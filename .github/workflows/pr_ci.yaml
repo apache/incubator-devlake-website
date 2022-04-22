@@ -1,0 +1,23 @@
+name: Build workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      - name: Use Node.js 17.8.x
+        uses: actions/setup-node@main
+        with:
+          node-version: 17.8.x
+      - name: Build Docusaurus website
+        run: |
+          npm install 
+          npm run build

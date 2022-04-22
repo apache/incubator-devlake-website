@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.docsSidebar.category.Plugins": {
+    "message": "Plugins",
+    "description": "The label for category Plugins in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Best Practices": {
+    "message": "Best Practices",
+    "description": "The label for category Best Practices in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Overview": {
+    "message": "Overview",
+    "description": "The label for category Overview in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Quick  Stack": {
+    "message": "Quick  Stack",
+    "description": "The label for category Quick  Stack in sidebar docsSidebar"
+  }
+}
