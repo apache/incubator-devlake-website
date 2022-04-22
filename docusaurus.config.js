@@ -23,13 +23,13 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
           path: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/merico-dev/lake-website/edit/main/docs/',
+          editUrl: 'https://github.com/merico-dev/lake-website/edit/main/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/merico-dev/lake-website/edit/main/blog/',
+            'https://github.com/merico-dev/lake-website/edit/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
