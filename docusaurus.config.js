@@ -5,12 +5,12 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (module.exports = {
   title: 'DevLake',
-  tagline: 'Welcome to DevLake',
+  tagline: 'DevLake is an open-source development data platform that converges operational data sources to distill development  insights throughout the software development life cycle (SDLC).',
   url: 'https://devlake.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
   organizationName: 'merico-dev', // Usually your GitHub org/user name.
   projectName: 'devlake', // Usually your repo name.
 
@@ -132,7 +132,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} DevLake@Merico Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} DevLake@Merico Inc.`,
       },
       prism: {
         theme: lightCodeTheme,
