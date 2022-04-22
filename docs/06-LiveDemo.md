@@ -9,5 +9,5 @@ description: >
   DevLake Live Demo
 ---
 
-<iframe src="http://52.89.41.35:44012/d-solo/y8DF7SUnz/wechaty_basic_metrics?orgId=1&from=1634837426413&to=1650562226413&panelId=74" width="800" height="300"></iframe>
 
+<iframe src="https://grafana-lake.demo.devlake.io/d/F0iYknc7z/demo-commit-count-by-author?orgId=1&from=1634911190615&to=1650635990615" width="120%" height="800px"></iframe>
