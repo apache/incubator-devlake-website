@@ -33,6 +33,7 @@ This is the up-to-date domain layer schema for DevLake v0.10.x. Tables (entities
 5. Cross-domain entities: entities that map entities from different domains to break data isolation
 
 
+### Schema Diagram
 ![Domain Layer Schema](../static/img/schema-diagram.png)
 
 When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. Github/Gitlab) and allow them to co-exist in a single table.
@@ -40,7 +41,7 @@ When reading the schema, you'll notice that many tables' primary key is called `
 Tables that end with WIP are still under development.
 
 
-### Naming Conversions
+### Naming Conventions
 
 1. The name of a table is in plural form. Eg. boards, issues, etc.
 2. The name of a table which describe the relation between 2 entities is in the form of [BigEntity in singular form]\_[SmallEntity in plural form]. Eg. board_issues, sprint_issues, pull_request_comments, etc.
@@ -423,7 +424,7 @@ A build is an execution of a job.
 | `commit_sha`   | char     | 40         | The specific commit being built on. Nullable.                    |            |
 
 
-### Cross-domain Entities
+### Cross-Domain Entities
 
 These entities are used to map entities between different domains. They are the key players to break data isolation.
 
