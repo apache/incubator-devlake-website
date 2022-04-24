@@ -422,7 +422,8 @@ A build is an execution of a job.
 | `status`       | varchar  | 255        | The result of build. The values may be 'success', 'failed', etc. |            |
 | `commit_sha`   | char     | 40         | The specific commit being built on. Nullable.                    |            |
 
-**Cross Domain Entities**
+
+### Cross-domain Entities
 
 These entities are used to map entities between different domains. They are the key players to break data isolation.
 
