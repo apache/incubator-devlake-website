@@ -13,20 +13,31 @@ description: >
 
 This document describes the entities and their relationships in DevLake's domain layer schema.
 
-Data in the domain layer is transformed from the data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, Gitlab, Jenkins, GitlabCI, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
+Data in the domain layer is transformed from the data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, Gitlab, Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
 
 Domain layer schema itself includes 2 logical layers: a `DWD` layer and a `DWM` layer. The DWD layer stores the detailed data points, while the DWM is the slight aggregation and operation of DWD to store more organized details or middle-level metrics.
 
 
+## Use Scenario
+1. Users can make customized Grafana dashboards based on the domain layer schema.
+2. Contributors can understand more about DevLake's data model.
+
+
 ## Data Model
 
-This is the latest design of the full domain layer schema. Although some tables and fields are still under development, the relationships and hierarchies between the tables have been mostly defined.
+This is the up-to-date domain layer schema for DevLake v0.10.x. Tables (entities) are categorized into 5 domains.
+1. Issue tracking domain entities: Jira issues, GitHub issues, GitLab issues, etc
+2. Source code management domain entities: Git/GitHub/Gitlab commits and refs, etc
+3. Code review domain entities: GitHub PRs, Gitlab MRs, etc
+4. CI/CD domain entities: Jenkins jobs & builds, etc
+5. Cross-domain entities: entities that map entities from different domains to break data isolation
 
-![Domain Layer Schema](../static/img/diagram.png)
+
+![Domain Layer Schema](../static/img/schema-diagram.png)
 
 When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. Github/Gitlab) and allow them to co-exist in a single table.
 
-You can open the original model file with [Navicat](https://www.navicat.com/en/download/navicat-premium?gclid=Cj0KCQiAtJeNBhCVARIsANJUJ2FHdZEwvCOj60cspy9npO35slGzScCyrb9oGmBRd59ysN5vw_zZNJoaArleEALw_wcB).
+Tables that end with WIP are still under development.
 
 
 ### Naming Conversions
@@ -261,8 +272,8 @@ The records of this table are computed by [RefDiff](https://github.com/merico-de
 | :---------------- | :------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- |
 | `sha`             | char     | 40         | One of the added commits in the new ref compared to the old ref                                                                                                  | FK_commits.sha |
 | `message`         | varchar  | 255        | Commit message                                                                                                                                                   |                |
-| `author_name`     | varchar  | 255        | The name of the author of this commit                                                                                                                            |                |
-| `author_email`    | varchar  | 255        | The email of commit author                                                                                                                                       |                |
+| `author_name`     | varchar  | 255        | The value is set with command `git config user.name xxxxx` commit                                                                                                                            |                |
+| `author_email`    | varchar  | 255        | The value is set with command `git config user.email xxxxx` author                                                                                                                                       |                |
 | `authored_date`   | datetime | 3          | The date when this commit was originally made                                                                                                                    |                |
 | `author_id`       | varchar  | 255        | The id of commit author                                                                                                                                          | FK_users.id    |
 | `committer_name`  | varchar  | 255        | The name of committer                                                                                                                                            |                |
