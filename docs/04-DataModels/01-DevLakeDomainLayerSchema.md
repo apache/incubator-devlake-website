@@ -1,5 +1,4 @@
 ﻿---
-sidebar_position: 05
 title: "Domain Layer Schema"
 linkTitle: "Domain Layer Schema"
 tags: []
@@ -34,7 +33,7 @@ This is the up-to-date domain layer schema for DevLake v0.10.x. Tables (entities
 
 
 ### Schema Diagram
-![Domain Layer Schema](../static/img/schema-diagram.png)
+![Domain Layer Schema](../../static/img/schema-diagram.png)
 
 When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. Github/Gitlab) and allow them to co-exist in a single table.
 
