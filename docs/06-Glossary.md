@@ -39,7 +39,7 @@ You can set up a new data connection either during the first step of creating a 
 
 The data scope for any data connection is defined in the second step of creating a blueprint.
 
-To learn more about the default data scope of each data source or data plugin, please refer to [Data Support](04-DataModels/02-DataSources.md).
+To learn more about the default data scope of each data source or data plugin, please refer to [Data Support](04-DataModels/02-DataSupport.md).
 
 ### Data Entities
 **Data entities refer to the domain entities of the five domains(Issue Tracking, Source Code Management, Code Review, CI/CD and Cross-Domain).** Data entities are selected during defining the data scope. For instance, if you wish to pull Source Code Management data from GitHub and Issue Tracking data from Jira, you can check the corresponding data entities during setting the data scope of these two data connections.
@@ -75,7 +75,7 @@ Data Transformation Plugins transform the data pulled by other Data Collection P
 
 The names of data plugins are not displayed in the regular mode of DevLake Configuration UI for user-friendly purposes, but they can be addressed in JSON in the Advanced Mode.
 
-For detailed information about the relationship between data sources and data plugins, please refer to [Data Support](04-DataModels/02-DataSources.md).
+For detailed information about the relationship between data sources and data plugins, please refer to [Data Support](04-DataModels/02-DataSupport.md).
 
 
 ### Pipelines
