@@ -27,9 +27,13 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         },
         blog: {
           showReadingTime: true,
+          readingTime: ({content, frontMatter, defaultReadingTime}) =>
+            defaultReadingTime({content, options: {wordsPerMinute: 300}}),
           // Please change this to your repo.
           editUrl:
             'https://github.com/merico-dev/lake-website/edit/main/',
+            blogSidebarTitle: 'All posts',
+            blogSidebarCount: 'ALL',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -85,6 +89,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             label: 'Community',
             docsPluginId: 'community'
           },
+          {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/merico-dev/lake',
             label: 'GitHub',
