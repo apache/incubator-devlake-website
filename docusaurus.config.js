@@ -10,7 +10,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
-  favicon: 'img/favicon.svg',
+  favicon: 'img/logo.svg',
   organizationName: 'merico-dev', // Usually your GitHub org/user name.
   projectName: 'devlake', // Usually your repo name.
 
@@ -22,8 +22,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         docs: {
           path: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/merico-dev/lake-website/edit/main/',
+          // set to undefined to remove Edit this Page
+          editUrl: undefined,
         },
         blog: {
           showReadingTime: true,
@@ -31,7 +31,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             defaultReadingTime({content, options: {wordsPerMinute: 300}}),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/merico-dev/lake-website/edit/main/',
+            undefined,
             blogSidebarTitle: 'All posts',
             blogSidebarCount: 'ALL',
         },
@@ -79,27 +79,28 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
           {
             type: 'doc',
             docId: 'Overview/WhatIsDevLake',
-            position: 'left',
+            position: 'right',
             label: 'Docs',
           },
          {
             type: 'doc',
             docId: 'index',
-            position: 'left',
+            position: 'right',
             label: 'Community',
             docsPluginId: 'community'
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {to: '/blog', label: 'Blog', position: 'right'},
+          {
+            href: 'https://github.com/merico-dev/lake/graphs/contributors',
+            label: 'Team',
+            position: 'right',
+          },
           {
             href: 'https://github.com/merico-dev/lake',
             label: 'GitHub',
             position: 'right',
           },
-          {
-            href: 'https://github.com/merico-dev/lake/graphs/contributors',
-            label: 'Team',
-            position: 'left',
-          },
+          
           {
             type: 'localeDropdown',
             position: 'right',
