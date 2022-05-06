@@ -6,29 +6,17 @@
 
 ```Go
 func (apiClient *ApiAsyncClient) DoAsync(
-
-   retry int,
-
+	retry int,
 ) error {
-
-   return apiClient.scheduler.Submit(func() error {
-
-      _, err := apiClient.Do()
-
-      if err != nil {
-
-         if retry < apiClient.maxRetry {
-
-            return apiClient.DoAsync(retry+1)
-
-         }
-
-      }
-
-      return err
-
-   })
-
+	return apiClient.scheduler.Submit(func() error {
+		_, err := apiClient.Do()
+		if err != nil {
+			if retry < apiClient.maxRetry {
+				return apiClient.DoAsync(retry+1)
+			}
+		}
+		return err
+	})
 }
 ```
 
@@ -42,106 +30,54 @@ func (apiClient *ApiAsyncClient) DoAsync(
 
 ```Go
 // retrieveWorker returns a available worker to run the tasks.
-
 func (p *Pool) retrieveWorker() (w *goWorker) {
-
- spawnWorker := func() {
-
-  w = p.workerCache.Get().(*goWorker)
-
-  w.run()
-
- }
-
-
-
- p.lock.Lock()
-
-
-
- w = p.workers.detach()
-
- if w != nil { // first try to fetch the worker from the queue
-
-  p.lock.Unlock()
-
- } else if capacity := p.Cap(); capacity == -1 || capacity > p.Running() {
-
-  // if the worker queue is empty and we don't run out of the pool capacity,
-
-  // then just spawn a new worker goroutine.
-
-  p.lock.Unlock()
-
-  spawnWorker()
-
- } else { // otherwise, we'll have to keep them blocked and wait for at least one worker to be put back into pool.
-
-  if p.options.Nonblocking {
-
-   p.lock.Unlock()
-
-   return
-
-  }
-
- retry:
-
-  if p.options.MaxBlockingTasks != 0 && p.blockingNum >= p.options.MaxBlockingTasks {
-
-   p.lock.Unlock()
-
-   return
-
-  }
-
-  p.blockingNum++
-
-  p.cond.Wait() // block and wait for an available worker
-
-  p.blockingNum--
-
-  var nw int
-
-  if nw = p.Running(); nw == 0 { // awakened by the scavenger
-
-   p.lock.Unlock()
-
-   if !p.IsClosed() {
-
-    spawnWorker()
-
-   }
-
-   return
-
-  }
-
-  if w = p.workers.detach(); w == nil {
-
-   if nw < capacity {
-
-    p.lock.Unlock()
-
-    spawnWorker()
-
-    return
-
-   }
-
-   goto retry
-
-  }
-
-
-
-  p.lock.Unlock()
-
- }
-
- return
-
+	spawnWorker := func() {
+		w = p.workerCache.Get().(*goWorker)
+		w.run()
+	}
+	p.lock.Lock()
+	w = p.workers.detach()
+	if w != nil { // first try to fetch the worker from the queue
+		p.lock.Unlock()
+	} else if capacity := p.Cap(); capacity == -1 || capacity > p.Running() {
+		// if the worker queue is empty and we don't run out of the pool capacity,
+		// then just spawn a new worker goroutine.
+		p.lock.Unlock()
+		spawnWorker()
+	} else { // otherwise, we'll have to keep them blocked and wait for at least one worker to be put back into pool.
+		if p.options.Nonblocking {
+			p.lock.Unlock()
+			return
+		}
+	retry:
+		if p.options.MaxBlockingTasks != 0 && p.blockingNum >= p.options.MaxBlockingTasks {
+			p.lock.Unlock()
+			return
+		}
+		p.blockingNum++
+		p.cond.Wait() // block and wait for an available worker
+		p.blockingNum--
+		var nw int
+		if nw = p.Running(); nw == 0 { // awakened by the scavenger
+			p.lock.Unlock()
+			if !p.IsClosed() {
+				spawnWorker()
+			}
+			return
+		}
+		if w = p.workers.detach(); w == nil {
+			if nw < capacity {
+				p.lock.Unlock()
+				spawnWorker()
+				return
+			}
+			goto retry
+		}
+		p.lock.Unlock()
+	}
+	return
 }
+
 ```
 
 ![img](ants_source_code_flowchart.png)
