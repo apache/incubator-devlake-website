@@ -21,10 +21,19 @@ jobs:
         run: |
           npm install 
           npm run build
-      - name: Deploy to netlify
-        uses: netlify/actions/cli@master
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         with:
-          args: deploy --dir=build --prod
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          publish_branch: asf-site
+          publish_dir: ./build
+      #- name: Deploy to netlify
+      #  uses: netlify/actions/cli@master
+      #  env:
+      #    NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #    NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #  with:
+      #    args: deploy --dir=build --prod

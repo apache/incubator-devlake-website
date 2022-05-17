@@ -9,7 +9,7 @@ description: >
   DevLake Glossary
 ---
 
-*Last updated: May 2 2022*
+*Last updated: May 16 2022*
 
 
 ## In Configuration UI (Regular Mode)
@@ -17,16 +17,18 @@ description: >
 The following terms are arranged in the order of their appearance in the actual user workflow.
 
 ### Blueprints
-**A blueprint is the plan that covers all the work to get your raw data ready for query and metric computaion in the dashboards.** Creating a blueprint consists of three steps:
+**A blueprint is the plan that covers all the work to get your raw data ready for query and metric computaion in the dashboards.** Creating a blueprint consists of four steps:
 1. **Adding [Data Connections](06-Glossary.md#data-connections)**: For each [data source](06-Glossary.md#data-sources), one or more data connections can be added to a single blueprint, depending on the data you want to sync to DevLake.
-2. **Setting [Data Scope](06-Glossary.md#data-scope) and [Transformation Rules](06-Glossary.md#transformation-rules)**: For each data connection, you need to configure the scope of data and their corresponding transformation rules for the optimized display of metrics in the dashboards. 
-3. **Setting up a Schedule**: You can set up a schedule for your blueprint to achieve recurring data syncs and transformation at a certain frequency. Alternatively, you can set the schedule to Manual if you wish to run the tasks in the blueprint manually.
+2. **Setting the [Data Scope](06-Glossary.md#data-scope)**: For each data connection, you need to configure the scope of data, such as GitHub projects, Jira boards, and their corresponding [data entities](06-Glossary.md#data-entities). 
+3. **Adding [Transformation Rules](06-Glossary.md#transformation-rules) (optional)**: You can optionally apply transformation for the data scope you have just selected, in order to view more advanced metrics. 
+3. **Setting the Sync Frequency**: You can specify the sync frequency for your blueprint to achieve recurring data syncs and transformation. Alternatively, you can set the frequency to manual if you wish to run the tasks in the blueprint manually.
 
 The relationship among Blueprint, Data Connections, Data Scope and Transformation Rules is explained as follows:
 
 ![Blueprint ERD](../static/img/blueprint-erd.svg)
 - Each blueprint can have multiple data connections. 
-- Each data connection can have one or multiple sets of data scope depending on if you want to trasform multiple groups of data with the same or different rules. 
+- Each data connection can have multiple sets of data scope.
+- Each set of data scope only consists of one GitHub/GitLab project or Jira board, along with their corresponding data entities.
 - Each set of data scope can only have one set of transformation rules.
 
 ### Data Sources
@@ -40,23 +42,23 @@ DevLake normally uses one [data plugin](06-Glossary.md#data-plugins) to pull dat
 You can set up a new data connection either during the first step of creating a blueprint, or in the Connections page that can be accessed from the navigation bar. Because one single data connection can be resued in multiple blueprints, you can update the information of a particular data connection in Connections, to ensure all its associated blueprints will run properly. For example, you may want to update your GitHub token in a data connection if it goes expired.
 
 ### Data Scope
-**In a blueprint, each data connection has one or more sets of data scope configurations.** The data scope selection includes Github or Gitlab repositories, Jira boards and [data entities](06-Glossary.md#data-entities) (e.g. Issue Tracking and Source Code Management). The fields for data scope configuration vary according to different data sources.
+**In a blueprint, each data connection can have multiple sets of data scope configurations, including GitHub or GitLab projects, Jira boards and their corresponding[data entities](06-Glossary.md#data-entities).** The fields for data scope configuration vary according to different data sources.
 
-As mentioned in the Blueprint diagram, the reason for choosing one vs. multiple sets of data scope is based on if you want to configure a unified set of transformation rules for the entire data collection, or you need distinct sets of transformation rules for different parts of the data collection(e.g. if you use different sets of labels across multiple GitHub repositories). 
+Each set of data scope refers to one GitHub or GitLab project, or one Jira board and the data entities you would like to sync for them, for the convinience of applying transformation in the next step. For instance, if you wish to sync 5 GitHub projects, you will have 5 sets of data scope for GitHub.
 
 To learn more about the default data scope of all data sources and data plugins, please refer to [Data Support](04-DataModels/02-DataSupport.md).
 
 ### Data Entities
-**Data entities refer to the domain entities of the five domains: Issue Tracking, Source Code Management, Code Review, CI/CD and Cross-Domain.** 
+**Data entities refer to the data fields from one of the five data domains: Issue Tracking, Source Code Management, Code Review, CI/CD and Cross-Domain.** 
 
 For instance, if you wish to pull Source Code Management data from GitHub and Issue Tracking data from Jira, you can check the corresponding data entities during setting the data scope of these two data connections.
 
-Although data entities and domain entities technically can be used interchangeably, data entities are typically used in the DevLake Configuration UI to reduce the learning curves of the DevLake data models. For detailed definition of all data entities/domain entities, please refer to [Domain Layer Schema](04-DataModels/01-DevLakeDomainLayerSchema.md).
+To learn more details, please refer to [Domain Layer Schema](04-DataModels/01-DevLakeDomainLayerSchema.md).
 
 ### Transformation Rules
-**Transformation rules are a collection of methods that allow you to customize how DevLake normalizes raw data for query and metric computation.** Each set of data scope is strictly acompanied with one set of transformation rules.
+**Transformation rules are a collection of methods that allow you to customize how DevLake normalizes raw data for query and metric computation.** Each set of data scope is strictly acompanied with one set of transformation rules. However, for your convenience, transformation rules can also be duplicated across different sets of data scope.
 
-DevLake uses these normalized values to design advanced dashboards, such as the Weekly Bug Retro dashboard. Although configuring transformation rules is not mandatory, if you leave the rules blank or have not configured correctly, only the basic dashboards (e.g. GitHub Basic Metrics) will be displayed as expected, while the advanced dashboards will not.
+DevLake uses these normalized values in the transformtion to design more advanced dashboards, such as the Weekly Bug Retro dashboard. Although configuring transformation rules is not mandatory, if you leave the rules blank or have not configured correctly, only the basic dashboards (e.g. GitHub Basic Metrics) will be displayed as expected, while the advanced dashboards will not.
 
 ### Historical Runs
 **A historical run of a blueprint is an actual excecution of the data collection and transformation [tasks](06-Glossary.md#tasks) defined in the blueprint at its creation.** A list of historical runs of a blueprint is the entire running history of that blueprint, whether excecuted automatically or manually. Historical runs can be triggered in three ways: 
@@ -73,7 +75,7 @@ The following terms have not appeared in the Regular Mode of Configuration UI fo
 ### Data Plugins
 **A data plugin is a specific module that syncs or transforms data.** There are two types of data plugins: Data Collection Plugins and Data Transformation Plugins.
 
-Data Collection Plugins pull data from one or more data sources. DevLake supports 8 data plugins in this category: `ae`, `feishu`, `gitextractor`, `github`, `gitlab`, `jenkins` and `jira`.
+Data Collection Plugins pull data from one or more data sources. DevLake supports 8 data plugins in this category: `ae`, `feishu`, `gitextractor`, `github`, `gitlab`, `jenkins`, `jira` and `tapd`.
 
 Data Transformation Plugins transform the data pulled by other Data Collection Plugins. `refdiff` is currently the only plugin in this category.
 
