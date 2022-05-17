@@ -138,7 +138,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} DevLake@Merico Inc.`,
+        copyright: `Copyright © ${new Date().getFullYear()} The Apache Software Foundation.`,
       },
       prism: {
         theme: lightCodeTheme,
