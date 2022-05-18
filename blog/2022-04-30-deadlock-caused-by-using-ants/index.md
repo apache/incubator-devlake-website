@@ -9,7 +9,10 @@ tags: [devlake, ants]
 
 我们的项目有大量的api请求由goroutine完成，所以我们需要引入一个pool来节省频繁创建goroutine所造成的的开销，同时也可以更简易的调度goroutine，在对github上多个协程池的对比后，我们最终选定了[ants](https://github.com/panjf2000/ants)作为我们的调度管理pool。
 
-1. 最近在测试中偶然发现系统出现了“死锁”的情况，进而采取断网的方式发现“死锁”在极端情况下是稳定出现，经过满篇的log，break，最终把问题定位到了ants的submit方法。这个问题来自于在使用ants pool的过程中，为了实现重试，我们在方法中又递归调用了方法本身，也就是submit task内部又submit一个task，下面是简化后的代码
+1. 最近在测试中偶然发现系统出现了“死锁”的情况，进而采取断网的方式发现“死锁”在极端情况下是稳定出现，经过满篇的log，break，最终把问题定位到了ants的submit方法。这个问题来自于在使用ants pool的过程中，为了实现重试，我们在方法中又递归调用了方法本身，也就是submit task内部又submit一个task，下面是简化后的代码：
+
+<!--truncate-->
+
 
 ```Go
 func (apiClient *ApiAsyncClient) DoAsync(
@@ -40,6 +43,7 @@ func (apiClient *ApiAsyncClient) DoAsync(
 ```
 
 在上面的代码块中，可以看到return apiClient.DoAsync(retry+1)这一步递归调用了自己，即在submit中又调用了submit
+
 
 ### 2. 深入ants分析
 

@@ -4,11 +4,11 @@ import styles from './HomepageFeatures.module.css';
 
 const FeatureList = [
   {
-    title: 'Silos Connected',
+    title: 'Data Silos Connected',
     Svg: require('../../static/img/SilosConnected.svg').default,
     description: (
       <>
-        Collect DevOps data across the entire SDLC process and connect data silos
+        Collect DevOps data across the entire SDLC and connect siloed data with a standard data model
       </>
     ),
   },
@@ -17,12 +17,12 @@ const FeatureList = [
     Svg: require('../../static/img/OutoftheboxAnalysis.svg').default,
     description: (
       <>
-        Collect DevOps data across the entire SDLC process and connect data silos
+        Provide out-of-the-box engineering metrics to be visualized in a sereis of dashboards
       </>
     ),
   },
   {
-    title: 'Highly Flexible',
+    title: 'A Highly Flexible Framework',
     Svg: require('../../static/img/HighlyFlexible.svg').default,
     description: (
       <>

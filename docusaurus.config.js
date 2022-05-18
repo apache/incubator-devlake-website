@@ -5,7 +5,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (module.exports = {
   title: 'Apache DevLake (Incubating)',
-  tagline: 'Apache DevLake is an open-source development data platform that converges operational data sources to distill development  insights throughout the software development life cycle (SDLC).',
+  tagline: 'Apache DevLake is an open-source dev data platform that ingests, analyzes, and visualizes the fragmented data from DevOps tools to distill insights for engineering productivity.',
   url: 'https://devlake.apache.org',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -23,7 +23,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
           path: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
           // set to undefined to remove Edit this Page
-          editUrl: undefined,
+          editUrl: 'https://github.com/apache/incubator-devlake-website/edit/main',
         },
         blog: {
           showReadingTime: true,

@@ -1,6 +1,6 @@
 ---
 slug: apache-welcomes-devlake
-title: Apache Incubator Welcomes DevLake, A Dev-Data Platform Serving Developers
+title: DevLake 加入 Apache 孵化器，来和我们一起玩开源！
 authors: weisi
 tags: [devlake, apache]
 ---
@@ -28,18 +28,18 @@ tags: [devlake, apache]
 
 当前 DevLake 已支持主流项目管理工具 [JIRA cloud](https://github.com/apache/incubator-devlake/tree/main/plugins/jira)、[JIRA server](https://github.com/apache/incubator-devlake/tree/main/plugins/jira)、[TAPD](https://github.com/apache/incubator-devlake/tree/main/plugins/tapd)，代码托管工具 [Git](https://github.com/apache/incubator-devlake/tree/main/plugins/gitextractor)、[GitHub](https://github.com/apache/incubator-devlake/tree/main/plugins/github)、[GitLab](https://github.com/apache/incubator-devlake/tree/main/plugins/gitlab)，CI/CD 工具 [Jenkins](https://github.com/apache/incubator-devlake/tree/main/plugins/jenkins)，日历工具[飞书日历](https://github.com/apache/incubator-devlake/tree/main/plugins/feishu)。
 
-数据源列表正在快速拓展中，您可以查看 DevLake 已支持数据的[详细文档](https://devlake.apache.org/docs/DataModels/DataSupport)，同时非常欢迎[参与贡献新的数据源插件](https://github.com/apache/incubator-devlake/blob/main/plugins/README.md)！
+数据源列表正在快速拓展中，您可以查看 Apache DevLake 已支持数据的[详细文档](https://devlake.apache.org/docs/DataModels/DataSupport)，同时非常欢迎[参与贡献新的数据源插件](https://github.com/apache/incubator-devlake/blob/main/plugins/README.md)！
 
 
 ### 标准化研发数据模型和开箱即用的效能指标
 
 研发过程数据的标准化程度低，用户难以直接使用这些数据进一步分析；而效能指标定义与计算方法模糊，又给研发数据的应用带来了额外的成本。
 
-DevLake 提供了便捷的数据转化能力，将收集来的数据清洗转换为为[标准数据模型](https://www.devlake.io/docs/DataModels/DevLakeDomainLayerSchema)，并基于标准模型生成一系列[研发效能指标](https://www.devlake.io/docs/EngineeringMetrics)，对用户来说简单易懂、开箱即用。一方面节省了治理数据和定义指标的成本，另一方面使效能指标更加透明，便于研发数据的应用落地。
+Apache DevLake 提供了便捷的数据转化能力，将收集来的数据清洗转换为为[标准数据模型](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema)，并基于标准模型生成一系列[研发效能指标](https://devlake.apache.org/docs/EngineeringMetrics)，对用户来说简单易懂、开箱即用。一方面节省了治理数据和定义指标的成本，另一方面使效能指标更加透明，便于研发数据的应用落地。
 
-目前 DevLake 已支持 20+常见研发效能指标，可应用于交付效率、质量、成本、能力等不同认知域。
+目前 Apache DevLake 已支持 20+常见研发效能指标，可应用于交付效率、质量、成本、能力等不同认知域。
 
-结合用户使用研发数据的具体场景，DevLake 基于 Grafana 搭建数据看板，支持趋势分析、按照成员/阶段下钻等分析能力，帮助用户快速定位研发效能提升的关键环节。您可以查看[预设数据看板](https://www.devlake.io/docs/LiveDemo)，后续我们将在 blog 中介绍每一个数据看板及其背后的真实用户场景。
+结合用户使用研发数据的具体场景，Apache DevLake 基于 Grafana 搭建数据看板，支持趋势分析、按照成员/阶段下钻等分析能力，帮助用户快速定位研发效能提升的关键环节。您可以查看[预设数据看板](https://devlake.apache.org/docs/LiveDemo)，后续我们将在 blog 中介绍每一个数据看板及其背后的真实用户场景。
 
 ![面向开源产品的版本/模块质量分析](Dashboard-1.jpg)
 
@@ -49,15 +49,15 @@ DevLake 提供了便捷的数据转化能力，将收集来的数据清洗转换
 
 ### 灵活的数据源插件系统及数据处理框架，支持自定义
 
-DevLake 将数据加工、关联与转换的底层能力开放出来，提供可拓展的数据底座。
+Apache DevLake 将数据加工、关联与转换的底层能力开放出来，提供可拓展的数据底座。
 用户可以根据实际需求，实现以下自定义：
 
-- 数据源自定义：DevLake 基于 Golang plugin 系统设计了灵活的插件系统，支持用户独立开发接入任意 DevOps 工具
+- 数据源自定义：Apache DevLake 基于 Golang plugin 系统设计了灵活的插件系统，支持用户独立开发接入任意 DevOps 工具
 - 数据实体自定义：基于 dbt 插件，支持用户自定义数据转换模型
 - 效能指标自定义：支持用户基于数据模型自定义指标，或调整指标计算方式
 - 数据看板自定义：SQL 查询，在 Grafana 中拖拽搭建数据看板
 
-以下是 [DevLake 架构图](https://github.com/apache/incubator-devlake/blob/main/ARCHITECTURE.md)：
+以下是 [Apache DevLake 架构图](https://github.com/apache/incubator-devlake/blob/main/ARCHITECTURE.md)：
 
 ![面向开源产品的版本/模块质量分析](0.11-architecture-diagram.jpg)
 
