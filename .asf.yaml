@@ -31,3 +31,7 @@ github:
 
 publish:
   whoami: asf-site
+notifications:
+  commits: commits@devlake.apache.org
+  issues:  issues@devlake.apache.org
+  pullrequests: notifications@devlake.apache.org
