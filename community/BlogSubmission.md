@@ -128,4 +128,4 @@ Not this.
 Or this.
 ```
 
-After completing the above steps, please submit a PR to merico-dev/lake-website for review. Happy blogging!
+After completing the above steps, please submit a PR to [apache/incubator-devlake-website](https://github.com/apache/incubator-devlake-website) for review. Happy blogging!
