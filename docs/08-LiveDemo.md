@@ -1,5 +1,5 @@
 ---
-sidebar_position: 07
+sidebar_position: 08
 title: "Dashboards (Live Demo)"
 linkTitle: "Live Demo"
 tags: []
