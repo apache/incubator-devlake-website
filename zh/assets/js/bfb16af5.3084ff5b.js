@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwww=self.webpackChunkwww||[]).push([[909],{5392:function(a){a.exports=JSON.parse('{"devlake":{"allTagsPath":"/zh/blog/tags","name":"devlake","count":1,"permalink":"/zh/blog/tags/devlake"},"ants":{"allTagsPath":"/zh/blog/tags","name":"ants","count":1,"permalink":"/zh/blog/tags/ants"}}')}}]);
