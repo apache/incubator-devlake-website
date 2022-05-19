@@ -1,7 +1,7 @@
 ---
 sidebar_position: 01
-title: "How to Make Contribution?"
-linkTitle: "How to Make Contribution?"
+title: "How to Make Contributions?"
+linkTitle: "How to Make Contributions?"
 tags: []
 categories: []
 weight: 10000
@@ -24,47 +24,14 @@ If you intend to change the public API, or make any non-trivial changes to the i
 
 If you’re only fixing a bug, it’s fine to submit a pull request right away but we still recommend to file an issue detailing what you’re fixing. This is helpful in case we don’t accept that specific fix but want to keep track of the issue.
 
-## Maintainer team @ Merico
+## Maintainer team 
 
-Dev Lake is maintained by a group of engineers at Merico, led by [@hezyin](https://github.com/hezyin). We aim to achieve an SLA of 24 hrs for replying to issues.
+Apache DevLake is maintained by apache/devlake committers. We aim to achieve an SLA of 24 hrs for replying to issues.
 
-## Style guides
+## Development workflow
 
-### Git Commit message
+Please check [Development Workflow](make-contribution/development-workflow.md)
 
-We follow the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) guidelines.
+## Contributor growth program
 
-#### Commit tool
-
-We use https://github.com/lintingzhen/commitizen-go to author our commits.
-
-```sh
-make commit
-```
-
-```
-> lake@1.0.0 commit /home/code/merico-dev/lake
-> cz
-
-cz-cli@4.2.4, cz-conventional-changelog@3.3.0
-
-? Select the type of change that you're committing: (Use arrow keys)
-> feat:     A new feature
-  fix:      A bug fix
-  docs:     Documentation only changes
-  style:    Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-  refactor: A code change that neither fixes a bug nor adds a feature
-  perf:     A code change that improves performance
-  test:     Adding missing tests or correcting existing tests
-(Move up and down to reveal more choices)
-? What is the scope of this change (e.g. component or file name): (press enter to skip)
-? Write a short, imperative tense description of the change (max 93 chars):
- (23) add commit message tool
-? Provide a longer description of the change: (press enter to skip)
-
-? Are there any breaking changes? No
-? Does this change affect any open issues? No
-[chore/commit_message dc34f57] chore: add commit message tool
- 5 files changed, 585 insertions(+), 4 deletions(-)
-```
-<br/><br/><br/>
+Please check [Contributor Growth Program](make-contribution/contributor-growth-program.md)
