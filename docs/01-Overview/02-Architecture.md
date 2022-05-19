@@ -6,9 +6,10 @@ description: >
 ---
 
 
-![devlake-architecture](../../static/img/arch-dataflow.svg)
+<p align="center"><img src="/img/arch-dataflow.svg" /></p>
 <p align="center">Architecture Diagram (data-flow perspective)</p>
-![devlake-architecture](../../static/img/arch-Component.svg)
+
+<p align="center"><img src="/img/arch-component.svg" /></p>
 <p align="center">Architecture Diagram (component perspective)</p>
 
 
