@@ -27,11 +27,11 @@ github:
   enabled_merge_buttons:
     squash:  true
     merge:   false
-    rebase:  false
+    rebase:  true
 
 publish:
   whoami: asf-site
 notifications:
   commits: commits@devlake.apache.org
-  issues:  issues@devlake.apache.org
-  pullrequests: notifications@devlake.apache.org
+  issues:  commits@devlake.apache.org
+  pullrequests: commits@devlake.apache.org
