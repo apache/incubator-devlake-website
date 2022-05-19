@@ -6,7 +6,6 @@ description: >
 
 # Jenkins
 
-
 ## Summary
 
 This plugin collects Jenkins data through [Remote Access API](https://www.jenkins.io/doc/book/using/remote-access-api/). It then computes and visualizes various devops metrics from the Jenkins data.
@@ -15,9 +14,9 @@ This plugin collects Jenkins data through [Remote Access API](https://www.jenkin
 
 ## Metrics
 
-| Metric Name | Description |
-| ------------ | ------------- |
-| Build Count | The number of builds created |
+| Metric Name        | Description                         |
+|:-------------------|:------------------------------------|
+| Build Count        | The number of builds created        |
 | Build Success Rate | The percentage of successful builds |
 
 ## Configuration
@@ -60,5 +59,4 @@ In order to collect data from Jenkins, you have to compose a JSON looks like fol
 ## Relationship between job and build
 
 Build is kind of a snapshot of job. Running job each time creates a build.
-
 <br/><br/><br/>

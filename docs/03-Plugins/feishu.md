@@ -8,7 +8,7 @@ description: >
 
 ## Summary
 
-This plugin collects Feishu data through [Feishu Openapi](https://open.feishu.cn/document/home/user-identity-introduction/introduction).
+This plugin collects Feishu meeting data through [Feishu Openapi](https://open.feishu.cn/document/home/user-identity-introduction/introduction).
 
 ## Configuration
 
@@ -49,7 +49,7 @@ You can also trigger data collection by making a POST request to `/pipelines`.
 curl --location --request POST 'localhost:8080/pipelines' \
 --header 'Content-Type: application/json' \
 --data-raw '
-  {
+{
     "name": "feishu 20211126",
     "tasks": [[{
       "plugin": "feishu",
@@ -58,8 +58,6 @@ curl --location --request POST 'localhost:8080/pipelines' \
         "rateLimitPerSecond" : 5
       }
     }]]
-  }
+}
 '
 ```
-
-<br/><br/><br/>
