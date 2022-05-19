@@ -9,22 +9,22 @@ description: >
 
 This plugin collects Jira data through Jira Cloud REST API. It then computes and visualizes various engineering metrics from the Jira data.
 
-<img width="2035" alt="jira metric display" src="https://user-images.githubusercontent.com/2908155/132926143-7a31d37f-22e1-487d-92a3-cf62e402e5a8.png">
+<img width="2035" alt="jira metric display" src="https://user-images.githubusercontent.com/2908155/132926143-7a31d37f-22e1-487d-92a3-cf62e402e5a8.png" />
 
 ## Project Metrics This Covers
 
-| Metric Name                         | Description                                                                                    |
-|:------------------------------------|:-----------------------------------------------------------------------------------------------|
-| Requirement Count	                  | Number of issues with type "Requirement"                                                       |
-| Requirement Lead Time	              | Lead time of issues with type "Requirement"                                                    |
-| Requirement Delivery Rate           | 	Ratio of delivered requirements to all requirements                                           |
-| Requirement Granularity             | Number of story points associated with an issue                                                |
-| Bug Count	                          | Number of issues with type "Bug"<br><i>bugs are found during testing</i>                       |
-| Bug Age	                            | Lead time of issues with type "Bug"<br><i>both new and deleted lines count</i>                 |
-| Bugs Count per 1k Lines of Code     | 	Amount of bugs per 1000 lines of code                                                         |
-| Incident Count                      | Number of issues with type "Incident"<br><i>incidents are found when running in production</i> |
-| Incident Age                        | Lead time of issues with type "Incident"                                                       |
-| Incident Count per 1k Lines of Code | Amount of incidents per 1000 lines of code                                                     |
+| Metric Name                         | Description                                                                                       |
+|:------------------------------------|:--------------------------------------------------------------------------------------------------|
+| Requirement Count	                  | Number of issues with type "Requirement"                                                          |
+| Requirement Lead Time	              | Lead time of issues with type "Requirement"                                                       |
+| Requirement Delivery Rate           | Ratio of delivered requirements to all requirements                                               |
+| Requirement Granularity             | Number of story points associated with an issue                                                   |
+| Bug Count	                          | Number of issues with type "Bug"<br/><i>bugs are found during testing</i>                         |
+| Bug Age	                          | Lead time of issues with type "Bug"<br/><i>both new and deleted lines count</i>                   |
+| Bugs Count per 1k Lines of Code     | Amount of bugs per 1000 lines of code                                                             |
+| Incident Count                      | Number of issues with type "Incident"<br/><i>incidents are found when running in production</i>   |
+| Incident Age                        | Lead time of issues with type "Incident"                                                          |
+| Incident Count per 1k Lines of Code | Amount of incidents per 1000 lines of code                                                        |
 
 ## Configuration
 
@@ -227,7 +227,8 @@ Your board id is used in all REST requests to Apache DevLake. You do not need to
 
 5. API forwarding
 For example:
-Requests to http://your_devlake_host/plugins/jira/connections/1/proxy/rest/agile/1.0/board/8/sprint would forward to https://your_jira_host/rest/agile/1.0/board/8/sprint
+Requests to `http://your_devlake_host/plugins/jira/connections/1/proxy/rest/agile/1.0/board/8/sprint`
+would be forwarded to `https://your_jira_host/rest/agile/1.0/board/8/sprint`
 
 ```GET /plugins/jira/connections/:connectionId/proxy/rest/*path
 {
