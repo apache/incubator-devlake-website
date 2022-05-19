@@ -102,7 +102,8 @@ See the pipeline finishes (progress 100%):
 
 2. Click 'Run Pipeline' and wait until it's finished.
 
-3. Click `View Dashboards` on the top left corner of `config-ui`
+3. Click `View Dashboards` on the top left corner of `config-ui`, the default username and password of Grafana are `admin`.
+Password: admin
 
 ![image](https://user-images.githubusercontent.com/61080/163666814-e48ac68d-a0cc-4413-bed7-ba123dd291c8.png)
 
