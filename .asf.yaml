@@ -19,7 +19,7 @@ github:
   description: "Apache Devlake Website"
   homepage: https://devlake.apache.org/
   features:
-    issues: false
+    issues: true
     projects: false
     wiki: false
   labels:
