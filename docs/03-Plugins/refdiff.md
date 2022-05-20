@@ -84,8 +84,12 @@ make
 make install
 ```
 
-### MacOs
-
+### MacOS
+1. HomeBrew install
+```
+brew install libgit2
+```
+2. Source install
 ```
 brew install cmake
 git clone https://github.com/libgit2/libgit2.git

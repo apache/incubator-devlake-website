@@ -64,7 +64,7 @@ description: >
     A: Make sure your program find `libgit2.so.1.3`. `LD_LIBRARY_PATH` can be assigned like this if your `libgit2.so.1.3` is located at `/usr/local/lib`:
 
     ```sh
-    export LD_LIBRARY_PATH=/usr/local/lib
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     ```
 
 8. Visit config UI at `localhost:4000` to configure data connections.
