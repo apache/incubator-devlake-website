@@ -1,10 +1,10 @@
-# Feishu
+# TAPD
 
 ## Summary
 
-This plugin collects tapd data.
+This plugin collects TAPD data.
 
-This plugin is in developing so that cannot modify settings in config-ui.
+This plugin is in development so you can't modify settings in config-ui.
 
 ## Configuration
 

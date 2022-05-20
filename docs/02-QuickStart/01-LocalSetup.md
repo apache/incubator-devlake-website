@@ -31,13 +31,13 @@ description: >
    - `devlake` takes a while to fully boot up. if `config-ui` complaining about api being unreachable, please wait a few seconds and try refreshing the page.
 2. Create pipelines to trigger data collection in `config-ui`
 3. Click *View Dashboards* button in the top left when done, or visit `localhost:3002` (username: `admin`, password: `admin`).
-   - We use [Grafana](https://grafana.com/) as a visualization tool to build charts for the [data](../05-DataModels/02-DataSupport.md) stored in our database. 
+   - We use [Grafana](https://grafana.com/) as a visualization tool to build charts for the [data](../05-DataModels/02-DataSupport.md) stored in our database.
    - Using SQL queries, we can add panels to build, save, and edit customized dashboards.
    - All the details on provisioning and customizing a dashboard can be found in the [Grafana Doc](../04-UserManuals/GRAFANA.md).
 4. To synchronize data periodically, users can set up recurring pipelines with DevLake's [pipeline blueprint](../04-UserManuals/recurring-pipeline.md) for details.
 
 #### Upgrade to a newer version
 
-Support for database schema migration was introduced to DevLake in v0.10.0. From v0.10.0 onwards, users can upgrade their instance smoothly to a newer version. However, versions prior to v0.10.0 do not support upgrading to a newer version with a different database schema. We recommend users deploying a new instance if needed.
+Support for database schema migration was introduced to DevLake in v0.10.0. From v0.10.0 onwards, users can upgrade their instance smoothly to a newer version. However, versions prior to v0.10.0 do not support upgrading to a newer version with a different database schema. We recommend users to deploy a new instance if needed.
 
 <br/><br/><br/>

@@ -24,7 +24,7 @@ description: >
 
 ## Rules
 
-1. Higher layer calls lower layer, not the other way around
-2. Whenever lower layer neeeds something from higher layer, a interface should be introduced for decoupling
-3. Components should be initialized in a low to high order during bootstraping
+1. Higher layers call lower layers, not the other way around
+2. Whenever a lower layer needs something from a higher layer, an interface should be introduced for decoupling
+3. Components should be initialized in a low to high order during bootstrapping
 <br/>

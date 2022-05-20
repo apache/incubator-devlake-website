@@ -7,7 +7,7 @@ description: >
 # Notification
 
 ## Request
-example request
+Example request
 ```
 POST /lake/notify?nouce=3-FDXxIootApWxEVtz&sign=424c2f6159bd9e9828924a53f9911059433dc14328a031e91f9802f062b495d5
 
@@ -15,17 +15,17 @@ POST /lake/notify?nouce=3-FDXxIootApWxEVtz&sign=424c2f6159bd9e9828924a53f9911059
 ```
 
 ## Configuration
-If you want to use the notification feature, you should add two configuration key to `.env` file. 
+If you want to use the notification feature, you should add two configuration key to `.env` file.
 ```shell
 # .env
-# endpoint is the notification request url, eg: http://example.com/lake/notify
+# notification request url, e.g.: http://example.com/lake/notify
 NOTIFICATION_ENDPOINT=
-# screte is used to calculate signature
+# secret is used to calculate signature
 NOTIFICATION_SECRET=
 ```
 
 ## Signature
-You should check the signature before accepting the notification request. We use sha256 algorithm to calculate the checksum.  
+You should check the signature before accepting the notification request. We use sha256 algorithm to calculate the checksum.
 ```go
 // calculate checksum
 sum := sha256.Sum256([]byte(requestBody + NOTIFICATION_SECRET + nouce))

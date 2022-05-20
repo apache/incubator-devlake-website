@@ -6,11 +6,11 @@ description: >
 
 ## Summary
 
-GitHub has a rate limit of 2,000 API calls per hour for their REST API.
+GitHub has a rate limit of 5,000 API calls per hour for their REST API.
 As a result, it may take hours to collect commits data from GitHub API for a repo that has 10,000+ commits.
 To accelerate the process, DevLake introduces GitExtractor, a new plugin that collects git data by cloning the git repo instead of by calling GitHub APIs.
 
-Starting from v0.10.0, DevLake will collect GitHub data in 2 separate plugins: 
+Starting from v0.10.0, DevLake will collect GitHub data in 2 separate plugins:
 
 - GitHub plugin (via GitHub API): collect repos, issues, pull requests
 - GitExtractor (via cloning repos):  collect commits, refs
@@ -32,45 +32,43 @@ There're 3 steps.
 
 ### Step 1 - Configure GitHub connection
 
-1. Visit `config-ui` at `http://localhost:4000`, click the GitHub icon
+1. Visit `config-ui` at `http://localhost:4000` and click the GitHub icon
 
 2. Click the default connection 'Github' in the list
     ![image](https://user-images.githubusercontent.com/14050754/163591959-11d83216-057b-429f-bb35-a9d845b3de5a.png)
-    
+
 3. Configure connection by providing your GitHub API endpoint URL and your personal access token(s).
     ![image](https://user-images.githubusercontent.com/14050754/163592015-b3294437-ce39-45d6-adf6-293e620d3942.png)
 
-    > Endpoint URL: Leave this unchanged if you're using github.com. Otherwise replace it with your own GitHub instance's REST API endpoint URL. This URL should end with '/'.
-    >
-    > Auth Token(s): Fill in your personal access tokens(s). For how to generate personal access tokens, please see GitHub's [official documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
-    > You can provide multiple tokens to speed up the data collection process, simply concatenating tokens with commas.
-    >
-    > GitHub Proxy URL: This is optional. Enter a valid proxy server address on your Network, e.g. http://your-proxy-server.com:1080
-    
+- Endpoint URL: Leave this unchanged if you're using github.com. Otherwise replace it with your own GitHub instance's REST API endpoint URL. This URL should end with '/'.
+- Auth Token(s): Fill in your personal access tokens(s). For how to generate personal access tokens, please see GitHub's [official documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+You can provide multiple tokens to speed up the data collection process, simply concatenating tokens with commas.
+- GitHub Proxy URL: This is optional. Enter a valid proxy server address on your Network, e.g. http://your-proxy-server.com:1080
+
 4. Click 'Test Connection' and see it's working, then click 'Save Connection'.
 
 5. [Optional] Help DevLake understand your GitHub data by customizing data enrichment rules shown below.
     ![image](https://user-images.githubusercontent.com/14050754/163592506-1873bdd1-53cb-413b-a528-7bda440d07c5.png)
-   
+
    1. Pull Request Enrichment Options
-   
+
       1. `Type`: PRs with label that matches given Regular Expression, their properties `type` will be set to the value of first sub match. For example, with Type being set to `type/(.*)$`, a PR with label `type/bug`, its `type` would be set to `bug`, with label `type/doc`, it would be `doc`.
       2. `Component`: Same as above, but for `component` property.
-   
+
    2. Issue Enrichment Options
-   
+
       1. `Severity`: Same as above, but for `issue.severity` of course.
-   
+
       2. `Component`: Same as above.
-   
+
       3. `Priority`: Same as above.
-   
-      4. **Requirement** : Issues with label that matches given Regular Expression, their properties `type` will be set to `REQUIREMENT`. Unlike `PR.type`, submatch does nothing,    because for Issue Management Analysis, people tend to focus on 3 kinds of type (Requiremnt/Bug/Incident), however, the concrete naming varies from repo to repo, time to time, so we decided to standardize them to help analyst making general purpose metric. 
-   
+
+      4. **Requirement** : Issues with label that matches given Regular Expression, their properties `type` will be set to `REQUIREMENT`. Unlike `PR.type`, submatch does nothing,    because for Issue Management Analysis, people tend to focus on 3 kinds of types (Requirement/Bug/Incident), however, the concrete naming varies from repo to repo, time to time, so we decided to standardize them to help analysts make general purpose metrics.
+
       5. **Bug**: Same as above, with `type` setting to `BUG`
-   
+
       6. **Incident**: Same as above, with `type` setting to `INCIDENT`
-   
+
 6. Click 'Save Settings'
 
 ### Step 2 - Create a pipeline to collect GitHub data

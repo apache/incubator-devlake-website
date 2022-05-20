@@ -12,23 +12,22 @@ This plugin collects Feishu meeting data through [Feishu Openapi](https://open.f
 
 ## Configuration
 
-In order to fully use this plugin, you will need to get app_id and app_secret from feishu administrator(For help on App info, please see [official Feishu Docs](https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/tenant_access_token_internal)), 
-then set these two configurations via Dev Lake's `.env`.
+In order to fully use this plugin, you will need to get app_id and app_secret from a Feishu administrator (for help on App info, please see [official Feishu Docs](https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/tenant_access_token_internal)),
+then set these two parameters via Dev Lake's `.env`.
 
 ### By `.env`
 
 The connection aspect of the configuration screen requires the following key fields to connect to the Feishu API. As Feishu is a single-source data provider at the moment, the connection name is read-only as there is only one instance to manage. As we continue our development roadmap we may enable multi-source connections for Feishu in the future.
 
+```
 FEISHU_APPID=app_id
-
 FEISHU_APPSCRECT=app_secret
+```
 
+## Collect data from Feishu
 
-## Collect Data From Feishu
+To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and paste a JSON config like the following:
 
-In order to collect data, you have to compose a JSON looks like following one, and send it by selecting `Advanced Mode` on `Create Pipeline Run` page:
-numOfDaysToCollect： The number of days you want to collect
-rateLimitPerSecond: The number of requests to send(Maximum is 8)
 
 ```json
 [
@@ -43,6 +42,10 @@ rateLimitPerSecond: The number of requests to send(Maximum is 8)
   ]
 ]
 ```
+
+> `numOfDaysToCollect`: The number of days you want to collect
+
+> `rateLimitPerSecond`: The number of requests to send(Maximum is 8)
 
 You can also trigger data collection by making a POST request to `/pipelines`.
 ```

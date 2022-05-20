@@ -8,7 +8,7 @@ description: >
 
 ## Summary
 
-This plugin collects Jenkins data through [Remote Access API](https://www.jenkins.io/doc/book/using/remote-access-api/). It then computes and visualizes various devops metrics from the Jenkins data.
+This plugin collects Jenkins data through [Remote Access API](https://www.jenkins.io/doc/book/using/remote-access-api/). It then computes and visualizes various DevOps metrics from the Jenkins data.
 
 ![image](https://user-images.githubusercontent.com/61080/141943122-dcb08c35-cb68-4967-9a7c-87b63c2d6988.png)
 
@@ -25,10 +25,10 @@ In order to fully use this plugin, you will need to set various configurations v
 
 ### By `config-ui`
 
-The connection aspect of the configuration screen requires the following key fields to connect to the Jenkins API. As Jenkins is a single-source data provider at the moment, the connection name is read-only as there is only one instance to manage. As we continue our development roadmap we may enable multi-source connections for Jenkins in the future.
+The connection section of the configuration screen requires the following key fields to connect to the Jenkins API.
 
 - Connection Name [READONLY]
-  - ⚠️ Defaults to "Jenkins" and may not be changed.
+  - ⚠️ Defaults to "Jenkins" and may not be changed. As Jenkins is a _single-source data provider_ at the moment, the connection name is read-only as there is only one instance to manage. As we advance on our development roadmap we may enable multi-source connections for Jenkins in the future.
 - Endpoint URL (REST URL, starts with `https://` or `http://`i, ends with `/`)
   - This should be a valid REST API Endpoint eg. `https://ci.jenkins.io/`
 - Username (E-mail)
@@ -42,8 +42,7 @@ Click Save Connection to update connection settings.
 
 ## Collect Data From Jenkins
 
-In order to collect data from Jenkins, you have to compose a JSON looks like following one, and send it via `Triggers` page on `config-ui`:
-
+To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and paste a JSON config like the following:
 
 ```json
 [
