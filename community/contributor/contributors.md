@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ## New Contributors in 2022 May
 
-After a vote within DevLake PPMC, we've decided to invite Jiageng Li, Xiangyu Zhang and Xiaolei Wang to be Contributors of DevLake community!
+After a vote within DevLake PPMC, we've decided to invite Jiageng Li, Xiangyu Zhang, Xiaolei Wang and Peng Su to be Contributors of DevLake community!
 
 ### Jiageng Li
 
@@ -25,3 +25,9 @@ After a vote within DevLake PPMC, we've decided to invite Jiageng Li, Xiangyu Zh
 ---
 
 ![Xiaolei Wang](../../img/community/contributors/wangxiaolei.jpeg)
+
+### Peng Su
+
+---
+
+![Peng Su](../../img/community/contributors/supeng.jpeg)

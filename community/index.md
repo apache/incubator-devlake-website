@@ -24,6 +24,8 @@ If you intend to change the public API, or make any non-trivial changes to the i
 
 If you’re only fixing a bug, it’s fine to submit a pull request right away but we still recommend to file an issue detailing what you’re fixing. This is helpful in case we don’t accept that specific fix but want to keep track of the issue.
 
+You can check [here](make-contribution/fix-or-create-issues.md) for details.
+
 ## Maintainer team 
 
 Apache DevLake is maintained by apache/devlake committers. We aim to achieve an SLA of 24 hrs for replying to issues.

@@ -1,5 +1,4 @@
-﻿
-# DevLake是怎么跑起来的
+﻿# DevLake是怎么跑起来的
 
 [DevLake](https://github.com/merico-dev/lake) 是一个DevOps数据收集和整合工具，通过 Grafana 为开发团队呈现出不同阶段的数据，让团队能够以数据为驱动改进开发流程。
 
