@@ -11,7 +11,7 @@ description: >
 
 ## Goals
 1. Moving to Apache Incubator and making DevLake a graduation-ready project.
-2. Explore and implement 3 typical use scenarios to help certain engineering teams and developers:
+2. Explore and implement 3 typical use case scenarios to help certain engineering teams and developers:
    - Observation of open-source project contribution and quality
    - DORA metrics for the DevOps team
    - SDLC workflow monitoring and improvement

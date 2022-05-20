@@ -9,7 +9,7 @@ description: >
 
 ## Summary
 
-For development workload analysis, we often need to know how many commits have been created between 2 releases. This plugin offers the ability to calculate the commits of difference between 2 Ref(branch/tag), and the result will be stored back into database for further analysis.
+For development workload analysis, we often need to know how many commits have been created between 2 releases. This plugin calculates which commits differ between 2 Ref (branch/tag), and the result will be stored back into database for further analysis.
 
 ## Important Note
 
@@ -102,18 +102,16 @@ make
 make install
 ```
 
-Troubleshooting (MacOS)
+#### Troubleshooting (MacOS)
 
-Q: I got an error saying: `pkg-config: exec: "pkg-config": executable file not found in $PATH`
+> Q: I got an error saying: `pkg-config: exec: "pkg-config": executable file not found in $PATH`
 
-A:
-
-1. Make sure you have pkg-config installed:
-
-  `brew install pkg-config`
-
-2. Make sure your pkg config path covers the installation: 
-
-  `export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib:/usr/local/lib/pkgconfig`
+> A:
+> 1. Make sure you have pkg-config installed:
+>
+> `brew install pkg-config`
+>
+> 2. Make sure your pkg config path covers the installation:
+> `export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib:/usr/local/lib/pkgconfig`
 
 <br/><br/><br/>

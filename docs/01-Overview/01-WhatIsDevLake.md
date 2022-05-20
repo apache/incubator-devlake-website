@@ -10,8 +10,8 @@ Apache DevLake is designed for developer teams looking to make better sense of t
 
 ## What can be accomplished with Apache DevLake?
 1. Collect DevOps data across the entire Software Development Life Cycle (SDLC) and connect the siloed data with a standard [data model](../05-DataModels/01-DevLakeDomainLayerSchema.md).
-2. Provide out-of-the-box engineering [metrics](../06-EngineeringMetrics.md) to be visualized in a sereis of dashboards.
-3. Allow a flexible [framework](02-Architecture.md) for data collection ad ETL to support customizable data analysis.
+2. Visualize out-of-the-box engineering [metrics](../06-EngineeringMetrics.md) on many dashboards.
+3. Create custom analyzes of your DevOps data with a flexible [framework](02-Architecture.md) for data collection and ETL.
 
 
 <div align="left">

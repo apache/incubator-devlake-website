@@ -7,13 +7,13 @@ description: >
 
 ## Why advanced mode?
 
-Advanced mode allows users to create any pipeline by writing JSON. This is most useful for users who'd like to:
+Advanced mode allows users to create any pipeline by writing JSON. This is useful for users who want to:
 
 1. Collect multiple GitHub/GitLab repos or Jira projects within a single pipeline
 2. Have fine-grained control over what entities to collect or what subtasks to run for each plugin
 3. Orchestrate a complex pipeline that consists of multiple stages of plugins.
 
-Advaned mode gives the most flexiblity to users by exposing the JSON API
+Advanced mode gives the most flexibility to users by exposing the JSON API.
 
 ## How to use advanced mode to create pipelines?
 
@@ -31,13 +31,13 @@ Advaned mode gives the most flexiblity to users by exposing the JSON API
 
 ## Examples
 
-1. Collect multiple GitLab repos sequentially. 
+1. Collect multiple GitLab repos sequentially.
 
->When there're multiple collection tasks against a single data source, we recommend running these tasks sequentially since the collection speed is mostly limited by the API rate limit of the data source. 
+>When there're multiple collection tasks against a single data source, we recommend running these tasks sequentially since the collection speed is mostly limited by the API rate limit of the data source.
 >Running multiple tasks against the same data source is unlikely to speed up the process and may overwhelm the data source.
 
 
-Below is an example for collecting 2 GitLab repos sequentially. It has 2 stages, each contains a GitLab task. 
+Below is an example for collecting 2 GitLab repos sequentially. It has 2 stages, each contains a GitLab task.
 
 
 ```

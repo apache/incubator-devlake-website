@@ -50,7 +50,7 @@ description: >
     docker-compose up -d mysql grafana
     ```
 
-7. Run lake and config UI in dev mode in two seperate terminals:
+7. Run lake and config UI in dev mode in two separate terminals:
 
     ```sh
     # run lake
@@ -61,7 +61,7 @@ description: >
 
     Q: I got an error saying: `libgit2.so.1.3: cannot open share object file: No such file or directory`
 
-    A: Make sure your program find `libgit2.so.1.3`. `LD_LIBRARY_PATH` can be assigned like this if your `libgit2.so.1.3` is located at `/usr/local/lib`:
+    A: Make sure your program can find `libgit2.so.1.3`. `LD_LIBRARY_PATH` can be assigned like this if your `libgit2.so.1.3` is located at `/usr/local/lib`:
 
     ```sh
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
@@ -69,8 +69,8 @@ description: >
 
 8. Visit config UI at `localhost:4000` to configure data connections.
     - Navigate to desired plugins pages on the Integrations page
-    - You will need to enter the required information for the plugins you intend to use.
-    - Please reference the following for more details on how to configure each one:
+    - Enter the required information for the plugins you intend to use.
+    - Refer to the following for more details on how to configure each one:
         - [Jira](../03-Plugins/jira.md)
         - [GitLab](../03-Plugins/gitlab.md)
         - [Jenkins](../03-Plugins/jenkins.md)

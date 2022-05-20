@@ -35,8 +35,8 @@ For each connection, you will need to set up following items first:
 ![connection at config ui](jira-connection-config-ui.png)
 
 - Connection Name: This allow you to distinguish different connections.
-- Endpoint URL: The JIRA instance api endpoint, for JIRA Cloud Service, it would be: `https://<mydomain>.atlassian.net/rest`. devlake officially supports JIRA Cloud Service on atlassian.net, may or may not work for JIRA Server Instance.
-- Basic Auth Token: First, generate a **JIRA API TOKEN** for your JIRA account on JIRA console (see [Generating API token](#generating-api-token)), then, in `config-ui` click the KEY icon on the right side of the input to generate a full `HTTP BASIC AUTH` token for you.
+- Endpoint URL: The JIRA instance API endpoint, for JIRA Cloud Service: `https://<mydomain>.atlassian.net/rest`. DevLake officially supports JIRA Cloud Service on atlassian.net, but may or may not work for JIRA Server Instance.
+- Basic Auth Token: First, generate a **JIRA API TOKEN** for your JIRA account on the JIRA console (see [Generating API token](#generating-api-token)), then, in `config-ui` click the KEY icon on the right side of the input to generate a full `HTTP BASIC AUTH` token for you.
 - Proxy Url: Just use when you want collect through VPN.
 
 ### More custom configuration
@@ -58,23 +58,24 @@ If you want to add more custom config, you can click "settings" to change these 
 
 Devlake supports 3 standard types, all metrics are computed based on these types:
 
- - `Bug`: Problems found during `test` phase, before they can reach the production environment.
- - `Incident`: Problems went through `test` phash, got deployed into production environment.
+ - `Bug`: Problems found during the `test` phase, before they can reach the production environment.
+ - `Incident`: Problems that went through the `test` phase, got deployed into production environment.
  - `Requirement`: Normally, it would be `Story` on your instance if you adopted SCRUM.
 
-You can may map arbitrary **YOUR OWN ISSUE TYPE** to a single **STANDARD ISSUE TYPE**, normally, one would map `Story` to `Requirement`, but you could map both `Story` and `Task` to `Requirement` if that was your case. Those unspecified type would be copied as standard type directly for your convenience, so you don't need to map your `Bug` to standard `Bug`.
+You can map arbitrary **YOUR OWN ISSUE TYPE** to a single **STANDARD ISSUE TYPE**. Normally, one would map `Story` to `Requirement`, but you could map both `Story` and `Task` to `Requirement` if that was your case. Unspecified types are copied directly for your convenience, so you don't need to map your `Bug` to standard `Bug`.
 
 Type mapping is critical for some metrics, like **Requirement Count**, make sure to map your custom type correctly.
 
 ### Find Out Custom Field
 
-Please follow this guide: [How to find Jira the custom field ID in Jira?](https://github.com/apache/incubator-devlake/wiki/How-to-find-the-custom-field-ID-in-Jira)
+Please follow this guide: [How to find the custom field ID in Jira?](https://github.com/apache/incubator-devlake/wiki/How-to-find-the-custom-field-ID-in-Jira)
 
 
 ## Collect Data From JIRA
 
-In order to collect data from JIRA, you have to compose a JSON looks like following one, and send it via `Triggers` page on `config-ui`.
-<font color="#ED6A45">Warning: Data collection only supports single-task execution, and the results of concurrent multi-task execution may not meet expectations.</font>
+To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and paste a JSON config like the following:
+
+> <font color="#ED6A45">Warning: Data collection only supports single-task execution, and the results of concurrent multi-task execution may not meet expectations.</font>
 
 ```
 [
@@ -92,8 +93,8 @@ In order to collect data from JIRA, you have to compose a JSON looks like follow
 ```
 
 - `connectionId`: The `ID` field from **JIRA Integration** page.
-- `boardId`: JIRA board id, see "Find Board Id" for detail.
-- `since`: optional, download data since specified date/time only.
+- `boardId`: JIRA board id, see "Find Board Id" for details.
+- `since`: optional, download data since a specified date only.
 
 
 ### Find Board Id
@@ -115,7 +116,7 @@ Your board id is used in all REST requests to Apache DevLake. You do not need to
 
 ### Data Connections
 
-1. Get all data connection 
+1. Get all data connection
 
 ```GET /plugins/jira/connections
 [

@@ -9,7 +9,7 @@ description: >
 
 <img src="https://user-images.githubusercontent.com/3789273/128533901-3107e9bf-c3e3-4320-ba47-879fe2b0ea4d.png" width="450px" />
 
-When first visiting grafana, you will be provided with a sample dashboard with some basic charts setup from the database
+When first visiting Grafana, you will be provided with a sample dashboard with some basic charts setup from the database.
 
 ## Contents
 
@@ -87,7 +87,7 @@ In the top right of the window are buttons for:
 
 ## Dashboard Settings<a id="dashboard-settings"></a>
 
-When viewing a dashboard click on the settings icon to view dashboard settings. In here there is 2 pages important sections to use:
+When viewing a dashboard click on the settings icon to view dashboard settings. Here are 2 important sections to use:
 
 ![Screen Shot 2021-08-06 at 1 51 14 PM](https://user-images.githubusercontent.com/3789273/128555763-4d0370c2-bd4d-4462-ae7e-4b140c4e8c34.png)
 
