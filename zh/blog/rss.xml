@@ -4,10 +4,30 @@
         <title>Apache DevLake (Incubating) Blog</title>
         <link>https://devlake.apache.org/zh/blog</link>
         <description>Apache DevLake (Incubating) Blog</description>
-        <lastBuildDate>Wed, 18 May 2022 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 20 May 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh</language>
+        <item>
+            <title><![CDATA[如何贡献issue]]></title>
+            <link>https://devlake.apache.org/zh/blog/2022/05/20/如何贡献issues</link>
+            <guid>/2022/05/20/如何贡献issues</guid>
+            <pubDate>Fri, 20 May 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[上周(2022-05-12)，我们以先到先得的方式为大家列出了两个"good first issue"。]]></description>
+            <content:encoded><![CDATA[<p>上周(2022-05-12)，我们以先到先得的方式为大家列出了两个"good first issue"。
+这很有趣，它们几乎立刻就被拿走了......
+但对于那些有兴趣但没有得到的人来说可能就不那么有趣了。</p><h3 class="anchor anchorWithStickyNavbar_mojV" id="所以">所以...<a class="hash-link" href="#所以" title="标题的直接链接">​</a></h3><p>我们决定，不再有竞争，你可以从我们的github issue pages中挑选你喜欢的issue。如果没有了，甚至可以创建你自己的。
+我们毕竟是社区！</p><h3 class="anchor anchorWithStickyNavbar_mojV" id="怎么做呢这很简单">怎么做呢？这很简单!<a class="hash-link" href="#怎么做呢这很简单" title="标题的直接链接">​</a></h3><p>进入我们的<a href="https://github.com/apache/incubator-devlake/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22" target="_blank" rel="noopener noreferrer">问题页面</a>，然后点击这里。我们所有的Good First Issue都列在这里!
+<img loading="lazy" alt="good first issue" src="/zh/assets/images/issue_page_screenshot-4aa3f48811d5bc6aa1a36ce71727344c.png" width="1320" height="266" class="img_E7b_"></p><ul><li><p>首先，寻找现有的issues，找到一个你喜欢的。
+你可以通过评论"I'll take it!"来预订它。
+接下来你可以写一份“攻略”，以展示你对问题的理解和你将采取什么样的步骤来解决这个issue，然后开始Coding。</p></li><li><p>如果没有GFI了怎么办？创造你自己的issue! 现在，通过查看我们的代码库。
+你肯定能发现很多问题，比如文档、单元测试，甚至是错字。
+把你觉得不对的地方提出来，我们会验证它是否必要，
+然后你就可以开始Coding了。</p></li><li><p>最后，你可能会问，我为什么要费尽心思为你写代码？
+不不不，你不是为我们写代码，你是为社区里的每个人写代码，你是为自己写代码。
+为了提高你的技能，为了学习如何与他人合作。而对于那些做出重大贡献的人，
+我们为您提供一个Apache Committer的席位，甚至是PPMC！</p></li></ul><h3 class="anchor anchorWithStickyNavbar_mojV" id="就这些了有任何问题请随时提出编码快乐">就这些了，有任何问题请随时提出。编码快乐！<a class="hash-link" href="#就这些了有任何问题请随时提出编码快乐" title="标题的直接链接">​</a></h3>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[DevLake 加入 Apache 孵化器，来和我们一起玩开源！]]></title>
             <link>https://devlake.apache.org/zh/blog/apache-welcomes-devlake</link>
