@@ -1,4 +1,11 @@
-# 如何贡献issue
+---
+slug: how-to-contribute-to-issues
+title: 如何贡献issues
+authors: klesh
+tags: [devlake, apache]
+---
+
+# 如何贡献issues
 
 上周(2022-05-12)，我们以先到先得的方式为大家列出了两个"good first issue"。
 这很有趣，它们几乎立刻就被拿走了......
@@ -12,7 +19,7 @@
 ### 怎么做呢？这很简单!
 
 进入我们的[问题页面](https://github.com/apache/incubator-devlake/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)，然后点击这里。我们所有的Good First Issue都列在这里!
-![good first issue](../../../../img/community/screenshots/issue_page_screenshot.png)
+![good first issue](../../img/community/screenshots/issue_page_screenshot.png)
 
 - 首先，寻找现有的issues，找到一个你喜欢的。
   你可以通过评论"I'll take it!"来预订它。
