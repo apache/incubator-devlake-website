@@ -31,3 +31,15 @@ After a vote within DevLake PPMC, we've decided to invite Jiageng Li, Xiangyu Zh
 ---
 
 ![Peng Su](../../img/community/contributors/supeng.jpeg)
+
+### Dunyu Song
+
+---
+
+![Dunyu Song](../../img/community/contributors/songdunyu.jpeg)
+
+### Nikita Koselev
+
+---
+
+![Nikita Koselev](../../img/community/contributors/nikitakoselec.jpeg)
