@@ -1,8 +1,14 @@
 warren:
   name: 陈映初
-  title: DevLake贡献者
+  title: Apache DevLake PPMC
   url: https://github.com/warren830
   image_url: https://github.com/warren830.png
+
+klesh:
+  name: Klesh Wong
+  title: Apache DevLake PPMC
+  url: https://kleshwong.com
+  image_url: https://github.com/klesh.png
 
 weisi:
   name: Weisi Deng
