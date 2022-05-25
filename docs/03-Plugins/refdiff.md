@@ -87,7 +87,7 @@ make install
 ### MacOS
 1. [MacPorts](https://guide.macports.org/#introduction) install
 ```
-port info libgit2@1.3.0
+port install libgit2@1.3.0
 ```
 2. Source install
 ```
