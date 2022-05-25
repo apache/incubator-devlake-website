@@ -11,8 +11,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/logo.svg',
-  organizationName: 'Apache', 
-  projectName: 'Apache DevLake', 
+  organizationName: 'Apache',
+  projectName: 'Apache DevLake',
 
   presets: [
     [
@@ -55,7 +55,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
   ],
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'zh'],
+    locales: ['en'],
     localeConfigs: {
       en: {
         htmlLang: 'en-GB',
@@ -112,7 +112,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
               {
                 label: 'License',
                 href: 'https://www.apache.org/licenses/',
-              },      
+              },
               {
                 label: 'Security',
                 href: 'https://www.apache.org/security/',
@@ -168,7 +168,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         <div style="margin-top: 20px">
                 <img style="height:50px; margin-bottom: 10px; margin-top: 10px" alt="Apache Software Foundation" src= "/img/apache-incubator.svg" />
                 <p style="color: #fff;font-weight:400;text-align:left">Apache DevLake is an effort undergoing incubation at The Apache Software Foundation (ASF), sponsored by the Apache Incubator. Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and decision making process have stabilized in a manner consistent with other successful ASF projects. While incubation status is not necessarily a reflection of the completeness or stability of the code, it does indicate that the project has yet to be fully endorsed by the ASF.</p>
-                <div style="border-top: 1px solid #fff;min-height: 60px;line-height: 20px;text-align: center;font-family: Avenir-Medium;font-size: 14px;color: #fff;display: flex;align-items: center;"><span>Copyright ©${new Date().getFullYear()} Apache, Apache DevLake, DevLake, the Apache feather logo and the Apache DevLake project logo are trademarks of The Apache Software Foundation.</span></div>                
+                <div style="border-top: 1px solid #fff;min-height: 60px;line-height: 20px;text-align: center;font-family: Avenir-Medium;font-size: 14px;color: #fff;display: flex;align-items: center;"><span>Copyright ©${new Date().getFullYear()} Apache, Apache DevLake, DevLake, the Apache feather logo and the Apache DevLake project logo are trademarks of The Apache Software Foundation.</span></div>
         `,
       },
       prism: {
