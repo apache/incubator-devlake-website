@@ -85,9 +85,9 @@ make install
 ```
 
 ### MacOS
-1. HomeBrew install
+1. [MacPorts](https://guide.macports.org/#introduction) install
 ```
-brew install libgit2
+port info libgit2@1.3.0
 ```
 2. Source install
 ```
