@@ -3,12 +3,10 @@ sidebar_position: 1
 ---
 
 # DevLake Contributors
+> All DevLake contributors will receive a certificate once their first PRs 
+get merged into the codebase. We really appreciate your contribution!
 
 ## New Contributors in 2022 May
-
-After a vote within DevLake PPMC, 
-we've decided to invite Jiageng Li, Xiangyu Zhang, Xiaolei Wang, Shimin An, 
-Abhishek KM and Peng Su to be Contributors of DevLake community!
 
 ### Jiageng Li
 
