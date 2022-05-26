@@ -55,3 +55,9 @@ get merged into the codebase. We really appreciate your contribution!
 ---
 
 ![Abhishek KM](../../img/community/contributors/abhishek.jpeg)
+
+### Guiping Tan
+
+---
+
+![Guiping Tan](../../img/community/contributors/tanguiping.jpeg)
