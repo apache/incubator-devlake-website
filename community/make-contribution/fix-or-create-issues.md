@@ -1,4 +1,8 @@
-# Contribute to issues
+---
+sidebar_position: 02
+title: "Contributing to Issues"
+---
+# Contributing to Issues
 > @Klesh
 
 Last week(2022-05-12), we had 2 designated Good First Issues listed out for everyone

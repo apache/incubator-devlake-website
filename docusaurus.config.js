@@ -30,8 +30,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
           readingTime: ({content, frontMatter, defaultReadingTime}) =>
             defaultReadingTime({content, options: {wordsPerMinute: 300}}),
           // Please change this to your repo.
-          editUrl:
-            undefined,
+            editUrl: 'https://github.com/apache/incubator-devlake-website/edit/main',
             blogSidebarTitle: 'All posts',
             blogSidebarCount: 'ALL',
         },
@@ -89,14 +88,12 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             label: 'Community',
             docsPluginId: 'community'
           },
-          {to: '/blog', label: 'Blog', position: 'right'},
           {
-            href: 'https://github.com/apache/incubator-devlake/graphs/contributors',
-            label: 'Team',
-            position: 'right',
-          },
+            to: '/blog', 
+            label: 'Blog', 
+            position: 'right'},
           {
-            href: 'https://github.com/merico-dev/lake',
+            to: 'https://github.com/apache/incubator-devlake',
             label: 'GitHub',
             position: 'right',
           },
@@ -107,23 +104,27 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             items: [
               {
                 label: 'Foundation',
-                href: 'https://www.apache.org/',
+                to: 'https://www.apache.org/',
               },
               {
                 label: 'License',
-                href: 'https://www.apache.org/licenses/',
-              },      
+                to: 'https://www.apache.org/licenses/',
+              },
+              {
+                label: 'Events',
+                to: 'https://www.apache.org/events/',
+              },        
               {
                 label: 'Security',
-                href: 'https://www.apache.org/security/',
+                to: 'https://www.apache.org/security/',
               },
               {
                 label: 'Sponsorship',
-                href: 'https://www.apache.org/foundation/sponsorship.html',
+                to: 'https://www.apache.org/foundation/sponsorship.html',
               },
               {
                 label: 'Thanks',
-                href: 'https://www.apache.org/foundation/thanks.html',
+                to: 'https://www.apache.org/foundation/thanks.html',
               }
             ],
           },
@@ -140,8 +141,20 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             title: 'Docs',
             items: [
               {
-                label: 'Docs',
-                to: '/docs/Overview/WhatIsDevLake',
+                label: 'Quick Start',
+                to: 'docs/QuickStart/LocalSetup',
+              },
+              {
+                label: 'Data Models',
+                to: 'docs/DataModels/DevLakeDomainLayerScheema',
+              },        
+              {
+                label: 'Engineering Metrics',
+                to: 'docs/EngineeringMetrics',
+              },
+              {
+                label: 'Dashboards (Live Demo)',
+                to: 'docs/Dashboards/GitHubBasic',
               },
             ],
           },
@@ -150,7 +163,11 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             items: [
               {
                 label: 'Slack',
-                href: 'https://join.slack.com/t/devlake-io/shared_invite/zt-17b6vuvps-x98pqseoUagM7EAmKC82xQ',
+                to: 'https://join.slack.com/t/devlake-io/shared_invite/zt-17b6vuvps-x98pqseoUagM7EAmKC82xQ',
+              },
+              {
+                label: 'GitHub Issue Tracker',
+                to: 'https://github.com/apache/incubator-devlake/issues',
               },
             ],
           },
@@ -159,7 +176,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/merico-dev/lake',
+                to: 'https://github.com/apache/incubator-devlake',
               },
             ],
           },

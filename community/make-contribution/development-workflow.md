@@ -1,3 +1,7 @@
+---
+sidebar_position: 03
+title: "Development Workflow"
+---
 # Development Workflow
 
 This document shows the workflow of how to develop DevLake.

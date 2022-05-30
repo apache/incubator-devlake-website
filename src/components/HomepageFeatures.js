@@ -8,7 +8,7 @@ const FeatureList = [
     Svg: require('../../static/img/SilosConnected.svg').default,
     description: (
       <>
-        Collect DevOps data across the entire SDLC and connect siloed data with a standard data model
+        Collect DevOps data across the entire Software Development LifeCycle (SDLC) and connect siloed data with a standard data model
       </>
     ),
   },
@@ -17,7 +17,7 @@ const FeatureList = [
     Svg: require('../../static/img/OutoftheboxAnalysis.svg').default,
     description: (
       <>
-        Provide out-of-the-box engineering metrics to be visualized in a sereis of dashboards
+        Visualize out-of-the-box engineering metrics in a series of use-case driven dashboards
       </>
     ),
   },
@@ -26,7 +26,7 @@ const FeatureList = [
     Svg: require('../../static/img/HighlyFlexible.svg').default,
     description: (
       <>
-        Flexible framework for data collection and ETL, support customized analysis
+        Easily extend DevLake to support your data sources, metrics, and dashboards
       </>
     ),
   },
