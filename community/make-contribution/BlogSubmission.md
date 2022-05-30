@@ -1,8 +1,6 @@
 ---
 sidebar_position: 02
-title: "How to Submit a Blog?"
-linkTitle: "How to Submit a Blog?"
-tags: []
+title: "Blog Submission"
 description: >
   Instructions for how to submit a blog post to DevLake Blog
 ---
@@ -26,7 +24,7 @@ Notice: No matter if you are submitting blog posts in one or two languages, plea
 
 ```markdown
 warren:
-  name: Warren Chen (陈映初)
+  name: Warren Chen
   title: DevLake Contributor
   url: https://github.com/warren830
   image_url: https://github.com/warren830.png

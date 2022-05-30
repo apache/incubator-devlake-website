@@ -1,3 +1,8 @@
+---
+sidebar_position: 04
+title: "Contributor Growth Program"
+---
+
 # Contributor Growth Program
 
 **Note:** This document is wip and welcomes everyone to help improve.
