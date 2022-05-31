@@ -146,7 +146,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
               },
               {
                 label: 'Data Models',
-                to: 'docs/DataModels/DevLakeDomainLayerScheema',
+                to: 'docs/DataModels/DevLakeDomainLayerSchema',
               },        
               {
                 label: 'Engineering Metrics',
