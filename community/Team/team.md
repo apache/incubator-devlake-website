@@ -16,20 +16,21 @@ title: "Team"
 ## Committers
 - [Kaiyun (Louis) Zhang](https://github.com/startrekzky)
 - [Jinglei Ren](https://github.com/basicthinker)
-- [Jingyang Liang](https://github.com/liangjingyang)
 - [Zhicheng Jiang](https://github.com/mappjzc)
 - [Zikuan An](https://github.com/abeizn)
-- [Yumeng Wang](https://github.com/yumengwang03)
-- [Yanghui Lin](https://github.com/likyh)
-- [Hao Ke](https://github.com/KeHaohaoke)
-- [Cong (Narro) Wang](https://github.com/narrowizard)
-- [Jinxiu (Jax) Zhou](https://github.com/jaxzhou)
 
 
 ## Contributors
 
 All DevLake contributors will be awarded with a certificate once their first PRs 
 get merged into the codebase. We deeply appreciate your contribution!
+
+- [Jingyang Liang](https://github.com/liangjingyang)
+- [Yumeng Wang](https://github.com/yumengwang03)
+- [Yanghui Lin](https://github.com/likyh)
+- [Hao Ke](https://github.com/KeHaohaoke)
+- [Cong (Narro) Wang](https://github.com/narrowizard)
+- [Jinxiu (Jax) Zhou](https://github.com/jaxzhou)
 
 ### New Contributors May 2022
 
