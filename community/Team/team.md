@@ -31,6 +31,14 @@ get merged into the codebase. We deeply appreciate your contribution!
 - [Hao Ke](https://github.com/KeHaohaoke)
 - [Cong (Narro) Wang](https://github.com/narrowizard)
 - [Jinxiu (Jax) Zhou](https://github.com/jaxzhou)
+- [Jiageng Li](https://github.com/skyleaworlder)
+- [Xiaolei Wang](https://github.com/fatelei)
+- [Peng Su](https://github.com/supersupeng)
+- [Dunyu Song](https://github.com/songdunyu)
+- [Nikita Koselev](https://github.com/nikitakoselev)
+- [Shimin An](https://github.com/snowmoon-dev)
+- [Abhishek KM](https://github.com/sync271)
+- [Guiping Tan](https://github.com/thenicetgp)
 
 ### New Contributors May 2022
 
