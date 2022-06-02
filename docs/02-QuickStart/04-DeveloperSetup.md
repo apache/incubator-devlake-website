@@ -29,20 +29,25 @@ description: >
 3. Install Go packages
 
     ```sh
-	go get
+	  go get
+    ```
+   
+4. Replace the devlake module with the current project path
+    ```sh
+    go mod edit -replace github.com/apache/incubator-devlake=./
     ```
 
-4. Copy the sample config file to new local file:
+5. Copy the sample config file to new local file:
 
     ```sh
     cp .env.example .env
     ```
 
-5. Update the following variables in the file `.env`:
+6. Update the following variables in the file `.env`:
 
     * `DB_URL`: Replace `mysql:3306` with `127.0.0.1:3306`
 
-6. Start the MySQL and Grafana containers:
+7. Start the MySQL and Grafana containers:
 
     > Make sure the Docker daemon is running before this step.
 
@@ -50,7 +55,7 @@ description: >
     docker-compose up -d mysql grafana
     ```
 
-7. Run lake and config UI in dev mode in two separate terminals:
+8. Run lake and config UI in dev mode in two separate terminals:
 
     ```sh
     # run lake
@@ -67,7 +72,7 @@ description: >
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     ```
 
-8. Visit config UI at `localhost:4000` to configure data connections.
+9. Visit config UI at `localhost:4000` to configure data connections.
     - Navigate to desired plugins pages on the Integrations page
     - Enter the required information for the plugins you intend to use.
     - Refer to the following for more details on how to configure each one:
@@ -77,7 +82,7 @@ description: >
         - [GitHub](../03-Plugins/github.md): For users who'd like to collect GitHub data, we recommend reading our [GitHub data collection guide](../04-UserManuals/github-user-guide-v0.10.0.md) which covers the following steps in detail.
     - Submit the form to update the values by clicking on the **Save Connection** button on each form page
 
-9. Visit `localhost:4000/pipelines/create` to RUN a Pipeline and trigger data collection.
+10. Visit `localhost:4000/pipelines/create` to RUN a Pipeline and trigger data collection.
 
 
    Pipelines Runs can be initiated by the new "Create Run" Interface. Simply enable the **Data Connection Providers** you wish to run collection for, and specify the data you want to collect, for instance, **Project ID** for Gitlab and **Repository Name** for GitHub.
