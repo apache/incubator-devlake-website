@@ -95,3 +95,9 @@ get merged into the codebase. We deeply appreciate your contribution!
 ---
 
 ![Guiping Tan](../../img/community/contributors/tanguiping.jpeg)
+
+#### Bin Ji
+
+---
+
+![jibin](../../img/community/contributors/jibin.jpeg)
