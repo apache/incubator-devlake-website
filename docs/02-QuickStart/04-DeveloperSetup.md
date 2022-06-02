@@ -29,7 +29,7 @@ description: >
 3. Install Go packages
 
     ```sh
-	  go get
+	go get
     ```
    
 4. Replace the devlake module with the current project path
