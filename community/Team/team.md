@@ -5,6 +5,12 @@ title: "Team"
 # Team
 
 ## PPMC
+- [Willem Ning Jiang](https://github.com/WillemJiang)
+- [Liang Zhang](https://github.com/terrymanu)
+- [Lidong Dai](https://github.com/davidzollo)
+- [Sijie Guo](https://github.com/sijie)
+- [Felix Cheung](https://github.com/felixcheung)
+- [Jean-Baptiste Onofré](https://github.com/jbonofre)
 - [Klesh Wong](https://github.com/klesh)
 - [Julien Chinapen](https://github.com/e2corporation)
 - [Liang Zhang](https://github.com/mindlesscloud)
@@ -12,6 +18,7 @@ title: "Team"
 - [Jonathan O'Donnell](https://github.com/joncodo)
 - [Hezheng Yin](https://github.com/hezyin)
 - [Maxim Wheatley](https://github.com/MaximDub)
+
 
 ## Committers
 - [Kaiyun (Louis) Zhang](https://github.com/startrekzky)
@@ -39,6 +46,7 @@ get merged into the codebase. We deeply appreciate your contribution!
 - [Shimin An](https://github.com/snowmoon-dev)
 - [Abhishek KM](https://github.com/sync271)
 - [Guiping Tan](https://github.com/thenicetgp)
+- [Bin Ji](https://github.com/matrixji)
 
 ### New Contributors May 2022
 
