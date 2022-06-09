@@ -1,11 +1,11 @@
 ---
-slug: apache-devLake-codebase-walkthrough
-title: Apache Devlake代码库导览
+slug: apache-devlake-codebase-walkthrough
+title: Apache DevLake代码库导览
 authors: abeizn
 tags: [devlake, codebase]
 ---
 
-# Apache Devlake 代码库导览
+# Apache DevLake 代码库导览
 ### Apache DevLake是什么？
 研发数据散落在软件研发生命周期的不同阶段、不同工作流、不同DevOps工具中，且标准化程度低，导致效能数据难以留存、汇集并转化为有效洞见。为了解决这一痛点，[Apache DevLake](https://github.com/apache/incubator-devlake) 应运而生。Apache DevLake是一款开源的研发数据平台，它通过提供自动化、一站式的数据收集、分析以及可视化能力，帮助研发团队更好地理解开发过程，挖掘关键瓶颈与提效机会。
 
