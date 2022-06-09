@@ -12,8 +12,7 @@ tags: [devlake, codebase]
 
 ### Apache DevLake架构概述
 ![img](Architecture_Diagram.png)
-<center>Apache DevLake 架构图</center>
-<br />
+<center>Apache DevLake 架构图</center> 
 
 - Config UI: 人如其名，配置的可视化，其主要承载Apache DevLake的配置工作。通过Config UI，用户可以建立数据源连接，并实现数据的收集范围，部分数据的转换规则，以及收集频率等任务。
 - Api Sever：Apache DevLake的Api接口，是前端调用后端数据的通道。
@@ -235,5 +234,6 @@ tags: [devlake, codebase]
 - Github地址：https://github.com/apache/incubator-devlake
 - 官网地址：https://devlake.apache.org/
 - <a href="https://join.slack.com/t/devlake-io/shared_invite/zt-18uayb6ut-cHOjiYcBwERQ8VVPZ9cQQw" target="_blank">Slack</a>: 通过Slack联系
-- 微信联系:<br />
-![img](wechat_community_barcode.png)
+- 微信联系:
+  
+  ![img](wechat_community_barcode.png)
