@@ -32,7 +32,7 @@ github:
     main:
       required_status_checks:
         contexts:
-          - Build workflow/build
+          - build
 
 publish:
   whoami: asf-site
