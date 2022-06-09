@@ -28,6 +28,11 @@ github:
     squash:  true
     merge:   false
     rebase:  true
+  protected_branches:
+    main:
+      required_status_checks:
+        contexts:
+          - Build workflow
 
 publish:
   whoami: asf-site
