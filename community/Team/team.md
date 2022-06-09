@@ -47,6 +47,8 @@ get merged into the codebase. We deeply appreciate your contribution!
 - [Abhishek KM](https://github.com/sync271)
 - [Guiping Tan](https://github.com/thenicetgp)
 - [Bin Ji](https://github.com/matrixji)
+- [Prajwal Borkar](https://github.com/PrajwalBorkar)
+- [Keon Amini](https://github.com/keon94)
 
 ### New Contributors May 2022
 
@@ -109,3 +111,15 @@ get merged into the codebase. We deeply appreciate your contribution!
 ---
 
 ![jibin](../../img/community/contributors/jibin.jpeg)
+
+#### Prajwal Borkar
+
+---
+
+![Prajwal Borkar](../../img/community/contributors/prajwalborkar.jpeg)
+
+#### Keon Amini
+
+---
+
+![Keon Amini](../../img/community/contributors/keonamini.jpeg)

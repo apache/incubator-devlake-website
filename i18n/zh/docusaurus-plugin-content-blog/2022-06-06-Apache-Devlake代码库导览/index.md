@@ -1,11 +1,11 @@
 ---
-slug: apache-devLake-codebase-walkthrough
-title: Apache Devlake代码库导览
+slug: apache-devlake-codebase-walkthrough
+title: Apache DevLake代码库导览
 authors: abeizn
 tags: [devlake, codebase]
 ---
 
-# Apache Devlake 代码库导览
+# Apache DevLake 代码库导览
 ### Apache DevLake是什么？
 研发数据散落在软件研发生命周期的不同阶段、不同工作流、不同DevOps工具中，且标准化程度低，导致效能数据难以留存、汇集并转化为有效洞见。为了解决这一痛点，[Apache DevLake](https://github.com/apache/incubator-devlake) 应运而生。Apache DevLake是一款开源的研发数据平台，它通过提供自动化、一站式的数据收集、分析以及可视化能力，帮助研发团队更好地理解开发过程，挖掘关键瓶颈与提效机会。
 
@@ -13,7 +13,7 @@ tags: [devlake, codebase]
 ### Apache DevLake架构概述
 ![img](Architecture_Diagram.png)
 <center>Apache DevLake 架构图</center>
-<br/>
+<br />
 
 - Config UI: 人如其名，配置的可视化，其主要承载Apache DevLake的配置工作。通过Config UI，用户可以建立数据源连接，并实现数据的收集范围，部分数据的转换规则，以及收集频率等任务。
 - Api Sever：Apache DevLake的Api接口，是前端调用后端数据的通道。
@@ -235,5 +235,5 @@ tags: [devlake, codebase]
 - Github地址：https://github.com/apache/incubator-devlake
 - 官网地址：https://devlake.apache.org/
 - <a href="https://join.slack.com/t/devlake-io/shared_invite/zt-18uayb6ut-cHOjiYcBwERQ8VVPZ9cQQw" target="_blank">Slack</a>: 通过Slack联系
-- 微信联系:
-![img](wechat_community_barcode.png)
+- 微信联系:<br />
+  ![img](wechat_community_barcode.png)
