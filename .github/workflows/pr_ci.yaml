@@ -2,8 +2,6 @@ name: Build workflow
 
 on:
   pull_request:
-    branches:
-      - main
 
 jobs:
   build:
@@ -19,5 +17,5 @@ jobs:
           node-version: 17.8.x
       - name: Build Docusaurus website
         run: |
-          npm install 
+          npm install
           npm run build
