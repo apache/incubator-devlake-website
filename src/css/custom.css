@@ -27,10 +27,10 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-html[data-theme='light'] footer {
-  background-color: 292B3F;
+html[data-theme='light'] .footer--dark {
+  background-color: #292B3F;
 }
 
-html[data-theme='light'] .theme-doc-footer-edit-meta-row {
+html[data-theme='light'] .docusaurus-mt-lg {
   background-color: white;
 }
