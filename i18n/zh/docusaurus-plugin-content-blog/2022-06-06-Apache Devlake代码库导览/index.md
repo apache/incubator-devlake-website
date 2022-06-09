@@ -235,5 +235,5 @@ tags: [devlake, codebase]
 - Github地址：https://github.com/apache/incubator-devlake
 - 官网地址：https://devlake.apache.org/
 - <a href="https://join.slack.com/t/devlake-io/shared_invite/zt-18uayb6ut-cHOjiYcBwERQ8VVPZ9cQQw" target="_blank">Slack</a>: 通过Slack联系
-- 微信联系:<br>
+- 微信联系:
 ![img](wechat_community_barcode.png)
