@@ -1,8 +1,8 @@
 ---
-sidebar_position: 03
-title: "Development Workflow"
+sidebar_position: 01
+title: "Submit Code"
 ---
-# Development Workflow
+# Submit Code
 
 This document shows the workflow of how to develop DevLake.
 

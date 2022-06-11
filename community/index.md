@@ -8,7 +8,7 @@ weight: 10000
 ---
 # DevLake Team
 
-The DevLake team is comprised of Members and Contributors. Members have direct access to the source of DevLake project and actively evolve the code-base. Contributors improve the project through submission of patches and suggestions to the Members. The number of Contributors to the project is unbounded. All contributions to DevLake are greatly appreciated, whether for trivial cleanups, big new features or other material rewards.
+The DevLake team consists of members and contributors. Members have direct access to the DevLake project's source code and actively develop the codebase. Contributors improve the project by submitting patches and suggestions to members. The number of contributions to the project is unlimited. Whether it's trivial cleanups, important new features or improved documentation, all contributions to DevLake will be greatly appreciated and some outstanding contributors will be rewarded handsomely.
 
 ## Members
 
