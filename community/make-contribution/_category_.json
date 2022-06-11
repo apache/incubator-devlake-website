@@ -1,4 +1,6 @@
 {
   "label": "Making Contributions",
-  "position": 2
+  "position": 2,
+  "collapsible": true,
+  "collapsed": false
 }
