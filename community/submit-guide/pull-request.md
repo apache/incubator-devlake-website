@@ -1,25 +1,31 @@
-# Pull Request Notice
+# pull request notice
 
-## Preface
-Pull Request is a way of software cooperation, which is a process of bringing code involving different functions into the trunk. During this process, the code can be discussed, reviewed, and modified.
+## preface
+pull request is a way of software cooperation, which is a process of bringing code involving different functions into the trunk. during this process, the code can be discussed, reviewed, and modified.
 
-In Pull Request, we try not to discuss the implementation of the code. The general implementation of the code and its logic should be determined in Issue. In the Pull Request, we only focus on the code format and code specification, so as to avoid wasting time caused by different opinions on implementation.
+in pull request, we try not to discuss the implementation of the code. the general implementation of the code and its logic should be determined in issue. in the pull request, we only focus on the code format and code specification, so as to avoid wasting time caused by different opinions on implementation.
 
-## Specification
+## specification
 
-### Pull Request Title
+### pull request title
 
-Title Format: [`Pull Request Type`-`Issue No`][`Module Name`] `Pull Request Description`
+title format: [`pull request type`-`issue no`][`module name`] `pull request description`
 
-The corresponding relationship between `Pull Request Type` and `Issue Type` is as follows:
+the corresponding relationship between `pull request type` and `issue type` is as follows:
 
+| issue type |   pull request type | example(suppose issue no is 3333) |
+|:----:|:----:|:--|
+| feature    |   feature | [feature-3333][plugin] implement xxx |
+| bug        |   fix | [fix-3333][plugin] fix xxx |
+| improvement| improvement | [improvement-3333][github] improve the performance of xxx |
+| test       | test | [test-3333][api] add the e2e test of xxx |
 
-`Issue No` refers to the Issue number corresponding to the current Pull Request to be resolved, `Module Name` is the same as the `Module Name` of Issue.
+`issue no` refers to the issue number corresponding to the current pull request to be resolved, `module name` is the same as the `module name` of issue.
 
-### Pull Request Branch
+### pull request branch
 
-Branch name format: `Pull Request type`-`Issue number`. e.g. Feature-3333
+branch name format: `pull request type`-`issue number`. e.g. feature-3333
 
-### Pull Request Content
+### pull request content
 
-Please refer to the commit message section.
+please refer to the commit message section.

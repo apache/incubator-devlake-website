@@ -15,6 +15,22 @@ If an issue corresponds to a large feature, it is recommended to divide it into 
 ### Issue title
 
 Title Format: [`Issue Type`][`Module Name`] `Issue Description`
+The `Issue Type` is as follows:
+
+| issue type |   Description | Example |
+|:----:|:----:|:--:|
+| feature    |   Include expected new features and functions | [Feature][api] Add xxx api in xxx controller |
+| bug        |   Bugs in the program | [Bug][api] Throw exception when xxx |
+| improvement| Some improvements of the current program, not limited to code format, program performance, etc | [Improvement][plugin] Improve xxx |
+| test       | Specifically for the test case | [Test][github] Add xxx e2e test |
+
+The `Module Name` is as follows:
+
+| Module Name |  Description |
+|:----:|:----:|
+| api    |   Application program interface layer module | 
+| plugin |   Plugin module | 
+| ui     | Front end module | 
 
 ### Issue content template
 
