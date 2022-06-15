@@ -1,5 +1,5 @@
 ---
-sidebar_position: 02
+sidebar_position: 03
 title: "Contributor Growth Program"
 ---
 # Contributor Growth Program

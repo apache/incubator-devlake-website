@@ -1,3 +1,7 @@
+---
+sidebar_position: 02
+title: "Subscribe Mailing Lists"
+---
 # Mailing List
 
 ## Subscribe to Mailing List

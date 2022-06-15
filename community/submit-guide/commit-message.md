@@ -1,40 +1,93 @@
-# Issue Notice
+# Commit Message Notice
 
-## Preface
-Issues function is used to track various Features, Bugs, Functions, etc. The project maintainer can organize the tasks to be completed through issues.
+### Preface
 
-Issue is an important step in drawing out a feature or bug,
-and the contents that can be discussed in an issue are not limited to the features, the causes of the existing bugs, the research on preliminary scheme, and the corresponding implementation design and code design.
+A good commit message can help other developers (or future developers) quickly understand the context of related changes, and can also help project managers determine whether the commit is suitable for inclusion in the release. But when we checked the commit logs of many open source projects, we found an interesting problem. Some developers have very good code quality, but the commit message record is rather confusing. When other contributors or learners are viewing the code, it can’t be intuitively understood through commit log.
+The purpose of the changes before and after the submission, as Peter Hutterer said：Re-establishing the context of a piece of code is wasteful. We can’t avoid it completely, so our efforts should go to reducing it as much as possible. Commit messages can do exactly that and as a result, a commit message shows whether a developer is a good collaborator. Therefore, Devlake developed the protocol in conjunction with other communities and official Apache documents.
 
-And only when the Issue is approved, the corresponding Pull Request should be implemented.
+### Commit Message RIP
 
-If an issue corresponds to a large feature, it is recommended to divide it into multiple small issues according to the functional modules and other dimensions.
+#### 1：Clearly modify the content
 
-## Specification
+A commit message should clearly state what issues (bug fixes, function enhancements, etc.) the submission solves, so that other developers can better track the issues and clarify the optimization during the version iteration process.
 
-### Issue title
+#### 2：Associate the corresponding Pull Request or Issue
 
-Title Format: [`Issue Type`][`Module Name`] `Issue Description`
+When our changes are large, the commit message should best be associated with the relevant Issue or Pull Request on GitHub, so that our developers can quickly understand the context of the code submission through the associated information when reviewing the code. If the current commit is for an issue, then the issue can be closed in the Footer section.
 
-### Issue content template
+#### 3：Unified format
 
-https://github.com/apache/incubator-devlake/tree/dev/.github/ISSUE_TEMPLATE
+The formatted CommitMessage can help provide more historical information for quick browsing, and it can also generate a Change Log directly from commit.
 
-### Contributor
+Commit message should include three parts: Header, Body and Footer. Among them, Header is required, Body and Footer can be omitted.
 
-Except for some special cases, it is recommended to discuss under issue or mailing list to determine the design scheme or provide the design scheme,
-as well as the code implementation design before completing the issue.
+##### Header
 
-If there are many different solutions, it is suggested to make a decision through mailing list or voting under issue.
-The issue can be implemented after final scheme and code implementation design being approved.
-The main purpose of this is to avoid wasting time caused by different opinions on implementation design or reconstruction in the pull request review stage.
+The header part has only one line, including three fields: type (required), scope (optional), and subject (required).
 
-### Question
+[DS-ISSUE number][type] subject
 
-- How to deal with the user who raises an issue does not know the module corresponding to the issue.
+(1) Type is used to indicate the category of commit, and only the following 7 types are allowed.
 
-    It is true that most users when raising issue do not know which module the issue belongs to.
-    In fact, this is very common in many open source communities. In this case, the committer / contributor actually knows the module affected by the issue.
-    If the issue is really valuable after being approved by committer and contributor, then the committer can modify the issue title according to the specific module involved in the issue,
-    or leave a message to the user who raises the issue to modify it into the corresponding title.
+- feat：New features
+- fix：Bug fixes
+- docs：Documentation
+- style： Format (does not affect changes in code operation)
+- refactor：Refactoring (It is not a new feature or a code change to fix a bug)
+- test：Add test
+- chore：Changes in the build process or auxiliary tools
+
+If the type is feat and fix, the commit will definitely appear in the change log. Other types (docs, chore, style, refactor, test) are not recommended.
+
+(2) Scope
+
+Scope is used to indicate the scope of commit impact, such as server, remote, etc. If there is no suitable scope, you can use \*.
+
+(3) subject
+
+Subject is a short description of the purpose of the commit, no more than 50 characters.
+
+##### Body
+
+The body part is a detailed description of this commit, which can be divided into multiple lines, and the line break will wrap with 72 characters to avoid automatic line wrapping affecting the appearance.
+
+Note the following points in the Body section:
+
+- Use the verb-object structure, note the use of present tense. For example, use change instead of changed or changes
+
+- Don't capitalize the first letter
+
+- The end of the sentence does not need a ‘.’ (period)
+
+##### Footer
+
+Footer only works in two situations
+
+(1) Incompatible changes
+
+If the current code is not compatible with the previous version, the Footer part starts with BREAKING CHANGE, followed by a description of the change, the reason for the change, and the migration method.
+
+(2) Close Issue
+
+If the current commit is for a certain issue, you can close the issue in the Footer section, or close multiple issues at once.
+
+##### For Example
+
+```
+[DS-001][docs-en] add commit message
+
+- commit message RIP
+- build some conventions
+- help the commit messages become clean and tidy
+- help developers and release managers better track issues
+  and clarify the optimization in the version iteration
+
+This closes #001
+```
+
+### Reference documents
+
+[Commit message format](https://cwiki.apache.org/confluence/display/GEODE/Commit+Message+Format)
+
+
 

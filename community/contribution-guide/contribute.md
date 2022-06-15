@@ -1,5 +1,5 @@
 ---
-sidebar_position: 03
+sidebar_position: 04
 title: "Participate in Contributing"
 ---
 # Participate in Contributing
