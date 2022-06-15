@@ -1,18 +1,16 @@
 ---
 sidebar_position: 04
-title: "Contributor Growth Program"
+title: "Becoming a Committer"
 ---
 
-# Contributor Growth Program
+The Apache Devlake (Incubating) community follows the [Apache Software Foundation's guidelines](https://community.apache.org/contributors/) on accepting new committers.
 
-**Note:** This document is wip and welcomes everyone to help improve.
+First, we deeply value the contribution from our community, in the forms of writing code, answering questions, maintaining documentation, arranging events, among a plethora of others. New contributors will always be welcomed by the current members of DevLake community, helped with PR workflow, and directed to relevant documentation and communication channels.
 
-## DevLake Community Membership
+Moving from a contributor to a committer, we expect you to be an active member of the community and committed to the project in the long run. 
 
-| Role        | Responsibilities                                                                              | Requirements                                                                                                                                                                                       | Defined by                                     |
-|-------------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------|
-| Contributor | N/A                                                                                           | Contributed at least 1 merged PR                                                                                                                                                  | N/A                                            |
-| Committer   | Active contributor in the community                                                           | Finished a whole plugin, or equal contribution (eg. contributed 10 `pr`), High quality of communication skills and responsibility will be a good plus point. Will be voted by Apache DevLake PPMC. | Apache DevLake GitHub Org member & Team member |
-| PPMC        | Responsible for the oversight of the podling, and it also decides who to add as a PPMC member | Highly experienced active member who is knowledgeable about the codebase; Has been voted to be a Committer for at least 6 month                                                                    | Apache PMC                                     |
+First of all, we would like to see a substantial amount of work from you, such as developing and maintaining an entire data plugin.
 
-New contributors should be welcomed to the DevLake community by existing members, helped with PR workflow, and directed to relevant documentation and communication channels.
+Besides code contribution, you also need to participate in the discussion via the [dev mailing list](../subscribe.md), edit the documentation, work on the issue tracker, help answering questions in the community, attend community events, etc.
+
+Once your contribution becomes influential in the community, you may be invited to become a committer (after the voting from current PPMC members) and will be provided with further guidance on the following process.
