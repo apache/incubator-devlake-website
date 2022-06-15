@@ -74,7 +74,7 @@ If the current commit is for a certain issue, you can close the issue in the Foo
 ##### For Example
 
 ```
-[DS-001][docs-en] add commit message
+[Dev-001][docs] add commit message
 
 - commit message RIP
 - build some conventions
