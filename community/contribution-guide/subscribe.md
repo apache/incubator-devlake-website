@@ -21,5 +21,5 @@ Although we are incredibly reluctant to see you go, but we respect your choice i
 
 ### Steps
 1. Send an e-mail to [dev-unsubscribe@devlake.apache.org](mailto:dev-unsubscribe@devlake.apache.org) with an arbitrary subject and content from your subscribed e-mail address.
-2. Receive an confirmation e-mail from [dev-help@devlake.apache.org}(mailto:dev-help@devlake.apache.org) and follow the instruction to reply. The subject and content of the reply e-mail are also arbitrary. (If you have not received the confirmation e-mail, try checking your spam inbox.)
+2. Receive an confirmation e-mail from [dev-help@devlake.apache.org](mailto:dev-help@devlake.apache.org) and follow the instruction to reply. The subject and content of the reply e-mail are also arbitrary. (If you have not received the confirmation e-mail, try checking your spam inbox.)
 3. Receive a goodbye e-mail and you will no longer receive e-mails from [dev@devlake.apache.org](mailto:dev@devlake.apache.org).
