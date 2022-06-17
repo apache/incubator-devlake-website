@@ -18,7 +18,7 @@ description: >
 1. Navigate to where you would like to install this project and clone the repository:
 
    ```sh
-   git clone https://github.com/merico-dev/lake.git
+   git clone https://github.com/apache/incubator-devlake
    cd lake
    ```
 
