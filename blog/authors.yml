@@ -16,6 +16,17 @@ maxim:
   url: https://github.com/MaximDub
   image_url: https://github.com/MaximDub.png
 
+abeizn:
+  name: abeizn
+  title: Apache DevLake Commiter
+  url: https://github.com/abeizn
+  image_url: https://github.com/abeizn.png
+
+ZhangLiang:
+  name: ZhangLiang
+  title: Apache DevLake PPMC
+  url: https://github.com/mindlesscloud
+  image_url: https://avatars.githubusercontent.com/u/8455907?s=400&v=4
 dunyu:
   name: DunyuSong
   title: Apache DevLake (Incubating) Contributor
