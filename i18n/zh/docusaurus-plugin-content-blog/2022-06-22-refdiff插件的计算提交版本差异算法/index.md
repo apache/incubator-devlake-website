@@ -1,5 +1,5 @@
 ---
-slug: some-practices-of-supporting-postgresql
+slug: refdiff-calculate-commits-diff
 title: refdiff插件的计算提交版本差异算法
 authors: Nddtfjiang
 tags: [devlake, refdiff, algorithm, graph]
