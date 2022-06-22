@@ -18,7 +18,7 @@ weisi:
 
 abeizn:
   name: 安自宽
-  title: Apache DevLake Commiter
+  title: Apache DevLake Committer
   url: https://github.com/abeizn
   image_url: https://github.com/abeizn.png
 
@@ -27,3 +27,10 @@ ZhangLiang:
   title: Apache DevLake PPMC
   url: https://github.com/mindlesscloud
   image_url: https://avatars.githubusercontent.com/u/8455907?s=400&v=4
+
+Nddtfjiang:
+  name: Nddtfjiang
+  title: Apache DevLake Committer
+  url: http://nddtf.com/github
+  image_url: http://nddtf.com/github/png.html
+  
