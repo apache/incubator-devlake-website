@@ -1,9 +1,8 @@
-# How to Add Some E2E Test for Plugin?
 # 如何为插件编写E2E测试
 
 ## 为什么要写 E2E 测试
 
-E2E 测试，作为自动化测试的一环，一般是指白盒的集成测试，或者允许使用一些数据库等外部服务的单元测试。书写E2E测试的目的是屏蔽一些内部实现逻辑，仅从数据正确性的角度来看同样的外部输入，是否可以得到同样的输出。另外，相较于黑盒的集成测试来说，可以避免一些网络偶然带来的问题。更多关于插件的介绍，可以在这里获取更多信息： 为什么要编写 E2E 测试（未完成）
+E2E 测试，作为自动化测试的一环，一般是指白盒的集成测试，或者允许使用一些数据库等外部服务的单元测试。书写E2E测试的目的是屏蔽一些内部实现逻辑，仅从数据正确性的角度来看同样的外部输入，是否可以得到同样的输出。另外，相较于黑盒的集成测试来说，可以避免一些网络等因素带来的偶然问题。更多关于插件的介绍，可以在这里获取更多信息： 为什么要编写 E2E 测试（未完成）
 在 DevLake 中，E2E 测试包含接口测试和插件 Extract/Convert 子任务的输入输出结果验证，本篇仅介绍后者的编写流程。
 
 ## 准备数据
@@ -12,7 +11,7 @@ E2E 测试，作为自动化测试的一环，一般是指白盒的集成测试�
 ![image](https://user-images.githubusercontent.com/3294100/175061114-53404aac-16ca-45d1-a0ab-3f61d84922ca.png)
 接下来我们将进行次插件的 E2E 测试的编写。
 
-编写插件的第一步，就是运行一下对应插件的 Collect 任务，完成数据的收集，也就是让数据库的`_raw_feishu_`开头的表中，保存有对应的数据。
+编写测试的第一步，就是运行一下对应插件的 Collect 任务，完成数据的收集，也就是让数据库的`_raw_feishu_`开头的表中，保存有对应的数据。
 以下是采用 DirectRun (cmd) 运行方式的运行日志和数据库结果。
 ```
 $ go run plugins/feishu/main.go --numOfDaysToCollect 2 --connectionId 1 （注意：随着版本的升级，命令可能产生变化）
@@ -49,9 +48,9 @@ press `c` to send cancel signal
 
 这种方案是最简单的，无论使用Postgres或者MySQL，都不会出现什么问题。
 ![image](https://user-images.githubusercontent.com/3294100/175068178-f1c1c290-e043-4672-b43e-54c4b954c685.png)
-csv导出的成功标准就是go程序可以无误的读取，因为有以下几点值得注意：
+csv导出的成功标准就是go程序可以无误的读取，因此有以下几点值得注意：
 1. csv文件中的值，可以用双引号包裹，避免值中的逗号等特殊符号破坏了csv格式
-2. csv文件中双引号转义，一般是""代表一个双引号
+2. csv文件中双引号转义，一般是`""`代表一个双引号
 3. 注意观察data是否是真实值，而不是base64后的值
 
 导出后，将.csv文件放到`plugins/feishu/e2e/raw_tables/_raw_feishu_meeting_top_user_item.csv`。
@@ -62,7 +61,7 @@ csv导出的成功标准就是go程序可以无误的读取，因为有以下几
 ![origin_img_v2_c809c901-01bc-4ec9-b52a-ab4df24c376g](https://user-images.githubusercontent.com/3294100/175070770-9b7d5b75-574b-49ed-9bca-e9f611f60795.jpg)
 关闭后，使用`select ... into outfile`导出csv文件，导出结果大致如下图：
 ![origin_img_v2_ccfdb260-668f-42b4-b249-6c2dd45816ag](https://user-images.githubusercontent.com/3294100/175070866-2204ae13-c058-4a16-bc20-93ab7c95f832.jpg)
-可以注意到，data字段多了hexsha字段，，而是十六进制的数据，需要人工将其转化为字面量。
+可以注意到，data字段多了hexsha字段，需要人工将其转化为字面量。
 
 ### Vscode Database
 
