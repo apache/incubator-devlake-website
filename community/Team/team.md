@@ -49,6 +49,22 @@ get merged into the codebase. We deeply appreciate your contribution!
 - [Bin Ji](https://github.com/matrixji)
 - [Prajwal Borkar](https://github.com/PrajwalBorkar)
 - [Keon Amini](https://github.com/keon94)
+- [Zhenlei Li](https://github.com/moonlzl)
+- [Danna Wang](https://github.com/banshengbushu)
+
+### New Contributors June 2022
+
+#### Zhenlei Li
+
+---
+
+![Zhenlei Li](../../img/community/contributors/lizhenlei.jpeg)
+
+#### Danna Wang
+
+---
+
+![Zhenlei Li](../../img/community/contributors/wangdanna.jpeg)
 
 ### New Contributors May 2022
 
