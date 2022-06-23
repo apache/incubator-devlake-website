@@ -51,6 +51,7 @@ get merged into the codebase. We deeply appreciate your contribution!
 - [Keon Amini](https://github.com/keon94)
 - [Zhenlei Li](https://github.com/moonlzl)
 - [Danna Wang](https://github.com/banshengbushu)
+- [Geyu Chen](https://github.com/fredtheflat)
 
 ### New Contributors June 2022
 
@@ -139,3 +140,10 @@ get merged into the codebase. We deeply appreciate your contribution!
 ---
 
 ![Keon Amini](../../img/community/contributors/keonamini.jpeg)
+
+
+#### Geyu Chen
+
+---
+
+![Geyu Chen](../../img/community/contributors/chengeyu.jpeg)
