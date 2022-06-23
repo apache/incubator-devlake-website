@@ -172,7 +172,7 @@ func TestMeetingDataFlow(t *testing.T) {
 
 如果这一步出现了问题，一般会是2种问题，
 1. 验证的字段中含有类似create_at运行时间或者自增id的字段，这些无法重复验证的字段应该排除。
-2. 运行的结果中存在\n或\r\n等转义不匹配的字段，一般是解析`httpResponse`时出现的错误，可以参考如下方案解决：
+2. 运行的结果中存在`\n`或`\r\n`等转义不匹配的字段，一般是解析`httpResponse`时出现的错误，可以参考如下方案解决：
   1. 修改api模型中，内容的字段类型为`json.RawMessage`
   2. 在解析时再将其转化为string
   3. 如此操作，即可原封不动的保存`\n`符号，避免数据库或操作系统对换行符的解析
@@ -187,5 +187,5 @@ func TestMeetingDataFlow(t *testing.T) {
 ## 像 CI 一样运行所有插件的 E2E 测试
 
 非常简单，只需要运行`make e2e-plugins`，因为DevLake已经将其固化为一个脚本了~
-  
+
   
