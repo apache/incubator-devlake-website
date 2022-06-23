@@ -2,14 +2,14 @@
 
 ## Why write E2E tests
 
-E2E testing, as a part of automated testing, generally refers to white-box integration testing, or unit testing that allows the use of some external services such as databases. The purpose of writing E2E tests is to shield some internal implementation logic and see whether the same external input can output the same result in terms of data aspect. In addition, compared to the black-box integration tests, it can avoid some chance problems caused by network and other factors. More information about the plugin can be found here: Why write E2E tests (incomplete)
-In DevLake, E2E testing consists of interface testing and input/output result validation for the plugin Extract/Convert subtask, this article only describes the process of writing the latter.
+E2E testing, as a part of automated testing, generally refers to white-box integration testing or unit testing that allows the use of some external services such as databases. The purpose of writing E2E tests is to shield some internal implementation logic and see whether the same external input can output the same result in terms of data aspects. In addition, compared to the black-box integration tests, it can avoid some chance problems caused by network and other factors. More information about the plugin can be found here: Why write E2E tests (incomplete).
+In DevLake, E2E testing consists of interface testing and input/output result validation for the plugin Extract/Convert subtask. This article only describes the process of writing the latter.
 
 ## Preparing data
 
-Let's take a simple plugin - Flybook Meeting Hours Collection as an example here, its directory structure looks like this.
-! [image](https://user-images.githubusercontent.com/3294100/175061114-53404aac-16ca-45d1-a0ab-3f61d84922ca.png)
-Next we will write the E2E tests of the subplugin.
+Let's take a simple plugin - Flybook Meeting Hours Collection as an example here. Its directory structure looks like this.
+![image](https://user-images.githubusercontent.com/3294100/175061114-53404aac-16ca-45d1-a0ab-3f61d84922ca.png)
+Next, we will write the E2E tests of the sub-tasks.
 
 The first step in writing the E2E test is to run the Collect task of the corresponding plugin to complete the data collection, that is, to have the corresponding data saved in the table starting with `_raw_feishu_` in the database.
 Here are the logs and database tables using the DirectRun (cmd) run method.
@@ -32,11 +32,11 @@ press `c` to send cancel signal
 ```
 
 <img width="993" alt="image" src="https://user-images.githubusercontent.com/3294100/175064505-bc2f98d6-3f2e-4ccf-be68-a1cab1e46401.png">
-Ok, the data has now been saved to the `_raw_feishu_*` table, and the `data` column is the return information from the plugin running. Here we only collected data for the last 2 days, the data information is not much, but also covers a variety of situations, that is, the same person has data on different days.
+Ok, the data has now been saved to the `_raw_feishu_*` table, and the `data` column is the return information from the plugin. Here we only collected data for the last 2 days. The data information is not much, but it also covers a variety of situations. That is, the same person has data on different days.
 
-It is also worth mentioning that the plugin runs two tasks, `collectMeetingTopUserItem` and `extractMeetingTopUserItem`, the former is the task of collecting data, which is needed to run this time, and the latter is the task of extracting data. It doesn't matter whether it runs in the prepare data session or not.
+It is also worth mentioning that the plugin runs two tasks, `collectMeetingTopUserItem` and `extractMeetingTopUserItem`, the former is the task of collecting, which is needed to run this time, and the latter is the task of extracting data. It doesn't matter whether it runs in the prepared data session.
 
-Next, we need to export the data to .csv format, this step is a variety of options, you can show your skills, I only introduce a few common methods here.
+Next, we need to export the data to .csv format. This step is a variety of options. You can show your skills, and I only introduce a few common methods here.
 
 ### DevLake Code Generator Export
 
@@ -46,12 +46,12 @@ This program is not yet completed
 
 ![image](https://user-images.githubusercontent.com/3294100/175067303-7e5e1c4d-2430-4eb5-ad00-e38d86bbd108.png)
 
-This solution is the easiest to use and will not cause any problems whether using in Postgres or MySQL.
+This solution is the easiest to use and will not cause any problems using Postgres or MySQL.
 ![image](https://user-images.githubusercontent.com/3294100/175068178-f1c1c290-e043-4672-b43e-54c4b954c685.png)
-The success criteria for csv export is that the go program can read it without errors, so there are several points worth noticing.
+The success criteria for csv export is that the go program can read it without errors, so several points are worth noticing.
 1. the values in the csv file should be wrapped in double quotes to avoid special symbols such as commas in the values that break the csv format
-2. double quotes in csv files are escaped, generally `""` represents a double quote
-3. pay attention to whether the colume `data` is the real value, not the value after base64 or hex
+2. double quotes in csv files are escaped. generally `""` represents a double quote
+3. pay attention to whether the column `data` is the actual value, not the value after base64 or hex
 
 After exporting, move the .csv file to `plugins/feishu/e2e/raw_tables/_raw_feishu_meeting_top_user_item.csv`.
 
@@ -59,7 +59,7 @@ After exporting, move the .csv file to `plugins/feishu/e2e/raw_tables/_raw_feish
 
 This is MySQL's solution for exporting query results to a file. The MySQL currently started in docker-compose.yml comes with the --security parameter, so it does not allow `select ... into outfile`, you first need to turn off the security parameter, which is done roughly as follows.
 ![origin_img_v2_c809c901-01bc-4ec9-b52a-ab4df24c376g](https://user-images.githubusercontent.com/3294100/175070770-9b7d5b75-574b-49ed-9bca-e9f611f60795.jpg)
-After closing it, use `select ... into outfile` to export the csv file, the export result is roughly as follows.
+After closing it, use `select ... into outfile` to export the csv file. The export result is rough as follows.
 ![origin_img_v2_ccfdb260-668f-42b4-b249-6c2dd45816ag](https://user-images.githubusercontent.com/3294100/175070866-2204ae13-c058-4a16-bc20-93ab7c95f832.jpg)
 You can notice that the data field has extra hexsha fields, which need to be manually converted to literal quantities.
 
@@ -69,7 +69,7 @@ This is Vscode's solution for exporting query results to a file, but it is not e
 ![origin_img_v2_c9eaadaa-afbc-4c06-85bc-e78235f7eb3g](https://user-images.githubusercontent.com/3294100/175071987-760c2537-240c-4314-bbd6-1a0cd85ddc0f.jpg)
 However, it is obvious that the escape symbol does not conform to the csv specification, and the data is not successfully exported. After adjusting the configuration and manually replacing `\"` with `""`, we get the following result.
 ![image](https://user-images.githubusercontent.com/3294100/175072314-954c6794-3ebd-45bb-98e7-60ddbb5a7da9.png)
-The data field of this file is encoded in base64, so it needs to be decoded manually to a literal amount. After successful decode you can use
+The data field of this file is encoded in base64, so it needs to be decoded manually to a literal amount. After successful decode, you can use it.
 
 ### MySQL workerbench
 
@@ -78,7 +78,7 @@ This tool must write the SQL yourself to complete the data export, which can be 
 SELECT id, params, CAST(`data` as char) as data, url, input,created_at FROM _raw_feishu_meeting_top_user_item;
 ```
 ![image](https://user-images.githubusercontent.com/3294100/175080866-1631a601-cbe6-40c0-9d3a-d23ca3322a50.png)
-Select csv as the save format, and export it for use.
+Select csv as the save format and export it for use.
 
 ### Postgres Copy with csv header;
 
@@ -88,12 +88,12 @@ COPY (
 SELECT id, params, convert_from(data, 'utf-8') as data, url, input,created_at FROM _raw_feishu_meeting_top_user_item
 ) to '/var/lib/postgresql/data/raw.csv' with csv header;
 ```
-Use the above statement to complete the export of the file. If your pg is running in docker, then you also need to use the `docker cp` command to export the file to the host for use.
+Use the above statement to complete the export of the file. If your pg is running in docker, then you also need to use the `docker cp` command to export the file to the host.
 
 ## Writing E2E tests
 
 First you need to create a test environment, for example here `meeting_test.go` is created
-! [image](https://user-images.githubusercontent.com/3294100/175091380-424974b9-15f3-457b-af5c-03d3b5d17e73.png)
+![image](https://user-images.githubusercontent.com/3294100/175091380-424974b9-15f3-457b-af5c-03d3b5d17e73.png)
 Then enter the test preparation code in it as follows. The code is to create an instance of the `feishu` plugin, and then call `ImportCsvIntoRawTable` to import the data from the csv file into the `_raw_feishu_meeting_top_user_item` table.
 ```go
 func TestMeetingDataFlow(t *testing.T) {
@@ -108,8 +108,8 @@ The signature of the import function is as follows.
 ```func (t *DataFlowTester) ImportCsvIntoRawTable(csvRelPath string, rawTableName string)```
 He has a twin, with only slight differences in parameters.
 ```func (t *DataFlowTester) ImportCsvIntoTabler(csvRelPath string, dst schema.Tabler)```
-The former is used to import tables in the raw layer, the latter is used to import arbitrary tables.
-**Note:** Also these two functions will delete the db table and use `gorm.AutoMigrate` to re-create a new table for the purpose of clearing data in it.
+The former is used to import tables in the raw layer. The latter is used to import arbitrary tables.
+**Note:** Also these two functions will delete the db table and use `gorm.AutoMigrate` to re-create a new table to clear data in it.
 After importing the data is complete, you can try to run it. It must be PASS without any test logic at this moment. Then proceed to write the logic for calling the call to the extractor task in `TestMeetingDataFlow`.
 ```go
 func TestMeetingDataFlow(t *testing.T) {
@@ -133,9 +133,9 @@ func TestMeetingDataFlow(t *testing.T) {
 ```
 The added code includes a call to `dataflowTester.FlushTabler` to clear the meeting table and a call to `dataflowTester.Subtask` to simulate the running of the subtask `ExtractMeetingTopUserItemMeta`.
 
-Now run it and see if the subtask `ExtractMeetingTopUserItemMeta` completes without errors. The data results of the `extract` run generally come from the raw table, so the plugin subtask will run correctly if it is written without errors, and you can observe if the data is successfully parsed in the db table in the tool layer, in this case the `_tool_feishu_meeting_top_user_items` table has the correct data.
+Now run it and see if the subtask `ExtractMeetingTopUserItemMeta` completes without errors. The data results of the `extract` run generally come from the raw table, so the plugin subtask will run correctly if it is written without errors. You can observe if the data is successfully parsed in the db table in the tool layer. In this case the `_tool_feishu_meeting_top_user_items` table has the correct data.
 
-If the run is incorrect, then you need to troubleshoot the problem with the plugin itself before moving on to the next step.
+If the run is incorrect, you need to troubleshoot the problem with the plugin itself before moving on to the next step.
 
 ## Verify that the results of the task are correct
 
@@ -160,16 +160,16 @@ func TestMeetingDataFlow(t *testing.T) {
     )
 }
 ```
-Its purpose is to call `dataflowTester.VerifyTable` to complete the validation of the data results. The third parameter is the primary keys of the table, and the fourth parameter is all the fields of the table that need to be verified. The data used for validation exists in `. /snapshot_tables/_tool_feishu_meeting_top_user_items.csv`, but of course, this file does not exist yet.
+Its purpose is to call `dataflowTester.VerifyTable` to complete the validation of the data results. The third parameter is the table's primary keys, and the fourth parameter is all the fields of the table that need to be verified. The data used for validation exists in `. /snapshot_tables/_tool_feishu_meeting_top_user_items.csv`, but of course, this file does not exist yet.
 
-To facilitate the generation of the aforementioned file, DevLake has adopted a testing technique called `Snapshot`, which will automatically generate the file based on the results of a run when the `VerifyTable` file is called without the csv exist.
+To facilitate the generation of the file mentioned above, DevLake has adopted a testing technique called `Snapshot`, which will automatically generate the file based on the run results when the `VerifyTable` file is called without the csv existing.
 
-But note! You need to do two things: 1. check if the file is generated correctly 2. run it again to make sure there are no errors between the generated results and the re-run results.
-These two operations are very important and are directly related to the quality of test writing. We should treat the snapshot file in `.csv' format like a code file.
+But note! You need to do two things: 1. check if the file is generated correctly 2. re-run it to make sure there are no errors between the generated results and the re-run results.
+These two operations are very important and directly related to the quality of test writing. We should treat the snapshot file in `.csv' format like a code file.
 
 If there is a problem with this step, there are usually 2 kinds of problems.
 1. The validated fields contain fields like create_at runtime or self-incrementing ids, which cannot be repeatedly validated and should be excluded.
-2. there is \n or \r\n and other escape mismatch fields in the results of the run, generally when parsing the `httpResponse` error, you can refer to the following program to solve.
+2. there is `\n` or `\r\n` or other escape mismatch fields in the run results. Generally, when parsing the `httpResponse` error, you can refer to the following program to solve it.
   1. modify the field type of the content in the api model to `json.
   2. convert it to string when parsing
   3. so that the `\n` symbol can be kept intact, avoiding the parsing of line breaks by the database or the operating system
@@ -183,4 +183,5 @@ Well, at this point, the E2E writing is done. We have added a total of 3 new fil
 
 ## Run E2E tests for all plugins like CI
 
-It's very simple, just run `make e2e-plugins`, because DevLake has already solidified it into a script~
+It's straightforward. Just run `make e2e-plugins` because DevLake has already solidified it into a script~
+
