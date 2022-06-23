@@ -67,6 +67,12 @@ get merged into the codebase. We deeply appreciate your contribution!
 
 ![Zhenlei Li](../../img/community/contributors/wangdanna.jpeg)
 
+#### Geyu Chen
+
+---
+
+![Geyu Chen](../../img/community/contributors/chengeyu.jpeg)
+
 ### New Contributors May 2022
 
 #### Jiageng Li
@@ -140,10 +146,3 @@ get merged into the codebase. We deeply appreciate your contribution!
 ---
 
 ![Keon Amini](../../img/community/contributors/keonamini.jpeg)
-
-
-#### Geyu Chen
-
----
-
-![Geyu Chen](../../img/community/contributors/chengeyu.jpeg)
