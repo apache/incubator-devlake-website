@@ -80,7 +80,7 @@ SELECT id, params, CAST(`data` as char) as data, url, input,created_at FROM _raw
 ![image](https://user-images.githubusercontent.com/3294100/175080866-1631a601-cbe6-40c0-9d3a-d23ca3322a50.png)
 Select csv as the save format and export it for use.
 
-### Postgres Copy with csv header;
+### Postgres Copy with csv header
 
 `Copy(SQL statement) to '/var/lib/postgresql/data/raw.csv' with csv header;` is a common export method for PG to export csv, which can also be used here.
 ```sql
