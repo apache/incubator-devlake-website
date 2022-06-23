@@ -18,7 +18,7 @@ maxim:
 
 abeizn:
   name: abeizn
-  title: Apache DevLake Commiter
+  title: Apache DevLake Committer
   url: https://github.com/abeizn
   image_url: https://github.com/abeizn.png
 
@@ -27,6 +27,25 @@ ZhangLiang:
   title: Apache DevLake PPMC
   url: https://github.com/mindlesscloud
   image_url: https://avatars.githubusercontent.com/u/8455907?s=400&v=4
+
+Nddtfjiang:
+  name: Nddtfjiang
+  title: Apache DevLake Committer
+  url: http://nddtf.com/github
+  image_url: http://nddtf.com/github/png.html
+
+Geyu:
+  name: Geyu Chen
+  title: Apache DevLake Contributor
+  url: https://github.com/fredtheflat
+  image_url: https://github.com/fredtheflat.png
+
+Danna:
+  name: Danna Wang
+  title: DevLake Contributor
+  url: https://github.com/banshengbushu
+  image_url: https://github.com/banshengbushu.png
+
 dunyu:
   name: DunyuSong
   title: Apache DevLake (Incubating) Contributor
