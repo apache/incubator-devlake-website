@@ -2,7 +2,7 @@
 
 ## Why write E2E tests
 
-E2E testing, as a part of automated testing, generally refers to white-box integration testing or unit testing that allows the use of some external services such as databases. The purpose of writing E2E tests is to shield some internal implementation logic and see whether the same external input can output the same result in terms of data aspects. In addition, compared to the black-box integration tests, it can avoid some chance problems caused by network and other factors. More information about the plugin can be found here: Why write E2E tests (incomplete).
+E2E testing, as a part of automated testing, generally refers to black-box testing at the file and module level or unit testing that allows the use of some external services such as databases. The purpose of writing E2E tests is to shield some internal implementation logic and see whether the same external input can output the same result in terms of data aspects. In addition, compared to the black-box integration tests, it can avoid some chance problems caused by network and other factors. More information about the plugin can be found here: Why write E2E tests (incomplete).
 In DevLake, E2E testing consists of interface testing and input/output result validation for the plugin Extract/Convert subtask. This article only describes the process of writing the latter.
 
 ## Preparing data
@@ -40,15 +40,18 @@ Next, we need to export the data to .csv format. This step is a variety of optio
 
 ### DevLake Code Generator Export
 
-This program is not yet completed
+Run `go run generator/main.go create-e2e-raw` directly and follow the guidelines to complete the export. This solution is the simplest, but has some limitations, such as the exported fields are fixed. If you need more customization options, you can refer to next solutions.
+
+![usage](https://user-images.githubusercontent.com/3294100/175849225-12af5251-6181-4cd9-ba72-26087b05ee73.gif)
 
 ### GoLand Database export
 
 ![image](https://user-images.githubusercontent.com/3294100/175067303-7e5e1c4d-2430-4eb5-ad00-e38d86bbd108.png)
 
-This solution is the easiest to use and will not cause any problems using Postgres or MySQL.
+This solution is very easy to use and will not cause any problems using Postgres or MySQL.
 ![image](https://user-images.githubusercontent.com/3294100/175068178-f1c1c290-e043-4672-b43e-54c4b954c685.png)
 The success criteria for csv export is that the go program can read it without errors, so several points are worth noticing.
+
 1. the values in the csv file should be wrapped in double quotes to avoid special symbols such as commas in the values that break the csv format
 2. double quotes in csv files are escaped. generally `""` represents a double quote
 3. pay attention to whether the column `data` is the actual value, not the value after base64 or hex
@@ -131,7 +134,7 @@ func TestMeetingDataFlow(t *testing.T) {
 
 }
 ```
-The added code includes a call to `dataflowTester.FlushTabler` to clear the meeting table and a call to `dataflowTester.Subtask` to simulate the running of the subtask `ExtractMeetingTopUserItemMeta`.
+The added code includes a call to `dataflowTester.FlushTabler` to clear the table `_tool_feishu_meeting_top_user_items` and a call to `dataflowTester.Subtask` to simulate the running of the subtask `ExtractMeetingTopUserItemMeta`.
 
 Now run it and see if the subtask `ExtractMeetingTopUserItemMeta` completes without errors. The data results of the `extract` run generally come from the raw table, so the plugin subtask will run correctly if it is written without errors. You can observe if the data is successfully parsed in the db table in the tool layer. In this case the `_tool_feishu_meeting_top_user_items` table has the correct data.
 
