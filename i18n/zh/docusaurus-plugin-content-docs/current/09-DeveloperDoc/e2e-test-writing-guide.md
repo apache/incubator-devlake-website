@@ -2,7 +2,7 @@
 
 ## 为什么要写 E2E 测试
 
-E2E 测试，作为自动化测试的一环，一般是指白盒的集成测试，或者允许使用一些数据库等外部服务的单元测试。书写E2E测试的目的是屏蔽一些内部实现逻辑，仅从数据正确性的角度来看同样的外部输入，是否可以得到同样的输出。另外，相较于黑盒的集成测试来说，可以避免一些网络等因素带来的偶然问题。更多关于插件的介绍，可以在这里获取更多信息： 为什么要编写 E2E 测试（未完成）
+E2E 测试，作为自动化测试的一环，一般是指文件与模块级别的黑盒测试，或者允许使用一些数据库等外部服务的单元测试。书写E2E测试的目的是屏蔽一些内部实现逻辑，仅从数据正确性的角度来看同样的外部输入，是否可以得到同样的输出。另外，相较于黑盒的集成测试来说，可以避免一些网络等因素带来的偶然问题。更多关于插件的介绍，可以在这里获取更多信息： 为什么要编写 E2E 测试（未完成）
 在 DevLake 中，E2E 测试包含接口测试和插件 Extract/Convert 子任务的输入输出结果验证，本篇仅介绍后者的编写流程。
 
 ## 准备数据
@@ -13,6 +13,7 @@ E2E 测试，作为自动化测试的一环，一般是指白盒的集成测试�
 
 编写测试的第一步，就是运行一下对应插件的 Collect 任务，完成数据的收集，也就是让数据库的`_raw_feishu_`开头的表中，保存有对应的数据。
 以下是采用 DirectRun (cmd) 运行方式的运行日志和数据库结果。
+
 ```
 $ go run plugins/feishu/main.go --numOfDaysToCollect 2 --connectionId 1 （注意：随着版本的升级，命令可能产生变化）
 [2022-06-22 23:03:29]  INFO failed to create dir logs: mkdir logs: file exists
@@ -40,15 +41,18 @@ press `c` to send cancel signal
 
 ### DevLake Code Generator 导出
 
-此方案尚未完工
+直接运行`go run generator/main.go create-e2e-raw`，根据指引来完成导出。此方案最简单，但也有一定的局限性，比如导出的字段是固定的，如果需要更多的自定义选项，可以参考接下来的方案。
+
+![usage](https://user-images.githubusercontent.com/3294100/175849225-12af5251-6181-4cd9-ba72-26087b05ee73.gif)
 
 ### GoLand Database 导出
 
 ![image](https://user-images.githubusercontent.com/3294100/175067303-7e5e1c4d-2430-4eb5-ad00-e38d86bbd108.png)
 
-这种方案是最简单的，无论使用Postgres或者MySQL，都不会出现什么问题。
+这种方案很简单，无论使用Postgres或者MySQL，都不会出现什么问题。
 ![image](https://user-images.githubusercontent.com/3294100/175068178-f1c1c290-e043-4672-b43e-54c4b954c685.png)
 csv导出的成功标准就是go程序可以无误的读取，因此有以下几点值得注意：
+
 1. csv文件中的值，可以用双引号包裹，避免值中的逗号等特殊符号破坏了csv格式
 2. csv文件中双引号转义，一般是`""`代表一个双引号
 3. 注意观察data是否是真实值，而不是base64后的值
@@ -133,7 +137,7 @@ func TestMeetingDataFlow(t *testing.T) {
 
 }
 ```
-新增的代码包括调用`dataflowTester.FlushTabler`刷新会议表，调用`dataflowTester.Subtask`模拟子任务`ExtractMeetingTopUserItemMeta`的运行。
+新增的代码包括调用`dataflowTester.FlushTabler`清空`FeishuMeetingTopUserItem`对应的表，调用`dataflowTester.Subtask`模拟子任务`ExtractMeetingTopUserItemMeta`的运行。
 
 现在在运行试试吧，看看子任务`ExtractMeetingTopUserItemMeta`是否能没有错误的完成运行。`extract`运行的数据结果一般来自raw表，因此，插件子任务编写如果没有差错的话，会正确运行，并且可以在 toolLayer 层的数据表中观察到数据成功解析，在本案例中，即`_tool_feishu_meeting_top_user_items`表中有正确的数据。
 
