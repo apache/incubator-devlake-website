@@ -19,7 +19,7 @@ description: >
 
    ```sh
    git clone https://github.com/apache/incubator-devlake
-   cd lake
+   cd incubator-devlake
    ```
 
 2. Install dependencies for plugins:
