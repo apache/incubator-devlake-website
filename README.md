@@ -28,4 +28,4 @@ If you have higher version of node installed, you may consider `nvm` to allow di
 
 ## Blog Submission
 
-We'd love to hear your thoughts both in creating and using DevLake! To submit a blog post to DevLake Blog, please follow the instructions [here](https://www.devlake.io/community//BlogSubmission).
+We'd love to hear your thoughts both in creating and using DevLake! To submit a blog post to DevLake Blog, please follow the instructions [here](https://devlake.apache.org/community/make-contribution/BlogSubmission/).
