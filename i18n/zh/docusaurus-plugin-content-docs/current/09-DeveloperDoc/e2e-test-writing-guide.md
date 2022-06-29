@@ -177,9 +177,10 @@ func TestMeetingDataFlow(t *testing.T) {
 如果这一步出现了问题，一般会是2种问题，
 1. 验证的字段中含有类似create_at运行时间或者自增id的字段，这些无法重复验证的字段应该排除。
 2. 运行的结果中存在`\n`或`\r\n`等转义不匹配的字段，一般是解析`httpResponse`时出现的错误，可以参考如下方案解决：
-  1. 修改api模型中，内容的字段类型为`json.RawMessage`
-  2. 在解析时再将其转化为string
-  3. 如此操作，即可原封不动的保存`\n`符号，避免数据库或操作系统对换行符的解析
+    1. 修改api模型中，内容的字段类型为`json.RawMessage`
+    2. 在解析时再将其转化为string
+    3. 如此操作，即可原封不动的保存`\n`符号，避免数据库或操作系统对换行符的解析
+
 
 比如在`github`插件中，是这么处理的：
 ![image](https://user-images.githubusercontent.com/3294100/175098219-c04b810a-deaf-4958-9295-d5ad4ec152e6.png)
