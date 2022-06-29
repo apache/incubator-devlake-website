@@ -1,5 +1,5 @@
 ---
-title: "Deploy to Kubernates"
+title: "Deploy to Kubernetes"
 description: >
   The steps to install Apache DevLake in Kubernetes.
 ---
