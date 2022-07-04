@@ -31,7 +31,7 @@ press `c` to send cancel signal
 [2022-06-22 23:03:34]  INFO  [feishu] finished step: 2 / 2
 ```
 
-<img width="993" alt="image" src="https://user-images.githubusercontent.com/3294100/175064505-bc2f98d6-3f2e-4ccf-be68-a1cab1e46401.png">
+<img width="993" alt="image" src="https://user-images.githubusercontent.com/3294100/175064505-bc2f98d6-3f2e-4ccf-be68-a1cab1e46401.png"/>
 Ok, the data has now been saved to the `_raw_feishu_*` table, and the `data` column is the return information from the plugin. Here we only collected data for the last 2 days. The data information is not much, but it also covers a variety of situations. That is, the same person has data on different days.
 
 It is also worth mentioning that the plugin runs two tasks, `collectMeetingTopUserItem` and `extractMeetingTopUserItem`, the former is the task of collecting, which is needed to run this time, and the latter is the task of extracting data. It doesn't matter whether it runs in the prepared data session.

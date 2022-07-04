@@ -32,7 +32,7 @@ press `c` to send cancel signal
 [2022-06-22 23:03:34]  INFO  [feishu] finished step: 2 / 2
 ```
 
-<img width="993" alt="image" src="https://user-images.githubusercontent.com/3294100/175064505-bc2f98d6-3f2e-4ccf-be68-a1cab1e46401.png">
+<img width="993" alt="image" src="https://user-images.githubusercontent.com/3294100/175064505-bc2f98d6-3f2e-4ccf-be68-a1cab1e46401.png"/>
 好的，目前数据已经被保存到了`_raw_feishu_*`表中，`data`列就是插件运行的返回信息。这里我们只收集了最近2天的数据，数据信息并不多，但也覆盖了各种情况，即同一个人不同天都有数据。
 
 另外值得一提的是，插件跑了两个任务，`collectMeetingTopUserItem`和`extractMeetingTopUserItem`，前者是收集数据的任务，是本次需要跑的，后者是解析数据的任务，是本次需要测试的。在准备数据环节是否运行无关紧要。
