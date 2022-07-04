@@ -17,9 +17,9 @@ Data in the domain layer is transformed from the data in the tool layer. The too
 Domain layer schema itself includes 2 logical layers: a `DWD` layer and a `DWM` layer. The DWD layer stores the detailed data points, while the DWM is the slight aggregation and operation of DWD to store more organized details or middle-level metrics.
 
 
-## Use Case Scenario
+## Use Cases
 1. Users can make customized Grafana dashboards based on the domain layer schema.
-2. Contributors can understand more about DevLake's data model.
+2. Contributors can complete the ETL logic when adding new data source plugins refering to this data model.
 
 
 ## Data Model
@@ -117,7 +117,6 @@ This table shows the changelogs of issues. Issues with multiple changelogs are s
 | `issue_id`     | varchar  | 255        | Issue ID                                                              | FK_issues.id |
 | `actor_id`     | varchar  | 255        | The id of the user who made the change                                | FK_users.id  |
 | `field`        | varchar  | 255        | The id of changed field                                               |              |
-| `action`       | varchar  | 255        | The operation. For instance, an action may be 'create', 'update', etc.|              |
 | `from`         | varchar  | 255        | The original value of the changed field                               |              |
 | `to`           | varchar  | 255        | The new value of the changed field                                    |              |
 | `created_date` | datetime | 3          | The creation date of the changelog                                    |              |
