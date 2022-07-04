@@ -31,7 +31,7 @@ description: >
    - `devlake` takes a while to fully boot up. if `config-ui` complaining about api being unreachable, please wait a few seconds and try refreshing the page.
 2. Create pipelines to trigger data collection in `config-ui`
 3. Click *View Dashboards* button in the top left when done, or visit `localhost:3002` (username: `admin`, password: `admin`).
-   - We use [Grafana](https://grafana.com/) as a visualization tool to build charts for the [data](../05-DataModels/02-DataSupport.md) stored in our database.
+   - We use [Grafana](https://grafana.com/) as a visualization tool to build charts for the [data](../DataModels/02-DataSupport.md) stored in our database.
    - Using SQL queries, we can add panels to build, save, and edit customized dashboards.
    - All the details on provisioning and customizing a dashboard can be found in the [Grafana Doc](../UserManuals/GRAFANA.md).
 4. To synchronize data periodically, users can set up recurring pipelines with DevLake's [pipeline blueprint](../UserManuals/recurring-pipeline.md) for details.

@@ -18,9 +18,9 @@ The following terms are arranged in the order of their appearance in the actual 
 
 ### Blueprints
 **A blueprint is the plan that covers all the work to get your raw data ready for query and metric computation in the dashboards.** Creating a blueprint consists of four steps:
-1. **Adding [Data Connections](07-Glossary.md#data-connections)**: For each [data source](07-Glossary.md#data-sources), one or more data connections can be added to a single blueprint, depending on the data you want to sync to DevLake.
-2. **Setting the [Data Scope](07-Glossary.md#data-scope)**: For each data connection, you need to configure the scope of data, such as GitHub projects, Jira boards, and their corresponding [data entities](07-Glossary.md#data-entities).
-3. **Adding [Transformation Rules](07-Glossary.md#transformation-rules) (optional)**: You can optionally apply transformation for the data scope you have just selected, in order to view more advanced metrics.
+1. **Adding [Data Connections](Glossary.md#data-connections)**: For each [data source](Glossary.md#data-sources), one or more data connections can be added to a single blueprint, depending on the data you want to sync to DevLake.
+2. **Setting the [Data Scope](Glossary.md#data-scope)**: For each data connection, you need to configure the scope of data, such as GitHub projects, Jira boards, and their corresponding [data entities](Glossary.md#data-entities).
+3. **Adding [Transformation Rules](Glossary.md#transformation-rules) (optional)**: You can optionally apply transformation for the data scope you have just selected, in order to view more advanced metrics.
 3. **Setting the Sync Frequency**: You can specify the sync frequency for your blueprint to achieve recurring data syncs and transformation. Alternatively, you can set the frequency to manual if you wish to run the tasks in the blueprint manually.
 
 The relationship among Blueprint, Data Connections, Data Scope and Transformation Rules is explained as follows:
@@ -34,7 +34,7 @@ The relationship among Blueprint, Data Connections, Data Scope and Transformatio
 ### Data Sources
 **A data source is a specific DevOps tool from which you wish to sync your data, such as GitHub, GitLab, Jira and Jenkins.**
 
-DevLake normally uses one [data plugin](07-Glossary.md#data-plugins) to pull data for a single data source. However, in some cases, DevLake uses multiple data plugins for one data source for the purpose of improved sync speed, among many other advantages. For instance, when you pull data from GitHub or GitLab, aside from the GitHub or GitLab plugin, Git Extractor is also used to pull data from the repositories. In this case, DevLake still refers GitHub or GitLab as a single data source.
+DevLake normally uses one [data plugin](Glossary.md#data-plugins) to pull data for a single data source. However, in some cases, DevLake uses multiple data plugins for one data source for the purpose of improved sync speed, among many other advantages. For instance, when you pull data from GitHub or GitLab, aside from the GitHub or GitLab plugin, Git Extractor is also used to pull data from the repositories. In this case, DevLake still refers GitHub or GitLab as a single data source.
 
 ### Data Connections
 **A data connection is a specific instance of a data source that stores information such as `endpoint` and `auth`.** A single data source can have one or more data connections (e.g. two Jira instances). Currently, DevLake supports one data connection for GitHub, GitLab and Jenkins, and multiple connections for Jira.
@@ -42,18 +42,18 @@ DevLake normally uses one [data plugin](07-Glossary.md#data-plugins) to pull dat
 You can set up a new data connection either during the first step of creating a blueprint, or in the Connections page that can be accessed from the navigation bar. Because one single data connection can be reused in multiple blueprints, you can update the information of a particular data connection in Connections, to ensure all its associated blueprints will run properly. For example, you may want to update your GitHub token in a data connection if it goes expired.
 
 ### Data Scope
-**In a blueprint, each data connection can have multiple sets of data scope configurations, including GitHub or GitLab projects, Jira boards and their corresponding[data entities](07-Glossary.md#data-entities).** The fields for data scope configuration vary according to different data sources.
+**In a blueprint, each data connection can have multiple sets of data scope configurations, including GitHub or GitLab projects, Jira boards and their corresponding[data entities](Glossary.md#data-entities).** The fields for data scope configuration vary according to different data sources.
 
 Each set of data scope refers to one GitHub or GitLab project, or one Jira board and the data entities you would like to sync for them, for the convenience of applying transformation in the next step. For instance, if you wish to sync 5 GitHub projects, you will have 5 sets of data scope for GitHub.
 
-To learn more about the default data scope of all data sources and data plugins, please refer to [Data Support](./05-DataModels/02-DataSupport.md).
+To learn more about the default data scope of all data sources and data plugins, please refer to [Data Support](./DataModels/02-DataSupport.md).
 
 ### Data Entities
 **Data entities refer to the data fields from one of the five data domains: Issue Tracking, Source Code Management, Code Review, CI/CD and Cross-Domain.**
 
 For instance, if you wish to pull Source Code Management data from GitHub and Issue Tracking data from Jira, you can check the corresponding data entities during setting the data scope of these two data connections.
 
-To learn more details, please refer to [Domain Layer Schema](./05-DataModels/01-DevLakeDomainLayerSchema.md).
+To learn more details, please refer to [Domain Layer Schema](./DataModels/01-DevLakeDomainLayerSchema.md).
 
 ### Transformation Rules
 **Transformation rules are a collection of methods that allow you to customize how DevLake normalizes raw data for query and metric computation.** Each set of data scope is strictly accompanied with one set of transformation rules. However, for your convenience, transformation rules can also be duplicated across different sets of data scope.
@@ -61,12 +61,12 @@ To learn more details, please refer to [Domain Layer Schema](./05-DataModels/01-
 DevLake uses these normalized values in the transformation to design more advanced dashboards, such as the Weekly Bug Retro dashboard. Although configuring transformation rules is not mandatory, if you leave the rules blank or have not configured correctly, only the basic dashboards (e.g. GitHub Basic Metrics) will be displayed as expected, while the advanced dashboards will not.
 
 ### Historical Runs
-**A historical run of a blueprint is an actual execution of the data collection and transformation [tasks](07-Glossary.md#tasks) defined in the blueprint at its creation.** A list of historical runs of a blueprint is the entire running history of that blueprint, whether executed automatically or manually. Historical runs can be triggered in three ways:
+**A historical run of a blueprint is an actual execution of the data collection and transformation [tasks](Glossary.md#tasks) defined in the blueprint at its creation.** A list of historical runs of a blueprint is the entire running history of that blueprint, whether executed automatically or manually. Historical runs can be triggered in three ways:
 - By the blueprint automatically according to its schedule in the Regular Mode of the Configuration UI
 - By running the JSON in the Advanced Mode of the Configuration UI
 - By calling the API `/pipelines` endpoint manually
 
-However, the name Historical Runs is only used in the Configuration UI. In DevLake API, they are called [pipelines](07-Glossary.md#pipelines).
+However, the name Historical Runs is only used in the Configuration UI. In DevLake API, they are called [pipelines](Glossary.md#pipelines).
 
 ## In Configuration UI (Advanced Mode) and API
 
@@ -81,11 +81,11 @@ Data Transformation Plugins transform the data pulled by other Data Collection P
 
 Although the names of the data plugins are not displayed in the regular mode of DevLake Configuration UI, they can be used directly in JSON in the Advanced Mode.
 
-For detailed information about the relationship between data sources and data plugins, please refer to [Data Support](./05-DataModels/02-DataSupport.md).
+For detailed information about the relationship between data sources and data plugins, please refer to [Data Support](./DataModels/02-DataSupport.md).
 
 
 ### Pipelines
-**A pipeline is an orchestration of [tasks](07-Glossary.md#tasks) of data `collection`, `extraction`, `conversion` and `enrichment`, defined in the DevLake API.** A pipeline is composed of one or multiple [stages](07-Glossary.md#stages) that are executed in a sequential order. Any error occurring during the execution of any stage, task or subtask will cause the immediate fail of the pipeline.
+**A pipeline is an orchestration of [tasks](Glossary.md#tasks) of data `collection`, `extraction`, `conversion` and `enrichment`, defined in the DevLake API.** A pipeline is composed of one or multiple [stages](Glossary.md#stages) that are executed in a sequential order. Any error occurring during the execution of any stage, task or subtask will cause the immediate fail of the pipeline.
 
 The composition of a pipeline is explained as follows:
 ![Blueprint ERD](../static/img/pipeline-erd.svg)
@@ -95,7 +95,7 @@ Notice: **You can manually orchestrate the pipeline in Configuration UI Advanced
 **A stages is a collection of tasks performed by data plugins.** Stages are executed in a sequential order in a pipeline.
 
 ### Tasks
-**A task is a collection of [subtasks](07-Glossary.md#subtasks) that perform any of the `collection`, `extraction`, `conversion` and `enrichment` jobs of a particular data plugin.** Tasks are executed in a parallel order in any stages.
+**A task is a collection of [subtasks](Glossary.md#subtasks) that perform any of the `collection`, `extraction`, `conversion` and `enrichment` jobs of a particular data plugin.** Tasks are executed in a parallel order in any stages.
 
 ### Subtasks
 **A subtask is the minimal work unit in a pipeline that performs in any of the four roles: `Collectors`, `Extractors`, `Converters` and `Enrichers`.** Subtasks are executed in sequential orders.
