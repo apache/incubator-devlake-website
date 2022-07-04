@@ -40,4 +40,4 @@ description: >
 
 Support for database schema migration was introduced to DevLake in v0.10.0. From v0.10.0 onwards, users can upgrade their instance smoothly to a newer version. However, versions prior to v0.10.0 do not support upgrading to a newer version with a different database schema. We recommend users to deploy a new instance if needed.
 
-<br/><br/><br/>
+<br/>

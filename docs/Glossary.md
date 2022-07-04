@@ -91,6 +91,7 @@ The composition of a pipeline is explained as follows:
 ![Blueprint ERD](../static/img/pipeline-erd.svg)
 Notice: **You can manually orchestrate the pipeline in Configuration UI Advanced Mode and the DevLake API; whereas in Configuration UI regular mode, an optimized pipeline orchestration will be automatically generated for you.**
 
+
 ### Stages
 **A stages is a collection of tasks performed by data plugins.** Stages are executed in a sequential order in a pipeline.
 
