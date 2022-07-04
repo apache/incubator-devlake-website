@@ -1,5 +1,6 @@
 ---
 title: "Create Recurring Pipelines"
+sidebar_position: 3
 description: >
   Create Recurring Pipelines
 ---
