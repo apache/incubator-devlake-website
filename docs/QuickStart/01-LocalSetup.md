@@ -23,18 +23,18 @@ description: >
 1. Visit `config-ui` at `http://localhost:4000` in your browser to configure data connections.
    - Navigate to desired plugins on the Integrations page
    - Please reference the following for more details on how to configure each one:<br/>
-      - [Jira](../03-Plugins/jira.md)
-      - [GitHub](../03-Plugins/github.md): For users who'd like to collect GitHub data, we recommend reading our [GitHub data collection guide](../04-UserManuals/github-user-guide-v0.10.0.md) which covers the following steps in detail.
-      - [GitLab](../03-Plugins/gitlab.md)
-      - [Jenkins](../03-Plugins/jenkins.md)
+      - [Jira](../Plugins/jira.md)
+      - [GitHub](../Plugins/github.md): For users who'd like to collect GitHub data, we recommend reading our [GitHub data collection guide](../UserManuals/github-user-guide-v0.10.0.md) which covers the following steps in detail.
+      - [GitLab](../Plugins/gitlab.md)
+      - [Jenkins](../Plugins/jenkins.md)
    - Submit the form to update the values by clicking on the **Save Connection** button on each form page
    - `devlake` takes a while to fully boot up. if `config-ui` complaining about api being unreachable, please wait a few seconds and try refreshing the page.
 2. Create pipelines to trigger data collection in `config-ui`
 3. Click *View Dashboards* button in the top left when done, or visit `localhost:3002` (username: `admin`, password: `admin`).
    - We use [Grafana](https://grafana.com/) as a visualization tool to build charts for the [data](../05-DataModels/02-DataSupport.md) stored in our database.
    - Using SQL queries, we can add panels to build, save, and edit customized dashboards.
-   - All the details on provisioning and customizing a dashboard can be found in the [Grafana Doc](../04-UserManuals/GRAFANA.md).
-4. To synchronize data periodically, users can set up recurring pipelines with DevLake's [pipeline blueprint](../04-UserManuals/recurring-pipeline.md) for details.
+   - All the details on provisioning and customizing a dashboard can be found in the [Grafana Doc](../UserManuals/GRAFANA.md).
+4. To synchronize data periodically, users can set up recurring pipelines with DevLake's [pipeline blueprint](../UserManuals/recurring-pipeline.md) for details.
 
 #### Upgrade to a newer version
 

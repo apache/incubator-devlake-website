@@ -1,5 +1,5 @@
 ---
-sidebar_position: 07
+sidebar_position: 8
 title: "Glossary"
 linkTitle: "Glossary"
 tags: []

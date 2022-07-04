@@ -24,7 +24,7 @@ description: >
 
 2. Install dependencies for plugins:
 
-   - [RefDiff](../03-Plugins/refdiff.md#development)
+   - [RefDiff](../Plugins/refdiff.md#development)
 
 3. Install Go packages
 
@@ -71,10 +71,10 @@ description: >
     - Navigate to desired plugins pages on the Integrations page
     - Enter the required information for the plugins you intend to use.
     - Refer to the following for more details on how to configure each one:
-        - [Jira](../03-Plugins/jira.md)
-        - [GitLab](../03-Plugins/gitlab.md)
-        - [Jenkins](../03-Plugins/jenkins.md)
-        - [GitHub](../03-Plugins/github.md): For users who'd like to collect GitHub data, we recommend reading our [GitHub data collection guide](../04-UserManuals/github-user-guide-v0.10.0.md) which covers the following steps in detail.
+        - [Jira](../Plugins/jira.md)
+        - [GitLab](../Plugins/gitlab.md)
+        - [Jenkins](../Plugins/jenkins.md)
+        - [GitHub](../Plugins/github.md): For users who'd like to collect GitHub data, we recommend reading our [GitHub data collection guide](../UserManuals/github-user-guide-v0.10.0.md) which covers the following steps in detail.
     - Submit the form to update the values by clicking on the **Save Connection** button on each form page
 
 9. Visit `localhost:4000/pipelines/create` to RUN a Pipeline and trigger data collection.
@@ -107,14 +107,14 @@ description: >
     ]
     ```
 
-   Please refer to [Pipeline Advanced Mode](../04-UserManuals/create-pipeline-in-advanced-mode.md) for in-depth explanation.
+   Please refer to [Pipeline Advanced Mode](../UserManuals/create-pipeline-in-advanced-mode.md) for in-depth explanation.
 
 
 10. Click *View Dashboards* button in the top left when done, or visit `localhost:3002` (username: `admin`, password: `admin`).
 
    We use <a href="https://grafana.com/" target="_blank">Grafana</a> as a visualization tool to build charts for the <a href="https://github.com/merico-dev/lake/wiki/DataModel.Domain-layer-schema">data stored in our database</a>. Using SQL queries, we can add panels to build, save, and edit customized dashboards.
 
-   All the details on provisioning and customizing a dashboard can be found in the [Grafana Doc](../04-UserManuals/GRAFANA.md).
+   All the details on provisioning and customizing a dashboard can be found in the [Grafana Doc](../UserManuals/GRAFANA.md).
 
 11. (Optional) To run the tests:
 
@@ -122,5 +122,5 @@ description: >
     make test
     ```
 
-12. For DB migrations, please refer to [Migration Doc](../04-UserManuals/MIGRATIONS.md).
+12. For DB migrations, please refer to [Migration Doc](../DeveloperManuals/MIGRATIONS.md).
 <br/><br/><br/>
