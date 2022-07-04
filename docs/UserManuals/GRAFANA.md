@@ -1,5 +1,6 @@
 ---
 title: "How to use Grafana"
+sidebar_position: 1
 description: >
   How to use Grafana
 ---

@@ -1,5 +1,6 @@
 ---
 title: "GitHub User Guide v0.10.0"
+sidebar_position: 4
 description: >
   GitHub User Guide v0.10.0
 ---

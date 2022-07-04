@@ -1,5 +1,6 @@
 ---
 title: "Create Pipeline in Advanced Mode"
+sidebar_position: 2
 description: >
   Create Pipeline in Advanced Mode
 ---
