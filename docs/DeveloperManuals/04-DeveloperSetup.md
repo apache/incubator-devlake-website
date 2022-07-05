@@ -31,23 +31,18 @@ description: >
     ```sh
 	go get
     ```
-4. Install mockery
 
-    ```sh
-    go install github.com/vektra/mockery/v2@latest
-    ```
-
-5. Copy the sample config file to new local file:
+4. Copy the sample config file to new local file:
 
     ```sh
     cp .env.example .env
     ```
 
-6. Update the following variables in the file `.env`:
+5. Update the following variables in the file `.env`:
 
     * `DB_URL`: Replace `mysql:3306` with `127.0.0.1:3306`
 
-7. Start the MySQL and Grafana containers:
+6. Start the MySQL and Grafana containers:
 
     > Make sure the Docker daemon is running before this step.
 
@@ -55,9 +50,13 @@ description: >
     docker-compose up -d mysql grafana
     ```
 
-8. Run lake and config UI in dev mode in two separate terminals:
+7. Run lake and config UI in dev mode in two separate terminals:
 
     ```sh
+    # install mockery
+    go install github.com/vektra/mockery/v2@latest
+    # generate mocking stubs
+    make mock
     # run lake
     make dev
     # run config UI
@@ -72,7 +71,7 @@ description: >
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     ```
 
-9. Visit config UI at `localhost:4000` to configure data connections.
+8. Visit config UI at `localhost:4000` to configure data connections.
     - Navigate to desired plugins pages on the Integrations page
     - Enter the required information for the plugins you intend to use.
     - Refer to the following for more details on how to configure each one:
@@ -82,7 +81,7 @@ description: >
         - [GitHub](../Plugins/github.md): For users who'd like to collect GitHub data, we recommend reading our [GitHub data collection guide](../UserManuals/github-user-guide-v0.10.0.md) which covers the following steps in detail.
     - Submit the form to update the values by clicking on the **Save Connection** button on each form page
 
-10. Visit `localhost:4000/pipelines/create` to RUN a Pipeline and trigger data collection.
+9. Visit `localhost:4000/pipelines/create` to RUN a Pipeline and trigger data collection.
 
 
    Pipelines Runs can be initiated by the new "Create Run" Interface. Simply enable the **Data Connection Providers** you wish to run collection for, and specify the data you want to collect, for instance, **Project ID** for Gitlab and **Repository Name** for GitHub.
@@ -115,17 +114,17 @@ description: >
    Please refer to [Pipeline Advanced Mode](../UserManuals/create-pipeline-in-advanced-mode.md) for in-depth explanation.
 
 
-11. Click *View Dashboards* button in the top left when done, or visit `localhost:3002` (username: `admin`, password: `admin`).
+10. Click *View Dashboards* button in the top left when done, or visit `localhost:3002` (username: `admin`, password: `admin`).
 
    We use <a href="https://grafana.com/" target="_blank">Grafana</a> as a visualization tool to build charts for the <a href="https://github.com/merico-dev/lake/wiki/DataModel.Domain-layer-schema">data stored in our database</a>. Using SQL queries, we can add panels to build, save, and edit customized dashboards.
 
    All the details on provisioning and customizing a dashboard can be found in the [Grafana Doc](../UserManuals/GRAFANA.md).
 
-12. (Optional) To run the tests:
+11. (Optional) To run the tests:
 
     ```sh
     make test
     ```
 
-13. For DB migrations, please refer to [Migration Doc](../DeveloperManuals/MIGRATIONS.md).
+12. For DB migrations, please refer to [Migration Doc](../DeveloperManuals/MIGRATIONS.md).
 <br/><br/><br/>
