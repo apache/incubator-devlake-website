@@ -1,3 +1,9 @@
+---
+title: "E2E Test Guide"
+description: >
+  The steps to write E2E tests for plugins.
+---
+
 # How to write E2E tests for plugins
 
 ## Why write E2E tests
