@@ -178,7 +178,7 @@ To facilitate the generation of the file mentioned above, DevLake has adopted a 
 But note! Please do two things after the snapshot is created: 1. check if the file is generated correctly 2. re-run it to make sure there are no errors between the generated results and the re-run results.
 These two operations are critical and directly related to the quality of test writing. We should treat the snapshot file in `.csv' format like a code file.
 
-If there is a problem with this step, there are usually 2 kinds of problems.
+If there is a problem with this step, there are usually 2 ways to solve it.
 1. The validated fields contain fields like create_at runtime or self-incrementing ids, which cannot be repeatedly validated and should be excluded.
 2. there is `\n` or `\r\n` or other escape mismatch fields in the run results. Generally, when parsing the `httpResponse` error, you can follow these solutions:
     1. modify the field type of the content in the api model to `json.
