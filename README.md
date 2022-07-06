@@ -10,7 +10,7 @@ Please also make sure your node version is 10+, version lower than 10.x is not s
 ## Installation
 
 1. Run `yarn install` or `yarn` in the root directory to install the dependencies.
-2. Run `yarn start` in the root directory to start a local server, you will see the website in 'http://localhost:3000'.
+2. Run `yarn start` in the root directory to start a local server, you will see the website in http://localhost:3000.
 
 If you have higher version of node installed, you may consider `nvm` to allow different versions of `node` coexisting on your machine.
 
