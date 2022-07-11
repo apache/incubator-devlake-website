@@ -98,10 +98,10 @@ DevLake provides a generator to create a plugin conveniently. Let's scaffold our
 * `with_api_client` is used for choosing if we need to request HTTP APIs by api_client. 
 * `Endpoint` use in which site we will request, in our case, it should be `https://people.apache.org/`.
 
-![](https://i.imgur.com/itzlFg7.png)
+![create plugin](https://i.imgur.com/itzlFg7.png)
 
 Now we have three files in our plugin. `api_client.go` and `task_data.go` are in subfolder `tasks/`.
-![](https://i.imgur.com/zon5waf.png)
+![plugin files](https://i.imgur.com/zon5waf.png)
 
 Have a try to run this plugin by function `main` in `plugin_main.go`. When you see result like this:
 ```
@@ -120,7 +120,7 @@ Before we start, it is helpful to know how collection task is executed:
 1. First, Apache DevLake would call `plugin_main.PrepareTaskData()` to prepare needed data before any sub-tasks. We need to create an API client here.
 2. Then Apache DevLake will call the sub-tasks returned by `plugin_main.SubTaskMetas()`. Sub-task is an independent task to do some job, like requesting API, processing data, etc.
 
-> Each sub-task must be defined as a [SubTaskMeta](), and implement [SubTaskEntryPoint]() of SubTaskMeta. SubTaskEntryPoint is defined as 
+> Each sub-task must be defined as a SubTaskMeta, and implement SubTaskEntryPoint of SubTaskMeta. SubTaskEntryPoint is defined as 
 > ```go
 > type SubTaskEntryPoint func(c SubTaskContext) error
 > ```
