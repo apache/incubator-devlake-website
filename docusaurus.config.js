@@ -1,5 +1,7 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const versions = require('./versions.json');
+
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
@@ -24,6 +26,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
           sidebarPath: require.resolve('./sidebars.js'),
           // set to undefined to remove Edit this Page
           editUrl: 'https://github.com/apache/incubator-devlake-website/edit/main',
+          versions: {
+            current: {
+                path: '',
+            },
+            [versions[0]]: {
+                path: versions[0],
+            }
+          }
         },
         blog: {
           showReadingTime: true,
@@ -76,10 +86,24 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         },
         items: [
           {
-            type: 'doc',
-            docId: 'Overview/WhatIsDevLake',
+            // type: 'docsVersionDropdown',
+            // docId: 'Overview/WhatIsDevLake',
             position: 'right',
             label: 'Docs',
+            items: [
+              ...versions.slice(0, versions.length - 2).map((version) => ({
+                label: version,
+                to: `docs/${version}/Overview/WhatIsDevLake`,
+             })),
+             ...versions.slice(versions.length - 2, versions.length).map((version) => ({
+              label: (version === "1.x") ? "1.x(Not Apache Release)" : version,
+              to: `docs/${version}/Overview/WhatIsDevLake`,
+          })),
+              {
+                  label: "Next",
+                  to: "/docs/Overview/WhatIsDevLake",
+              }
+            ]
           },
          {
             type: 'doc',
