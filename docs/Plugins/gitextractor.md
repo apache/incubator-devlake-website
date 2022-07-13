@@ -12,7 +12,7 @@ This plugin extracts commits and references from a remote or local git repositor
 1. Use the Git repo extractor to retrieve data about commits and branches from your repository.
 2. Use the GitHub plugin to retrieve data about Github issues and PRs from your repository.
 NOTE: you can run only one issue collection stage as described in the Github Plugin README.
-3. Use the [RefDiff](RefDiff.md) plugin to calculate version diff, which will be stored in `refs_commits_diffs` table.
+3. Use the [RefDiff](./refdiff.md) plugin to calculate version diff, which will be stored in `refs_commits_diffs` table.
 
 ## Sample Request
 
@@ -58,6 +58,6 @@ For more options (e.g., saving to a csv file instead of a db), please read `plug
 ## Development
 
 This plugin depends on `libgit2`, you need to install version 1.3.0 in order to run and debug this plugin on your local
-machine. [Click here](RefDiff.md#Development) for a brief guide.
+machine. [Click here](./refdiff.md#Development) for a brief guide.
 
 <br/><br/><br/>

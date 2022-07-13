@@ -25,7 +25,7 @@ sidebar_position: 1
 
 2. Install dependencies for plugins:
 
-   - [RefDiff](../Plugins/RefDiff.md#development)
+   - [RefDiff](../Plugins/refdiff.md#development)
 
 3. Install Go packages
 
@@ -76,10 +76,10 @@ sidebar_position: 1
     - Navigate to desired plugins pages on the Integrations page
     - Enter the required information for the plugins you intend to use.
     - Refer to the following for more details on how to configure each one:
-        - [Jira](../Plugins/Jira.md)
-        - [GitLab](../Plugins/GitLab.md)
-        - [Jenkins](../Plugins/Jenkins.md)
-        - [GitHub](../Plugins/GitHub.md): For users who'd like to collect GitHub data, we recommend reading our [GitHub data collection guide](../UserManuals/GitHubUserGuide.md) which covers the following steps in detail.
+        - [Jira](../Plugins/jira.md)
+        - [GitLab](../Plugins/gitlab.md)
+        - [Jenkins](../Plugins/jenkins.md)
+        - [GitHub](../Plugins/github.md): For users who'd like to collect GitHub data, we recommend reading our [GitHub data collection guide](../UserManuals/GitHubUserGuide.md) which covers the following steps in detail.
     - Submit the form to update the values by clicking on the **Save Connection** button on each form page
 
 9. Visit `localhost:4000/pipelines/create` to RUN a Pipeline and trigger data collection.

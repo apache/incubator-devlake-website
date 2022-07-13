@@ -24,10 +24,10 @@ sidebar_position: 1
 1. Visit `config-ui` at `http://localhost:4000` in your browser to configure data connections.
    - Navigate to desired plugins on the Integrations page
    - Please reference the following for more details on how to configure each one:<br/>
-      - [Jira](../Plugins/Jira.md)
-      - [GitHub](../Plugins/GitHub.md): For users who'd like to collect GitHub data, we recommend reading our [GitHub data collection guide](../UserManuals/GitHubUserGuide.md) which covers the following steps in detail.
-      - [GitLab](../Plugins/GitLab.md)
-      - [Jenkins](../Plugins/Jenkins.md)
+      - [Jira](../Plugins/jira.md)
+      - [GitHub](../Plugins/github.md): For users who'd like to collect GitHub data, we recommend reading our [GitHub data collection guide](../UserManuals/GitHubUserGuide.md) which covers the following steps in detail.
+      - [GitLab](../Plugins/gitlab.md)
+      - [Jenkins](../Plugins/jenkins.md)
    - Submit the form to update the values by clicking on the **Save Connection** button on each form page
    - `devlake` takes a while to fully boot up. if `config-ui` complaining about api being unreachable, please wait a few seconds and try refreshing the page.
 2. Create pipelines to trigger data collection in `config-ui`
