@@ -87,21 +87,21 @@ const versions = require('./versions.json');
         items: [
           {
             // type: 'docsVersionDropdown',
-            // docId: 'Overview/WhatIsDevLake',
+            // docId: 'Overview/Introduction',
             position: 'right',
             label: 'Docs',
             items: [
               ...versions.slice(0, versions.length - 2).map((version) => ({
                 label: version,
-                to: `docs/${version}/Overview/WhatIsDevLake`,
+                to: `docs/${version}/Overview/Introduction`,
              })),
              ...versions.slice(versions.length - 2, versions.length).map((version) => ({
               label: (version === "1.x") ? "1.x(Not Apache Release)" : version,
-              to: `docs/${version}/Overview/WhatIsDevLake`,
+              to: `docs/${version}/Overview/Introduction`,
           })),
               {
-                  label: "Next",
-                  to: "/docs/Overview/WhatIsDevLake",
+                  label: "Latest",
+                  to: "/docs/Overview/Introduction",
               }
             ]
           },
