@@ -1,6 +1,6 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-// const versions = require('./versions.json');
+const versions = require('./versions.json');
 
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
@@ -26,14 +26,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
           sidebarPath: require.resolve('./sidebars.js'),
           // set to undefined to remove Edit this Page
           editUrl: 'https://github.com/apache/incubator-devlake-website/edit/main',
-          // versions: {
-          //   current: {
-          //       path: '',
-          //   },
-          //   [versions[0]]: {
-          //       path: versions[0],
-          //   }
-          // }
+          versions: {
+            current: {
+                path: '',
+            },
+            [versions[0]]: {
+                path: versions[0],
+            }
+          }
         },
         blog: {
           showReadingTime: true,
@@ -86,24 +86,24 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         },
         items: [
           {
-            type: 'doc',
-            docId: 'Overview/Introduction',
+            // type: 'doc',
+            // docId: 'Overview/Introduction',
             position: 'right',
             label: 'Docs',
-          //   items: [
-          //     ...versions.slice(0, versions.length - 2).map((version) => ({
-          //       label: version,
-          //       to: `docs/${version}/Overview/Introduction`,
-          //    })),
-          //    ...versions.slice(versions.length - 2, versions.length).map((version) => ({
-          //     label: (version === "1.x") ? "1.x(Not Apache Release)" : version,
-          //     to: `docs/${version}/Overview/Introduction`,
-          // })),
-          //     {
-          //         label: "Latest",
-          //         to: "/docs/Overview/Introduction",
-          //     }
-          //   ]
+            items: [
+              ...versions.slice(0, versions.length - 2).map((version) => ({
+                label: version,
+                to: `docs/${version}/Overview/Introduction`,
+             })),
+             ...versions.slice(versions.length - 2, versions.length).map((version) => ({
+              label: (version === "1.x") ? "1.x(Not Apache Release)" : version,
+              to: `docs/${version}/Overview/Introduction`,
+          })),
+              {
+                  label: "Latest",
+                  to: "/docs/Overview/Introduction",
+              }
+            ]
           },
          {
             type: 'doc',
