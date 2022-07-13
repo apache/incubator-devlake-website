@@ -59,19 +59,19 @@ get merged into the codebase. We deeply appreciate your contribution!
 
 ---
 
-![Zhenlei Li](../../img/community/contributors/lizhenlei.jpeg)
+![Zhenlei Li](/img/Community/contributors/lizhenlei.jpeg)
 
 #### Danna Wang
 
 ---
 
-![Zhenlei Li](../../img/community/contributors/wangdanna.jpeg)
+![Zhenlei Li](/img/Community/contributors/wangdanna.jpeg)
 
 #### Geyu Chen
 
 ---
 
-![Geyu Chen](../../img/community/contributors/chengeyu.jpeg)
+![Geyu Chen](/img/Community/contributors/chengeyu.jpeg)
 
 ### New Contributors May 2022
 
@@ -79,70 +79,70 @@ get merged into the codebase. We deeply appreciate your contribution!
 
 ---
 
-![Jiageng Li](../../img/community/contributors/lijiageng.jpeg)
+![Jiageng Li](/img/Community/contributors/lijiageng.jpeg)
 
 #### Xiangyu Zhang
 
 ---
 
-![Xiangyu Zhang](../../img/community/contributors/zhangxiangyu.jpeg)
+![Xiangyu Zhang](/img/Community/contributors/zhangxiangyu.jpeg)
 
 #### Xiaolei Wang
 
 ---
 
-![Xiaolei Wang](../../img/community/contributors/wangxiaolei.jpeg)
+![Xiaolei Wang](/img/Community/contributors/wangxiaolei.jpeg)
 
 #### Peng Su
 
 ---
 
-![Peng Su](../../img/community/contributors/supeng.jpeg)
+![Peng Su](/img/Community/contributors/supeng.jpeg)
 
 #### Dunyu Song
 
 ---
 
-![Dunyu Song](../../img/community/contributors/songdunyu.jpeg)
+![Dunyu Song](/img/Community/contributors/songdunyu.jpeg)
 
 #### Nikita Koselev
 
 ---
 
-![Nikita Koselev](../../img/community/contributors/nikitakoselec.jpeg)
+![Nikita Koselev](/img/Community/contributors/nikitakoselec.jpeg)
 
 #### Shimin An
 
 ---
 
-![Shimin An](../../img/community/contributors/anshimin.jpeg)
+![Shimin An](/img/Community/contributors/anshimin.jpeg)
 
 #### Abhishek KM
 
 ---
 
-![Abhishek KM](../../img/community/contributors/abhishek.jpeg)
+![Abhishek KM](/img/Community/contributors/abhishek.jpeg)
 
 #### Guiping Tan
 
 ---
 
-![Guiping Tan](../../img/community/contributors/tanguiping.jpeg)
+![Guiping Tan](/img/Community/contributors/tanguiping.jpeg)
 
 #### Bin Ji
 
 ---
 
-![jibin](../../img/community/contributors/jibin.jpeg)
+![jibin](/img/Community/contributors/jibin.jpeg)
 
 #### Prajwal Borkar
 
 ---
 
-![Prajwal Borkar](../../img/community/contributors/prajwalborkar.jpeg)
+![Prajwal Borkar](/img/Community/contributors/prajwalborkar.jpeg)
 
 #### Keon Amini
 
 ---
 
-![Keon Amini](../../img/community/contributors/keonamini.jpeg)
+![Keon Amini](/img/Community/contributors/keonamini.jpeg)
