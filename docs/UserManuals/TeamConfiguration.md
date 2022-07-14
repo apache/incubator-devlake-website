@@ -31,7 +31,7 @@ b. The actual api request.
     iii. After successful execution, the teams table is generated and the data can be seen in the database table teams. 
     (Notes: how to connect to the database: mainly through host, port, username, password, and then through sql tools, such as sequal ace, datagrip and other data, of course you can also access through the command line mysql -h `ip` -u `username` -p -P `port`)
 
-![image](/img/Team/teamflow3.png)
+![image](../../static/img/Team/teamflow3.png)
 
 
 ## Step 2 - Construct user tables (roster)
@@ -52,11 +52,11 @@ b. The actual api request.
 
     iii. After successful execution, the users table is generated and the data can be seen in the database table users.
 
-![image](/img/Team/teamflow1.png)
+![image](../../static/img/Team/teamflow1.png)
     
     iv. Generated the team_users table, you can see the data in the team_users table.
 
-![image](/img/Team/teamflow2.png)
+![image](../../static/img/Team/teamflow2.png)
 
 ## Step 3 - Update users if you need  
 If there is a problem with team_users association or data in users, just re-put users api interface, i.e. (b in step 2 above)
@@ -64,7 +64,7 @@ If there is a problem with team_users association or data in users, just re-put 
 ## Step 4 - Collect accounts 
 accounts table is collected by users through devlake. You can see the accounts table information in the database.
 
-![image](/img/Team/teamflow4.png)
+![image](../../static/img/Team/teamflow4.png)
 
 ## Step 5 - Automatically match existing accounts and users through api requests
 
@@ -91,7 +91,7 @@ curl --location --request POST '127.0.0.1:8080/pipelines' \
 
 b. After successful execution, the user_accounts table is generated, and you can see the data in table user_accounts.
 
-![image](/img/Team/teamflow5.png)
+![image](../../static/img/Team/teamflow5.png)
 
 ## Step 6 - Get user_accountsr relationship
 After generating the user_accounts relationship, the user can get the associated data through the GET method to confirm whether the data user and account match correctly and whether the matched accounts are complete.
@@ -103,7 +103,7 @@ b. The corresponding curl command:
 curl --location --request GET 'http://127.0.0.1:8080/plugins/org/user_account_mapping.csv'
 ```
 
-![image](/img/Team/teamflow6.png)
+![image](../../static/img/Team/teamflow6.png)
 
 c. You can also use sql statements to determine, here to provide a sql statement for reference only.
 ```
@@ -123,7 +123,7 @@ curl --location --request PUT 'http://127.0.0.1:8080/plugins/org/user_account_ma
 
 b. You can see that the data in the user_accounts table has been updated.
 
-![image](/img/Team/teamflow7.png)
+![image](../../static/img/Team/teamflow7.png)
 
 
 **The above is the flow of user usage for the whole team feature.**
