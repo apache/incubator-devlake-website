@@ -93,7 +93,7 @@ b. After successful execution, the user_accounts table is generated, and you can
 
 ![image](../../static/img/Team/teamflow5.png)
 
-## Step 6 - Get user_accountsr relationship
+## Step 6 - Get user_accounts relationship
 After generating the user_accounts relationship, the user can get the associated data through the GET method to confirm whether the data user and account match correctly and whether the matched accounts are complete.
 
 a. http://127.0.0.1:8080/plugins/org/user_account_mapping.csv (put into the browser to download the file directly)
