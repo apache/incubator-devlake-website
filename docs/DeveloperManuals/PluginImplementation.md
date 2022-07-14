@@ -5,8 +5,6 @@ description: >
   Plugin Implementation
 ---
 
-## How to Implement a DevLake plugin?
-
 If your favorite DevOps tool is not yet supported by DevLake, don't worry. It's not difficult to implement a DevLake plugin. In this post, we'll go through the basics of DevLake plugins and build an example plugin from scratch together.
 
 ## What is a plugin?
@@ -35,13 +33,13 @@ A plugin mainly consists of a collection of subtasks that can be executed by Dev
 The diagram below shows the control flow of executing a plugin:
 
 ```mermaid
-flowchart TD;
-    subgraph S4[Step4 sub-task extractor running process];
-    direction LR;
-    D4[DevLake];
+flowchart TD
+    subgraph S4[Step4 sub-task extractor running process]
+    direction LR
+    D4[DevLake]
     D4 -- Step4.1 create a new\n ApiExtractor\n and execute it --> E["ExtractXXXMeta.\nEntryPoint"];
     E <-- Step4.2 read from\n raw table --> RawDataSubTaskArgs.\nTable;
-    E -- "Step4.3 call with RawData" --> ApiExtractor.Extract;
+    E -- "Step4.3 call with RawData" --> ApiExtractor.Extract
     ApiExtractor.Extract -- "decode and return gorm models" --> E
     end
     subgraph S3[Step3 sub-task collector running process]
@@ -73,7 +71,7 @@ There's a lot of information in the diagram but we don't expect you to digest it
 
 In this guide, we'll walk through how to create a data source plugin from scratch. 
 
-The example in this tutorial comes from DevLake's own needs of managing [CLAs](https://en.wikipedia.org/wiki/Contributor_License_Agreement). Whenever DevLake receives a new PR on GitHub, we need to check if the author has signed a CLA by referencing `https://people.apache.org/public/icla-info.json`. This guide will demonstrate how to collect the ICLA info from Apache API, cache the raw response, and extract the raw data into a relational table ready to be queried.
+Apache requires the project to confirm whether the Contributors and Committers of the project have signed the CLA. So we need to check whether committers have signed the CLA by requesting apple and whether contributors have signed by requesting the mailing list. Here we will explain how to request and cache committer information from the Apache API and extract the structured data. There is just an introduction for contributors at the end of this article.
 
 ### Step 1: Bootstrap the new plugin
 
@@ -98,7 +96,7 @@ DevLake provides a generator to create a plugin conveniently. Let's scaffold our
 * `with_api_client` is used for choosing if we need to request HTTP APIs by api_client. 
 * `Endpoint` use in which site we will request, in our case, it should be `https://people.apache.org/`.
 
-![create plugin](https://i.imgur.com/itzlFg7.png)
+![](https://i.imgur.com/itzlFg7.png)
 
 Now we have three files in our plugin. `api_client.go` and `task_data.go` are in subfolder `tasks/`.
 ![plugin files](https://i.imgur.com/zon5waf.png)
@@ -196,7 +194,7 @@ receive data: 272956 /* <- the number means 272956 models received */
 
 We have already collected data from HTTP API and saved them into the DB table `_raw_XXXX`. In this step, we will extract the names of committers from the raw data. As you may infer from the name, raw tables are temporary and not easy to use directly.
 
-Now Apache DevLake suggests to save data by [gorm](https://gorm.io/docs/index.html), so we will create a model by gorm and add it into `plugin_main.go/AutoSchemas.Up()`.
+Now Apache DevLake suggests to save data by [gorm](https://gorm.io/docs/index.html), so we will create a model by gorm and add it into `plugin_main.go/AutoMigrate()`.
 
 plugins/icla/models/committer.go
 ```go
@@ -224,7 +222,7 @@ plugins/icla/plugin_main.go
 Ok, run the plugin, and table `_tool_icla_committer` will be created automatically just like the snapshot below:
 ![](https://i.imgur.com/7Z324IX.png)
 
-Next, let's run `go run generator/main.go create-extractor icla committer` and type in what the command prompt asks for.
+Next, let's run `go run generator/main.go create-extractor icla committer` and type in what the command prompt asks for to create a new sub-task.
 
 ![](https://i.imgur.com/UyDP9Um.png)
 
@@ -271,7 +269,7 @@ Now committer data have been saved in _tool_icla_committer.
 Notes: There are two ways here (open source or using it yourself). It is unnecessary, but we encourage it because convertors and the domain layer will significantly help build dashboards. More info about the domain layer at: https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema/
 
 > - Convertor will convert data from the tool layer and save it into the domain layer.
-> - We use `helper.NewDataConverter` to create an object of [DataConvertor], then call `execute()`. 
+> - We use `helper.NewDataConverter` to create an object of DataConvertor, then call `execute()`. 
 
 #### Step 2.4 Let's try it
 Sometimes OpenApi will be protected by token or other auth types, and we need to log in to gain a token to visit it. For example, only after logging in `private@apahce.com` could we gather the data about contributors signing ICLA. Here we briefly introduce how to authorize DevLake to collect data.
