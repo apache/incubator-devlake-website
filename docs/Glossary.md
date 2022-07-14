@@ -25,7 +25,7 @@ The following terms are arranged in the order of their appearance in the actual 
 
 The relationship among Blueprint, Data Connections, Data Scope and Transformation Rules is explained as follows:
 
-![Blueprint ERD](/img/blueprint-erd.svg)
+![Blueprint ERD](/img/Glossary/blueprint-erd.svg)
 - Each blueprint can have multiple data connections.
 - Each data connection can have multiple sets of data scope.
 - Each set of data scope only consists of one GitHub/GitLab project or Jira board, along with their corresponding data entities.
@@ -46,14 +46,14 @@ You can set up a new data connection either during the first step of creating a 
 
 Each set of data scope refers to one GitHub or GitLab project, or one Jira board and the data entities you would like to sync for them, for the convenience of applying transformation in the next step. For instance, if you wish to sync 5 GitHub projects, you will have 5 sets of data scope for GitHub.
 
-To learn more about the default data scope of all data sources and data plugins, please refer to [Data Support](./DataModels/02-DataSupport.md).
+To learn more about the default data scope of all data sources and data plugins, please refer to [Data Support](./DataModels/DataSupport.md).
 
 ### Data Entities
 **Data entities refer to the data fields from one of the five data domains: Issue Tracking, Source Code Management, Code Review, CI/CD and Cross-Domain.**
 
 For instance, if you wish to pull Source Code Management data from GitHub and Issue Tracking data from Jira, you can check the corresponding data entities during setting the data scope of these two data connections.
 
-To learn more details, please refer to [Domain Layer Schema](./DataModels/01-DevLakeDomainLayerSchema.md).
+To learn more details, please refer to [Domain Layer Schema](./DataModels/DevLakeDomainLayerSchema.md).
 
 ### Transformation Rules
 **Transformation rules are a collection of methods that allow you to customize how DevLake normalizes raw data for query and metric computation.** Each set of data scope is strictly accompanied with one set of transformation rules. However, for your convenience, transformation rules can also be duplicated across different sets of data scope.
@@ -81,14 +81,14 @@ Data Transformation Plugins transform the data pulled by other Data Collection P
 
 Although the names of the data plugins are not displayed in the regular mode of DevLake Configuration UI, they can be used directly in JSON in the Advanced Mode.
 
-For detailed information about the relationship between data sources and data plugins, please refer to [Data Support](./DataModels/02-DataSupport.md).
+For detailed information about the relationship between data sources and data plugins, please refer to [Data Support](./DataModels/DataSupport.md).
 
 
 ### Pipelines
 **A pipeline is an orchestration of [tasks](Glossary.md#tasks) of data `collection`, `extraction`, `conversion` and `enrichment`, defined in the DevLake API.** A pipeline is composed of one or multiple [stages](Glossary.md#stages) that are executed in a sequential order. Any error occurring during the execution of any stage, task or subtask will cause the immediate fail of the pipeline.
 
 The composition of a pipeline is explained as follows:
-![Blueprint ERD](/img/pipeline-erd.svg)
+![Blueprint ERD](/img/Glossary/pipeline-erd.svg)
 Notice: **You can manually orchestrate the pipeline in Configuration UI Advanced Mode and the DevLake API; whereas in Configuration UI regular mode, an optimized pipeline orchestration will be automatically generated for you.**
 
 
