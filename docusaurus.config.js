@@ -28,7 +28,9 @@ const versions = require('./versions.json');
           editUrl: 'https://github.com/apache/incubator-devlake-website/edit/main',
           versions: {
             current: {
+                label:'Latest',
                 path: '',
+                banner:'none',
             },
             [versions[0]]: {
                 path: versions[0],
@@ -91,6 +93,10 @@ const versions = require('./versions.json');
             position: 'right',
             label: 'Docs',
             items: [
+              {
+                label: "Latest",
+                to: "/docs/Overview/Introduction",
+              },
               ...versions.slice(0, versions.length - 2).map((version) => ({
                 label: version,
                 to: `docs/${version}/Overview/Introduction`,
@@ -98,11 +104,7 @@ const versions = require('./versions.json');
              ...versions.slice(versions.length - 2, versions.length).map((version) => ({
               label: (version === "1.x") ? "1.x(Not Apache Release)" : version,
               to: `docs/${version}/Overview/Introduction`,
-          })),
-              {
-                  label: "Latest",
-                  to: "/docs/Overview/Introduction",
-              }
+            }))
             ]
           },
          {
