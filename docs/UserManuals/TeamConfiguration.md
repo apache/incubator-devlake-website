@@ -62,7 +62,7 @@ b. The actual api request.
 If there is a problem with team_users association or data in users, just re-put users api interface, i.e. (b in step 2 above)
 
 ## Step 4 - Collect accounts 
-accounts table is collected by users through devlake. You can see the accounts table information in the database.
+The accounts table is collected by users through devlake. In order to match with users and facilitate the demonstration of subsequent functions, here I construct fake accounts data from the information in the users table. For real user collection, you need to run the corresponding plugin service through devlake, for example, the github plugin, and after running the corresponding plugin service, the accounts data will be generated.
 
 ![image](/img/Team/teamflow4.png)
 
