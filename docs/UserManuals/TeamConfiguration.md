@@ -62,7 +62,14 @@ b. The actual api request.
 If there is a problem with team_users association or data in users, just re-put users api interface, i.e. (b in step 2 above)
 
 ## Step 4 - Collect accounts 
-The accounts table is collected by users through devlake. In order to match with users and facilitate the demonstration of subsequent functions, here I construct fake accounts data from the information in the users table. For real user collection, you need to run the corresponding plugin service through devlake, for example, the github plugin, and after running the corresponding plugin service, the accounts data will be generated.
+The accounts table is collected by users through devlake. In order to match with users and facilitate the demonstration of subsequent functions, here I construct fake accounts data from the information in the users table. For real user collection, you need to run the corresponding plugin service through devlake, for example, the github plugin, and after running the corresponding plugin service, the accounts data will be generated. A sample sql for constructing fake data is given here.
+```
+INSERT INTO `accounts` (`id`, `created_at`, `updated_at`, `_raw_data_params`, `_raw_data_table`, `_raw_data_id`, `_raw_data_remark`, `email`, `full_name`, `user_name`, `avatar_url`, `organization`, `created_date`, `status`)
+VALUES
+        ('github:GithubAccount:1:1234', '2022-07-12 10:54:09.632', '2022-07-12 10:54:09.632', '{\"ConnectionId\":1,\"Owner\":\"apache\",\"Repo\":\"incubator-devlake\"}', '_raw_github_api_pull_request_reviews', 28, '', 'TyroneKCummings@teleworm.us', '', 'Tyrone K. Cummings', 'https://avatars.githubusercontent.com/u/101256042?u=a6e460fbaffce7514cbd65ac739a985f5158dabc&v=4', '', NULL, 0),
+        ('jira:JiraAccount:1:629cdf', '2022-07-12 10:54:09.632', '2022-07-12 10:54:09.632', '{\"ConnectionId\":1,\"BoardId\":\"76\"}', '_raw_jira_api_users', 5, '', 'DorothyRUpdegraff@dayrep.com', '', 'Dorothy R. Updegraff', 'https://avatars.jiraxxxx158dabc&v=4', '', NULL, 0);
+
+```
 
 ![image](/img/Team/teamflow4.png)
 
