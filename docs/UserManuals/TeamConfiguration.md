@@ -22,17 +22,27 @@ Each of the questions above translates to a table in DevLake's schema, illustrat
 3. `team_users` table stores which users belong to a team.
 4. `user_accounts` table stores which accounts belong to a user. An `account` refers to an identiy in a DevOps tool and is automatically created when importing data from that tool. For example, a `user` may have a GitHub `account` as well as a Jira `account`.
 
-DevLake uses a simple heuristic algorithm based on names and emails to automatically map accounts to users and populate the `user_accounts` table. When DevLake cannot confidently map an `account` to a `user` due to insufficient information, it allows DevLake users to manually configure the mapping.
+DevLake uses a simple heuristic algorithm based on names and emails to automatically map accounts to users and populate the `user_accounts` table.
+When DevLake cannot confidently map an `account` to a `user` due to insufficient information, it allows DevLake users to manually configure the mapping.
 
 ## A step-by-step guide
 
 In the following sections, we'll walk through how to configure teams and create the four tables mentioned above (`teams`, `users`, `team_users`, and `user_accounts`).
+The overall workflow is:
 
-Notes: 
-1. Please convert /xxxpath/*.csv to the absolute path of the csv file you want to upload. 
-2. Please replace the 127.0.0.1:8080 in the text with the actual ip and port. 
+1. Create the `teams` table
+2. Create the `users` and `team_users` table
+3. Populate the `accounts` table via data collection
+4. Run a heursitic algorithm to populate `user_accounts` table
+5. Manually update `user_accounts` when the algorithm falls short
 
-## Step 1 - Construct the teams table.
+Note:
+
+1. Please replace `/xxxpath/*.csv` with the absolute path of the csv file you'd like to upload.
+2. Please replace `127.0.0.1:8080` with your actual DevLake service IP and port number.
+
+## Step 1 - Create the `teams` table
+
 a. API request example, you can generate sample data.
 
     i.  GET request: http://127.0.0.1:8080/plugins/org/teams.csv?fake_data=true (put into the browser can download the corresponding csv file)
@@ -55,7 +65,8 @@ b. The actual API request.
 ![image](/img/Team/teamflow3.png)
 
 
-## Step 2 - Construct user tables (roster)
+## Step 2 - Create the `users` and `team_users` table
+
 a. API request example, you can generate sample data.
 
     i.  Get request: http://127.0.0.1:8080/plugins/org/users.csv?fake_data=true (put into the browser can download the corresponding csv file).
@@ -79,10 +90,10 @@ b. The actual api request.
 
 ![image](/img/Team/teamflow2.png)
 
-## Step 3 - Update users if you need  
-If there is a problem with team_users association or data in users, just re-put users api interface, i.e. (b in step 2 above)
+If there is a problem with `team_users` association or data in `users` table, simply re-put users api interface, i.e. (b in step 2 above)
 
-## Step 4 - Collect accounts 
+## Step 3 - Populate the `accounts` table via data collection
+
 The accounts table is collected by users through DevLake. In order to match with users and facilitate the demonstration of subsequent functions, here I construct fake accounts data from the information in the users table. For real user collection, you need to run the corresponding plugin service through DevLake, for example, the github plugin, and after running the corresponding plugin service, the accounts data will be generated. A sample sql for constructing fake data is given here.
 ```
 INSERT INTO `accounts` (`id`, `created_at`, `updated_at`, `_raw_data_params`, `_raw_data_table`, `_raw_data_id`, `_raw_data_remark`, `email`, `full_name`, `user_name`, `avatar_url`, `organization`, `created_date`, `status`)
@@ -94,7 +105,7 @@ VALUES
 
 ![image](/img/Team/teamflow4.png)
 
-## Step 5 - Automatically match existing accounts and users through api requests
+## Step 4 - Run a heursitic algorithm to populate `user_accounts` table
 
 a. API request:  the name of the plugin is "org", connctionId is order to keep same with other plugins.
 
@@ -121,7 +132,8 @@ b. After successful execution, the user_accounts table is generated, and you can
 
 ![image](/img/Team/teamflow5.png)
 
-## Step 6 - Get user_accounts relationship
+## Step 5 - Manually update `user_accounts` when the algorithm falls short
+
 After generating the user_accounts relationship, the user can get the associated data through the GET method to confirm whether the data user and account match correctly and whether the matched accounts are complete.
 
 a. http://127.0.0.1:8080/plugins/org/user_account_mapping.csv (put into the browser to download the file directly)
@@ -141,17 +153,13 @@ FROM accounts a
         join users u on ua.user_id = u.id
 ```
 
-## Step 7 - Update user_accounts if you need
 If the association between user and account is not as expected, you can change the user_account_mapping.csv file. For example, I change the UserId in the line Id=github:GithubAccount:1:1234 in the user_account_mapping.csv file to 2, and then upload the user_account_mapping.csv file through the api interface.
 
-a. The corresponding curl command:
+d. The corresponding curl command:
 ```
 curl --location --request PUT 'http://127.0.0.1:8080/plugins/org/user_account_mapping.csv' --form 'file=@"/xxxpath/user_account_mapping.csv"'
 ```
 
-b. You can see that the data in the user_accounts table has been updated.
+e. You can see that the data in the user_accounts table has been updated.
 
 ![image](/img/Team/teamflow7.png)
-
-
-**The above is the flow of user usage for the whole team feature.**
