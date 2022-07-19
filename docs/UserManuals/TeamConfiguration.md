@@ -4,16 +4,16 @@ sidebar_position: 6
 description: >
   Team Configuration
 ---
-## What's this for and how it works?
+## What is 'Team Configuration' and how it works?
 
-To render metrics by team, DevLake needs to know about the team configuration in an organization, specifically:
+To render and organize metrics by team, DevLake needs to know about the team configuration in an organization, specifically:
 
 1. What're the teams?
 2. Who're the users?
 3. Which users belong to a team?
 4. Which accounts belong to a user?
 
-Each of the questions above translates to a table in DevLake's schema, illustrated below:
+Each of the questions above corresponds to a table in DevLake's schema, illustrated below:
 
 ![image](/img/Team/teamflow0.png)
 
