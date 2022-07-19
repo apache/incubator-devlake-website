@@ -12,7 +12,7 @@ Notes:
 2. Please replace the 127.0.0.1:8080 in the text with the actual ip and port. 
 
 ## Step 1 - Construct the teams table.
-a. Api request example, you can generate sample data.
+a. API request example, you can generate sample data.
 
     i.  GET request: http://127.0.0.1:8080/plugins/org/teams.csv?fake_data=true (put into the browser can download the corresponding csv file)
 
@@ -20,7 +20,7 @@ a. Api request example, you can generate sample data.
         curl --location --request GET 'http://127.0.0.1:8080/plugins/org/teams.csv?fake_data=true'
     
 
-b. The actual api request.
+b. The actual API request.
 
     i.  Create the corresponding teams file: teams.csv 
     (Notes: 1.The table table field names should have initial capital letters. 2.Be careful not to change the file suffix when opening csv files through the tool ).
@@ -35,7 +35,7 @@ b. The actual api request.
 
 
 ## Step 2 - Construct user tables (roster)
-a. Api request example, you can generate sample data.
+a. API request example, you can generate sample data.
 
     i.  Get request: http://127.0.0.1:8080/plugins/org/users.csv?fake_data=true (put into the browser can download the corresponding csv file).
 
@@ -62,7 +62,7 @@ b. The actual api request.
 If there is a problem with team_users association or data in users, just re-put users api interface, i.e. (b in step 2 above)
 
 ## Step 4 - Collect accounts 
-The accounts table is collected by users through devlake. In order to match with users and facilitate the demonstration of subsequent functions, here I construct fake accounts data from the information in the users table. For real user collection, you need to run the corresponding plugin service through devlake, for example, the github plugin, and after running the corresponding plugin service, the accounts data will be generated. A sample sql for constructing fake data is given here.
+The accounts table is collected by users through DevLake. In order to match with users and facilitate the demonstration of subsequent functions, here I construct fake accounts data from the information in the users table. For real user collection, you need to run the corresponding plugin service through DevLake, for example, the github plugin, and after running the corresponding plugin service, the accounts data will be generated. A sample sql for constructing fake data is given here.
 ```
 INSERT INTO `accounts` (`id`, `created_at`, `updated_at`, `_raw_data_params`, `_raw_data_table`, `_raw_data_id`, `_raw_data_remark`, `email`, `full_name`, `user_name`, `avatar_url`, `organization`, `created_date`, `status`)
 VALUES
@@ -75,7 +75,7 @@ VALUES
 
 ## Step 5 - Automatically match existing accounts and users through api requests
 
-a. Api request:  the name of the plugin is "org", connctionId is order to keep same with other plugins.
+a. API request:  the name of the plugin is "org", connctionId is order to keep same with other plugins.
 
 ```
 curl --location --request POST '127.0.0.1:8080/pipelines' \
