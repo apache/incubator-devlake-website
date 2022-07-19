@@ -23,78 +23,84 @@ Each of the questions above corresponds to a table in DevLake's schema, illustra
 4. `user_accounts` table stores which accounts belong to a user. An `account` refers to an identiy in a DevOps tool and is automatically created when importing data from that tool. For example, a `user` may have a GitHub `account` as well as a Jira `account`.
 
 DevLake uses a simple heuristic algorithm based on names and emails to automatically map accounts to users and populate the `user_accounts` table.
-When DevLake cannot confidently map an `account` to a `user` due to insufficient information, it allows DevLake users to manually configure the mapping.
+When DevLake cannot confidently map an `account` to a `user` due to insufficient information, it allows DevLake users to manually configure the mapping to ensure accuracy and completeness.
 
 ## A step-by-step guide
 
-In the following sections, we'll walk through how to configure teams and create the four tables mentioned above (`teams`, `users`, `team_users`, and `user_accounts`).
+In the following sections, we'll walk through how to configure teams and create the five aforementioned tables (`teams`, `users`, `team_users`, `accounts`, and `user_accounts`).
 The overall workflow is:
 
 1. Create the `teams` table
 2. Create the `users` and `team_users` table
 3. Populate the `accounts` table via data collection
 4. Run a heursitic algorithm to populate `user_accounts` table
-5. Manually update `user_accounts` when the algorithm falls short
+5. Manually update `user_accounts` when the algorithm can't catch everything
 
 Note:
 
-1. Please replace `/xxxpath/*.csv` with the absolute path of the csv file you'd like to upload.
+1. Please replace `/path/to/*.csv` with the absolute path of the csv file you'd like to upload.
 2. Please replace `127.0.0.1:8080` with your actual DevLake service IP and port number.
 
 ## Step 1 - Create the `teams` table
 
-a. API request example, you can generate sample data.
+You can create the `teams` table by sending a PUT request to `/plugins/org/teams.csv` with a `teams.csv` file. To jumpstart the process, you can download a template `teams.csv` from `/plugins/org/teams.csv?fake_data=true`. Below are the detailed instructions:
 
-    i.  GET request: http://127.0.0.1:8080/plugins/org/teams.csv?fake_data=true (put into the browser can download the corresponding csv file)
+a. Dowload the template `teams.csv` file
 
-    ii. The corresponding curl command:
+    i.  GET http://127.0.0.1:8080/plugins/org/teams.csv?fake_data=true (pasting the URL into your browser will download the template)
+
+    ii. If you prefer using curl:
         curl --location --request GET 'http://127.0.0.1:8080/plugins/org/teams.csv?fake_data=true'
     
 
-b. The actual API request.
+b. Fill out `teams.csv` file and upload to DevLake
 
-    i.  Create the corresponding teams file: teams.csv 
-    (Notes: 1.The table table field names should have initial capital letters. 2.Be careful not to change the file suffix when opening csv files through the tool ).
+    i. Fill out `teams.csv` with your org data. Please don't modify the colume headers or the file suffix.
 
-    ii. The corresponding curl command（Quick copy folder path for macOS, Shortcut option + command + c）:
-    curl --location --request PUT 'http://127.0.0.1:8080/plugins/org/teams.csv' --form 'file=@"/xxxpath/teams.csv"'
+    ii. Upload `teams.csv` to DevLake with the following curl command: 
+    curl --location --request PUT 'http://127.0.0.1:8080/plugins/org/teams.csv' --form 'file=@"/path/to/teams.csv"'
 
-    iii. After successful execution, the teams table is generated and the data can be seen in the database table teams. 
-    (Notes: how to connect to the database: mainly through host, port, username, password, and then through sql tools, such as sequal ace, datagrip and other data, of course you can also access through the command line mysql -h `ip` -u `username` -p -P `port`)
+    iii. The PUT request would populate the `teams` table with data from `teams.csv` file.
+    You can connect to the database and verify the data in `teams` table.
+    See Appendix for how to connect to the database.
 
 ![image](/img/Team/teamflow3.png)
 
 
 ## Step 2 - Create the `users` and `team_users` table
 
-a. API request example, you can generate sample data.
+You can create the `users` and `team_users` table by sending a single PUT request to `/plugins/org/users.csv` with a `users.csv` file. To jumpstart the process, you can download a template `users.csv` from `/plugins/org/users.csv?fake_data=true`. Below are the detailed instructions:
 
-    i.  Get request: http://127.0.0.1:8080/plugins/org/users.csv?fake_data=true (put into the browser can download the corresponding csv file).
+a. Dowload the template `users.csv` file
 
-    ii. The corresponding curl command:
+    i.  GET http://127.0.0.1:8080/plugins/org/users.csv?fake_data=true (pasting the URL into your browser will download the template)
+
+    ii. If you prefer using curl:
     curl --location --request GET 'http://127.0.0.1:8080/plugins/org/users.csv?fake_data=true'
 
 
-b. The actual api request.
+b. Fill out `users.csv` and upload to DevLake
 
-    i.  Create the csv file (roster) (Notes: the table header is in capital letters: Id,Email,Name).
+    i.  Fill out `users.csv` with your org data. Please don't modify the colume headers or the file suffix
 
-    ii. The corresponding curl command:
-    curl --location --request PUT 'http://127.0.0.1:8080/plugins/org/users.csv' --form 'file=@"/xxxpath/users.csv"'
+    ii. Upload `users.csv` to DevLake with the following curl command:
+    curl --location --request PUT 'http://127.0.0.1:8080/plugins/org/users.csv' --form 'file=@"/path/to/users.csv"'
 
-    iii. After successful execution, the users table is generated and the data can be seen in the database table users.
+    iii. The PUT request would populate the `users` table along with the `team_users` table with data from `users.csv` file.
+    You can connect to the database and verify these two tables.
 
 ![image](/img/Team/teamflow1.png)
     
-    iv. Generated the team_users table, you can see the data in the team_users table.
-
 ![image](/img/Team/teamflow2.png)
 
-If there is a problem with `team_users` association or data in `users` table, simply re-put users api interface, i.e. (b in step 2 above)
+c. If you ever want to update `team_users` or `users` table, simply upload the updated `users.csv` to DevLake again following step b.
 
 ## Step 3 - Populate the `accounts` table via data collection
 
-The accounts table is collected by users through DevLake. In order to match with users and facilitate the demonstration of subsequent functions, here I construct fake accounts data from the information in the users table. For real user collection, you need to run the corresponding plugin service through DevLake, for example, the github plugin, and after running the corresponding plugin service, the accounts data will be generated. A sample sql for constructing fake data is given here.
+The `accounts` table is automatically populated when you collect data from data sources like GitHub and Jira through DevLake.
+For example, the GitHub plugin would create one entry in `accounts` table for each GitHub user involved in your repository.
+For demo purpose, we'll insert some mock data into the `accounts` table using SQL:
+
 ```
 INSERT INTO `accounts` (`id`, `created_at`, `updated_at`, `_raw_data_params`, `_raw_data_table`, `_raw_data_id`, `_raw_data_remark`, `email`, `full_name`, `user_name`, `avatar_url`, `organization`, `created_date`, `status`)
 VALUES
@@ -107,7 +113,9 @@ VALUES
 
 ## Step 4 - Run a heursitic algorithm to populate `user_accounts` table
 
-a. API request:  the name of the plugin is "org", connctionId is order to keep same with other plugins.
+Now that we have data in both the `users` and `accounts` table, we can tell DevLake to infer the mappings between `users` and `accounts` with a simple heuristic algorithm based on names and emails.
+
+a. Send an API request to DevLake to run the mapping algorithm
 
 ```
 curl --location --request POST '127.0.0.1:8080/pipelines' \
@@ -128,38 +136,52 @@ curl --location --request POST '127.0.0.1:8080/pipelines' \
 }'
 ```
 
-b. After successful execution, the user_accounts table is generated, and you can see the data in table user_accounts.
+b. After successful execution, you can verify the data in `user_accounts` in the database. 
 
 ![image](/img/Team/teamflow5.png)
 
-## Step 5 - Manually update `user_accounts` when the algorithm falls short
+## Step 5 - Manually update `user_accounts` when the algorithm can't catch everything
 
-After generating the user_accounts relationship, the user can get the associated data through the GET method to confirm whether the data user and account match correctly and whether the matched accounts are complete.
+It is recommended to examine the generated `user_accounts` table after running the algorithm.
+We'll domonstrate how to manually update `user_accounts` when the mapping is inaccurate/incomplete in this section.
+To make manual verification easier, DevLake provides an API for users to download `user_accounts` as a csv file.
+Alternatively, you can verify and modify `user_accounts` all by SQL, see Appendix for more info.
 
-a. http://127.0.0.1:8080/plugins/org/user_account_mapping.csv (put into the browser to download the file directly)
-
-b. The corresponding curl command:
+a. GET http://127.0.0.1:8080/plugins/org/user_account_mapping.csv(pasting the URL into your browser will download the file). If you prefer using curl:
 ```
 curl --location --request GET 'http://127.0.0.1:8080/plugins/org/user_account_mapping.csv'
 ```
 
 ![image](/img/Team/teamflow6.png)
 
-c. You can also use sql statements to determine, here to provide a sql statement for reference only.
+b. If you find the mapping inaccurate or incomplete, you can modify the `user_account_mapping.csv` file and then upload to DevLake.
+For example, here we change the `UserId` of row Id=github:GithubAccount:1:1234 in the `user_account_mapping.csv` file to 2.
+Then we upload the updated `user_account_mapping.csv` file with the following curl command:
+
+```
+curl --location --request PUT 'http://127.0.0.1:8080/plugins/org/user_account_mapping.csv' --form 'file=@"/path/to/user_account_mapping.csv"'
+```
+
+c. You can verify the data in the `user_accounts` table has been updated.
+
+![image](/img/Team/teamflow7.png)
+
+## Appendix: how to connect to the database
+
+Here we use MySQL as an example. You can install database management tools like Sequel Ace, DataGrip, MySQLWorkbench, and etc.
+
+
+Or through command line:
+
+```
+mysql -h <ip> -u <username> -p -P <port>
+```
+
+## Appendix: how to examine `user_accounts` via SQL
+
 ```
 SELECT a.id as account_id, a.email, a.user_name as account_user_name, u.id as user_id, u.name as real_name
-FROM accounts a 
+FROM accounts a
         join user_accounts ua on a.id = ua.account_id
         join users u on ua.user_id = u.id
 ```
-
-If the association between user and account is not as expected, you can change the user_account_mapping.csv file. For example, I change the UserId in the line Id=github:GithubAccount:1:1234 in the user_account_mapping.csv file to 2, and then upload the user_account_mapping.csv file through the api interface.
-
-d. The corresponding curl command:
-```
-curl --location --request PUT 'http://127.0.0.1:8080/plugins/org/user_account_mapping.csv' --form 'file=@"/xxxpath/user_account_mapping.csv"'
-```
-
-e. You can see that the data in the user_accounts table has been updated.
-
-![image](/img/Team/teamflow7.png)
