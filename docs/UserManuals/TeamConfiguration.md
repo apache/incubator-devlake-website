@@ -4,8 +4,29 @@ sidebar_position: 6
 description: >
   Team Configuration
 ---
-## Summary
-This is a brief step-by-step guide to using the team feature.
+## What's this for and how it works?
+
+To render metrics by team, DevLake needs to know about the team configuration in an organization, specifically:
+
+1. What're the teams?
+2. Who're the users?
+3. Which users belong to a team?
+4. Which accounts belong to a user?
+
+Each of the questions above translates to a table in DevLake's schema, illustrated below:
+
+![image](/img/Team/teamflow0.png)
+
+1. `teams` table stores all the teams in the organization.
+2. `users` table stores the organization's roster. An entry in the `users` table corresponds to a person in the org.
+3. `team_users` table stores which users belong to a team.
+4. `user_accounts` table stores which accounts belong to a user. An `account` refers to an identiy in a DevOps tool and is automatically created when importing data from that tool. For example, a `user` may have a GitHub `account` as well as a Jira `account`.
+
+DevLake uses a simple heuristic algorithm based on names and emails to automatically map accounts to users and populate the `user_accounts` table. When DevLake cannot confidently map an `account` to a `user` due to insufficient information, it allows DevLake users to manually configure the mapping.
+
+## A step-by-step guide
+
+In the following sections, we'll walk through how to configure teams and create the four tables mentioned above (`teams`, `users`, `team_users`, and `user_accounts`).
 
 Notes: 
 1. Please convert /xxxpath/*.csv to the absolute path of the csv file you want to upload. 
