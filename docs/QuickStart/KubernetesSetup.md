@@ -1,7 +1,7 @@
 ---
-title: "Kubernetes Setup"
+title: "Install via Kubernetes"
 description: >
-  The steps to install Apache DevLake in Kubernetes
+  The steps to install Apache DevLake via Kubernetes
 sidebar_position: 2
 ---
 

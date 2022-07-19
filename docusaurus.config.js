@@ -172,7 +172,7 @@ const versions = require('./versions.json');
             items: [
               {
                 label: 'Quick Start',
-                to: 'docs/QuickStart/LocalSetup',
+                to: 'docs/QuickStart/DockerComposeSetup',
               },
               {
                 label: 'Data Models',

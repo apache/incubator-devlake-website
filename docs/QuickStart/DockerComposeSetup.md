@@ -1,7 +1,7 @@
 ---
-title: "Local Setup"
+title: "Install via Docker Compose"
 description: >
-  The steps to install DevLake locally
+  The steps to install DevLake via Docker Compose
 sidebar_position: 1
 ---
 
