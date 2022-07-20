@@ -20,15 +20,15 @@ Advanced mode gives the most flexibility to users by exposing the JSON API.
 
 1. Click on "+ New Blueprint" on the Blueprint page.
 
-![image](/img/AdvancedMode/Advancedmode1.png)
+![image](/img/AdvancedMode/AdvancedMode1.png)
 
 2. In step 1, click on the "Advanced Mode" link.
 
-![image](/img/AdvancedMode/Advancedmode2.png)
+![image](/img/AdvancedMode/AdvancedMode2.png)
 
 3. The pipeline editor expects a 2D array of plugins. The first dimension represents different stages of the pipeline and the second dimension describes the plugins in each stage. Stages run in sequential order and plugins within the same stage runs in parallel. We provide some templates for users to get started. Please also see the next section for some examples.
 
-![image](/img/AdvancedMode/Advancedmode3.png)
+![image](/img/AdvancedMode/AdvancedMode3.png)
 
 
 ## Examples
