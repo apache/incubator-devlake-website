@@ -1,5 +1,5 @@
 ---
-title: "Advanced Mode"
+title: "Advanced Mode (WIP)"
 sidebar_position: 2
 description: >
   Advanced Mode
@@ -18,17 +18,18 @@ Advanced mode gives the most flexibility to users by exposing the JSON API.
 
 ## How to use advanced mode to create pipelines?
 
-1. Visit the "Create Pipeline Run" page on `config-ui`
+1. Click on "+ New Blueprint" on the Blueprint page.
 
-![image](https://user-images.githubusercontent.com/2908155/164569669-698da2f2-47c1-457b-b7da-39dfa7963e09.png)
+![image](/img/AdvancedMode/Advancedmode1.png)
 
-2. Scroll to the bottom and toggle on the "Advanced Mode" button
+2. In step 1, click on the "Advanced Mode" link.
 
-![image](https://user-images.githubusercontent.com/2908155/164570039-befb86e2-c400-48fe-8867-da44654194bd.png)
+![image](/img/AdvancedMode/Advancedmode2.png)
 
 3. The pipeline editor expects a 2D array of plugins. The first dimension represents different stages of the pipeline and the second dimension describes the plugins in each stage. Stages run in sequential order and plugins within the same stage runs in parallel. We provide some templates for users to get started. Please also see the next section for some examples.
 
-![image](https://user-images.githubusercontent.com/2908155/164576122-fc015fea-ca4a-48f2-b2f5-6f1fae1ab73c.png)
+![image](/img/AdvancedMode/Advancedmode3.png)
+
 
 ## Examples
 

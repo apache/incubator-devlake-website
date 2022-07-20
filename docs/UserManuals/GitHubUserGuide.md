@@ -29,7 +29,6 @@ There're 3 steps.
 1. Configure GitHub connection
 2. Create a pipeline to run GitHub plugin
 3. Create a pipeline to run GitExtractor plugin
-4. [Optional] Set up a recurring pipeline to keep data fresh
 
 ### Step 1 - Configure GitHub connection
 
@@ -106,10 +105,6 @@ See the pipeline finishes (progress 100%):
 ![image](https://user-images.githubusercontent.com/61080/163666814-e48ac68d-a0cc-4413-bed7-ba123dd291c8.png)
 
 4. See dashboards populated with GitHub data.
-
-### Step 4 - [Optional] Set up a recurring pipeline to keep data fresh
-
-Please see [How to create recurring pipelines](./RecurringPipelines.md) for details.
 
 
 
