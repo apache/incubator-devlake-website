@@ -1,12 +1,20 @@
 ---
-sidebar_position: 03
 title: "Development Workflow"
+sidebar_position: 03
 ---
+
 # Development Workflow
 
 This document shows the workflow of how to develop DevLake.
 
-## Step 1 - Clone the repo
+## Step 1 - Fork the repo
+
+1. Visit the DevLake repo: https://github.com/apache/incubator-devlake;
+2. Click the Fork button to create a fork of the DevLake;
+3. We assume your fork is called `https://github.com/{user}/{repo}`.
+
+
+## Step 2 - Clone the repo
 
 1. Create your clone locally
 
@@ -15,9 +23,9 @@ mkdir -p ${WORKING_PATH}
 cd ${WORKING_PATH}
 # You can also use the url: git@github.com:merico-dev/lake.git
 # if your ssh configuration is proper
-git clone https://github.com/merico-dev/lake.git
+git clone https://github.com/{user}/{repo}.git
 
-cd lake
+cd ${PROJECT}
 
 git remote add upstream https://github.com/apache/incubator-devlake.git
 # Never push to upstream locally
@@ -35,7 +43,7 @@ upstream        https://github.com/apache/incubator-devlake.git (fetch)
 upstream        no_push (push)
 ```
 
-## Step 2 - Keep your branch in sync
+## Step 3 - Keep your branch in sync
 
 You will often need to update your local code to keep in sync with upstream
 
@@ -45,7 +53,7 @@ git checkout main
 git rebase upstream/main
 ```
 
-## Step 3 - Coding
+## Step 4 - Coding
 
 First, you need to pull a new branch, the name is according to your own taste.
 
@@ -55,7 +63,7 @@ git checkout -b feat-xxx
 
 Then start coding.
 
-## Step 4 - Commit & Push
+## Step 5 - Commit & Push
 
 ```sh
 git add <file>
