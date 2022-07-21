@@ -1,6 +1,6 @@
 ---
 title: "Grafana User Guide"
-sidebar_position: 1
+sidebar_position: 2
 description: >
   Grafana User Guide
 ---
