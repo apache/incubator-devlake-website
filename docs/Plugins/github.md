@@ -42,6 +42,8 @@ The connection section of the configuration screen requires the following key fi
   - For help on **Creating a personal access token**, please see official [GitHub Docs on Personal Tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
   - Provide at least one token for Authentication.
   - This field accepts a comma-separated list of values for multiple tokens. The data collection will take longer for GitHub since they have a **rate limit of [5,000 requests](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) per hour** (15,000 requests/hour if you pay for `GitHub` enterprise). You can accelerate the process by configuring _multiple_ personal access tokens.
+  - In order to collect data from your Private Repositories, the token must be granted with `repo` scope
+    ![repo scope](https://user-images.githubusercontent.com/61080/178412908-3ac9366b-80af-4a4d-a243-a9d598f1e6ac.png)
 
 Click **Save Connection** to update connection settings.
 
