@@ -1,6 +1,6 @@
 ---
 title: "GitHub User Guide"
-sidebar_position: 4
+sidebar_position: 5
 description: >
   GitHub User Guide
 ---
