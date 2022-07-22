@@ -4,6 +4,7 @@ sidebar_position: 2
 description: Config UI instruction for GitHub
 ---
 
+Visit config-ui: `http://localhost:4000`.
 ### Step 1 - Add Data Connections
 ![github-add-data-connections](/img/ConfigUI/github-add-data-connections.png)
 
@@ -15,10 +16,10 @@ This should be a valid REST API endpoint, eg. `https://api.github.com/`. The url
 
 #### Auth Token(s)
 GitHub personal access tokens are required to add a connection.
-- Learn about [how to create a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+- Learn about [how to create a GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 - The data collection speed is relatively slow for GitHub since they have a **rate limit of [5,000 requests](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) per hour** (15,000 requests/hour if you pay for GitHub enterprise). You can accelerate the process by configuring _multiple_ personal access tokens. Please note that multiple tokens should be created by different GitHub accounts. Tokens belonging to the same GitHub account share the rate limit.
 
-#### GitHub Proxy URL (Optional)
+#### Proxy URL (Optional)
 If you are behind a corporate firewall or VPN you may need to utilize a proxy server. Enter a valid proxy server address on your network, e.g. `http://your-proxy-server.com:1080`
 
 #### Test and Save Connection
@@ -33,9 +34,9 @@ Enter the GitHub repos to collect. If you want to collect more than 1 repo, plea
 
 #### Data Entities
 Usually, you don't have to modify this part. However, if you don't want to collect certain GitHub entities, you can unselect some entities to accerlerate the collection speed.
-- Source Code Management: repos, refs, commits, etc.
 - Issue Tracking: GitHub issues, issue comments, issue labels, etc.
-- Code Review: PRs, PR comments and reviews, PR commits, etc.
+- Source Code Management: GitHub repos, refs, commits, etc.
+- Code Review: GitHub PRs, PR comments and reviews, etc.
 - Cross Domain: GitHub accounts, etc.
 
 ### Step 3 - Adding Transformation Rules (Optional)

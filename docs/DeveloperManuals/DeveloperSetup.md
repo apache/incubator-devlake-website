@@ -73,13 +73,7 @@ sidebar_position: 1
     ```
 
 8. Visit config UI at `localhost:4000` to configure data connections.
-    - Navigate to desired plugins pages on the Integrations page
-    - Enter the required information for the plugins you intend to use.
-    - Refer to the following for more details on how to configure each one:
-        - [Jira](../Plugins/jira.md)
-        - [GitLab](../Plugins/gitlab.md)
-        - [Jenkins](../Plugins/jenkins.md)
-        - [GitHub](../Plugins/github.md): For users who'd like to collect GitHub data, we recommend reading our [GitHub data collection guide](../UserManuals/GitHubUserGuide.md) which covers the following steps in detail.
+    - Please follow the [tutorial](./UserManuals/ConfigUI/Tutorial.md)
     - Submit the form to update the values by clicking on the **Save Connection** button on each form page
 
 9. Visit `localhost:4000/pipelines/create` to RUN a Pipeline and trigger data collection.

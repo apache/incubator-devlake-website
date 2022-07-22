@@ -5,7 +5,7 @@ description: Config UI instruction
 ---
 
 ## Overview
-The Apache DevLake Config UI allows you to configure the data you wish to collect through a graphical user interface. 
+The Apache DevLake Config UI allows you to configure the data you wish to collect through a graphical user interface. Visit config-ui at `http://localhost:4000`.
 
 ## Creating a Blueprint
 
