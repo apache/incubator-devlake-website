@@ -112,14 +112,14 @@ sidebar_position: 1
     ]
     ```
 
-   Please refer to [Pipeline Advanced Mode](../UserManuals/AdvancedMode.md) for in-depth explanation.
+   Please refer to [Pipeline Advanced Mode](../UserManuals/ConfigUI/AdvancedMode.md) for in-depth explanation.
 
 
 10. Click *View Dashboards* button in the top left when done, or visit `localhost:3002` (username: `admin`, password: `admin`).
 
    We use <a href="https://grafana.com/" target="_blank">Grafana</a> as a visualization tool to build charts for the <a href="https://github.com/merico-dev/lake/wiki/DataModel.Domain-layer-schema">data stored in our database</a>. Using SQL queries, we can add panels to build, save, and edit customized dashboards.
 
-   All the details on provisioning and customizing a dashboard can be found in the [Grafana Doc](../UserManuals/GrafanaUserGuide.md).
+   All the details on provisioning and customizing a dashboard can be found in the [Grafana Doc](../UserManuals/Dashboards/GrafanaUserGuide.md).
 
 11. (Optional) To run the tests:
 

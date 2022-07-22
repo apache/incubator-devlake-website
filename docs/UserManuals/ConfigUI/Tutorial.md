@@ -1,11 +1,11 @@
 ---
-title: "Config UI"
+title: "Tutorial"
 sidebar_position: 1
 description: Config UI instruction
 ---
 
 ## Overview
-The DevLake Config UI allows you to configure the data you wish to collect through a graphical user interface. 
+The Apache DevLake Config UI allows you to configure the data you wish to collect through a graphical user interface. 
 
 ## Creating a Blueprint
 

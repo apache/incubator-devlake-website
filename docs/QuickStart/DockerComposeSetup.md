@@ -34,7 +34,7 @@ sidebar_position: 1
 3. Click *View Dashboards* button in the top left when done, or visit `localhost:3002` (username: `admin`, password: `admin`).
    - We use [Grafana](https://grafana.com/) as a visualization tool to build charts for the [data](../DataModels/DataSupport.md) stored in our database.
    - Using SQL queries, we can add panels to build, save, and edit customized dashboards.
-   - All the details on provisioning and customizing a dashboard can be found in the [Grafana Doc](../UserManuals/GrafanaUserGuide.md).
+   - All the details on provisioning and customizing a dashboard can be found in the [Grafana Doc](../UserManuals/Dashboards/GrafanaUserGuide.md).
 
 
 ## Upgrade to a newer version
