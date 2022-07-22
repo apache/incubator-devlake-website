@@ -1,5 +1,5 @@
 ---
-title: "Temporal Setup"
+title: "Install via Temporal"
 sidebar_position: 6
 description: >
   The steps to install DevLake in Temporal mode.

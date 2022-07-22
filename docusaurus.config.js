@@ -184,7 +184,7 @@ const versions = require('./versions.json');
               },
               {
                 label: 'Dashboards (Live Demo)',
-                to: 'docs/Dashboards/GitHubBasic',
+                to: 'docs/LiveDemo/GitHubBasic',
               },
             ],
           },
