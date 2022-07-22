@@ -27,49 +27,7 @@ This plugin collects Jira data through Jira Cloud REST API. It then computes and
 | Incident Count per 1k Lines of Code | Amount of incidents per 1000 lines of code                                                        |
 
 ## Configuration
-
-In order to fully use this plugin, you will need to set various configurations via Dev Lake's `config-ui` service. Open `config-ui` on browser, by default the URL is http://localhost:4000, then go to **Data Integrations / JIRA** page. JIRA plugin currently supports multiple data connections, Here you can **add** new connection to your JIRA connection or **update** the settings if needed.
-
-For each connection, you will need to set up following items first:
-
-![connection at config ui](jira-connection-config-ui.png)
-
-- Connection Name: This allow you to distinguish different connections.
-- Endpoint URL: The JIRA instance API endpoint, for JIRA Cloud Service: `https://<mydomain>.atlassian.net/rest`. DevLake officially supports JIRA Cloud Service on atlassian.net, but may or may not work for JIRA Server Instance.
-- Basic Auth Token: First, generate a **JIRA API TOKEN** for your JIRA account on the JIRA console (see [Generating API token](#generating-api-token)), then, in `config-ui` click the KEY icon on the right side of the input to generate a full `HTTP BASIC AUTH` token for you.
-- Proxy Url: Just use when you want collect through VPN.
-
-### More custom configuration
-If you want to add more custom config, you can click "settings" to change these config
-![More config in config ui](jira-more-setting-in-config-ui.png)
-- Issue Type Mapping: JIRA is highly customizable, each JIRA instance may have a different set of issue types than others. In order to compute and visualize metrics for different instances, you need to map your issue types to standard ones. See [Issue Type Mapping](#issue-type-mapping) for detail.
-- Epic Key: unfortunately, epic relationship implementation in JIRA is based on `custom field`, which is vary from instance to instance. Please see [Find Out Custom Fields](#find-out-custom-fields).
-- Story Point Field: same as Epic Key.
-- Remotelink Commit SHA:A regular expression that matches commit links to determine whether an external link is a link to a commit. Taking gitlab as an example, to match all commits similar to https://gitlab.com/merico-dev/ce/example-repository/-/commit/8ab8fb319930dbd8615830276444b8545fd0ad24, you can directly use the regular expression **/commit/([0-9a-f]{40})$**
-
-
-### Generating API token
-1. Once logged into Jira, visit the url `https://id.atlassian.com/manage-profile/security/api-tokens`
-2. Click the **Create API Token** button, and give it any label name
-![image](https://user-images.githubusercontent.com/27032263/129363611-af5077c9-7a27-474a-a685-4ad52366608b.png)
-
-
-### Issue Type Mapping
-
-Devlake supports 3 standard types, all metrics are computed based on these types:
-
- - `Bug`: Problems found during the `test` phase, before they can reach the production environment.
- - `Incident`: Problems that went through the `test` phase, got deployed into production environment.
- - `Requirement`: Normally, it would be `Story` on your instance if you adopted SCRUM.
-
-You can map arbitrary **YOUR OWN ISSUE TYPE** to a single **STANDARD ISSUE TYPE**. Normally, one would map `Story` to `Requirement`, but you could map both `Story` and `Task` to `Requirement` if that was your case. Unspecified types are copied directly for your convenience, so you don't need to map your `Bug` to standard `Bug`.
-
-Type mapping is critical for some metrics, like **Requirement Count**, make sure to map your custom type correctly.
-
-### Find Out Custom Field
-
-Please follow this guide: [How to find the custom field ID in Jira?](https://github.com/apache/incubator-devlake/wiki/How-to-find-the-custom-field-ID-in-Jira)
-
+Configuring Jira via [config-ui](/UserManuals/ConfigUI/Jira.md).
 
 ## Collect Data From JIRA
 
@@ -95,21 +53,6 @@ To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and pa
 - `connectionId`: The `ID` field from **JIRA Integration** page.
 - `boardId`: JIRA board id, see "Find Board Id" for details.
 - `since`: optional, download data since a specified date only.
-
-
-### Find Board Id
-
-1. Navigate to the Jira board in the browser
-2. in the URL bar, get the board id from the parameter `?rapidView=`
-
-**Example:**
-
-`https://{your_jira_endpoint}/secure/RapidBoard.jspa?rapidView=51`
-
-![Screenshot](https://user-images.githubusercontent.com/27032263/129363083-df0afa18-e147-4612-baf9-d284a8bb7a59.png)
-
-Your board id is used in all REST requests to Apache DevLake. You do not need to configure this at the data connection level.
-
 
 
 ## API
