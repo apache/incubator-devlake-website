@@ -22,7 +22,7 @@ sidebar_position: 1
 ## Configure and collect data
 
 1. Visit `config-ui` at `http://localhost:4000` in your browser to configure and collect data.
-   - Please follow the [turorial](./UserManuals/ConfigUI/Tutorial.md)
+   - Please follow the [turorial](UserManuals/ConfigUI/Tutorial.md)
    - `devlake` takes a while to fully boot up. if `config-ui` complaining about api being unreachable, please wait a few seconds and try refreshing the page.
 2. Click *View Dashboards* button in the top left when done, or visit `localhost:3002` (username: `admin`, password: `admin`).
    - We use [Grafana](https://grafana.com/) as a visualization tool to build charts for the [data](../DataModels/DataSupport.md) stored in our database.
