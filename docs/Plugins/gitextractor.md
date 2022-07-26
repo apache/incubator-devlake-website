@@ -38,6 +38,7 @@ curl --location --request POST 'localhost:8080/pipelines' \
 ```
 - `url`: the location of the git repository. It should start with `http`/`https` for a remote git repository and with `/` for a local one.
 - `repoId`: column `id` of  `repos`.
+   Note : To find the repo id run `$("meta[name=octolytics-dimension-repository_id]").getAttribute('content')` in console. 
 - `proxy`: optional, http proxy, e.g. `http://your-proxy-server.com:1080`.
 - `user`: optional, for cloning private repository using HTTP/HTTPS
 - `password`: optional, for cloning private repository using HTTP/HTTPS
