@@ -19,7 +19,7 @@ Domain layer schema itself includes 2 logical layers: a `DWD` layer and a `DWM` 
 2. Contributors can complete the ETL logic when adding new data source plugins refering to this data model.
 
 
-## Data Model
+## Data Models
 
 This is the up-to-date domain layer schema for DevLake v0.10.x. Tables (entities) are categorized into 5 domains.
 1. Issue tracking domain entities: Jira issues, GitHub issues, GitLab issues, etc
@@ -98,44 +98,48 @@ This table shows the comments of issues. Issues with multiple comments are shown
 | :------------- | :------- | :--------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------- |
 | `id`           | varchar  | 255        | The unique id of a comment                                                                                                                                                                    | PK           |
 | `issue_id`     | varchar  | 255        | Issue ID                                                                                                                                                                                      | FK_issues.id |
-| `user_id`      | varchar  | 255        | The id of the user who made the comment                                                                                                                                                       | FK_users.id  |
+| `account_id`      | varchar  | 255        | The id of the account who made the comment                                                                                                                                                       | FK_accounts.id  |
 | `body`         | longtext |            | The body/detail of the comment                                                                                                                                                                |              |
 | `created_date` | datetime | 3          | The creation date of the comment                                                                                                                                                              |              |
 | `updated_date` | datetime | 3          | The last time comment gets updated                                                                                                                                                            |              |
 | `position`     | int      |            | The position of a comment under an issue. It starts from 1. The position is sorted by comment created_date asc.<br/>Eg. If an issue has 5 comments, the position of the 1st created comment is 1. |              |
 
-#### 4. issue_changelog(WIP)
+#### 4. issue_changelogs
 
-This table shows the changelogs of issues. Issues with multiple changelogs are shown as multiple records.
+This table shows the changelogs of issues. Issues with multiple changelogs are shown as multiple records. This is transformed from Jira or TAPD changelogs.
 
-| **field**      | **type** | **length** | **description**                                                       | **key**      |
-| :------------- | :------- | :--------- | :-------------------------------------------------------------------- | :----------- |
-| `id`           | varchar  | 255        | The unique id of an issue changelog                                   | PK           |
-| `issue_id`     | varchar  | 255        | Issue ID                                                              | FK_issues.id |
-| `actor_id`     | varchar  | 255        | The id of the user who made the change                                | FK_users.id  |
-| `field`        | varchar  | 255        | The id of changed field                                               |              |
-| `from`         | varchar  | 255        | The original value of the changed field                               |              |
-| `to`           | varchar  | 255        | The new value of the changed field                                    |              |
-| `created_date` | datetime | 3          | The creation date of the changelog                                    |              |
+| **field**             | **type** | **length** | **description**                                                  | **key**        |
+| :-------------------- | :------- | :--------- | :--------------------------------------------------------------- | :------------- |
+| `id`                  | varchar  | 255        | The unique id of an issue changelog                              | PK             |
+| `issue_id`            | varchar  | 255        | Issue ID                                                         | FK_issues.id   |
+| `author_id`           | varchar  | 255        | The id of the user who made the change                           | FK_accounts.id |
+| `author_name`         | varchar  | 255        | The id of the user who made the change                           | FK_accounts.id |
+| `field_id`            | varchar  | 255        | The id of changed field                                          |                |
+| `field_name`          | varchar  | 255        | The id of changed field                                          |                |
+| `original_from_value` | varchar  | 255        | The original value of the changed field                          |                |
+| `original_to_value`   | varchar  | 255        | The new value of the changed field                               |                |
+| `from_value`          | varchar  | 255        | The transformed/standardized original value of the changed field |                |
+| `to_value`            | varchar  | 255        | The transformed/standardized new value of the changed field      |                |
+| `created_date`        | datetime | 3          | The creation date of the changelog                               |                |
 
 
 #### 5. issue_worklogs
 
 This table shows the work logged under issues. Usually, an issue has multiple worklogs logged by different developers.
 
-| **field**            | **type** | **length** | **description**                                                                              | **key**      |
-| :------------------- | :------- | :--------- | :------------------------------------------------------------------------------------------- | :----------- |
-| `issue_id`           | varchar  | 255        | Issue ID                                                                                     | FK_issues.id |
-| `author_id`          | varchar  | 255        | The id of the user who logged the work                                                       | FK_users.id  |
-| `comment`            | varchar  | 255        | The comment an user made while logging the work.                                             |              |
-| `time_spent_minutes` | int      |            | The time user logged. The unit of value is normalized to minute. Eg. 1d =) 480, 4h30m =) 270 |              |
-| `logged_date`        | datetime | 3          | The time of this logging action                                                              |              |
-| `started_date`       | datetime | 3          | Start time of the worklog                                                                    |              |
+| **field**            | **type** | **length** | **description**                                                                              | **key**          |
+| :------------------- | :------- | :--------- | :------------------------------------------------------------------------------------------- | :--------------- |
+| `issue_id`           | varchar  | 255        | Issue ID                                                                                     | FK_issues.id     |
+| `author_id`          | varchar  | 255        | The id of the author who logged the work                                                     | FK_acccounts.id  |
+| `comment`            | varchar  | 255        | The comment made while logging the work.                                                     |                  |
+| `time_spent_minutes` | int      |            | The time logged. The unit of value is normalized to minute. Eg. 1d =) 480, 4h30m =) 270      |                  |
+| `logged_date`        | datetime | 3          | The time of this logging action                                                              |                  |
+| `started_date`       | datetime | 3          | Start time of the worklog                                                                    |                  |
 
 
 #### 6. boards
 
-A `board` is an issue list or a collection of issues. It's the abstraction of a Jira board, a Jira project or a [Github issue list](https://github.com/merico-dev/lake/issues). This table can be used to filter issues by the boards they belong to.
+A `board` is an issue list or a collection of issues. It's the abstraction of a Jira board, a Jira project, a [Github issue list](https://github.com/merico-dev/lake/issues) or a GitLab issue list. This table can be used to filter issues by the boards they belong to.
 
 | **field**      | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                      | **key** |
 | :------------- | :------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
@@ -145,7 +149,7 @@ A `board` is an issue list or a collection of issues. It's the abstraction of a 
 | `url`          | varchar  | 255        | The url of the board. Eg. https://Github.com/merico-dev/lake                                                                                                                                                                                                                                                                                                                         |         |
 | `created_date` | datetime | 3          | Board creation time                                                                                                                                                                                                                                                                                                                             |         |
 
-#### 7. board_issues
+#### board_issues
 
 This table shows the relation between boards and issues. This table can be used to filter issues by board.
 
@@ -154,7 +158,7 @@ This table shows the relation between boards and issues. This table can be used 
 | `board_id` | varchar  | 255        | Board id        | FK_boards.id |
 | `issue_id` | varchar  | 255        | Issue id        | FK_issues.id |
 
-#### 8. sprints
+#### sprints
 
 A `sprint` is the abstraction of Jira sprints, TAPD iterations and Github milestones. A sprint contains a list of issues.
 
@@ -204,7 +208,7 @@ Information about Github or Gitlab repositories. A repository is always owned by
 | `name`         | varchar  | 255        | The name of repo.                                                                                                                                                                              |             |
 | `description`  | varchar  | 255        | The description of repo.                                                                                                                                                                       |             |
 | `url`          | varchar  | 255        | The url of repo. Eg. https://Github.com/merico-dev/lake                                                                                                                                        |             |
-| `owner_id`     | varchar  | 255        | The id of the owner of repo                                                                                                                                                                    | FK_users.id |
+| `owner_id`     | varchar  | 255        | The id of the owner of repo                                                                                                                                                                    | FK_accounts.id |
 | `language`     | varchar  | 255        | The major language of repo. Eg. The language for merico-dev/lake is 'Go'                                                                                                                       |             |
 | `forked_from`  | varchar  | 255        | Empty unless the repo is a fork in which case it contains the `id` of the repo the repo is forked from.                                                                                        |             |
 | `deleted`      | tinyint  | 255        | 0: repo is active 1: repo has been deleted                                                                                                                                                     |             |
@@ -262,7 +266,7 @@ The records of this table are computed by [RefDiff](https://github.com/merico-de
 | `old_ref_commit_sha` | char     | 40         | The commit old ref points to at the time of collection          |                |
 | `sorting_index`      | varchar  | 255        | An index for debugging, please skip it                          |                |
 
-#### 16. commits
+#### commits
 
 | **field**         | **type** | **length** | **description**                                                                                                                                                  | **key**        |
 | :---------------- | :------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- |
@@ -271,42 +275,47 @@ The records of this table are computed by [RefDiff](https://github.com/merico-de
 | `author_name`     | varchar  | 255        | The value is set with command `git config user.name xxxxx` commit                                                                                                                            |                |
 | `author_email`    | varchar  | 255        | The value is set with command `git config user.email xxxxx` author                                                                                                                                       |                |
 | `authored_date`   | datetime | 3          | The date when this commit was originally made                                                                                                                    |                |
-| `author_id`       | varchar  | 255        | The id of commit author                                                                                                                                          | FK_users.id    |
+| `author_id`       | varchar  | 255        | The id of commit author                                                                                                                                          | FK_accounts.id    |
 | `committer_name`  | varchar  | 255        | The name of committer                                                                                                                                            |                |
 | `committer_email` | varchar  | 255        | The email of committer                                                                                                                                           |                |
 | `committed_date`  | datetime | 3          | The last time the commit gets modified.<br/>For example, when rebasing the branch where the commit is in on another branch, the committed_date changes.          |                |
-| `committer_id`    | varchar  | 255        | The id of committer                                                                                                                                              | FK_users.id    |
+| `committer_id`    | varchar  | 255        | The id of committer                                                                                                                                              | FK_accounts.id    |
 | `additions`       | int      |            | Added lines of code                                                                                                                                              |                |
 | `deletions`       | int      |            | Deleted lines of code                                                                                                                                            |                |
 | `dev_eq`          | int      |            | A metric that quantifies the amount of code contribution. The data can be retrieved from [AE plugin](https://github.com/merico-dev/lake/tree/v0.9.3/plugins/ae). |                |
 
+#### commit_files
 
-#### 17. commit_files
+The files have been changed via commits.
 
-The files have been changed via commits. Multiple entries can exist per commit.
+| **field**    | **type** | **length** | **description**                                        | **key**        |
+| :----------- | :------- | :--------- | :----------------------------------------------------- | :------------- |
+| `id`         | varchar  | 255        | The `id` is composed of "< Commit_sha >:< file_path >" | FK_commits.sha |
+| `commit_sha` | char     | 40         | Commit sha                                             | FK_commits.sha |
+| `file_path`  | varchar  | 255        | Path of a changed file in a commit                     |                |
+| `additions`  | int      |            | The added lines of code in this file by the commit     |                |
+| `deletions`  | int      |            | The deleted lines of code in this file by the commit   |                |
 
-| **field**    | **type** | **length** | **description**                        | **key**        |
-| :----------- | :------- | :--------- | :------------------------------------- | :------------- |
-| `commit_sha` | char     | 40         | Commit sha                             | FK_commits.sha |
-| `file_path`  | varchar  | 255        | Path of a changed file in a commit     |                |
-| `additions`  | int      |            | The added lines of code in this file   |                |
-| `deletions`  | int      |            | The deleted lines of code in this file |                |
+#### components
 
-#### 18. commit_comments(WIP)
+The components of files extracted from the file paths. This can be used to analyze Git metrics by component.
 
-Code review comments on commits. These are comments on individual commits. If a commit is associated with a pull request, then its comments are in the [pull_request_comments](https://merico.feishu.cn/docs/doccnvyuG9YpVc6lvmWkmmbZtUc#xt2lv4) table.
+| **field**    | **type** | **length** | **description**                                        | **key**     |
+| :----------- | :------- | :--------- | :----------------------------------------------------- | :---------- |
+| `repo_id`    | varchar  | 255        | The repo id                                            | FK_repos.id |
+| `name`       | varchar  | 255        | The name of component                                  |             |
+| `path_regex` | varchar  | 255        | The regex to extract components from this repo's paths |             |
 
-| **field**      | **type** | **length** | **description**                     | **key**        |
-| :------------- | :------- | :--------- | :---------------------------------- | :------------- |
-| `id`           | varchar  | 255        | Unique comment id                   |                |
-| `commit_sha`   | char     | 40         | Commit sha                          | FK_commits.sha |
-| `user_id`      | varchar  | 255        | Id of the user who made the comment |                |
-| `created_date` | datetime | 3          | Comment creation time               |                |
-| `body`         | longtext |            | Comment body/detail                 |                |
-| `line`         | int      |            |                                     |                |
-| `position`     | int      |            |                                     |                |
+#### commit_file_components
 
-#### 19. commit_parents
+The relationship between commit_file and component_name.
+
+| **field**        | **type** | **length** | **description**              | **key**            |
+| :--------------- | :------- | :--------- | :--------------------------- | :----------------- |
+| `commit_file_id` | varchar  | 255        | The id of commit file        | FK_commit_files.id |
+| `component_name` | varchar  | 255        | The component name of a file |                    |
+
+#### commit_parents
 
 The parent commit(s) for each commit, as specified by Git.
 
@@ -334,8 +343,8 @@ A pull request is the abstraction of Github pull request and Gitlab merge reques
 | `head_reop_id`     | varchar  | 255        | The repo containing the changes that will be added to the base. If the head repository is NULL, this means that the corresponding project had been deleted when DevLake processed the pull request.                                                                                                                                                                                            |                |
 | `base_ref`         | varchar  | 255        | The branch name in the base repo that will be updated                                                                                                                                                                                                                                                                                                                                          |                |
 | `head_ref`         | varchar  | 255        | The branch name in the head repo that contains the changes that will be added to the base                                                                                                                                                                                                                                                                                                      |                |
-| `author_name`      | varchar  | 255        | The creator's name of the pull request                                                                                                                                                                                                                                                                                                                                                         |                |
-| `author_id`        | varchar  | 255        | The creator's id of the pull request                                                                                                                                                                                                                                                                                                                                                           |                |
+| `author_name`      | varchar  | 255        | The author's name of the pull request                                                                                                                                                                                                                                                                                                                                                         |                |
+| `author_id`        | varchar  | 255        | The author's id of the pull request                                                                                                                                                                                                                                                                                                                                                           |                |
 | `url`              | varchar  | 255        | the web link of the pull request                                                                                                                                                                                                                                                                                                                                                               |                |
 | `type`             | varchar  | 255        | The work-type of a pull request. For example: feature-development, bug-fix, docs, etc.<br/>The value is transformed from Github pull request labels by configuring `GITHUB_PR_TYPE` in `.env` file during installation.                                                                                                                                                                        |                |
 | `component`        | varchar  | 255        | The component this PR affects.<br/>The value is transformed from Github/Gitlab pull request labels by configuring `GITHUB_PR_COMPONENT` in `.env` file during installation.                                                                                                                                                                                                                    |                |
@@ -364,20 +373,22 @@ The list is additive. This means if a rebase with commit squashing takes place a
 | `pull_request_id` | varchar  | 255        | Pull request id | FK_pull_requests.id |
 | `commit_sha`      | char     | 40         | Commit sha      | FK_commits.sha      |
 
-#### 23. pull_request_comments(WIP)
+#### pull_request_comments
 
-A code review comment on a commit associated with a pull request
+Normal comments, review bodies, reviews' inline comments of GitHub's pull requests or GitLab's merge requests.
 
-The list is additive. If commits are squashed on the head repo, the comments remain intact.
+| **field**         | **type** | **length** | **description**                                            | **key**             |
+| :---------------- | :------- | :--------- | :--------------------------------------------------------- | :------------------ |
+| `id`              | varchar  | 255        | Comment id                                                 | PK                  |
+| `pull_request_id` | varchar  | 255        | Pull request id                                            | FK_pull_requests.id |
+| `body`            | longtext |            | The body of the comments                                   |                     |
+| `account_id`      | varchar  | 255        | The account who made the comment                           | FK_accounts.id     |
+| `created_date`    | datetime | 3          | Comment creation time                                      |                     |
+| `position`        | int      |            | Deprecated                                                 |                     |
+| `type`            | varchar  | 255        | - For normal comments: NORMAL<br/> - For review comments, ie. diff/inline comments: DIFF<br/> - For reviews' body (exist in GitHub but not GitLab): REVIEW                                                |                     |
+| `review_id`       | varchar  | 255        | Review_id of the comment if the type is `REVIEW` or `DIFF` |                     |
+| `status`          | varchar  | 255        | Status of the comment                                      |                     |
 
-| **field**         | **type** | **length** | **description**                                                                                                                                                                                     | **key**             |
-| :---------------- | :------- | :--------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------ |
-| `id`              | varchar  | 255        | Comment id                                                                                                                                                                                          | PK                  |
-| `pull_request_id` | varchar  | 255        | Pull request id                                                                                                                                                                                     | FK_pull_requests.id |
-| `user_id`         | varchar  | 255        | Id of user who made the comment                                                                                                                                                                     | FK_users.id         |
-| `created_date`    | datetime | 3          | Comment creation time                                                                                                                                                                               |                     |
-| `body`            | longtext |            | The body of the comment                                                                                                                                                                             |                     |
-| `position`        | int      |            | The position of a comment under a pull request. It starts from 1. The position is sorted by comment created_date asc.<br/>Eg. If a PR has 5 comments, the position of the 1st created comment is 1. |                     |
 
 #### 24. pull_request_events(WIP)
 
@@ -388,7 +399,7 @@ Events of pull requests.
 | `id`              | varchar  | 255        | Event id                                                                                                                                                                                                                                                                                                                                                                                                                                                 | PK                  |
 | `pull_request_id` | varchar  | 255        | Pull request id                                                                                                                                                                                                                                                                                                                                                                                                                                          | FK_pull_requests.id |
 | `action`          | varchar  | 255        | The action to be taken, some values:<ul><li>`opened`: When the pull request has been opened</li><li>`closed`: When the pull request has been closed</li><li>`merged`: When Github detected that the pull request has been merged. No merges outside Github (i.e. Git based) are reported</li><li>`reoponed`: When a pull request is opened after being closed</li><li>`syncrhonize`: When new commits are added/removed to the head repository</li></ul> |                     |
-| `actor_id`        | varchar  | 255        | The user id of the event performer                                                                                                                                                                                                                                                                                                                                                                                                                       | FK_users.id         |
+| `actor_id`        | varchar  | 255        | The account id of the event performer                                                                                                                                                                                                                                                                                                                                                                                                                       | FK_accounts.id         |
 | `created_date`    | datetime | 3          | Event creation time                                                                                                                                                                                                                                                                                                                                                                                                                                      |                     |
 
 <br/>
@@ -451,31 +462,59 @@ The data is extracted from the body of pull requests conforming to certain regul
 | `pull_request_number` | varchar  | 255        | Pull request number |                     |
 | `issue_number`        | varchar  | 255        | Issue number        |                     |
 
-#### 29. board_repo(WIP)
+#### board_repos (Deprecated)
 
-A rough way to link "issue tracking" and "source code management" domain by mapping `boards` and `repos`. Board(n): Repo(n).
-
-The mapping logic is under development.
+A way to link "issue tracking" and "source code management" domain by mapping `boards` and `repos`. Board(n): Repo(n).
 
 | **field**  | **type** | **length** | **description** | **key**      |
 | :--------- | :------- | :--------- | :-------------- | :----------- |
 | `board_id` | varchar  | 255        | Board id        | FK_boards.id |
 | `repo_id`  | varchar  | 255        | Repo id         | FK_repos.id  |
 
-#### 30. users(WIP)
+#### accounts
 
-This is the table to unify user identities across tools. This table can be used to do all user-based metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contributor',_
+This table stores of user accounts across different tools such as GitHub, Jira, GitLab, etc. This table can be joined to get the metadata of all accounts.
+ metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contributor',_
 
-| **field**      | **type** | **length** | **description**                                                                                                                                                                                         | **key** |
-| :------------- | :------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------ |
-| `id`           | varchar  | 255        | A user's `id` is composed of "< Plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github user's id is composed of "< github >:< GithubUsers >< GithubUserId)". Eg. 'github:GithubUsers:14050754' | PK      |
-| user_name      | varchar  | 255        | username/Github login of a user                                                                                                                                                                         |         |
-| `fullname`     | varchar  | 255        | User's full name                                                                                                                                                                                        |         |
-| `email`        | varchar  | 255        | Email                                                                                                                                                                                                   |         |
-| `avatar_url`   | varchar  | 255        |                                                                                                                                                                                                         |         |
-| `organization` | varchar  | 255        | User's organization or comany name                                                                                                                                                                      |         |
-| `created_date` | datetime | 3          | User creation time                                                                                                                                                                                      |         |
-| `deleted`      | tinyint  |            | 0: default. The user is active 1: the user is no longer active                                                                                                                                          |         |
+| **field**      | **type** | **length** | **description**         | **key** |
+| :------------- | :------- | :--------- | :---------------------- | :------ |
+| `id`           | varchar  | 255        | An account's `id` is the identifier of the account of a specific tool. It is composed of "< Plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github account's id is composed of "< github >:< GithubAccounts >< GithubUserId)". Eg. 'github:GithubUsers:14050754' | PK      |
+| `email`        | varchar  | 255        | Email of the account                                              |         |
+| `full_name`    | varchar  | 255        | Full name                                                         |         |
+| `user_name`    | varchar  | 255        | Username, nickname or Github login of an account                  |         |
+| `avatar_url`   | varchar  | 255        |                                                                   |         |
+| `organization` | varchar  | 255        | User's organization(s)                                            |         |
+| `created_date` | datetime | 3          | User creation time                                                |         |
+| `status`       | int      |            | 0: default, the user is active. 1: the user is not active         |         |
+
+#### users
+| **field** | **type** | **length** | **description**               | **key** |
+| --------- | -------- | ---------- | ----------------------------- | ------- |
+| `id`      | varchar  | 255        | id of a person                | PK      |
+| `email`   | varchar  | 255        | the primary email of a person |         |
+| `name`    | varchar  | 255        | name of a person              |         |
+
+#### user_accounts
+| **field**    | **type** | **length** | **description** | **key**          |
+| ------------ | -------- | ---------- | --------------- | ---------------- |
+| `user_id`    | varchar  | 255        | users.id        | Composite PK, FK |
+| `account_id` | varchar  | 255        | accounts.id     | Composite PK, FK |
+
+#### teams
+| **field**       | **type** | **length** | **description**                                    | **key** |
+| --------------- | -------- | ---------- | -------------------------------------------------- | ------- |
+| `id`            | varchar  | 255        | id from the data sources, decided by DevLake users | PK      |
+| `name`          | varchar  | 255        | name of the team. Eg. team A, team B, etc.         |         |
+| `alias`         | varchar  | 255        | alias or abbreviation of a team                    |         |
+| `parent_id`     | varchar  | 255        | teams.id, default to null                          | FK      |
+| `sorting_index` | int      | 255        | the field to sort team                             |         |
+
+#### team_users
+| **field** | **type** | **length** | **description**                                 | **key**          |
+| --------- | -------- | ---------- | ----------------------------------------------- | ---------------- |
+| `team_id` | varchar  | 255        | Full name of the team. Eg. team A, team B, etc. | Composite PK, FK |
+| `user_id` | varchar  | 255        | users.id                                        | Composite PK, FK |
+
 
 <br/>
 
@@ -483,40 +522,8 @@ This is the table to unify user identities across tools. This table can be used 
 
 DWM entities are the slight aggregation and operation of DWD to store more organized details or middle-level metrics.
 
-#### 31. issue_status_history
 
-This table shows the history of 'status change' of issues. This table can be used to break down _'issue lead time'_ to _'issue staying time in each status'_ to identify the bottleneck of the delivery workflow.
-
-| **field**         | **type** | **length** | **description**                 | **key**         |
-| :---------------- | :------- | :--------- | :------------------------------ | :-------------- |
-| `issue_id`        | varchar  | 255        | Issue id                        | PK, FK_issue.id |
-| `original_status` | varchar  | 255        | The original status of an issue |                 |
-| `start_date`      | datetime | 3          | The start time of the status    |                 |
-| `end_date`        | datetime | 3          | The end time of the status      |                 |
-
-#### 32. Issue_assignee_history
-
-This table shows the 'assignee change history' of issues. This table can be used to identify _'the actual developer of an issue',_ or _'contributor involved in an issue'_ for contribution analysis.
-
-| **field**    | **type** | **length** | **description**                                    | **key**         |
-| :----------- | :------- | :--------- | :------------------------------------------------- | :-------------- |
-| `issue_id`   | varchar  | 255        | Issue id                                           | PK, FK_issue.id |
-| `assignee`   | varchar  | 255        | The name of assignee of an issue                   |                 |
-| `start_date` | datetime | 3          | The time when the issue is assigned to an assignee |                 |
-| `end_date`   | datetime | 3          | The time when the assignee changes                 |                 |
-
-#### 33. issue_sprints_history
-
-This table shows the 'scope change history' of sprints. This table can be used to analyze the _'how much and how frequently does a team change plans'_.
-
-| **field**    | **type** | **length** | **description**                                    | **key**         |
-| :----------- | :------- | :--------- | :------------------------------------------------- | :-------------- |
-| `issue_id`   | varchar  | 255        | Issue id                                           | PK, FK_issue.id |
-| `sprint_id`  | varchar  | 255        | Sprint id                                          | FK_sprints.id   |
-| `start_date` | datetime | 3          | The time when the issue added to a sprint          |                 |
-| `end_date`   | datetime | 3          | The time when the issue gets removed from a sprint |                 |
-
-#### 34. refs_issues_diffs
+#### refs_issues_diffs
 
 This table shows the issues fixed by commits added in a new ref compared to an old one. The data is computed from [table.ref_commits_diff](https://merico.feishu.cn/docs/doccnvyuG9YpVc6lvmWkmmbZtUc#yJOyqa), [table.pull_requests](https://merico.feishu.cn/docs/doccnvyuG9YpVc6lvmWkmmbZtUc#Uc849c), [table.pull_request_commits](https://merico.feishu.cn/docs/doccnvyuG9YpVc6lvmWkmmbZtUc#G9cPfj), and [table.pull_request_issues](https://merico.feishu.cn/docs/doccnvyuG9YpVc6lvmWkmmbZtUc#we6Uac).
 
