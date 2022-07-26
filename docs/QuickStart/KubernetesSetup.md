@@ -18,10 +18,12 @@ We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlak
      * `MYSQL_USER`: shared between `mysql` and `grafana`
      * `MYSQL_PASSWORD`: shared between `mysql` and `grafana`
      * `MYSQL_DATABASE`: shared between `mysql` and `grafana`
+   - Settings used by `grafana`
      * `MYSQL_URL`: set MySQL URL for `grafana` in `$HOST:$PORT` format
+     * `GF_SERVER_ROOT_URL`: Public URL to the `grafana`
    - Settings used by `config-ui`:
-     * `GRAFANA_ENDPOINT`: FQDN of grafana service which can be reached within k8s cluster, normally you don't need to change it unless namespace was changed
-     * `DEVLAKE_ENDPOINT`: FQDN of devlake service which can be reached within k8s cluster, normally you don't need to change it unless namespace was changed
+     * `GRAFANA_ENDPOINT`: FQDN of grafana which can be reached within k8s cluster, normally you don't need to change it unless namespace was changed
+     * `DEVLAKE_ENDPOINT`: FQDN of devlake which can be reached within k8s cluster, normally you don't need to change it unless namespace was changed
      * `ADMIN_USER`/`ADMIN_PASS`: Not required, but highly recommended
    - Settings used by `devlake`:
      * `DB_URL`: update this value if  `MYSQL_USER`, `MYSQL_PASSWORD` or `MYSQL_DATABASE` were changed
