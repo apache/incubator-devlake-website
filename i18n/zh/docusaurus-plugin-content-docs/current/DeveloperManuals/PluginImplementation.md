@@ -1,6 +1,6 @@
 ---
 title: "如何制作一个DevLake插件？"
-sidebar_position: 1
+sidebar_position: 2
 description: >
   如何制作一个DevLake插件？
 ---
@@ -38,31 +38,31 @@ flowchart TD
     subgraph S4[Step4 Extractor 运行流程]
     direction LR
     D4[DevLake]
-    D4 -- Step4.1 创建\n ApiExtractor 并执行 --> E["ExtractXXXMeta.\nEntryPoint"];
-    E <-- Step4.2 读取raw table --> RawDataSubTaskArgs.\nTable;
+    D4 -- "Step4.1 创建\n ApiExtractor 并执行" --> E["ExtractXXXMeta.\nEntryPoint"];
+    E <-- "Step4.2 读取raw table" --> E2["RawDataSubTaskArgs\n.Table"];
     E -- "Step4.3 解析 RawData" --> ApiExtractor.Extract
     ApiExtractor.Extract -- "返回 gorm 模型" --> E
     end
     subgraph S3[Step3 Collector 运行流程]
     direction LR
     D3[DevLake]
-    D3 -- Step3.1 创建\n ApiCollector 并执行 --> C["CollectXXXMeta.\nEntryPoint"];
-    C <-- Step3.2 创建raw table --> RawDataSubTaskArgs.\nRAW_BBB_TABLE;
-    C <-- Step3.3 构造请求query --> ApiCollectorArgs.\nQuery/UrlTemplate;
-    C <-. Step3.4 通过 ApiClient \n请求并返回HTTP --> A1["HTTP APIs"];
+    D3 -- "Step3.1 创建\n ApiCollector 并执行" --> C["CollectXXXMeta.\nEntryPoint"];
+    C <-- "Step3.2 创建raw table" --> C2["RawDataSubTaskArgs\n.RAW_BBB_TABLE"];
+    C <-- "Step3.3 构造请求query" --> ApiCollectorArgs.\nQuery/UrlTemplate;
+    C <-. "Step3.4 通过 ApiClient \n请求并返回HTTP" --> A1["HTTP APIs"];
     C <-- "Step3.5 解析\n并返回请求结果" --> ResponseParser;
     end
     subgraph S2[Step2 DevLake 的自定义插件]
     direction LR
     D2[DevLake]
-    D2 <-- "Step2.1 在`Init` \n初始化插件" --> plugin.Init;
+    D2 <-- "Step2.1 在\`Init\` \n初始化插件" --> plugin.Init;
     D2 <-- "Step2.2 (Optional) 调用\n与返回 migration 脚本" --> plugin.MigrationScripts;
     D2 <-- "Step2.3 (Optional) \n初始化并返回taskCtx" --> plugin.PrepareTaskData;
     D2 <-- "Step2.4 返回\n 需要执行的子函数" --> plugin.SubTaskContext;
     end
     subgraph S1[Step1 DevLake 的运行]
     direction LR
-    main -- 通过 `runner.DirectRun`\n 移交控制权 --> D1[DevLake];
+    main -- "通过 \`runner.DirectRun\`\n 移交控制权" --> D1[DevLake];
     end
     S1-->S2-->S3-->S4
 ```
