@@ -1,5 +1,9 @@
+// @ts-check
+// Note: type annotations allow type checking and IDEs autocompletion
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const math = require('remark-math');
+const katex = require('rehype-katex');
 const versions = require('./versions.json');
 
 
@@ -13,8 +17,8 @@ const versions = require('./versions.json');
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/logo.svg',
-  organizationName: 'Apache', 
-  projectName: 'Apache DevLake', 
+  organizationName: 'Apache',
+  projectName: 'Apache DevLake',
 
   presets: [
     [
@@ -26,15 +30,17 @@ const versions = require('./versions.json');
           sidebarPath: require.resolve('./sidebars.js'),
           // set to undefined to remove Edit this Page
           editUrl: 'https://github.com/apache/incubator-devlake-website/edit/main',
+          remarkPlugins: [math, [require('mdx-mermaid'), {
+            theme: {light: 'neutral', dark: 'forest'}
+          }]],
+          rehypePlugins: [katex],
           versions: {
             current: {
-                label:'Latest',
-                path: '',
-                banner:'none',
+              label: 'Latest',
+              path: '',
+              banner: 'none',
             },
-            [versions[0]]: {
-                path: versions[0],
-            }
+            ...Object.fromEntries(versions.map(version => [ version, { path: version } ]))
           }
         },
         blog: {
@@ -42,9 +48,13 @@ const versions = require('./versions.json');
           readingTime: ({content, frontMatter, defaultReadingTime}) =>
             defaultReadingTime({content, options: {wordsPerMinute: 300}}),
           // Please change this to your repo.
-            editUrl: 'https://github.com/apache/incubator-devlake-website/edit/main',
-            blogSidebarTitle: 'All posts',
-            blogSidebarCount: 'ALL',
+          editUrl: 'https://github.com/apache/incubator-devlake-website/edit/main',
+          remarkPlugins: [math, [require('mdx-mermaid'), {
+            theme: {light: 'neutral', dark: 'forest'}
+          }]],
+          rehypePlugins: [katex],
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -53,7 +63,7 @@ const versions = require('./versions.json');
     ],
   ],
 
- plugins: [
+  plugins: [
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -100,14 +110,14 @@ const versions = require('./versions.json');
               ...versions.slice(0, versions.length - 2).map((version) => ({
                 label: version,
                 to: `docs/${version}/Overview/Introduction`,
-             })),
-             ...versions.slice(versions.length - 2, versions.length).map((version) => ({
-              label: (version === "1.x") ? "1.x(Not Apache Release)" : version,
-              to: `docs/${version}/Overview/Introduction`,
-            }))
+              })),
+              ...versions.slice(versions.length - 2, versions.length).map((version) => ({
+                label: (version === "1.x") ? "1.x(Not Apache Release)" : version,
+                to: `docs/${version}/Overview/Introduction`,
+              }))
             ]
           },
-         {
+          {
             type: 'doc',
             docId: 'index',
             position: 'right',
@@ -115,9 +125,10 @@ const versions = require('./versions.json');
             docsPluginId: 'community'
           },
           {
-            to: '/blog', 
-            label: 'Blog', 
-            position: 'right'},
+            to: '/blog',
+            label: 'Blog',
+            position: 'right'
+          },
           {
             to: 'https://github.com/apache/incubator-devlake',
             label: 'GitHub',
@@ -139,7 +150,7 @@ const versions = require('./versions.json');
               {
                 label: 'Events',
                 to: 'https://www.apache.org/events/current-event',
-              },        
+              },
               {
                 label: 'Security',
                 to: 'https://www.apache.org/security/',
@@ -177,7 +188,7 @@ const versions = require('./versions.json');
               {
                 label: 'Data Models',
                 to: 'docs/DataModels/DevLakeDomainLayerSchema',
-              },        
+              },
               {
                 label: 'Engineering Metrics',
                 to: 'docs/EngineeringMetrics',
