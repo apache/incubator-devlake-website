@@ -1,6 +1,6 @@
 ---
 title: "拥抱开源指南"
-weight: 50000
+authors: likyh
 description: >
   拥抱开源指南
 

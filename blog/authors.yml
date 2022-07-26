@@ -1,8 +1,26 @@
-warren:
-  name: Warren Chen
-  title: Apache DevLake PPMC
-  url: https://github.com/warren830
-  image_url: https://github.com/warren830.png
+abeizn:
+  name: abeizn
+  title: Apache DevLake Committer
+  url: https://github.com/abeizn
+  image_url: https://github.com/abeizn.png
+
+Danna:
+  name: Danna Wang
+  title: DevLake Contributor
+  url: https://github.com/banshengbushu
+  image_url: https://github.com/banshengbushu.png
+
+Geyu:
+  name: Geyu Chen
+  title: Apache DevLake Contributor
+  url: https://github.com/fredtheflat
+  image_url: https://github.com/fredtheflat.png
+
+likyh:
+  name: Likyh
+  title: Apache DevLake Contributor
+  url: https://github.com/likyh
+  image_url: https://avatars.githubusercontent.com/u/3294100?v=4
 
 klesh:
   name: Klesh Wong
@@ -16,11 +34,17 @@ maxim:
   url: https://github.com/MaximDub
   image_url: https://github.com/MaximDub.png
 
-abeizn:
-  name: abeizn
+Nddtfjiang:
+  name: Nddtfjiang
   title: Apache DevLake Committer
-  url: https://github.com/abeizn
-  image_url: https://github.com/abeizn.png
+  url: http://nddtf.com/github
+  image_url: http://nddtf.com/github/png.html
+
+warren:
+  name: Warren Chen
+  title: Apache DevLake PPMC
+  url: https://github.com/warren830
+  image_url: https://github.com/warren830.png
 
 ZhangLiang:
   name: ZhangLiang
@@ -28,20 +52,3 @@ ZhangLiang:
   url: https://github.com/mindlesscloud
   image_url: https://avatars.githubusercontent.com/u/8455907?s=400&v=4
 
-Nddtfjiang:
-  name: Nddtfjiang
-  title: Apache DevLake Committer
-  url: http://nddtf.com/github
-  image_url: http://nddtf.com/github/png.html
-
-Geyu:
-  name: Geyu Chen
-  title: Apache DevLake Contributor
-  url: https://github.com/fredtheflat
-  image_url: https://github.com/fredtheflat.png
-  
-Danna:
-  name: Danna Wang
-  title: DevLake Contributor
-  url: https://github.com/banshengbushu
-  image_url: https://github.com/banshengbushu.png
