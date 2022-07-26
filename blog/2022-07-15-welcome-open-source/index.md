@@ -10,6 +10,8 @@ description: >
 
 近年来，开源正在变得越来越火，在很多开发者眼中，「开源」也是非常极客的体现。同时参与开源项目也能给职业发展带来巨大的好处。可一些小伙伴却因为不知道参与的方法和途径没能参与，这里就向大家介绍一下作为开发者，可以怎么拥抱开源软件，以及怎么成为大家认可的开源贡献者。
 
+当然，本文会更多的从大的背景知识上进行叙述，关于代码提交的详细步骤，可以看看这一篇文章：https://mp.weixin.qq.com/s/b1mKPgOm1mnwsBbEBDRvK 。
+
 ## 什么是开源软件
 
 开源是源代码可以任意获取的计算机软件，任何人都能查看、修改和分发他们认为合适的代码，但这并不意味着可以使用源代码而没有任何著作权或发行权的约束，我们接触到的开源软件一般都有对应的开源许可证（Open Source License）对软件的使用、复制、修改和再发布等进行限制。许可证即授权条款，开源许可证就是说明这些限制的文件，常见的开源许可证主要有 Apache、MIT、BSD、GPL、LGPL、MPL、SSPL 等。
@@ -28,9 +30,7 @@ description: >
 
 ![image](https://user-images.githubusercontent.com/3294100/177321877-e1b295a9-2e33-499d-98d8-0a789f96c375.png)
 
-
-
-另外，由开源基金会维护的运行良好的项目，还可以在对应的开源基金会官网找到。
+第二种寻找方式，由开源基金会维护的运行良好的项目，还可以在对应的开源基金会官网找到。
 
 比如Linux基金会的项目地址：https://www.linuxfoundation.org/projects/
 
@@ -44,21 +44,26 @@ description: >
 
 ![ASF的项目页](https://user-images.githubusercontent.com/3294100/177317430-35c08429-9d18-44f9-9e4b-b3172527572d.png)
 
+最后，还有一些第三方的评估面板，从一些独特的视角了解现存的开源项目。
+比如ossinsight：https://ossinsight.io/collections/open-source-database ，可以了解本月点赞最多的项目有些什么，
+![ossinsight](https://user-images.githubusercontent.com/3294100/179458318-bc6d753c-01da-41e5-b059-ea1a8d888e80.png)
+再比如从 DevLake 的 [OSS 项目面板](https://grafana-oss.demo.devlake.io/d/KXWvOFQnz/github_basic_metrics?orgId=1&var-repo_id=github:GithubRepo:482676524&from=1642498327554&to=1658136727554) 更加深入的了解项目，这都是了解开源项目运行状况的有效途径。
+![devlake oss](https://user-images.githubusercontent.com/3294100/179483669-cc954d0c-68ed-4af3-8170-9cf4f0f16abd.png)
 
 
 ## Apache开源软件基金会
 
 因为笔者更了解 ASF ，所以这里就对它做一些更详细的介绍。
 
-Apache 开源基金会目前维护着380余个开源项目，但一年的开销仅一百多万美元左右。这是一个非常低的数（而其他基金会比如Linux基金会，每年开销在上亿美元），平均每个项目仅2000余美元，这就决定了Apache的开源项目更依赖社区和开源贡献者，在Apache社区中，「Community over Code」即社区先于编码提现的淋漓尽致。Apache 基金会每年的支出其中80%用在**基础设施**，其余会用在**营销、宣传和品牌管理服务，研讨会和发展社区，法律咨询等方面**，而其他诸如日常维护、编码等工作均由各个项目的成员维护。
+Apache 开源基金会目前维护着380余个开源项目，但一年的开销仅一百多万美元左右。这是一个非常低的数（而其他基金会比如Linux基金会，每年开销在上亿美元），平均每个项目仅2000余美元，这就决定了Apache的开源项目更依赖社区和开源贡献者，在Apache社区中，「Community over Code」即社区先于编码体现得淋漓尽致。Apache 基金会每年的支出其中80%用在**基础设施**，其余会用在**营销、宣传和品牌管理服务，研讨会和发展社区，法律咨询等方面**，而其他诸如日常维护、编码等工作均由各个项目的成员维护。
 
 Apache开源项目中，一般有如下几个基本的角色：
 
-* Contributer
+* Contributor
     普通贡献者，这种就是很容易获得，只需要提交一个PR并被官方合并到主分支即可获得，例如提交一个文档，修改几行代码就行。
 
-* Commiter
-    核心开发，对贡献特别大的 Contributer，官方社区会考虑将其吸收，提升到commiter，成为核心开发，此时就有项目的写入权限，**并可以申请@apache.com结尾的邮箱**。
+* Committer 
+    核心开发，对贡献特别大的 Contributor，官方社区会考虑将其吸收，提升到commiter，成为核心开发，此时就有项目的写入权限，**并可以申请@apache.com结尾的邮箱**。
 
 * PMC
     开源项目决策成员。
@@ -69,7 +74,7 @@ Apache开源项目中，一般有如下几个基本的角色：
 
 一旦选择好一个开源项目后，我们又该如何找到组织呢？
 
-首先是阅读官方文档，全面了解该项目的架构设计文档和解决的问题。之后可以尝试参与项目日常的邮件讨论。
+首先是阅读官方文档，全面了解该项目的架构设计文档和解决的问题，之后可以尝试参与项目日常的讨论。尽管在微信群中提问很方便，但 Apache 项目的大部分讨论需要公开地在邮件列表中进行，方便所有人查看及查询，因此我们也需要了解如何参与 Apache 的邮件讨论。
 
 Apache下面的每一个项目都有自己的邮件列表，同时分不同的邮件组，以Apache DevLake为例，有如下订阅列表：
 
@@ -83,7 +88,7 @@ Apache下面的每一个项目都有自己的邮件列表，同时分不同的�
 
 添加后就可以收到所有开发讨论的信息了，另外也可以关注官网的 maillist(https://lists.apache.org/list.html?dev@devlake.apache.org) 查看全部历史邮件。
 
-另外，大部分项目会有一些线上的聚会，往往可以在Readme页面找到，参与线上聚会可以更直接的获取所需的信息，也机会能和项目PMC直接交流。
+另外，大部分项目会有一些线上的聚会，往往可以在Readme页面找到，参与线上聚会可以更直接的获取所需的信息，也能有机会和项目PMC直接交流。
 
 ## 向开源项目反馈问题
 
@@ -105,11 +110,11 @@ Apache下面的每一个项目都有自己的邮件列表，同时分不同的�
 
 ## 成为项目的贡献者
 
-在参与讨论的基础上，只要你在社区上帮助验证一些发布的新功能或者提一些建议或者缺陷，或者修改源码，就能成为该项目的贡献者。
+在参与讨论的基础上，只要能在 GitHub 社区中帮助验证一些发布的新功能或者提一些建议或者缺陷，或者修改源码，就能成为该项目的贡献者(Contributor)。
 
-刚参与项目时，可以考虑编写文档，或完善一些模块的单元测试，或者进行一些简单编码工作。比如可以在 GitHub Issues 列表中寻找带有`good first issue`标记的事情，这往往是社区维护者为了引导贡献者专门创建的issue，很适合作为第一个提交。完成第一个提交后，可以再去看看正在open的issue，并将其解决。
+刚参与项目时，可以考虑编写文档，或完善一些模块的单元测试，或者进行一些简单编码工作。比如可以在 GitHub Issues 列表中寻找带有`good first issue`标记且暂未被认领的事情，这往往是社区维护者为了引导贡献者专门创建的issue，很适合作为第一个提交。完成第一个提交后，可以再去看看其他open的issue并解决。
 
-目前开源项目一般采用 Git 来管理源代码，如果你从未使用过代码管理工具的话，可以现在网上寻找教程了解，比如：https://www.liaoxuefeng.com/wiki/896043488029600。一般的提交流程是：先 fork 对应的项目，在 fork 项目提交代码后，向开源项目发起代码合并请求等待合并。
+目前开源项目一般采用 Git 来管理源代码，如果你从未使用过代码管理工具的话，可以现在网上寻找教程了解，比如：https://www.liaoxuefeng.com/wiki/896043488029600 。一般的提交流程是：先 fork 对应的项目，在 fork 项目提交代码后，向开源项目发起代码合并请求等待合并。
 
 需要注意的是，任何代码提交后，都不会立刻合并，需要寻找社区维护者 Review 后才会进入主干。
 
@@ -146,7 +151,7 @@ Apache下面的每一个项目都有自己的邮件列表，同时分不同的�
 
 顺便再说几个 GitHub 中实用的小技巧：
 
-1. 如果你的 PR 解决了某个 issue，可以在描述中加上 close #1234，1234需要改成对应的issue号，在 PR 合并时该issue也会同事关闭（[更多信息](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword#linking-a-pull-request-to-an-issue-using-a-keyword)）
+1. 如果你的 PR 解决了某个 issue，可以在描述中加上 close #1234，1234需要改成对应的issue号，在 PR 合并时该issue也会同时关闭（[更多信息](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword#linking-a-pull-request-to-an-issue-using-a-keyword)）
     ![image-20220710215354120](https://user-images.githubusercontent.com/3294100/178149926-f4f647e4-3765-47be-8b3a-9b19381294dd.png)
 2. GitHub 的 Markdown 编辑器可以将默认字体设置为等宽字体，便于代码的书写，具体设置为： **Settings** -  **Appearance** - **Use a fixed-width (monospace) font when editing Markdown**. （[更多信息](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/about-writing-and-formatting-on-github)）
     ![Screenshot showing the GitHub comment field with fixed width fonts enabled](https://docs.github.com/assets/cb-14573/images/help/writing/enable-fixed-width.png)
@@ -155,6 +160,6 @@ Apache下面的每一个项目都有自己的邮件列表，同时分不同的�
 
 ## 结语
 
-好啦，大体的情况应该介绍的差不多了，其实参与开源项目并没有想象中的难，成为一个开源项目的Commiter，给职场和技术实力带来的助力将不可估量。另外，如果你还是较为初级的开发者，迫切的想要知道具体的参与步骤，这里还有另一篇教程可以帮助到你：https://mp.weixin.qq.com/s/b1mKPgOm1mnwsBbEBDRvKw。
+好啦，大体的情况应该介绍的差不多了，其实参与开源项目并没有想象中的难，成为一个开源项目的Commiter，给职场和技术实力带来的助力将不可估量。另外，如果你还是较为初级的开发者，迫切的想要知道具体的参与步骤，可以看看开头提到的这篇文章：https://mp.weixin.qq.com/s/b1mKPgOm1mnwsBbEBDRvKw 。
 
 我们的 DevLake (https://github.com/apache/incubator-devlake)  和 DevStream (https://github.com/devstream-io/devstream) 也是优秀的开源项目，欢迎你的参与哦~ 
