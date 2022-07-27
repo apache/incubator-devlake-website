@@ -22,11 +22,11 @@ Domain layer schema itself includes 2 logical layers: a `DWD` layer and a `DWM` 
 ## Data Models
 
 This is the up-to-date domain layer schema for DevLake v0.10.x. Tables (entities) are categorized into 5 domains.
-1. Issue tracking domain entities: Jira issues, GitHub issues, GitLab issues, etc
-2. Source code management domain entities: Git/GitHub/Gitlab commits and refs, etc
-3. Code review domain entities: GitHub PRs, Gitlab MRs, etc
-4. CI/CD domain entities: Jenkins jobs & builds, etc
-5. Cross-domain entities: entities that map entities from different domains to break data isolation
+1. Issue tracking domain entities: Jira issues, GitHub issues, GitLab issues, etc.
+2. Source code management domain entities: Git/GitHub/Gitlab commits and refs(tags and branches), etc.
+3. Code review domain entities: GitHub PRs, Gitlab MRs, etc.
+4. CI/CD domain entities: Jenkins jobs & builds, etc.
+5. Cross-domain entities: entities that map entities from different domains to break data isolation.
 
 
 ### Schema Diagram
@@ -49,14 +49,14 @@ Tables that end with WIP are still under development.
 
 ### Domain 1 - Issue Tracking
 
-#### 1. Issues
+#### issues
 
 An `issue` is the abstraction of Jira/Github/GitLab/TAPD/... issues.
 
 | **field**                   | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | **key** |
 | :-------------------------- | :------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
 | `id`                        | varchar  | 255        | An issue's `id` is composed of < plugin >:< Entity >:< PK0 >[:PK1]..." <ul><li>For Github issues, a Github issue's id is like "github:GithubIssues:< GithubIssueId >". Eg. 'github:GithubIssues:1049355647'</li> <li>For Jira issues, a Github repo's id is like "jira:JiraIssues:< JiraSourceId >:< JiraIssueId >". Eg. 'jira:JiraIssues:1:10063'. < JiraSourceId > is used to identify which jira source the issue came from, since DevLake users can import data from several different Jira instances at the same time.</li></ul>                                                                    | PK      |
-| `number`                    | varchar  | 255        | The number of this issue. For example, the number of this Github [issue](https://github.com/merico-dev/lake/issues/1145) is 1145.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |         |
+| `issue_key`                 | varchar  | 255        | The key of this issue. For example, the key of this Github [issue](https://github.com/merico-dev/lake/issues/1145) is 1145.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |         |
 | `url`                       | varchar  | 255        | The url of the issue. It's a web address in most cases.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
 | `title`                     | varchar  | 255        | The title of an issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |         |
 | `description`               | longtext |            | The detailed description/summary of an issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
@@ -73,6 +73,7 @@ An `issue` is the abstraction of Jira/Github/GitLab/TAPD/... issues.
 | `time_spent_minutes`         | int      |            | The orginal estimation of the time allocated for this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
 | `time_remaining_minutes`     | int      |            | The remaining time to resolve the issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |         |
 | `creator_id`                 | varchar  | 255        | The id of issue creator                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |         |
+| `creator_name`              | varchar  | 255        | The name of the creator                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |         |
 | `assignee_id`               | varchar  | 255        | The id of issue assignee.<ul><li>For Github issues: this is the last assignee of an issue if the issue has multiple assignees</li><li>For Jira issues: this is the assignee of the issue at the time of collection</li></ul>                                                                                                                                                                                                                                                                                                                                                           |         |
 | `assignee_name`             | varchar  | 255        | The name of the assignee                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |         |
 | `created_date`              | datetime | 3          | The time issue created                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |         |
@@ -80,7 +81,7 @@ An `issue` is the abstraction of Jira/Github/GitLab/TAPD/... issues.
 | `resolution_date`           | datetime | 3          | The time the issue changes to 'DONE'.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |         |
 | `lead_time_minutes`         | int      |            | Describes the cycle time from issue creation to issue resolution.<ul><li>For issues whose type = 'REQUIREMENT' and status = 'DONE', lead_time_minutes = resolution_date - created_date. The unit is minute.</li><li>For issues whose type != 'REQUIREMENT' or status != 'DONE', lead_time_minutes is null</li></ul>                                                                                                                                                                                                                                                                    |         |
 
-#### 2. issue_labels
+#### issue_labels
 
 This table shows the labels of issues. Multiple entries can exist per issue. This table can be used to filter issues by label name.
 
@@ -90,7 +91,7 @@ This table shows the labels of issues. Multiple entries can exist per issue. Thi
 | `issue_id` | varchar  | 255        | Issue ID        | FK_issues.id |
 
 
-#### 3. issue_comments(WIP)
+#### issue_comments(WIP)
 
 This table shows the comments of issues. Issues with multiple comments are shown as multiple records. This table can be used to calculate _metric - issue response time_.
 
@@ -102,9 +103,8 @@ This table shows the comments of issues. Issues with multiple comments are shown
 | `body`         | longtext |            | The body/detail of the comment                                                                                                                                                                |              |
 | `created_date` | datetime | 3          | The creation date of the comment                                                                                                                                                              |              |
 | `updated_date` | datetime | 3          | The last time comment gets updated                                                                                                                                                            |              |
-| `position`     | int      |            | The position of a comment under an issue. It starts from 1. The position is sorted by comment created_date asc.<br/>Eg. If an issue has 5 comments, the position of the 1st created comment is 1. |              |
 
-#### 4. issue_changelogs
+#### issue_changelogs
 
 This table shows the changelogs of issues. Issues with multiple changelogs are shown as multiple records. This is transformed from Jira or TAPD changelogs.
 
@@ -123,21 +123,22 @@ This table shows the changelogs of issues. Issues with multiple changelogs are s
 | `created_date`        | datetime | 3          | The creation date of the changelog                               |                |
 
 
-#### 5. issue_worklogs
+#### issue_worklogs
 
 This table shows the work logged under issues. Usually, an issue has multiple worklogs logged by different developers.
 
 | **field**            | **type** | **length** | **description**                                                                              | **key**          |
 | :------------------- | :------- | :--------- | :------------------------------------------------------------------------------------------- | :--------------- |
-| `issue_id`           | varchar  | 255        | Issue ID                                                                                     | FK_issues.id     |
+| `id`                 | varchar  | 255        | The id of the worklog                                                                                      | PK               |
 | `author_id`          | varchar  | 255        | The id of the author who logged the work                                                     | FK_acccounts.id  |
-| `comment`            | varchar  | 255        | The comment made while logging the work.                                                     |                  |
+| `comment`            | longtext | 255        | The comment made while logging the work.                                                     |                  |
 | `time_spent_minutes` | int      |            | The time logged. The unit of value is normalized to minute. Eg. 1d =) 480, 4h30m =) 270      |                  |
 | `logged_date`        | datetime | 3          | The time of this logging action                                                              |                  |
 | `started_date`       | datetime | 3          | Start time of the worklog                                                                    |                  |
+| `issue_id`           | varchar  | 255        | Issue ID                                                                                     | FK_issues.id     |
 
 
-#### 6. boards
+#### boards
 
 A `board` is an issue list or a collection of issues. It's the abstraction of a Jira board, a Jira project, a [Github issue list](https://github.com/merico-dev/lake/issues) or a GitLab issue list. This table can be used to filter issues by the boards they belong to.
 
@@ -173,7 +174,7 @@ A `sprint` is the abstraction of Jira sprints, TAPD iterations and Github milest
 | `completed_date`    | datetime | 3          | The actual time to complete a sprint.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |              |
 | `original_board_id` | datetime | 3          | The id of board where the sprint first created. This field is not null only when this entity is transformed from Jira sprintas.<br/>In Jira, sprint and board entities have 2 types of relation:<ul><li>A sprint is created based on a specific board. In this case, board(1):(n)sprint. The `original_board_id` is used to show the relation.</li><li>A sprint can be mapped to multiple boards, a board can also show multiple sprints. In this case, board(n):(n)sprint. This relation is shown in [table.board_sprints](https://merico.feishu.cn/docs/doccnvyuG9YpVc6lvmWkmmbZtUc#xfm617)</li></ul> | FK_boards.id |
 
-#### 9. sprint_issues
+#### sprint_issues
 
 This table shows the relation between sprints and issues that have been added to sprints. This table can be used to show metrics such as _'ratio of unplanned issues'_, _'completion rate of sprint issues'_, etc
 
@@ -187,7 +188,7 @@ This table shows the relation between sprints and issues that have been added to
 | `added_stage`    | varchar  | 255        | The stage when issue is added to this sprint. There're 3 possible values:<ul><li>BEFORE_SPRINT<br/>Planning before sprint starts.<br/> Condition: sprint_issues.added_date <= sprints.start_date</li><li>DURING_SPRINT Planning during a sprint.<br/>Condition: sprints.start_date < sprint_issues.added_date <= sprints.end_date</li><li>AFTER_SPRINT<br/>Planing after a sprint. This is caused by improper operation - adding issues to a completed sprint.<br/>Condition: sprint_issues.added_date ) sprints.end_date</li></ul> |               |
 | `resolved_stage` | varchar  | 255        | The stage when an issue is resolved (issue status turns to 'DONE'). There're 3 possible values:<ul><li>BEFORE_SPRINT<br/>Condition: issues.resolution_date <= sprints.start_date</li><li>DURING_SPRINT<br/>Condition: sprints.start_date < issues.resolution_date <= sprints.end_date</li><li>AFTER_SPRINT<br/>Condition: issues.resolution_date ) sprints.end_date</li></ul>                                                                                                                                                       |               |
 
-#### 10. board_sprints
+#### board_sprints
 
 | **field**   | **type** | **length** | **description** | **key**       |
 | :---------- | :------- | :--------- | :-------------- | :------------ |
@@ -198,7 +199,7 @@ This table shows the relation between sprints and issues that have been added to
 
 ### Domain 2 - Source Code Management
 
-#### 11. repos
+#### repos
 
 Information about Github or Gitlab repositories. A repository is always owned by a user.
 
@@ -215,7 +216,7 @@ Information about Github or Gitlab repositories. A repository is always owned by
 | `created_date` | datetime | 3          | Repo creation date                                                                                                                                                                             |             |
 | `updated_date` | datetime | 3          | Last full update was done for this repo                                                                                                                                                        |             |
 
-#### 12. repo_languages(WIP)
+#### repo_languages(WIP)
 
 Languages that are used in the repository along with byte counts for all files in those languages. This is in line with how Github calculates language percentages in a repository. Multiple entries can exist per repo.
 
@@ -228,7 +229,7 @@ The table is filled in when the repo has been first inserted on when an update r
 | `bytes`        | int      |            | The byte counts for all files in those languages                                                                                                                                                   |         |
 | `created_date` | datetime | 3          | The field is filled in with the latest timestamp the query for a specific `repo_id` was done.                                                                                                      |         |
 
-#### 13. repo_commits
+#### repo_commits
 
 The commits belong to the history of a repository. More than one repos can share the same commits if one is a fork of the other.
 
@@ -237,7 +238,7 @@ The commits belong to the history of a repository. More than one repos can share
 | `repo_id`    | varchar  | 255        | Repo id         | FK_repos.id    |
 | `commit_sha` | char     | 40         | Commit sha      | FK_commits.sha |
 
-#### 14. refs
+#### refs
 
 A ref is the abstraction of a branch or tag.
 
@@ -251,7 +252,7 @@ A ref is the abstraction of a branch or tag.
 | `merge_base` | char     | 40         | The merge base commit of the main ref and the current ref                                                                                                                                                                                                                                                                                                   |             |
 | `ref_type`   | varchar  | 64         | There're 2 typical types:<ul><li>BRANCH</li><li>TAG</li></ul>                                                                                                                                                                                                                                                                                               |             |
 
-#### 15. refs_commits_diffs
+#### refs_commits_diffs
 
 This table shows the commits added in a new ref compared to an old ref. This table can be used to support tag-based analysis, for instance, '_No. of commits of a tag_', '_No. of merged pull request of a tag_', etc.
 
@@ -282,7 +283,7 @@ The records of this table are computed by [RefDiff](https://github.com/merico-de
 | `committer_id`    | varchar  | 255        | The id of committer                                                                                                                                              | FK_accounts.id    |
 | `additions`       | int      |            | Added lines of code                                                                                                                                              |                |
 | `deletions`       | int      |            | Deleted lines of code                                                                                                                                            |                |
-| `dev_eq`          | int      |            | A metric that quantifies the amount of code contribution. The data can be retrieved from [AE plugin](https://github.com/merico-dev/lake/tree/v0.9.3/plugins/ae). |                |
+| `dev_eq`          | int      |            | A metric that quantifies the amount of code contribution. The data can be retrieved from [AE plugin](https://github.com/apache/incubator-devlake/tree/main/plugins/ae). |                |
 
 #### commit_files
 
@@ -328,7 +329,7 @@ The parent commit(s) for each commit, as specified by Git.
 
 ### Domain 3 - Code Review
 
-#### 20. pull_requests
+#### pull_requests
 
 A pull request is the abstraction of Github pull request and Gitlab merge request.
 
@@ -338,7 +339,8 @@ A pull request is the abstraction of Github pull request and Gitlab merge reques
 | `title`            | varchar  | 255        | The title of pull request                                                                                                                                                                                                                                                                                                                                                                      |                |
 | `description`      | longtext |            | The body/description of pull request                                                                                                                                                                                                                                                                                                                                                           |                |
 | `status`           | varchar  | 255        | the status of pull requests. For a Github pull request, the status can either be 'open' or 'closed'.                                                                                                                                                                                                                                                                                           |                |
-| `number`           | varchar  | 255        | The number of PR. Eg, 1536 is the number of this [PR](https://github.com/merico-dev/lake/pull/1563)                                                                                                                                                                                                                                                                                            |                |
+| `parent_pr_id`     | varchar  | 255        | The id of the parent PR                                                                                                                                                                                                                                                                                               |                |
+| `pull_request_key` | varchar  | 255        | The key of PR. Eg, 1536 is the key of this [PR](https://github.com/merico-dev/lake/pull/1563)                                                                                                                                                                                                                                                                                            |                |
 | `base_repo_id`     | varchar  | 255        | The repo that will be updated.                                                                                                                                                                                                                                                                                                                                                                 |                |
 | `head_reop_id`     | varchar  | 255        | The repo containing the changes that will be added to the base. If the head repository is NULL, this means that the corresponding project had been deleted when DevLake processed the pull request.                                                                                                                                                                                            |                |
 | `base_ref`         | varchar  | 255        | The branch name in the base repo that will be updated                                                                                                                                                                                                                                                                                                                                          |                |
@@ -352,8 +354,11 @@ A pull request is the abstraction of Github pull request and Gitlab merge reques
 | `merged_date`      | datetime | 3          | The time PR gets merged. Null when the PR is not merged.                                                                                                                                                                                                                                                                                                                                       |                |
 | `closed_date`      | datetime | 3          | The time PR closed. Null when the PR is not closed.                                                                                                                                                                                                                                                                                                                                            |                |
 | `merge_commit_sha` | char     | 40         | the merge commit of this PR. By the definition of [Github](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch), when you click the default Merge pull request option on a pull request on Github, all commits from the feature branch are added to the base branch in a merge commit. |                |
+| `base_commit_sha` | char     | 40         | The base commit of this PR.      |                |
+| `head_commit_sha` | char     | 40         | The head commit of this PR.      |                |
 
-#### 21. pull_request_labels
+
+#### pull_request_labels
 
 This table shows the labels of pull request. Multiple entries can exist per pull request. This table can be used to filter pull requests by label name.
 
@@ -362,7 +367,7 @@ This table shows the labels of pull request. Multiple entries can exist per pull
 | `name`            | varchar  | 255        | Label name      |                     |
 | `pull_request_id` | varchar  | 255        | Pull request ID | FK_pull_requests.id |
 
-#### 22. pull_request_commits
+#### pull_request_commits
 
 A commit associated with a pull request
 
@@ -390,7 +395,7 @@ Normal comments, review bodies, reviews' inline comments of GitHub's pull reques
 | `status`          | varchar  | 255        | Status of the comment                                      |                     |
 
 
-#### 24. pull_request_events(WIP)
+#### pull_request_events(WIP)
 
 Events of pull requests.
 
@@ -406,7 +411,7 @@ Events of pull requests.
 
 ### Domain 4 - CI/CD(WIP)
 
-#### 25. jobs
+#### jobs
 
 The CI/CD schedule, not a specific task.
 
@@ -415,7 +420,7 @@ The CI/CD schedule, not a specific task.
 | `id`      | varchar  | 255        | Job id          | PK      |
 | `name`    | varchar  | 255        | Name of job     |         |
 
-#### 26. builds
+#### builds
 
 A build is an execution of a job.
 
@@ -436,7 +441,7 @@ These entities are used to map entities between different domains. They are the 
 
 There're low-level entities such as issue_commits, users, and higher-level cross domain entities such as board_repos
 
-#### 27. issue_commits
+#### issue_commits
 
 A low-level mapping between "issue tracking" and "source code management" domain by mapping `issues` and `commits`. Issue(n): Commit(n).
 
@@ -449,7 +454,7 @@ For example, a common method to connect Jira issue and GitLab commit is a GitLab
 | `issue_id`   | varchar  | 255        | Issue id        | FK_issues.id   |
 | `commit_sha` | char     | 40         | Commit sha      | FK_commits.sha |
 
-#### 28. pull_request_issues
+#### pull_request_issues
 
 This table shows the issues closed by pull requests. It's a medium-level mapping between "issue tracking" and "source code management" domain by mapping issues and commits. Issue(n): Commit(n).
 
@@ -459,8 +464,8 @@ The data is extracted from the body of pull requests conforming to certain regul
 | :-------------------- | :------- | :--------- | :------------------ | :------------------ |
 | `pull_request_id`     | char     | 40         | Pull request id     | FK_pull_requests.id |
 | `issue_id`            | varchar  | 255        | Issue id            | FK_issues.id        |
-| `pull_request_number` | varchar  | 255        | Pull request number |                     |
-| `issue_number`        | varchar  | 255        | Issue number        |                     |
+| `pull_request_number` | varchar  | 255        | Pull request key    |                     |
+| `issue_number`        | varchar  | 255        | Issue key           |                     |
 
 #### board_repos (Deprecated)
 
