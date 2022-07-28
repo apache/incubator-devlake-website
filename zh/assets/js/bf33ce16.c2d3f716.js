@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwww=self.webpackChunkwww||[]).push([[5036],{6121:function(e){e.exports=JSON.parse('{"allTagsPath":"/zh/blog/tags","name":"codebase","count":1,"permalink":"/zh/blog/tags/codebase"}')}}]);
