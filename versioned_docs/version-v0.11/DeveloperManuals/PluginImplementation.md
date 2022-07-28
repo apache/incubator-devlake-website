@@ -2,7 +2,7 @@
 title: "Plugin Implementation"
 sidebar_position: 2
 description: >
-  Plugin Implementation
+Plugin Implementation
 ---
 
 ## How to Implement a DevLake plugin?
@@ -24,13 +24,13 @@ A plugin may extend DevLake's capability in three ways:
 
 A plugin mainly consists of a collection of subtasks that can be executed by DevLake core. For data source plugins, a subtask may be collecting a single entity from the data source (e.g., issues from Jira). Besides the subtasks, there're hooks that a plugin can implement to customize its initialization, migration, and more. See below for a list of the most important interfaces:
 
-1. [PluginMeta](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_meta.go) contains the minimal interface that a plugin should implement, with only two functions 
-   - Description() returns the description of a plugin
-   - RootPkgPath() returns the root package path of a plugin
+1. [PluginMeta](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_meta.go) contains the minimal interface that a plugin should implement, with only two functions
+    - Description() returns the description of a plugin
+    - RootPkgPath() returns the root package path of a plugin
 2. [PluginInit](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_init.go) allows a plugin to customize its initialization
 3. [PluginTask](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_task.go) enables a plugin to prepare data prior to subtask execution
 4. [PluginApi](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_api.go) lets a plugin exposes some self-defined APIs
-5. [Migratable](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_db_migration.go) is where a plugin manages its database migrations 
+5. [Migratable](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_db_migration.go) is where a plugin manages its database migrations
 
 The diagram below shows the control flow of executing a plugin:
 
@@ -39,31 +39,31 @@ flowchart TD;
     subgraph S4[Step4 sub-task extractor running process];
     direction LR;
     D4[DevLake];
-    D4 -- Step4.1 create a new\n ApiExtractor\n and execute it --> E["ExtractXXXMeta.\nEntryPoint"];
-    E <-- Step4.2 read from\n raw table --> RawDataSubTaskArgs.\nTable;
+    D4 -- "Step4.1 create a new\n ApiExtractor\n and execute it" --> E["ExtractXXXMeta.\nEntryPoint"];
+    E <-- "Step4.2 read from\n raw table" --> E2["RawDataSubTaskArgs\n.Table"];
     E -- "Step4.3 call with RawData" --> ApiExtractor.Extract;
     ApiExtractor.Extract -- "decode and return gorm models" --> E
     end
     subgraph S3[Step3 sub-task collector running process]
     direction LR
     D3[DevLake]
-    D3 -- Step3.1 create a new\n ApiCollector\n and execute it --> C["CollectXXXMeta.\nEntryPoint"];
-    C <-- Step3.2 create\n raw table --> RawDataSubTaskArgs.\nRAW_BBB_TABLE;
-    C <-- Step3.3 build query\n before sending requests --> ApiCollectorArgs.\nQuery/UrlTemplate;
-    C <-. Step3.4 send requests by ApiClient \n and return HTTP response.-> A1["HTTP APIs"];
+    D3 -- "Step3.1 create a new\n ApiCollector\n and execute it" --> C["CollectXXXMeta.\nEntryPoint"];
+    C <-- "Step3.2 create\n raw table" --> C2["RawDataSubTaskArgs\n.RAW_BBB_TABLE"];
+    C <-- "Step3.3 build query\n before sending requests" --> ApiCollectorArgs.\nQuery/UrlTemplate;
+    C <-. "Step3.4 send requests by ApiClient \n and return HTTP response" .-> A1["HTTP APIs"];
     C <-- "Step3.5 call and \nreturn decoded data \nfrom HTTP response" --> ResponseParser;
     end
     subgraph S2[Step2 DevLake register custom plugin]
     direction LR
     D2[DevLake]
-    D2 <-- "Step2.1 function `Init` \nneed to do init jobs" --> plugin.Init;
+    D2 <-- "Step2.1 function \`Init\` \nneed to do init jobs" --> plugin.Init;
     D2 <-- "Step2.2 (Optional) call \nand return migration scripts" --> plugin.MigrationScripts;
     D2 <-- "Step2.3 (Optional) call \nand return taskCtx" --> plugin.PrepareTaskData;
     D2 <-- "Step2.4 call and \nreturn subTasks for execting" --> plugin.SubTaskContext;
     end
     subgraph S1[Step1 Run DevLake]
     direction LR
-    main -- Transfer of control \nby `runner.DirectRun` --> D1[DevLake];
+    main -- "Transfer of control \nby \`runner.DirectRun\`" --> D1[DevLake];
     end
     S1-->S2-->S3-->S4
 ```
@@ -71,7 +71,7 @@ There's a lot of information in the diagram but we don't expect you to digest it
 
 ## A step-by-step guide towards your first plugin
 
-In this guide, we'll walk through how to create a data source plugin from scratch. 
+In this guide, we'll walk through how to create a data source plugin from scratch.
 
 The example in this tutorial comes from DevLake's own needs of managing [CLAs](https://en.wikipedia.org/wiki/Contributor_License_Agreement). Whenever DevLake receives a new PR on GitHub, we need to check if the author has signed a CLA by referencing `https://people.apache.org/public/icla-info.json`. This guide will demonstrate how to collect the ICLA info from Apache API, cache the raw response, and extract the raw data into a relational table ready to be queried.
 
@@ -84,18 +84,18 @@ The example in this tutorial comes from DevLake's own needs of managing [CLAs](h
 > `api` interacts with `config-ui` for test/get/save connection of data source
 >       - connection [example](https://github.com/apache/incubator-devlake/blob/main/plugins/gitlab/api/connection.go)
 >       - connection model [example](https://github.com/apache/incubator-devlake/blob/main/plugins/gitlab/models/connection.go)
-> `models` stores all `data entities` and `data migration scripts`. 
->       - entity 
+> `models` stores all `data entities` and `data migration scripts`.
+>       - entity
 >       - data migrations [template](https://github.com/apache/incubator-devlake/tree/main/generator/template/migrationscripts)
 > `tasks` contains all of our `sub tasks` for a plugin
 >       - task data [template](https://github.com/apache/incubator-devlake/blob/main/generator/template/plugin/tasks/task_data.go-template)
 >       - api client [template](https://github.com/apache/incubator-devlake/blob/main/generator/template/plugin/tasks/task_data_with_api_client.go-template)
 
-Don't worry if you cannot figure out what these concepts mean immediately. We'll explain them one by one later. 
+Don't worry if you cannot figure out what these concepts mean immediately. We'll explain them one by one later.
 
 DevLake provides a generator to create a plugin conveniently. Let's scaffold our new plugin by running `go run generator/main.go create-plugin icla`, which would ask for `with_api_client` and `Endpoint`.
 
-* `with_api_client` is used for choosing if we need to request HTTP APIs by api_client. 
+* `with_api_client` is used for choosing if we need to request HTTP APIs by api_client.
 * `Endpoint` use in which site we will request, in our case, it should be `https://people.apache.org/`.
 
 ![create plugin](https://i.imgur.com/itzlFg7.png)
@@ -116,11 +116,11 @@ invalid ICLA_TOKEN, but ignore this error now
 How exciting. It works! The plugin defined and initiated in `plugin_main.go` use some options in `task_data.go`. They are made up as the most straightforward plugin in Apache DevLake, and `api_client.go` will be used in the next step to request HTTP APIs.
 
 ### Step 2: Create a sub-task for data collection
-Before we start, it is helpful to know how collection task is executed: 
+Before we start, it is helpful to know how collection task is executed:
 1. First, Apache DevLake would call `plugin_main.PrepareTaskData()` to prepare needed data before any sub-tasks. We need to create an API client here.
 2. Then Apache DevLake will call the sub-tasks returned by `plugin_main.SubTaskMetas()`. Sub-task is an independent task to do some job, like requesting API, processing data, etc.
 
-> Each sub-task must be defined as a SubTaskMeta, and implement SubTaskEntryPoint of SubTaskMeta. SubTaskEntryPoint is defined as 
+> Each sub-task must be defined as a SubTaskMeta, and implement SubTaskEntryPoint of SubTaskMeta. SubTaskEntryPoint is defined as
 > ```go
 > type SubTaskEntryPoint func(c SubTaskContext) error
 > ```
@@ -132,15 +132,15 @@ Let's run `go run generator/main.go create-collector icla committer` and confirm
 
 ![](https://i.imgur.com/tkDuofi.png)
 
-> - Collector will collect data from HTTP or other data sources, and save the data into the raw layer. 
-> - Inside the func `SubTaskEntryPoint` of `Collector`, we use `helper.NewApiCollector` to create an object of [ApiCollector](https://github.com/apache/incubator-devlake/blob/main/generator/template/plugin/tasks/api_collector.go-template), then call `execute()` to do the job. 
+> - Collector will collect data from HTTP or other data sources, and save the data into the raw layer.
+> - Inside the func `SubTaskEntryPoint` of `Collector`, we use `helper.NewApiCollector` to create an object of [ApiCollector](https://github.com/apache/incubator-devlake/blob/main/generator/template/plugin/tasks/api_collector.go-template), then call `execute()` to do the job.
 
 Now you can notice `data.ApiClient` is inited in `plugin_main.go/PrepareTaskData.ApiClient`. `PrepareTaskData` create a new `ApiClient`, and it's a tool Apache DevLake suggests to request data from HTTP Apis. This tool support some valuable features for HttpApi, like rateLimit, proxy and retry. Of course, if you like, you may use the lib `http` instead, but it will be more tedious.
 
 Let's move forward to use it.
 
 1. To collect data from `https://people.apache.org/public/icla-info.json`,
-we have filled `https://people.apache.org/` into `tasks/api_client.go/ENDPOINT` in Step 1.
+   we have filled `https://people.apache.org/` into `tasks/api_client.go/ENDPOINT` in Step 1.
 
 ![](https://i.imgur.com/q8Zltnl.png)
 
@@ -271,7 +271,7 @@ Now committer data have been saved in _tool_icla_committer.
 Notes: There are two ways here (open source or using it yourself). It is unnecessary, but we encourage it because convertors and the domain layer will significantly help build dashboards. More info about the domain layer at: https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema/
 
 > - Convertor will convert data from the tool layer and save it into the domain layer.
-> - We use `helper.NewDataConverter` to create an object of [DataConvertor], then call `execute()`. 
+> - We use `helper.NewDataConverter` to create an object of [DataConvertor], then call `execute()`.
 
 #### Step 2.4 Let's try it
 Sometimes OpenApi will be protected by token or other auth types, and we need to log in to gain a token to visit it. For example, only after logging in `private@apahce.com` could we gather the data about contributors signing ICLA. Here we briefly introduce how to authorize DevLake to collect data.
