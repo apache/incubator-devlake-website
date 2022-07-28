@@ -73,7 +73,7 @@ sidebar_position: 1
     ```
 
 8. Visit config UI at `localhost:4000` to configure data connections.
-    - Please follow the [tutorial](./UserManuals/ConfigUI/Tutorial.md)
+    - Please follow the [tutorial](UserManuals/ConfigUI/Tutorial.md)
     - Submit the form to update the values by clicking on the **Save Connection** button on each form page
 
 9. Visit `localhost:4000/pipelines/create` to RUN a Pipeline and trigger data collection.
