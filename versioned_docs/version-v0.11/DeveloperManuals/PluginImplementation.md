@@ -2,7 +2,7 @@
 title: "Plugin Implementation"
 sidebar_position: 2
 description: >
-Plugin Implementation
+   Plugin Implementation
 ---
 
 ## How to Implement a DevLake plugin?
