@@ -71,7 +71,7 @@ There's a lot of information in the diagram but we don't expect you to digest it
 
 In this guide, we'll walk through how to create a data source plugin from scratch. 
 
-Apache requires the project to confirm whether the Contributors and Committers of the project have signed the CLA. So we need to check whether committers have signed the CLA by requesting apple and whether contributors have signed by requesting the mailing list. Here we will explain how to request and cache committer information from the Apache API and extract the structured data. There is just an introduction for contributors at the end of this article.
+Apache requires the project to confirm whether the Contributors and Committers of the project have signed the CLA. So we need to check whether committers have signed the CLA by requesting Apache API and whether contributors have signed by requesting the mailing list. Here we will explain how to request and cache committer information from the Apache API and extract the structured data. There is just an introduction for contributors' at the end of this article.
 
 ### Step 1: Bootstrap the new plugin
 

@@ -40,7 +40,9 @@ const versions = require('./versions.json');
               path: '',
               banner: 'none',
             },
-            ...Object.fromEntries(versions.map(version => [ version, { path: version } ]))
+            [versions[0]]: {
+              path: versions[0],
+            }
           }
         },
         blog: {
