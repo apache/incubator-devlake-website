@@ -70,7 +70,12 @@ flowchart TD
 
 ## 一起来实现一个最简单的插件
 
-在本节中，将介绍如何从头创建一个数据收集插件。要收集的数据是 Apache 项目的所有 Committer 和 Contributor，Apache 要求项目确认项目的 Contributor 和 Committer 是否签署了CLA，我们需要通过请求`https://people.apache.org/public/icla-info.json`来检查 Committer、通过请求邮件列表检查 Contributor 是否签署了CLA。这里我们将演示如何从Apache API中请求并缓存所有Committer的信息，并提取出结构化的数据，Contributor 的检查仅做一些思路的介绍。
+在本节中，我们将介绍如何从头创建一个数据收集插件。要收集的数据是 Apache 项目的所有 Committers 和 Contributors 信息，目的是检查其是否签署了 CLA。我们将通过:
+
+* 请求 `https://people.apache.org/public/icla-info.json` 获取 Committers 信息
+* 请求`邮件列表` 获取 Contributors 信息
+  我们将演示如何通过 Apache API 请求并缓存所有 Committers 的信息，并提取出结构化的数据。Contributors 的收集仅做一些思路的介绍。
+
 
 ### 一、 创建新的插件
 

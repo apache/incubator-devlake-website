@@ -69,9 +69,12 @@ There's a lot of information in the diagram but we don't expect you to digest it
 
 ## A step-by-step guide towards your first plugin
 
-In this guide, we'll walk through how to create a data source plugin from scratch. 
+In this section, we will describe how to create a data collection plugin from scratch. The data to be collected is the information about all Committers and Contributors of the Apache project, in order to check whether they have signed the CLA. We are going to
 
-Apache requires the project to confirm whether the Contributors and Committers of the project have signed the CLA. So we need to check whether committers have signed the CLA by requesting Apache API and whether contributors have signed by requesting the mailing list. Here we will explain how to request and cache committer information from the Apache API and extract the structured data. There is just an introduction for contributors' at the end of this article.
+* request `https://people.apache.org/public/icla-info.json` to get the Committers' information
+* request the `mailing list` to get the Contributors' information
+
+We will focus on demonstrating how to request and cache information about all Committers through the Apache API and extract structured data from it. The collection of Contributors will only be briefly described.
 
 ### Step 1: Bootstrap the new plugin
 
