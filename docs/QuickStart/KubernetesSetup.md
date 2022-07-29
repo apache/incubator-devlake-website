@@ -37,13 +37,14 @@ We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlak
 ## FAQ
 
 1. Can I use a managed Cloud database service instead of running database in docker?
-  Yes, it only takes a few changes in the sample yaml file to make it happen. Below we'll use MySQL on AWS RDS as an example.
-  1. (Optional) Create a MySQL instance on AWS RDS following this [doc](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html), skip this step if you'd like to use an existing instance
-  2. Remove the `mysql` deployment and service sections from `k8s-deploy.yaml`
-  3. Update `devlake-config` configmap according to your RDS instance setup:
-    * `MYSQL_ROOT_PASSWORD`: remove this line
-    * `MYSQL_USER`: use your RDS instance's master username
-    * `MYSQL_PASSWORD`: use your RDS instance's password
-    * `MYSQL_DATABASE`: use your RDS instance's DB name, you may need to create a database first with `CREATE DATABASE <DB name>;`
-    * `MYSQL_URL`: set this for `grafana` in `$HOST:$PORT` format, where $HOST and $PORT should be your RDS instance's endpoint and port respectively
-    * `DB_URL`: update the connection string with your RDS instance's info for `devlake`
+
+   Yes, it only takes a few changes in the sample yaml file. Below we'll use MySQL on AWS RDS as an example.
+   1. (Optional) Create a MySQL instance on AWS RDS following this [doc](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html), skip this step if you'd like to use an existing instance
+   2. Remove the `mysql` deployment and service sections from `k8s-deploy.yaml`
+   3. Update `devlake-config` configmap according to your RDS instance setup:
+     * `MYSQL_ROOT_PASSWORD`: remove this line
+     * `MYSQL_USER`: use your RDS instance's master username
+     * `MYSQL_PASSWORD`: use your RDS instance's password
+     * `MYSQL_DATABASE`: use your RDS instance's DB name, you may need to create a database first with `CREATE DATABASE <DB name>;`
+     * `MYSQL_URL`: set this for `grafana` in `$HOST:$PORT` format, where $HOST and $PORT should be your RDS instance's endpoint and port respectively
+     * `DB_URL`: update the connection string with your RDS instance's info for `devlake`
