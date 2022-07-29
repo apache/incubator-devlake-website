@@ -36,11 +36,11 @@ We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlak
 
 ## FAQ
 
-- Can I use a managed Cloud database service instead of running database in docker?
+1. Can I use a managed Cloud database service instead of running database in docker?
   Yes, it only takes a few changes in the sample yaml file to make it happen. Below we'll use MySQL on AWS RDS as an example.
-  0. (Optional) Create a MySQL instance on AWS RDS following this [doc](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html), skip this step if you'd like to use an existing instance
-  1. Remove the `mysql` deployment and service sections from `k8s-deploy.yaml`
-  2. Update `devlake-config` configmap according to your RDS instance setup:
+  1. (Optional) Create a MySQL instance on AWS RDS following this [doc](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html), skip this step if you'd like to use an existing instance
+  2. Remove the `mysql` deployment and service sections from `k8s-deploy.yaml`
+  3. Update `devlake-config` configmap according to your RDS instance setup:
     * `MYSQL_ROOT_PASSWORD`: remove this line
     * `MYSQL_USER`: use your RDS instance's master username
     * `MYSQL_PASSWORD`: use your RDS instance's password
