@@ -5,13 +5,13 @@ description: >
 sidebar_position: 2
 ---
 
-We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/k8s-deploy.yaml) for users interested in deploying Apache DevLake to a k8s cluster.
+We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/k8s-deploy.yaml) to help deploy DevLake to Kubernetes
 
 [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/k8s-deploy.yaml) will create a namespace `devlake` on your k8s cluster, and use `nodePort 30004` for `config-ui`,  `nodePort 30002` for `grafana` dashboards. If you would like to use a specific version of Apache DevLake, please update the image tag of `grafana`, `devlake` and `config-ui` deployments.
 
 ## Step-by-step guide
 
-1. Download [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/k8s-deploy.yaml) to local machine
+1. Download [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/k8s-deploy.yaml)
 2. Customize the settings (`devlake-config` config map):
    - Settings shared between `grafana` and `mysql`
      * `MYSQL_ROOT_PASSWORD`: set root password for `mysql`
@@ -28,7 +28,7 @@ We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlak
    - Settings used by `devlake`:
      * `DB_URL`: update this value if  `MYSQL_USER`, `MYSQL_PASSWORD` or `MYSQL_DATABASE` were changed
 3. The `devlake` deployment store its configuration in `/app/.env`. In our sample yaml, we use `hostPath` volume, so please make sure directory `/var/lib/devlake` exists on your k8s workers, or employ other techniques to persist `/app/.env` file. Please do NOT mount the entire `/app` directory, because plugins are located in `/app/bin` folder.
-4. Finally, execute the following command, Apache DevLake should be up and running:
+4. Finally, execute the following command and DevLake should be up and running:
    ```sh
    kubectl apply -f k8s-deploy.yaml
    ```
@@ -36,11 +36,14 @@ We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlak
 
 ## FAQ
 
-- What if I want to replace MySQL with RDS?
-  First, remove the `mysql` deployment section, and then update the `devlake-config` configmap accordingly:
-  * `MYSQL_ROOT_PASSWORD`: remove this line
-  * `MYSQL_USER`: set RDS username for grafana
-  * `MYSQL_PASSWORD`: set RDS password for grafana
-  * `MYSQL_DATABASE`: set RDS database for grafana
-  * `MYSQL_URL`: set RDS URL for `grafana` in `$HOST:$PORT` format
-  * `DB_URL`: set RDS URL for `devlake`
+- Can I use a managed Cloud database service instead of running database in docker?
+  Yes, it only takes a few changes in the sample yaml file to make it happen. Below we'll use MySQL on AWS RDS as an example.
+  0. (Optional) Create a MySQL instance on AWS RDS following this [doc](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html), skip this step if you'd like to use an existing instance
+  1. Remove the `mysql` deployment and service sections from `k8s-deploy.yaml`
+  2. Update `devlake-config` configmap according to your RDS instance setup:
+    * `MYSQL_ROOT_PASSWORD`: remove this line
+    * `MYSQL_USER`: use your RDS instance's master username
+    * `MYSQL_PASSWORD`: use your RDS instance's password
+    * `MYSQL_DATABASE`: use your RDS instance's DB name, you may need to create a database first with `CREATE DATABASE <DB name>;`
+    * `MYSQL_URL`: set this for `grafana` in `$HOST:$PORT` format, where $HOST and $PORT should be your RDS instance's endpoint and port respectively
+    * `DB_URL`: update the connection string with your RDS instance's info for `devlake`
