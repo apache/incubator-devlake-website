@@ -10,7 +10,7 @@ description: >
 
 近年来，开源正在变得越来越火，在很多开发者眼中，「开源」也是非常极客的体现。同时参与开源项目也能给职业发展带来巨大的好处。可一些小伙伴却因为不知道参与的方法和途径没能参与，这里就向大家介绍一下作为开发者，可以怎么拥抱开源软件，以及怎么成为大家认可的开源贡献者。
 
-当然，本文会更多的从大的背景知识上进行叙述，关于代码提交的详细步骤，可以看看这一篇文章：https://mp.weixin.qq.com/s/b1mKPgOm1mnwsBbEBDRvKw 。
+当然，本文会更多的从大的背景知识上进行叙述，关于代码提交的详细步骤，可以看看这一篇文章：[如何参与开源项目 - 细说 GitHub 上的 PR 全过程](https://mp.weixin.qq.com/s/b1mKPgOm1mnwsBbEBDRvKw)。
 
 ## 什么是开源软件
 
@@ -160,6 +160,6 @@ Apache下面的每一个项目都有自己的邮件列表，同时分不同的�
 
 ## 结语
 
-好啦，大体的情况应该介绍的差不多了，其实参与开源项目并没有想象中的难，成为一个开源项目的Commiter，给职场和技术实力带来的助力将不可估量。另外，如果你还是较为初级的开发者，迫切的想要知道具体的参与步骤，可以看看开头提到的这篇文章：https://mp.weixin.qq.com/s/b1mKPgOm1mnwsBbEBDRvKw 。
+好啦，大体的情况应该介绍的差不多了，其实参与开源项目并没有想象中的难，成为一个开源项目的Commiter，给职场和技术实力带来的助力将不可估量。另外，如果你还是较为初级的开发者，迫切的想要知道具体的参与步骤，可以看看开头提到的这篇文章，[如何参与开源项目 - 细说 GitHub 上的 PR 全过程](https://mp.weixin.qq.com/s/b1mKPgOm1mnwsBbEBDRvKw)。
 
 我们的 DevLake (https://github.com/apache/incubator-devlake)  和 DevStream (https://github.com/devstream-io/devstream) 也是优秀的开源项目，欢迎你的参与哦~ 
