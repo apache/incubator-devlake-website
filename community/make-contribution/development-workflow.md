@@ -2,6 +2,70 @@
 sidebar_position: 03
 title: "Development Workflow"
 ---
+
+# Development Use Cases
+
+## Prerequests for development
+
+1. Install docker
+
+https://docs.docker.com/get-docker/
+
+1. Clone the repository
+
+```
+git clone https://github.com/apache/incubator-devlake
+```
+
+2. Init your config file
+
+`cp .env.example .env`
+
+3. Install the correct version of go 
+
+here: https://go.dev/dl/
+
+4. Install all go dependencies
+
+```
+go version
+go get
+```
+# Development Use Cases
+
+## Use Case 1: I want to run this project just to see what it does
+
+1. Run docker-compose
+
+`docker-compose up -d`
+
+## Use Case 2: I want to work on an existing plugin
+
+In this case, you will need to run a few docker containers manually: 
+
+```
+docker-compose up -d mysql
+docker-compose up -d grafana
+docker-compose up -d config-ui
+docker-compose up -d postgres
+```
+
+These are dependencies for most plugins.
+
+Then you will need to run the plugin you want directly:
+
+`go run ./plugin/xxx/xxx.go`
+
+> Note: each plugin has it's own README file with more detailed instructions for you to use.
+
+## Use Case 3: I want to work on the API
+
+`make dev`
+
+## Use Case 4: I want to work on the frontend
+
+TBD
+
 # Development Workflow
 
 This document shows the workflow of how to develop DevLake.
@@ -24,9 +88,9 @@ git remote add upstream https://github.com/apache/incubator-devlake.git
 git remote set-url --push upstream no_push
 ```
 
-2. Confirm the remotes you've set is make sense
+2. Confirm the remotes you've set make sense
 
-Execute `git remote -v` and you'll see output like below:
+Execute `git remote -v` and you'll see something similar to the following output:
 
 ```sh
 origin  git@github.com:merico-dev/lake.git (fetch)
