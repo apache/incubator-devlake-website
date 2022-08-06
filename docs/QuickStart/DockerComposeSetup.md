@@ -9,7 +9,7 @@ sidebar_position: 1
 ## Prerequisites
 
 - [Docker v19.03.10+](https://docs.docker.com/get-docker)
-- [docker-compose v2.2.3+](https://docs.docker.com/compose/install/)
+- [docker-compose v2.2.3+](https://docs.docker.com/compose/install/) (If you have Docker Desktop installed then you already have the Compose plugin installed)
 
 ## Launch DevLake
 
