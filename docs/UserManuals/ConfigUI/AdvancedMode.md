@@ -14,7 +14,7 @@ Advanced mode allows users to create any pipeline by writing JSON. This is usefu
 2. Have fine-grained control over what entities to collect or what subtasks to run for each plugin
 3. Orchestrate a complex pipeline that consists of multiple stages of plugins.
 
-Advanced mode gives the most flexibility to users by exposing the JSON API.
+Advanced mode gives utmost flexibility to users by exposing the JSON API.
 
 ## How to use advanced mode to create pipelines?
 
