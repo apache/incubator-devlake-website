@@ -42,7 +42,7 @@ DevLake normally uses one [data plugin](Glossary.md#data-plugins) to pull data f
 You can set up a new data connection either during the first step of creating a blueprint, or in the Connections page that can be accessed from the navigation bar. Because one single data connection can be reused in multiple blueprints, you can update the information of a particular data connection in Connections, to ensure all its associated blueprints will run properly. For example, you may want to update your GitHub token in a data connection if it goes expired.
 
 ### Data Scope
-**In a blueprint, each data connection can have multiple sets of data scope configurations, including GitHub or GitLab projects, Jira boards and their corresponding[data entities](Glossary.md#data-entities).** The fields for data scope configuration vary according to different data sources.
+**In a blueprint, each data connection can have multiple sets of data scope configurations, including GitHub or GitLab projects, Jira boards and their corresponding [data entities](Glossary.md#data-entities).** The fields for data scope configuration vary according to different data sources.
 
 Each set of data scope refers to one GitHub or GitLab project, or one Jira board and the data entities you would like to sync for them, for the convenience of applying transformation in the next step. For instance, if you wish to sync 5 GitHub projects, you will have 5 sets of data scope for GitHub.
 
