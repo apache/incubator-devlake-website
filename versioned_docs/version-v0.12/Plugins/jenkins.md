@@ -34,7 +34,9 @@ To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and pa
   [
     {
       "plugin": "jenkins",
-      "options": {}
+      "options": {
+        "connectionId": 1
+      }
     }
   ]
 ]
@@ -43,4 +45,3 @@ To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and pa
 ## Relationship between job and build
 
 Build is kind of a snapshot of job. Running job each time creates a build.
-<br/><br/><br/>

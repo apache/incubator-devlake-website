@@ -28,8 +28,6 @@ Here are some examples metrics using `GitHub` data:
 
 ## Configuration
 - Configuring GitHub via [config-ui](/UserManuals/ConfigUI/GitHub.md).
-- Configuring GitHub via `.env`
-   - GITHUB_PR_BODY_CLOSE_PATTERN: Define key word to associate issue in PR body, please check the example in .env.example
 
 ## Sample Request
 To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and paste a JSON config like the following:
@@ -40,6 +38,7 @@ To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and pa
     {
       "plugin": "github",
       "options": {
+        "connectionId": 1,
         "repo": "lake",
         "owner": "merico-dev"
       }
@@ -50,7 +49,7 @@ To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and pa
 
 You can also trigger data collection by making a POST request to `/pipelines`.
 ```
-curl --location --request POST 'localhost:8080/pipelines' \
+curl 'http://localhost:8080/pipelines' \
 --header 'Content-Type: application/json' \
 --data-raw '
 {
@@ -58,6 +57,7 @@ curl --location --request POST 'localhost:8080/pipelines' \
     "tasks": [[{
         "plugin": "github",
         "options": {
+            "connectionId": 1,
             "repo": "lake",
             "owner": "merico-dev"
         }
@@ -65,4 +65,3 @@ curl --location --request POST 'localhost:8080/pipelines' \
 }
 '
 ```
-<br/><br/><br/>

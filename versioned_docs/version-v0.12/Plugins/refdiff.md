@@ -63,6 +63,32 @@ curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
 }
 JSON
 ```
+Or if you prefered calculating latest releases
+```
+curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
+{
+    "name": "test-refdiff",
+    "tasks": [
+        [
+            {
+                "plugin": "refdiff",
+                "options": {
+                    "repoId": "github:GithubRepo:384111310",
+                    "tagsPattern": "v\d+\.\d+.\d+",
+                    "tagsLimit": 10,
+                    "tagsOrder": "reverse semver",
+                    "tasks": [
+                        "calculateCommitsDiff",
+                        "calculateIssuesDiff",
+                        "calculatePrCherryPick",
+                    ]
+                }
+            }
+        ]
+    ]
+}
+JSON
+```
 
 ## Development
 
