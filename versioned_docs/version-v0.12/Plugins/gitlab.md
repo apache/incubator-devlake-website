@@ -24,10 +24,10 @@ Configuring GitLab via [config-ui](/UserManuals/ConfigUI/GitLab.md).
 
 ## Gathering Data with GitLab
 
-To collect data, you can make a POST request to `/pipelines`
+To collect data, you can either utilize the `config-ui` or make a POST request to `/pipelines`
 
 ```
-curl --location --request POST 'localhost:8080/pipelines' \
+curl 'http://localhost:8080/pipelines' \
 --header 'Content-Type: application/json' \
 --data-raw '
 {
@@ -35,6 +35,7 @@ curl --location --request POST 'localhost:8080/pipelines' \
     "tasks": [[{
         "plugin": "gitlab",
         "options": {
+            "connectionId": 1,
             "projectId": <Your gitlab project id>
         }
     }]]
