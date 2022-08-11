@@ -33,7 +33,7 @@ Once the first run of the Blueprint is completed, you can view the corresponding
 
 ![img](/img/Introduction/userflow3.png)
 
-### 5. Customize the dahsboards with SQL
+### 5. Customize the dashboards with SQL
 If the pre-built dashboards are limited for your use cases, you can always customize or create your own metrics or dashboards with SQL.
 
 ![img](/img/Introduction/userflow4.png)
