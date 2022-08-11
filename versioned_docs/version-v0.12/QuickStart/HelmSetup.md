@@ -69,7 +69,7 @@ helm install devlake . \
     --set "ingress.tlsSecretName=ssl-certificate"
 ```
 
-After deployed, visit devlake: https://devlake-0.example.com:8443, and grafana at https://devlake-0.example.com:8443/grafana
+After deployed, visit devlake: https://devlake-0.example.com, and grafana at https://devlake-0.example.com/grafana
 
 
 ## Parameters
@@ -115,3 +115,7 @@ Some useful parameters for the chart, you could also check them in values.yaml
 | service.ingress.httpPort  | The http port for ingress  | 80  |
 | service.ingress.httpsPort  | The https port for ingress  | 443  |
 | option.localtime  | The hostpath for mount as /etc/localtime | /etc/localtime  |
+
+## Notes
+
+1. The first time you visit the Grafana dashboard you will need to use admin/admin as the username and password.
