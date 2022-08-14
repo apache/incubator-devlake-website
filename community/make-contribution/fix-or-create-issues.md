@@ -19,7 +19,7 @@ you can claim it by sending comment like "I'll take it",
 you can choose to write a Plan of Attack to show your understanding of the problem and 
 what steps would you take to solve the problem, and then start working on PR for the issue. 
 
-- Secondly, what if no more GFI left? yes, that is the most import part. 
+- Secondly, what if there are no more GFIs left? Yes, that is the most important part. 
 Create your own issues! Now, by looking into our code base, 
 you can definitely find many problem, like documentation, unit-test, even typo. 
 File issues for things you don't feel right, and we will verify if it is valid,
@@ -27,7 +27,7 @@ and then you can work on it.
 
 - Finally, you may ask, why do I go through all these troubles to write code for you? 
 No, you don't code for us, you code for everyone in the community, you code for yourself, 
-for your skills, to learn how to cooperate with others. And for those who made significant contribution,  
-we offer you, a seat of Apache Committer, or even PPMC.
+for your skills, to learn how to cooperate with others. And for those who made significant contribution,
+we offer you a seat of Apache Committer, or even PPMC.
 
 That's all, feel free to ask any questions. And Happy Coding!
