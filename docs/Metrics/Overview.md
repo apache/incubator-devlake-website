@@ -1,8 +1,6 @@
 ---
-sidebar_position: 8
-title: "Engineering Metrics"
-linkTitle: "Engineering Metrics"
-tags: []
+sidebar_position: 1
+title: "Overview"
 description: >
   The definition, values and data required for the 20+ engineering metrics supported by DevLake.
 ---
