@@ -110,11 +110,8 @@ make install
 ```
 
 ### MacOS
-1. [MacPorts](https://guide.macports.org/#introduction) install
-```
-port install libgit2@1.3.0
-```
-2. Source install
+
+NOTE：Do **NOT** install libgit2 via `MadPorts` or `homebrew`, install from source instead.
 ```
 brew install cmake
 git clone https://github.com/libgit2/libgit2.git
