@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwww=self.webpackChunkwww||[]).push([[4238],{77060:e=>{e.exports=JSON.parse('{"title":"Metrics","slug":"/category/metrics","permalink":"/docs/category/metrics","navigation":{"previous":{"title":"Team Configuration","permalink":"/docs/UserManuals/TeamConfiguration"},"next":{"title":"Overview","permalink":"/docs/Metrics/Overview"}}}')}}]);
