@@ -7,16 +7,17 @@ sidebar_position: 2
 
 ## Summary
 
-This document describes the entities in DevLake's domain layer schema and their relationships.
+This document describes Apache DevLake's domain layer schema.
 
-Data in the domain layer is transformed from the data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, Gitlab, Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
+Referring to DevLake's [architecture](../Overview/Architecture.md), the data in the domain layer is transformed from the data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, Gitlab, Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
 
 Domain layer schema itself includes 2 logical layers: a `DWD` layer and a `DWM` layer. The DWD layer stores the detailed data points, while the DWM is the slight aggregation and operation of DWD to store more organized details or middle-level metrics.
 
 
 ## Use Cases
-1. Users can make customized Grafana dashboards based on the domain layer schema.
-2. Contributors can complete the ETL logic when adding new data source plugins refering to this data model.
+1. [All metrics](../Metrics/Overview.md) from pre-built dashboards are based on this data schema.
+2. As a user, you can create your own customized dashboards based on this data schema.
+3. As a contributor, you can refer to this data schema while working on the ETL logic when adding/updating data source plugins.
 
 
 ## Data Models

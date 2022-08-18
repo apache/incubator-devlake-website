@@ -1,5 +1,5 @@
 ---
-title: "Data Support"
+title: "Supported Data Sources"
 description: >
   Data sources that DevLake supports
 sidebar_position: 1
