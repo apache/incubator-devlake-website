@@ -193,7 +193,7 @@ const versions = require('./versions.json');
               },
               {
                 label: 'Engineering Metrics',
-                to: 'docs/Metrics/Overview',
+                to: 'docs/category/Metrics',
               },
               {
                 label: 'Dashboards (Live Demo)',
