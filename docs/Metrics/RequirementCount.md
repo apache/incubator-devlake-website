@@ -6,7 +6,7 @@ sidebar_position: 2
 ---
 
 ## What is this metric? 
-The number of issues created with the type `REQUIREMENT`.
+The number of delivered requirements or features.
 
 ## Why is it important?
 1. Based on historical data, establish a baseline of the delivery capacity of a single iteration to improve the organization and planning of R&D resources.
@@ -18,27 +18,27 @@ The number of issues created with the type `REQUIREMENT`.
 
 
 ## How is it calculated?
-This metric is calculated by counting the number of completed issues in type "REQUIREMENT".
+This metric is calculated by counting the number of delivered issues in type "REQUIREMENT" in the given data range.
 
 <b>Data Sources Required</b>
 
-This metric relies on issues collected from Jira, GitHub, or TAPD.
+This metric relies on the issues collected from Jira, GitHub, or TAPD.
 
 <b>Transformation Rules Required</b>
 
-This metric relies on the "issue type mapping" in "blueprint-transformation rules" page to let DevLake know what issues can be regarded as `REQUIREMENT`.
+This metric relies on the 'type-requirement' configuration in Jira, GitHub or TAPD transformation rules to let DevLake know what CI builds/jobs can be regarded as `Requirements`.
 
 <b>SQL Queries</b>
 
 If you want to see a single count, run the following SQL in Grafana
 ```
   select 
-    count(*) as value
+    count(*) as "Requirement Count"
   from issues i
     join board_issues bi on i.id = bi.issue_id
   where 
-    i.type in ($type)
-    and i.type = 'REQUIREMENT'
+    i.type = 'REQUIREMENT'
+    and i.status = 'DONE'
     -- this is the default variable in Grafana
     and $__timeFilter(i.created_date)
     and bi.board_id in ($board_id)
@@ -55,6 +55,7 @@ If you want to see the monthly trend, run the following SQL
     join boards b on bi.board_id = b.id
   WHERE 
     i.type = 'REQUIREMENT'
+    and i.status = 'DONE'
     and $__timeFilter(i.created_date)
     and bi.board_id in ($board_id)
   GROUP by 1

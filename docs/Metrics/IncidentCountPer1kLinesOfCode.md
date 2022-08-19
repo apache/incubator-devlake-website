@@ -1,67 +1,39 @@
 ---
 title: "Incident Count per 1k Lines of Code"
 description: >
-  Requirement Count
-sidebar_position: 2
+  Incident Count per 1k Lines of Code
+sidebar_position: 13
 ---
 
 ## What is this metric? 
-The number of issues created with the type `REQUIREMENT`.
+Amount of incidents per 1,000 lines of code.
 
 ## Why is it important?
-1. Based on historical data, establish a baseline of the delivery capacity of a single iteration to improve the organization and planning of R&D resources.
-2. Evaluate whether the delivery capacity matches the business phase and demand scale. Identify key bottlenecks and reasonably allocate resources.
+1. Defect drill-down analysis to inform the development of design and code review strategies and to improve the internal QA process
+2. Assist teams to locate projects/modules with higher defect severity and density, and clean up technical debts
+3. Analyze critical points, identify good/to-be-improved practices that affect defect count or defect rate, to reduce the amount of future defects
 
 ## Which dashboard(s) does it exist in
-- Jira
-- GitHub
+N/A
 
 
 ## How is it calculated?
-This metric is calculated by counting the number of completed issues in type "REQUIREMENT".
+The number of incidents divided by total accumulated lines of code (additions + deletions) in the given data range.
 
 <b>Data Sources Required</b>
 
-This metric relies on issues collected from Jira, GitHub, or TAPD.
+This metric relies on 
+- issues collected from Jira, GitHub or TAPD.
+- commits collected from GitHub, GitLab or BitBucket.
 
 <b>Transformation Rules Required</b>
 
-This metric relies on the "issue type mapping" in "blueprint-transformation rules" page to let DevLake know what issues can be regarded as `REQUIREMENT`.
-
-<b>SQL Queries</b>
-
-If you want to see a single count, run the following SQL in Grafana
-```
-  select 
-    count(*) as value
-  from issues i
-    join board_issues bi on i.id = bi.issue_id
-  where 
-    i.type in ($type)
-    and i.type = 'REQUIREMENT'
-    -- this is the default variable in Grafana
-    and $__timeFilter(i.created_date)
-    and bi.board_id in ($board_id)
-```
-
-If you want to see the monthly trend, run the following SQL
-```
-  SELECT
-    DATE_ADD(date(i.created_date), INTERVAL -DAYOFMONTH(date(i.created_date))+1 DAY) as time,
-    count(distinct case when status != 'DONE' then i.id else null end) as "Number of Open Issues",
-    count(distinct case when status = 'DONE' then i.id else null end) as "Number of Delivered Issues"
-  FROM issues i
-    join board_issues bi on i.id = bi.issue_id
-    join boards b on bi.board_id = b.id
-  WHERE 
-    i.type = 'REQUIREMENT'
-    and $__timeFilter(i.created_date)
-    and bi.board_id in ($board_id)
-  GROUP by 1
-```
+This metric relies on
+- "Issue type mapping" in Jira, GitHub or TAPD's transformation rules page to let DevLake know what type(s) of issues can be regarded as incidents.
+- "PR-Issue Mapping" in GitHub, GitLab's transformation rules page to let DevLake know the bugs are fixed by which PR/MRs.
 
 ## How to improve?
-1. Analyze the number of requirements and delivery rate of different time cycles to find the stability and trend of the development process.
-2. Analyze and compare the number of requirements delivered and delivery rate of each project/team, and compare the scale of requirements of different projects.
-3. Based on historical data, establish a baseline of the delivery capacity of a single iteration (optimistic, probable and pessimistic values) to provide a reference for iteration estimation.
-4. Drill down to analyze the number and percentage of requirements in different phases of SDLC. Analyze rationality and identify the requirements stuck in the backlog. 
+1. From the project or team dimension, observe the statistics on the total number of defects, the distribution of the number of defects in each severity level/type/owner, the cumulative trend of defects, and the change trend of the defect rate in thousands of lines, etc.
+2. From version cycle dimension, observe the statistics on the cumulative trend of the number of defects/defect rate, which can be used to determine whether the growth rate of defects is slowing down, showing a flat convergence trend, and is an important reference for judging the stability of software version quality
+3. From the time dimension, analyze the trend of the number of test defects, defect rate to locate the key items/key points
+4. Evaluate whether the software quality and test plan are reasonable by referring to CMMI standard values

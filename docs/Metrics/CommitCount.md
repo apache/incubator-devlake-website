@@ -1,67 +1,55 @@
 ---
 title: "Commit Count"
 description: >
-  Requirement Count
-sidebar_position: 2
+  Commit Count
+sidebar_position: 6
 ---
 
 ## What is this metric? 
-The number of issues created with the type `REQUIREMENT`.
+The number of commits created.
 
 ## Why is it important?
-1. Based on historical data, establish a baseline of the delivery capacity of a single iteration to improve the organization and planning of R&D resources.
-2. Evaluate whether the delivery capacity matches the business phase and demand scale. Identify key bottlenecks and reasonably allocate resources.
+1. Identify potential bottlenecks that may affect output
+2. Encourage R&D practices of small step submissions and develop excellent coding habits
 
 ## Which dashboard(s) does it exist in
-- Jira
-- GitHub
-
+- GitHub Release Quality and Contribution Analysis
+- Demo-Is this month more productive than last?
+- Demo-Commit Count by Author
 
 ## How is it calculated?
-This metric is calculated by counting the number of completed issues in type "REQUIREMENT".
+This metric is calculated by counting the number of commits in the given data range.
 
 <b>Data Sources Required</b>
 
-This metric relies on issues collected from Jira, GitHub, or TAPD.
+This metric relies on commits collected from GitHub, GitLab or BitBucket.
 
 <b>Transformation Rules Required</b>
 
-This metric relies on the "issue type mapping" in "blueprint-transformation rules" page to let DevLake know what issues can be regarded as `REQUIREMENT`.
+N/A
 
 <b>SQL Queries</b>
 
-If you want to see a single count, run the following SQL in Grafana
-```
-  select 
-    count(*) as value
-  from issues i
-    join board_issues bi on i.id = bi.issue_id
-  where 
-    i.type in ($type)
-    and i.type = 'REQUIREMENT'
-    -- this is the default variable in Grafana
-    and $__timeFilter(i.created_date)
-    and bi.board_id in ($board_id)
-```
-
 If you want to see the monthly trend, run the following SQL
 ```
-  SELECT
-    DATE_ADD(date(i.created_date), INTERVAL -DAYOFMONTH(date(i.created_date))+1 DAY) as time,
-    count(distinct case when status != 'DONE' then i.id else null end) as "Number of Open Issues",
-    count(distinct case when status = 'DONE' then i.id else null end) as "Number of Delivered Issues"
-  FROM issues i
-    join board_issues bi on i.id = bi.issue_id
-    join boards b on bi.board_id = b.id
-  WHERE 
-    i.type = 'REQUIREMENT'
-    and $__timeFilter(i.created_date)
-    and bi.board_id in ($board_id)
-  GROUP by 1
+  with _commits as(
+    SELECT
+      DATE_ADD(date(authored_date), INTERVAL -DAY(date(authored_date))+1 DAY) as time,
+      count(*) as commit_count
+    FROM commits
+    WHERE
+      message not like '%Merge%'
+      and $__timeFilter(authored_date)
+    group by 1
+  )
+
+  SELECT 
+    date_format(time,'%M %Y') as month,
+    commit_count as "Commit Count"
+  FROM _commits
+  ORDER BY time
 ```
 
 ## How to improve?
-1. Analyze the number of requirements and delivery rate of different time cycles to find the stability and trend of the development process.
-2. Analyze and compare the number of requirements delivered and delivery rate of each project/team, and compare the scale of requirements of different projects.
-3. Based on historical data, establish a baseline of the delivery capacity of a single iteration (optimistic, probable and pessimistic values) to provide a reference for iteration estimation.
-4. Drill down to analyze the number and percentage of requirements in different phases of SDLC. Analyze rationality and identify the requirements stuck in the backlog. 
+1. Identify the main reasons for the unusual number of commits and the possible impact on the number of commits through comparison
+2. Evaluate whether the number of commits is reasonable in conjunction with more microscopic workload metrics (e.g. lines of code/code equivalents)
