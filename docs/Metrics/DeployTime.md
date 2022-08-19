@@ -16,15 +16,14 @@ The time it takes from when a PR is merged to when it is deployed.
 
 
 ## How is it calculated?
-You can define `deployment` based on your actual practice. For a full list of `deployment`'s definitions that DevLake support, please refer to [Deploy Frequency](/docs/Metrics/DeployFrequency.md).
+You can define `deployment` based on your actual practice. For a full list of `deployment`'s definitions that DevLake support, please refer to [Deployment Frequency](/docs/Metrics/DeploymentFrequency.md).
 
 <b>Data Sources Required</b>
+
 This metric relies on PR/MRs collected from GitHub or GitLab.
 
 <b>Transformation Rules Required</b>
 N/A
-
-<b>SQL Queries</b>
 
 ## How to improve?
 
