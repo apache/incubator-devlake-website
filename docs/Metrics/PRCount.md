@@ -1,12 +1,12 @@
 ---
-title: "PR Merge Rate"
+title: "Pull Request Count"
 description: >
-  Pull Request Merge Rate
-sidebar_position: 12
+  Pull Request Count
+sidebar_position: 11
 ---
 
 ## What is this metric? 
-The ratio of PRs/MRs that get merged.
+The number of pull requests created.
 
 ## Why is it important?
 1. Code review metrics are process indicators to provide quick feedback on developers' code quality
@@ -23,7 +23,7 @@ The ratio of PRs/MRs that get merged.
 
 
 ## How is it calculated?
-The number of merged PRs divided by the number of all PRs in the given data range.
+This metric is calculated by counting the number of PRs in the given data range.
 
 <b>Data Sources Required</b>
 
@@ -32,7 +32,6 @@ This metric relies on PRs/MRs collected from GitHub, GitLab or BitBucket.
 <b>Transformation Rules Required</b>
 
 N/A
-
 
 ## How to improve?
 1. From the developer dimension, we evaluate the code quality of developers by combining the task complexity with the metrics related to the number of review passes and review rounds.

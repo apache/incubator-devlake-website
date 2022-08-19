@@ -2,15 +2,15 @@
 title: "Requirement Granularity"
 description: >
   Requirement Granularity
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 ## What is this metric? 
-The number of issues in type `requirement/feature`, reflecting the throughput of features delivered.
+The average number of story points per requirement.
 
 ## Why is it important?
-1. Based on historical data, establish a baseline of the delivery capacity of a single iteration to improve the organization and planning of R&D resources.
-2. Evaluate whether the delivery capacity matches the business phase and demand scale. Identify key bottlenecks and reasonably allocate resources.
+1. Promote product teams to split requirements carefully, improve requirements quality, help developers understand requirements clearly, deliver efficiently and with high quality, and improve the project management capability of the team.
+2. Establish a data-supported workload estimation model to help R&D teams calibrate their estimation methods and more accurately assess the granularity of requirements, which is useful to achieve better issue planning in project management.
 
 ## Which dashboard(s) does it exist in
 - Jira
@@ -18,7 +18,7 @@ The number of issues in type `requirement/feature`, reflecting the throughput of
 
 
 ## How is it calculated?
-This metric is calculated by counting the number of completed issues in type "REQUIREMENT".
+The average story points of issues in type "REQUIREMENT" in the given data range.
 
 <b>Data Sources Required</b>
 
@@ -26,42 +26,9 @@ This metric relies on issues collected from Jira, GitHub, or TAPD.
 
 <b>Transformation Rules Required</b>
 
-This metric relies on the "issue type mapping" in "blueprint-transformation rules" page to let DevLake know what issues can be regarded as `REQUIREMENT`.
+This metric relies on the 'type-requirement' configuration in Jira, GitHub or TAPD transformation rules to let DevLake know what CI builds/jobs can be regarded as `Requirements`.
 
-<b>SQL Queries</b>
-
-If you want to see a single count, run the following SQL in Grafana
-```
-  select 
-    count(*) as value
-  from issues i
-    join board_issues bi on i.id = bi.issue_id
-  where 
-    i.type in ($type)
-    and i.type = 'REQUIREMENT'
-    -- this is the default variable in Grafana
-    and $__timeFilter(i.created_date)
-    and bi.board_id in ($board_id)
-```
-
-If you want to see the monthly trend, run the following SQL
-```
-  SELECT
-    DATE_ADD(date(i.created_date), INTERVAL -DAYOFMONTH(date(i.created_date))+1 DAY) as time,
-    count(distinct case when status != 'DONE' then i.id else null end) as "Number of Open Issues",
-    count(distinct case when status = 'DONE' then i.id else null end) as "Number of Delivered Issues"
-  FROM issues i
-    join board_issues bi on i.id = bi.issue_id
-    join boards b on bi.board_id = b.id
-  WHERE 
-    i.type = 'REQUIREMENT'
-    and $__timeFilter(i.created_date)
-    and bi.board_id in ($board_id)
-  GROUP by 1
-```
 
 ## How to improve?
-1. Analyze the number of requirements and delivery rate of different time cycles to find the stability and trend of the development process.
-2. Analyze and compare the number of requirements delivered and delivery rate of each project/team, and compare the scale of requirements of different projects.
-3. Based on historical data, establish a baseline of the delivery capacity of a single iteration (optimistic, probable and pessimistic values) to provide a reference for iteration estimation.
-4. Drill down to analyze the number and percentage of requirements in different phases of SDLC. Analyze rationality and identify the requirements stuck in the backlog. 
+1. Analyze the story points/requirement lead time of requirements to evaluate whether the ticket size, ie. requirement complexity is optimal.
+2. Compare the estimated requirement granularity with the actual situation and evaluate whether the difference is reasonable by combining more microscopic workload metrics (e.g. lines of code/code equivalents)
