@@ -30,7 +30,7 @@ DevLake插件是用Go的`plugin`包构建的共享库，在运行时与DevLake�
 3. [PluginTask](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_task.go) 实现自定义准备数据，其在子任务之前执行；
 4. [PluginApi](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_api.go) 实现插件自定义的API；
 5. [Migratable](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_db_migration.go) 返回插件自定义的数据库迁移的脚本。
-6. [PluginModel](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_model.go) 实现允许其他插件通过 GetTablesInfo() 的方法来获取当前插件的全部数据库表的 model 信息。
+6. [PluginModel](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_model.go) 实现允许其他插件通过 GetTablesInfo() 的方法来获取当前插件的全部数据库表的 model 信息。（若需domain layer的 model 信息，可访问[DomainLayerSchema](https://devlake.apache.org/zh/docs/DataModels/DevLakeDomainLayerSchema/)）
 
 下图是一个插件执行的流程：
 
@@ -316,6 +316,18 @@ func (plugin Gitlab) GetTablesInfo() []core.Tabler {
 		&models.GitlabTag{},
 	}
 }
+```
+
+可以使用如下方式来使用该接口
+
+```
+if pm, ok := plugin.(core.PluginModel); ok {
+    tables := pm.GetTablesInfo()
+    for _, table := range tables {
+        // do something
+    }
+}
+
 ```
 
 #### 2.6 将插件提交给开源社区
