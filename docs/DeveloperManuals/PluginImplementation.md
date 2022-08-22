@@ -29,6 +29,7 @@ A plugin mainly consists of a collection of subtasks that can be executed by Dev
 3. [PluginTask](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_task.go) enables a plugin to prepare data prior to subtask execution
 4. [PluginApi](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_api.go) lets a plugin exposes some self-defined APIs
 5. [Migratable](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_db_migration.go) is where a plugin manages its database migrations 
+6. [PluginModel](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_model.go) allows other plugins to get the model information of all database tables of the current plugin through the GetTablesInfo() method.
 
 The diagram below shows the control flow of executing a plugin:
 
@@ -283,6 +284,36 @@ Let's look at `api_client.go`. `NewIclaApiClient` load config `ICLA_TOKEN` by `.
 Of course, we can use `username/password` to get a token after login mockery. Just try and adjust according to the actual situation.
 
 Look for more related details at https://github.com/apache/incubator-devlake
+
+#### Step 2.5 Implement the GetTablesInfo() method of the PluginModel interface
+
+As shown in the following gitlab plugin example
+Add all models that need to be accessed by external plugins to the return value.
+
+```golang
+var _ core.PluginModel = (*Gitlab)(nil)
+
+func (plugin Gitlab) GetTablesInfo() []core.Tabler {
+	return []core.Tabler{
+		&models.GitlabConnection{},
+		&models.GitlabAccount{},
+		&models.GitlabCommit{},
+		&models.GitlabIssue{},
+		&models.GitlabIssueLabel{},
+		&models.GitlabJob{},
+		&models.GitlabMergeRequest{},
+		&models.GitlabMrComment{},
+		&models.GitlabMrCommit{},
+		&models.GitlabMrLabel{},
+		&models.GitlabMrNote{},
+		&models.GitlabPipeline{},
+		&models.GitlabProject{},
+		&models.GitlabProjectCommit{},
+		&models.GitlabReviewer{},
+		&models.GitlabTag{},
+	}
+}
+```
 
 #### Final step: Submit the code as open source code
 Good ideas and we encourage contributions~ Let's learn about migration scripts and domain layers to write normative and platform-neutral codes. More info at https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema or contact us for ebullient help.
