@@ -1,7 +1,7 @@
 ---
 title: "Developer Setup"
 description: >
-  The steps to install DevLake in develper mode.
+  The steps to install DevLake in developer mode.
 sidebar_position: 1
 ---
 
@@ -9,7 +9,7 @@ sidebar_position: 1
 ## Requirements
 
 - <a href="https://docs.docker.com/get-docker" target="_blank">Docker v19.03.10+</a>
-- <a href="https://golang.org/doc/install" target="_blank">Golang v1.17+</a>
+- <a href="https://golang.org/doc/install" target="_blank">Golang v1.19+</a>
 - Make
   - Mac (Already installed)
   - Windows: [Download](http://gnuwin32.sourceforge.net/packages/make.htm)
