@@ -46,6 +46,21 @@ Tables that end with WIP are still under development.
 
 <br/>
 
+## Get all domain layer model info.
+
+All domain layer models can be accessed by the following method
+
+```golang
+import "github.com/apache/incubator-devlake/models/domainlayer/domaininfo"
+
+domaininfo := domaininfo.GetDomainTablesInfo()
+for _, table := range domaininfo {
+  // do something 
+}
+```
+
+If you want to learn more about plugin models,please visit [PluginImplementation](https://devlake.apache.org/docs/DeveloperManuals/PluginImplementation)
+
 ## DWD Entities - (Data Warehouse Detail)
 
 ### Domain 1 - Issue Tracking

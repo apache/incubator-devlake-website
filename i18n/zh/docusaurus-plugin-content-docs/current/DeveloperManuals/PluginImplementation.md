@@ -30,6 +30,7 @@ DevLake插件是用Go的`plugin`包构建的共享库，在运行时与DevLake�
 3. [PluginTask](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_task.go) 实现自定义准备数据，其在子任务之前执行；
 4. [PluginApi](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_api.go) 实现插件自定义的API；
 5. [Migratable](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_db_migration.go) 返回插件自定义的数据库迁移的脚本。
+6. [PluginModel](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_model.go) 实现允许其他插件通过 GetTablesInfo() 的方法来获取当前插件的全部数据库表的 model 信息。（若需domain layer的 model 信息，可访问[DomainLayerSchema](https://devlake.apache.org/zh/docs/DataModels/DevLakeDomainLayerSchema/)）
 
 下图是一个插件执行的流程：
 
@@ -287,7 +288,49 @@ receive data: 272956
 
 更多相关细节请看https://github.com/apache/incubator-devlake
 
-#### 2.5 将插件提交给开源社区
+#### Step 2.5 实现 PluginModel 接口的 GetTablesInfo() 方法
+
+如下gitlab插件示例所示
+将所有需要被外部插件访问到的 model 均添加到返回值中。
+
+```golang
+var _ core.PluginModel = (*Gitlab)(nil)
+
+func (plugin Gitlab) GetTablesInfo() []core.Tabler {
+	return []core.Tabler{
+		&models.GitlabConnection{},
+		&models.GitlabAccount{},
+		&models.GitlabCommit{},
+		&models.GitlabIssue{},
+		&models.GitlabIssueLabel{},
+		&models.GitlabJob{},
+		&models.GitlabMergeRequest{},
+		&models.GitlabMrComment{},
+		&models.GitlabMrCommit{},
+		&models.GitlabMrLabel{},
+		&models.GitlabMrNote{},
+		&models.GitlabPipeline{},
+		&models.GitlabProject{},
+		&models.GitlabProjectCommit{},
+		&models.GitlabReviewer{},
+		&models.GitlabTag{},
+	}
+}
+```
+
+可以使用如下方式来使用该接口
+
+```
+if pm, ok := plugin.(core.PluginModel); ok {
+    tables := pm.GetTablesInfo()
+    for _, table := range tables {
+        // do something
+    }
+}
+
+```
+
+#### 2.6 将插件提交给开源社区
 恭喜你! 第一个插件已经创建完毕! 🎖 我们鼓励开源贡献~ 接下来还需要学习 migrationScripts 和 domainLayers 来编写规范的、平台无关的代码。更多信息请访问https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema，或联系我们以获得热情洋溢的帮助。
 
 ![come on](https://user-images.githubusercontent.com/3294100/178882323-7bae0331-c458-4f34-a63d-af3975b9dd85.jpg)
