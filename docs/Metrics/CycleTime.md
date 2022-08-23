@@ -20,9 +20,11 @@ PR Cycle Time indicate the overall speed of the delivery progress in terms of PR
 You can define `deployment` based on your actual practice. For a full list of `deployment`'s definitions that DevLake support, please refer to [Deployment Frequency](/docs/Metrics/DeploymentFrequency.md).
 
 <b>Data Sources Required</b>
+
 This metric relies on PR/MRs collected from GitHub or GitLab.
 
 <b>Transformation Rules Required</b>
+
 N/A
 
 <b>SQL Queries</b>

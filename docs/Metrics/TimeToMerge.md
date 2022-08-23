@@ -18,9 +18,11 @@ The delay of reviewing and waiting to review PRs has large impact on delivery sp
 
 ## How is it calculated?
 <b>Data Sources Required</b>
+
 This metric relies on PR/MRs collected from GitHub or GitLab.
 
 <b>Transformation Rules Required</b>
+
 N/A
 
 <b>SQL Queries</b>
