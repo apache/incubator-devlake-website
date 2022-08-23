@@ -18,9 +18,11 @@ It is recommended that you keep every task on a workable and manageable scale fo
 
 ## How is it calculated?
 <b>Data Sources Required</b>
+
 This metric relies on PR/MRs collected from GitHub or GitLab.
 
 <b>Transformation Rules Required</b>
+
 N/A
 
 <b>SQL Queries</b>

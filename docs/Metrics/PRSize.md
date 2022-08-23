@@ -20,9 +20,11 @@ Small PRs can reduce risks of introducing new bugs and increase code review qual
 This metric is calculated by counting the total number of code changes (in LOC) divided by the total number of PRs in the selected time range.
 
 <b>Data Sources Required</b>
+
 This metric relies on PR/MRs collected from GitHub or GitLab.
 
 <b>Transformation Rules Required</b>
+
 N/A
 
 <b>SQL Queries</b>

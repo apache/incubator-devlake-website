@@ -20,10 +20,13 @@ Code review should be conducted almost in real-time and usually take less than t
 
 ## How is it calculated?
 This metric is the time frame between when the first comment is added to a PR, to when the PR is merged.
+
 <b>Data Sources Required</b>
+
 This metric relies on PR/MRs collected from GitHub or GitLab.
 
 <b>Transformation Rules Required</b>
+
 N/A
 
 <b>SQL Queries</b>

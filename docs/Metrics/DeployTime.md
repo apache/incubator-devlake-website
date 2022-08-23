@@ -23,6 +23,7 @@ You can define `deployment` based on your actual practice. For a full list of `d
 This metric relies on PR/MRs collected from GitHub or GitLab.
 
 <b>Transformation Rules Required</b>
+
 N/A
 
 ## How to improve?

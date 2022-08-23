@@ -19,9 +19,11 @@ PR Review Depth (in Comments per RR) is related to the quality of code review, i
 This metric is calculated by counting the total number of PR comments divided by the total number of PRs in the selected time range.
 
 <b>Data Sources Required</b>
+
 This metric relies on PR/MRs collected from GitHub or GitLab.
 
 <b>Transformation Rules Required</b>
+
 N/A
 
 <b>SQL Queries</b>

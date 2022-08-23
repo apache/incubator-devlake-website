@@ -18,9 +18,11 @@ PR Pickup Time shows how engaged your team is in collaborative work by identifyi
 
 ## How is it calculated?
 <b>Data Sources Required</b>
+
 This metric relies on PR/MRs collected from GitHub or GitLab.
 
 <b>Transformation Rules Required</b>
+
 N/A
 
 <b>SQL Queries</b>
