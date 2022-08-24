@@ -89,3 +89,9 @@ Below is an example for collecting a GitHub repo and a Jira board in parallel. I
   ]
 ]
 ```
+## Editing a Blueprint (Advanced Mode)
+This section is for editing a Blueprint in the Advanced Mode. To edit in the Normal mode, please refer to [this guide](Tutorial.md#editing-a-blueprint-normal-mode).
+
+To edit a Blueprint created in the Advanced mode, you can simply go the Settings page of that Blueprint and click on Edit JSON to edit its configuration.
+
+![img](/img/ConfigUI/BlueprintEditing/blueprint-edit2.png)
