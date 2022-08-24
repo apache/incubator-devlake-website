@@ -2,7 +2,7 @@
 title: "Supported Data Sources"
 description: >
   Data sources that DevLake supports
-sidebar_position: 1
+sidebar_position: 4
 ---
 
 
@@ -23,7 +23,7 @@ DevLake supports the following data sources. The data from each data source is c
 
 
 ## Data Collection Scope By Each Plugin
-This table shows the entities collected by each plugin. Domain layer entities in this table are consistent with the entities [here](./DevLakeDomainLayerSchema.md).
+This table shows the entities collected by each plugin. Domain layer entities in this table are consistent with the entities [here](./DataModels/DevLakeDomainLayerSchema.md).
 
 | Domain Layer Entities | ae             | gitextractor | github         | gitlab  | jenkins | jira    | refdiff | tapd    |
 | --------------------- | -------------- | ------------ | -------------- | ------- | ------- | ------- | ------- | ------- |
