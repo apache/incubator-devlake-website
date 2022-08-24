@@ -184,8 +184,8 @@ const versions = require('./versions.json');
             title: 'Docs',
             items: [
               {
-                label: 'Quick Start',
-                to: 'docs/QuickStart/DockerComposeSetup',
+                label: 'Getting Started',
+                to: 'docs/GettingStarted',
               },
               {
                 label: 'Data Models',
@@ -193,11 +193,11 @@ const versions = require('./versions.json');
               },
               {
                 label: 'Engineering Metrics',
-                to: 'docs/category/Metrics',
+                to: 'docs/Metrics',
               },
               {
                 label: 'Dashboards (Live Demo)',
-                to: 'docs/LiveDemo/GitHubBasic',
+                to: 'docs/LiveDemo',
               },
             ],
           },

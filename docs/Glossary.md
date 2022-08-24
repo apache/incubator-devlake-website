@@ -1,10 +1,7 @@
 ---
-sidebar_position: 10
+sidebar_position: 7
 title: "Glossary"
 linkTitle: "Glossary"
-tags: []
-categories: []
-weight: 6
 description: >
   DevLake Glossary
 ---
@@ -46,7 +43,7 @@ You can set up a new data connection either during the first step of creating a 
 
 Each set of data scope refers to one GitHub or GitLab project, or one Jira board and the data entities you would like to sync for them, for the convenience of applying transformation in the next step. For instance, if you wish to sync 5 GitHub projects, you will have 5 sets of data scope for GitHub.
 
-To learn more about the default data scope of all data sources and data plugins, please refer to [Data Support](./DataModels/DataSupport.md).
+To learn more about the default data scope of all data sources and data plugins, please refer to [Supported Data Sources](./SupportedDataSources.md).
 
 ### Data Entities
 **Data entities refer to the data fields from one of the five data domains: Issue Tracking, Source Code Management, Code Review, CI/CD and Cross-Domain.**
@@ -81,7 +78,7 @@ Data Transformation Plugins transform the data pulled by other Data Collection P
 
 Although the names of the data plugins are not displayed in the regular mode of DevLake Configuration UI, they can be used directly in JSON in the Advanced Mode.
 
-For detailed information about the relationship between data sources and data plugins, please refer to [Data Support](./DataModels/DataSupport.md).
+For detailed information about the relationship between data sources and data plugins, please refer to [Supported Data Sources](./SupportedDataSources.md).
 
 
 ### Pipelines
