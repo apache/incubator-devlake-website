@@ -15,7 +15,7 @@ Domain layer schema itself includes 2 logical layers: a `DWD` layer and a `DWM` 
 
 
 ## Use Cases
-1. [All metrics](../category/metrics) from pre-built dashboards are based on this data schema.
+1. [All metrics](../Metrics) from pre-built dashboards are based on this data schema.
 2. As a user, you can create your own customized dashboards based on this data schema.
 3. As a contributor, you can refer to this data schema while working on the ETL logic when adding/updating data source plugins.
 
