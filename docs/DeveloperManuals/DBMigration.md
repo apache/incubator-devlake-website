@@ -18,16 +18,32 @@ When DevLake starts, scripts register themselves to the framework by invoking th
 
 ```go
 type Script interface {
+    // this function will contain the business logic of the migration (e.g. DDL logic)
 	Up(ctx context.Context, db *gorm.DB) error
+    // the version number of the migration. typically in date format (YYYYMMDDHHMMSS), e.g. 20220728000001. Migrations are executed sequentially based on this number.
 	Version() uint64
+	// The name of this migration
 	Name() string
 }
 ```
+
+## Migration Model
+
+For each migration we define a "snapshot" datamodel of the model that we wish to perform the migration on.
+The fields on this model shall be identical to the actual model, but unlike the actual one, this one will
+never change in the future. The naming convention of these models is `<ModelName>YYYYMMDD` and they must implement
+the `func TableName() string` method, and consumed by the `Script::Up` method.
 
 ## Table `migration_history`
 
 The table tracks migration scripts execution and schemas changes.
 From which, DevLake could figure out the current state of database schemas.
+
+## Execution
+
+Each plugin has a `migrationscripts` subpackage that lists all the migrations to be executed for that plugin. You
+will need to add your migration to that list for the framework to pick it up. Similarly, there is such a package
+for the framework-only migrations defined under the `models` package.
 
 
 ## How It Works
