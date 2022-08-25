@@ -450,6 +450,58 @@ A build is an execution of a job.
 | `status`       | varchar  | 255        | The result of build. The values may be 'success', 'failed', etc. |            |
 | `commit_sha`   | char     | 40         | The specific commit being built on. Nullable.                    |            |
 
+#### cicd_pipelines
+
+A cicd_pipeline is a series of builds that have connections or a standalone build.
+
+| **field**          | **type**        | **length** | **description**                                                 | **key** |
+| :----------------- | :-------------- | :--------- | :-------------------------------------------------------------- | :------ |
+| `id`               | varchar         | 255       | This key is generated based on details from the original plugin | PK      |
+| `created_at`       | datetime        | 3         |                                                                 |         |
+| `updated_at`       | datetime        | 3         |                                                                 |         |
+| `name`             | varchar         | 255       |                                                                 |         |
+| `commit_sha`       | varchar         | 255       |                                                                 |         |
+| `branch`           | varchar         | 255       |                                                                 |         |
+| `repo`             | varchar         | 255       |                                                                 |         |
+| `result`           | varchar         | 100       |                                                                 |         |
+| `status`           | varchar         | 100       |                                                                 |         |
+| `type`             | varchar         | 100       | to indicate this is CI or CD                                    |         |
+| `duration_sec`     | bigint unsigned |            |                                                                 |         |
+| `created_date`     | datetime        | 3         |                                                                 |         |
+| `finished_date`    | datetime        | 3         |                                                                 |         |
+
+#### cicd_pipeline_repos
+
+A map between cic_pipeline and repo info.
+
+| **field**    | **type** | **length** | **description**                                                 | **key** |
+| :----------- | :------- | :--------- | :-------------------------------------------------------------- | :------ |
+| `commit_sha` | varchar  | 255       |                                                                 | PK      |
+| `branch`     | varchar  | 255       |                                                                 |         |
+| `repo_url`   | varchar  | 255       |                                                                 |         |
+| `id`         | varchar  | 255       | This key is generated based on details from the original plugin | PK      |
+| `created_at` | datetime | 3         |                                                                 |         |
+| `updated_at` | datetime | 3         |                                                                 |         |
+
+
+#### cicd_tasks
+
+A cicd_task is a single job of ci/cd.
+
+| **field**          | **type**        | **length** | **description**                                                 | **key** |
+| :----------------- | :-------------- | :--------- | :-------------------------------------------------------------- | :------ |
+| `id`               | varchar         | 255        | This key is generated based on details from the original plugin | PK      |
+| `created_at`       | datetime        | 3          |                                                                 |         |
+| `updated_at`       | datetime        | 3          |                                                                 |         |
+| `name`             | varchar         | 255        |                                                                 |         |
+| `pipeline_id`      | varchar         | 255        |                                                                 |         |
+| `result`           | varchar         | 100        |                                                                 |         |
+| `status`           | varchar         | 100        |                                                                 |         |
+| `type`             | varchar         | 100        | to indicate this is CI or CD                                    |         |
+| `duration_sec`     | bigint unsigned |            |                                                                 |         |
+| `started_date`     | datetime        | 3          |                                                                 |         |
+| `finished_date`    | datetime        | 3          |                                                                 |         |
+
 
 ### Cross-Domain Entities
 
