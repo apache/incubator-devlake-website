@@ -39,7 +39,7 @@ The overall workflow is:
 Note:
 
 1. Please replace `/path/to/*.csv` with the absolute path of the CSV file you'd like to upload.
-2. Please replace `127.0.0.1:8080` with your actual Apache DevLake service IP and port number.
+2. Please replace `127.0.0.1:4000` with your actual Apache DevLake ConfigUI service IP and port number.
 
 ## Step 1 - Create the `teams` table
 
@@ -47,10 +47,10 @@ You can create the `teams` table by sending a PUT request to `/plugins/org/teams
 
 a. Download the template `teams.csv` file
 
-    i.  GET http://127.0.0.1:8080/plugins/org/teams.csv?fake_data=true (pasting the URL into your browser will download the template)
+    i.  GET http://127.0.0.1:4000/api/plugins/org/teams.csv?fake_data=true (pasting the URL into your browser will download the template)
 
     ii. If you prefer using curl:
-        curl --location --request GET 'http://127.0.0.1:8080/plugins/org/teams.csv?fake_data=true'
+        curl --location --request GET 'http://127.0.0.1:4000/api/plugins/org/teams.csv?fake_data=true'
     
 
 b. Fill out `teams.csv` file and upload it to DevLake
@@ -58,7 +58,7 @@ b. Fill out `teams.csv` file and upload it to DevLake
     i. Fill out `teams.csv` with your org data. Please don't modify the column headers or the file suffix.
 
     ii. Upload `teams.csv` to DevLake with the following curl command: 
-    curl --location --request PUT 'http://127.0.0.1:8080/plugins/org/teams.csv' --form 'file=@"/path/to/teams.csv"'
+    curl --location --request PUT 'http://127.0.0.1:4000/api/plugins/org/teams.csv' --form 'file=@"/path/to/teams.csv"'
 
     iii. The PUT request would populate the `teams` table with data from `teams.csv` file.
     You can connect to the database and verify the data in the `teams` table.
@@ -73,10 +73,10 @@ You can create the `users` and `team_users` table by sending a single PUT reques
 
 a. Download the template `users.csv` file
 
-    i.  GET http://127.0.0.1:8080/plugins/org/users.csv?fake_data=true (pasting the URL into your browser will download the template)
+    i.  GET http://127.0.0.1:4000/api/plugins/org/users.csv?fake_data=true (pasting the URL into your browser will download the template)
 
     ii. If you prefer using curl:
-    curl --location --request GET 'http://127.0.0.1:8080/plugins/org/users.csv?fake_data=true'
+    curl --location --request GET 'http://127.0.0.1:4000/api/plugins/org/users.csv?fake_data=true'
 
 
 b. Fill out `users.csv` and upload to DevLake
@@ -84,7 +84,7 @@ b. Fill out `users.csv` and upload to DevLake
     i.  Fill out `users.csv` with your org data. Please don't modify the column headers or the file suffix
 
     ii. Upload `users.csv` to DevLake with the following curl command:
-    curl --location --request PUT 'http://127.0.0.1:8080/plugins/org/users.csv' --form 'file=@"/path/to/users.csv"'
+    curl --location --request PUT 'http://127.0.0.1:4000/api/plugins/org/users.csv' --form 'file=@"/path/to/users.csv"'
 
     iii. The PUT request would populate the `users` table along with the `team_users` table with data from `users.csv` file.
     You can connect to the database and verify these two tables.
@@ -119,7 +119,7 @@ Now that we have data in both the `users` and `accounts` table, we can tell DevL
 a. Send an API request to DevLake to run the mapping algorithm
 
 ```
-curl --location --request POST '127.0.0.1:8080/pipelines' \
+curl --location --request POST '127.0.0.1:4000/api/pipelines' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "name": "test",
@@ -148,9 +148,9 @@ We'll demonstrate how to manually update `user_accounts` when the mapping is ina
 To make manual verification easier, DevLake provides an API for users to download `user_accounts` as a CSV file.
 Alternatively, you can verify and modify `user_accounts` all by SQL, see Appendix for more info.
 
-a. GET http://127.0.0.1:8080/plugins/org/user_account_mapping.csv(pasting the URL into your browser will download the file). If you prefer using curl:
+a. GET http://127.0.0.1:4000/api/plugins/org/user_account_mapping.csv(pasting the URL into your browser will download the file). If you prefer using curl:
 ```
-curl --location --request GET 'http://127.0.0.1:8080/plugins/org/user_account_mapping.csv'
+curl --location --request GET 'http://127.0.0.1:4000/api/plugins/org/user_account_mapping.csv'
 ```
 
 ![image](/img/Team/teamflow6.png)
@@ -160,7 +160,7 @@ For example, here we change the `UserId` of row 'Id=github:GithubAccount:1:1234'
 Then we upload the updated `user_account_mapping.csv` file with the following curl command:
 
 ```
-curl --location --request PUT 'http://127.0.0.1:8080/plugins/org/user_account_mapping.csv' --form 'file=@"/path/to/user_account_mapping.csv"'
+curl --location --request PUT 'http://127.0.0.1:4000/api/plugins/org/user_account_mapping.csv' --form 'file=@"/path/to/user_account_mapping.csv"'
 ```
 
 c. You can verify the data in the `user_accounts` table has been updated.
