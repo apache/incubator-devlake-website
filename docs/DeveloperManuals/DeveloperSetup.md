@@ -16,6 +16,10 @@ sidebar_position: 1
   - Ubuntu: `sudo apt-get install build-essential libssl-dev`
 
 ## How to setup dev environment
+
+The following guide will walk you through the procedure to run local config-ui and devlake servers against dockerized
+MySQL and Grafana containers.
+
 1. Navigate to where you would like to install this project and clone the repository:
 
    ```sh
@@ -66,11 +70,13 @@ sidebar_position: 1
 
     Q: I got an error saying: `libgit2.so.1.3: cannot open share object file: No such file or directory`
 
-    A: Make sure your program can find `libgit2.so.1.3`. `LD_LIBRARY_PATH` can be assigned like this if your `libgit2.so.1.3` is located at `/usr/local/lib`:
+    A: This library is needed by the git-extractor plugin. Make sure your program can find `libgit2.so.1.3`. `LD_LIBRARY_PATH` can be assigned like this if your `libgit2.so.1.3` is located at `/usr/local/lib`:
 
     ```sh
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     ```
+   
+    Note that the version has to be pinned to 1.3.0. If you don't have it, you may need to build it manually with CMake from [source](https://github.com/libgit2/libgit2/releases/tag/v1.3.0).
 
 8. Visit config UI at `localhost:4000` to configure data connections.
     - Please follow the [tutorial](UserManuals/ConfigUI/Tutorial.md)
