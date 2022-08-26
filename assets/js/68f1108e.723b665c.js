@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwww=self.webpackChunkwww||[]).push([[3906],{9135:e=>{e.exports=JSON.parse('{"title":"Live Demo","slug":"LiveDemo","permalink":"/docs/v0.13/LiveDemo","navigation":{"previous":{"title":"TAPD","permalink":"/docs/v0.13/Plugins/tapd"},"next":{"title":"GitHub Basic Metrics","permalink":"/docs/v0.13/LiveDemo/GitHubBasic"}}}')}}]);
