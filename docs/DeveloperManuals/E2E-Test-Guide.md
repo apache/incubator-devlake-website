@@ -9,7 +9,8 @@ description: >
 ## Why write E2E tests
 
 E2E testing, as a part of automated testing, generally refers to black-box testing at the file and module level or unit testing that allows the use of some external services such as databases. The purpose of writing E2E tests is to shield some internal implementation logic and see whether the same external input can output the same result in terms of data aspects. In addition, compared to the black-box integration tests, it can avoid some chance problems caused by network and other factors. More information about the plugin can be found here: Why write E2E tests (incomplete).
-In DevLake, E2E testing consists of interface testing and input/output result validation for the plugin Extract/Convert subtask. This article only describes the process of writing the latter.
+In DevLake, E2E testing consists of interface testing and input/output result validation for the plugin Extract/Convert subtask. This article only describes the process of writing the latter. As the Collectors invoke external
+services we typically do not write E2E tests for them.
 
 ## Preparing data
 
@@ -17,8 +18,8 @@ Let's take a simple plugin - Feishu Meeting Hours Collection as an example here.
 ![image](https://user-images.githubusercontent.com/3294100/175061114-53404aac-16ca-45d1-a0ab-3f61d84922ca.png)
 Next, we will write the E2E tests of the sub-tasks.
 
-The first step in writing the E2E test is to run the Collect task of the corresponding plugin to complete the data collection, that is, to have the corresponding data saved in the table starting with `_raw_feishu_` in the database.
-Here are the logs and database tables using the DirectRun (cmd) run method.
+The first step in writing the E2E test is to run the Collect task of the corresponding plugin to complete the data collection; that is, to have the corresponding data saved in the table starting with `_raw_feishu_` in the database.
+This data will be presumed to be the "source of truth" for our tests. Here are the logs and database tables using the DirectRun (cmd) run method.
 ```
 $ go run plugins/feishu/main.go --numOfDaysToCollect 2 --connectionId 1 (Note: command may change with version upgrade)
 [2022-06-22 23:03:29] INFO failed to create dir logs: mkdir logs: file exists
@@ -40,9 +41,9 @@ press `c` to send cancel signal
 <img width="993" alt="image" src="https://user-images.githubusercontent.com/3294100/175064505-bc2f98d6-3f2e-4ccf-be68-a1cab1e46401.png"/>
 Ok, the data has now been saved to the `_raw_feishu_*` table, and the `data` column is the return information from the plugin. Here we only collected data for the last 2 days. The data information is not much, but it also covers a variety of situations. That is, the same person has data on different days.
 
-It is also worth mentioning that the plugin runs two tasks, `collectMeetingTopUserItem` and `extractMeetingTopUserItem`, the former is the task of collecting, which is needed to run this time, and the latter is the task of extracting data. It doesn't matter whether it runs in the prepared data session.
+It is also worth mentioning that the plugin runs two tasks, `collectMeetingTopUserItem` and `extractMeetingTopUserItem`. The former is the task of collecting, which is needed to run this time, and the latter is the task of extracting data. It doesn't matter whether the extractor runs in the prepared data session.
 
-Next, we need to export the data to .csv format. This step is a variety of options. You can show your skills, and I only introduce a few common methods here.
+Next, we need to export the data to .csv format. This step can be done in a variety of different ways - you can show your skills. I will only introduce a few common methods here.
 
 ### DevLake Code Generator Export
 
@@ -116,7 +117,7 @@ func TestMeetingDataFlow(t *testing.T) {
 ```
 The signature of the import function is as follows.
 ```func (t *DataFlowTester) ImportCsvIntoRawTable(csvRelPath string, rawTableName string)```
-He has a twin, with only slight differences in parameters.
+It has a twin, with only slight differences in parameters.
 ```func (t *DataFlowTester) ImportCsvIntoTabler(csvRelPath string, dst schema.Tabler)```
 The former is used to import tables in the raw layer. The latter is used to import arbitrary tables.
 **Note:** These two functions will delete the db table and use `gorm.AutoMigrate` to re-create a new table to clear data in it.
@@ -158,7 +159,6 @@ func TestMeetingDataFlow(t *testing.T) {
     dataflowTester.VerifyTable(
       models.FeishuMeetingTopUserItem{},
       "./snapshot_tables/_tool_feishu_meeting_top_user_items.csv",
-      []string{"connection_id", "start_time", "name"},
       []string{
         "meeting_count",
         "meeting_duration",
@@ -171,9 +171,22 @@ func TestMeetingDataFlow(t *testing.T) {
     )
 }
 ```
-Its purpose is to call `dataflowTester.VerifyTable` to complete the validation of the data results. The third parameter is the table's primary keys, and the fourth parameter is all the fields of the table that need to be verified. The data used for validation exists in `. /snapshot_tables/_tool_feishu_meeting_top_user_items.csv`, but of course, this file does not exist yet.
+Its purpose is to call `dataflowTester.VerifyTable` to complete the validation of the data results. The third parameter is all the fields of the table that need to be verified. 
+The data used for validation exists in `. /snapshot_tables/_tool_feishu_meeting_top_user_items.csv`, but of course, this file does not exist yet.
 
-To facilitate the generation of the file mentioned above, DevLake has adopted a testing technique called `Snapshot`, which will automatically generate the file based on the run results when the `VerifyTable` file is called without the csv existing.
+There is a twin, more generalized function, that could be used instead:
+```go
+dataflowTester.VerifyTableWithOptions(models.FeishuMeetingTopUserItem{}, 
+        dataflowTester.TableOptions{
+	        CSVRelPath: "./snapshot_tables/_tool_feishu_meeting_top_user_items.csv"
+        },
+    )
+
+```
+The above usage will default to validating against all fields of the ```models.FeishuMeetingTopUserItem``` model. There are additional fields on ```TableOptions``` that can be specified
+to limit which fields on that model to perform validation on.
+
+To facilitate the generation of the file mentioned above, DevLake has adopted a testing technique called `Snapshot`, which will automatically generate the file based on the run results when the `VerifyTable` or `VerifyTableWithOptions` functions are called without the csv existing.
 
 But note! Please do two things after the snapshot is created: 1. check if the file is generated correctly 2. re-run it to make sure there are no errors between the generated results and the re-run results.
 These two operations are critical and directly related to the quality of test writing. We should treat the snapshot file in `.csv' format like a code file.
