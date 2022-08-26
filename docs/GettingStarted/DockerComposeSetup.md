@@ -16,13 +16,13 @@ sidebar_position: 1
 - Commands written `like this` are to be run in your terminal.
 
 1. Download `docker-compose.yml` and `env.example` from [latest release page](https://github.com/apache/incubator-devlake/releases/latest) into a folder.
-2. Rename `env.example` to `.env`. For Mac/Linux users, please run `mv env.example .env` in the terminal.
+2. Rename `env.example` to `.env`. For Mac/Linux users, please run `mv env.example .env` in the terminal. This file contains the environment variables that the Devlake server will use. Additional ones can be found in the compose file(s).
 3. Run `docker-compose up -d` to launch DevLake.
 
 ## Configure and collect data
 
 1. Visit `config-ui` at `http://localhost:4000` in your browser to configure and collect data.
-   - Please follow the [turorial](UserManuals/ConfigUI/Tutorial.md)
+   - Please follow the [tutorial](UserManuals/ConfigUI/Tutorial.md)
    - `devlake` takes a while to fully boot up. if `config-ui` complaining about api being unreachable, please wait a few seconds and try refreshing the page.
 2. Click *View Dashboards* button in the top left when done, or visit `localhost:3002` (username: `admin`, password: `admin`).
    - We use [Grafana](https://grafana.com/) as a visualization tool to build charts for the [data](../SupportedDataSources.md) stored in our database.

@@ -27,6 +27,7 @@ We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlak
      * `ADMIN_USER`/`ADMIN_PASS`: Not required, but highly recommended
    - Settings used by `devlake`:
      * `DB_URL`: update this value if  `MYSQL_USER`, `MYSQL_PASSWORD` or `MYSQL_DATABASE` were changed
+     * `LOGGING_DIR`: the directory of logs for Devlake - you likely don't need to change it.
 3. The `devlake` deployment store its configuration in `/app/.env`. In our sample yaml, we use `hostPath` volume, so please make sure directory `/var/lib/devlake` exists on your k8s workers, or employ other techniques to persist `/app/.env` file. Please do NOT mount the entire `/app` directory, because plugins are located in `/app/bin` folder.
 4. Finally, execute the following command and DevLake should be up and running:
    ```sh

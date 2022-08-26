@@ -31,5 +31,5 @@ But, be careful, many API services like JIRA/GITHUB have a request rate limit me
 
 ### How to setup
 
-1. Clone and fire up  [temporalio](https://temporal.io/) services
-2. Clone this repo, and fire up DevLake with command `docker-compose -f docker-compose-temporal.yml up -d`
+1. Clone and fire up the [temporalio](https://temporal.io/) services
+2. Clone this repo, and fire up DevLake with command `docker-compose -f deployment/temporal/docker-compose-temporal.yml up -d`
