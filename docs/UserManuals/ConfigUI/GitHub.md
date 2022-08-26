@@ -33,7 +33,7 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 Enter the GitHub repos to collect. If you want to collect more than 1 repo, please separate repos with comma. For example, "apache/incubator-devlake,apache/incubator-devlake-website".
 
 #### Data Entities
-Usually, you don't have to modify this part. However, if you don't want to collect certain GitHub entities, you can unselect some entities to accerlerate the collection speed.
+Usually, you don't have to modify this part. However, if you don't want to collect certain GitHub entities, you can unselect some entities to accelerate the collection speed.
 - Issue Tracking: GitHub issues, issue comments, issue labels, etc.
 - Source Code Management: GitHub repos, refs, commits, etc.
 - Code Review: GitHub PRs, PR comments and reviews, etc.
