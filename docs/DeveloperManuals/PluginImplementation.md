@@ -128,7 +128,7 @@ Before we start, it is helpful to know how collection task is executed:
 > ```
 > More info at: https://devlake.apache.org/blog/how-apache-devlake-runs/
 
-#### Step 2.1 Create a sub-task(Collector) for data collection
+#### Step 2.1: Create a sub-task(Collector) for data collection
 
 Let's run `go run generator/main.go create-collector icla committer` and confirm it. This sub-task is activated by registering in `plugin_main.go/SubTaskMetas` automatically.
 
@@ -137,7 +137,7 @@ Let's run `go run generator/main.go create-collector icla committer` and confirm
 > - Collector will collect data from HTTP or other data sources, and save the data into the raw layer. 
 > - Inside the func `SubTaskEntryPoint` of `Collector`, we use `helper.NewApiCollector` to create an object of [ApiCollector](https://github.com/apache/incubator-devlake/blob/main/generator/template/plugin/tasks/api_collector.go-template), then call `execute()` to do the job. 
 
-Now you can notice `data.ApiClient` is inited in `plugin_main.go/PrepareTaskData.ApiClient`. `PrepareTaskData` create a new `ApiClient`, and it's a tool Apache DevLake suggests to request data from HTTP Apis. This tool support some valuable features for HttpApi, like rateLimit, proxy and retry. Of course, if you like, you may use the lib `http` instead, but it will be more tedious.
+Now you can notice `data.ApiClient` is initiated in `plugin_main.go/PrepareTaskData.ApiClient`. `PrepareTaskData` create a new `ApiClient`, which is a tool Apache DevLake suggests to request data from HTTP Apis. This tool support some valuable features for HttpApi, like rateLimit, proxy and retry. Of course, if you like, you may use the lib `http` instead, but it will be more tedious.
 
 Let's move forward to use it.
 
@@ -146,7 +146,7 @@ we have filled `https://people.apache.org/` into `tasks/api_client.go/ENDPOINT` 
 
 ![](https://i.imgur.com/q8Zltnl.png)
 
-2. And fill `public/icla-info.json` into `UrlTemplate`, delete unnecessary iterator and add `println("receive data:", res)` in `ResponseParser` to see if collection was successful.
+2. Fill `public/icla-info.json` into `UrlTemplate`, delete the unnecessary iterator and add `println("receive data:", res)` in `ResponseParser` to see if collection was successful.
 
 ![](https://i.imgur.com/ToLMclH.png)
 
@@ -191,7 +191,7 @@ receive data: 272956 /* <- the number means 272956 models received */
 
 ![](https://i.imgur.com/aVYNMRr.png)
 
-#### Step 2.2 Create a sub-task(Extractor) to extract data from the raw layer
+#### Step 2.2: Create a sub-task(Extractor) to extract data from the raw layer
 
 > - Extractor will extract data from raw layer and save it into tool db table.
 > - Except for some pre-processing, the main flow is similar to the collector.
@@ -230,7 +230,7 @@ Next, let's run `go run generator/main.go create-extractor icla committer` and t
 
 ![](https://i.imgur.com/UyDP9Um.png)
 
-Let's look at the function `extract` in `committer_extractor.go` created just now, and some codes need to be written here. It's obviously `resData.data` is raw data, so we could decode them by json and add new `IclaCommitter` to save them.
+Let's look at the function `extract` in `committer_extractor.go` created just now, and the code that needs to be written here. It's obvious that `resData.data` is the raw data, so we could json-decode each row add a new `IclaCommitter` for each and save them.
 ```go
 Extract: func(resData *helper.RawData) ([]interface{}, error) {
     names := &map[string]string{}
@@ -268,14 +268,17 @@ receive data: 272956
 Now committer data have been saved in _tool_icla_committer.
 ![](https://i.imgur.com/6svX0N2.png)
 
-#### Step 2.3 Convertor
+#### Step 2.3: Convertor
 
-Notes: There are two ways here (open source or using it yourself). It is unnecessary, but we encourage it because convertors and the domain layer will significantly help build dashboards. More info about the domain layer at: https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema/
+Notes: The goal of Converters is to create a vendor-agnostic model out of the vendor-dependent ones created by the Extractors. 
+They are not necessary to have per se, but we encourage it because converters and the domain layer will significantly help with building dashboards. More info about the domain layer [here](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema/).
+
+In short:
 
 > - Convertor will convert data from the tool layer and save it into the domain layer.
 > - We use `helper.NewDataConverter` to create an object of DataConvertor, then call `execute()`. 
 
-#### Step 2.4 Let's try it
+#### Step 2.4: Let's try it
 Sometimes OpenApi will be protected by token or other auth types, and we need to log in to gain a token to visit it. For example, only after logging in `private@apahce.com` could we gather the data about contributors signing ICLA. Here we briefly introduce how to authorize DevLake to collect data.
 
 Let's look at `api_client.go`. `NewIclaApiClient` load config `ICLA_TOKEN` by `.env`, so we can add `ICLA_TOKEN=XXXXXX` in `.env` and use it in `apiClient.SetHeaders()` to mock the login status. Code as below:
@@ -285,12 +288,12 @@ Of course, we can use `username/password` to get a token after login mockery. Ju
 
 Look for more related details at https://github.com/apache/incubator-devlake
 
-#### Step 2.5 Implement the GetTablesInfo() method of the PluginModel interface
+#### Step 2.5: Implement the GetTablesInfo() method of the PluginModel interface
 
-As shown in the following gitlab plugin example
-Add all models that need to be accessed by external plugins to the return value.
+As shown in the following gitlab plugin example,
+add all models that need to be accessed by external plugins to the return value.
 
-```golang
+```go
 var _ core.PluginModel = (*Gitlab)(nil)
 
 func (plugin Gitlab) GetTablesInfo() []core.Tabler {
@@ -315,9 +318,9 @@ func (plugin Gitlab) GetTablesInfo() []core.Tabler {
 }
 ```
 
-You can use it as follow
+You can use it as follows:
 
-```
+```go
 if pm, ok := plugin.(core.PluginModel); ok {
     tables := pm.GetTablesInfo()
     for _, table := range tables {
@@ -328,7 +331,7 @@ if pm, ok := plugin.(core.PluginModel); ok {
 ```
 
 #### Final step: Submit the code as open source code
-Good ideas and we encourage contributions~ Let's learn about migration scripts and domain layers to write normative and platform-neutral codes. More info at https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema or contact us for ebullient help.
+We encourage ideas and contributions ~ Let's use migration scripts, domain layers and other discussed concepts to write normative and platform-neutral code. More info at [here](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema) or contact us for ebullient help.
 
 
 ## Done!
