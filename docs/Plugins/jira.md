@@ -133,43 +133,142 @@ To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and pa
 ```
 
 
-### Type mappings
+### Type mappings setting
 
-1. Get all type mappings
-```GET /plugins/jira/connections/:connectionId/type-mappings
-[
-  {
-    "jiraConnectionId": 16,
-    "userType": "userType",
-    "standardType": "standardType"
+1. mappings struct 
+
+```json /blueprints/{blueprintId}
+{
+  "settings": {
+    "connections": 
+    [{
+        "scope": 
+        [{
+            "transformation":
+            {
+              "epicKeyField": "",
+              "storyPointField": "",
+              "remotelinkCommitShaPattern": "",
+              "typeMappings": 
+              {
+                  "<USER_TYPE_1>": 
+                  {
+                      "standardType": "<STD_TYPE_1>",
+                      "statusMappings": 
+                      {
+                          "<USER_STATUS_a_from_USER_TYPE_1>": { "standardStatus": "<STD_STATUS_1>" },
+                          "<USER_STATUS_a_from_USER_TYPE_2>": { "standardStatus": "<STD_STATUS_2>" }
+                      }
+                  }
+              }
+            }
+        }]
+    }]
   }
-]
-```
-
-2. Create a new type mapping
-
-```POST /plugins/jira/connections/:connectionId/type-mappings
-{
-    "userType": "userType",
-    "standardType": "standardType"
 }
 ```
 
-3. Update type mapping
+2. set mappings example:
 
-```PUT /plugins/jira/connections/:connectionId/type-mapping/:userType
+```json PATCH /blueprints/{blueprintId}
 {
-    "standardType": "standardTypeUpdated"
+  "name": "jira-test",
+  "mode": "NORMAL",
+  "plan": 
+  [
+    [
+      {
+        "plugin": "jira",
+        "subtasks": 
+        [
+          "collectStatus",
+          "extractStatus",
+          "collectProjects",
+          "extractProjects",
+          "collectBoard",
+          "extractBoard",
+          "collectIssueTypes",
+          "extractIssueType",
+          "collectIssues",
+          "extractIssues",
+          "collectIssueChangelogs",
+          "extractIssueChangelogs",
+          "collectAccounts",
+          "collectWorklogs",
+          "extractWorklogs",
+          "collectRemotelinks",
+          "extractRemotelinks",
+          "collectSprints",
+          "extractSprints",
+          "convertBoard",
+          "convertIssues",
+          "convertWorklogs",
+          "convertIssueChangelogs",
+          "convertSprints",
+          "convertSprintIssues",
+          "convertIssueCommits",
+          "extractAccounts",
+          "convertAccounts",
+          "collectEpics",
+          "extractEpics"
+        ]
+      }
+    ]
+  ],
+  "enable": true,
+  "cronConfig": "0 0 * * *",
+  "isManual": true,
+  "settings": {
+    "connections": 
+    [{
+        "connectionId": 1,
+        "plugin": "jira",
+        "scope": 
+        [{
+            "entities": 
+            [
+              "TICKET",
+              "CROSS"
+            ],
+            "options": { "boardId": 1 },
+            "transformation":
+            {
+              "epicKeyField": "",
+              "storyPointField": "",
+              "remotelinkCommitShaPattern": "",
+              "typeMappings": 
+              {
+                  "Task1": 
+                  {
+                      "standardType": "Task1",
+                      "statusMappings": 
+                      {
+                          "done": { "standardStatus": "hello world" },
+                          "new":  { "standardStatus": "nice to meet you" }
+                      }
+                  },
+                  "Task2": 
+                  {
+                      "standardType": "Task2",
+                      "statusMappings": 
+                      {
+                          "done": { "standardStatus": "hello world" },
+                          "new":  { "standardStatus": "nice to meet you too" }
+                      }
+                  }
+              }
+            }
+        }]
+    }],
+    "version": "1.0.0"
+  },
+  "id": 1,
+  "createdAt": "2022-08-30T11:25:10.699Z",
+  "updatedAt": "2022-08-30T11:28:22.891Z"
 }
 ```
 
-
-4. Delete type mapping
-
-```DELETE /plugins/jira/connections/:connectionId/type-mapping/:userType
-```
-
-5. API forwarding
+3. API forwarding
 For example:
 Requests to `http://your_devlake_host/plugins/jira/connections/1/proxy/rest/agile/1.0/board/8/sprint`
 would be forwarded to `https://your_jira_host/rest/agile/1.0/board/8/sprint`
