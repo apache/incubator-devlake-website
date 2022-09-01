@@ -52,6 +52,45 @@ get merged into the codebase. We deeply appreciate your contribution!
 - [Zhenlei Li](https://github.com/moonlzl)
 - [Danna Wang](https://github.com/banshengbushu)
 - [Geyu Chen](https://github.com/fredtheflat)
+- [Huang Zheng](https://github.com/phzbbbbbbbb)
+- [Zhu Jin](https://github.com/jinzhu2002) 
+- [Kai Tian](https://github.com/tk103331)
+- [M PalaniKannan](https://github.com/Palanikannan1437)
+- [Zhengyu Zhang](https://github.com/zhangzhenyu2)
+
+### New Contributors August 2022
+
+#### Zhengyu Zhang
+
+---
+
+![Zhengyu Zhang](/img/Community/contributors/zhangzhengyu.jpeg)
+
+#### M PalaniKannan
+
+---
+
+![M PalaniKannan](/img/Community/contributors/mpalanikannan.jpeg)
+
+#### Kai Tian
+
+---
+
+![Kai Tian](/img/Community/contributors/tiankai.jpeg)
+
+### New Contributors July 2022
+
+#### Zhu Jin
+
+---
+
+![Zhu Jin](/img/Community/contributors/jinzhu.jpeg)
+
+#### HuaZheng Pan
+
+---
+
+![HuaZheng Pan](/img/Community/contributors/panhuangzheng.jpeg)
 
 ### New Contributors June 2022
 
