@@ -25,7 +25,7 @@ Deployment frequency is calculated based on the number of deployment days, not t
 | Medium performers| Once a month to once every six months|
 | Low performers   | Less than once every six months      |
 
-<i>Source: 2021 Accelerate State of DevOps, Google</i>
+<p><i>Source: 2021 Accelerate State of DevOps, Google</i></p>
 
 
 <b>Data Sources Required</b>
