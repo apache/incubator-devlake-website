@@ -90,7 +90,7 @@ get merged into the codebase. We deeply appreciate your contribution!
 
 ---
 
-![HuaZheng Pan](/img/Community/contributors/panhuangzheng.jpeg)
+![HuaZheng Pan](/img/Community/contributors/panhuazheng.jpeg)
 
 ### New Contributors June 2022
 
