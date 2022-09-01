@@ -27,7 +27,7 @@ As you can see, there is not much distinction between performance benchmarks for
 | Medium performers| 16%-30%         |
 | Low performers   | 16%-30%         |
 
-<i>Source: 2021 Accelerate State of DevOps, Google</i>
+<p><i>Source: 2021 Accelerate State of DevOps, Google</i></p>
 
 <b>Data Sources Required</b>
 

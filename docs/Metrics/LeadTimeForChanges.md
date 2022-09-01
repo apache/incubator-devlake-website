@@ -36,7 +36,7 @@ Below are the benchmarks for different development teams:
 | Medium performers| Between one month and six months     |
 | Low performers   | More than six months                 |
 
-<i>Source: 2021 Accelerate State of DevOps, Google</i>
+<p><i>Source: 2021 Accelerate State of DevOps, Google</i></p>
 
 <b>Data Sources Required</b>
 
