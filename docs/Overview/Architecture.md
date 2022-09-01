@@ -5,7 +5,7 @@ description: >
 sidebar_position: 2
 ---
 
-## Architecture Overview
+## Overview
 
 <p align="center"><img src="/img/Architecture/arch-component.svg" /></p>
 <p align="center">DevLake Components</p>
