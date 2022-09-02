@@ -129,3 +129,9 @@ MySQL and Grafana containers.
 
 12. For DB migrations, please refer to [Migration Doc](../DeveloperManuals/DBMigration.md).
 
+13. Compiling
+
+    - Compile all plugins: `make build-plugin`
+    - Compile specific plugins: `PLUGIN=<PLUGIN_NAME> make build-plugin`
+    - Compile server: `make build`
+    - Compile worker: `make build-worker`
