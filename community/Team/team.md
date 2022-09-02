@@ -49,6 +49,7 @@ get merged into the codebase. We deeply appreciate your contribution!
 - [Bin Ji](https://github.com/matrixji)
 - [Prajwal Borkar](https://github.com/PrajwalBorkar)
 - [Keon Amini](https://github.com/keon94)
+- [Prasurjya Pran Borah](https://github.com/ppborah)
 - [Zhenlei Li](https://github.com/moonlzl)
 - [Danna Wang](https://github.com/banshengbushu)
 - [Geyu Chen](https://github.com/fredtheflat)
@@ -93,6 +94,12 @@ get merged into the codebase. We deeply appreciate your contribution!
 ![HuaZheng Pan](/img/Community/contributors/panhuazheng.jpeg)
 
 ### New Contributors June 2022
+
+#### Prasurjya Pran Borah
+
+---
+
+![Prasurjya Pran Borah](/img/Community/contributors/ppborah.jpeg)
 
 #### Zhenlei Li
 
