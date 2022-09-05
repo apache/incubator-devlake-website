@@ -109,6 +109,24 @@ make
 make install
 ```
 
+#### Troubleshooting (Ubuntu)
+
+> Q: # pkg-config --cflags  -- libgit2 Package libgit2 was not found in the pkg-config search path.
+Perhaps you should add the directory containing `libgit2.pc` to the PKG_CONFIG_PATH environment variable
+No package 'libgit2' found pkg-config: exit status 1
+
+> A:
+> Make sure your pkg config path covers the installation:
+> if your libgit2.pc in `/usr/local/lib64/pkgconfig`
+> 
+> `export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib64:/usr/local/lib64/pkgconfig`
+> 
+> else if your libgit2.pc in `/usr/local/lib/pkgconfig`
+> 
+> `export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib:/usr/local/lib/pkgconfig`
+> 
+> else consider install pkgconfig or rebuild the libgit2
+
 ### MacOS
 
 NOTE：Do **NOT** install libgit2 via `MadPorts` or `homebrew`, install from source instead.
