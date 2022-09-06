@@ -95,18 +95,27 @@ JSON
 This plugin depends on `libgit2`, you need to install version 1.3.0 in order to run and debug this plugin on your local
 machine.
 
-### Ubuntu
+### Linux
 
 ```
-apt install cmake
-git clone https://github.com/libgit2/libgit2.git
-cd libgit2
-git checkout v1.3.0
-mkdir build
-cd build
-cmake ..
-make
-make install
+1. require cmake
+[ubuntu]
+apt install cmake -y
+[centos]
+yum install cmake -y
+
+2. compiling 
+git clone -b v1.3.0 https://github.com/libgit2/libgit2.git && cd libgit2
+mkdir build && cd build && cmake ..
+make && make install
+
+3.PKG_CONFIG and LD_LIBRARY_PATH
+[centos]
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib64:/usr/local/lib64/pkgconfig
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64
+[ubuntu]
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib:/usr/local/lib/pkgconfig
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 ```
 
 #### Troubleshooting (linux)
