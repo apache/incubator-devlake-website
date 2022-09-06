@@ -58,6 +58,20 @@ get merged into the codebase. We deeply appreciate your contribution!
 - [Kai Tian](https://github.com/tk103331)
 - [M PalaniKannan](https://github.com/Palanikannan1437)
 - [Zhengyu Zhang](https://github.com/zhangzhenyu2)
+- [Wei Tian](https://github.com/txtw)
+- [Nico Gallinal](https://github.com/nicoabie)
+### New Contributors September 2022
+#### Nico Gallinal
+
+---
+
+![Wei Tian](/img/Community/contributors/nicogallinal.jpeg)
+
+#### Wei Tian
+
+---
+
+![Wei Tian](/img/Community/contributors/tianwei.jpeg)
 
 ### New Contributors August 2022
 
