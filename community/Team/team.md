@@ -60,6 +60,7 @@ get merged into the codebase. We deeply appreciate your contribution!
 - [Zhengyu Zhang](https://github.com/zhangzhenyu2)
 - [Wei Tian](https://github.com/txtw)
 - [Nico Gallinal](https://github.com/nicoabie)
+
 ### New Contributors September 2022
 #### Nico Gallinal
 
