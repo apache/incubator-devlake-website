@@ -65,7 +65,7 @@ get merged into the codebase. We deeply appreciate your contribution!
 
 ---
 
-![Wei Tian](/img/Community/contributors/nicogallinal.jpeg)
+![Nico Gallinal](/img/Community/contributors/nicogallinal.jpeg)
 
 #### Wei Tian
 
