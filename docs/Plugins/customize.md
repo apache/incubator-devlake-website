@@ -8,19 +8,22 @@ description: >
 
 ## Summary
 
-This plugin provides user the ability to create/delete columns and extract data from some raw layer tables.
+This plugin provides users the ability to create/delete columns and extract data from certain raw layer tables.
 The columns created with this plugin must be start with the prefix `x_`
 
-**NOTE:** All columns created by this plugin are of datatype `VARCHAR(255)`
+**NOTE:** All columns created by this plugin are of the datatype `VARCHAR(255)`
 
 ## Sample Request
-To extract data, select `Advanced Mode` on the `Create Pipeline Run` page and paste a JSON config like the following:
-The below example demonstrates how to extract status name from the table `_raw_jira_api_issues` and assign it to the `x_test` column of the table `issues`.
-We leverage the package `https://github.com/tidwall/gjson` to extract value from the JSON. For the extraction syntax, please refer to the [docs](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)
-`table` domain layer table name
-`rawDataTable` raw layer table, from which we extract values by json path
-`rawDataParams` the filter to select records from the raw layer table. **the value should be a string not an object**
-`mapping` the extraction rule, the key is extension field name, the value is json path
+To extract data, switch to `Advanced Mode` on the the first step of creating a Blueprint and paste a JSON config as the following:
+
+The example below demonstrates how to extract status name from the table `_raw_jira_api_issues` and assign it to the `x_test` column of the table `issues`.
+We leverage the package `https://github.com/tidwall/gjson` to extract value from the JSON. For the extraction syntax, please refer to this [docs](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)
+
+- `table`: domain layer table name
+- `rawDataTable`: raw layer table, from which we extract values by json path
+- `rawDataParams`: the filter to select records from the raw layer table (**The value should be a string not an object**)
+- `mapping` the extraction rule; the key is the extension field name; the value is json path
+
 ```json
 [
   [
