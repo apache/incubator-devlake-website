@@ -22,7 +22,7 @@ const Card = ({ icon, text, children }: {
   <div className="mt-5 text-label18 font-inter pr-3">{children}</div>
 </div>)
 
-const Arrow = () => <div className="h-[140px] flex items-center"><BlueArrow /></div>
+const Arrow = () => <div className="h-[140px] flex items-center mobile:hidden"><BlueArrow /></div>
 
 export function UserFlow() {
   return (
@@ -30,7 +30,7 @@ export function UserFlow() {
       <span
         className="section-title text-center mt-[72px] mb-6"
       >User Flow</span>
-      <div className="flex mb-[72px]">
+      <div className="flex mb-[72px] mobile:flex-col">
         <Card
           icon={<UF1 width={40} height={40} />}
           text="Set up DevLake"

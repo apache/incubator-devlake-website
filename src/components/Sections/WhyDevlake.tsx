@@ -60,6 +60,7 @@ export function WhyDevlake() {
         flex flex-col
         px-[140px] mb-[72px]
         space-y-7
+        mobile:px-[0px]
         ">
       <Feature>
         <C.SectionImg src={WAD1} />

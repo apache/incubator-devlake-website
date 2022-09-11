@@ -41,8 +41,8 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
     @apply flex items-center justify-center w-[160px] h-[48px];
     @apply hover:no-underline hover:text-neutral-invert;
     @apply text-neutral-invert text-[16px] leading-[20px] font-semibold;
-    @apply rounded-[4.9px] lg:rounded-[10px];
-    @apply shadow-sm shadow-primary/20 lg:shadow-lg lg:shadow-primary/20;
+    @apply rounded-[10px];
+    @apply shadow-sm shadow-primary/20 ;
   }
 
   .section-title {
