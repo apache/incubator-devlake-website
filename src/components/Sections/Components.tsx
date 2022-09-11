@@ -46,7 +46,7 @@ export const SectionImg = ({ src }: { src: string }) => <img src={src} alt="" cl
 " />
 
 export const InlineLink = ({ link, children }: { link: string, children: React.ReactNode }) =>
-  <a className="text-label16 text-primary-500 mt-[16px]"
+  <a className="text-primary-500 mt-[16px]"
     href={link}>{children}
   </a>
 
