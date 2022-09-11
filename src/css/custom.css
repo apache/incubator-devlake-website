@@ -48,6 +48,8 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   .section-title {
     @apply text-heading1 mb-[64px];
     @apply text-primary-800 font-semibold;
+    @apply mobile:text-heading2 mobile:leading-[32px] mobile:text-neutral-600;
+    @apply mobile:py-6 mobile:mb-[0];
   }
 
   .floating-link-icon {
@@ -59,6 +61,7 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   }
 
   .use-case-card {
-      background: linear-gradient(105.48deg, #DBE4FD 16.79%, #F0F4FE 93.34%);
+    background: linear-gradient(105.48deg, #DBE4FD 16.79%, #F0F4FE 93.34%);
+    @apply mobile:bg-none;
   }
 }
