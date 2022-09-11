@@ -14,6 +14,7 @@ function UCCard({ lead, title, desc, children }: {
 }) {
   return (<div className='use-case-card relative shadow-card overflow-hidden
     w-[460px] h-[468px] rounded-[16px]
+    mobile:w-auto
     '>
     <div className="flex items-center h-[228px] justify-center">
       {children}
