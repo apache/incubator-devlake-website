@@ -32,12 +32,13 @@ const UCIcon = ({ src }: { src: string }) => <img src={src} alt='' className="
 
 export function UseCases() {
   return (<div className="flex flex-col relative items-center
-    h-[1206px] ">
-    <BG className='absolute z-0' />
+    h-[1206px] mobile:h-auto">
+    <BG className='absolute z-0 mobile:hidden' />
     <span
       className="section-title text-center mt-7"
     >Use Cases</span>
-    <div className="grid grid-cols-2 gap-x-[72px] gap-y-6">
+    <div className="grid grid-cols-2 gap-x-[72px] gap-y-6
+      mobile:grid-cols-1">
       <UCCard
         lead="Open-source Software Maintainers"
         title="Contribution Analysis for Community Growth"

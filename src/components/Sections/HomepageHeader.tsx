@@ -12,7 +12,9 @@ export function HomepageHeader() {
         flex
         justify-between items-center"
     >
-      <HeaderBgSvg className='absolute top-[0px] left-[0px]' />
+      <HeaderBgSvg className='
+        absolute top-[0px] left-[0px] 
+        mobile:hidden' />
       <div
         className=" z-10
           flex flex-col flex-nowrap
