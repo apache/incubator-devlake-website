@@ -14,10 +14,11 @@ import Sup8 from "@site/static/img/Homepage/sup-8-ghaction.svg";
 import Sup9 from "@site/static/img/Homepage/sup-9-glci.svg";
 import SupA from "@site/static/img/Homepage/sup-A-feishu.png";
 
-function Feature({ children }: { children: React.ReactNode }) {
+function Feature({ className, children }: { className?: string, children: React.ReactNode }) {
   return (
-    <div className="flex w-full justify-between items-center
-      mobile:flex-col">
+    <div className={`flex w-full justify-between items-center
+      mobile:text-center
+      mobile:flex-col ${className}`}>
       {children}
     </div>
   );
@@ -50,19 +51,17 @@ function Supports() {
 }
 
 export function WhyDevlake() {
-  return (<section className="flex flex-col flex-nowrap py-5 items-stretch">
+  return (<section className="flex flex-col flex-nowrap py-5 items-stretch
+    mobile:py-[0px]">
     <span
-      className="section-title text-center
-      mobile:text-heading2 mobile:leading-[32px]"
+      className="section-title text-center"
     >
-      Why Apache DevLake (Incubating)
+      Why Apache DevLake<span className="mobile:hidden"> (Incubating)</span>
     </span>
     <div
-      className="
-        flex flex-col
-        px-[140px] mb-[72px]
-        space-y-7
-        mobile:px-[0px]
+      className=" flex flex-col
+        px-[140px] mb-[72px] space-y-7
+        mobile:px-[0px] mobile:space-y-6 mobile:mb-6
         ">
       <Feature>
         <C.SectionImg src={WAD1} />
@@ -75,7 +74,7 @@ export function WhyDevlake() {
           </C.TextDescription>
         </C.TextSection>
       </Feature>
-      <Feature>
+      <Feature className="mobile:flex-col-reverse">
         <C.TextSection>
           <C.TextTitle>Out-of-the-box Analysis</C.TextTitle>
           <C.TextDescription>
@@ -90,9 +89,10 @@ export function WhyDevlake() {
         <C.SectionImg src={WAD3} />
         <C.TextSection>
           <C.TextTitle>A Highly Flexible Framework</C.TextTitle>
+          {/* FIXME: A weird margin right happend here, didn't find solution yet */}
           <C.TextDescription>
             Easily extend DevLake to support your data sources, metrics, and dashboards with a flexible framework for data collection and transformation.
-            <br />
+            <br className="mobile:hidden" />
             <C.TextLink link="https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema">Learn about DevLake’s data model</C.TextLink>
           </C.TextDescription>
         </C.TextSection>
