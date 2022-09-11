@@ -4,6 +4,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import { HomepageHeader } from '@site/src/components/Sections/HomepageHeader';
 import { WhyDevlake } from '../components/Sections/WhyDevlake';
+import { UseCases } from '../components/Sections/UseCases';
 
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
@@ -16,6 +17,7 @@ export default function Home() {
           <HomepageHeader />
           <main>
             <WhyDevlake />
+            <UseCases />
           </main>
         </div>
       </div>
