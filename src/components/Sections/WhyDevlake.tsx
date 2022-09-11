@@ -49,7 +49,7 @@ function Supports() {
 }
 
 export function WhyDevlake() {
-  return (<section className="bg-white flex flex-col flex-nowrap py-5 items-stretch">
+  return (<section className="flex flex-col flex-nowrap py-5 items-stretch">
     <span
       className="section-title text-center"
     >
