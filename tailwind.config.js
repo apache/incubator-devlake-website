@@ -12,7 +12,7 @@ module.exports = {
     },
     screens: {
       'xl': '1280px',
-      'sm': { 'max': '750px' },
+      'sm': { 'max': '850px' },
       'mobile': { 'max': '390px' },
     },
     spacing: {

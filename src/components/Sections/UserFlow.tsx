@@ -11,29 +11,27 @@ const Card = ({ icon, text, children }: {
   icon: React.ReactNode,
   text: String,
   children: React.ReactNode,
-}) => (<div className="w-[220px] mobile:mb-6 mobile:text-center">
+}) => (<div className="w-[220px] xl:w-[15vw] mobile:mb-6 mobile:text-center">
   <div className="flex flex-col items-center
-   bg-primary-100 w-[220px] h-[140px] rounded-[6px]
+   bg-primary-100 w-[220px] xl:w-[15vw] h-[140px] rounded-[6px]
    border-primary-500 border-[1px] border-solid
   ">
     <div className="mt-[40px]">{icon}</div>
     <div className="mt-[10px] text-heading4 font-inter font-semibold text-primary-800">{text}</div>
   </div>
-  <div className="mt-5 text-label18 font-inter pr-3
-  mobile:text-label14 mobile:mt-3">{children}</div>
+  <div className="mt-5 text-label18 font-inter pl-1 text-neutral-500">{children}</div>
 </div>)
 
-const Arrow = () => <div className="h-[140px] flex items-center mobile:hidden"><BlueArrow /></div>
+const Arrow = () => <div className="h-[140px] flex items-center"><BlueArrow className="xl:w-[3.33vw]" /></div>
 
 export function UserFlow() {
   return (
-    <div className="flex flex-col relative items-center
-      sm:hidden">
+    <div className="hidden flex-col relative items-center
+      xl:flex">
       <span
-        className="section-title text-center mt-[72px] mb-6
-        mobile:m-[0]"
+        className="section-title text-center mt-[72px] mb-6"
       >User Flow</span>
-      <div className="flex mb-[72px] mobile:flex-col">
+      <div className="flex mb-[72px]">
         <Card
           icon={<UF1 width={40} height={40} />}
           text="Set up DevLake"
