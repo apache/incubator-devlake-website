@@ -27,8 +27,8 @@ function Supports() {
   return (
     <div className=" flex flex-col items-center
       mt-[48px] mb-[72px]
-      sm:mt-[36px]
-      mobile:mt-4
+      sm:mt-[36px] sm:mb-[60px]
+      mobile:mt-4 mobile:mb-6
     ">
       <C.H3Title>Supported Data Sources</C.H3Title>
       <div className="grid grid-cols-5 gap-x-[24px] gap-y-[16px]
