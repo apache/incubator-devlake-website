@@ -16,8 +16,7 @@ import SupA from "@site/static/img/Homepage/sup-A-feishu.png";
 
 function Feature({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex w-full justify-between items-center
-      mobile:flex-col">
+    <div className="flex w-full justify-between items-center">
       {children}
     </div>
   );
@@ -26,7 +25,7 @@ function Feature({ children }: { children: React.ReactNode }) {
 function Supports() {
   return (
     <div className=" flex flex-col items-center
-      mt-[48px] mb-[72px] mobile:hidden
+      mt-[48px] mb-[72px]
     ">
       <C.H3Title>Supported Data Sources</C.H3Title>
       <div className="grid grid-cols-5 gap-x-[24px] gap-y-[16px]">
@@ -52,8 +51,7 @@ function Supports() {
 export function WhyDevlake() {
   return (<section className="flex flex-col flex-nowrap py-5 items-stretch">
     <span
-      className="section-title text-center
-      mobile:text-heading2 mobile:leading-[32px]"
+      className="section-title text-center"
     >
       Why Apache DevLake (Incubating)
     </span>

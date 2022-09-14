@@ -5,11 +5,9 @@ import Join from "@site/static/img/Homepage/Join.png";
 import { InlineLink } from "./Components";
 
 export function JoinCommunity() {
-  return (<div className="flex justify-between mobile:flex-col-reverse
-    my-[72px] mx-[140px] rounded-[20px] bg-primary-200 px-6 py-[36px] font-inter
-    mobile:m-[0px] mobile:rounded-none mobile:p-[0px]">
-    <div className="w-[600px] pr-3
-    mobile:w-auto">
+  return (<div className="flex justify-between
+    my-[72px] mx-[140px] rounded-[20px] bg-primary-200 px-6 py-[36px] font-inter">
+    <div className="w-[600px] pr-3">
       <div className="text-heading1 mb-3 text-primary-800 font-semibold">Join the Community</div>
       <div className="text-label18 mb-4 text-neutral-500">Join our community to stay up to date on the latest news, ask and answer questions, make contributions, and connect with fellow community members!</div>
       <div className="text-label16 space-y-[8px] flex flex-col">

@@ -29,7 +29,6 @@ export const TextSection = ({ children }: { children: React.ReactNode }) =>
   <div
     className="
       text-start w-[448px]
-      mobile:w-auto
     ">
     {children}
   </div>
@@ -44,7 +43,6 @@ export const SvgImg = ({ svg: Svg }: { svg: React.ComponentType<React.SVGProps<S
   </div>
 export const SectionImg = ({ src }: { src: string }) => <img src={src} alt="" className="
   w-[384px] h-[288px]
-  mobile:w-[160px] mobile:h-[124px]
 " />
 
 export const InlineLink = ({ link, children }: { link: string, children: React.ReactNode }) =>
@@ -53,7 +51,7 @@ export const InlineLink = ({ link, children }: { link: string, children: React.R
   </a>
 
 export const BreakLine = () => <div className="
-  h-[2px] bg-neutral-100 mx-[140px] mobile:hidden
+  h-[2px] bg-neutral-100 mx-[140px]
   " />
 
 export const Sup = ({ children, title }: { children: React.ReactNode, title: string }) =>
