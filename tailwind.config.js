@@ -33,7 +33,6 @@ module.exports = {
         'primary-800': '#3C5088',
         neutral: {
           invert: '#FFFFFF',
-          300: '#94959F',
           400: '#70727F',
           500: '#4D4E5F',
           600: '#292B3F',
@@ -63,8 +62,7 @@ module.exports = {
         sm: '0px 2.4px 4.8px -0.8px rgba(0, 0, 0, 0.2), 0px 1.6px 8px rgba(0, 0, 0, 0.2)',
         lg: '0px 4.8px 9.6px -0.8px rgba(0, 0, 0, 0.2), 0px 3.2px 16px rgba(0, 0, 0, 0.2)',
         lower: '0px 1.2px 2.4px -0.8px rgba(0, 0, 0, 0.1), 0px 0.8px 4px rgba(0, 0, 0, 0.07)',
-        high: '0px 9.6px 19.2px -0.8px rgba(0, 0, 0, 0.1), 0px 6.4px 32px rgba(0, 0, 0, 0.07)',
-        card: '0px 20px 64px -0.8px rgba(0, 0, 0, 0.06)',
+        high: '0px 9.6px 19.2px -0.8px rgba(0, 0, 0, 0.1), 0px 6.4px 32px rgba(0, 0, 0, 0.07)'
       },
     },
   },

@@ -57,8 +57,4 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   .floating-link:hover .floating-link-icon {
     @apply transform translate-x-1;
   }
-
-  .use-case-card {
-      background: linear-gradient(105.48deg, #DBE4FD 16.79%, #F0F4FE 93.34%);
-  }
 }

@@ -25,7 +25,7 @@ function Feature({ children }: { children: React.ReactNode }) {
 function Supports() {
   return (
     <div className=" flex flex-col items-center
-      mt-[48px] mb-[72px]
+      mt-[48px]
     ">
       <C.H3Title>Supported Data Sources</C.H3Title>
       <div className="grid grid-cols-5 gap-x-[24px] gap-y-[16px]">
