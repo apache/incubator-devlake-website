@@ -18,7 +18,7 @@ export default function Home() {
       <div className='bg-[#f8f8f8]'>
         <div className=' mx-auto bg-white'>
           <HomepageHeader />
-          <main className='max-w-[1128px] xl:mx-auto mx-[140px]'>
+          <main className='max-w-[1128px] xl:mx-auto mx-[140px] sm:mx-[0px]'>
             <WhyDevlake />
             <UseCases />
             <UserFlow />
