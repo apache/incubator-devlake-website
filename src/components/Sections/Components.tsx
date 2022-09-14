@@ -50,7 +50,7 @@ export const InlineLink = ({ link, children }: { link: string, children: React.R
   </a>
 
 export const BreakLine = () => <div className="
-  h-[2px] bg-neutral-100 mx-[140px] mobile:hidden
+  h-[2px] bg-neutral-100 mobile:hidden
   " />
 
 export const Sup = ({ children, title }: { children: React.ReactNode, title: string }) =>

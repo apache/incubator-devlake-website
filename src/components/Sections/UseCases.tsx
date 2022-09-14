@@ -1,6 +1,6 @@
 import React from "react";
 
-import BG from '@site/static/img/Homepage/UC-bg.svg';
+import BG from '@site/static/img/Homepage/UCBG.png';
 import UC1 from '@site/static/img/Homepage/UC1.png';
 import UC2 from '@site/static/img/Homepage/UC2.png';
 import UC3 from '@site/static/img/Homepage/UC3.png';
@@ -37,41 +37,45 @@ const UCIcon = ({ src }: { src: string }) => <img src={src} alt='' className="
   " />
 
 export function UseCases() {
-  return (<div className="flex flex-col relative items-center
-    h-[1206px] mobile:h-auto mobile:bg-primary-100 mobile:pb-6">
-    <BG className='absolute z-0 mobile:hidden' />
-    <span className="section-title text-center mt-7
-      mobile:mt-[0]">Use Cases</span>
-    <div className="grid grid-cols-2 gap-x-[72px] gap-y-6
-      mobile:grid-cols-1">
-      <UCCard
-        lead="Open-source Software Maintainers"
-        title="Contribution Analysis for Community Growth"
-        desc="Grow your community strategically by learning how developers participate, contribute and collaborate."
-      >
-        <UCIcon src={UC1} />
-      </UCCard>
-      <UCCard
-        lead="Product Managers"
-        title="Dev Workflow Improvement"
-        desc="Align sprint planning with high-level goals and ensure the development progress is on track with metrics that help with improving the workflow."
-      >
-        <UCIcon src={UC2} />
-      </UCCard>
-      <UCCard
-        lead="Tech Leads"
-        title="Bring Out the Best in Your Team"
-        desc="Gain insights into the development and delivery process. Remove blockers and risks to establish best practices."
-      >
-        <UCIcon src={UC3} />
-      </UCCard>
-      <UCCard
-        lead="Data Engineers"
-        title="The Foundation to Build What You Want"
-        desc="Integrate user-defined data sources with DevLake and easily implement customized metrics and dashboards without reinventing the wheel."
-      >
-        <UCIcon src={UC4} />
-      </UCCard>
-    </div>
-  </div>)
+  return (
+    <div className="h-[1206px]">
+      <img src={BG} alt='' className='absolute z-0 mobile:hidden 
+        xl:w-screen h-[1206px] left-[0px]' />
+      <div className="flex flex-col relative items-center 
+        mobile:h-auto mobile:bg-primary-100 mobile:pb-6">
+        <span className="section-title text-center mt-7
+          mobile:mt-[0]">Use Cases</span>
+        <div className="grid grid-cols-2 gap-x-[72px] gap-y-6
+          mobile:grid-cols-1">
+          <UCCard
+            lead="Open-source Software Maintainers"
+            title="Contribution Analysis for Community Growth"
+            desc="Grow your community strategically by learning how developers participate, contribute and collaborate."
+          >
+            <UCIcon src={UC1} />
+          </UCCard>
+          <UCCard
+            lead="Product Managers"
+            title="Dev Workflow Improvement"
+            desc="Align sprint planning with high-level goals and ensure the development progress is on track with metrics that help with improving the workflow."
+          >
+            <UCIcon src={UC2} />
+          </UCCard>
+          <UCCard
+            lead="Tech Leads"
+            title="Bring Out the Best in Your Team"
+            desc="Gain insights into the development and delivery process. Remove blockers and risks to establish best practices."
+          >
+            <UCIcon src={UC3} />
+          </UCCard>
+          <UCCard
+            lead="Data Engineers"
+            title="The Foundation to Build What You Want"
+            desc="Integrate user-defined data sources with DevLake and easily implement customized metrics and dashboards without reinventing the wheel."
+          >
+            <UCIcon src={UC4} />
+          </UCCard>
+        </div>
+      </div>
+    </div>)
 }

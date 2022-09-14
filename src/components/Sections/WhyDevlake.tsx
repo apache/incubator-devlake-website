@@ -60,7 +60,7 @@ export function WhyDevlake() {
     </span>
     <div
       className=" flex flex-col
-        px-[140px] mb-[72px] space-y-7
+        mb-[72px] space-y-7
         mobile:px-[0px] mobile:space-y-6 mobile:mb-6
         ">
       <Feature>
