@@ -6,7 +6,7 @@ import { InlineLink } from "./Components";
 
 export function JoinCommunity() {
   return (<div className="flex justify-between mobile:flex-col-reverse
-    my-[72px] mx-[140px] rounded-[20px] bg-primary-200 px-6 py-[36px] font-inter
+    my-[72px] rounded-[20px] bg-primary-200 px-6 py-[36px] font-inter
     mobile:mx-5 mobile:my-6 mobile:px-3 mobile:py-4">
     <div className="w-[600px] pr-3
     mobile:w-auto">

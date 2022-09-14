@@ -27,7 +27,8 @@ const Arrow = () => <div className="h-[140px] flex items-center mobile:hidden"><
 
 export function UserFlow() {
   return (
-    <div className="flex flex-col relative items-center">
+    <div className="flex flex-col relative items-center
+      sm:hidden">
       <span
         className="section-title text-center mt-[72px] mb-6
         mobile:m-[0]"

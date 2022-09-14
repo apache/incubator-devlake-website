@@ -12,6 +12,8 @@ module.exports = {
     },
     screens: {
       'mobile': { 'max': '375px' },
+      'xl': '1280px',
+      'sm': { 'max': '744px' },
     },
     spacing: {
       1: '8px',
