@@ -5,14 +5,6 @@
  */
 
 /* You can override the default Infima variables here. */
-
-/**
- * Enable tailwindcss, preflight styles from tailwind are removed to avoid conflicts.
- */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   --ifm-color-primary: #7497f7;
   --ifm-color-primary-dark: #5d7cd2;
@@ -35,27 +27,10 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-@layer components {
-  .primary-button {
-    @apply bg-primary-500 hover:bg-primary-light;
-    @apply flex items-center justify-center w-[160px] h-[48px];
-    @apply hover:no-underline hover:text-neutral-invert;
-    @apply text-neutral-invert text-[16px] leading-[20px] font-semibold;
-    @apply rounded-[4.9px] lg:rounded-[10px];
-    @apply shadow-sm shadow-primary/20 lg:shadow-lg lg:shadow-primary/20;
-  }
+html[data-theme='light'] .footer--dark {
+  background-color: #292B3F;
+}
 
-  .section-title {
-    @apply text-heading2 mb-5;
-    @apply text-neutral-600 font-semibold;
-    @apply lg:text-[40px] lg:leading-[1.2] lg:mb-6;
-  }
-
-  .floating-link-icon {
-    transition: transform 0.2s ease-in-out;
-  }
-
-  .floating-link:hover .floating-link-icon {
-    @apply transform translate-x-1;
-  }
+html[data-theme='light'] .docusaurus-mt-lg {
+  background-color: white;
 }

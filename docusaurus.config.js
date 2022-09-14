@@ -31,7 +31,7 @@ const versions = require('./versions.json');
           // set to undefined to remove Edit this Page
           editUrl: 'https://github.com/apache/incubator-devlake-website/edit/main',
           remarkPlugins: [math, [require('mdx-mermaid'), {
-            theme: { light: 'neutral', dark: 'forest' }
+            theme: {light: 'neutral', dark: 'forest'}
           }]],
           rehypePlugins: [katex],
           versions: {
@@ -47,12 +47,12 @@ const versions = require('./versions.json');
         },
         blog: {
           showReadingTime: true,
-          readingTime: ({ content, frontMatter, defaultReadingTime }) =>
-            defaultReadingTime({ content, options: { wordsPerMinute: 300 } }),
+          readingTime: ({content, frontMatter, defaultReadingTime}) =>
+            defaultReadingTime({content, options: {wordsPerMinute: 300}}),
           // Please change this to your repo.
           editUrl: 'https://github.com/apache/incubator-devlake-website/edit/main',
           remarkPlugins: [math, [require('mdx-mermaid'), {
-            theme: { light: 'neutral', dark: 'forest' }
+            theme: {light: 'neutral', dark: 'forest'}
           }]],
           rehypePlugins: [katex],
           blogSidebarTitle: 'All posts',
@@ -75,18 +75,6 @@ const versions = require('./versions.json');
         sidebarPath: require.resolve('./sidebarsCommunity.js'),
       },
     ],
-    function tailwindcss() {
-      return {
-        name: 'docusaurus-tailwindcss',
-        configurePostCss(postcssOptions) {
-          // Appends TailwindCSS and AutoPrefixer.
-          postcssOptions.plugins.push(require('tailwindcss'));
-          postcssOptions.plugins.push(require('autoprefixer'));
-          postcssOptions.plugins.push(require('postcss-gap-properties'));
-          return postcssOptions;
-        },
-      };
-    },
   ],
   i18n: {
     defaultLocale: 'en',
