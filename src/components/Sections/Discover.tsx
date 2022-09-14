@@ -11,7 +11,7 @@ export function Discover() {
       sm:mt-5 sm:text-center sm:text-heading3 sm:leading-[30px]
       ">Discover more engineering <br className="hidden sm:block" /> insights with</div>
     <div className="font-semibold text-primary-500 text-[40px] leading-[60px] mt-1 mb-3
-      sm:text-label24 sm:leading-[30px] sm:text-center">Apache DevLake (Incubating)</div>
+      sm:text-label24 sm:leading-[30px] sm:text-center sm:whitespace-nowrap">Apache DevLake (Incubating)</div>
     <Link
       className="primary-button z-10 sm:flex sm:w-[137px] sm:h-5 sm:p-[0px] 
       whitespace-nowrap sm:mx-auto sm:rounded-[5px] sm:mb-4"

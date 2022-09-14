@@ -39,18 +39,18 @@ const UCIcon = ({ src }: { src: string }) => <img src={src} alt='' className="
 
 export function UseCases() {
   return (
-    <div className="h-[1206px] sm:h-[1590px] mobile:h-[1816px]">
+    <div className="h-[1206px] sm:h-[1590px] mobile:h-[1752px]">
       <img src={BG} alt='' className='absolute z-0 sm:hidden 
         xl:w-screen h-[1206px] left-[0px]' />
       <img src={BGMB} alt='' className='absolute z-0 hidden 
         sm:block sm:w-full
-        xl:w-screen left-[0px] h-[1590px] mobile:h-[1816px]' />
+        xl:w-screen left-[0px] h-[1590px] mobile:h-[1752px]' />
       <div className="flex flex-col relative items-center 
         mobile:pb-6">
         <span className="section-title text-center mt-7
           sm:mt-[0] sm:text-heading2">Use Cases</span>
         <div className="grid grid-cols-2 gap-x-[72px] gap-y-6
-          sm:grid-cols-1">
+          sm:grid-cols-1 sm:gap-y-4">
           <UCCard
             lead="Open-source Software Maintainers"
             title="Contribution Analysis for Community Growth"
