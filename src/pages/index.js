@@ -1,32 +1,33 @@
 import React from 'react';
+import clsx from 'clsx';
 import Layout from '@theme/Layout';
+import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
-import { HomepageHeader } from '@site/src/components/Sections/HomepageHeader';
-import { WhyDevlake } from '../components/Sections/WhyDevlake';
-import { UseCases } from '../components/Sections/UseCases';
-import { UserFlow } from '../components/Sections/UserFlow';
-import { JoinCommunity } from '../components/Sections/JoinCommunity';
-import { Discover } from '../components/Sections/Discover';
+import HomepageFeatures from '../components/HomepageFeatures';
+
+function HomepageHeader() {
+  const {siteConfig} = useDocusaurusContext();
+  return (
+    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+      <div className="container">
+        <h1 className="hero__title">{siteConfig.title}</h1>
+        <p className="hero__subtitle">{siteConfig.tagline}</p>
+      </div>
+    </header>
+  );
+}
 
 export default function Home() {
-  const { siteConfig } = useDocusaurusContext();
+  const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
       title={`${siteConfig.title}`}
       description="Apache DevLake is an open-source dev data platform that ingests, analyzes, and visualizes the fragmented data from DevOps tools to distill insights for engineering productivity.">
-      <div className='bg-[#f8f8f8]'>
-        <div className='max-w-[1280px] mx-auto bg-white'>
-          <HomepageHeader />
-          <main>
-            <WhyDevlake />
-            <UseCases />
-            <UserFlow />
-            <JoinCommunity />
-            <Discover />
-          </main>
-        </div>
-      </div>
+      <HomepageHeader />
+      <main>
+        <HomepageFeatures />
+      </main>
     </Layout>
   );
 }
