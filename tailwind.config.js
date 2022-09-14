@@ -47,7 +47,7 @@ module.exports = {
         heading1: ['32px', { lineHeight: '40px' }],
         heading2: ['24px', { lineHeight: '30px' }],
         heading3: ['20px', { lineHeight: '25px' }],
-        heading4: ['16px', { lineHeight: '20px' }],
+        heading4: ['16px', { lineHeight: 1.25 }],
         label14: ['14px', { lineHeight: 1.43 }],
         label16: ['16px', { lineHeight: '24px' }],
         label18: ['18px', { lineHeight: '24px' }],

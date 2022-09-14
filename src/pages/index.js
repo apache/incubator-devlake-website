@@ -5,7 +5,6 @@ import styles from './index.module.css';
 import { HomepageHeader } from '@site/src/components/Sections/HomepageHeader';
 import { WhyDevlake } from '../components/Sections/WhyDevlake';
 import { UseCases } from '../components/Sections/UseCases';
-import { UserFlow } from '../components/Sections/UserFlow';
 
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
@@ -19,7 +18,6 @@ export default function Home() {
           <main>
             <WhyDevlake />
             <UseCases />
-            <UserFlow />
           </main>
         </div>
       </div>
