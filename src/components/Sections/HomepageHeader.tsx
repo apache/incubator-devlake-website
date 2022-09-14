@@ -42,7 +42,7 @@ export function HomepageHeader() {
           </div>
           <div className="text-primary-800
             text-label24 font-inter font-normal mb-[48px]
-            mobile:text-label16 mobile:leading-[22px] mobile:text-start mobile:mb-3
+            mobile:text-label16 mobile:text-start mobile:mb-3
           ">
             Apache DevLake (Incubating) ingests, analyzes, and visualizes the fragmented data from DevOps tools to distill insights for engineering excellence.
           </div>

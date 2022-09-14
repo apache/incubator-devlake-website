@@ -48,8 +48,8 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   .section-title {
     @apply text-heading1 mb-[64px];
     @apply text-primary-800 font-semibold;
-    @apply mobile:text-heading2 mobile:leading-[32px] mobile:text-neutral-600;
-    @apply mobile:py-6 mobile:mb-[0];
+    @apply mobile:text-heading3;
+    @apply mobile:mb-4 mobile:mt-3;
   }
 
   .floating-link-icon {

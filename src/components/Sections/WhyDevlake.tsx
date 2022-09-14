@@ -17,7 +17,6 @@ import SupA from "@site/static/img/Homepage/sup-A-feishu.png";
 function Feature({ className, children }: { className?: string, children: React.ReactNode }) {
   return (
     <div className={`flex w-full justify-between items-center
-      mobile:text-center
       mobile:flex-col ${className}`}>
       {children}
     </div>
@@ -27,23 +26,24 @@ function Feature({ className, children }: { className?: string, children: React.
 function Supports() {
   return (
     <div className=" flex flex-col items-center
-      mt-[48px] mb-[72px] mobile:hidden
+      mt-[48px] mb-[72px]
     ">
       <C.H3Title>Supported Data Sources</C.H3Title>
-      <div className="grid grid-cols-5 gap-x-[24px] gap-y-[16px]">
+      <div className="grid grid-cols-5 gap-x-[24px] gap-y-[16px]
+        sm:gap-x-1">
         <C.Sup title="Jira"><C.SupImg src={Sup1} /></C.Sup>
-        <C.Sup title="TAPD"><Sup2 /></C.Sup>
-        <C.Sup title="GitHub"><Sup3 /></C.Sup>
-        <C.Sup title="GitLab"><Sup4 /></C.Sup>
-        <C.Sup title="BitBucket"><Sup5 /></C.Sup>
-        <C.Sup title="Gitee"><Sup6 /></C.Sup>
-        <C.Sup title="Jenkins"><Sup7 /></C.Sup>
-        <C.Sup title="GitHub Action"><Sup8 /></C.Sup>
-        <C.Sup title="GitLab CI"><Sup9 /></C.Sup>
+        <C.Sup title="TAPD"><Sup2 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="GitHub"><Sup3 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="GitLab"><Sup4 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="BitBucket"><Sup5 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="Gitee"><Sup6 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="Jenkins"><Sup7 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="GitHub Action"><Sup8 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="GitLab CI"><Sup9 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
         <C.Sup title="Feishu"><C.SupImg src={SupA} /></C.Sup>
       </div>
-      <div className="text-label18 font-inter text-neutral-500
-        mt-[48px]">
+      <div className="text-label18 font-inter text-neutral-500 mt-6
+        sm:text-label16 sm:mt-4">
         <C.InlineLink link="https://devlake.apache.org/docs/Overview/Roadmap">More data sources</C.InlineLink> comming soon...
       </div>
     </div>
@@ -56,7 +56,7 @@ export function WhyDevlake() {
     <span
       className="section-title text-center"
     >
-      Why Apache DevLake<span className="mobile:hidden"> (Incubating)</span>
+      Why Apache DevLake (Incubating)
     </span>
     <div
       className=" flex flex-col
