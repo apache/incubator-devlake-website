@@ -41,15 +41,15 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
     @apply flex items-center justify-center w-[160px] h-[48px];
     @apply hover:no-underline hover:text-neutral-invert;
     @apply text-neutral-invert text-[16px] leading-[20px] font-semibold;
-    @apply rounded-[10px];
+    @apply rounded-[10px] sm:text-[14px];
     @apply shadow-sm shadow-primary/20 ;
   }
 
   .section-title {
     @apply text-heading1 mb-[64px];
     @apply text-primary-800 font-semibold;
-    @apply mobile:text-heading3;
-    @apply mobile:mb-4 mobile:mt-3;
+    @apply sm:text-heading3;
+    @apply mobile:mb-4 sm:mt-3 sm:mb-[36px];
   }
 
   .floating-link-icon {
@@ -62,6 +62,5 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
 
   .use-case-card {
     background: linear-gradient(105.48deg, #DBE4FD 16.79%, #F0F4FE 93.34%);
-    @apply mobile:bg-none;
   }
 }

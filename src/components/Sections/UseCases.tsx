@@ -1,6 +1,7 @@
 import React from "react";
 
 import BG from '@site/static/img/Homepage/UCBG.png';
+import BGMB from '@site/static/img/Homepage/UCBG-MB.png';
 import UC1 from '@site/static/img/Homepage/UC1.png';
 import UC2 from '@site/static/img/Homepage/UC2.png';
 import UC3 from '@site/static/img/Homepage/UC3.png';
@@ -13,40 +14,43 @@ function UCCard({ lead, title, desc, children }: {
   children: React.ReactNode,
 }) {
   return (<div className='use-case-card relative shadow-card overflow-hidden
-    w-[460px] h-[468px] rounded-[16px]
-    mobile:w-[312px] mobile:shadow-hide
-    '>
+    w-[30%] h-[468px] rounded-[16px]
+    sm:w-[62vw] sm:h-[336px] sm:mx-auto
+    mobile:w-auto mobile:h-[392px]'>
     <div className="flex items-center h-[228px] justify-center
-      mobile:h-auto mobile:mb-4">
+      sm:h-[182px]">
       {children}
     </div>
-    <div className="bg-white px-4 py-2 h-[240px] mobile:bg-transparent mobile:h-auto mobile:p-[0]">
+    <div className="bg-white px-4 py-2 h-[240px] sm:h-[152px] sm:p-2 mobile:h-[208px]">
       <div className="font-inter text-neutral-300 text-label18 font-medium mb-2 pr-1
-        mobile:text-heading4 mobile:text-neutral-600 mobile:font-semibold mobile:mb-3">{lead}</div>
+        sm:text-label16 sm:font-normal sm:mb-[4px]">{lead}</div>
       <div className="font-inter text-primary-800 text-heading2 font-semibold mb-2 pr-1
-        mobile:text-neutral-600 mobile:mb-3">{title}</div>
+        sm:text-[20px] sm:leading-[28px] sm:mb-[4px] sm:pr-[0]">{title}</div>
       <div className="font-inter text-neutral-500 text-label18 font-normal pr-1
-        mobile:text-label14 mobile:text-neutral-400">{desc}</div>
+        sm:text-label16 sm:pr-[0]">{desc}</div>
     </div>
   </div>)
 }
 
 const UCIcon = ({ src }: { src: string }) => <img src={src} alt='' className="
   w-[240px] h-[180px]
-  mobile:w-[308px] mobile:h-[250px]
+  mobile:w-[212px] mobile:h-[160px]
   " />
 
 export function UseCases() {
   return (
-    <div className="h-[1206px]">
-      <img src={BG} alt='' className='absolute z-0 mobile:hidden 
+    <div className="h-[1206px] sm:h-[1590px] mobile:h-[1816px]">
+      <img src={BG} alt='' className='absolute z-0 sm:hidden 
         xl:w-screen h-[1206px] left-[0px]' />
+      <img src={BGMB} alt='' className='absolute z-0 hidden 
+        sm:block sm:w-full
+        xl:w-screen left-[0px] h-[1590px] mobile:h-[1816px]' />
       <div className="flex flex-col relative items-center 
-        mobile:h-auto mobile:bg-primary-100 mobile:pb-6">
+        mobile:pb-6">
         <span className="section-title text-center mt-7
-          mobile:mt-[0]">Use Cases</span>
+          sm:mt-[0] sm:text-heading2">Use Cases</span>
         <div className="grid grid-cols-2 gap-x-[72px] gap-y-6
-          mobile:grid-cols-1">
+          sm:grid-cols-1">
           <UCCard
             lead="Open-source Software Maintainers"
             title="Contribution Analysis for Community Growth"

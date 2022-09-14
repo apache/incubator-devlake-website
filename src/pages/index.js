@@ -18,14 +18,14 @@ export default function Home() {
       <div className='bg-[#f8f8f8]'>
         <div className=' mx-auto bg-white'>
           <HomepageHeader />
-          <main className='max-w-[1128px] xl:mx-auto mx-[140px] 
-            sm:max-w-[90%] sm:mx-auto'>
+          <main className='max-w-[70%] xl:mx-auto
+            sm:max-w-[90%] mx-auto'>
             <WhyDevlake />
             <UseCases />
             <UserFlow />
             <JoinCommunity />
-            <Discover />
           </main>
+          <Discover />
         </div>
       </div>
     </Layout>
