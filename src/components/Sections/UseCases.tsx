@@ -14,34 +14,30 @@ function UCCard({ lead, title, desc, children }: {
 }) {
   return (<div className='use-case-card relative shadow-card overflow-hidden
     w-[460px] h-[468px] rounded-[16px]
-    mobile:w-[312px] mobile:shadow-hide
+    mobile:w-auto
     '>
-    <div className="flex items-center h-[228px] justify-center
-      mobile:h-auto mobile:mb-4">
+    <div className="flex items-center h-[228px] justify-center">
       {children}
     </div>
-    <div className="bg-white px-4 py-2 h-[240px] mobile:bg-transparent mobile:h-auto mobile:p-[0]">
-      <div className="font-inter text-neutral-300 text-label18 font-medium mb-2 pr-1
-        mobile:text-heading4 mobile:text-neutral-600 mobile:font-semibold mobile:mb-3">{lead}</div>
-      <div className="font-inter text-primary-800 text-heading2 font-semibold mb-2 pr-1
-        mobile:text-neutral-600 mobile:mb-3">{title}</div>
-      <div className="font-inter text-neutral-500 text-label18 font-normal pr-1
-        mobile:text-label14 mobile:text-neutral-400">{desc}</div>
+    <div className="bg-white px-4 py-2 h-[240px]">
+      <div className="font-inter text-neutral-300 text-label18 font-medium mb-2 pr-1">{lead}</div>
+      <div className="font-inter text-primary-800 text-heading2 font-semibold mb-2 pr-1">{title}</div>
+      <div className="font-inter text-neutral-500 text-label18 font-normal pr-1">{desc}</div>
     </div>
   </div>)
 }
 
 const UCIcon = ({ src }: { src: string }) => <img src={src} alt='' className="
   w-[240px] h-[180px]
-  mobile:w-[308px] mobile:h-[250px]
   " />
 
 export function UseCases() {
   return (<div className="flex flex-col relative items-center
-    h-[1206px] mobile:h-auto mobile:bg-primary-100 mobile:pb-6">
+    h-[1206px] mobile:h-auto">
     <BG className='absolute z-0 mobile:hidden' />
-    <span className="section-title text-center mt-7
-      mobile:mt-[0]">Use Cases</span>
+    <span
+      className="section-title text-center mt-7"
+    >Use Cases</span>
     <div className="grid grid-cols-2 gap-x-[72px] gap-y-6
       mobile:grid-cols-1">
       <UCCard
@@ -52,25 +48,25 @@ export function UseCases() {
         <UCIcon src={UC1} />
       </UCCard>
       <UCCard
-        lead="Product Managers"
-        title="Dev Workflow Improvement"
-        desc="Align sprint planning with high-level goals and ensure the development progress is on track with metrics that help with improving the workflow."
+        lead="Open-source Software Maintainers"
+        title="Contribution Analysis for Community Growth"
+        desc="Grow your community strategically by learning how developers participate, contribute and collaborate."
       >
-        <UCIcon src={UC2} />
+        <UCIcon src={UC1} />
       </UCCard>
       <UCCard
-        lead="Tech Leads"
-        title="Bring Out the Best in Your Team"
-        desc="Gain insights into the development and delivery process. Remove blockers and risks to establish best practices."
+        lead="Open-source Software Maintainers"
+        title="Contribution Analysis for Community Growth"
+        desc="Grow your community strategically by learning how developers participate, contribute and collaborate."
       >
-        <UCIcon src={UC3} />
+        <UCIcon src={UC1} />
       </UCCard>
       <UCCard
-        lead="Data Engineers"
-        title="The Foundation to Build What You Want"
-        desc="Integrate user-defined data sources with DevLake and easily implement customized metrics and dashboards without reinventing the wheel."
+        lead="Open-source Software Maintainers"
+        title="Contribution Analysis for Community Growth"
+        desc="Grow your community strategically by learning how developers participate, contribute and collaborate."
       >
-        <UCIcon src={UC4} />
+        <UCIcon src={UC1} />
       </UCCard>
     </div>
   </div>)
