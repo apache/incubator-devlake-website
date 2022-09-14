@@ -9,12 +9,12 @@ export function HomepageHeader() {
     <header
       className="relative
         pt-[64px] pb-[90px] px-[80px]
-        flex bg-[white]
+        flex
         justify-between items-center"
     >
-      <HeaderBgSvg className='absolute top-[0px] left-[0px]' />
+      <HeaderBgSvg className='absolute z-[-1] top-[0px] left-[0px]' />
       <div
-        className=" z-10
+        className="
           flex flex-col flex-nowrap
           justify-start w-[590px]
         "
@@ -44,9 +44,7 @@ export function HomepageHeader() {
           Getting Started
         </Link>
       </div>
-      <HeaderSvg className="
-        w-auto h-auto z-10
-      "
+      <HeaderSvg className="w-auto h-auto"
       />
     </header>
   );
