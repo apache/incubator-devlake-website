@@ -43,8 +43,8 @@ module.exports = {
       },
       fontSize: {
         heading0: ['48px', { lineHeight: '64px' }],
-        heading1: ['32px', { lineHeight: '40px' }],
-        heading2: ['24px', { lineHeight: '30px' }],
+        heading1: ['32px', { lineHeight: 1.25 }],
+        heading2: ['24px', { lineHeight: 1.25 }],
         heading3: ['20px', { lineHeight: 1.25 }],
         heading4: ['16px', { lineHeight: 1.25 }],
         label14: ['14px', { lineHeight: 1.43 }],
