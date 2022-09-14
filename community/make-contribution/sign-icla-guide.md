@@ -38,6 +38,8 @@ The process of submitting ICLA are:
 
 ## Email Template 
 
+![](/img/icla/email.png)
+
 addressee
 
 ```
