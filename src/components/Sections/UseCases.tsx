@@ -31,7 +31,7 @@ const UCIcon = ({ src }: { src: string }) => <img src={src} alt='' className="
   " />
 
 export function UseCases() {
-  return (<div className="flex flex-col relative items-center
+  return (<div className="flex flex-col relative  bg-white items-center
     h-[1206px] ">
     <BG className='absolute z-0' />
     <span

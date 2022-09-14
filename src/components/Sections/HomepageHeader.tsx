@@ -9,7 +9,7 @@ export function HomepageHeader() {
     <header
       className="relative
         pt-[64px] pb-[90px] px-[80px]
-        flex
+        flex bg-[white]
         justify-between items-center"
     >
       <HeaderBgSvg className='absolute top-[0px] left-[0px]' />
