@@ -10,9 +10,6 @@ module.exports = {
     fontFamily: {
       inter: ['"Inter"', ...defaultTheme.fontFamily.sans],
     },
-    screens: {
-      'mobile': { 'max': '375px' },
-    },
     spacing: {
       1: '8px',
       2: '12px',
