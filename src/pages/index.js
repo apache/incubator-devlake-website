@@ -7,7 +7,6 @@ import { WhyDevlake } from '../components/Sections/WhyDevlake';
 import { UseCases } from '../components/Sections/UseCases';
 import { UserFlow } from '../components/Sections/UserFlow';
 import { JoinCommunity } from '../components/Sections/JoinCommunity';
-import { Discover } from '../components/Sections/Discover';
 
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
@@ -23,7 +22,6 @@ export default function Home() {
             <UseCases />
             <UserFlow />
             <JoinCommunity />
-            <Discover />
           </main>
         </div>
       </div>
