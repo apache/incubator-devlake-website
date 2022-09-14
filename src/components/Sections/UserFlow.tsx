@@ -36,7 +36,7 @@ export function UserFlow() {
           icon={<UF1 width={40} height={40} />}
           text="Set up DevLake"
         >
-          <InlineLink link="https://devlake.apache.org/docs/QuickStart/DockerComposeSetup">Install DevLake</InlineLink> via Docker Compose, Kubernetes, Helm or Temporal.
+          <InlineLink link="https://devlake.apache.org/docs/GettingStarted/DockerComposeSetup">Install DevLake</InlineLink> via Docker Compose, Kubernetes, Helm or Temporal.
         </Card>
         <Arrow />
         <Card
