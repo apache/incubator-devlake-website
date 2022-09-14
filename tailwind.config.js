@@ -11,7 +11,7 @@ module.exports = {
       inter: ['"Inter"', ...defaultTheme.fontFamily.sans],
     },
     screens: {
-      'mobile': { 'max': '375px' },
+      'mobile': { 'max': '390px' },
       'xl': '1280px',
       'sm': { 'max': '744px' },
     },
