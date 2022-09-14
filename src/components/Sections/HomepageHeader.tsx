@@ -10,46 +10,47 @@ export function HomepageHeader() {
     <div>
       <img src={HeaderBG} alt='' className="
       absolute top-[0px] left-[0px] max-h-[580px] 
-      xl:w-screen mobile:hidden" />
+      xl:w-screen sm:hidden" />
       <img src={HeaderBGMB} alt='' className="
-      absolute top-[0px] left-[0px] h-[526px]
-      hidden mobile:block" />
+      absolute top-[0px] left-[0px] w-screen z-0
+      sm:h-[496px] mobile:h-[526px]
+      hidden sm:block" />
       <header
         className="relative
-        pt-[64px] pb-[90px] px-[80px]
-        mobile:pt-5 mobile:px-[32px] mobile:pb-[0px]
-        flex mobile:flex-col
+        pt-[64px] pb-[90px]
+        sm:pt-5 sm:pb-[0px]
+        flex sm:flex-col
         justify-between items-center
-        max-w-[80vw] mx-auto sm:max-w-none"
+        max-w-[80%] mx-auto sm:max-w-[90%]"
       >
         <div className=" z-10
           flex flex-col flex-nowrap
           justify-start w-[590px]
-          mobile:flex-wrap mobile:w-auto
-          mobile:text-center mobile:justify-center
+          sm:flex-wrap sm:w-auto
+          sm:text-center mobile:justify-center
         " >
           <div
             className="text-primary
             font-bold font-inter
             text-heading0
-            mobile:text-heading2
-            mobile:font-semibold mobile:text-center
-            mb-[32px] mobile:mb-3"
+            sm:text-heading2
+            sm:font-semibold sm:text-center
+            mb-[32px] sm:mb-3"
           >
             Debug Your Software{' '}
-            <br />
+            <br className="sm:hidden mobile:block" />
             Engineering Process
           </div>
           <div className="text-primary-800
             text-label24 font-inter font-normal mb-[48px]
-            mobile:text-label16 mobile:text-start mobile:mb-3
+            sm:text-label16 sm:text-start sm:mb-3
           ">
             Apache DevLake (Incubating) ingests, analyzes, and visualizes the fragmented data from DevOps tools to distill insights for engineering excellence.
           </div>
           <Link
             className="primary-button
-              mobile:flex mobile:w-[160px] mobile:h-5 p-[0px] 
-              whitespace-nowrap mobile:mx-auto mobile:rounded-[5px] mobile:mb-4"
+              sm:flex sm:w-[137px] sm:h-5 p-[0px] sm:text-[14px]
+              whitespace-nowrap sm:mx-auto sm:rounded-[5px] sm:mb-4"
             to="https://devlake.apache.org/docs/GettingStarted"
           >
             Getting Started
@@ -57,7 +58,7 @@ export function HomepageHeader() {
         </div>
         <HeaderSvg className="
         w-auto h-auto z-10
-        mobile:w-[260px] mobile:h-[228px] mobile:mx-auto mobile:mb-5
+        sm:w-[260px] sm:h-[228px] sm:mx-auto sm:mb-5
       "/>
       </header>
     </div>

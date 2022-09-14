@@ -4,32 +4,33 @@ import ArrowRight from "@site/static/img/Homepage/arrow-right.svg";
 export const TextTitle = ({ children }: { children: React.ReactNode }) =>
   <span className="block font-inter
     text-heading2 text-primary-800 font-semibold mb-[16px]
-    mobile:text-heading4 sm:mb-2 sm:mt-5">
+    sm:text-heading4 sm:mb-2 sm:mt-5">
     {children}
   </span>
 
 export const H3Title = ({ children }: { children: React.ReactNode }) =>
   <span className="block font-inter
-    text-heading3 text-primary-800 font-semibold mb-[24px]">
+    text-heading3 text-primary-800 font-semibold mb-[24px]
+    sm:text-heading4">
     {children}
   </span>
 
 export const TextDescription = ({ children }: { children: React.ReactNode }) =>
   <div className="font-inter pr-[20px] mobile:pr-[0]
     text-label18 text-neutral-500 
-    mobile:text-label16 mobile:text-start">
+    sm:text-label16 sm:text-start">
     {children}
   </div>
 
 export const TextLink = ({ link, children }: { link: string, children: React.ReactNode }) =>
   <a className="text-label16 text-secondary-500 flex items-center mt-[16px]
-    mobile:justify-center hover:text-secondary-500"
+    sm:justify-center hover:text-secondary-500"
     href={link}>{children}
     <ArrowRight width={20} height={20} />
   </a>
 
 export const TextSection = ({ children }: { children: React.ReactNode }) =>
-  <div className={`text-start mobile:text-center w-[448px] mobile:w-auto`}>
+  <div className={`text-start sm:text-center w-[448px] sm:w-auto`}>
     {children}
   </div>
 
@@ -41,6 +42,7 @@ export const SvgImg = ({ svg: Svg }: { svg: React.ComponentType<React.SVGProps<S
   </div>
 export const SectionImg = ({ src }: { src: string }) => <img src={src} alt="" className="
   w-[384px] h-[288px]
+  sm:w-[240px] sm:h-[182px]
   mobile:w-[200px] mobile:h-[150px]
 " />
 

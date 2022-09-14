@@ -17,7 +17,7 @@ import SupA from "@site/static/img/Homepage/sup-A-feishu.png";
 function Feature({ className, children }: { className?: string, children: React.ReactNode }) {
   return (
     <div className={`flex w-full justify-between items-center
-      mobile:flex-col ${className}`}>
+      sm:flex-col ${className}`}>
       {children}
     </div>
   );
@@ -27,6 +27,8 @@ function Supports() {
   return (
     <div className=" flex flex-col items-center
       mt-[48px] mb-[72px]
+      sm:mt-[36px]
+      mobile:mt-4
     ">
       <C.H3Title>Supported Data Sources</C.H3Title>
       <div className="grid grid-cols-5 gap-x-[24px] gap-y-[16px]
@@ -52,7 +54,7 @@ function Supports() {
 
 export function WhyDevlake() {
   return (<section className="flex flex-col flex-nowrap py-5 items-stretch
-    mobile:py-[0px]">
+    sm:py-[0px]">
     <span
       className="section-title text-center"
     >
@@ -61,7 +63,8 @@ export function WhyDevlake() {
     <div
       className=" flex flex-col
         mb-[72px] space-y-7
-        mobile:px-[0px] mobile:space-y-6 mobile:mb-6
+        sm:px-[0px] sm:space-y-[36px] sm:mb-[36px]
+        mobile:mb-4 mobile:space-y-4
         ">
       <Feature>
         <C.SectionImg src={WAD1} />
@@ -74,7 +77,7 @@ export function WhyDevlake() {
           </C.TextDescription>
         </C.TextSection>
       </Feature>
-      <Feature className="mobile:flex-col-reverse">
+      <Feature className="sm:flex-col-reverse">
         <C.TextSection>
           <C.TextTitle>Out-of-the-box Analysis</C.TextTitle>
           <C.TextDescription>
