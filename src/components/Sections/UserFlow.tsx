@@ -50,7 +50,7 @@ export function UserFlow() {
           icon={<UF3 width={40} height={40} />}
           text="View Dashboards"
         >
-          <InlineLink link="https://devlake.apache.org/docs/LiveDemo">View dashboards</InlineLink> pre-built for a variety of use cases and learn engineering insights from the <InlineLink link="https://devlake.apache.org/docs/Metrics">metrics</InlineLink>.
+          <InlineLink link="https://devlake.apache.org/docs/LiveDemo">View pre-built dashboards</InlineLink> of a variety of use cases and learn engineering insights from the <InlineLink link="https://devlake.apache.org/docs/Metrics">metrics</InlineLink>.
         </Card>
         <Arrow />
         <Card

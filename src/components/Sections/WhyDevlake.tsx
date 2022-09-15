@@ -58,7 +58,7 @@ export function WhyDevlake() {
     <span
       className="section-title text-center"
     >
-      Why Apache DevLake (Incubating)
+      Why Apache DevLake
     </span>
     <div
       className=" flex flex-col
@@ -73,7 +73,7 @@ export function WhyDevlake() {
           <C.TextDescription>
             Collect DevOps data from tools across the entire Software Development Life Cycle (SDLC) and connect siloed data with a standard data model.
             <br />
-            <C.TextLink link="https://devlake.apache.org/docs/DataSupport">Explore supported data sources</C.TextLink>
+            <C.TextLink link="https://devlake.apache.org/docs/SupportedDataSources">Explore supported data sources</C.TextLink>
           </C.TextDescription>
         </C.TextSection>
       </Feature>
