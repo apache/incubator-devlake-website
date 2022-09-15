@@ -19,7 +19,7 @@ export default function Home() {
         <div className=' mx-auto bg-white'>
           <HomepageHeader />
           <main className='max-w-[70%] xl:mx-auto
-            sm:max-w-[90%] mx-auto'>
+            sm:max-w-[90%] mx-auto xl:max-w-[1280px]'>
             <WhyDevlake />
             <UseCases />
             <UserFlow />

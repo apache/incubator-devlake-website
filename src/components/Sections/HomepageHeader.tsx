@@ -21,7 +21,7 @@ export function HomepageHeader() {
         sm:pt-5 sm:pb-[0px]
         flex sm:flex-col
         justify-between items-center
-        max-w-[80%] mx-auto sm:max-w-[90%]"
+        max-w-[80%] xl:max-w-[1440px] mx-auto sm:max-w-[90%]"
       >
         <div className=" z-10
           flex flex-col flex-nowrap
