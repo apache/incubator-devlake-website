@@ -61,14 +61,14 @@ export function UseCases() {
           <UCCard
             lead="Product Managers"
             title="Dev Workflow Improvement"
-            desc="Align sprint planning with high-level goals and ensure the development progress is on track with metrics that help with improving the workflow."
+            desc="Align sprint planning with high-level goals and ensure the development progress is on track."
           >
             <UCIcon src={UC2} />
           </UCCard>
           <UCCard
             lead="Tech Leads"
             title="Bring out the Best in Your Team"
-            desc="Gain insights into the development and delivery process. Remove blockers and risks to establish best practices."
+            desc="Gain insights into the development process to establish best practices by removing blockers and risks."
           >
             <UCIcon src={UC3} />
           </UCCard>
