@@ -46,7 +46,7 @@ function Supports() {
       </div>
       <div className="text-label18 font-inter text-neutral-500 mt-6
         sm:text-label16 sm:mt-4">
-        <C.InlineLink link="https://devlake.apache.org/docs/Overview/Roadmap">More data sources</C.InlineLink> comming soon...
+        <C.InlineLink link="https://devlake.apache.org/docs/Overview/Roadmap">More data sources</C.InlineLink> coming soon...
       </div>
     </div>
   )
