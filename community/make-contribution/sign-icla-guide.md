@@ -6,10 +6,10 @@ description: Sign ICLA Guide
 
 ## Apache Sign ICLA Guide {#apache-sign-icla-guide}
 
-Apache CLA short for Apache Contributor License Agreement, the purpose of this agreement is to clearly define the terms under which intellectual property has been contributed to the ASF and thereby allow us to defend the project should there be a legal dispute regarding the software at some future time.
+Apache CLA, short for Apache Contributor License Agreement, the purpose of this agreement is to clearly define the terms under which intellectual property has been contributed to the ASF and thereby allow us to defend the project should there be a legal dispute regarding the software at some future time.
 A signed ICLA is required to be on file before an individual is given commit rights to any ASF project.
 
-If you have already signed an Apache ICLA, no need to send an email. As you have already submitted an ICLA under your public name, no need to resubmit it. If you have never signed an ICLA, please indicate this in your email, and PMC can apply for this account directly.
+Suppose you have already signed an Apache ICLA; there is no need to send an email as you have already submitted an ICLA under your public name, and there is no need to resubmit it. If you have never signed an ICLA, please indicate this in your email, and PMC can apply for this account directly.
 
 The process of submitting ICLA are:
 
@@ -17,7 +17,7 @@ The process of submitting ICLA are:
 
 ![](/img/Icla/page_link.png)
 
-**2. At the top of the page, there are two download links choose ICLA(Individual Contributor License Agreement) and download it.**
+**2.  At the top of the page, there are two download links; choose ICLA(Individual Contributor License Agreement) and download it .**
 
 ![](/img/Icla/download.png)
 
@@ -25,14 +25,14 @@ The process of submitting ICLA are:
 
 > To be noticed:
 >
-> - Leave a space between family name and last name, remember capitalize the first letter, please write family name at first. Leave the public name empty or add a name with more than a single word; this is not an id
+> - Leave a space between the family name and last name. Remember to capitalize the first letter; please write the family name first. Leave the public name empty or add a name with more than a single word; this is not an id
 > - Include your complete postal address where you receive postal mail, not a conference room or corporate address
 > - If you sign with a gpg signature, be sure that the email in the public key matches the email on the form
 > - Preferred Apache id(s) is a required field for committers.
 
 ![](/img/Icla/write_info.png)
 
-**4. The signature at the bottom of the document: Apache only accept hand-written signature or gpg signature, here we suggest choosing hand-written way. Print the document and sign your name on the paper, or use electric pen.**
+**4. The signature at the bottom of the document: Apache only accepts hand-written signatures or gpg signatures; here, we suggest choosing a hand-written way. Print the document and sign your name on the paper, or use an electric pen .**
 
 ![](/img/Icla/sign.png)
 
