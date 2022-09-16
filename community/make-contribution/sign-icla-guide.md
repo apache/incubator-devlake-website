@@ -15,11 +15,11 @@ The process of submitting ICLA are:
 
 **1. First, click the link [Apache Licenses](https://www.apache.org/licenses/#clas) and find CLAs under the Contributor License Agreements section.**
 
-![](/img/icla/page_link.png)
+![](/img/Icla/page_link.png)
 
 **2. At the top of the page, there are two download links choose ICLA(Individual Contributor License Agreement) and download it.**
 
-![](/img/icla/download.png)
+![](/img/Icla/download.png)
 
 **3. Open the PDF, and fill in the following columns in English.**
 
@@ -30,15 +30,15 @@ The process of submitting ICLA are:
 > - If you sign with a gpg signature, be sure that the email in the public key matches the email on the form
 > - Preferred Apache id(s) is a required field for committers.
 
-![](/img/icla/write_info.png)
+![](/img/Icla/write_info.png)
 
 **4. The signature at the bottom of the document: Apache only accept hand-written signature or gpg signature, here we suggest choosing hand-written way. Print the document and sign your name on the paper, or use electric pen.**
 
-![](/img/icla/sign.png)
+![](/img/Icla/sign.png)
 
 ## Email Template 
 
-![](/img/icla/email.png)
+![](/img/Icla/email.png)
 
 addressee
 
