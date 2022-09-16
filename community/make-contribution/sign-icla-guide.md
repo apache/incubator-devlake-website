@@ -15,7 +15,7 @@ The process of submitting ICLA are:
 
 **1. First, click the link [Apache Licenses](https://www.apache.org/licenses/#clas) and find CLAs under the Contributor License Agreements section.**
 
-![](/img/icla/page_link.png)
+![](/img/Icla/page_link.png)
 
 **2. At the top of the page, there are two download links choose ICLA(Individual Contributor License Agreement) and download it.**
 
