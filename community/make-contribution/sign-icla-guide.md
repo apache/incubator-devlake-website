@@ -15,7 +15,7 @@ The process of submitting ICLA are:
 
 **1. First, click the link [Apache Licenses](https://www.apache.org/licenses/#clas) and find CLAs under the Contributor License Agreements section.**
 
-![](/img/Icla/page_link.png)
+![](/img/icla/page_link.png)
 
 **2. At the top of the page, there are two download links choose ICLA(Individual Contributor License Agreement) and download it.**
 
@@ -49,7 +49,6 @@ secretary@apache.org
 template
 
 ```
-Hello Apache,
-    I am willing donate the DevLake project to ASF. The attachment is my ICLA information. Github account: https://github.com/xxxx.
-Thanks !
+Hello Apache, 
+    Please check the attachment.
 ```
