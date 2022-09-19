@@ -14,7 +14,7 @@ function UCCard({ lead, title, desc, children }: {
   children: React.ReactNode,
 }) {
   return (<div className='use-case-card relative shadow-card overflow-hidden
-    xl:w-[30vw] h-[468px] rounded-[16px]
+    xl:w-[30vw] h-[468px] max-w-[650px] rounded-[16px]
     sm:w-[62vw] sm:h-[336px] sm:mx-auto
     mobile:w-auto mobile:h-[392px]'>
     <div className="flex items-center h-[228px] justify-center
@@ -49,7 +49,7 @@ export function UseCases() {
         mobile:pb-6">
         <span className="section-title text-center mt-7
           sm:mt-[0] sm:text-heading2">Use Cases</span>
-        <div className="grid grid-cols-2 gap-x-[72px] xl:gap-x-[10vw] gap-y-6
+        <div className="grid grid-cols-2 gap-x-[72px] xl:gap-x-10 gap-y-6
           sm:grid-cols-1 sm:gap-y-4">
           <UCCard
             lead="Open-source Software Maintainers"
