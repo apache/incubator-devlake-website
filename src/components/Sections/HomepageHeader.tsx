@@ -59,6 +59,8 @@ export function HomepageHeader() {
         </div>
         <HeaderSvg className="
         w-auto h-auto z-10
+        xl:relative xl:mr-8 xl:ml-2
+        md:mr-0
         sm:w-[260px] sm:h-[228px] sm:mx-auto sm:mb-5
       "/>
       </header>
