@@ -16,7 +16,8 @@ export function HomepageHeader() {
       sm:h-[496px] mobile:h-[526px]
       hidden sm:block" />
       <header
-        className="relative
+        className="relative 
+        xl:left-[30px]
         pt-[64px] pb-[90px]
         sm:pt-5 sm:pb-[0px]
         flex sm:flex-col
