@@ -11,9 +11,9 @@ const Card = ({ icon, text, children }: {
   icon: React.ReactNode,
   text: String,
   children: React.ReactNode,
-}) => (<div className="w-[220px] xl:w-[15vw] mobile:mb-6 mobile:text-center">
+}) => (<div className="w-[220px] xl:w-[15vw] xl:max-w-[260px] mobile:mb-6 mobile:text-center">
   <div className="flex flex-col items-center
-   bg-primary-100 w-[220px] xl:w-[15vw] h-[140px] rounded-[6px]
+   bg-primary-100 w-[220px] xl:w-[15vw] xl:max-w-[260px]  h-[140px] rounded-[6px]
    border-primary-500 border-[1px] border-solid
   ">
     <div className="mt-[40px]">{icon}</div>
@@ -22,7 +22,7 @@ const Card = ({ icon, text, children }: {
   <div className="mt-5 text-label18 font-inter pl-1 text-neutral-500">{children}</div>
 </div>)
 
-const Arrow = () => <div className="h-[140px] flex items-center"><BlueArrow className="xl:w-[3.33vw]" /></div>
+const Arrow = () => <div className="h-[140px] flex items-center"><BlueArrow className="xl:w-[3.33vw] xl:max-w-[80px] " /></div>
 
 export function UserFlow() {
   return (
