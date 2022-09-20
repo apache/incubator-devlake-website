@@ -98,7 +98,11 @@ https://incubator.apache.org/guides/releasemanagement.html
     ```shell
     svn mv https://dist.apache.org/repos/dist/dev/incubator/devlake/0.12.0-incubating-rc2 https://dist.apache.org/repos/dist/release/incubator/devlake/0.12.0-incubating -m "transfer packages for 0.12.0-incubating-rc2"
     ```
-- Wait until the directory 0.12.0-incubating in https://downloads.apache.org/incubator/devlake/  was created
+- Wait until the directory `https://downloads.apache.org/incubator/devlake/0.12.0-incubating/`  was created
+- Remove the last release from `https://downloads.apache.org/` (according the Apache release policy, this link is to the current release)
+    ```shell
+    svn rm https://dist.apache.org/repos/dist/release/incubator/devlake/0.11.0-incubating -m "remove 0.11.0-incubating"
+    ```
 - Announce release by sending an email to general@incubator.apache.org
    [[ANNOUNCE] Release Apache Devlake(incubating) 0.12.0-incubating](https://lists.apache.org/thread/7h6og1y6nhh4xr4r6rqbnswjoj3msxjk)
 ### GitHub
