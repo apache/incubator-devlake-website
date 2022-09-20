@@ -99,7 +99,7 @@ https://incubator.apache.org/guides/releasemanagement.html
     svn mv https://dist.apache.org/repos/dist/dev/incubator/devlake/0.12.0-incubating-rc2 https://dist.apache.org/repos/dist/release/incubator/devlake/0.12.0-incubating -m "transfer packages for 0.12.0-incubating-rc2"
     ```
 - Wait until the directory `https://downloads.apache.org/incubator/devlake/0.12.0-incubating/`  was created
-- Remove the last release from `https://downloads.apache.org/` (according the Apache release policy, this link is to the current release)
+- Remove the last release from `https://downloads.apache.org/` (according the Apache release policy, this link should be pointing to the current release)
     ```shell
     svn rm https://dist.apache.org/repos/dist/release/incubator/devlake/0.11.0-incubating -m "remove 0.11.0-incubating"
     ```

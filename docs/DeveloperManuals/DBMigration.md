@@ -17,9 +17,10 @@ They implement the `Script` interface.
 When DevLake starts, scripts register themselves to the framework by invoking the `Register` function
 
 The method `Up` contains the steps of migration. When you write a new migration script,
-please pay attention to the fault tolerance and the side effect. If something goes wrong during the migration,
-it would be better if the  failed script could be safely retry. For this purpose, the migration scripts should be well-designed.
+please pay attention to the fault tolerance and the side effect. In case of something goes wrong during the migration,
+it would be better if the failed script could be safely retry. For this purpose, the migration scripts should be well-designed.
 For example, if you created a temporary table in the `Up` method, it should be dropped before exiting, regardless of success or failure.
+Using the `defer` statement to do some cleanup is a good idea.
 
 ```go
 type Script interface {
