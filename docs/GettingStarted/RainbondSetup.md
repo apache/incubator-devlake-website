@@ -19,10 +19,10 @@ Install DevLake in Rainbond is the easiest way to get started.
 
 ![](/img/GettingStarted/install-devlake.jpg)
 
-2.fill in the install information, and click `Confirm` button startup install.
+2.fill in the installation information, and click `Confirm` button startup install.
   * Team: select a team or create a new team
   * Cluster: select a cluster
-  * Application: select a application or create a new application
+  * Application: select an application or create a new application
   * Version: select a version
 
 3.Moment later, DevLake will be installed successfully, via the `Access` button to access DevLake.
