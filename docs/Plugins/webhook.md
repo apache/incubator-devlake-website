@@ -6,27 +6,27 @@ description: >
 
 ## Summary
 
-[Webhooks](https://en.wikipedia.org/wiki/Webhook) are user-defined HTTP callbacks that can be used for causing an event on one site that will trigger certain behavior on another site. They can be triggered in your deployment and bug recording systems, such as build shells in Jenkins or Jira. 
+[Webhooks](https://en.wikipedia.org/wiki/Webhook) are HTTPs that you need to request. They should be triggered in your deploy and bug recorder systems, such as build shells in Jenkins or Jira. 
 
 ![webhook](https://user-images.githubusercontent.com/3294100/191303047-b66ece00-5095-420e-b52a-b61146de0d43.png)
-(Image from the Internet)
+(picture from the Internet)
 
-While using webhooks in DevLake, your systems play the roles of system A as shown in the above image, and Apache DevLake as system B. You can use webhooks to:
+Here, your systems play the roles of system A as the picture, and Apache DevLake is system B. Now, you can use webhooks to:
 
 * record bugs or incidents when DevLake cannot collect data from issue applications directly.
-* detect code deployments by using custom deploy-time measurement 
+* detect code deployments by custom deploy-time measurement 
 
-DevLake does not limit the number of webhook requests. **But be aware** that your Database or other servers may not handle unlimited requests.
+DevLake does not limit the number of webhook requests. **But Notice**: Your Database or other servers may not handle unlimited requests.
 
 ## Configuration
-Configuring webhooks via the Config UI.
+Configuring Webhook via config-ui.
 
-First, you can create a webhook connection from the Integration page. 
+First, You can create a webhook connection.
 ![image](https://user-images.githubusercontent.com/3294100/191309840-460fbc9c-15a1-4b12-a510-9ed5ccd8f2b0.png)
 
-We recommand that you give your webhook connection a unique name so that you can identify and manage where you have used it later.
+We suggest that one connection must be used in one system. So you can input the name of your system here.
 
-After cicking on "Generate POST URL", you will find four webhook URLs. Copy the ones that suits your usage into your CI or issue tracking systems. You can always come back to the webhook page to copy the URLS later on.
+Then, you can find the webhook URLs here. Copy what you need. (Or copy when you need them)
 
 ![image](https://user-images.githubusercontent.com/3294100/191400110-327c153f-b236-47e3-88cc-85bf8fcae310.png)
 
@@ -34,15 +34,15 @@ After cicking on "Generate POST URL", you will find four webhook URLs. Copy the 
 
 ## Incident / Issue
 
-If you want to collect issue or incident data from your system, you can use the two webhooks for issues. 
+If you want to collect issue or incident data from your system, you can use the webhook of issues. 
 
-**Notice**: `https://sample-url.com/` and `1` shown in the screenshot above should be replaced with your URL and connectionId.
+There are 2 hooks. **Notice**: `https://sample-url.com/` and `1` should be replaced with your URL and connectionId.
 
-#### Update or Create Issues
+#### Update or Create issues
 
 `POST https://sample-url.com/api/plugins/webhook/1/issues`
 
-needs to be called when an issue or incident is created. The body includes columns as follows:
+Need to be called when an issue or incident is created. The body includes columns as follows:
 
 ```
 board_key: issue belongs to which board/project
@@ -74,11 +74,11 @@ component(Optional): which component is this issue in.
 
 
 
-#### Close Issues (Optional)
+#### Close issue (Optional)
 
 `POST https://sample-url.com/api/plugins/webhook/1/issue/:boardKey/:issueId/close`
 
-needs to be called when an issue or incident is closed. Replace `:boardKey` and `:issueId` with specific strings and keep the body empty.
+Need to be called when an issue or incident is closed. Replace `:boardKey` and `:issueId` with specific strings and keep the body empty.
 
 
 
@@ -98,11 +98,11 @@ curl http://127.0.0.1:4000/api/plugins/webhook/1/issue/DLK/DLK-1234/close -X 'PO
 
 Read more in Swagger: http://localhost:4000/api/swagger/index.html#/plugins%2Fwebhook/post_plugins_webhook__connectionId_issues. 
 
-## Deployments
+## Deployment
 
 Adding pipeline webhook in your deploy shells will help you collect data into DevLake.
 
-First, let us know there are two entities: Tasks and Pipelines. A pipeline means one build or deployment, and a pipeline may have more than one task.
+First, let us know there are 2 entities Tasks and Pipelines. A pipeline means one build or deployment, and a pipeline may have more than one task.
 
 ![image](https://user-images.githubusercontent.com/3294100/191319143-ea5e9546-1c6d-4b2a-abba-95375cfdcec3.png)
 
@@ -112,21 +112,21 @@ For example, we can find 6 tasks like `golangci-lint` and `unit-test` in one Git
 
 ![image](https://user-images.githubusercontent.com/3294100/191319924-f05c4790-d368-4fe4-8c07-dea43e1dd2f3.png)
 
-(Example 2. Image from the Internet)
+(Example 2. Picture from the Internet)
 
 In Example 2, we can find 12 Jenkins pipelines.
 
 ![image](https://user-images.githubusercontent.com/3294100/191320316-19e5a88f-550d-4460-b631-da634436e6e0.png)
 
-(Example 3. Image from the Internet)
+(Example 3. Picture from the Internet)
 
 In Example 3, we can find 5 Jenkins pipelines, and these pipelines have 1~4 task(s).
 
 
 
-After figuring out `pipeline` and `task`, we can start to add webhooks. Two hooks need to be added in shells. **Notice**: `https://sample-url.com/` and `1` should be replaced with your URL and connectionId.
+After figuring out `pipeline` and `task`, we can start to add webhook. 2 hooks need to be added in shells. **Notice**: `https://sample-url.com/` and `1` should be replaced with your URL and connectionId.
 
-#### Update or Create Tasks in the Pipeline
+#### Update or Create the tasks in the pipeline
 
 This hook should be added when the task starts and finishes. So in Example 3, we need to add 8 CURLs in the 4 tasks.
 
@@ -150,7 +150,7 @@ commit_sha(Optional)
 
 
 
-#### Close Pipelines
+#### Close pipelines
 
 `POST https://sample-url.com/api/plugins/webhook/1/cicd_pipeline/:pipelineName/finish`
 
