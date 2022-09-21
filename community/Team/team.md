@@ -60,8 +60,16 @@ get merged into the codebase. We deeply appreciate your contribution!
 - [Zhengyu Zhang](https://github.com/zhangzhenyu2)
 - [Wei Tian](https://github.com/txtw)
 - [Nico Gallinal](https://github.com/nicoabie)
+- [Qi Zhang](https://github.com/zhangqi)
 
 ### New Contributors September 2022
+
+#### Qi Zhang
+
+---
+
+![Qi Zhang](/img/Community/contributors/zhangqi.jpeg)
+
 #### Nico Gallinal
 
 ---
