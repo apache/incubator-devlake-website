@@ -183,8 +183,7 @@ dataflowTester.VerifyTableWithOptions(models.FeishuMeetingTopUserItem{},
     )
 
 ```
-The above usage will default to validating against all fields of the `models.FeishuMeetingTopUserItem` model. There are additional fields on `TableOptions` that can be specified
-to limit which fields on that model to perform validation on.
+The above usage will be default to validating against all fields of the `models.FeishuMeetingTopUserItem` model. There are additional fields on `TableOptions` that can be specified to limit which fields on that model to perform validation on.
 
 To facilitate the generation of the file mentioned above, DevLake has adopted a testing technique called `Snapshot`, which will automatically generate the file based on the run results when the `VerifyTable` or `VerifyTableWithOptions` functions are called without the csv existing.
 
