@@ -66,7 +66,7 @@ flowchart TD;
     end
     S1-->S2-->S3-->S4
 ```
-There's a lot of information in the diagram, but we don't expect you to digest it right away, simply use it as a reference when you go through the example below.
+There's a lot of information in the diagram, but we don't expect you to digest it right away. You can simply use it as a reference when you go through the example below.
 
 ## A step-by-step guide towards your first plugin
 
