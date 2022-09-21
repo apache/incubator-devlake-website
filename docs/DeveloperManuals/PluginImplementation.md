@@ -66,7 +66,7 @@ flowchart TD;
     end
     S1-->S2-->S3-->S4
 ```
-There's a lot of information in the diagram but we don't expect you to digest it right away, simply use it as a reference when you go through the example below.
+There's a lot of information in the diagram, but we don't expect you to digest it right away, simply use it as a reference when you go through the example below.
 
 ## A step-by-step guide towards your first plugin
 
@@ -180,7 +180,7 @@ ResponseParser: func(res *http.Response) ([]json.RawMessage, error) {
 },
 
 ```
-Ok, run the function `main` once again, then it turned out like this, and we should be able see some records show up in the table `_raw_icla_committer`.
+Ok, run the function `main` once again, then it turned out like this, and we should be able to see some records show up in the table `_raw_icla_committer`.
 ```bash
 ……
 receive data: 272956 /* <- the number means 272956 models received */

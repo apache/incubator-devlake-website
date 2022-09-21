@@ -76,7 +76,7 @@ err := db.Exec("UPDATE users SET department = ? WHERE department = ?", "Research
 ### Insert
 ```go
 err := db.Create(&models.User{
-  Email: "hello@example.com", // assumming this the Primarykey
+  Email: "hello@example.com", // assuming this the Primarykey
   Name: "hello",
   Department: "R&D",
 })
@@ -85,7 +85,7 @@ err := db.Create(&models.User{
 ### Update
 ```go
 err := db.Create(&models.User{
-  Email: "hello@example.com", // assumming this the Primarykey
+  Email: "hello@example.com", // assuming this the Primarykey
   Name: "hello",
   Department: "R&D",
 })

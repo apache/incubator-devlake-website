@@ -81,7 +81,7 @@ However, it is obvious that the escape symbol does not conform to the csv specif
 ![image](https://user-images.githubusercontent.com/3294100/175072314-954c6794-3ebd-45bb-98e7-60ddbb5a7da9.png)
 The data field of this file is encoded in base64, so it needs to be decoded manually to a literal amount before using it.
 
-### MySQL workerbench
+### MySQL workbench
 
 This tool must write the SQL yourself to complete the data export, which can be rewritten by imitating the following SQL.
 ```sql
@@ -183,13 +183,13 @@ dataflowTester.VerifyTableWithOptions(models.FeishuMeetingTopUserItem{},
     )
 
 ```
-The above usage will default to validating against all fields of the ```models.FeishuMeetingTopUserItem``` model. There are additional fields on ```TableOptions``` that can be specified
+The above usage will default to validating against all fields of the `models.FeishuMeetingTopUserItem` model. There are additional fields on `TableOptions` that can be specified
 to limit which fields on that model to perform validation on.
 
 To facilitate the generation of the file mentioned above, DevLake has adopted a testing technique called `Snapshot`, which will automatically generate the file based on the run results when the `VerifyTable` or `VerifyTableWithOptions` functions are called without the csv existing.
 
 But note! Please do two things after the snapshot is created: 1. check if the file is generated correctly 2. re-run it to make sure there are no errors between the generated results and the re-run results.
-These two operations are critical and directly related to the quality of test writing. We should treat the snapshot file in `.csv' format like a code file.
+These two operations are critical and directly related to the quality of test writing. We should treat the snapshot file in `.csv` format like a code file.
 
 If there is a problem with this step, there are usually 2 ways to solve it.
 1. The validated fields contain fields like create_at runtime or self-incrementing ids, which cannot be repeatedly validated and should be excluded.
