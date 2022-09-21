@@ -16,10 +16,15 @@ Migration script describes how to do database migration.
 They implement the `Script` interface.
 When DevLake starts, scripts register themselves to the framework by invoking the `Register` function
 
+The method `Up` contains the steps of migration. When you write a new migration script, please pay attention to the fault tolerance and the side effect. 
+It would be better if the failed script could be safely retry, in case of something goes wrong during the migration. For this purpose, the migration scripts should be well-designed.
+For example, if you created a temporary table in the `Up` method, it should be dropped before exiting, regardless of success or failure.
+Using the `defer` statement to do some cleanup is a good idea.
+
 ```go
 type Script interface {
     // this function will contain the business logic of the migration (e.g. DDL logic)
-	Up(ctx context.Context, db *gorm.DB) error
+	Up(ctx context.Context, db *gorm.DB) errors.Error
     // the version number of the migration. typically in date format (YYYYMMDDHHMMSS), e.g. 20220728000001. Migrations are executed sequentially based on this number.
 	Version() uint64
 	// The name of this migration
