@@ -26,7 +26,7 @@ First, you can create a webhook connection from the Integration page.
 
 We recommand that you give your webhook connection a unique name so that you can identify and manage where you have used it later.
 
-After cicking on "Generate POST URL", you will find four webhook URLs. Copy the ones that suits your usage into your CI or issue tracking systems. You can always come back to the webhook page to copy the URLS later on.
+After cicking on "Generate POST URL", you will find four webhook URLs. Copy the ones that suits your usage into your CI or issue tracking systems. You can always come back to the webhook page to copy the URLs later on.
 
 ![image](https://user-images.githubusercontent.com/3294100/191400110-327c153f-b236-47e3-88cc-85bf8fcae310.png)
 
