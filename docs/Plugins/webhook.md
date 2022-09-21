@@ -36,7 +36,7 @@ After cicking on "Generate POST URL", you will find four webhook URLs. Copy the 
 
 If you want to collect issue or incident data from your system, you can use the two webhooks for issues. 
 
-**Notice**: The URL shown in the screenshot and the following samples, `https://sample-url.com/...`, is just an example and should be replaced with the actual URL copied from your Config UI.
+**Notice**: `https://sample-url.com/` and `1` shown in the screenshot above should be replaced with your URL and connectionId.
 
 #### Update or Create Issues
 
@@ -124,7 +124,7 @@ In Example 3, we can find 5 Jenkins pipelines, and these pipelines have 1~4 task
 
 
 
-After figuring out `pipeline` and `task`, we can start to add webhooks. Two hooks need to be added in shells. **Notice**: The URL shown in the following samples, `https://sample-url.com/...`, should be replaced with the actual URL copied from your Config UI.
+After figuring out `pipeline` and `task`, we can start to add webhooks. Two hooks need to be added in shells. **Notice**: `https://sample-url.com/` and `1` should be replaced with your URL and connectionId.
 
 #### Update or Create Tasks in the Pipeline
 
