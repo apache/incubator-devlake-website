@@ -56,3 +56,115 @@ for the framework-only migrations defined under the `models` package.
 2. Sort scripts by Version in ascending order.
 3. Execute scripts.
 4. Save results in the `migration_history` table.
+
+
+## Best Practices
+When you write a new migration script, please pay attention to the fault tolerance and the side effect. It would be better if the failed script could be safely retry, in case of something goes wrong during the migration. For this purpose, the migration scripts should be well-designed. For example, if you created a temporary table in the Up method, it should be dropped before exiting, regardless of success or failure. Using the defer statement to do some cleanup is a good idea. Let's demonstrate this idea with a concrete example.
+
+Suppose we want to recalculate the column `name` of the table `user`
+
+1. rename `user` to `user_bak` (stop if error, define `defer` to rename back on error)
+2. create new `user` (stop if error, define `defer` to drop TABLE on error)
+3. convert data from `user_bak` to `user` (stop if error)
+4. drop `user_bak`
+
+```golang
+
+type User struct {
+	name string `gorm:"type:varchar(255)"`
+}
+
+func (User) TableName() string {
+	return "user"
+}
+
+type NewUser struct {
+	name string `gorm:"type:text"`
+}
+
+func (NewUser) TableName() string {
+	return "user"
+}
+
+type UserBak struct {
+	name string `gorm:"type:varchar(255)"`
+}
+
+func (UserBak) TableName() string {
+	return "user_bak"
+}
+
+func (*exampleScript) Up(ctx context.Context, db *gorm.DB) (errs errors.Error) {
+	var err error
+
+	// rename the user_bak to cache old table
+	err = db.Migrator().RenameTable(&User{}, &UserBak{})
+	if err != nil {
+		return errors.Default.Wrap(err, "error no rename user to user_bak")
+	}
+
+	// rollback for rename back
+	defer func() {
+		if errs != nil {
+			err = db.Migrator().RenameTable(&UserBak{}, &User{})
+			if err != nil {
+				errs = errors.Default.Wrap(err, fmt.Sprintf("fail to rollback table user_bak , you must to rollback by yourself. %s", err.Error()))
+			}
+		}
+	}()
+
+	// create new user table
+	err = db.Migrator().AutoMigrate(&NewUser{})
+
+	if err != nil {
+		return errors.Default.Wrap(err, "error on auto migrate user")
+	}
+
+	// rollback for create new table
+	defer func() {
+		if errs != nil {
+			err = db.Migrator().DropTable(&User{})
+			if err != nil {
+				errs = errors.Default.Wrap(err, fmt.Sprintf("fail to rollback table OldTable , you must to rollback by yourself. %s", err.Error()))
+			}
+		}
+	}()
+
+	// update old id to new id and write to the new table
+	cursor, err := db.Model(&UserBak{}).Rows()
+	if err != nil {
+		return errors.Default.Wrap(err, "error on select NewTable")
+	}
+	defer cursor.Close()
+
+	// caculate and save the data to new table
+	batch, err := helper.NewBatchSave(api.BasicRes, reflect.TypeOf(&NewUser{}), 200)
+	if err != nil {
+		return errors.Default.Wrap(err, "error getting batch from table user")
+	}
+	defer batch.Close()
+	for cursor.Next() {
+		ot := UserBak{}
+		err = db.ScanRows(cursor, &ot)
+		if err != nil {
+			return errors.Default.Wrap(err, "error scan rows from table user_bak")
+		}
+		nt := NewUser(ot)
+
+		nt.name = nt.name + "new"
+
+		err = batch.Add(&nt)
+		if err != nil {
+			return errors.Default.Wrap(err, "error on user batch add")
+		}
+	}
+
+	// drop the old table
+	err = db.Migrator().DropTable(&UserBak{})
+	if err != nil {
+		return errors.Default.Wrap(err, "error no drop user_bak")
+	}
+}
+
+```
+
