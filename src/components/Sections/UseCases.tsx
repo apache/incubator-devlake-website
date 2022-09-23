@@ -67,7 +67,7 @@ export function UseCases() {
           </UCCard>
           <UCCard
             lead="Tech Leads"
-            title="Bring out the Best in Your Team"
+            title="Bring Out the Best in Your Team"
             desc="Gain insights into the development process to establish best practices by removing blockers and risks."
           >
             <UCIcon src={UC3} />
