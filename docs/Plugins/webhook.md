@@ -171,3 +171,113 @@ curl http://127.0.0.1:4000/api/plugins/webhook/1/cicd_pipeline/A123/finish -X 'P
 ```
 
 Read more in Swagger: http://localhost:4000/api/swagger/index.html#/plugins%2Fwebhook/post_plugins_webhook__connectionId_issues. 
+
+### Sample Config in CircleCi
+
+First, we need to know that CircleCi has three entities: pipeline, workflow, and job, and the entity workflow is the entity task in DevLake. 
+Second, we must get pipelines and task data from the build machine. In CircleCi, the data define in env, and we can get it by $CIRCLE_WORKFLOW_JOB_ID and so on. So we can write config to send task data in each workflow and send the close pipeline request in the last workflow.
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "build"
+          command: |
+            create_time=`date '+%Y-%m-%dT%H:%M:%S%z'`
+            echo Hello, World!
+            curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{\"pipeline_name\":\"`date '+%Y-%m-%d'`$CIRCLE_SHA1\",\"name\":\"$CIRCLE_WORKFLOW_JOB_ID\",\"result\":\"SUCCESS\",\"status\":\"DONE\",\"type\":\"BUILD\",\"environment\":\"PRODUCTION\",\"created_date\":\"$create_time\",\"finished_date\":\"`date '+%Y-%m-%dT%H:%M:%S%z'`\",\"repo_id\":\"$CIRCLE_REPOSITORY_URL\",\"branch\":\"$CIRCLE_BRANCH\",\"commit_sha\":\"$CIRCLE_SHA1\"}"
+
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "deploy"
+          command: |
+            create_time=`date '+%Y-%m-%dT%H:%M:%S%z'`
+            echo Hello, World!
+            curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{\"pipeline_name\":\"`date '+%Y-%m-%d'`$CIRCLE_SHA1\",\"name\":\"$CIRCLE_WORKFLOW_JOB_ID\",\"result\":\"SUCCESS\",\"status\":\"DONE\",\"type\":\"DEPLOYMENT\",\"environment\":\"PRODUCTION\",\"created_date\":\"$create_time\",\"finished_date\":\"`date '+%Y-%m-%dT%H:%M:%S%z'`\",\"repo_id\":\"$CIRCLE_REPOSITORY_URL\",\"branch\":\"$CIRCLE_BRANCH\",\"commit_sha\":\"$CIRCLE_SHA1\"}"
+      - run:
+          name: "close pipeline"
+          command: |
+            env
+            curl https://ui-my-svr02.demo.devlake.io/api/plugins/webhook/1/cicd_pipeline/`date '+%Y-%m-%d'`$CIRCLE_SHA1/finish -X 'POST' -d '' -H 'Authorization: Basic ZGV2bGFrZTpqbDhzazFvc3NPNk93'
+          when: always
+
+workflows:
+  say-hello-workflow:
+    jobs:
+      - build
+      - deploy
+```
+
+
+
+Actually, we finish the webhook in prev step. If we want to do more, the config in CircleCi is as fellow. It will call webhook before tasks start and after tasks fail.
+```yaml
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+jobs:
+  build:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: cimg/base:stable
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      - checkout
+      - run:
+          name: "build"
+          command: |
+            create_time=`date '+%Y-%m-%dT%H:%M:%S%z'`
+            curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{……\"result\":\"IN_PROGRESS\",\"status\":\"IN_PROGRESS\"……}"
+            echo Hello, World!
+            sleep $[ ( $RANDOM % 10 )  + 1 ]
+            curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{\"result\":\"SUCCESS\",\"status\":\"DONE\",……}"
+      - run:
+          name: "send fail"
+          command: |
+            curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{\"result\":\"FAILURE\",\"status\":\"DONE\"……}"
+          when: on_fail
+
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "deploy"
+          command: |
+          …… # the same as before
+      - run:
+          name: "send fail"
+          command: |
+          …… # the same as before
+          when: on_fail 
+      - run:
+          name: "close pipeline"
+          command: |
+            env
+            curl https://sample-url.com/api/plugins/webhook/1/cicd_pipeline/`date '+%Y-%m-%d'`$CIRCLE_SHA1/finish -X 'POST' -d ''
+          when: always
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  say-hello-workflow:
+    jobs:
+      - build
+      - deploy
+```
