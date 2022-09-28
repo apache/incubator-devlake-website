@@ -26,7 +26,7 @@ export function HomepageHeader() {
       >
         <div className=" z-10
           flex flex-col flex-nowrap
-          justify-start w-[590px]
+          justify-start w-[670px]
           sm:flex-wrap sm:w-auto
           sm:text-center mobile:justify-center
         " >
@@ -38,7 +38,7 @@ export function HomepageHeader() {
             sm:font-semibold sm:text-center
             mb-[32px] sm:mb-3"
           >
-            Debug Your Engineering Process{' '}
+            Debug Engineering Process{' '}
             <br className="sm:hidden mobile:block" />
             Demystify Dev Data
           </div>

@@ -25,6 +25,7 @@ export const TextDescription = ({ children }: { children: React.ReactNode }) =>
 export const TextLink = ({ link, children }: { link: string, children: React.ReactNode }) =>
   <a className="text-label16 text-secondary-500 flex items-center mt-[16px]
     sm:justify-center hover:text-secondary-500"
+    target="_blank"
     href={link}>{children}
     <ArrowRight width={20} height={20} />
   </a>
