@@ -45,16 +45,16 @@ export function UseCases() {
       <img src={BGMB} alt='' className='absolute z-0 hidden 
         sm:block sm:w-full
         xl:w-screen left-[0px] h-[1590px] mobile:h-[1752px]' />
-      <div className="flex flex-col relative items-center 
+      <div className="flex flex-col relative items-center
         mobile:pb-6">
         <span className="section-title text-center mt-7
           sm:mt-[0] sm:text-heading2">Use Cases</span>
         <div className="grid grid-cols-2 gap-x-[72px] xl:gap-x-10 gap-y-6
           sm:grid-cols-1 sm:gap-y-4">
           <UCCard
-            lead="Open-source Software Maintainers"
-            title="Contribution Analysis for Community Growth"
-            desc="Grow your community strategically by learning how developers participate, contribute and collaborate."
+            lead="Open Source Maintainers"
+            title="Fuel Community Growth with Analysis"
+            desc="Grow your community strategically with insights on how developers participate, contribute, and collaborate."
           >
             <UCIcon src={UC1} />
           </UCCard>
@@ -66,9 +66,9 @@ export function UseCases() {
             <UCIcon src={UC2} />
           </UCCard>
           <UCCard
-            lead="Tech Leads"
-            title="Bring out the Best in Your Team"
-            desc="Gain insights into the development process to establish best practices by removing blockers and risks."
+            lead="Engineering Leads"
+            title="Implement DORA Fast"
+            desc="Implement DORA metrics in minutes to enable and manage delivery processes your developers and users will love."
           >
             <UCIcon src={UC3} />
           </UCCard>

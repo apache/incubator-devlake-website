@@ -38,15 +38,15 @@ export function HomepageHeader() {
             sm:font-semibold sm:text-center
             mb-[32px] sm:mb-3"
           >
-            Debug Your Software{' '}
+            Debug Your Engineering Process{' '}
             <br className="sm:hidden mobile:block" />
-            Engineering Process
+            Demystify Dev Data
           </div>
           <div className="text-primary-800
             text-label24 font-inter font-normal mb-[48px]
             sm:text-label16 sm:text-start sm:mb-3
           ">
-            Apache DevLake (Incubating) ingests, analyzes, and visualizes the fragmented data from DevOps tools to distill insights for engineering excellence.
+            Apache DevLake (Incubating) ingests, analyzes, and visualizes the fragmented data from DevOps tools to extract insights and opportunities for engineering excellence.
           </div>
           <Link
             className="primary-button

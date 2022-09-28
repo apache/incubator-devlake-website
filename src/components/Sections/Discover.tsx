@@ -9,7 +9,7 @@ export function Discover() {
     <img src={BG} alt='' className="absolute bottom-[0px] z-0" />
     <div className="font-medium text-primary-800 text-[32px] leading-[48px] mt-[72px]
       sm:mt-5 sm:text-center sm:text-heading3 sm:leading-[30px]
-      ">Discover more engineering <br className="hidden sm:block" /> insights with</div>
+      ">Get Started with DORA, Scrum Retros and More with <br className="hidden sm:block" /></div>
     <div className="font-semibold text-primary-500 text-[40px] leading-[60px] mt-1 mb-3
       sm:text-label24 sm:leading-[30px] sm:text-center sm:whitespace-nowrap">Apache DevLake</div>
     <Link
