@@ -69,9 +69,9 @@ export function WhyDevlake() {
       <Feature>
         <C.SectionImg src={WAD1} />
         <C.TextSection>
-          <C.TextTitle>Data Silos Connected</C.TextTitle>
+          <C.TextTitle>Defragment Your Data Silos</C.TextTitle>
           <C.TextDescription>
-            Collect DevOps data from tools across the entire Software Development Life Cycle (SDLC) and connect siloed data with a standard data model.
+          Your Dev Data lives in many silos and tools. DevLake brings them all together to give you a complete view of your Software Development Life Cycle (SDLC).
             <br />
             <C.TextLink link="https://devlake.apache.org/docs/SupportedDataSources">Explore supported data sources</C.TextLink>
           </C.TextDescription>
@@ -81,7 +81,7 @@ export function WhyDevlake() {
         <C.TextSection>
           <C.TextTitle>Out-of-the-box Analysis</C.TextTitle>
           <C.TextDescription>
-            Visualize out-of-the-box engineering metrics in a series of use-case driven dashboards.
+          From DORA to scrum retros, DevLake implements metrics effortlessly with prebuilt dashboards supporting common frameworks and goals.
             <br />
             <C.TextLink link="https://devlake.apache.org/docs/LiveDemo">Interact with pre-built dashboards</C.TextLink>
           </C.TextDescription>
@@ -91,10 +91,10 @@ export function WhyDevlake() {
       <Feature>
         <C.SectionImg src={WAD3} />
         <C.TextSection>
-          <C.TextTitle>A Highly Flexible Framework</C.TextTitle>
+          <C.TextTitle>Flexible. Extensible. Adaptable.</C.TextTitle>
           {/* FIXME: A weird margin right happend here, didn't find solution yet */}
           <C.TextDescription>
-            Easily extend DevLake to support your data sources, metrics, and dashboards with a flexible framework for data collection and transformation.
+          DevLake fits teams of all shapes and sizes, and can be readily extended to support new data sources, metrics, and dashboards, with a flexible framework for data collection and transformation.
             <br className="mobile:hidden" />
             <C.TextLink link="https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema">Learn about DevLake’s data model</C.TextLink>
           </C.TextDescription>
