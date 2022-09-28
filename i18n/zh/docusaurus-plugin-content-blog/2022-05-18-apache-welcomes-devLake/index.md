@@ -35,7 +35,7 @@ tags: [devlake, apache]
 
 研发过程数据的标准化程度低，用户难以直接使用这些数据进一步分析；而效能指标定义与计算方法模糊，又给研发数据的应用带来了额外的成本。
 
-Apache DevLake 提供了便捷的数据转化能力，将收集来的数据清洗转换为[标准数据模型](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema)，并基于标准模型生成一系列[研发效能指标](https://devlake.apache.org/docs/EngineeringMetrics)，对用户来说简单易懂、开箱即用。一方面节省了治理数据和定义指标的成本，另一方面使效能指标更加透明，便于研发数据的应用落地。
+Apache DevLake 提供了便捷的数据转化能力，将收集来的数据清洗转换为[标准数据模型](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema)，并基于标准模型生成一系列[研发效能指标](https://devlake.apache.org/docs/category/metrics)，对用户来说简单易懂、开箱即用。一方面节省了治理数据和定义指标的成本，另一方面使效能指标更加透明，便于研发数据的应用落地。
 
 目前 Apache DevLake 已支持 20+常见研发效能指标，可应用于交付效率、质量、成本、能力等不同认知域。
 

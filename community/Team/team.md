@@ -49,29 +49,98 @@ get merged into the codebase. We deeply appreciate your contribution!
 - [Bin Ji](https://github.com/matrixji)
 - [Prajwal Borkar](https://github.com/PrajwalBorkar)
 - [Keon Amini](https://github.com/keon94)
+- [Prasurjya Pran Borah](https://github.com/ppborah)
 - [Zhenlei Li](https://github.com/moonlzl)
 - [Danna Wang](https://github.com/banshengbushu)
 - [Geyu Chen](https://github.com/fredtheflat)
+- [Huang Zheng](https://github.com/phzbbbbbbbb)
+- [Zhu Jin](https://github.com/jinzhu2002) 
+- [Kai Tian](https://github.com/tk103331)
+- [M PalaniKannan](https://github.com/Palanikannan1437)
+- [Zhengyu Zhang](https://github.com/zhangzhenyu2)
+- [Wei Tian](https://github.com/txtw)
+- [Nico Gallinal](https://github.com/nicoabie)
+- [Qi Zhang](https://github.com/zhangqi)
+
+### New Contributors September 2022
+
+#### Qi Zhang
+
+---
+
+![Qi Zhang](/img/Community/contributors/zhangqi.jpeg)
+
+#### Nico Gallinal
+
+---
+
+![Nico Gallinal](/img/Community/contributors/nicogallinal.jpeg)
+
+#### Wei Tian
+
+---
+
+![Wei Tian](/img/Community/contributors/tianwei.jpeg)
+
+### New Contributors August 2022
+
+#### Zhengyu Zhang
+
+---
+
+![Zhengyu Zhang](/img/Community/contributors/zhangzhengyu.jpeg)
+
+#### M PalaniKannan
+
+---
+
+![M PalaniKannan](/img/Community/contributors/mpalanikannan.jpeg)
+
+#### Kai Tian
+
+---
+
+![Kai Tian](/img/Community/contributors/tiankai.jpeg)
+
+### New Contributors July 2022
+
+#### Zhu Jin
+
+---
+
+![Zhu Jin](/img/Community/contributors/jinzhu.jpeg)
+
+#### HuaZheng Pan
+
+---
+
+![HuaZheng Pan](/img/Community/contributors/panhuazheng.jpeg)
 
 ### New Contributors June 2022
+
+#### Prasurjya Pran Borah
+
+---
+
+![Prasurjya Pran Borah](/img/Community/contributors/ppborah.jpeg)
 
 #### Zhenlei Li
 
 ---
 
-![Zhenlei Li](../../img/community/contributors/lizhenlei.jpeg)
+![Zhenlei Li](/img/Community/contributors/lizhenlei.jpeg)
 
 #### Danna Wang
 
 ---
 
-![Zhenlei Li](../../img/community/contributors/wangdanna.jpeg)
+![Zhenlei Li](/img/Community/contributors/wangdanna.jpeg)
 
 #### Geyu Chen
 
 ---
 
-![Geyu Chen](../../img/community/contributors/chengeyu.jpeg)
+![Geyu Chen](/img/Community/contributors/chengeyu.jpeg)
 
 ### New Contributors May 2022
 
@@ -79,70 +148,70 @@ get merged into the codebase. We deeply appreciate your contribution!
 
 ---
 
-![Jiageng Li](../../img/community/contributors/lijiageng.jpeg)
+![Jiageng Li](/img/Community/contributors/lijiageng.jpeg)
 
 #### Xiangyu Zhang
 
 ---
 
-![Xiangyu Zhang](../../img/community/contributors/zhangxiangyu.jpeg)
+![Xiangyu Zhang](/img/Community/contributors/zhangxiangyu.jpeg)
 
 #### Xiaolei Wang
 
 ---
 
-![Xiaolei Wang](../../img/community/contributors/wangxiaolei.jpeg)
+![Xiaolei Wang](/img/Community/contributors/wangxiaolei.jpeg)
 
 #### Peng Su
 
 ---
 
-![Peng Su](../../img/community/contributors/supeng.jpeg)
+![Peng Su](/img/Community/contributors/supeng.jpeg)
 
 #### Dunyu Song
 
 ---
 
-![Dunyu Song](../../img/community/contributors/songdunyu.jpeg)
+![Dunyu Song](/img/Community/contributors/songdunyu.jpeg)
 
 #### Nikita Koselev
 
 ---
 
-![Nikita Koselev](../../img/community/contributors/nikitakoselec.jpeg)
+![Nikita Koselev](/img/Community/contributors/nikitakoselec.jpeg)
 
 #### Shimin An
 
 ---
 
-![Shimin An](../../img/community/contributors/anshimin.jpeg)
+![Shimin An](/img/Community/contributors/anshimin.jpeg)
 
 #### Abhishek KM
 
 ---
 
-![Abhishek KM](../../img/community/contributors/abhishek.jpeg)
+![Abhishek KM](/img/Community/contributors/abhishek.jpeg)
 
 #### Guiping Tan
 
 ---
 
-![Guiping Tan](../../img/community/contributors/tanguiping.jpeg)
+![Guiping Tan](/img/Community/contributors/tanguiping.jpeg)
 
 #### Bin Ji
 
 ---
 
-![jibin](../../img/community/contributors/jibin.jpeg)
+![jibin](/img/Community/contributors/jibin.jpeg)
 
 #### Prajwal Borkar
 
 ---
 
-![Prajwal Borkar](../../img/community/contributors/prajwalborkar.jpeg)
+![Prajwal Borkar](/img/Community/contributors/prajwalborkar.jpeg)
 
 #### Keon Amini
 
 ---
 
-![Keon Amini](../../img/community/contributors/keonamini.jpeg)
+![Keon Amini](/img/Community/contributors/keonamini.jpeg)

@@ -1,5 +1,11 @@
+// @ts-check
+// Note: type annotations allow type checking and IDEs autocompletion
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const math = require('remark-math');
+const katex = require('rehype-katex');
+const versions = require('./versions.json');
+
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
@@ -11,8 +17,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/logo.svg',
-  organizationName: 'Apache', 
-  projectName: 'Apache DevLake', 
+  organizationName: 'Apache',
+  projectName: 'Apache DevLake',
 
   presets: [
     [
@@ -24,15 +30,33 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
           sidebarPath: require.resolve('./sidebars.js'),
           // set to undefined to remove Edit this Page
           editUrl: 'https://github.com/apache/incubator-devlake-website/edit/main',
+          remarkPlugins: [math, [require('mdx-mermaid'), {
+            theme: { light: 'neutral', dark: 'forest' }
+          }]],
+          rehypePlugins: [katex],
+          versions: {
+            current: {
+              label: 'Latest',
+              path: '',
+              banner: 'none',
+            },
+            [versions[0]]: {
+              path: versions[0],
+            }
+          }
         },
         blog: {
           showReadingTime: true,
-          readingTime: ({content, frontMatter, defaultReadingTime}) =>
-            defaultReadingTime({content, options: {wordsPerMinute: 300}}),
+          readingTime: ({ content, frontMatter, defaultReadingTime }) =>
+            defaultReadingTime({ content, options: { wordsPerMinute: 300 } }),
           // Please change this to your repo.
-            editUrl: 'https://github.com/apache/incubator-devlake-website/edit/main',
-            blogSidebarTitle: 'All posts',
-            blogSidebarCount: 'ALL',
+          editUrl: 'https://github.com/apache/incubator-devlake-website/edit/main',
+          remarkPlugins: [math, [require('mdx-mermaid'), {
+            theme: { light: 'neutral', dark: 'forest' }
+          }]],
+          rehypePlugins: [katex],
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -41,7 +65,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
     ],
   ],
 
- plugins: [
+  plugins: [
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -51,6 +75,18 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         sidebarPath: require.resolve('./sidebarsCommunity.js'),
       },
     ],
+    function tailwindcss() {
+      return {
+        name: 'docusaurus-tailwindcss',
+        configurePostCss(postcssOptions) {
+          // Appends TailwindCSS and AutoPrefixer.
+          postcssOptions.plugins.push(require('tailwindcss'));
+          postcssOptions.plugins.push(require('autoprefixer'));
+          postcssOptions.plugins.push(require('postcss-gap-properties'));
+          return postcssOptions;
+        },
+      };
+    },
   ],
   i18n: {
     defaultLocale: 'en',
@@ -76,12 +112,26 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         },
         items: [
           {
-            type: 'doc',
-            docId: 'Overview/WhatIsDevLake',
+            // type: 'doc',
+            // docId: 'Overview/Introduction',
             position: 'right',
             label: 'Docs',
+            items: [
+              {
+                label: "Latest",
+                to: "/docs/Overview/Introduction",
+              },
+              ...versions.slice(0, versions.length - 2).map((version) => ({
+                label: version,
+                to: `docs/${version}/Overview/Introduction`,
+              })),
+              ...versions.slice(versions.length - 2, versions.length).map((version) => ({
+                label: (version === "1.x") ? "1.x(Not Apache Release)" : version,
+                to: `docs/${version}/Overview/Introduction`,
+              }))
+            ]
           },
-         {
+          {
             type: 'doc',
             docId: 'index',
             position: 'right',
@@ -89,9 +139,10 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             docsPluginId: 'community'
           },
           {
-            to: '/blog', 
-            label: 'Blog', 
-            position: 'right'},
+            to: '/blog',
+            label: 'Blog',
+            position: 'right'
+          },
           {
             to: 'https://github.com/apache/incubator-devlake',
             label: 'GitHub',
@@ -113,7 +164,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
               {
                 label: 'Events',
                 to: 'https://www.apache.org/events/current-event',
-              },        
+              },
               {
                 label: 'Security',
                 to: 'https://www.apache.org/security/',
@@ -145,20 +196,20 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             title: 'Docs',
             items: [
               {
-                label: 'Quick Start',
-                to: 'docs/QuickStart/LocalSetup',
+                label: 'Getting Started',
+                to: 'docs/GettingStarted',
               },
               {
                 label: 'Data Models',
                 to: 'docs/DataModels/DevLakeDomainLayerSchema',
-              },        
+              },
               {
                 label: 'Engineering Metrics',
-                to: 'docs/EngineeringMetrics',
+                to: 'docs/Metrics',
               },
               {
                 label: 'Dashboards (Live Demo)',
-                to: 'docs/Dashboards/GitHubBasic',
+                to: 'docs/LiveDemo',
               },
             ],
           },

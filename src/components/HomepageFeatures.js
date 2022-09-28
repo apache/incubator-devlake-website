@@ -5,7 +5,7 @@ import styles from './HomepageFeatures.module.css';
 const FeatureList = [
   {
     title: 'Data Silos Connected',
-    Svg: require('../../static/img/SilosConnected.svg').default,
+    Svg: require('../../static/img/Homepage/SilosConnected.svg').default,
     description: (
       <>
         Collect DevOps data across the entire Software Development LifeCycle (SDLC) and connect siloed data with a standard data model
@@ -14,7 +14,7 @@ const FeatureList = [
   },
   {
     title: 'Out-of-the-box Analysis',
-    Svg: require('../../static/img/OutoftheboxAnalysis.svg').default,
+    Svg: require('../../static/img/Homepage/OutoftheboxAnalysis.svg').default,
     description: (
       <>
         Visualize out-of-the-box engineering metrics in a series of use-case driven dashboards
@@ -23,7 +23,7 @@ const FeatureList = [
   },
   {
     title: 'A Highly Flexible Framework',
-    Svg: require('../../static/img/HighlyFlexible.svg').default,
+    Svg: require('../../static/img/Homepage/HighlyFlexible.svg').default,
     description: (
       <>
         Easily extend DevLake to support your data sources, metrics, and dashboards
