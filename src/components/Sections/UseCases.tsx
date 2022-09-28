@@ -6,28 +6,31 @@ import UC1 from '@site/static/img/Homepage/UC1.png';
 import UC2 from '@site/static/img/Homepage/UC2.png';
 import UC3 from '@site/static/img/Homepage/UC3.png';
 import UC4 from '@site/static/img/Homepage/UC4.png';
+import * as C from "./Components";
 
-function UCCard({ lead, title, desc, children }: {
+function UCCard({ lead, title, desc, demoURL, children }: {
   lead: string,
   title: string,
   desc: string,
+  demoURL: string,
   children: React.ReactNode,
 }) {
   return (<div className='use-case-card relative shadow-card overflow-hidden
-    xl:w-[30vw] h-[468px] max-w-[650px] rounded-[16px]
-    sm:w-[62vw] sm:h-[336px] sm:mx-auto
-    mobile:w-auto mobile:h-[392px]'>
-    <div className="flex items-center h-[228px] justify-center
+    xl:w-[30vw] h-[496px] max-w-[650px] rounded-[16px]
+    sm:w-[62vw] sm:h-[360px] sm:mx-auto
+    mobile:w-auto mobile:h-[420px]'>
+    <div className="flex items-center h-[232px] justify-center
       sm:h-[182px]">
       {children}
     </div>
-    <div className="bg-white px-4 py-2 h-[240px] sm:h-[152px] sm:p-2 mobile:h-[208px]">
+    <div className="bg-white px-4 py-2 h-[264px] sm:h-[152px] sm:p-2 mobile:h-[240px]">
       <div className="font-inter text-neutral-300 text-label18 font-medium mb-2 pr-1
         sm:text-label16 sm:font-normal sm:mb-[4px]">{lead}</div>
       <div className="font-inter text-primary-800 text-heading2 font-semibold mb-2 pr-1
         sm:text-[20px] sm:leading-[28px] sm:mb-[4px] sm:pr-[0]">{title}</div>
       <div className="font-inter text-neutral-500 text-label18 font-normal pr-1
         sm:text-label16 sm:pr-[0]">{desc}</div>
+       <C.TextLink link={demoURL}>See it Live</C.TextLink>
     </div>
   </div>)
 }
@@ -55,6 +58,7 @@ export function UseCases() {
             lead="Open Source Maintainers"
             title="Fuel Community Growth with Analysis"
             desc="Grow your community strategically with insights on how developers participate, contribute, and collaborate."
+            demoURL="https://devlake.apache.org/docs/LiveDemo/WeeklyCommunityRetro"
           >
             <UCIcon src={UC1} />
           </UCCard>
@@ -62,6 +66,7 @@ export function UseCases() {
             lead="Product Managers"
             title="Dev Workflow Improvement"
             desc="Align sprint planning with high-level goals and ensure the development progress is on track."
+            demoURL="https://devlake.apache.org/docs/LiveDemo/GitHubBasic"
           >
             <UCIcon src={UC2} />
           </UCCard>
@@ -69,6 +74,7 @@ export function UseCases() {
             lead="Engineering Leads"
             title="Implement DORA Fast"
             desc="Implement DORA metrics in minutes to enable and manage delivery processes your developers and users will love."
+            demoURL="https://devlake.apache.org/docs/LiveDemo/WeeklyBugRetro"
           >
             <UCIcon src={UC3} />
           </UCCard>
@@ -76,6 +82,7 @@ export function UseCases() {
             lead="Data Engineers"
             title="The Foundation to Build What You Want"
             desc="Integrate user-defined data sources with DevLake and easily implement customized metrics and dashboards without reinventing the wheel."
+            demoURL="https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema"
           >
             <UCIcon src={UC4} />
           </UCCard>
