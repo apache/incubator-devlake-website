@@ -1,13 +1,12 @@
 import React from "react";
 
 import Join from "@site/static/img/Homepage/Join.png";
-
 import { InlineLink } from "./Components";
 
 export function JoinCommunity() {
   return (<div className="flex justify-between sm:flex-col-reverse
     my-[72px] rounded-[20px] bg-primary-200 px-6 py-[36px] font-inter
-    sm:w-[87vw] sm:my-6 sm:p-4 mobile:my- mobile:p-3">
+    sm:w-[87vw] sm:my-6 sm:p-4 mobile:my-10 mobile:p-3">
     <div className="w-[600px] pr-3 sm:pr-[0] sm:w-auto">
       <div className="text-heading1 mb-3 text-primary-800 font-semibold
         sm:text-heading2">Join the Community</div>

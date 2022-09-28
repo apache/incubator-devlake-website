@@ -23,7 +23,7 @@ export const TextDescription = ({ children }: { children: React.ReactNode }) =>
   </div>
 
 export const TextLink = ({ link, children }: { link: string, children: React.ReactNode }) =>
-  <a className="text-label16 text-secondary-500 flex items-center mt-[16px]
+  <a className="text-label16 text-secondary-500 flex items-center mt-[16px] mb-[8px]
     sm:justify-center hover:text-secondary-500"
     target="_blank"
     href={link}>{children}
