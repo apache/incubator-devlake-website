@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 title: "GitHub Basic Metrics"
 description: >
   DevLake Live Demo

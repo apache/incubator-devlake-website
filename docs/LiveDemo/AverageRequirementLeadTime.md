@@ -1,5 +1,4 @@
 ---
-sidebar_position: 6
 title: "Average Requirement Lead Time by Assignee"
 description: >
   DevLake Live Demo

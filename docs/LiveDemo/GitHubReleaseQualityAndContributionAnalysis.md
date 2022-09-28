@@ -1,5 +1,4 @@
 ---
-sidebar_position: 5
 title: "GitHub Release Quality and Contribution Analysis"
 description: >
   DevLake Live Demo
