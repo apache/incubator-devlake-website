@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 title: "Weekly Bug Retro"
 description: >
   DevLake Live Demo

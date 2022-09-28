@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 title: "Commit Count by Author"
 description: >
   DevLake Live Demo
