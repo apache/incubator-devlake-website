@@ -96,6 +96,7 @@ An `issue` is the abstraction of Jira/Github/GitLab/TAPD/... issues.
 | `updated_date`              | datetime | 3          | The last time issue gets updated                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |         |
 | `resolution_date`           | datetime | 3          | The time the issue changes to 'DONE'.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |         |
 | `lead_time_minutes`         | int      |            | Describes the cycle time from issue creation to issue resolution.<ul><li>For issues whose type = 'REQUIREMENT' and status = 'DONE', lead_time_minutes = resolution_date - created_date. The unit is minute.</li><li>For issues whose type != 'REQUIREMENT' or status != 'DONE', lead_time_minutes is null</li></ul>                                                                                                                                                                                                                                                                                      |         |
+| `deployment_id` | varchar | 255 | The cicd_task that relates to this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |  |
 
 #### issue_labels
 
@@ -428,80 +429,80 @@ Events of pull requests.
 
 ### Domain 4 - CI/CD(WIP)
 
-#### jobs
-
-The CI/CD schedule, not a specific task.
-
-| **field** | **type** | **length** | **description** | **key** |
-| :-------- | :------- | :--------- | :-------------- | :------ |
-| `id`      | varchar  | 255        | Job id          | PK      |
-| `name`    | varchar  | 255        | Name of job     |         |
-
-#### builds
-
-A build is an execution of a job.
-
-| **field**      | **type** | **length** | **description**                                                  | **key**    |
-| :------------- | :------- | :--------- | :--------------------------------------------------------------- | :--------- |
-| `id`           | varchar  | 255        | Build id                                                         | PK         |
-| `job_id`       | varchar  | 255        | Id of the job this build belongs to                              | FK_jobs.id |
-| `name`         | varchar  | 255        | Name of build                                                    |            |
-| `duration_sec` | bigint   |            | The duration of build in seconds                                 |            |
-| `started_date` | datetime | 3          | Started time of the build                                        |            |
-| `status`       | varchar  | 255        | The result of build. The values may be 'success', 'failed', etc. |            |
-| `commit_sha`   | char     | 40         | The specific commit being built on. Nullable.                    |            |
-
 #### cicd_pipelines
 
 A cicd_pipeline is a series of builds that have connections or a standalone build.
 
-| **field**          | **type**        | **length** | **description**                                                 | **key** |
-| :----------------- | :-------------- | :--------- | :-------------------------------------------------------------- | :------ |
-| `id`               | varchar         | 255       | This key is generated based on details from the original plugin | PK      |
-| `created_at`       | datetime        | 3         |                                                                 |         |
-| `updated_at`       | datetime        | 3         |                                                                 |         |
-| `name`             | varchar         | 255       |                                                                 |         |
-| `commit_sha`       | varchar         | 255       |                                                                 |         |
-| `branch`           | varchar         | 255       |                                                                 |         |
-| `repo`             | varchar         | 255       |                                                                 |         |
-| `result`           | varchar         | 100       |                                                                 |         |
-| `status`           | varchar         | 100       |                                                                 |         |
-| `type`             | varchar         | 100       | to indicate this is CI or CD                                    |         |
-| `duration_sec`     | bigint unsigned |            |                                                                 |         |
-| `created_date`     | datetime        | 3         |                                                                 |         |
-| `finished_date`    | datetime        | 3         |                                                                 |         |
+| **field** | **type** | **length** | **description**                                                                               | **key** |
+| :-------- | :-------- | :-------- |:----------------------------------------------------------------------------------------------| :-------- |
+| `id` | varchar | 255 | This key is generated based on details from the original plugin                               | PK |
+| `created_at` | datetime | 3                             | Devlake common.NoPKModel                                                                      |  |
+| `updated_at` | datetime | 3                             | Devlake common.NoPKModel                                                                      |  |
+| `_raw_data_params` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                                        |  |
+| `_raw_data_table` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                                        |  |
+| `_raw_data_id` | bigint unsigned | Devlake common.NoPKModel.RawDataOrigin |                                                                                               |  |
+| `_raw_data_remark` | longtext | Devlake common.NoPKModel.RawDataOrigin              |                                                                                               |  |
+| `name` | varchar | 255 | For gitlab, as there is no name for pipeline, so we use projectId, others have their own name |  |
+| `result` | varchar | 100                           | The result of this task                                                                       |  |
+| `status` | varchar | 100                           | The status of this task                                                                       |  |
+| `type` | varchar | 100                           | To indicate if this is a DEPLOYMENT                                                           |  |
+| `duration_sec` | bigint unsigned |                                | how long does this task take                                                                  |  |
+| `started_date` | datetime | 3                             | when did this task start                                                                      |  |
+| `finished_date` | datetime | 3                             | when did this task finish                                                                     |  |
+| `environment` | varchar | 255                           | To indicate the environment in which the task is running                                                       |  |
 
-#### cicd_pipeline_repos
+#### cicd_pipeline_commits
 
-A map between cic_pipeline and repo info.
+| **field** | **type** | **length** | **description**                                                 | **key** |
+| :-------- | :-------- | :-------- |:----------------------------------------------------------------| :-------- |
+| `pipeline_id` | varchar | 255 | This key is generated based on details from the original plugin | PK |
+| `created_at` | datetime | 3                             | Devlake common.NoPKModel                                                |  |
+| `updated_at` | datetime | 3                             | Devlake common.NoPKModel                                                |  |
+| `_raw_data_params` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                  |  |
+| `_raw_data_table` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                  |  |
+| `_raw_data_id` | bigint unsigned | Devlake common.NoPKModel.RawDataOrigin |                                                                 |  |
+| `_raw_data_remark` | longtext | Devlake common.NoPKModel.RawDataOrigin              |                                                                 |  |
+| `commit_sha` | varchar | 255 | The commit that trigger this pipeline                           | PK |
+| `branch` | varchar | 255 | The branch that trigger this pipeline                           |  |
+| `repo` | varchar | 255 |                                                                 |  |
+| `repo_id` | varchar | 255 | The repo that this pipeline belongs to                          |  |
+| `repo_url` | longtext |  |                                                                 |  |
 
-| **field**    | **type** | **length** | **description**                                                 | **key** |
-| :----------- | :------- | :--------- | :-------------------------------------------------------------- | :------ |
-| `commit_sha` | varchar  | 255       |                                                                 | PK      |
-| `branch`     | varchar  | 255       |                                                                 |         |
-| `repo_url`   | varchar  | 255       |                                                                 |         |
-| `id`         | varchar  | 255       | This key is generated based on details from the original plugin | PK      |
-| `created_at` | datetime | 3         |                                                                 |         |
-| `updated_at` | datetime | 3         |                                                                 |         |
+#### cicd_pipeline_relationships
 
+| **field** | **type** | **length** | **description**                                   | **key** |
+| :-------- | :-------- | :-------- |:--------------------------------------------------| :-------- |
+| `parent_pipeline_id` | varchar | 255 | The pipeline trigger child_pipeline               | PK |
+| `child_pipeline_id` | varchar | 255 | The pipeline that is triggered by parent_pipeline | PK |
+| `created_at` | datetime | 3                             | Devlake common.NoPKModel                                                |  |
+| `updated_at` | datetime | 3                             | Devlake common.NoPKModel                                                |  |
+| `_raw_data_params` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                  |  |
+| `_raw_data_table` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                  |  |
+| `_raw_data_id` | bigint unsigned | Devlake common.NoPKModel.RawDataOrigin |                                                                 |  |
+| `_raw_data_remark` | longtext | Devlake common.NoPKModel.RawDataOrigin              |                                                                 |  |
 
 #### cicd_tasks
 
 A cicd_task is a single job of ci/cd.
 
-| **field**          | **type**        | **length** | **description**                                                 | **key** |
-| :----------------- | :-------------- | :--------- | :-------------------------------------------------------------- | :------ |
-| `id`               | varchar         | 255        | This key is generated based on details from the original plugin | PK      |
-| `created_at`       | datetime        | 3          |                                                                 |         |
-| `updated_at`       | datetime        | 3          |                                                                 |         |
-| `name`             | varchar         | 255        |                                                                 |         |
-| `pipeline_id`      | varchar         | 255        |                                                                 |         |
-| `result`           | varchar         | 100        |                                                                 |         |
-| `status`           | varchar         | 100        |                                                                 |         |
-| `type`             | varchar         | 100        | to indicate this is CI or CD                                    |         |
-| `duration_sec`     | bigint unsigned |            |                                                                 |         |
-| `started_date`     | datetime        | 3          |                                                                 |         |
-| `finished_date`    | datetime        | 3          |                                                                 |         |
+| **field** | **type** | **length**                     | **description**                                                 | **key** |
+| :-------- | :-------- |:-------------------------------|:----------------------------------------------------------------| :-------- |
+| `id` | varchar | 255                           | This key is generated based on details from the original plugin | PK |
+| `created_at` | datetime | 3                             | Devlake common.NoPKModel                                                |  |
+| `updated_at` | datetime | 3                             | Devlake common.NoPKModel                                                |  |
+| `_raw_data_params` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                  |  |
+| `_raw_data_table` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                  |  |
+| `_raw_data_id` | bigint unsigned | Devlake common.NoPKModel.RawDataOrigin |                                                                 |  |
+| `_raw_data_remark` | longtext | Devlake common.NoPKModel.RawDataOrigin              |                                                                 |  |
+| `name` | varchar | 255                           |                                                                 |  |
+| `pipeline_id` | varchar | 255                           | The id of pipeline                                              |  |
+| `result` | varchar | 100                           | The result of this task                                         |  |
+| `status` | varchar | 100                           | The status of this task                                         |  |
+| `type` | varchar | 100                           | To indicate if this is a DEPLOYMENT                             |  |
+| `duration_sec` | bigint unsigned |                                | how long does this task take                                    |  |
+| `started_date` | datetime | 3                             | when did this task start                                        |  |
+| `finished_date` | datetime | 3                             | when did this task finish                                       |  |
+| `environment` | varchar | 255                           | To indicate the environment in which the task is running                         |  |
 
 
 ### Cross-Domain Entities
