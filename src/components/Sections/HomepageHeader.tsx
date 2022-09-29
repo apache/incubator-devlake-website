@@ -46,7 +46,7 @@ export function HomepageHeader() {
             text-label24 font-inter font-normal mb-[48px]
             sm:text-label16 sm:text-start sm:mb-3
           ">
-            Apache DevLake (Incubating) ingests, analyzes, and visualizes the fragmented data from DevOps tools to extract insights and opportunities for engineering excellence.
+            Apache DevLake (Incubating) ingests, analyzes, and visualizes the fragmented data from DevOps tools to extract insights for engineering excellence, developer experience, and community growth.
           </div>
           <Link
             className="primary-button
@@ -54,7 +54,7 @@ export function HomepageHeader() {
               whitespace-nowrap sm:mx-auto sm:rounded-[5px] sm:mb-4"
             to="https://devlake.apache.org/docs/GettingStarted"
           >
-            Getting Started
+            Get Started
           </Link>
         </div>
         <HeaderSvg className="

@@ -10,15 +10,19 @@ sidebar_position: 4
 DevLake supports the following data sources. The data from each data source is collected with one or more plugins. There are 9 data plugins in total: `ae`, `feishu`, `gitextractor`, `github`, `gitlab`, `jenkins`, `jira`, `refdiff` and `tapd`.
 
 
-| Data Source | Versions                             | Plugins |
-|-------------|--------------------------------------|-------- |
-| AE          |                                      | `ae`    |
-| Feishu      | Cloud                                |`feishu` |
-| GitHub      | Cloud                                |`github`, `gitextractor`, `refdiff` |
-| Gitlab      | Cloud, Community Edition 13.x+       |`gitlab`, `gitextractor`, `refdiff` |
-| Jenkins     | 2.263.x+                             |`jenkins` |
-| Jira        | Cloud, Server 8.x+, Data Center 8.x+ |`jira` |
-| TAPD        | Cloud                                | `tapd` |
+| Data Source  | Domain(s)                                             |Supoorted Versions                    | Plugins |
+|--------------|-----------------------------------------------------|--------------------------------------|-------- |
+| GitHub       | Source Code Management, Code Review, Issue Tracking | Cloud                                |`github`, `gitextractor`, `refdiff` |
+| GitLab       | Source Code Management, Code Review, Issue Tracking | Cloud, Community Edition 13.x+       |`gitlab`, `gitextractor`, `refdiff` |
+| BitBucket    | Source Code Management, Code Review, Issue Tracking | Cloud                                |`bitbucket`, `gitextractor`, `refdiff` |
+| Gitee        | Source Code Management, Code Review, Issue Tracking | Cloud                                |`gitee`, `gitextractor`, `refdiff` |
+| Jira         | Issue Tracking                                      | Cloud, Server 8.x+, Data Center 8.x+ |`jira` |
+| TAPD         | Issue Tracking                                      | Cloud                                | `tapd` |
+| Jenkins      | CI/CD                                               | 2.263.x+                             |`jenkins` |
+| GitHub Action| CI/CD                                               | Cloud                                |`github`|
+| GitLab CI    | CI/CD                                               | Cloud, Community Edition 13.x+       |`gitlab`|
+| Feishu       | Calendar                                            | Cloud                                |`feishu` |
+| AE           | Source Code Management                              |                                      | `ae`    |
 
 
 
