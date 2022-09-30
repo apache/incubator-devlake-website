@@ -16,7 +16,7 @@ This should be a valid REST API endpoint, eg. `https://api.github.com/`. The url
 
 #### Auth Token(s)
 GitHub personal access tokens are required to add a connection.
-- Learn about [how to create a GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token), the following permission are required for private repository:
+- Learn about [how to create a GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). The following permissions are required for private repositories:
   - `repo:status`
   - `repo_deployment`
   - `public_repo`
