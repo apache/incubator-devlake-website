@@ -208,7 +208,7 @@ jobs:
           name: "close pipeline"
           command: |
             env
-            curl https://ui-my-svr02.demo.devlake.io/api/plugins/webhook/1/cicd_pipeline/`date '+%Y-%m-%d'`$CIRCLE_SHA1/finish -X 'POST' -d '' -H 'Authorization: Basic ZGV2bGFrZTpqbDhzazFvc3NPNk93'
+            curl https://sample-url.com/api/plugins/webhook/1/cicd_pipeline/`date '+%Y-%m-%d'`$CIRCLE_SHA1/finish -X 'POST' -d ''
           when: always
 
 workflows:
