@@ -24,6 +24,7 @@ github:
     wiki: false
   labels:
     - devlake
+    - hacktoberfest
   enabled_merge_buttons:
     squash:  true
     merge:   false
