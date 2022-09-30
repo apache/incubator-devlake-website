@@ -13,6 +13,8 @@ sidebar_position: 3
 
 ## Quick Install
 
+#### You can also check https://merico-dev.github.io/devlake-helm-chart for the easiest way to deploy your devlake
+
 clone the code, and enter the deployment/helm folder.
 ```
 helm install devlake .
