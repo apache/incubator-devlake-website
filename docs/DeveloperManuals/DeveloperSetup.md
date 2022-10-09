@@ -55,16 +55,16 @@ MySQL and Grafana containers.
     docker-compose up -d mysql grafana
     ```
 
-7. Run lake and config UI in dev mode in two separate terminals:
+7. Run `devlake` and `config-ui` in dev mode in two separate terminals:
 
     ```sh
     # install mockery
     go install github.com/vektra/mockery/v2@latest
     # generate mocking stubs
     make mock
-    # run lake
+    # run devlake
     make dev
-    # run config UI
+    # run config-ui
     make configure-dev
     ```
 
@@ -117,7 +117,7 @@ MySQL and Grafana containers.
 
 10. Click *View Dashboards* button in the top left when done, or visit `localhost:3002` (username: `admin`, password: `admin`).
 
-   We use <a href="https://grafana.com/" target="_blank">Grafana</a> as a visualization tool to build charts for the <a href="https://github.com/merico-dev/lake/wiki/DataModel.Domain-layer-schema">data stored in our database</a>. Using SQL queries, we can add panels to build, save, and edit customized dashboards.
+   We use <a href="https://grafana.com/" target="_blank">Grafana</a> as a visualization tool to build charts for the [data stored in our database](../DataModels/DevLakeDomainLayerSchema). Using SQL queries, we can add panels to build, save, and edit customized dashboards.
 
    All the details on provisioning and customizing a dashboard can be found in the [Grafana Doc](../UserManuals/Dashboards/GrafanaUserGuide.md).
 
@@ -129,9 +129,18 @@ MySQL and Grafana containers.
 
 12. For DB migrations, please refer to [Migration Doc](../DeveloperManuals/DBMigration.md).
 
-13. Compiling
+13. Swagger documentation.
+
+    - Install the `swag` package by following instruction on [swaggo](https://github.com/swaggo/swag).
+    - Run `make swag` to generate the Swagger Documentation.
+    - Visit `http://localhost:8080/swagger/index.html` while `devlake` is running.
+
+14. Compiling
 
     - Compile all plugins: `make build-plugin`
     - Compile specific plugins: `PLUGIN=<PLUGIN_NAME> make build-plugin`
     - Compile server: `make build`
     - Compile worker: `make build-worker`
+
+
+
