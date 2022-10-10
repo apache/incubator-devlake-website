@@ -17,8 +17,7 @@ import SupA from "@site/static/img/Homepage/sup-A-feishu.png";
 function Feature({ className, children }: { className?: string, children: React.ReactNode }) {
   return (
     <div className={`flex w-full justify-between items-center
-      mobile:text-center
-      mobile:flex-col ${className}`}>
+      sm:flex-col ${className}`}>
       {children}
     </div>
   );
@@ -27,24 +26,27 @@ function Feature({ className, children }: { className?: string, children: React.
 function Supports() {
   return (
     <div className=" flex flex-col items-center
-      mt-[48px] mb-[72px] mobile:hidden
+      mt-[48px] mb-[72px]
+      sm:mt-[36px] sm:mb-[60px]
+      mobile:mt-4 mobile:mb-6
     ">
       <C.H3Title>Supported Data Sources</C.H3Title>
-      <div className="grid grid-cols-5 gap-x-[24px] gap-y-[16px]">
+      <div className="grid grid-cols-5 gap-x-[24px] gap-y-[16px]
+        sm:gap-x-1">
         <C.Sup title="Jira"><C.SupImg src={Sup1} /></C.Sup>
-        <C.Sup title="TAPD"><Sup2 /></C.Sup>
-        <C.Sup title="GitHub"><Sup3 /></C.Sup>
-        <C.Sup title="GitLab"><Sup4 /></C.Sup>
-        <C.Sup title="BitBucket"><Sup5 /></C.Sup>
-        <C.Sup title="Gitee"><Sup6 /></C.Sup>
-        <C.Sup title="Jenkins"><Sup7 /></C.Sup>
-        <C.Sup title="GitHub Action"><Sup8 /></C.Sup>
-        <C.Sup title="GitLab CI"><Sup9 /></C.Sup>
+        <C.Sup title="TAPD"><Sup2 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="GitHub"><Sup3 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="GitLab"><Sup4 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="BitBucket"><Sup5 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="Gitee"><Sup6 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="Jenkins"><Sup7 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="GitHub Action"><Sup8 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
+        <C.Sup title="GitLab CI"><Sup9 className="sm:w-[48px] sm:h-[48px]" /></C.Sup>
         <C.Sup title="Feishu"><C.SupImg src={SupA} /></C.Sup>
       </div>
-      <div className="text-label18 font-inter text-neutral-500
-        mt-[48px]">
-        <C.InlineLink link="https://devlake.apache.org/docs/Overview/Roadmap">More data sources</C.InlineLink> comming soon...
+      <div className="text-label18 font-inter text-neutral-500 mt-6
+        sm:text-label16 sm:mt-4">
+        <C.InlineLink link="https://devlake.apache.org/docs/Overview/Roadmap">More data sources</C.InlineLink> coming soon...
       </div>
     </div>
   )
@@ -52,35 +54,36 @@ function Supports() {
 
 export function WhyDevlake() {
   return (<section className="flex flex-col flex-nowrap py-5 items-stretch
-    mobile:py-[0px]">
+    sm:py-[0px]">
     <span
       className="section-title text-center"
     >
-      Why Apache DevLake<span className="mobile:hidden"> (Incubating)</span>
+      Why Apache DevLake
     </span>
     <div
       className=" flex flex-col
-        px-[140px] mb-[72px] space-y-7
-        mobile:px-[0px] mobile:space-y-6 mobile:mb-6
+        mb-[72px] space-y-7
+        sm:px-[0px] sm:space-y-[36px] sm:mb-[36px]
+        mobile:mb-4 mobile:space-y-4
         ">
       <Feature>
         <C.SectionImg src={WAD1} />
         <C.TextSection>
-          <C.TextTitle>Data Silos Connected</C.TextTitle>
+          <C.TextTitle>Defragment Your Data Silos</C.TextTitle>
           <C.TextDescription>
-            Collect DevOps data from tools across the entire Software Development Life Cycle (SDLC) and connect siloed data with a standard data model.
+          Your Dev Data lives in many silos and tools. DevLake brings them all together to give you a complete view of your Software Development Life Cycle (SDLC).
             <br />
-            <C.TextLink link="https://devlake.apache.org/docs/DataSupport">Explore supported data sources</C.TextLink>
+            <C.TextLink link="https://devlake.apache.org/docs/SupportedDataSources">Explore supported data sources</C.TextLink>
           </C.TextDescription>
         </C.TextSection>
       </Feature>
-      <Feature className="mobile:flex-col-reverse">
+      <Feature className="sm:flex-col-reverse">
         <C.TextSection>
           <C.TextTitle>Out-of-the-box Analysis</C.TextTitle>
           <C.TextDescription>
-            Visualize out-of-the-box engineering metrics in a series of use-case driven dashboards.
+          From DORA to scrum retros, DevLake implements metrics effortlessly with prebuilt dashboards supporting common frameworks and goals.
             <br />
-            <C.TextLink link="https://devlake.apache.org/docs/LiveDemo">Interact with pre-built dashboards</C.TextLink>
+            <C.TextLink link="https://devlake.apache.org/docs/LiveDemo">See Live Demo</C.TextLink>
           </C.TextDescription>
         </C.TextSection>
         <C.SectionImg src={WAD2} />
@@ -88,10 +91,10 @@ export function WhyDevlake() {
       <Feature>
         <C.SectionImg src={WAD3} />
         <C.TextSection>
-          <C.TextTitle>A Highly Flexible Framework</C.TextTitle>
+          <C.TextTitle>Flexible. Extensible. Adaptable.</C.TextTitle>
           {/* FIXME: A weird margin right happend here, didn't find solution yet */}
           <C.TextDescription>
-            Easily extend DevLake to support your data sources, metrics, and dashboards with a flexible framework for data collection and transformation.
+          DevLake fits teams of all shapes and sizes, and can be readily extended to support new data sources, metrics, and dashboards, with a flexible framework for data collection and transformation.
             <br className="mobile:hidden" />
             <C.TextLink link="https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema">Learn about DevLake’s data model</C.TextLink>
           </C.TextDescription>

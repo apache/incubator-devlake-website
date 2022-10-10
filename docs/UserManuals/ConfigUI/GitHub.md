@@ -16,7 +16,13 @@ This should be a valid REST API endpoint, eg. `https://api.github.com/`. The url
 
 #### Auth Token(s)
 GitHub personal access tokens are required to add a connection.
-- Learn about [how to create a GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+- Learn about [how to create a GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). The following permissions are required for private repositories:
+  - `repo:status`
+  - `repo_deployment`
+  - `public_repo`
+  - `repo:invite`
+  - `read:user`
+  - `read:org`
 - The data collection speed is relatively slow for GitHub since they have a **rate limit of [5,000 requests](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) per hour** (15,000 requests/hour if you pay for GitHub enterprise). You can accelerate the process by configuring _multiple_ personal access tokens. Please note that multiple tokens should be created by different GitHub accounts. Tokens belonging to the same GitHub account share the rate limit.
 
 #### Proxy URL (Optional)

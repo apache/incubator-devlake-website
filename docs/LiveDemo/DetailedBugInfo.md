@@ -1,5 +1,4 @@
 ---
-sidebar_position: 4
 title: "Detailed Bug Info"
 description: >
   DevLake Live Demo
