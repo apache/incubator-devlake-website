@@ -5,4 +5,4 @@ description: >
 ---
 
 # Community Experience
-<iframe src="https://grafana-lake.demo.devlake.io/grafana/goto/uvEHAMVVk?orgId=1" width="100%" height="1000px"></iframe>
+<iframe src="https://grafana-lake.demo.devlake.io/grafana/d/bwsP5Nz4z/community-experience?orgId=1&from=now-6M&to=now" width="100%" height="1000px"></iframe>
