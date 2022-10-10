@@ -5,4 +5,4 @@ description: >
 ---
 
 # DORA
-<iframe src="https://grafana-lake.demo.devlake.io/grafana/goto/mofbBIV4k?orgId=1" width="100%" height="2300px"></iframe>
+<iframe src="https://grafana-lake.demo.devlake.io/grafana/d/qNo8_0M4z/dora?orgId=1&from=now-6M&to=now" width="100%" height="2300px"></iframe>
