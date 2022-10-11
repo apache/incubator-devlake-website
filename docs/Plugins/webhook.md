@@ -98,6 +98,8 @@ If your CI/CD tool isn't already supported by DevLake, you can insert curl comma
 
 DevLake models CI/CD domain with two entities: Pipelines and Tasks. A pipeline has many tasks.
 
+#### Example 1
+
 Take GitHub Actions as an example, the screenshot below shows a GitHub Actions workflow, which consists of 6 jobs including `golangci-lint`, `unit-test`, and etc. When DevLake normalizes data from GitHub Actions, it creates the following records in the domain layer:
 
 - 1 entry in cicd_pipelines table, corresponds to the GitHub workflow
@@ -105,17 +107,26 @@ Take GitHub Actions as an example, the screenshot below shows a GitHub Actions w
 
 ![image](https://user-images.githubusercontent.com/3294100/191319143-ea5e9546-1c6d-4b2a-abba-95375cfdcec3.png)
 
+#### Example 2
+
+Then look at Jenkins build history, the screenshot below shows 12 Jenkins builds, and no Jenkins stages appeared. When DevLake normalizes data from Jenkins build history, it creates the following records in the domain layer:
+
+- 12 entry in cicd_pipelines table, corresponds to the Jenkins builds
+
 ![image](https://user-images.githubusercontent.com/3294100/191319924-f05c4790-d368-4fe4-8c07-dea43e1dd2f3.png)
+(Image from the Internet)
 
-(Example 2. Image from the Internet)
+#### Example 3
 
-In Example 2, we can find 12 Jenkins pipelines.
+Jenkins build may contain some stage. This screenshot shows 5 Jenkins builds, which consists of 1~4 stages including `Build the sudo images for installation`, `Basic Test: running from repo with preinstalled libs`, and etc. When DevLake normalizes data from Jenkins, it creates the following records in the domain layer:
+
+* 5 entry in cicd_pipelines table, corresponds to the Jenkins builds
+
+* 13 entry in cicd_tasks table, corresponds to the Jenkins stages
 
 ![image](https://user-images.githubusercontent.com/3294100/191320316-19e5a88f-550d-4460-b631-da634436e6e0.png)
 
-(Example 3. Image from the Internet)
-
-In Example 3, we can find 5 Jenkins pipelines, and these pipelines have 1~4 task(s).
+(Image from the Internet)
 
 
 
