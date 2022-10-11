@@ -14,18 +14,15 @@ As of v0.14.0, users can push incidents and deployments data required by DORA me
 
 ## Creating webhooks in DevLake
 
-Configuring webhooks via the Config UI.
-
-First, you can create a webhook connection from the Integration page. 
+### Add a new webhook
+To add a new webhook, go to "Data Connections" page in config-ui and select "Issue/Deployment Incoming/Webhook".
 ![image](https://user-images.githubusercontent.com/3294100/191309840-460fbc9c-15a1-4b12-a510-9ed5ccd8f2b0.png)
 
 We recommand that you give your webhook connection a unique name so that you can identify and manage where you have used it later.
 
-After cicking on "Generate POST URL", you will find four webhook URLs. Copy the ones that suits your usage into your CI or issue tracking systems. You can always come back to the webhook page to copy the URLs later on.
+After clicking on "Generate POST URL", you will find four webhook URLs. Copy the ones that suits your usage into your CI or issue tracking systems. You can always come back to the webhook page to copy the URLs later on.
 
 ![image](https://user-images.githubusercontent.com/3294100/191400110-327c153f-b236-47e3-88cc-85bf8fcae310.png)
-
-
 
 ## Incident / Issue
 
