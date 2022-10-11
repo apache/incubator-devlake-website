@@ -34,35 +34,37 @@ If you want to collect issue or incident data from your system, you can use the 
 
 `POST https://sample-url.com/api/plugins/webhook/1/issues`
 
-needs to be called when an issue or incident is created. The body includes columns as follows:
+needs to be called when an issue or incident is created. The body  should be a JSON and include columns as follows:
 
-```
-board_key: issue belongs to which board/project
-url(Optional):  issue's URL
-issue_key: issue's key, needs to be unique in a connection
-title
-description(Optional)
-epic_key(Optional): in which epic.
-type(Optional): type, such as bug/incident/epic/...
-status: issue's status. Must be one of TODO DONE IN_PROGRESS
-original_status:  status in your system, such as created/open/closed/...
-story_point(Optional)
-resolution_date(Optional): date, Format should be 2020-01-01T12:00:00+00:00
-created_date: date, Format should be 2020-01-01T12:00:00+00:00
-updated_date(Optional): date, Format should be 2020-01-01T12:00:00+00:00
-lead_time_minutes(Optional): how long from this issue accepted to develop
-parent_issue_key(Optional)
-priority(Optional)
-original_estimate_minutes(Optional)
-time_spent_minutes(Optional)
-time_remaining_minutes(Optional)
-creator_id(Optional): the user id of the creator
-creator_name(Optional): the user name of the creator, it will just be used to display
-assignee_id(Optional)
-assignee_name(Optional)
-severity(Optional)
-component(Optional): which component is this issue in.
-```
+|          Keyname          | Require | Notes                                                        |
+| :-----------------------: | :-----: | ------------------------------------------------------------ |
+|         board_key         | Require | issue belongs to which board/project                         |
+|            url            |         | issue's URL                                                  |
+|         issue_key         | Require | issue's key, needs to be unique in a connection              |
+|           title           | Require |                                                              |
+|        description        |         |                                                              |
+|         epic_key          |         | in which epic.                                               |
+|           type            |         | type, such as bug/incident/epic/...                          |
+|          status           | Require | issue's status. Must be one of `TODO` `DONE` `IN_PROGRESS`   |
+|      original_status      | Require | status in your system, such as created/open/closed/...       |
+|        story_point        |         |                                                              |
+|      resolution_date      |         | date, Format should be 2020-01-01T12:00:00+00:00             |
+|       created_date        | Require | date, Format should be 2020-01-01T12:00:00+00:00             |
+|       updated_date        |         | date, Format should be 2020-01-01T12:00:00+00:00             |
+|     lead_time_minutes     |         | how long from this issue accepted to develop                 |
+|     parent_issue_key      |         |                                                              |
+|         priority          |         |                                                              |
+| original_estimate_minutes |         |                                                              |
+|    time_spent_minutes     |         |                                                              |
+|  time_remaining_minutes   |         |                                                              |
+|        creator_id         |         | the user id of the creator                                   |
+|       creator_name        |         | the user name of the creator, it will just be used to display |
+|        assignee_id        |         |                                                              |
+|       assignee_name       |         |                                                              |
+|         severity          |         |                                                              |
+|         component         |         | which component is this issue in.                            |
+
+More information about these column at [DomainLayerIssueTracking](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema#domain-1---issue-tracking).
 
 
 
@@ -127,19 +129,21 @@ This hook should be added when the task starts and finishes. So in Example 3, we
 
 The body should be a JSON and include columns as follows:
 
-```
-pipeline_name: pipeline's name can be filled by any string unique in a connection
-name: task's name should be unique in one pipeline
-result: Must be one of SUCCESS FAILURE ABORT IN_PROGRESS
-status: Must be one of IN_PROGRESS DONE
-type: one of TEST LINT BUILD DEPLOYMENT
-environment: which type of machine did this task run in. one of PRODUCTION STAGING TESTING
-started_date: date, Format should be 2020-01-01T12:00:00+00:00
-finished_date(Optional): date, Format should be 2020-01-01T12:00:00+00:00
-repo_id: build for which repo/project. It can be a unique string that you can distinguish
-branch(Optional)
-commit_sha(Optional)
-```
+| Keyname       | Require | Notes                                                        |
+| ------------- | ------- | ------------------------------------------------------------ |
+| pipeline_name | Require | pipeline's name can be filled by any string **unique** in a connection |
+| name          | Require | task's name should be **unique** in one pipeline             |
+| result        | Require | one of `SUCCESS` `FAILURE` `ABORT` `IN_PROGRESS`             |
+| status        | Require | one of `IN_PROGRESS` `DONE`                                  |
+| type          | Require | one of `TEST` `LINT` `BUILD` `DEPLOYMENT`                    |
+| environment   | Require | which type of machine did this task run in. one of `PRODUCTION` `STAGING` `TESTING` |
+| started_date  | Require | date, Format should be 2020-01-01T12:00:00+00:00             |
+| finished_date |         | date, Format should be 2020-01-01T12:00:00+00:00             |
+| repo_id       | Require | build for which repo/project. It can be a **unique** string that you can distinguish |
+| branch        |         |                                                              |
+| commit_sha    |         |                                                              |
+
+More information about these column at [DomainLayerCicdTask](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema#cicd_tasks).
 
 
 
