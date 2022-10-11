@@ -92,15 +92,16 @@ Read more in Swagger: http://localhost:4000/api/swagger/index.html#/plugins%2Fwe
 
 ## Deployments
 
-Adding pipeline webhook in your deploy shells will help you collect data into DevLake.
+If your CI/CD tool isn't already supported by DevLake, you can insert curl commands in your CI/CD script to post deployment data to DevLake.
 
-First, let us know there are two entities: Tasks and Pipelines. A pipeline means one build or deployment, and a pipeline may have more than one task.
+DevLake models CI/CD domain with two entities: Pipelines and Tasks. A pipeline has many tasks.
+
+Take GitHub Actions as an example, the screenshot below shows a GitHub Actions workflow, which consists of 6 jobs including `golangci-lint`, `unit-test`, and etc. When DevLake normalizes data from GitHub Actions, it creates the following records in the domain layer:
+
+- 1 entry in cicd_pipelines table, corresponds to the GitHub workflow
+- 6 entries in cicd_tasks table, one for each job in the GitHub workflow
 
 ![image](https://user-images.githubusercontent.com/3294100/191319143-ea5e9546-1c6d-4b2a-abba-95375cfdcec3.png)
-
-(Example 1)
-
-For example, we can find 6 tasks like `golangci-lint` and `unit-test` in one GitHub pipeline.
 
 ![image](https://user-images.githubusercontent.com/3294100/191319924-f05c4790-d368-4fe4-8c07-dea43e1dd2f3.png)
 
