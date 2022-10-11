@@ -182,8 +182,8 @@ Read more in Swagger: http://localhost:4000/api/swagger/index.html#/plugins%2Fwe
 
 ### Sample Config in CircleCI
 
-First, we need to know that CircleCI has three entities: pipeline, workflow, and job, and the entity workflow is the entity task in DevLake.
-Second, we must get pipelines and task data from the build machine. In CircleCI, the data define in env, and we can get it by $CIRCLE_WORKFLOW_JOB_ID and so on. So we can write config to send task data in each workflow and send the close pipeline request in the last workflow.
+CircleCI pipelines are the highest-level unit of work. Pipelines include your workflows, which coordinate your jobs. The following demo regard CircleCI workflow as the entity task in DevLake.
+In CircleCI, the data defined in env describe build machine, pipelines and tasks , sucs as `$CIRCLE_WORKFLOW_JOB_ID`, etc. So Write config to send task data read from env in each workflow and send the close pipeline request in the last workflow.
 
 ```yaml
 version: 2.1
@@ -228,7 +228,7 @@ workflows:
 
 
 
-Actually, we finish the webhook in prev step. If we want to do more, the config in CircleCI is as fellow. It will call webhook before tasks start and after tasks fail.
+Actually, the incoming webhook works in prev step. If you want to do more, the config in CircleCI is as fellow. It will call webhook before tasks start and after tasks fail.
 ```yaml
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 # See: https://circleci.com/docs/2.0/configuration-reference
