@@ -436,12 +436,6 @@ A cicd_pipeline is a series of builds that have connections or a standalone buil
 | **field** | **type** | **length** | **description**                                                                               | **key** |
 | :-------- | :-------- | :-------- |:----------------------------------------------------------------------------------------------| :-------- |
 | `id` | varchar | 255 | This key is generated based on details from the original plugin                               | PK |
-| `created_at` | datetime | 3                             | Devlake common.NoPKModel                                                                      |  |
-| `updated_at` | datetime | 3                             | Devlake common.NoPKModel                                                                      |  |
-| `_raw_data_params` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                                        |  |
-| `_raw_data_table` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                                        |  |
-| `_raw_data_id` | bigint unsigned | Devlake common.NoPKModel.RawDataOrigin |                                                                                               |  |
-| `_raw_data_remark` | longtext | Devlake common.NoPKModel.RawDataOrigin              |                                                                                               |  |
 | `name` | varchar | 255 | For gitlab, as there is no name for pipeline, so we use projectId, others have their own name |  |
 | `result` | varchar | 100                           | The result of this task                                                                       |  |
 | `status` | varchar | 100                           | The status of this task                                                                       |  |
@@ -456,12 +450,6 @@ A cicd_pipeline is a series of builds that have connections or a standalone buil
 | **field** | **type** | **length** | **description**                                                 | **key** |
 | :-------- | :-------- | :-------- |:----------------------------------------------------------------| :-------- |
 | `pipeline_id` | varchar | 255 | This key is generated based on details from the original plugin | PK |
-| `created_at` | datetime | 3                             | Devlake common.NoPKModel                                                |  |
-| `updated_at` | datetime | 3                             | Devlake common.NoPKModel                                                |  |
-| `_raw_data_params` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                  |  |
-| `_raw_data_table` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                  |  |
-| `_raw_data_id` | bigint unsigned | Devlake common.NoPKModel.RawDataOrigin |                                                                 |  |
-| `_raw_data_remark` | longtext | Devlake common.NoPKModel.RawDataOrigin              |                                                                 |  |
 | `commit_sha` | varchar | 255 | The commit that trigger this pipeline                           | PK |
 | `branch` | varchar | 255 | The branch that trigger this pipeline                           |  |
 | `repo` | varchar | 255 |                                                                 |  |
@@ -474,12 +462,6 @@ A cicd_pipeline is a series of builds that have connections or a standalone buil
 | :-------- | :-------- | :-------- |:--------------------------------------------------| :-------- |
 | `parent_pipeline_id` | varchar | 255 | The pipeline trigger child_pipeline               | PK |
 | `child_pipeline_id` | varchar | 255 | The pipeline that is triggered by parent_pipeline | PK |
-| `created_at` | datetime | 3                             | Devlake common.NoPKModel                                                |  |
-| `updated_at` | datetime | 3                             | Devlake common.NoPKModel                                                |  |
-| `_raw_data_params` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                  |  |
-| `_raw_data_table` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                  |  |
-| `_raw_data_id` | bigint unsigned | Devlake common.NoPKModel.RawDataOrigin |                                                                 |  |
-| `_raw_data_remark` | longtext | Devlake common.NoPKModel.RawDataOrigin              |                                                                 |  |
 
 #### cicd_tasks
 
@@ -488,12 +470,6 @@ A cicd_task is a single job of ci/cd.
 | **field** | **type** | **length**                     | **description**                                                 | **key** |
 | :-------- | :-------- |:-------------------------------|:----------------------------------------------------------------| :-------- |
 | `id` | varchar | 255                           | This key is generated based on details from the original plugin | PK |
-| `created_at` | datetime | 3                             | Devlake common.NoPKModel                                                |  |
-| `updated_at` | datetime | 3                             | Devlake common.NoPKModel                                                |  |
-| `_raw_data_params` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                  |  |
-| `_raw_data_table` | varchar | 255                           | Devlake common.NoPKModel.RawDataOrigin                                  |  |
-| `_raw_data_id` | bigint unsigned | Devlake common.NoPKModel.RawDataOrigin |                                                                 |  |
-| `_raw_data_remark` | longtext | Devlake common.NoPKModel.RawDataOrigin              |                                                                 |  |
 | `name` | varchar | 255                           |                                                                 |  |
 | `pipeline_id` | varchar | 255                           | The id of pipeline                                              |  |
 | `result` | varchar | 100                           | The result of this task                                         |  |
