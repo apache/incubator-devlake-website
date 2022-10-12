@@ -22,13 +22,90 @@ We recommand that you give your webhook connection a unique name so that you can
 
 After clicking on the "Generate POST URL" button, you will find four webhook URLs. Copy the ones that suit your usage into your CI or issue tracking systems. You can always come back to the webhook page to copy the URLs later on.
 
-![image](https://user-images.githubusercontent.com/3294100/195242087-6cb58613-783a-4b68-9c46-731d828d6b91.png)
+![image](https://user-images.githubusercontent.com/3294100/195338899-2cb3a91c-3110-43ec-aec3-0ab2498e56d7.png)
+
+## Deployments
+
+If your CI/CD tool isn't already supported by DevLake, you can insert curl commands as [Sample API Calls](https://devlake.apache.org/docs/Plugins/webhook#deployments-sample-api-calls) in your CI/CD script to post deployment data to DevLake.
+
+**Notice**: The URL shown in the screenshot and the following samples, `https://sample-url.com/...`, is just an example and should be replaced with the actual URL copied from your Config UI.
+
+#### Register a deployment
+
+`POST https://sample-url.com/api/plugins/webhook/1/cicd_tasks`
+
+The body should be a JSON and include columns as follows:
+
+|   Keyname   | Required | Notes                                                        |
+| :---------: | :------: | ------------------------------------------------------------ |
+|  repo_url   |  ✔️ Yes   | Repository url or other **unique** string                    |
+| commit_sha  |  ✔️ Yes   | commit sha                                                   |
+| environment |   ✖️ No   | which type of machine did this task run in. one of `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br />Default is `PRODUCTION` |
+| start_time  |   ✖️ No   | Time, Format should be 2020-01-01T12:00:00+00:00<br />If absent, it is when DevLake receives the POST request. |
+|  end_time   |   ✖️ No   | Time, Format should be 2020-01-01T12:00:00+00:00<br />`start_time` becomes required if end_time is provided. If absent, this column is null. |
+
+
+### Deployments Sample API Calls
+
+Sample CURL for the tasks starting and finishing in deploy pipelines:
+
+```
+curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -d '{"repo_url":"devlake","commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d","start_time":"2020-01-01T12:00:00+00:00","end_time":"2020-01-01T12:59:59+00:00","environment":"PRODUCTION"}'
+```
+
+Read more in Swagger: https://sample-url.com/api/swagger/index.html#/plugins%2Fwebhook/post_plugins_webhook__connectionId_deployments. 
+
+
+
+### Sample Config in CircleCI
+
+CircleCI pipelines are the highest-level unit of work. Pipelines include your workflows, which coordinate your jobs. The following demo is regarding a CircleCI workflow running as an entity task in DevLake.
+
+In CircleCI, the data defined in *env* describe the build machine, pipelines and tasks (e.g. `$CIRCLE_WORKFLOW_JOB_ID`), etc. You will need to add config to send task data, read from the *env*, for each workflow.
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "build"
+          command: |
+            echo Hello, World!
+
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "deploy"
+          command: |
+            # record start before deploy
+            start_time=`date '+%Y-%m-%dT%H:%M:%S%z'`
+            
+            # some deploy here ...
+            echo Hello, World!
+            
+            # send request after deploy
+            curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{\"environment\":\"PRODUCTION\",\"start_time\":\"$start_time\",\"repo_url\":\"$CIRCLE_REPOSITORY_URL\",\"commit_sha\":\"$CIRCLE_SHA1\"}"
+
+workflows:
+  say-hello-workflow:
+    jobs:
+      - build
+      - deploy
+```
+
+
 
 ## Incident / Issue
 
 If you want to collect issue or incident data from your system, you can use the two webhooks for issues. 
-
-**Notice**: The URL shown in the screenshot and the following samples, `https://sample-url.com/...`, is just an example and should be replaced with the actual URL copied from your Config UI.
 
 #### Update or Create Issues
 
@@ -76,12 +153,12 @@ needs to be called when an issue or incident is closed. Replace `:boardKey` and 
 
 
 
-### Sample API Calls
+### Issues Sample API Calls
 
 Sample CURL for Issue Creating :
 
 ```
-curl http://127.0.0.1:4000/api/plugins/webhook/1/issues -X 'POST' -d '{"board_key":"DLK","url":"","issue_key":"DLK-1234","title":"a feature from DLK","description":"","epic_key":"","type":"BUG","status":"TODO","original_status":"created","story_point":0,"resolution_date":null,"created_date":"2020-01-01T12:00:00+00:00","updated_date":null,"lead_time_minutes":0,"parent_issue_key":"DLK-1200","priority":"","original_estimate_minutes":0,"time_spent_minutes":0,"time_remaining_minutes":0,"creator_id":"user1131","creator_name":"Nick name 1","assignee_id":"user1132","assignee_name":"Nick name 2","severity":"","component":""}'
+curl https://sample-url.com/api/plugins/webhook/1/issues -X 'POST' -d '{"board_key":"DLK","url":"","issue_key":"DLK-1234","title":"a feature from DLK","description":"","epic_key":"","type":"BUG","status":"TODO","original_status":"created","story_point":0,"resolution_date":null,"created_date":"2020-01-01T12:00:00+00:00","updated_date":null,"lead_time_minutes":0,"parent_issue_key":"DLK-1200","priority":"","original_estimate_minutes":0,"time_spent_minutes":0,"time_remaining_minutes":0,"creator_id":"user1131","creator_name":"Nick name 1","assignee_id":"user1132","assignee_name":"Nick name 2","severity":"","component":""}'
 ```
 
 Sample CURL for Issue Closing:
@@ -90,203 +167,5 @@ Sample CURL for Issue Closing:
 curl http://127.0.0.1:4000/api/plugins/webhook/1/issue/DLK/DLK-1234/close -X 'POST'
 ```
 
-Read more in Swagger: http://localhost:4000/api/swagger/index.html#/plugins%2Fwebhook/post_plugins_webhook__connectionId_issues. 
+Read more in Swagger: https://sample-url.com/api/swagger/index.html#/plugins%2Fwebhook/post_plugins_webhook__connectionId_issues. 
 
-## Deployments
-
-If your CI/CD tool isn't already supported by DevLake, you can insert curl commands in your CI/CD script to post deployment data to DevLake.
-
-DevLake CI/CD domain-models contain two entities: Pipelines and Tasks. A pipeline can have one or more tasks.
-
-#### Example 1
-
-Take GitHub Actions as an example: the screenshot below shows a GitHub Actions workflow, which consists of 6 jobs including `golangci-lint`, `unit-test`, and etc. When DevLake normalizes data from GitHub Actions, it creates the following records in the domain layer:
-
-- 1 entry in cicd_pipelines table, corresponding to the GitHub workflow
-- 6 entries in cicd_tasks table, one for each job in the GitHub workflow
-
-![image](https://user-images.githubusercontent.com/3294100/191319143-ea5e9546-1c6d-4b2a-abba-95375cfdcec3.png)
-
-#### Example 2
-
-Now look at the Jenkins build history, as another example: the screenshot below shows 12 Jenkins builds, with no Jenkins stages. When DevLake normalizes data from Jenkins build history, it creates the following records in the domain layer:
-
-- 12 entries in cicd_pipelines table, corresponding to the Jenkins builds
-
-![image](https://user-images.githubusercontent.com/3294100/191319924-f05c4790-d368-4fe4-8c07-dea43e1dd2f3.png)
-(Image from the Internet)
-
-#### Example 3
-
-Jenkins builds may contain stages. This screenshot shows 5 Jenkins builds, which consist of 1~4 stages, including `Build the sudo images for installation`, `Basic Test: running from repo with preinstalled libs`, etc. When DevLake gets and normalizes data from Jenkins, it creates the following records in the domain layer:
-
-* 5 entries in cicd_pipelines table, corresponding to the Jenkins builds
-
-* 13 entries in cicd_tasks table, corresponding to the Jenkins stages
-
-![image](https://user-images.githubusercontent.com/3294100/191320316-19e5a88f-550d-4460-b631-da634436e6e0.png)
-
-(Image from the Internet)
-
-
-
-After figuring out `pipeline` and `task`, we can start to add webhooks. Two hooks need to be added in shells. **Notice**: The URL shown in the following samples, `https://sample-url.com/...`, should be replaced with the actual URL copied from your Config UI.
-
-#### Update or Create Tasks in the Pipeline
-
-This hook should be added when the task starts and finishes. So in Example 3, we need to add 8 CURLs in the 4 tasks.
-
-`POST https://sample-url.com/api/plugins/webhook/1/cicd_tasks`
-
-The body should be a JSON and include columns as follows:
-
-|    Keyname    | Required | Notes                                                        |
-| :-----------: | :------: | ------------------------------------------------------------ |
-| pipeline_name |  ✔️ Yes   | pipeline's name can be filled by any string **unique** in a connection |
-|     name      |  ✔️ Yes   | task's name should be **unique** in one pipeline             |
-|    result     |  ✔️ Yes   | one of `SUCCESS` `FAILURE` `ABORT` `IN_PROGRESS`             |
-|    status     |  ✔️ Yes   | one of `IN_PROGRESS` `DONE`                                  |
-|     type      |  ✔️ Yes   | one of `TEST` `LINT` `BUILD` `DEPLOYMENT`                    |
-|  environment  |  ✔️ Yes   | which type of machine did this task run in. one of `PRODUCTION` `STAGING` `TESTING` |
-| started_date  |  ✔️ Yes   | date, Format should be 2020-01-01T12:00:00+00:00             |
-| finished_date |   ✖️ No   | date, Format should be 2020-01-01T12:00:00+00:00             |
-|    repo_id    |  ✔️ Yes   | build for which repo/project. It can be a **unique** string that you can distinguish |
-|    branch     |   ✖️ No   |                                                              |
-|  commit_sha   |   ✖️ No   |                                                              |
-
-More information about these columns at [DomainLayerCicdTask](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema#cicd_tasks).
-
-
-
-#### Close Pipelines
-
-`POST https://sample-url.com/api/plugins/webhook/1/cicd_pipeline/:pipelineName/finish`
-
-This hook should be called to tell DevLake a pipeline finish when a pipeline is completed. `:pipelineName` need to be replaced with the pipeline name in the previous webhook.
-
-### Sample API Calls
-
-Sample CURL for the tasks starting and finishing in deploy pipelines:
-
-```
-curl http://127.0.0.1:4000/api/plugins/webhook/1/cicd_tasks -X 'POST' -d '{"pipeline_name":"A123","name":"unit-test","result":"IN_PROGRESS","status":"IN_PROGRESS","type":"TEST","environment":"PRODUCTION","created_date":"2020-01-01T12:00:00+00:00","finished_date":"2020-01-01T12:59:59+00:00","repo_id":"devlake","branch":"main","commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d"}'
-```
-
-Sample CURL for pipeline completed:
-
-```
-curl http://127.0.0.1:4000/api/plugins/webhook/1/cicd_pipeline/A123/finish -X 'POST' -d ''
-```
-
-Read more in Swagger: http://localhost:4000/api/swagger/index.html#/plugins%2Fwebhook/post_plugins_webhook__connectionId_issues. 
-
-### Sample Config in CircleCI
-
-CircleCI pipelines are the highest-level unit of work. Pipelines include your workflows, which coordinate your jobs. The following demo is regarding a CircleCI workflow running as an entity task in DevLake.
-
-In CircleCI, the data defined in *env* describe the build machine, pipelines and tasks (e.g. `$CIRCLE_WORKFLOW_JOB_ID`), etc. You will need to add config to send task data, read from the *env*, for each workflow, and to send the *close pipeline* request in the last workflow.
-
-```yaml
-version: 2.1
-
-jobs:
-  build:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - run:
-          name: "build"
-          command: |
-            create_time=`date '+%Y-%m-%dT%H:%M:%S%z'`
-            echo Hello, World!
-            curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{\"pipeline_name\":\"`date '+%Y-%m-%d'`$CIRCLE_SHA1\",\"name\":\"$CIRCLE_WORKFLOW_JOB_ID\",\"result\":\"SUCCESS\",\"status\":\"DONE\",\"type\":\"BUILD\",\"environment\":\"PRODUCTION\",\"created_date\":\"$create_time\",\"finished_date\":\"`date '+%Y-%m-%dT%H:%M:%S%z'`\",\"repo_id\":\"$CIRCLE_REPOSITORY_URL\",\"branch\":\"$CIRCLE_BRANCH\",\"commit_sha\":\"$CIRCLE_SHA1\"}"
-
-  deploy:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - run:
-          name: "deploy"
-          command: |
-            create_time=`date '+%Y-%m-%dT%H:%M:%S%z'`
-            echo Hello, World!
-            curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{\"pipeline_name\":\"`date '+%Y-%m-%d'`$CIRCLE_SHA1\",\"name\":\"$CIRCLE_WORKFLOW_JOB_ID\",\"result\":\"SUCCESS\",\"status\":\"DONE\",\"type\":\"DEPLOYMENT\",\"environment\":\"PRODUCTION\",\"created_date\":\"$create_time\",\"finished_date\":\"`date '+%Y-%m-%dT%H:%M:%S%z'`\",\"repo_id\":\"$CIRCLE_REPOSITORY_URL\",\"branch\":\"$CIRCLE_BRANCH\",\"commit_sha\":\"$CIRCLE_SHA1\"}"
-      - run:
-          name: "close pipeline"
-          command: |
-            env
-            curl https://sample-url.com/api/plugins/webhook/1/cicd_pipeline/`date '+%Y-%m-%d'`$CIRCLE_SHA1/finish -X 'POST' -d ''
-          when: always
-
-workflows:
-  say-hello-workflow:
-    jobs:
-      - build
-      - deploy
-```
-
-
-
-Actually, we finish the incoming webhook in prev step. If you want to customize more, a sample CircleCI config is provided below. This sample calls the webhook before the tasks start and after tasks fail.
-```yaml
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.1
-
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-jobs:
-  build:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: "build"
-          command: |
-            create_time=`date '+%Y-%m-%dT%H:%M:%S%z'`
-            curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{……\"result\":\"IN_PROGRESS\",\"status\":\"IN_PROGRESS\"……}"
-            echo Hello, World!
-            sleep $[ ( $RANDOM % 10 )  + 1 ]
-            curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{\"result\":\"SUCCESS\",\"status\":\"DONE\",……}"
-      - run:
-          name: "send fail"
-          command: |
-            curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{\"result\":\"FAILURE\",\"status\":\"DONE\"……}"
-          when: on_fail
-
-  deploy:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - run:
-          name: "deploy"
-          command: |
-          …… # the same as before
-      - run:
-          name: "send fail"
-          command: |
-          …… # the same as before
-          when: on_fail 
-      - run:
-          name: "close pipeline"
-          command: |
-            env
-            curl https://sample-url.com/api/plugins/webhook/1/cicd_pipeline/`date '+%Y-%m-%d'`$CIRCLE_SHA1/finish -X 'POST' -d ''
-          when: always
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-workflows:
-  say-hello-workflow:
-    jobs:
-      - build
-      - deploy
-```
