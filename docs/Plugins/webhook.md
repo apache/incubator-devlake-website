@@ -18,7 +18,7 @@ As of v0.14.0, users can push incidents and deployments data required by DORA me
 To add a new webhook, go to the "Data Connections" page in config-ui and select "Issue/Deployment Incoming/Webhook".
 ![image](https://user-images.githubusercontent.com/3294100/191309840-460fbc9c-15a1-4b12-a510-9ed5ccd8f2b0.png)
 
-We recommand that you give your webhook connection a unique name so that you can identify and manage where you have used it later.
+We recommend that you give your webhook connection a unique name so that you can identify and manage where you have used it later.
 
 After clicking on the "Generate POST URL" button, you will find four webhook URLs. Copy the ones that suit your usage into your CI or issue tracking systems. You can always come back to the webhook page to copy the URLs later on.
 
@@ -59,47 +59,51 @@ Read more in Swagger: https://sample-url.com/api/swagger/index.html#/plugins%2Fw
 
 ### Sample Config in CircleCI
 
-CircleCI pipelines are the highest-level unit of work. Pipelines include your workflows, which coordinate your jobs. The following demo is regarding a CircleCI workflow running as an entity task in DevLake.
+The following demo shows how to post "deployments" to DevLake from CircleCI. In this example, CircleCI job 'deploy' is used to do deployments.
 
-In CircleCI, the data defined in *env* describe the build machine, pipelines and tasks (e.g. `$CIRCLE_WORKFLOW_JOB_ID`), etc. You will need to add config to send task data, read from the *env*, for each workflow.
 
-```yaml
-version: 2.1
+  ```
+  version: 2.1
 
-jobs:
-  build:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - run:
-          name: "build"
-          command: |
-            echo Hello, World!
+  jobs:
+    build:
+      docker:
+        - image: cimg/base:stable
+      steps:
+        - checkout
+        - run:
+            name: "build"
+            command: |
+              echo Hello, World!
 
-  deploy:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - run:
-          name: "deploy"
-          command: |
-            # record start before deploy
-            start_time=`date '+%Y-%m-%dT%H:%M:%S%z'`
-            
-            # some deploy here ...
-            echo Hello, World!
-            
-            # send request after deploy
-            curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{\"environment\":\"PRODUCTION\",\"start_time\":\"$start_time\",\"repo_url\":\"$CIRCLE_REPOSITORY_URL\",\"commit_sha\":\"$CIRCLE_SHA1\"}"
+    deploy:
+      docker:
+        - image: cimg/base:stable
+      steps:
+        - checkout
+        - run:
+            name: "deploy"
+            command: |
+              # record start before deploy
+              start_time=`date '+%Y-%m-%dT%H:%M:%S%z'`
 
-workflows:
-  say-hello-workflow:
-    jobs:
-      - build
-      - deploy
-```
+              # some deploy here ...
+              echo Hello, World!
+
+              # send request after deploy. Only repo_url and commit_sha are required fields.
+              curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{
+                \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
+                \"commit_sha\":\"$CIRCLE_SHA1\",
+                \"environment\":\"PRODUCTION\",
+                \"start_time\":\"$start_time\"
+              }"
+
+  workflows:
+    build_and_deploy_workflow:
+      jobs:
+        - build
+        - deploy
+  ```
 
 
 
