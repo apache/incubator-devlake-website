@@ -10,15 +10,14 @@ sidebar_position: 1
 
 - <a href="https://docs.docker.com/get-docker" target="_blank">Docker v19.03.10+</a>
 - <a href="https://golang.org/doc/install" target="_blank">Golang v1.19+</a>
-- Make
-  - Mac (Already installed)
+- <a href="https://www.gnu.org/software/make/" target="_blank">GNU Make</a>
+  - Mac (Preinstalled)
   - Windows: [Download](http://gnuwin32.sourceforge.net/packages/make.htm)
   - Ubuntu: `sudo apt-get install build-essential libssl-dev`
 
 ## How to setup dev environment
 
-The following guide will walk you through the procedure to run local config-ui and devlake servers against dockerized
-MySQL and Grafana containers.
+The following guide will walk you through the procedure to run local config-ui and devlake servers against dockerized MySQL and Grafana containers.
 
 1. Navigate to where you would like to install this project and clone the repository:
 
