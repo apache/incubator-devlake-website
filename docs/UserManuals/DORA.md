@@ -74,12 +74,14 @@ In the next section, we'll demonstrate how to configure DevLake to implement DOR
 4. Click `Add Transformation` to configure for DORA metrics
 ![](https://i.imgur.com/Lhcu2DE.png)
 
-5. To make it simple, fields with a ![](https://i.imgur.com/rrLopFx.png) label are DORA-related configurations for every data source. Via these fields, you can define what are "incidents" and "deployments" for each data source. 
+5. To make it simple, fields with a ![](https://i.imgur.com/rrLopFx.png) label are DORA-related configurations for every data source. Via these fields, you can define what are "incidents" and "deployments" for each data source. After all data connections have been configured, click `Next Step`
    - This team uses Jira issue types `Crash` and `Incident` as "incident", so choose the two types in field "incident". Jira issues in these two types will be transformed to "incidents" in DevLake.
    - This team uses the GitHub action jobs named `deploy` and `build-and-deploy` to deploy, so type in `(?i)deploy` to match these jobs. These jobs will be transformed to "deployments" in DevLake.
-   ![](https://i.imgur.com/57sRc8L.png)
-
-   After all the data connections have been configured, click `Next Step`
+   ![](https://i.imgur.com/1JZA2xn.png)
+   
+   Note: The following example shows where to find GitHub action jobs. It's easy to mix them up with GitHub workflows.
+   ![](https://i.imgur.com/Y2hchEh.png)
+   
 
 6. Choose sync frequency, click 'Save and Run Now' to start data collection. The duration varies by data source and depends on the volume of data.
 ![](https://i.imgur.com/zPkfzGr.png)
@@ -92,14 +94,14 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
 
 7. Visit "Data Connections" page in config-ui and select "Issue/Deployment Incoming Webhook".
 
-8. Click "Add Incoming Webhook", give it a name, and click "Generate POST URL". DevLake will generate URLs that you can send JSON payloads to push `deployments` and `incidents` data to Devlake. Copy the `Deployment` curl command.
-![image](https://user-images.githubusercontent.com/3294100/191309840-460fbc9c-15a1-4b12-a510-9ed5ccd8f2b0.png)
-![image](https://user-images.githubusercontent.com/3294100/195282257-00d7e741-9910-465b-82a6-9ffbc0d7ce43.png)
+8. Click "Add Incoming Webhook", give it a name, and click "Generate POST URL". DevLake will generate URLs that you can send JSON payloads to push `deployments` and `incidents` to Devlake. Copy the `Deployment` curl command.
+![](https://i.imgur.com/jq6lzg1.png)
+![](https://i.imgur.com/jBMQnjt.png)
 
 9. Now head to your CircleCI's pipelines page in a new tab. Find your deployment pipeline and click `Configuration File`
 ![](https://i.imgur.com/XwPzmyk.png)
 
-10. Paste the curl command copied in step 8 to post `Deployments` to DevLake. Below is an example of how it's configured in the CircleCI `config.yml`.
+10. Paste the curl command copied in step 8 to the `config.yml`.
   ```
   version: 2.1
 
@@ -122,17 +124,17 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
         - run:
             name: "deploy"
             command: |
-              # record start before deploy
+              # The time a deploy started
               start_time=`date '+%Y-%m-%dT%H:%M:%S%z'`
 
-              # some deploy here ...
+              # Some deployment tasks here ...
               echo Hello, World!
 
-              # send request after deploy. Only repo_url and commit_sha are required fields.
-              curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{
-                \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
+              # Send the request to DevLake after deploy
+              # The values start with a '$CIRCLE_' are CircleCI's built-in variables
+              curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -d "{
                 \"commit_sha\":\"$CIRCLE_SHA1\",
-                \"environment\":\"PRODUCTION\",
+                \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
                 \"start_time\":\"$start_time\"
               }"
 
@@ -142,10 +144,13 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
         - build
         - deploy
   ```
-  You can find more about Deployment webhook's payload schema in this [doc](https://devlake.apache.org/docs/Plugins/webhook/#deployments).
+  You can find more about webhook's payload schema in this [doc](https://devlake.apache.org/docs/Plugins/webhook/#deployments).
 
-11. Run the modified CircleCI pipeline and you will find corresponding `deployments` data in table.cicd_tasks in DevLake's database.
-![](https://i.imgur.com/4g1Cb2B.png)
+11. Run the modified CircleCI pipeline. Check if the request has been successfully sent.
+![](https://i.imgur.com/IyneAMn.png)
+
+12. You will find the corresponding `deployments` in table.cicd_tasks in DevLake's database.
+![](https://i.imgur.com/6hguCYK.png)
 
 ### View and customize DevLake's DORA dashboard 
 
@@ -154,10 +159,10 @@ With all the data collected, DevLake's DORA dashboard is ready to deliver your D
 You can customize the DORA dashboard by editing the underlying SQL query of each panel.
 
 For a breakdown of each metric's SQL query, please refer to metric docs:
-    - [Deployment Frequency](https://devlake.apache.org/docs/Metrics/DeploymentFrequency)
-    - [Lead Time for Changes](https://devlake.apache.org/docs/Metrics/LeadTimeForChanges)
-    - [Median Time to Restore Service](https://devlake.apache.org/docs/Metrics/MTTR)
-    - [Change Failure Rate](https://devlake.apache.org/docs/Metrics/CFR)
+  - [Deployment Frequency](https://devlake.apache.org/docs/Metrics/DeploymentFrequency)
+  - [Lead Time for Changes](https://devlake.apache.org/docs/Metrics/LeadTimeForChanges)
+  - [Median Time to Restore Service](https://devlake.apache.org/docs/Metrics/MTTR)
+  - [Change Failure Rate](https://devlake.apache.org/docs/Metrics/CFR)
 
 If you aren't familiar with Grafana, please refer to our [Grafana doc](./Dashboards/GrafanaUserGuide.md)
 

@@ -10,56 +10,65 @@ An Incoming Webhook allows users to actively push data to DevLake. It's particul
 
 When you create an Incoming Webhook within DevLake, DevLake generates a unique URL. You can post JSON payloads to this URL to push data to DevLake.
 
-As of v0.14.0, users can push incidents and deployments data required by DORA metrics to DevLake via Incoming Webhooks.
+As of v0.14.0, users can push incidents and deployments required by DORA metrics to DevLake via Incoming Webhooks.
 
 ## Creating webhooks in DevLake
 
 ### Add a new webhook
 To add a new webhook, go to the "Data Connections" page in config-ui and select "Issue/Deployment Incoming/Webhook".
-![image](https://user-images.githubusercontent.com/3294100/191309840-460fbc9c-15a1-4b12-a510-9ed5ccd8f2b0.png)
+![](https://i.imgur.com/jq6lzg1.png)
 
 We recommend that you give your webhook connection a unique name so that you can identify and manage where you have used it later.
 
 After clicking on the "Generate POST URL" button, you will find four webhook URLs. Copy the ones that suit your usage into your CI or issue tracking systems. You can always come back to the webhook page to copy the URLs later on.
 
-![image](https://user-images.githubusercontent.com/3294100/195338899-2cb3a91c-3110-43ec-aec3-0ab2498e56d7.png)
+![](https://i.imgur.com/jBMQnjt.png)
 
-## Deployments
+## Register a deployment
 
-If your CI/CD tool isn't already supported by DevLake, you can insert curl commands as [Sample API Calls](https://devlake.apache.org/docs/Plugins/webhook#deployments-sample-api-calls) in your CI/CD script to post deployment data to DevLake.
+You can copy the generated deployment curl commands to your CI/CD script to post deployments to Apache DevLake. Below is the detailed payload schema:
 
-**Notice**: The URL shown in the screenshot and the following samples, `https://sample-url.com/...`, is just an example and should be replaced with the actual URL copied from your Config UI.
-
-#### Register a deployment
-
-`POST https://sample-url.com/api/plugins/webhook/1/cicd_tasks`
-
-The body should be a JSON and include columns as follows:
-
-|   Keyname   | Required | Notes                                                        |
+| Key         | Required | Notes                                                        |
 | :---------: | :------: | ------------------------------------------------------------ |
-|  repo_url   |  ✔️ Yes   | Repository url or other **unique** string                    |
-| commit_sha  |  ✔️ Yes   | commit sha                                                   |
-| environment |   ✖️ No   | which type of machine did this task run in. one of `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br />Default is `PRODUCTION` |
-| start_time  |   ✖️ No   | Time, Format should be 2020-01-01T12:00:00+00:00<br />If absent, it is when DevLake receives the POST request. |
-|  end_time   |   ✖️ No   | Time, Format should be 2020-01-01T12:00:00+00:00<br />`start_time` becomes required if end_time is provided. If absent, this column is null. |
+| commit_sha  |  ✔️ Yes   | the sha of the deployment commit                             |
+| repo_url    |  ✔️ Yes   | the repo URL of the deployment commit                        |
+| environment |   ✖️ No   | the environment this deployment happens. For example, `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br/>The default value is `PRODUCTION` |
+| start_time  |   ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.|
+| end_time    |   ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/>The default value is the time when DevLake receives the POST request.|
 
 
-### Deployments Sample API Calls
+### Deployment - Sample API Calls
 
-Sample CURL for the tasks starting and finishing in deploy pipelines:
+Sample CURL to post deployments to DevLake. The URL `https://sample-url.com/api/plugins/webhook/1/deployments` should be replaced with the actual URL copied from your Config UI:
 
 ```
-curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -d '{"repo_url":"devlake","commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d","start_time":"2020-01-01T12:00:00+00:00","end_time":"2020-01-01T12:59:59+00:00","environment":"PRODUCTION"}'
+curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -d '{
+    "commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d",
+    "repo_url":"https://github.com/apache/incubator-devlake/",
+    "environment":"PRODUCTION",
+    "start_time":"2020-01-01T12:00:00+00:00",
+    "end_time":"2020-01-02T12:00:00+00:00"
+  }'
 ```
 
-Read more in Swagger: https://sample-url.com/api/swagger/index.html#/plugins%2Fwebhook/post_plugins_webhook__connectionId_deployments. 
+If you have set a username/password for Config UI, you need to add the username and password to the following curl to register a `deployment`:
+```
+curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
+    "commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d",
+    "repo_url":"https://github.com/apache/incubator-devlake/",
+    "environment":"PRODUCTION",
+    "start_time":"2020-01-01T12:00:00+00:00",
+    "end_time":"2020-01-02T12:00:00+00:00"
+  }'
+```
+
+Read more in [Swagger](https://sample-url.com/api/swagger/index.html#/plugins%2Fwebhook/post_plugins_webhook__connectionId_deployments). 
 
 
 
-### Sample Config in CircleCI
+#### Deployment - A real-world example in CircleCI
 
-The following demo shows how to post "deployments" to DevLake from CircleCI. In this example, CircleCI job 'deploy' is used to do deployments.
+The following demo shows how to post "deployments" to DevLake from CircleCI. In this example, the CircleCI job 'deploy' is used to do deployments.
 
 
   ```
@@ -84,17 +93,17 @@ The following demo shows how to post "deployments" to DevLake from CircleCI. In 
         - run:
             name: "deploy"
             command: |
-              # record start before deploy
+              # The time a deploy started
               start_time=`date '+%Y-%m-%dT%H:%M:%S%z'`
 
-              # some deploy here ...
+              # Some deployment tasks here ...
               echo Hello, World!
 
-              # send request after deploy. Only repo_url and commit_sha are required fields.
-              curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{
-                \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
+              # Send the request to DevLake after deploy
+              # The values start with a '$CIRCLE_' are CircleCI's built-in variables
+              curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -d "{
                 \"commit_sha\":\"$CIRCLE_SHA1\",
-                \"environment\":\"PRODUCTION\",
+                \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
                 \"start_time\":\"$start_time\"
               }"
 
