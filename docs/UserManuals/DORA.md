@@ -129,7 +129,10 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
               echo Hello, World!
 
               # send request after deploy. Only repo_url and commit_sha are required fields.
-              curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' -d "{
+              curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' \
+              --header 'Content-Type: application/json' \
+              --header 'authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=' \
+              --data-raw {
                 \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
                 \"commit_sha\":\"$CIRCLE_SHA1\",
                 \"environment\":\"PRODUCTION\",
@@ -142,6 +145,16 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
         - build
         - deploy
   ```
+  If you do not setting the config-ui username and password, you can ignore the line `--header 'authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ='`
+
+  Else you have to find out an base64 encode tool to caculate the base64 of your `username:password`:
+
+  ![](base64.jpg)
+
+  Just 
+  And after you caculated your `username:password` base64 coding.You have to use your base64 coding to replace `dXNlcm5hbWU6cGFzc3dvcmQ=`.
+
+
   You can find more about Deployment webhook's payload schema in this [doc](https://devlake.apache.org/docs/Plugins/webhook/#deployments).
 
 11. Run the modified CircleCI pipeline and you will find corresponding `deployments` data in table.cicd_tasks in DevLake's database.
