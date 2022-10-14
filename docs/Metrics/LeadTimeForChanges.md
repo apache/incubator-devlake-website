@@ -64,37 +64,31 @@ If you want to measure the monthly trend of median lead time for changes as the 
 ![](/img/Metrics/lead-time-for-changes-monthly.jpeg)
 
 ```
-with _deployment_change_lead_time as (
--- to get each deployment's change lead time
+with _pr_stats as (
+-- get PRs' cycle lead time in each month
 	SELECT
-		ct.id as deployment_id,
-		ct.name as deployment_name,
-		date_format(ct.finished_date,'%y/%m') as month,
-		avg(pr.change_timespan) as change_lead_time_of_a_deployment
+		pr.id,
+		date_format(pr.merged_date,'%y/%m') as month,
+		pr.change_timespan as pr_cycle_time
 	FROM
-		cicd_tasks ct 
-		join cicd_pipeline_commits cpc on ct.pipeline_id = cpc.pipeline_id
-		join pull_requests pr on cpc.commit_sha = pr.merge_commit_sha
+		pull_requests pr
 	WHERE
-		ct.type = 'DEPLOYMENT'
-		and ct.result = 'success'
-		and $__timeFilter(ct.finished_date)
-	GROUP BY 1,2,3
+		pr.merged_date is not null
+		and pr.change_timespan is not null
+		and $__timeFilter(pr.merged_date)
 ),
 
 _find_median_clt_each_month as (
-	SELECT 
-		x.month, x.change_lead_time_of_a_deployment
-	from _deployment_change_lead_time x join _deployment_change_lead_time y on x.month = y.month
-	WHERE x.change_lead_time_of_a_deployment is not null and y.change_lead_time_of_a_deployment is not null
-	GROUP BY x.month, x.change_lead_time_of_a_deployment
-	HAVING SUM(SIGN(1-SIGN(y.change_lead_time_of_a_deployment-x.change_lead_time_of_a_deployment)))/COUNT(*) > 0.5
+	SELECT x.month, x.pr_cycle_time as med_change_lead_time 
+	FROM _pr_stats x JOIN _pr_stats y ON x.month = y.month
+	GROUP BY x.month, x.pr_cycle_time
+	HAVING SUM(SIGN(1-SIGN(y.pr_cycle_time-x.pr_cycle_time)))/COUNT(*) > 0.5
 ),
 
 _find_clt_rank_each_month as (
 	SELECT
 		*,
-		rank() over(PARTITION BY month ORDER BY change_lead_time_of_a_deployment) as _rank 
+		rank() over(PARTITION BY month ORDER BY med_change_lead_time) as _rank 
 	FROM
 		_find_median_clt_each_month
 ),
@@ -102,7 +96,7 @@ _find_clt_rank_each_month as (
 _clt as (
 	SELECT
 		month,
-		change_lead_time_of_a_deployment as med_change_lead_time
+		med_change_lead_time
 	from _find_clt_rank_each_month
 	WHERE _rank = 1
 ),
@@ -135,29 +129,25 @@ If you want to measure in which category your team falls into as the picture sho
 ![](/img/Metrics/lead-time-for-changes-text.jpeg)
 
 ```
-with _deployment_change_lead_time as (
--- get one deployment's change lead time
+-- Metric 2: median change lead time
+with _pr_stats as (
+-- get PRs' cycle time in the selected period
 	SELECT
-		ct.id as deployment_id,
-		ct.name as deployment_name,
-		ct.finished_date as deployed_at,
-		avg(pr.change_timespan) as change_lead_time_of_a_deployment
+		pr.id,
+		pr.change_timespan as pr_cycle_time
 	FROM
-		cicd_tasks ct 
-		join cicd_pipeline_commits cpc on ct.pipeline_id = cpc.pipeline_id
-		join pull_requests pr on cpc.commit_sha = pr.merge_commit_sha
+		pull_requests pr
 	WHERE
-		ct.type = 'DEPLOYMENT'
-		and ct.result = 'success'
-		and $__timeFilter(ct.finished_date)
-	GROUP BY 1,2,3
+		pr.merged_date is not null
+		and pr.change_timespan is not null
+		and $__timeFilter(pr.merged_date)
 ),
 
 _median_change_lead_time as (
-	SELECT x.change_lead_time_of_a_deployment as median_change_lead_time from _deployment_change_lead_time x, _deployment_change_lead_time y
-	WHERE x.change_lead_time_of_a_deployment is not null and y.change_lead_time_of_a_deployment is not null
-	GROUP BY x.change_lead_time_of_a_deployment
-	HAVING SUM(SIGN(1-SIGN(y.change_lead_time_of_a_deployment-x.change_lead_time_of_a_deployment)))/COUNT(*) > 0.5
+-- use median PR cycle time as the median change lead time
+	SELECT x.pr_cycle_time as median_change_lead_time from _pr_stats x, _pr_stats y
+	GROUP BY x.pr_cycle_time
+	HAVING SUM(SIGN(1-SIGN(y.pr_cycle_time-x.pr_cycle_time)))/COUNT(*) > 0.5
 	LIMIT 1
 )
 
