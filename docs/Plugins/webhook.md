@@ -6,11 +6,11 @@ description: >
 
 ## Overview 
 
-An Incoming Webhook allows users to actively push data to DevLake. It's particularly useful when DevLake is missing the plugin that pulls data from your DevOps tool.
+Webhooks are your solution to bring data to DevLake when there isn't a specific plug in ready for your DevOps tool. An Incoming Webhook allows users to actively push data to DevLake. 
 
-When you create an Incoming Webhook within DevLake, DevLake generates a unique URL. You can post JSON payloads to this URL to push data to DevLake.
+When you create an Incoming Webhook within DevLake, DevLake generates a unique URL. You can then post JSON payloads to this URL to push data directly to your DevLake instance.
 
-As of v0.14.0, users can push incidents and deployments required by DORA metrics to DevLake via Incoming Webhooks.
+In v0.14.0, users can push "incidents" and "deployments" required by DORA metrics to DevLake via Incoming Webhooks.
 
 ## Creating webhooks in DevLake
 
@@ -20,7 +20,7 @@ To add a new webhook, go to the "Data Connections" page in config-ui and select 
 
 We recommend that you give your webhook connection a unique name so that you can identify and manage where you have used it later.
 
-After clicking on the "Generate POST URL" button, you will find four webhook URLs. Copy the ones that suit your usage into your CI or issue tracking systems. You can always come back to the webhook page to copy the URLs later on.
+After clicking on the "Generate POST URL" button, you will find four webhook URLs. Copy the ones that suit your usage into your CI or issue tracking systems. You can always come back to the webhook page to copy the URLs later.
 
 ![](https://i.imgur.com/jBMQnjt.png)
 
@@ -68,7 +68,7 @@ Read more in [Swagger](https://sample-url.com/api/swagger/index.html#/plugins%2F
 
 #### Deployment - A real-world example in CircleCI
 
-The following demo shows how to post "deployments" to DevLake from CircleCI. In this example, the CircleCI job 'deploy' is used to do deployments.
+The following demo shows how to post "deployments" to DevLake from CircleCI. In this example, the CircleCI job 'deploy' is used to manage deployments.
 
 
   ```
