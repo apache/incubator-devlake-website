@@ -102,7 +102,7 @@ _clt as (
 ),
 
 _calendar_months as(
--- to	deal with the month with no incidents
+-- to deal with the month with no incidents
 	SELECT date_format(CAST((SYSDATE()-INTERVAL (month_index) MONTH) AS date), '%y/%m') as month
 	FROM ( SELECT 0 month_index
 			UNION ALL SELECT   1  UNION ALL SELECT   2 UNION ALL SELECT   3
@@ -129,7 +129,6 @@ If you want to measure in which category your team falls into as the picture sho
 ![](/img/Metrics/lead-time-for-changes-text.jpeg)
 
 ```
--- Metric 2: median change lead time
 with _pr_stats as (
 -- get PRs' cycle time in the selected period
 	SELECT
