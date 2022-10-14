@@ -101,7 +101,7 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
 9. Now head to your CircleCI's pipelines page in a new tab. Find your deployment pipeline and click `Configuration File`
 ![](https://i.imgur.com/XwPzmyk.png)
 
-10. Paste the curl command copied in step 8 to the `config.yml`.
+10. Paste the curl command copied in step 8 to the `config.yml`, change the key-values in the payload. See full payload schema [here](https://devlake.apache.org/docs/Plugins/webhook/##register-a-deployment).
   ```
   version: 2.1
 
@@ -144,7 +144,7 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
         - build
         - deploy
   ```
-  If you have set a [username/password](https://devlake.apache.org/docs/UserManuals/Authentication) for Config UI, you need to add the username and password to the curl to register a deployment:
+  If you have set a [username/password](https://devlake.apache.org/docs/UserManuals/Authentication) for Config UI, you need to add them to the curl to register a deployment:
 
   ```
   curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
@@ -153,8 +153,6 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
       \"start_time\":\"$start_time\"
     }'
   ```
-
-  You can find more about webhook's payload schema in this [doc](https://devlake.apache.org/docs/Plugins/webhook/#deployments).
 
 11. Run the modified CircleCI pipeline. Check to verify that the request has been successfully sent.
 ![](https://i.imgur.com/IyneAMn.png)

@@ -39,7 +39,7 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 
 ### Deployment - Sample API Calls
 
-Sample CURL to post deployments to DevLake. The URL `https://sample-url.com/api/plugins/webhook/1/deployments` should be replaced with the actual URL copied from your Config UI:
+Sample CURL to post deployments to DevLake. The following command should be replaced with the actual curl command copied from your Config UI:
 
 ```
 curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -d '{
@@ -51,7 +51,7 @@ curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -d '{
   }'
 ```
 
-If you have set a username/password for Config UI, you need to add the username and password to the following curl to register a `deployment`:
+If you have set a [username/password](https://devlake.apache.org/docs/UserManuals/Authentication) for Config UI, you'll need to add them to the curl command to register a `deployment`:
 ```
 curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
     "commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d",
