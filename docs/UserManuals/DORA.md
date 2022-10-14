@@ -135,7 +135,7 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
               curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' \
               --header 'Content-Type: application/json' \
               --header 'authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=' \
-              --data-raw {
+              --data-raw "{
                 \"commit_sha\":\"$CIRCLE_SHA1\",
                 \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
                 \"start_time\":\"$start_time\"
