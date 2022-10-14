@@ -75,6 +75,15 @@ const versions = require('./versions.json');
         sidebarPath: require.resolve('./sidebarsCommunity.js'),
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'livedemo',
+        path: 'livedemo',
+        routeBasePath: 'livedemo',
+        sidebarPath: require.resolve('./sidebarsLivedemo.js'),
+      },
+    ],
     function tailwindcss() {
       return {
         name: 'docusaurus-tailwindcss',
@@ -133,6 +142,14 @@ const versions = require('./versions.json');
                 activeBaseRegex: `docs/${version}/`,
               }))
             ]
+          },
+          {
+            type: 'doc',
+            position: 'right',
+            label: 'Live Demo',
+            to: 'livedemo',
+            docsPluginId: 'livedemo',
+            docId: 'WeeklyBugRetro',
           },
           {
             type: 'doc',
@@ -209,11 +226,7 @@ const versions = require('./versions.json');
               {
                 label: 'Engineering Metrics',
                 to: 'docs/Metrics',
-              },
-              {
-                label: 'Dashboards (Live Demo)',
-                to: 'docs/LiveDemo',
-              },
+              }
             ],
           },
           {
