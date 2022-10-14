@@ -1,5 +1,6 @@
 ---
 title: "Security and Authentication"
+sidebar_position: 6
 description: How to secure your deployment and enable the Authentication
 ---
 
