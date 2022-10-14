@@ -5,6 +5,15 @@ import HeaderSvg from '@site/static/img/Homepage/HeaderIcon.svg';
 import HeaderBG from '@site/static/img/Homepage/HeaderBG.png';
 import HeaderBGMB from '@site/static/img/Homepage/HeaderBG-MB.png';
 
+import RedHatIcon from '@site/static/img/Homepage/brand/RedHat.svg';
+import StripeIcon from '@site/static/img/Homepage/brand/Stripe.svg';
+import OrkesIcon from '@site/static/img/Homepage/brand/Orkes.png';
+import ClickHouseIcon from '@site/static/img/Homepage/brand/ClickHouse.png';
+import CrozIcon from '@site/static/img/Homepage/brand/Croz.png';
+import CoderIcon from '@site/static/img/Homepage/brand/Coder.png';
+import ScarfIcon from '@site/static/img/Homepage/brand/Scarf.svg';
+import IBMIcon from '@site/static/img/Homepage/brand/IBM.svg'
+
 export function HomepageHeader() {
   return (
     <div>
@@ -17,7 +26,7 @@ export function HomepageHeader() {
       hidden sm:block" />
       <header
         className="relative 
-        xl:left-[30px]
+        pl-[30px] pr-[30px]
         pt-[64px] pb-[90px]
         sm:pt-5 sm:pb-[0px]
         flex sm:flex-col
@@ -64,6 +73,39 @@ export function HomepageHeader() {
         sm:w-[260px] sm:h-[228px] sm:mx-auto sm:mb-5
       "/>
       </header>
+      <div
+        className=" 
+              pl-[30px] pr-[30px]
+              flex sm:flex-wrap
+              xl:justify-between
+              sm:justify-around
+              items-center"
+      >
+        <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px]">
+          <RedHatIcon className="mobile:w-[72px]" />
+        </div>
+        <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px]">
+          <StripeIcon className="mobile:w-[36px]" />
+        </div>
+        <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px]">
+          <img className="w-[88px] mobile:w-[48px]" src={OrkesIcon} />
+        </div>
+        <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px]">
+          <img className="w-[140px] mobile:w-[71px]" src={ClickHouseIcon} />
+        </div>
+        <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px]">
+          <img className="w-[80px] mobile:w-[36px]" src={CrozIcon} />
+        </div>
+        <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px]">
+          <img className="w-[120px] mobile:w-[60px]" src={CoderIcon} />
+        </div>
+        <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px]">
+          <ScarfIcon className="mobile:w-[48px]" />
+        </div>
+        <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px]">
+          <IBMIcon className="mobile:w-[30px]" />
+        </div>
+      </div>
     </div>
   );
 }

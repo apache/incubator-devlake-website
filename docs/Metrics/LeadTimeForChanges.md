@@ -16,16 +16,24 @@ DORA dashboard. See [live demo](https://grafana-lake.demo.devlake.io/grafana/d/q
 
 
 ## How is it calculated?
-This metric can be calculated in two ways:
-- If a deployment can be linked to PRs, then the lead time for changes of a deployment is the average cycle time of its associated PRs. For instance,
-   - Compared to the previous deployment `deploy-1`, `deploy-2` deployed three new commits `commit-1`, `commit-2` and `commit-3`.
-   - `commit-1` is linked to `pr-1`, `commit-2` is linked to `pr-2` and `pr-3`, `commit-3` is not linked to any PR. Then, `deploy-2` is associated with `pr-1`, `pr-2` and `pr-3`.
-   - `Deploy-2`'s lead time for changes = average cycle time of `pr-1`, `pr-2` and `pr-3`.
-- If a deployment can't be linked to PRs, then the lead time for changes is computed based on its associated commits. For instance,
-   - Compared to the previous deployment `deploy-1`, `deploy-2` deployed three new commits `commit-1`, `commit-2` and `commit-3`.
-   - None of `commit-1`, `commit-2` and `commit-3` is linked to any PR. 
-   - Calculate each commit's lead time for changes, which equals to `deploy-2`'s deployed_at - commit's authored_date
-   - `Deploy-2`'s Lead time for changes = average lead time for changes of `commit-1`, `commit-2` and `commit-3`.
+This metric is calculated by the median cycle time of the PRs deployed in a time range. A PR's cycle time is equal to the time a PR was deployed minus the PR's first commit's authored_date.
+
+![](https://i.imgur.com/edtqmRE.png)
+
+See the picture above, there were three deployments in the last month: Deploy-1, Deploy-2 and Deploy-3. Six PRs were deployed during the same period.
+
+	Median Lead Time for Changes = The median cycle time of PR-1, PR-2, PR-3, PR-4, PR-5, PR-6
+
+The way to calculate PR cycle time:
+- PR-1 cycle time = Deploy-1's finished_date - PR-1's first commit's authored_date
+- PR-2 cycle time = Deploy-2's finished_date - PR-2's first commit's authored_date
+- PR-3 cycle time = Deploy-2's finished_date - PR-3's first commit's authored_date
+- PR-4 cycle time = Deploy-3's finished_date - PR-4's first commit's authored_date
+- PR-5 cycle time = Deploy-3's finished_date - PR-5's first commit's authored_date
+- PR-6 cycle time = Deploy-3's finished_date - PR-6's first commit's authored_date
+
+PR cycle time is pre-calculated when dora plugin is triggered. You can connect to DevLake's database and find it in the field `change_timespan` in [table.pull_requests](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema/#pull_requests).
+
 
 Below are the benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's median lead time for changes is `between one week and one month`. Therefore, DevLake provides its own benchmarks to address this problem:
 
@@ -56,37 +64,31 @@ If you want to measure the monthly trend of median lead time for changes as the 
 ![](/img/Metrics/lead-time-for-changes-monthly.jpeg)
 
 ```
-with _deployment_change_lead_time as (
--- to get each deployment's change lead time
+with _pr_stats as (
+-- get PRs' cycle lead time in each month
 	SELECT
-		ct.id as deployment_id,
-		ct.name as deployment_name,
-		date_format(ct.finished_date,'%y/%m') as month,
-		avg(pr.change_timespan) as change_lead_time_of_a_deployment
+		pr.id,
+		date_format(pr.merged_date,'%y/%m') as month,
+		pr.change_timespan as pr_cycle_time
 	FROM
-		cicd_tasks ct 
-		join cicd_pipeline_commits cpc on ct.pipeline_id = cpc.pipeline_id
-		join pull_requests pr on cpc.commit_sha = pr.merge_commit_sha
+		pull_requests pr
 	WHERE
-		ct.type = 'DEPLOYMENT'
-		and ct.result = 'success'
-		and $__timeFilter(ct.finished_date)
-	GROUP BY 1,2,3
+		pr.merged_date is not null
+		and pr.change_timespan is not null
+		and $__timeFilter(pr.merged_date)
 ),
 
 _find_median_clt_each_month as (
-	SELECT 
-		x.month, x.change_lead_time_of_a_deployment
-	from _deployment_change_lead_time x join _deployment_change_lead_time y on x.month = y.month
-	WHERE x.change_lead_time_of_a_deployment is not null and y.change_lead_time_of_a_deployment is not null
-	GROUP BY x.month, x.change_lead_time_of_a_deployment
-	HAVING SUM(SIGN(1-SIGN(y.change_lead_time_of_a_deployment-x.change_lead_time_of_a_deployment)))/COUNT(*) > 0.5
+	SELECT x.month, x.pr_cycle_time as med_change_lead_time 
+	FROM _pr_stats x JOIN _pr_stats y ON x.month = y.month
+	GROUP BY x.month, x.pr_cycle_time
+	HAVING SUM(SIGN(1-SIGN(y.pr_cycle_time-x.pr_cycle_time)))/COUNT(*) > 0.5
 ),
 
 _find_clt_rank_each_month as (
 	SELECT
 		*,
-		rank() over(PARTITION BY month ORDER BY change_lead_time_of_a_deployment) as _rank 
+		rank() over(PARTITION BY month ORDER BY med_change_lead_time) as _rank 
 	FROM
 		_find_median_clt_each_month
 ),
@@ -94,13 +96,13 @@ _find_clt_rank_each_month as (
 _clt as (
 	SELECT
 		month,
-		change_lead_time_of_a_deployment as med_change_lead_time
+		med_change_lead_time
 	from _find_clt_rank_each_month
 	WHERE _rank = 1
 ),
 
 _calendar_months as(
--- to	deal with the month with no incidents
+-- to deal with the month with no incidents
 	SELECT date_format(CAST((SYSDATE()-INTERVAL (month_index) MONTH) AS date), '%y/%m') as month
 	FROM ( SELECT 0 month_index
 			UNION ALL SELECT   1  UNION ALL SELECT   2 UNION ALL SELECT   3
@@ -127,29 +129,24 @@ If you want to measure in which category your team falls into as the picture sho
 ![](/img/Metrics/lead-time-for-changes-text.jpeg)
 
 ```
-with _deployment_change_lead_time as (
--- get one deployment's change lead time
+with _pr_stats as (
+-- get PRs' cycle time in the selected period
 	SELECT
-		ct.id as deployment_id,
-		ct.name as deployment_name,
-		ct.finished_date as deployed_at,
-		avg(pr.change_timespan) as change_lead_time_of_a_deployment
+		pr.id,
+		pr.change_timespan as pr_cycle_time
 	FROM
-		cicd_tasks ct 
-		join cicd_pipeline_commits cpc on ct.pipeline_id = cpc.pipeline_id
-		join pull_requests pr on cpc.commit_sha = pr.merge_commit_sha
+		pull_requests pr
 	WHERE
-		ct.type = 'DEPLOYMENT'
-		and ct.result = 'success'
-		and $__timeFilter(ct.finished_date)
-	GROUP BY 1,2,3
+		pr.merged_date is not null
+		and pr.change_timespan is not null
+		and $__timeFilter(pr.merged_date)
 ),
 
 _median_change_lead_time as (
-	SELECT x.change_lead_time_of_a_deployment as median_change_lead_time from _deployment_change_lead_time x, _deployment_change_lead_time y
-	WHERE x.change_lead_time_of_a_deployment is not null and y.change_lead_time_of_a_deployment is not null
-	GROUP BY x.change_lead_time_of_a_deployment
-	HAVING SUM(SIGN(1-SIGN(y.change_lead_time_of_a_deployment-x.change_lead_time_of_a_deployment)))/COUNT(*) > 0.5
+-- use median PR cycle time as the median change lead time
+	SELECT x.pr_cycle_time as median_change_lead_time from _pr_stats x, _pr_stats y
+	GROUP BY x.pr_cycle_time
+	HAVING SUM(SIGN(1-SIGN(y.pr_cycle_time-x.pr_cycle_time)))/COUNT(*) > 0.5
 	LIMIT 1
 )
 
