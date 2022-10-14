@@ -6,14 +6,14 @@ description: >
 ---
 
 
-This document describes all things about DORA, why and how to implement DORA metrics with Apache DevLake.
+This document describes everything you need to know about DORA, and implementing this powerful and practical framework in DevLake.
 
 ## What are DORA metrics?
 Created six years ago by a team of researchers, DORA stands for "DevOps Research & Assessment" and is the answer to years of research, having examined thousands of teams, seeking a reliable and actionable approach to understanding the performance of software development teams.
 
-DORA has since become a standardized framework focused on the stability and velocity of development processes, one that avoids the more controversial aspects of productivity measurements and individual performance metrics.
+DORA has since become a standardized framework focused on the stability and velocity of development processes, one that avoids the more controversial aspects of productivity and individual performance measures.
 
-There are two key clusters of data inside DORA: Velocity and Stability. The DORA framework is focused on keeping these two in context with each other, as a whole, rather than as independent variables, making the data more challenging to misinterpret or abuse. 
+There are two key clusters of data inside DORA: Velocity and Stability. The DORA framework is focused on keeping them in context with each other, as a whole, rather than as independent variables, making the data more challenging to misinterpret or abuse. 
 
 Within velocity are two core metrics: 
 - [Deployment Frequency](https://devlake.apache.org/docs/Metrics/DeploymentFrequency): Number of successful deployments to production, how rapidly is your team releasing to users?
@@ -25,10 +25,10 @@ Stability is composed of two core metrics:
 
 ![](https://i.imgur.com/71EUflb.png)
 
-To make DORA even more actionable, there are some well-established benchmarks providing a simple lens to determine if you are performing at "Elite", "High", "Medium", or "Low" levels. 
+To make DORA even more actionable, there are well-established benchmarks to determine if you are performing at "Elite", "High", "Medium", or "Low" levels. Inside DevLake, you will find the benchmarking table available to assess and compare your own projects.  
 
 ## Why is DORA important?
-DORA metrics help a team or project measure and improve software development practices to continuously deliver reliable products with user values.
+DORA metrics help teams and projects measure and improve software development practices to consistently deliver reliable products, and thus happy users!
 
 
 ## How to implement DORA metrics with Apache DevLake?
@@ -44,24 +44,24 @@ You can set up DORA metrics in DevLake in a few steps:
 
 DevLake now supports Jenkins, GitHub Action and GitLabCI as data sources for `deployments` data; Jira, GitHub issues, and TAPD as the sources for `incidents` data; Github PRs, GitLab MRs as the sources for `changes` data.
 
-However, if your CI/CD tools are not listed on the [Supported Data Sources](https://devlake.apache.org/docs/SupportedDataSources) page, DevLake provides incoming webhooks to push your `deployments` data to DevLake. The webhook configuration doc can be found [here](https://devlake.apache.org/docs/UserManuals/ConfigUI/webhook/).
+If your CI/CD tools are not listed on the [Supported Data Sources](https://devlake.apache.org/docs/SupportedDataSources) page, have no fear! DevLake provides incoming webhooks to push your `deployments` data to DevLake. The webhook configuration doc can be found [here](https://devlake.apache.org/docs/UserManuals/ConfigUI/webhook/).
 
 
 ## A real-world example
 
 Let's walk through the DORA implementation process for a team with the following toolchain
 
-- Code hosting: GitHub
+- Code Hosting: GitHub
 - CI/CD: GitHub Actions + CircleCI
-- Issue tracking: Jira
+- Issue Tracking: Jira
 
-Calculating DORA metrics requires three key entities: **changes**, **deployments**, and **incidents**. Their exact definition depends on a team's DevOps practice and varies team by team. For the team in this example, let's assume the following definition:
+Calculating DORA metrics requires three key entities: **changes**, **deployments**, and **incidents**. Their exact definitions of course depend on a team's DevOps practice and varies team by team. For the team in this example, let's assume the following definition:
 
-- Changes: all pull requests in GitHub
-- Deployments: GitHub action jobs that have "deploy" in their names and CircleCI's deployment jobs
+- Changes: All pull requests in GitHub.
+- Deployments: GitHub action jobs that have "deploy" in their names and CircleCI's deployment jobs.
 - Incidents: Jira issues whose types are `Crash` or `Incident`
 
-In the next section, we'll demonstrate how to configure DevLake to implement DORA metrics for the example team.
+In the next section, we'll demonstrate how to configure DevLake to implement DORA metrics for the aforementioned example team.
 
 ### Collect GitHub & Jira data via `blueprint`
 1. Visit the config-ui at `http://localhost:4000`
@@ -83,14 +83,14 @@ In the next section, we'll demonstrate how to configure DevLake to implement DOR
    ![](https://i.imgur.com/Y2hchEh.png)
    
 
-6. Choose sync frequency, click 'Save and Run Now' to start data collection. The duration varies by data source and depends on the volume of data.
+6. Choose sync frequency, click 'Save and Run Now' to start data collection. The time to completion varies by data source and depends on the volume of data.
 ![](https://i.imgur.com/zPkfzGr.png)
 
 For more details, please refer to our [blueprint manuals](https://devlake.apache.org/docs/UserManuals/ConfigUI/Tutorial).
 
 ### Collect CircleCI data via `webhook`
 
-Using CircleCI as an example, we demonstrate how to actively push data to DevLake in case DevLake doesn't have a plugin that can pull data from your data source.
+Using CircleCI as an example, we demonstrate how to actively push data to DevLake using the Webhook approach, in cases where DevLake doesn't have a plugin specific to that tool to pull data from your data source.
 
 7. Visit "Data Connections" page in config-ui and select "Issue/Deployment Incoming Webhook".
 
@@ -146,7 +146,7 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
   ```
   You can find more about webhook's payload schema in this [doc](https://devlake.apache.org/docs/Plugins/webhook/#deployments).
 
-11. Run the modified CircleCI pipeline. Check if the request has been successfully sent.
+11. Run the modified CircleCI pipeline. Check to verify that the request has been successfully sent.
 ![](https://i.imgur.com/IyneAMn.png)
 
 12. You will find the corresponding `deployments` in table.cicd_tasks in DevLake's database.
@@ -154,21 +154,21 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
 
 ### View and customize DevLake's DORA dashboard 
 
-With all the data collected, DevLake's DORA dashboard is ready to deliver your DORA metrics and benchmark. You can find the DORA dashboard within the Grafana instance shipped with DevLake.
+With all the data collected, DevLake's DORA dashboard is ready to deliver your DORA metrics and benchmarks. You can find the DORA dashboard within the Grafana instance shipped with DevLake, ready for you to put into action.
 
 You can customize the DORA dashboard by editing the underlying SQL query of each panel.
 
-For a breakdown of each metric's SQL query, please refer to metric docs:
+For a breakdown of each metric's SQL query, please refer to the corresponding metric docs:
   - [Deployment Frequency](https://devlake.apache.org/docs/Metrics/DeploymentFrequency)
   - [Lead Time for Changes](https://devlake.apache.org/docs/Metrics/LeadTimeForChanges)
   - [Median Time to Restore Service](https://devlake.apache.org/docs/Metrics/MTTR)
   - [Change Failure Rate](https://devlake.apache.org/docs/Metrics/CFR)
 
-If you aren't familiar with Grafana, please refer to our [Grafana doc](./Dashboards/GrafanaUserGuide.md)
+If you aren't familiar with Grafana, please refer to our [Grafana doc], or jump into Slack for help. (./Dashboards/GrafanaUserGuide.md)
 
 <br/>
 
-:tada::tada::tada: Congratulations! Now you have your own DORA dashboard. 
+:tada::tada::tada: Congratulations! You are now a DevOps Hero, with your own DORA dashboard! 
 
 <br/><br/><br/>
 
