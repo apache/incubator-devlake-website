@@ -132,10 +132,7 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
 
               # Send the request to DevLake after deploy
               # The values start with a '$CIRCLE_' are CircleCI's built-in variables
-              curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' \
-              --header 'Content-Type: application/json' \
-              --header 'authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=' \
-              --data-raw "{
+              curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -d "{
                 \"commit_sha\":\"$CIRCLE_SHA1\",
                 \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
                 \"start_time\":\"$start_time\"
@@ -147,13 +144,15 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
         - build
         - deploy
   ```
-  If you do not setting the config-ui username and password, you can ignore the line `--header 'authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ='`
+  If you have set a [username/password](https://devlake.apache.org/docs/UserManuals/Authentication) for Config UI, you need to add the username and password to the curl to register a deployment:
 
-  Else you have to find out an base64 encode tool to caculate the base64 of your `username:password`:
-
-  ![](base64.jpg)
-
-  And after you caculated your `username:password` base64 coding.You have to use your base64 coding to replace `dXNlcm5hbWU6cGFzc3dvcmQ=`.
+  ```
+  curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
+      \"commit_sha\":\"$CIRCLE_SHA1\",
+      \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
+      \"start_time\":\"$start_time\"
+    }'
+  ```
 
   You can find more about webhook's payload schema in this [doc](https://devlake.apache.org/docs/Plugins/webhook/#deployments).
 
