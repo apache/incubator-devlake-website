@@ -132,7 +132,7 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
 
               # Send the request to DevLake after deploy
               # The values start with a '$CIRCLE_' are CircleCI's built-in variables
-              curl https://sample-url.com/api/plugins/webhook/1/cicd_tasks -X 'POST' \
+              curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' \
               --header 'Content-Type: application/json' \
               --header 'authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=' \
               --data-raw {
