@@ -39,7 +39,7 @@ Apache DevLake 提供了便捷的数据转化能力，将收集来的数据清�
 
 目前 Apache DevLake 已支持 20+常见研发效能指标，可应用于交付效率、质量、成本、能力等不同认知域。
 
-结合用户使用研发数据的具体场景，Apache DevLake 基于 Grafana 搭建数据看板，支持趋势分析、按照成员/阶段下钻等分析能力，帮助用户快速定位研发效能提升的关键环节。您可以查看[预设数据看板](https://devlake.apache.org/docs/LiveDemo)，后续我们将在 blog 中介绍每一个数据看板及其背后的真实用户场景。
+结合用户使用研发数据的具体场景，Apache DevLake 基于 Grafana 搭建数据看板，支持趋势分析、按照成员/阶段下钻等分析能力，帮助用户快速定位研发效能提升的关键环节。您可以查看[预设数据看板](https://devlake.apache.org/livedemo)，后续我们将在 blog 中介绍每一个数据看板及其背后的真实用户场景。
 
 ![面向开源产品的版本/模块质量分析](Dashboard-1.jpg)
 
