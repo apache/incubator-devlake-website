@@ -144,6 +144,16 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
         - build
         - deploy
   ```
+  If you have set a [username/password](https://devlake.apache.org/docs/UserManuals/Authentication) for Config UI, you need to add the username and password to the curl to register a deployment:
+
+  ```
+  curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
+      \"commit_sha\":\"$CIRCLE_SHA1\",
+      \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
+      \"start_time\":\"$start_time\"
+    }'
+  ```
+
   You can find more about webhook's payload schema in this [doc](https://devlake.apache.org/docs/Plugins/webhook/#deployments).
 
 11. Run the modified CircleCI pipeline. Check to verify that the request has been successfully sent.
