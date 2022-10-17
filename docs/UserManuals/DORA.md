@@ -172,7 +172,7 @@ For a breakdown of each metric's SQL query, please refer to the corresponding me
   - [Median Time to Restore Service](https://devlake.apache.org/docs/Metrics/MTTR)
   - [Change Failure Rate](https://devlake.apache.org/docs/Metrics/CFR)
 
-If you aren't familiar with Grafana, please refer to our [Grafana doc], or jump into Slack for help. (./Dashboards/GrafanaUserGuide.md)
+If you aren't familiar with Grafana, please refer to our [Grafana doc](./Dashboards/GrafanaUserGuide.md), or jump into Slack for help.
 
 <br/>
 
