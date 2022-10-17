@@ -45,6 +45,10 @@ const versions = require('./versions.json');
             }
           }
         },
+        gtag: {
+          trackingID: 'G-PKZLL38MQG',
+          anonymizeIP: true,
+        },
         blog: {
           showReadingTime: true,
           readingTime: ({ content, frontMatter, defaultReadingTime }) =>
