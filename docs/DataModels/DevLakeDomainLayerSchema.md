@@ -44,22 +44,13 @@ Tables that end with WIP are still under development.
 2. The name of a table which describe the relation between 2 entities is in the form of [BigEntity in singular form]\_[SmallEntity in plural form]. Eg. board_issues, sprint_issues, pull_request_comments, etc.
 3. Value of the field in enum type are in capital letters. Eg. [table.issues.type](#issues) has 3 values, REQUIREMENT, BUG, INCIDENT. Values that are phrases, such as 'IN_PROGRESS' of [table.issues.status](#issues), are separated with underscore '\_'.
 
+## How to Customize Data Models
+Apache DevLake provides 2 plugins:
+- [customize](https://devlake.apache.org/docs/Plugins/customize): to create/delete columns in the domain layer schema with the data extracted from [raw layer tables](https://devlake.apache.org/docs/Overview/Architecture/#dataflow)
+- [dbt](https://devlake.apache.org/docs/Plugins/customize): to transform data based on the domain layer schema and generate new tables
+
 <br/>
 
-## Get all domain layer model info.
-
-All domain layer models can be accessed by the following method
-
-```golang
-import "github.com/apache/incubator-devlake/models/domainlayer/domaininfo"
-
-domaininfo := domaininfo.GetDomainTablesInfo()
-for _, table := range domaininfo {
-  // do something 
-}
-```
-
-If you want to learn more about plugin models,please visit [PluginImplementation](https://devlake.apache.org/docs/DeveloperManuals/PluginImplementation)
 
 ## DWD Entities - (Data Warehouse Detail)
 
@@ -593,3 +584,19 @@ This table can support tag-based analysis, for instance, '_No. of bugs closed in
 | `old_ref_commit_sha` | char     | 40         | The commit old ref points to at the time of collection |              |
 | `issue_number`       | varchar  | 255        | Issue number                                           |              |
 | `issue_id`           | varchar  | 255        | Issue id                                               | FK_issues.id |
+
+
+## Get Domain Layer Models in Developer Mode
+
+When developing a new plugin, you need to refer to domain layer models, as all raw data should be transformed to domain layer data to provide standardized metrics across tools. Please use the following method to access the domain data models.
+
+```golang
+import "github.com/apache/incubator-devlake/models/domainlayer/domaininfo"
+
+domaininfo := domaininfo.GetDomainTablesInfo()
+for _, table := range domaininfo {
+  // do something 
+}
+```
+
+If you want to learn more about plugin models, please visit [PluginImplementation](https://devlake.apache.org/docs/DeveloperManuals/PluginImplementation)

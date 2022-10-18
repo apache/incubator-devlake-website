@@ -1,5 +1,5 @@
 ---
-title: "customize"
+title: "Customize"
 description: >
   Customize Plugin
 ---
