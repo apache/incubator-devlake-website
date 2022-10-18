@@ -3,7 +3,7 @@
 const {tailwindConfig} = require('dev-website-tailwind-config');
 module.exports = tailwindConfig;
 
-// pre config
+// pre config 
 // const defaultTheme = require('tailwindcss/defaultTheme');
 
 // module.exports = {
