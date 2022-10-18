@@ -20,7 +20,7 @@ To add a new webhook, go to the "Data Connections" page in config-ui and select 
 
 We recommend that you give your webhook connection a unique name so that you can identify and manage where you have used it later.
 
-After clicking on the "Generate POST URL" button, you will find four webhook URLs. Copy the ones that suit your usage into your CI or issue tracking systems. You can always come back to the webhook page to copy the URLs later on.
+After clicking on the "Generate POST URL" button, you will find several webhook URLs. You can then post to these URLs from your CI/CD tool or issue tracking system to push data directly to DevLake. You can always come back to the webhook page to access the URLs later.
 
 ![](https://i.imgur.com/jBMQnjt.png)
 
