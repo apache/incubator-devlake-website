@@ -150,7 +150,7 @@ const versions = require('./versions.json');
             label: 'Live Demo',
             to: 'livedemo',
             docsPluginId: 'livedemo',
-            docId: 'WeeklyBugRetro',
+            docId: 'AverageRequirementLeadTime',
           },
           {
             type: 'doc',
