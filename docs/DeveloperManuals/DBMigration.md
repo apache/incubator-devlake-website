@@ -49,118 +49,46 @@ for the framework-only migrations defined under the `models` package.
 
 ## How It Works
 1. Check `migration_history` table, calculate all the migration scripts need to be executed.
-2. Sort scripts by Version in ascending order.
+2. Sort scripts by `Version` and `Name` in ascending order. You should NOT change these 2 values for the script after release for whatever reasons, or user may fail to upgrade due to duplicate execution.
 3. Execute scripts.
 4. Save results in the `migration_history` table.
 
 
 ## Best Practices
-When you write a new migration script, please pay attention to the fault tolerance and the side effect. It would be better if the failed script could be safely retry, in case of something goes wrong during the migration. For this purpose, the migration scripts should be well-designed. For example, if you created a temporary table in the Up method, it should be dropped before exiting, regardless of success or failure. Using the defer statement to do some cleanup is a good idea. Let's demonstrate this idea with a concrete example.
 
-Suppose we want to recalculate the column `name` of the table `user`
+When you write a new migration script, please pay attention to the fault tolerance and the side effect. It would be better if the failed script could be safely retry, in case of something goes wrong during the migration. For this purpose, the migration scripts should be well-designed. For example, if you created a temporary table in the Up method, it should be dropped before exiting, regardless of success or failure. 
 
-1. rename `user` to `user_bak` (stop if error, define `defer` to rename back on error)
-2. create new `user` (stop if error, define `defer` to drop TABLE on error)
-3. convert data from `user_bak` to `user` (stop if error)
-4. drop `user_bak`
+Suppose we want to change the type of the Primary Key `name` of table `users` from `int` to `varchar(255)`
 
-```golang
+1. Rename `users` to `users_20221018` (stop if error, otherwise define a `defer` to rename back on error)
+2. Create new `users` (stop if error, otherwise define a `defer` to drop the table on error)
+3. Convert data from `users_20221018` to `users` (stop if error)
+4. Drop table `users_20221018`
 
-type User struct {
-	name string `gorm:"type:varchar(255)"`
-}
+With these steps, the `defer` functions would be executed in reverse order if any error occurred during the migration process so the database would roll back to the original state in most cases.
 
-func (User) TableName() string {
-	return "user"
-}
+However, you don't neccessary deal with all these mess. We had summarized some of the most useful code examples for you to follow:
 
-type NewUser struct {
-	name string `gorm:"type:text"`
-}
+- [Create new tables](https://github.com/apache/incubator-devlake/blob/main/models/migrationscripts/20220406_add_frame_tables.go)
+[Rename column](https://github.com/apache/incubator-devlake/blob/main/models/migrationscripts/20220505_rename_pipeline_step_to_stage.go)
+- [Add columns with default value](https://github.com/apache/incubator-devlake/blob/main/models/migrationscripts/20220616_add_blueprint_mode.go)
+- [Change the values(or type) of Primary Key](https://github.com/apache/incubator-devlake/blob/main/models/migrationscripts/20220913_fix_commitfile_id_toolong.go)
+- [Change the values(or type) of Column](https://github.com/apache/incubator-devlake/blob/main/models/migrationscripts/20220929_modify_lead_time_minutes.go)
 
-func (NewUser) TableName() string {
-	return "user"
-}
+The above examples should cover most of the scenarios you may run into. Feel free to post issue on our github repo otherwise.
 
-type UserBak struct {
-	name string `gorm:"type:varchar(255)"`
-}
 
-func (UserBak) TableName() string {
-	return "user_bak"
-}
+In order to help others understand the script you wrote, there are a couple of rules you have to follow:
 
-func (*exampleScript) Up(ctx context.Context, db *gorm.DB) (errs errors.Error) {
-	var err error
+In order to help others understand the script you wrote, there are a couple of rules you have to follow:
 
-	// rename the user_bak to cache old table
-	err = db.Migrator().RenameTable(&User{}, &UserBak{})
-	if err != nil {
-		return errors.Default.Wrap(err, "error no rename user to user_bak")
-	}
+- Name your script in a meaningful way. For instance `renamePipelineStepToStage` is far more better than `modifyPipelines`
+- The script should keep only the targeted `fields` you are attempting to operate except when using `migrationhelper.Transform` which is a full table tranformation that requires full table definition, if this is the case, add comment to the end of the fields to indicate which ones are the target.
+- Add comment to the script when the operation are too complicated to express in plain code.
 
-	// rollback for rename back
-	defer func() {
-		if errs != nil {
-			err = db.Migrator().RenameTable(&UserBak{}, &User{})
-			if err != nil {
-				errs = errors.Default.Wrap(err, fmt.Sprintf("fail to rollback table user_bak , you must to rollback by yourself. %s", err.Error()))
-			}
-		}
-	}()
+Other rules to follow when writing a migration script:
 
-	// create new user table
-	err = db.Migrator().AutoMigrate(&NewUser{})
-
-	if err != nil {
-		return errors.Default.Wrap(err, "error on auto migrate user")
-	}
-
-	// rollback for create new table
-	defer func() {
-		if errs != nil {
-			err = db.Migrator().DropTable(&User{})
-			if err != nil {
-				errs = errors.Default.Wrap(err, fmt.Sprintf("fail to rollback table OldTable , you must to rollback by yourself. %s", err.Error()))
-			}
-		}
-	}()
-
-	// update old id to new id and write to the new table
-	cursor, err := db.Model(&UserBak{}).Rows()
-	if err != nil {
-		return errors.Default.Wrap(err, "error on select NewTable")
-	}
-	defer cursor.Close()
-
-	// caculate and save the data to new table
-	batch, err := helper.NewBatchSave(api.BasicRes, reflect.TypeOf(&NewUser{}), 200)
-	if err != nil {
-		return errors.Default.Wrap(err, "error getting batch from table user")
-	}
-	defer batch.Close()
-	for cursor.Next() {
-		ot := UserBak{}
-		err = db.ScanRows(cursor, &ot)
-		if err != nil {
-			return errors.Default.Wrap(err, "error scan rows from table user_bak")
-		}
-		nt := NewUser(ot)
-
-		nt.name = nt.name + "new"
-
-		err = batch.Add(&nt)
-		if err != nil {
-			return errors.Default.Wrap(err, "error on user batch add")
-		}
-	}
-
-	// drop the old table
-	err = db.Migrator().DropTable(&UserBak{})
-	if err != nil {
-		return errors.Default.Wrap(err, "error no drop user_bak")
-	}
-}
-
-```
+- The migration script should use only the interfaces and packages offerred by the framework like `core`, `errors` and `migrationhelper`, do NOT import `gorm` or package from `plugin` directly.
+- The name of `model struct` defined in your script should be suffixed with the `Version` of the script to distinguish from other scripts in the same package to keep it self-contained, i.e. `tasks20221018`. do NOT refer `struct` defined in other scripts.
+- All scripts and models names should be `camelCase` to avoid accidentally reference from other packages
 
