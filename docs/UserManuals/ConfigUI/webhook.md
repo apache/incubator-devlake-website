@@ -18,13 +18,3 @@ After clicking on "Generate POST URL", you will find four webhook URLs. Copy the
 ![image](https://user-images.githubusercontent.com/3294100/191400110-327c153f-b236-47e3-88cc-85bf8fcae310.png)
 
 For more usage: [plugins/webhook](/Plugins/webhook.md).
-
-
-### Webhook Accessibility
-
-In real-world scenarios, most likely, you would like to call the webhook API from another machine inside some CI/CD scripts. The CI/CD Machine may be located in the same Internal Network or provided by a Cloud Service. 
-
-In any case, the only rule is to make sure the CI/CD Machine could reach the config-ui instance.
-
-  - Access the config-ui via IP Address or Domain Name that is accessible from the CI/CD Machine, since the Webhook FQDN is generated based on the Browser URL. In other words, `localhost` and `127.0.0.1` might not work.
-  - If you set up Apache DevLake as [Internal Deployment](../Authentication#internal-deployment-recommended) and the CI/CD Machine belongs to a Cloud Service Provider, you may have to switch to `Internet Deployment` or employ reverse-proxy software like [fatedier/frp](https://github.com/fatedier/frp).

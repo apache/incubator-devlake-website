@@ -20,9 +20,19 @@ To add a new webhook, go to the "Data Connections" page in config-ui and select 
 
 We recommend that you give your webhook connection a unique name so that you can identify and manage where you have used it later.
 
-After clicking on the "Generate POST URL" button, you will find four webhook URLs. Copy the ones that suit your usage into your CI or issue tracking systems. You can always come back to the webhook page to copy the URLs later on.
+After clicking on the "Generate POST URL" button, you will find several webhook URLs. You can then post to these URLs from your CI/CD tool or issue tracking system to push data directly to DevLake. You can always come back to the webhook page to access the URLs later.
 
 ![](https://i.imgur.com/jBMQnjt.png)
+
+### Put webhook on the internet
+
+For the new webhook to work, it needs to be accessible from the DevOps tools from which you would like to push data to DevLake. If DevLake is deployed in your private network and your DevOps tool (e.g. CircleCI) is a cloud service that lives outside of your private network, then you need to make DevLake's webhook accessible to the outside cloud service.
+
+There're many tools for this:
+
+  - For testing and quick setup, [ngrok](https://ngrok.com/) is a useful utility that provides a publicly accessible web URL to any locally hosted application. You can put DevLake's webhook on the internet within 5 mins by following ngrok's [Getting Started](https://ngrok.com/docs/getting-started) guide. Note that, when posting to webhook, you may need to replace the `localhost` part in the webhook URL with the forwarding URL that ngrok provides.
+  - If you prefer DIY, please checkout open-source reverse proxies like [fatedier/frp](https://github.com/fatedier/frp) or go for the classic [nginx](https://www.nginx.com/).
+
 
 ## Register a deployment
 
