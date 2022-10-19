@@ -1,7 +1,7 @@
 ---
 slug: how-DevLake-is-up-and-running
 title: How DevLake is Up and Running
-authors: Danna
+authors: warren
 tags: [devlake, apache]
 ---
 
