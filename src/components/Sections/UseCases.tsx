@@ -58,7 +58,7 @@ export function UseCases() {
             lead="Open Source Maintainers"
             title="Fuel Community Growth with Analysis"
             desc="Grow your community strategically with insights on how developers participate, contribute, and collaborate."
-            demoURL="https://grafana-lake.demo.devlake.io/grafana/goto/7z1QfSV4z?orgId=1"
+            demoURL="https://grafana-lake.demo.devlake.io/grafana/d/VTr6Y_q7z/weekly-community-retro?orgId=1"
           >
             <UCIcon src={UC1} />
           </UCCard>
@@ -74,7 +74,7 @@ export function UseCases() {
             lead="Engineering Leads"
             title="Implement DORA Fast"
             desc="Implement DORA metrics in minutes to enable and manage delivery processes your developers and users will love."
-            demoURL="https://grafana-lake.demo.devlake.io/grafana/goto/qBPPBS44k?orgId=1"
+            demoURL="https://grafana-lake.demo.devlake.io/grafana/goto/D5djPwIVk?orgId=1"
           >
             <UCIcon src={UC3} />
           </UCCard>
