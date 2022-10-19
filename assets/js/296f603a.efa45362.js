@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwww=self.webpackChunkwww||[]).push([[7727],{3004:e=>{e.exports=JSON.parse('{"title":"Developer Manuals","slug":"DeveloperManuals","permalink":"/docs/DeveloperManuals","navigation":{"previous":{"title":"Glossary","permalink":"/docs/Glossary"},"next":{"title":"Developer Setup","permalink":"/docs/DeveloperManuals/DeveloperSetup"}}}')}}]);
