@@ -81,7 +81,7 @@ export function WhyDevlake() {
       </Feature>
       <Feature className="sm:flex-col-reverse">
         <C.TextSection>
-          <C.TextTitle>Out-of-the-box Analysis</C.TextTitle>
+          <C.TextTitle>Out-of-the-Box Analysis</C.TextTitle>
           <C.TextDescription>
           From DORA to scrum retros, DevLake implements metrics effortlessly with prebuilt dashboards supporting common frameworks and goals.
             <br />
