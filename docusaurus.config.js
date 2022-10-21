@@ -45,6 +45,10 @@ const versions = require('./versions.json');
             }
           }
         },
+        gtag: {
+          trackingID: 'G-PKZLL38MQG',
+          anonymizeIP: true,
+        },
         blog: {
           showReadingTime: true,
           readingTime: ({ content, frontMatter, defaultReadingTime }) =>
@@ -73,6 +77,15 @@ const versions = require('./versions.json');
         path: 'community',
         routeBasePath: 'community',
         sidebarPath: require.resolve('./sidebarsCommunity.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'livedemo',
+        path: 'livedemo',
+        routeBasePath: 'livedemo',
+        sidebarPath: require.resolve('./sidebarsLivedemo.js'),
       },
     ],
     function tailwindcss() {
@@ -136,6 +149,14 @@ const versions = require('./versions.json');
           },
           {
             type: 'doc',
+            position: 'right',
+            label: 'Live Demo',
+            to: 'livedemo',
+            docsPluginId: 'livedemo',
+            docId: 'AverageRequirementLeadTime',
+          },
+          {
+            type: 'doc',
             docId: 'index',
             position: 'right',
             label: 'Community',
@@ -186,10 +207,10 @@ const versions = require('./versions.json');
               }
             ],
           },
-          {
-            type: 'localeDropdown',
-            position: 'right',
-          },
+          // {
+          //   type: 'localeDropdown',
+          //   position: 'right',
+          // },
         ],
       },
       footer: {
@@ -209,11 +230,7 @@ const versions = require('./versions.json');
               {
                 label: 'Engineering Metrics',
                 to: 'docs/Metrics',
-              },
-              {
-                label: 'Dashboards (Live Demo)',
-                to: 'docs/LiveDemo',
-              },
+              }
             ],
           },
           {

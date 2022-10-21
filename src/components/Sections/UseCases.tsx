@@ -4,7 +4,7 @@ import BG from '@site/static/img/Homepage/UCBG.png';
 import BGMB from '@site/static/img/Homepage/UCBG-MB.png';
 import UC1 from '@site/static/img/Homepage/UC1.png';
 import UC2 from '@site/static/img/Homepage/UC2.png';
-import UC3 from '@site/static/img/Homepage/UC3.png';
+import UC3 from '@site/static/img/Homepage/newUC3.png';
 import UC4 from '@site/static/img/Homepage/UC4.png';
 import * as C from "./Components";
 
@@ -30,7 +30,7 @@ function UCCard({ lead, title, desc, demoURL, children }: {
         sm:text-[20px] sm:leading-[28px] sm:mb-[4px] sm:pr-[0]">{title}</div>
       <div className="font-inter text-neutral-500 text-label18 font-normal pr-1
         sm:text-label16 sm:pr-[0]">{desc}</div>
-       <C.TextLink link={demoURL}>See it Live</C.TextLink>
+       <C.TextLink link={demoURL}>{lead === "Data Engineers" ? "Learn More" : "See it Live"}</C.TextLink>
     </div>
   </div>)
 }
@@ -55,10 +55,18 @@ export function UseCases() {
         <div className="grid grid-cols-2 gap-x-[72px] xl:gap-x-10 gap-y-6
           sm:grid-cols-1 sm:gap-y-4">
           <UCCard
+            lead="Engineering Leads"
+            title="Implement DORA Fast"
+            desc="Implement DORA metrics in minutes to enable and manage delivery processes your developers and users will love."
+            demoURL="https://grafana-lake.demo.devlake.io/grafana/goto/qBPPBS44k?orgId=1"
+          >
+          <UCIcon src={UC3} />
+          </UCCard>
+          <UCCard
             lead="Open Source Maintainers"
             title="Fuel Community Growth with Analysis"
             desc="Grow your community strategically with insights on how developers participate, contribute, and collaborate."
-            demoURL="https://grafana-lake.demo.devlake.io/grafana/goto/7z1QfSV4z?orgId=1"
+            demoURL="https://grafana-lake.demo.devlake.io/grafana/d/VTr6Y_q7z/weekly-community-retro?orgId=1"
           >
             <UCIcon src={UC1} />
           </UCCard>
@@ -69,14 +77,6 @@ export function UseCases() {
             demoURL="https://grafana-lake.demo.devlake.io/grafana/d/KXWvOFQnz/github?orgId=1"
           >
             <UCIcon src={UC2} />
-          </UCCard>
-          <UCCard
-            lead="Engineering Leads"
-            title="Implement DORA Fast"
-            desc="Implement DORA metrics in minutes to enable and manage delivery processes your developers and users will love."
-            demoURL="https://grafana-lake.demo.devlake.io/grafana/goto/qBPPBS44k?orgId=1"
-          >
-            <UCIcon src={UC3} />
           </UCCard>
           <UCCard
             lead="Data Engineers"

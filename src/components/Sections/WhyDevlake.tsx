@@ -53,8 +53,10 @@ function Supports() {
 }
 
 export function WhyDevlake() {
-  return (<section className="flex flex-col flex-nowrap py-5 items-stretch
-    sm:py-[0px]">
+  return (<section className="
+    flex flex-col flex-nowrap  items-stretch
+    mt-[108px] sm:mt-[75px] mobile:mt-[44.9px]
+    ">
     <span
       className="section-title text-center"
     >
@@ -79,11 +81,11 @@ export function WhyDevlake() {
       </Feature>
       <Feature className="sm:flex-col-reverse">
         <C.TextSection>
-          <C.TextTitle>Out-of-the-box Analysis</C.TextTitle>
+          <C.TextTitle>Out-of-the-Box Analysis</C.TextTitle>
           <C.TextDescription>
           From DORA to scrum retros, DevLake implements metrics effortlessly with prebuilt dashboards supporting common frameworks and goals.
             <br />
-            <C.TextLink link="https://devlake.apache.org/docs/LiveDemo">See Live Demo</C.TextLink>
+            <C.TextLink link="https://devlake.apache.org/livedemo/AverageRequirementLeadTime">See Live Demo</C.TextLink>
           </C.TextDescription>
         </C.TextSection>
         <C.SectionImg src={WAD2} />
