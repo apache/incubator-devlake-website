@@ -53,8 +53,10 @@ function Supports() {
 }
 
 export function WhyDevlake() {
-  return (<section className="flex flex-col flex-nowrap py-5 items-stretch
-    sm:py-[0px]">
+  return (<section className="
+    flex flex-col flex-nowrap  items-stretch
+    mt-[108px] sm:mt-[75px] mobile:mt-[44.9px]
+    ">
     <span
       className="section-title text-center"
     >

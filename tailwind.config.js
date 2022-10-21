@@ -1,6 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 
-const {tailwindConfig} = require('dev-website-tailwind-config');
+let {tailwindConfig} = require('dev-website-tailwind-config');
+tailwindConfig.theme.extend.fontSize = {
+    ...tailwindConfig.theme.extend.fontSize,
+    label40: ['40px', { lineHeight : '56px' }],
+    label20: ['20px', { lineHeight: '30px' }],
+    label16Lake: ['16px', { lineHeight: '22px' }]
+}
 module.exports = tailwindConfig;
 
 // pre config 
