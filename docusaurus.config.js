@@ -133,14 +133,17 @@ const versions = require('./versions.json');
               {
                 label: "Latest",
                 to: "/docs/Overview/Introduction",
+                activeBaseRegex: `docs(?!(\/${versions.join('|\\/')}))`,
               },
               ...versions.slice(0, versions.length - 2).map((version) => ({
                 label: version,
                 to: `docs/${version}/Overview/Introduction`,
+                activeBaseRegex: `docs/${version}/`,
               })),
               ...versions.slice(versions.length - 2, versions.length).map((version) => ({
                 label: (version === "1.x") ? "1.x(Not Apache Release)" : version,
                 to: `docs/${version}/Overview/Introduction`,
+                activeBaseRegex: `docs/${version}/`,
               }))
             ]
           },
@@ -204,10 +207,10 @@ const versions = require('./versions.json');
               }
             ],
           },
-          {
-            type: 'localeDropdown',
-            position: 'right',
-          },
+          // {
+          //   type: 'localeDropdown',
+          //   position: 'right',
+          // },
         ],
       },
       footer: {

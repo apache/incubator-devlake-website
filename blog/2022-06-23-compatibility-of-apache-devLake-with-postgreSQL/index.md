@@ -1,7 +1,7 @@
 ---
 slug: compatibility-of-apache-devLake-with-postgreSQL
 title: Compatibility of Apache DevLake with PostgreSQL
-authors: Geyu
+authors: ZhangLiang
 tags: [devlake, database, postgresql]
 ---
 

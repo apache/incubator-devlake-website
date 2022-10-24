@@ -66,7 +66,7 @@ export function UseCases() {
             lead="Open Source Maintainers"
             title="Fuel Community Growth with Analysis"
             desc="Grow your community strategically with insights on how developers participate, contribute, and collaborate."
-            demoURL="https://grafana-lake.demo.devlake.io/grafana/goto/7z1QfSV4z?orgId=1"
+            demoURL="https://grafana-lake.demo.devlake.io/grafana/d/VTr6Y_q7z/weekly-community-retro?orgId=1"
           >
             <UCIcon src={UC1} />
           </UCCard>
