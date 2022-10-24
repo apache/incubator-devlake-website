@@ -7,7 +7,7 @@ import { InlineLink } from "./Components";
 export function JoinCommunity() {
   return (<div className="flex align-self-center justify-between xl:relative right-2
     my-[72px] rounded-[20px] bg-primary-200 px-5 py-[36px] font-inter xl:mx-auto xl:w-[72vw] xl:max-w-[1300px]
-    sm:w-[87vw] sm:my-6 sm:p-4 mobile:my-4 mobile:p-3">
+    sm:w-[87vw] sm:my-6 sm:p-4 mobile:my-4 mobile:p-3 mobile:mt-[80px] sm:mt-[180px]">
     <div className="w-[600px] pr-3 sm:pr-[0] sm:w-auto">
       <div className="text-heading1 mb-3 text-primary-800 font-semibold
         sm:text-heading2">Join the Community</div>
