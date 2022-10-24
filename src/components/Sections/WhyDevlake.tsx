@@ -85,7 +85,7 @@ export function WhyDevlake() {
           <C.TextDescription>
           From DORA to scrum retros, DevLake implements metrics effortlessly with prebuilt dashboards supporting common frameworks and goals.
             <br />
-            <C.TextLink link="https://devlake.apache.org/livedemo/AverageRequirementLeadTime">See Live Demo</C.TextLink>
+            <C.TextLink link="https://devlake.apache.org/livedemo/EngineeringLeads/DORA">See Live Demo</C.TextLink>
           </C.TextDescription>
         </C.TextSection>
         <C.SectionImg src={WAD2} />

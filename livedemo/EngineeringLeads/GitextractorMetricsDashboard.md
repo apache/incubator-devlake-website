@@ -1,10 +1,10 @@
 ---
-title: "Gitextractor Metrics Dashboard"
+title: "Component and File-level Git Metrics"
 description: >
   DevLake Live Demo
 ---
 
-# Gitextractor Metrics Dashboard
+# Component and File-level Git Metrics Dashboard
 
 <div className="info">
   <h5>
@@ -16,4 +16,4 @@ description: >
   </h5>
 </div>
 
-<iframe src="https://grafana-lake.demo.devlake.io/grafana/goto/x1lKtlSVz?orgId=1" width="135%" height="1500px"></iframe>
+<iframe src="https://grafana-lake.demo.devlake.io/grafana/d/L4dp9mn4z/gitextractor-metrics-dashboard?orgId=1" width="135%" height="1500px"></iframe>

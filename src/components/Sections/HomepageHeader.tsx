@@ -85,7 +85,7 @@ export function HomepageHeader() {
               rounded-[8px] sm:rounded-[5px] mobile:rounded-[5px]
               w-[200px] sm:w-[140px] mobile:w-[140px]
               h-[48px] sm:h-[32px] mobile:h-[32px]"
-            to="https://devlake.apache.org/livedemo/DORA"
+            to="https://devlake.apache.org/livedemo/EngineeringLeads/DORA"
           >
             See it Live
           </Link>
