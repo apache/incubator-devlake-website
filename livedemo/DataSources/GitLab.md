@@ -1,10 +1,10 @@
 ---
-title: "Commit Count by Author"
+title: "GitLab"
 description: >
   DevLake Live Demo
 ---
 
-# Commit Count by Author
+# GitLab
 
 <div className="info">
   <h5>
@@ -16,4 +16,4 @@ description: >
   </h5>
 </div>
 
-<iframe src="https://grafana-lake.demo.devlake.io/d/F0iYknc7z/demo-commit-count-by-author?orgId=1&from=now-6M&to=now" width="135%" height="880px"></iframe>
+<iframe src="https://grafana-lake.demo.devlake.io/grafana/d/msSjEq97z/gitlab?orgId=1" width="135%" height="1800px"></iframe>

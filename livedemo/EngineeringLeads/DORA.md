@@ -1,5 +1,6 @@
 ---
 title: "DORA"
+sidebar_position: 1
 description: >
   DevLake Live Demo
 ---

@@ -153,7 +153,7 @@ const versions = require('./versions.json');
             label: 'Live Demo',
             to: 'livedemo',
             docsPluginId: 'livedemo',
-            docId: 'AverageRequirementLeadTime',
+            docId: 'EngineeringLeads/DORA',
           },
           {
             type: 'doc',

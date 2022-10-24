@@ -1,10 +1,10 @@
 ---
-title: "Detailed Bug Info"
+title: "Engineering Throughput and Cycle Time - Team View"
 description: >
   DevLake Live Demo
 ---
 
-# Detailed Bug Info
+# Engineering Throughput and Cycle Time - Team View
 
 <div className="info">
   <h5>
@@ -16,4 +16,4 @@ description: >
   </h5>
 </div>
 
-<iframe src="https://grafana-lake.demo.devlake.io/d/s48Lzn5nz/demo-detailed-bug-info?orgId=1&from=now-6M&to=now" width="135%" height="800px"></iframe>
+<iframe src="https://grafana-lake.demo.devlake.io/grafana/d/nJ1ijje7k/engineering-throughput-and-cycle-time-team-view?orgId=1" width="135%" height="1740px"></iframe>

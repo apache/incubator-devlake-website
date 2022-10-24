@@ -1,10 +1,10 @@
 ---
-title: "Engineering Throughput and Cycyle Time"
+title: "Engineering Throughput and Cycle Time"
 description: >
   DevLake Live Demo
 ---
 
-# Engineering Throughput and Cycyle Time
+# Engineering Throughput and Cycle Time
 
 <div className="info">
   <h5>
@@ -16,4 +16,4 @@ description: >
   </h5>
 </div>
 
-<iframe src="https://grafana-lake.demo.devlake.io/grafana/goto/tJEGp_S4z?orgId=1" width="135%" height="1740px"></iframe>
+<iframe src="https://grafana-lake.demo.devlake.io/grafana/d/Jaaimc67k/engineering-throughput-and-cycle-time?orgId=1" width="135%" height="1740px"></iframe>

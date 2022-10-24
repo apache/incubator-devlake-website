@@ -1,10 +1,10 @@
 ---
-title: "GitLab"
+title: "GitHub"
 description: >
   DevLake Live Demo
 ---
 
-# GitLab
+# GitHub
 
 <div className="info">
   <h5>
@@ -16,4 +16,4 @@ description: >
   </h5>
 </div>
 
-<iframe src="https://grafana-lake.demo.devlake.io/grafana/goto/KcWhO_IVk?orgId=1" width="135%" height="1800px"></iframe>
+<iframe src="https://grafana-lake.demo.devlake.io/d/KXWvOFQnz/github?orgId=1&from=now-6M&to=now" width="135%" height="3000px"></iframe>

@@ -58,7 +58,7 @@ export function UseCases() {
             lead="Engineering Leads"
             title="Implement DORA Fast"
             desc="Implement DORA metrics in minutes to enable and manage delivery processes your developers and users will love."
-            demoURL="https://grafana-lake.demo.devlake.io/grafana/goto/qBPPBS44k?orgId=1"
+            demoURL="https://grafana-lake.demo.devlake.io/grafana/d/qNo8_0M4z/dora?orgId=1"
           >
           <UCIcon src={UC3} />
           </UCCard>
