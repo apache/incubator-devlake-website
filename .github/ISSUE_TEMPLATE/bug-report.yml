@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-name: Bug report
+name: Bug
 title: "[Bug][Doc Name] Bug title "
 description: Problems with the docs of Apache DevLake Website
 labels: ["type/bug"]
@@ -28,7 +28,7 @@ body:
         to check if this bug already exists.
       options:
         - label: >
-            I had searched in the [issues](https://github.com/apache/incubator-devlake/issues?q=is%3Aissue) and found
+            I had searched in the [issues](https://github.com/apache/incubator-devlake-website/issues?q=is%3Aissue) and found
             no similar issues.
           required: true
 

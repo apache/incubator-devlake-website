@@ -1,6 +1,6 @@
 ---
-name: Documentation Issue
-about: Help improve our documentation
+name: Documentation
+about: Add or update the documentation
 title: '[Doc][Module Name] Documentation title'
 labels: type/docs
 assignees: ''
