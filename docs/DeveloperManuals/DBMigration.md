@@ -12,7 +12,7 @@ The migration scripts are written with gorm in Golang to support different SQL d
 
 
 ## Migration Scripts
-Migration scripts describes how to do database migration and implements the `MigrationScript` interface.
+The migration scripts describe how to do database migration and implement the `MigrationScript` interface.
 When DevLake starts, the scripts register themselves to the framework by invoking the `Register` function.
 The method `Up` contains the steps of migration.
 
