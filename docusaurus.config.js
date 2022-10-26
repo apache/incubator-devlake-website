@@ -36,12 +36,9 @@ const versions = require('./versions.json');
           rehypePlugins: [katex],
           versions: {
             current: {
-              label: 'Latest',
-              path: '',
-              banner: 'none',
-            },
-            [versions[0]]: {
-              path: versions[0],
+              label: 'Next',
+              path: 'next',
+              banner: 'unreleased',
             }
           }
         },
@@ -131,15 +128,15 @@ const versions = require('./versions.json');
             label: 'Docs',
             items: [
               {
-                label: "Latest",
-                to: "/docs/Overview/Introduction",
+                label: "Next",
+                to: "/docs/next/Overview/Introduction"
               },
-              ...versions.slice(0, versions.length - 2).map((version) => ({
+              {
+                label: versions[0] + ' (Stable)',
+                to: "/docs/Overview/Introduction"
+              },
+              ...versions.slice(1, versions.length).map((version) => ({
                 label: version,
-                to: `docs/${version}/Overview/Introduction`,
-              })),
-              ...versions.slice(versions.length - 2, versions.length).map((version) => ({
-                label: (version === "1.x") ? "1.x(Not Apache Release)" : version,
                 to: `docs/${version}/Overview/Introduction`,
               }))
             ]
