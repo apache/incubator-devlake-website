@@ -12,14 +12,14 @@ The migration scripts are written with gorm in Golang to support different SQL d
 
 
 ## Migration Scripts
-Migration scripts describes how to do database migration and implements the `Script` interface.
+The migration scripts describe how to do database migration and implement the `MigrationScript` interface.
 When DevLake starts, the scripts register themselves to the framework by invoking the `Register` function.
 The method `Up` contains the steps of migration.
 
 ```go
-type Script interface {
+type MigrationScript interface {
     // this function will contain the business logic of the migration (e.g. DDL logic)
-	Up(ctx context.Context, db *gorm.DB) errors.Error
+    Up(basicRes BasicRes) errors.Error
     // the version number of the migration. typically in date format (YYYYMMDDHHMMSS), e.g. 20220728000001. Migrations are executed sequentially based on this number.
 	Version() uint64
 	// The name of this migration
@@ -84,7 +84,7 @@ In order to help others understand the script you have written, there are a coup
 
 Other rules to follow when writing a migration script:
 
-- The migration script should only use the interfaces and packages offerred by the framework like `core`, `errors` and `migrationhelper`. Do NOT import `gorm` or package from `plugin` directly.
+- The migration script should only use the interfaces and packages offered by the framework like `core`, `errors` and `migrationhelper`. Do NOT import `gorm` or package from `plugin` directly.
 - The name of `model struct` defined in your script should be suffixed with the `Version` of the script to distinguish from other scripts in the same package to keep it self-contained, i.e. `tasks20221018`. Do NOT refer `struct` defined in other scripts.
 - All scripts and models names should be `camelCase` to avoid accidental reference from other packages.
 
