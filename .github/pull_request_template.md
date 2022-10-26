@@ -8,10 +8,7 @@
 # Summary
 
 <!--
-Thanks for submitting a pull request!
-
-We appreciate you spending the time to work on these changes.
-Please fill out as many sections below as possible.
+Thanks for submitting a PR! We appreciate you spending the time to work on these changes. Please fill out as many sections below as possible.
 -->
 
 ### Does this close any open issues?
