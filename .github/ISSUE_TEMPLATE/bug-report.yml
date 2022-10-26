@@ -53,9 +53,6 @@ body:
   - type: textarea
     attributes:
       label: Anything else
-      description: Anything else we need to know?
-      placeholder: >
-        
 
   - type: dropdown
     id: version
