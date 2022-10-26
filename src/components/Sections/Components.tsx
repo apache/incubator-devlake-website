@@ -24,7 +24,7 @@ export const TextDescription = ({ children }: { children: React.ReactNode }) =>
 
 export const TextLink = ({ link, children }: { link: string, children: React.ReactNode }) =>
   <a className="absolute sm:static mobile:static text-label16 text-secondary-500 flex items-center mt-[16px] mb-[8px]
-    sm:justify-center hover:text-secondary-500 bottom-[0]"
+    sm:justify-center hover:text-secondary-500 bottom-[10px]"
     target="_blank"
     href={link}>{children}
     <ArrowRight width={20} height={20} />

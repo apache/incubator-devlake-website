@@ -93,6 +93,7 @@ export function HomepageHeader() {
             className="primary-button
             flex
             whitespace-nowrap
+            rounded-[8px] sm:rounded-[5px] mobile:rounded-[5px]
             bg-neutral-invert
             text-primary-500
             border-2 border-primary-500 border-solid
@@ -110,6 +111,7 @@ export function HomepageHeader() {
             className="primary-button
             flex
             whitespace-nowrap
+            rounded-[8px] sm:rounded-[5px] mobile:rounded-[5px]
             bg-neutral-invert
             text-primary-500
             border-2 border-primary-500 border-solid
@@ -128,7 +130,6 @@ export function HomepageHeader() {
       </header>
       <div className="
        flex
-       mobile:hidden sm:hidden
        text-heading4
        text-neutral-300
        font-inter
@@ -139,14 +140,14 @@ export function HomepageHeader() {
        mb-[40px]
        items-center
       ">
-        <div className="h-[2px] bg-neutral-100 w-[46%]"></div>
+        <div className="h-[2px] bg-neutral-100 w-[46%] sm:w-[42%] mobile:w-[35%] relative"></div>
         <span className="
          flex-1
          w-[81px]
         ">
         Trusted by
         </span>
-        <div className="h-[2px] bg-neutral-100 w-[46%]"></div>
+        <div className="h-[2px] bg-neutral-100 w-[46%] sm:w-[42%] mobile:w-[35%]"></div>
       </div>
       <div
         className=" 
