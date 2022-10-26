@@ -93,9 +93,10 @@ export function HomepageHeader() {
             className="primary-button
             flex
             whitespace-nowrap
+            rounded-[8px] sm:rounded-[5px] mobile:rounded-[5px]
             bg-neutral-invert
             text-primary-500
-            border-2 border-primary-500
+            border-2 border-primary-500 border-solid
             hover:text-primary-500 
             hover:bg-neutral-invert
             hover:opacity-80
@@ -110,9 +111,10 @@ export function HomepageHeader() {
             className="primary-button
             flex
             whitespace-nowrap
+            rounded-[8px] sm:rounded-[5px] mobile:rounded-[5px]
             bg-neutral-invert
             text-primary-500
-            border-2 border-primary-500
+            border-2 border-primary-500 border-solid
             hover:text-primary-500 
             hover:bg-neutral-invert
             hover:opacity-80
@@ -126,54 +128,27 @@ export function HomepageHeader() {
           </div>
         </div>
       </header>
-      {/* <header
-        className="relative 
-        pl-[30px] pr-[30px]
-        pt-[64px] pb-[90px]
-        sm:pt-5 sm:pb-[0px]
-        flex sm:flex-col
-        justify-between items-center
-        max-w-[80%] xl:max-w-[1440px] mx-auto sm:max-w-[90%]"
-      >
-        <div
-          className=" z-10
-          flex flex-col flex-nowrap
-          justify-start w-[670px]
-          sm:flex-wrap sm:w-auto
-          sm:text-center mobile:justify-center
-        "
-        >
-          <div
-            className="text-primary
-            font-bold font-inter
-            text-heading0
-            sm:text-heading2
-            sm:font-semibold sm:text-center
-            mb-[32px] sm:mb-3"
-          >
-            Debug Engineering Process <br className="sm:hidden mobile:block" />
-            Demystify Dev Data
-          </div>
-          <div
-            className="text-primary-800
-            text-label24 font-inter font-normal mb-[48px]
-            sm:text-label16 sm:text-start sm:mb-3
-          "
-          >
-            Apache DevLake (Incubating) ingests, analyzes, and visualizes the
-            fragmented data from DevOps tools to extract insights for
-            engineering excellence, developer experience, and community growth.
-          </div>
-          <Link
-            className="primary-button
-              sm:flex sm:w-[137px] sm:h-5 p-[0px] sm:text-[14px]
-              whitespace-nowrap sm:mx-auto sm:rounded-[5px] sm:mb-4"
-            to="https://devlake.apache.org/docs/GettingStarted"
-          >
-            Get Started
-          </Link>
-        </div>
-      </header> */}
+      <div className="
+       flex
+       text-heading4
+       text-neutral-300
+       font-inter
+       text-center
+       mx-[auto]
+       w-[86%]
+       h-[20px]
+       mb-[40px]
+       items-center
+      ">
+        <div className="h-[2px] bg-neutral-100 w-[46%] sm:w-[42%] mobile:w-[35%] relative"></div>
+        <span className="
+         flex-1
+         w-[81px]
+        ">
+        Trusted by
+        </span>
+        <div className="h-[2px] bg-neutral-100 w-[46%] sm:w-[42%] mobile:w-[35%]"></div>
+      </div>
       <div
         className=" 
               pl-[30px] pr-[30px]

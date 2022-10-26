@@ -1,7 +1,7 @@
 import React from "react";
 import * as C from "./Components";
 import WAD1 from "@site/static/img/Homepage/WAD-1.png";
-import WAD2 from "@site/static/img/Homepage/WAD-2.png";
+import WAD2 from "@site/static/img/Homepage/NewWAD-2.png";
 import WAD3 from "@site/static/img/Homepage/WAD-3.png";
 import Sup1 from "@site/static/img/Homepage/sup-1-jira.png";
 import Sup2 from "@site/static/img/Homepage/sup-2-tapd.svg";
@@ -16,8 +16,10 @@ import SupA from "@site/static/img/Homepage/sup-A-feishu.png";
 
 function Feature({ className, children }: { className?: string, children: React.ReactNode }) {
   return (
-    <div className={`flex w-full justify-between items-center
-      sm:flex-col ${className}`}>
+    <div className={`flex w-full sm:justify-between mobile:justify-between items-center
+      h-[488px] mobile:h-[auto] sm:h-[auto] relative
+      space-x-5
+      flex-col ${className}`}>
       {children}
     </div>
   );
@@ -53,18 +55,21 @@ function Supports() {
 }
 
 export function WhyDevlake() {
-  return (<section className="
-    flex flex-col flex-nowrap  items-stretch
-    mt-[108px] sm:mt-[75px] mobile:mt-[44.9px]
-    ">
+  return (
+  <section className="
+    flex flex-col flex-nowrap 
+    py-5 items-stretch
+    mt-[80px] mobile:mt-[0px] sm:mt-[70px]
+    sm:py-[0px]">
     <span
       className="section-title text-center"
     >
       Why Apache DevLake
     </span>
     <div
-      className=" flex flex-col
-        mb-[72px] space-y-7
+      className="
+        flex flex-row mobile:flex-col sm:flex-col
+        mb-[72px] 
         sm:px-[0px] sm:space-y-[36px] sm:mb-[36px]
         mobile:mb-4 mobile:space-y-4
         ">
@@ -79,7 +84,8 @@ export function WhyDevlake() {
           </C.TextDescription>
         </C.TextSection>
       </Feature>
-      <Feature className="sm:flex-col-reverse">
+      <Feature>
+        <C.SectionImg src={WAD2} />
         <C.TextSection>
           <C.TextTitle>Out-of-the-Box Analysis</C.TextTitle>
           <C.TextDescription>
@@ -88,7 +94,6 @@ export function WhyDevlake() {
             <C.TextLink link="https://devlake.apache.org/livedemo/EngineeringLeads/DORA">See Live Demo</C.TextLink>
           </C.TextDescription>
         </C.TextSection>
-        <C.SectionImg src={WAD2} />
       </Feature>
       <Feature>
         <C.SectionImg src={WAD3} />

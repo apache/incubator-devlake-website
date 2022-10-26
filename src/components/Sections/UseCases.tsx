@@ -17,13 +17,13 @@ function UCCard({ lead, title, desc, demoURL, children }: {
 }) {
   return (<div className='use-case-card relative shadow-card overflow-hidden
     xl:w-[30vw] h-[496px] max-w-[650px] rounded-[16px]
-    sm:w-[62vw] sm:h-[360px] sm:mx-auto
-    mobile:w-auto mobile:h-[420px]'>
+    sm:w-[62vw] sm:h-[380px] sm:mx-auto 
+    mobile:w-auto mobile:h-[auto]'>
     <div className="flex items-center h-[232px] justify-center
       sm:h-[182px]">
       {children}
     </div>
-    <div className="bg-white px-4 py-2 h-[264px] sm:h-[152px] sm:p-2 mobile:h-[240px]">
+    <div className="bg-white px-4 py-2 h-[264px] sm:h-[195px] sm:p-2 mobile:h-[240px]">
       <div className="font-inter text-neutral-300 text-label18 font-medium mb-2 pr-1
         sm:text-label16 sm:font-normal sm:mb-[4px]">{lead}</div>
       <div className="font-inter text-primary-800 text-heading2 font-semibold mb-2 pr-1
@@ -42,7 +42,7 @@ const UCIcon = ({ src }: { src: string }) => <img src={src} alt='' className="
 
 export function UseCases() {
   return (
-    <div className="h-[1206px] sm:h-[1590px] mobile:h-[1752px]">
+    <div className="h-[1206px] sm:h-[1590px] mobile:h-[1768px]">
       <img src={BG} alt='' className='absolute z-0 sm:hidden 
         xl:w-screen h-[1206px] left-[0px]' />
       <img src={BGMB} alt='' className='absolute z-0 hidden 
