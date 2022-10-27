@@ -35,7 +35,7 @@ A plugin mainly consists of a collection of subtasks that can be executed by Dev
 2. [PluginInit](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_init.go) allows a plugin to customize its initialization
 3. [PluginTask](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_task.go) enables a plugin to prepare data prior to subtask execution
 4. [PluginApi](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_api.go) lets a plugin exposes some self-defined APIs
-5. [Migratable](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_db_migration.go) is where a plugin manages its database migrations 
+5. [PluginMigration](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_migration.go) is where a plugin manages its database migrations 
 6. [PluginModel](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_model.go) allows other plugins to get the model information of all database tables of the current plugin through the GetTablesInfo() method.If you need to access Domain Layer Models,please visit [DomainLayerSchema](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema/)
 
 The diagram below shows the control flow of executing a plugin:
