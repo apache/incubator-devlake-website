@@ -11,18 +11,51 @@ sidebar_position: 3
 - Kubernetes >= 1.19.0
 
 
-## Quick Install
 
-#### You can also check https://merico-dev.github.io/devlake-helm-chart for the easiest way to deploy your devlake
+## Quick Start
 
-clone the code, and enter the deployment/helm folder.
+#### You can also check https://apache.github.io/incubator-devlake-helm-chart for the easiest way to deploy your devlake
+
+### Install
+
+To install the chart with release name `devlake`:
+
+```shell
+helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
+helm repo update
+helm install devlake devlake/devlake
 ```
-helm install devlake .
-```
-
 And visit your devlake from the node port (32001 by default).
 
 http://YOUR-NODE-IP:32001
+
+#### Tips: 
+If you are using minikube inside your mac, please use the following command to forward the port:
+```shell
+kubectl port-forward service/devlake-ui  30090:4000
+```
+and open another terminal:
+```shell
+kubectl port-forward service/devlake-grafana  30091:3000
+```
+
+Then you can visit:
+config-ui by url `http://YOUR-NODE-IP:30090`
+grafana by url `http://YOUR-NODE-IP:30091`
+
+### Update
+
+```shell
+helm repo update
+```
+
+### Uninstall
+
+To uninstall/delete the `devlake` release:
+
+```shell
+helm uninstall devlake
+```
 
 
 ## Some example deployments
