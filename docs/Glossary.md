@@ -13,6 +13,16 @@ description: >
 
 The following terms are arranged in the order of their appearance in the actual user workflow.
 
+### Projects
+**A project is a set of related [Data Scopes](#data-scope), the Data Scopes may contains different [Data Entities](#data-entities) from arbitrary [Data Sources](#data-sources) for Metric Computation**
+
+Project was introduced in v0.15 to solve some complex metric computation problems. For example, There was a **Change Failure Rate** in [DORA Metric](../UserManuals/DORA) which requires connecting Incident(issue.type = 'INCIDENT') to its related Deployment(cicd_task.type = 'DEPLOYMENT') to determine whether a Deployment failed or not. Unfortunately, most data sources do not offer this relationship, the only reasonable approach so far is to connect Incident to its Closest Deployment, without Project, 
+
+A project consists of the following elements:
+A set of Metrics(currently, only DORA)
+A [Blueprint](#blueprints) for active data collection
+A set of Incoming Webhooks for passive data collection
+
 ### Blueprints
 **A blueprint is the plan that covers all the work to get your raw data ready for query and metric computation in the dashboards.** Creating a blueprint consists of four steps:
 1. **Adding [Data Connections](Glossary.md#data-connections)**: For each [data source](Glossary.md#data-sources), one or more data connections can be added to a single blueprint, depending on the data you want to sync to DevLake.
