@@ -1,7 +1,7 @@
 ---
-title: "GitHub"
+title: "BitBucket (WIP)"
 description: >
-  GitHub Plugin
+  BitBucket Plugin
 ---
 
 
