@@ -89,6 +89,30 @@ curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
 JSON
 ```
 
+## How to use with dora 
+Refdiff take the project_name from taskOptions, and offer the ability to calculate refs_commits_diffs between 2 consecutive deployments under the same scope.
+ 
+```shell
+curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
+{
+    "name": "test-refdiff-dora",
+    "tasks": [
+        [
+            {
+                "plugin": "refdiff",
+                "options": {
+                    "projectName": "xxxx",
+                    "scopeId": "github:GithubRepo:384111310",
+                    "tasks": [
+                        "calculateCommitsDiff"
+                    ]
+                }
+            }
+        ]
+    ]
+}
+```
+
 ## Development
 
 This plugin depends on `libgit2`, you need to install version 1.3.0 in order to run and debug this plugin on your local
