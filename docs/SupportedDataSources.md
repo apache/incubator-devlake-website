@@ -7,21 +7,19 @@ sidebar_position: 4
 
 
 ## Data Sources and Data Plugins
-DevLake supports the following data sources. The data from each data source is collected with one or more plugins.
+Apache DevLake(incubating) supports the following data sources. The data from each data source is collected with one or more plugins.
 
-
-| Data Source                   | Domain(s)                                                  | Supported Versions                   | Triggered Plugins           | Collection Mode       |
-|-------------------------------|------------------------------------------------------------|--------------------------------------|---------------------------- | --------------------- |
-| GitHub (include GitHub Action)| Source Code Management, Code Review, Issue Tracking, CI/CD | Cloud                                |`github`, `gitextractor`     | Full Refresh, Incremental Sync(for `issues`, `PRs`) |
-| GitLab (include GitLabCI)     | Source Code Management, Code Review, Issue Tracking, CI/CD | Cloud, Community Edition 13.x+       |`gitlab`, `gitextractor`     | Full Refresh, Incremental Sync(for `issues`)|
-| Gitee                         | Source Code Management, Code Review, Issue Tracking        | Cloud                                |`gitee`, `gitextractor`      | Incremental Sync      |
-| BitBucket                     | Source Code Management, Code Review                        | Cloud                                |`bitbucket`, `gitextractor`  | Full Refresh          |
-| Jira                          | Issue Tracking                                             | Cloud, Server 8.x+, Data Center 8.x+ |`jira`                       | Full Refresh, Incremental Sync(for `issues`, `changelogs`, `worklogs`) |
-| TAPD                          | Issue Tracking                                             | Cloud                                |`tapd`                       | Full Refresh, Incremental Sync(for `stories`, `bugs`, `tasks`)          |
-| Jenkins                       | CI/CD                                                      | 2.263.x+                             |`jenkins`                    | Full Refresh          |
-| Feishu                        | Calendar                                                   | Cloud                                |`feishu`                     | Full Refresh          |
-| AE                            | Source Code Management                                     |                                      | `ae`                        | Full Refresh          |
-
+| Data Source                   | Domain(s)                                                  | Supported Versions                   | Config UI Availability | Triggered Plugins           | Collection Mode       |
+|-------------------------------|------------------------------------------------------------|--------------------------------------|------------------------|---------------------------- | --------------------- |
+| GitHub (include GitHub Action)| Source Code Management, Code Review, Issue Tracking, CI/CD | Cloud                                |Available               |`github`, `gitextractor`     | Full Refresh, Incremental Sync(for `issues`, `PRs`) |
+| GitLab (include GitLabCI)     | Source Code Management, Code Review, Issue Tracking, CI/CD | Cloud, Community Edition 13.x+       |Available               |`gitlab`, `gitextractor`     | Full Refresh, Incremental Sync(for `issues`)|
+| Gitee                         | Source Code Management, Code Review, Issue Tracking        | Cloud                                |Not Available           |`gitee`, `gitextractor`      | Incremental Sync      |
+| BitBucket                     | Source Code Management, Code Review                        | Cloud                                |Not Available           |`bitbucket`, `gitextractor`  | Full Refresh          |
+| Jira                          | Issue Tracking                                             | Cloud, Server 8.x+, Data Center 8.x+ |Available               |`jira`                       | Full Refresh, Incremental Sync(for `issues`, `changelogs`, `worklogs`) |
+| TAPD                          | Issue Tracking                                             | Cloud                                |Not Available           |`tapd`                       | Full Refresh, Incremental Sync(for `stories`, `bugs`, `tasks`)          |
+| Jenkins                       | CI/CD                                                      | 2.263.x+                             |Available               |`jenkins`                    | Full Refresh          |
+| Feishu                        | Calendar                                                   | Cloud                                |Not Available           |`feishu`                     | Full Refresh          |
+| AE                            | Source Code Management                                     |                                      |Not Available           | `ae`                        | Full Refresh          |
 
 
 
