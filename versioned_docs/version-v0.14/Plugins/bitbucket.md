@@ -1,7 +1,7 @@
 ---
 title: "GitHub"
 description: >
-  GitHub Plugin
+  BitBucket Plugin
 ---
 
 
