@@ -15,7 +15,7 @@ As of v0.14.2, `bitbucket` plugin can only be invoked through DevLake API. Its s
 
 ## Usage via DevLake API
 
-> Note: Please replace the `http://localhost:8080` in the sample requests with your actual DevLake API endpoint. For how to view DevLake API's swagger documentation, please refer to the "Using DevLake API" section of [Developer Setup](../../DeveloperManuals/DeveloperSetup.md).
+> Note: Please replace the `http://localhost:8080` in the sample requests with your actual DevLake API endpoint. For how to view DevLake API's swagger documentation, please refer to the "Using DevLake API" section of [Developer Setup](../DeveloperManuals/DeveloperSetup.md).
 
 
 1. Create a Bitbucket data connection: `POST /plugins/bitbucket/connections`. Please see a sample request below:
