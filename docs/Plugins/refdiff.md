@@ -102,7 +102,6 @@ curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
                 "plugin": "refdiff",
                 "options": {
                     "projectName": "xxxx",
-                    "scopeId": "github:GithubRepo:384111310",
                     "tasks": [
                         "calculateCommitsDiff"
                     ]
