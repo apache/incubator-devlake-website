@@ -89,8 +89,7 @@ curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
 JSON
 ```
 
-## How it gets used in DORA
-RefDiff can be called by the [DORA plugin](https://github.com/apache/incubator-devlake/tree/main/plugins/dora). RefDiff takes the project_name from taskOptions to calculate refs_commits_diffs between two consecutive deployments within the same project.
+4. Refdiff has a new subtask `calculateProjectDeploymentCommitsDiff`, which can find related deployments according to the project, and then calculate the commits diff between deployments. Such a function can be used to support the calculation of dora indicators.
  
 ```shell
 curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
@@ -103,7 +102,7 @@ curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
                 "options": {
                     "projectName": "xxxx",
                     "tasks": [
-                        "calculateCommitsDiff"
+                        "calculateProjectDeploymentCommitsDiff"
                     ]
                 }
             }
