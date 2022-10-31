@@ -2,7 +2,7 @@
 
 > Please complete _ALL_ items in this checklist, and remove before submitting
 
-- [ ] I have `run npm build` and `run npm serve` locally before submitting this PR
+- [ ] I have `npm run build` and `npm run serve` locally before submitting this PR
 - [ ] I have read through the [Contributing](https://devlake.apache.org/community/) Documentation
 
 # Summary
