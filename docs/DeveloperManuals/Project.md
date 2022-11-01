@@ -13,7 +13,37 @@ It contains the following two models:
  - `project_metrics` describes the mapping relationship enabled by a plugin, including the name of the project and plugin on both sides of the mapping, and basic information about plugin options.
 
 ![image](project_table.jpg)
- 
+
+## project
+
+|   **field**   | **type** | **length** | **description**               | **key** |
+| ------------- | -------- | ---------- | ----------------------------- | ------- |
+| `name`        | varchar  | 255        | name for project              | PK      |
+| `describe`    | longtext |            | describe for project          |         |
+| `created_at`  | datetime | 3          | created time of project       |         |
+| `updated_at`  | datetime | 3          | last updated time of project  |         | 
+
+
+| **name**  | **describe**                         | **created_at**          | **updated_at**          |
+| --------- | ------------------------------------ | ----------------------- | ------------------------|
+| project_1 | this is one of test project          | 2022-11-01 01:22:13.000 | 2022-11-01 02:24:15.000 |
+| project_2 | this is another project test project | 2022-11-01 01:23:29.000 | 2022-11-01 02:27:24.000 |
+
+## project_metric
+
+|   **field**   | **type** | **length** | **description**                                            | **key** |
+| ------------- | -------- | ---------- | ---------------------------------------------------------- | ------- |
+| `project_name`   | varchar  | 255     | name for project                                           | PK      |
+| `plugin_name`    | varchar  | 255     | name for plugin                                            | PK      |
+| `plugin_option`  | longtext |         | check if metric plugins have been enabled by the project   |         |
+
+
+| **project_name** | **plugin_name** | **plugin_option**      |
+| ---------------- | --------------- | ---------------------- |
+| project_1        | gitlab          | {'enable':true}        |
+| project_2        | gitlab          | {'enable':disable}     |
+
+
 It requires each plugin to implement an interface named `PluginMetric`
 
 # 如何使用 Project
