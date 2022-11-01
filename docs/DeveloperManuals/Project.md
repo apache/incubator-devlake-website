@@ -19,14 +19,14 @@ It contains the following two models:
 |   **field**   | **type** | **length** | **description**               | **key** |
 | ------------- | -------- | ---------- | ----------------------------- | ------- |
 | `name`        | varchar  | 255        | name for project              | PK      |
-| `describe`    | longtext |            | describe for project          |         |
+| `description` | longtext |            | description of the project    |         |
 | `created_at`  | datetime | 3          | created time of project       |         |
 | `updated_at`  | datetime | 3          | last updated time of project  |         | 
 
 
 | **name**  | **describe**                         | **created_at**          | **updated_at**          |
 | --------- | ------------------------------------ | ----------------------- | ------------------------|
-| project_1 | this is one of test project          | 2022-11-01 01:22:13.000 | 2022-11-01 02:24:15.000 |
+| project_1 | this is one of the test projects     | 2022-11-01 01:22:13.000 | 2022-11-01 02:24:15.000 |
 | project_2 | this is another project test project | 2022-11-01 01:23:29.000 | 2022-11-01 02:27:24.000 |
 
 ## project_metric
@@ -41,7 +41,8 @@ It contains the following two models:
 | **project_name** | **plugin_name** | **plugin_option**      |
 | ---------------- | --------------- | ---------------------- |
 | project_1        | gitlab          | {'enable':true}        |
-| project_2        | gitlab          | {'enable':disable}     |
+| project_2        | gitlab          | {'enable':false}       |
+| project_2        | github          | {'enable':true}        |
 
 
 It requires each plugin to implement an interface named `PluginMetric`
@@ -64,6 +65,16 @@ It requires each plugin to implement an interface named `PluginMetric`
 
 - 我们可以通过 `GET` `/project_metrics` 接口来获取一组 `project_metrics` 信息，我们可以只设置 `project_name` 或只设置 `plugin_name` 来进行筛选。也可以同时设置 `project_name` 和 `plugin_name` 此时我们将获取到一个特定的 `project_metrics` 信息。
 - 我们可以通过 `UPDATE` `/project_metrics` 接口来更新特定的一组 `project_metrics` 信息。这要求我们必须同时设置好 `project_name` 和 `plugin_name`。
+
+# 关于 Project 和 Blueprint
+
+- 在 `blueprint` 的表中现在添加了一个与 `project` 相关联的字段 `project_name`，该字段表示 当前的 `blueprint` 唯一的属于某一张特定的 `project`
+- 一个`project`允许被多个 `blueprint` 的 `project_name` 字段指定。也就是`project`对`blueprint`是一对多关系
+- 可以通过以下sql 快速的查看 某个 `project` 所对应的全部 `blueprint`
+
+```
+SELECT * from `_devlake_blueprints` where `project_name`="ProjectName";
+```
 
 
 ## The PluginMetric Interface
@@ -105,7 +116,7 @@ type Projects struct {
 }
 
 func (Projects) TableName() {
-    return "project"
+    return "_devlake_project"
 }
 
 type ProjectMetrics struct { 
@@ -115,7 +126,7 @@ type ProjectMetrics struct {
 }
 
 func (ProjectMetrics) TableName() {
-    return "project_metrics"
+    return "_devlake_project_metrics"
 }
 ```
 
