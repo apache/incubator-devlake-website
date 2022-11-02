@@ -42,11 +42,12 @@ Usually, you don't have to modify this part. However, if you don't want to colle
 - Source Code Management: GitHub repos, refs, commits, etc.
 - Code Review: GitHub PRs, PR comments and reviews, etc.
 - Cross Domain: GitHub accounts, etc.
+- CI/CD: GitHub Workflow runs, GitHub Workflow jobs, etc.
 
 ### Step 3 - Adding Transformation Rules (Optional)
 ![github-add-transformation-rules-list](/img/ConfigUI/github-add-transformation-rules-list.png)
 ![github-add-transformation-rules](/img/ConfigUI/github-add-transformation-rules.png)
- 
+
 Without adding transformation rules, you can still view the "[GitHub Metrics](/livedemo/DataSources/GitHub)" dashboard. However, if you want to view "[Weekly Bug Retro](/livedemo/QAEngineers/WeeklyBugRetro)", "[Weekly Community Retro](/livedemo/OSSMaintainers/WeeklyCommunityRetro)" or other pre-built dashboards, the following transformation rules, especially "Type/Bug", should be added.<br/>
 
 Each GitHub repo has at most ONE set of transformation rules.
