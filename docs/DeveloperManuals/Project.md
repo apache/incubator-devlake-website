@@ -2,11 +2,11 @@
 title: "Project"
 sidebar_position: 5
 description: >
-  `Project` is an object that can be used for DORA to associate `changes(commits)`, with `deployments` and `issues`.
+  `Project` is **a set of scopes from different domains**, a way to group different resources, and it is crucial for some metric calculation like `DORA`.
 ---
 
 ## Summary
-`Project` is an object that can be used for DORA to associate `changes(commits)`, with `deployments` and `issues`.
+`Project` is **a set of scopes from different domains**, a way to group different resources, and it is crucial for some metric calculation like `DORA`.
 
 It contains the following two models:
  - `projects` describes a project object, including its name, creation and update time and other basic information
@@ -14,7 +14,7 @@ It contains the following two models:
 
 ![image](project_table.jpg)
 
-## project
+## projects
 
 |   **field**   | **type** | **length** | **description**               | **key** |
 | ------------- | -------- | ---------- | ----------------------------- | ------- |
@@ -29,35 +29,50 @@ It contains the following two models:
 | project_1 | this is one of the test projects     | 2022-11-01 01:22:13.000 | 2022-11-01 02:24:15.000 |
 | project_2 | this is another project test project | 2022-11-01 01:23:29.000 | 2022-11-01 02:27:24.000 |
 
-## project_metric
+## project_metrics
 
-|   **field**   | **type** | **length** | **description**                                            | **key** |
-| ------------- | -------- | ---------- | ---------------------------------------------------------- | ------- |
-| `project_name`   | varchar  | 255     | name for project                                           | PK      |
-| `plugin_name`    | varchar  | 255     | name for plugin                                            | PK      |
-| `plugin_option`  | longtext |         | check if metric plugins have been enabled by the project   |         |
+|    **field**    | **type** | **length** | **description**                                            | **key** |
+| --------------- | -------- | ---------- | ---------------------------------------------------------- | ------- |
+| `project_name`  | varchar  | 255        | name for project                                           | PK      |
+| `plugin_name`   | varchar  | 255        | name for plugin                                            | PK      |
+| `plugin_option` | longtext |            | check if metric plugins have been enabled by the project   |         |
+| `enable`        | tinyint  | 1          | if the metric plugins is enabled                           |         |
 
 
-| **project_name** | **plugin_name** | **plugin_option**      |
-| ---------------- | --------------- | ---------------------- |
-| project_1        | gitlab          | {'enable':true}        |
-| project_2        | gitlab          | {'enable':false}       |
-| project_2        | github          | {'enable':true}        |
+| **project_name** | **plugin_name** | **plugin_option** | **enable** |
+| ---------------- | --------------- | ----------------- | ---------- |
+| project_1        | gitlab          | {}                | true       |
+| project_2        | gitlab          | {}                | false      |
+| project_2        | github          | {}                | true       |
+
+## project_mapping
+
+|   **field**    | **type** | **length** | **description**                                            | **key** |
+| -------------- | -------- | ---------- | ---------------------------------------------------------- | ------- |
+| `project_name` | varchar  | 255        | name for project                                           | PK      |
+| `scope_id`     | bigint   | 255        | the scope id  by project mapping                           | PK      |
+
+
+| **project_name** | **scope_id** |
+| ---------------- | ------------ |
+| project_1        | 1            |
+| project_1        | 2            |
+| project_2        | 1            |
 
 
 It requires each plugin to implement an interface named `PluginMetric`
 
 # 如何使用 Project
 
-1. 首先我们可以通过 `GET` `/plugininfo` 接口来获取到 完整详细的 `插件` 信息，其中包括对应 `插件` 的每个表的结构信息。除此以外，我们也可以通过调用相对简单的 `GET` `/plugins` 来获取更为简洁的插件信息。简洁的插件信息仅包含插件名称，也就是`plugin_name`组成的列表，除此之外不包含其他任何信息。
-
-2. 于此同时，我们可以通过 `POST` `/project` 接口来创建一个全新的 `project` 对象，该对象需要一个 `project_name`字段，作为其名称，该名称唯一。
+1. 首先我们可以通过 `POST` `/project` 接口来创建一个全新的 `project` 对象，该对象需要一个 `project_name`字段，作为其名称，该名称唯一。
 
 当我们创建出 `project` 对象之后：
 
 - 我们可以通过 `GET` `/project` 接口来获取具体的的某一个 `project`的信息，除了名称外，这些信息里也包含了project的更新时间和创建时间。
 - 我们可以通过 `UPDATE` `/project` 接口来更新具体的某一个 `project`的信息，比如更新其相关的 `描述` 信息。
 - 我们可以通过 `GET` `/projects` 接口来获取所有的`project`信息。 
+
+2. 与此同时，我们可以通过 `GET` `/plugininfo` 接口来获取到 完整详细的 `插件` 信息，其中包括对应 `插件` 的每个表的结构信息。除此以外，我们也可以通过调用相对简单的 `GET` `/plugins` 来获取更为简洁的插件信息。简洁的插件信息仅包含插件名称，也就是`plugin_name`组成的列表，除此之外不包含其他任何信息。
 
 3. 在上述过程之后 通过 `POST` `/project_metrics` 接口来创建一组 `project` 与 `plugins` 之间的关系。使用我们前面获取到的 `project_name` 和 `plugin_name` 来构建这种关系。同时为其配置相应的 `option`.
 
@@ -116,18 +131,34 @@ type Projects struct {
 }
 
 func (Projects) TableName() {
-    return "_devlake_project"
+    return "_devlake_projects"
 }
 
 type ProjectMetrics struct { 
-    ProjectName string `gorm:"primaryKey" gorm:"type:varchar(255)"`
-    PluginName string `gorm:"primaryKey" gorm:"type:varchar(255)"`
+    ProjectName  string `gorm:"primaryKey" gorm:"type:varchar(255)"`
+    PluginName   string `gorm:"primaryKey" gorm:"type:varchar(255)"`
     PluginOption string `gorm:"type:text"`
 }
 
 func (ProjectMetrics) TableName() {
     return "_devlake_project_metrics"
 }
+
+type ProjectMetrics struct { 
+    ProjectName  string `gorm:"primaryKey" gorm:"type:varchar(255)"`
+    PluginName   string `gorm:"primaryKey" gorm:"type:varchar(255)"`
+    PluginOption string `gorm:"type:text"`
+}
+
+type ProjectMapping struct {
+	ProjectName string `gorm:"primaryKey;type:varchar(255)"`
+	ScopeID     string `gorm:"primaryKey;type:varchar(255)"`
+}
+
+func (ProjectMapping) TableName() string {
+	return "_devlake_project_mapping"
+}
+
 ```
 
 ## api
