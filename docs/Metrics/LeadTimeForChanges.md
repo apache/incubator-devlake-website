@@ -16,21 +16,12 @@ DORA dashboard. See [live demo](https://grafana-lake.demo.devlake.io/grafana/d/q
 
 
 ## How is it calculated?
-This metric is calculated by the median cycle time of the PRs deployed in a time range. A PR's cycle time is equal to the time a PR was deployed minus the PR's first commit's authored_date.
+1. Find the deployments whose finished_date falls into the time range that users select
+2. Calculate the commits diff between each deployment by deployments' commit_sha
+3. Find the PRs mapped to the commits in step 2, now we have the relation of Deployment - Deployed_commits - Deployed_PRs.
+4. Calculate PR Deploy Time by using finish_time of deployment minus merge_time of PR
 
-![](https://i.imgur.com/edtqmRE.png)
-
-See the picture above, there were three deployments in the last month: Deploy-1, Deploy-2 and Deploy-3. Six PRs were deployed during the same period.
-
-	Median Lead Time for Changes = The median cycle time of PR-1, PR-2, PR-3, PR-4, PR-5, PR-6
-
-The way to calculate PR cycle time:
-- PR-1 cycle time = Deploy-1's finished_date - PR-1's first commit's authored_date
-- PR-2 cycle time = Deploy-2's finished_date - PR-2's first commit's authored_date
-- PR-3 cycle time = Deploy-2's finished_date - PR-3's first commit's authored_date
-- PR-4 cycle time = Deploy-3's finished_date - PR-4's first commit's authored_date
-- PR-5 cycle time = Deploy-3's finished_date - PR-5's first commit's authored_date
-- PR-6 cycle time = Deploy-3's finished_date - PR-6's first commit's authored_date
+![](/img/Metrics/pr-commit-deploy.jpeg)
 
 PR cycle time is pre-calculated when dora plugin is triggered. You can connect to DevLake's database and find it in the field `change_timespan` in [table.pull_requests](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema/#pull_requests).
 
