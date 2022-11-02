@@ -10,7 +10,8 @@ description: >
 
 It contains the following two models:
  - `projects` describes a project object, including its name, creation and update time and other basic information
- - `project_metrics` describes the mapping relationship enabled by a plugin, including the name of the project and plugin on both sides of the mapping, and basic information about plugin options.
+ - `project_metrics` describes what metrics a project had enabled.
+ - `project_mapping` describes the mapping relationship of project and scope, including the name of the project、table and row_id.
 
 ![image](project_table.jpg)
 
@@ -50,50 +51,44 @@ It contains the following two models:
 |   **field**    | **type** | **length** | **description**                                            | **key** |
 | -------------- | -------- | ---------- | ---------------------------------------------------------- | ------- |
 | `project_name` | varchar  | 255        | name for project                                           | PK      |
-| `scope_id`     | bigint   | 255        | the scope id  by project mapping                           | PK      |
+| `table`        | varchar  | 255        | the table name of scope                                    | PK      |
+| `row_id`       | varchar  | 255        | the row_id in the scope table                              | PK      |
 
 
-| **project_name** | **scope_id** |
-| ---------------- | ------------ |
-| project_1        | 1            |
-| project_1        | 2            |
-| project_2        | 1            |
+| **project_name** | **table** | **row_id**               |
+| ---------------- | --------- | ------------------------ |
+| project_1        | Repo      | gitlab:GithubRepo:1:lake |
+| project_1        | Board     | jira:JiraBoard:1:lake    |
+| project_2        | Repo      | github:GithubRepo:1:lake |
 
 
 It requires each plugin to implement an interface named `PluginMetric`
 
 # 如何使用 Project
 
-1. 首先我们可以通过 `POST` `/project` 接口来创建一个全新的 `project` 对象，该对象需要一个 `project_name`字段，作为其名称，该名称唯一。
+1. 首先我们可以通过 `POST` `/projects/:projectName` 接口来创建一个全新的 `project` 对象，该对象需要一个 `projectName`字段，作为其名称，该名称唯一。
 
 当我们创建出 `project` 对象之后：
 
-- 我们可以通过 `GET` `/project` 接口来获取具体的的某一个 `project`的信息，除了名称外，这些信息里也包含了project的更新时间和创建时间。
-- 我们可以通过 `UPDATE` `/project` 接口来更新具体的某一个 `project`的信息，比如更新其相关的 `描述` 信息。
-- 我们可以通过 `GET` `/projects` 接口来获取所有的`project`信息。 
+- 我们可以通过 `GET /projects/:projectName` 接口来获取具体的的某一个 `project`的信息，除了名称外，这些信息里也包含了project的更新时间和创建时间,以及会关联所有的与当前`project`的相关的`project_metrics`和`project_mapping`信息，整合后一并返回。
+- 我们可以通过 `PATCH /projects/:projectName` 接口来更新具体的某一个 `project`的信息，比如更新其相关的 `描述` 信息。
+- 我们可以通过 `GET /projects` 接口来获取所有的`project`信息。 通过设置参数 `search` 可以对返回的信息进行过滤，通过设置参数`page_size`,`page_num`可以对返回的信息进行分页。
 
-2. 与此同时，我们可以通过 `GET` `/plugininfo` 接口来获取到 完整详细的 `插件` 信息，其中包括对应 `插件` 的每个表的结构信息。除此以外，我们也可以通过调用相对简单的 `GET` `/plugins` 来获取更为简洁的插件信息。简洁的插件信息仅包含插件名称，也就是`plugin_name`组成的列表，除此之外不包含其他任何信息。
+2. 与此同时，为了能给 project 指定需要的指标，我们可以通过调用接口 `GET` `/plugins` 来获取基本的插件信息。这将会返回一组包含`pluginName`组成的列表。
 
-3. 在上述过程之后 通过 `POST` `/project_metrics` 接口来创建一组 `project` 与 `plugins` 之间的关系。使用我们前面获取到的 `project_name` 和 `plugin_name` 来构建这种关系。同时为其配置相应的 `option`.
+3. 在上述过程之后 通过 `POST /project_metrics/:projectName/:pluginName` 接口来创建一组 `project` 与 `plugins` 之间的关系。使用我们前面获取到的 `projectName` 和 `pluginName` 来构建这种关系。同时为其配置相应的 `option`.
 
 当我们创建出一组 `project_metrics` 的关系后我们就可以做更进一步的操作：
 
-- 我们可以通过 `GET` `/project_metrics` 接口来获取一组 `project_metrics` 信息，我们可以只设置 `project_name` 或只设置 `plugin_name` 来进行筛选。也可以同时设置 `project_name` 和 `plugin_name` 此时我们将获取到一个特定的 `project_metrics` 信息。
-- 我们可以通过 `UPDATE` `/project_metrics` 接口来更新特定的一组 `project_metrics` 信息。这要求我们必须同时设置好 `project_name` 和 `plugin_name`。
+- 我们可以通过 `GET /project_metrics/:projectName/:pluginName` 接口来获取一组 `project_metrics` 信息，我们可以只设置 `projectName` 或只设置 `pluginName` 来进行筛选。也可以同时设置 `project_name` 和 `plugin_name` 此时我们将获取到一个特定的 `project_metrics` 信息。
+- 我们可以通过 `PATCH /project_metrics/:projectName/:pluginName` 接口来更新特定的一组 `project_metrics` 信息。这要求我们必须同时设置好 `projectName` 和 `pluginName`。
 
 # 关于 Project 和 Blueprint
 
 - 在 `blueprint` 的表中现在添加了一个与 `project` 相关联的字段 `project_name`，该字段表示 当前的 `blueprint` 唯一的属于某一张特定的 `project`
-- 一个`project`允许被多个 `blueprint` 的 `project_name` 字段指定。也就是`project`对`blueprint`是一对多关系
-- 可以通过以下sql 快速的查看 某个 `project` 所对应的全部 `blueprint`
-
-```
-SELECT * from `_devlake_blueprints` where `project_name`="ProjectName";
-```
-
+- 一个`project`允许被唯一的一个 `blueprint` 的 `project_name` 字段指定。也就是`project`对`blueprint`是一对一关系
 
 ## The PluginMetric Interface
-
 
 ```go
 type PluginMetric interface {
@@ -116,111 +111,4 @@ type PluginMetric interface {
     // (no concrete usage at this point)
     Settings() (p interface{})
 }
-```
-
-## models
-
-The following is the  table structure data of `project` related.
-
-```go
-type Projects struct {
-    Name string `gorm:"primaryKey" gorm:"type:varchar(255)"`
-    describe string `gorm:"type:text"`
-    CreatedAt time.time
-    UpdatedAt time.time
-}
-
-func (Projects) TableName() {
-    return "_devlake_projects"
-}
-
-type ProjectMetrics struct { 
-    ProjectName  string `gorm:"primaryKey" gorm:"type:varchar(255)"`
-    PluginName   string `gorm:"primaryKey" gorm:"type:varchar(255)"`
-    PluginOption string `gorm:"type:text"`
-}
-
-func (ProjectMetrics) TableName() {
-    return "_devlake_project_metrics"
-}
-
-type ProjectMetrics struct { 
-    ProjectName  string `gorm:"primaryKey" gorm:"type:varchar(255)"`
-    PluginName   string `gorm:"primaryKey" gorm:"type:varchar(255)"`
-    PluginOption string `gorm:"type:text"`
-}
-
-type ProjectMapping struct {
-	ProjectName string `gorm:"primaryKey;type:varchar(255)"`
-	ScopeID     string `gorm:"primaryKey;type:varchar(255)"`
-}
-
-func (ProjectMapping) TableName() string {
-	return "_devlake_project_mapping"
-}
-
-```
-
-## api
-
-`Project` will provide the following APIs to support users to perform related operations.
-
-```go
-// Used to obtain the corresponding information of all Projects
-// Request parameters: null
-// response parameter: the list of project infomation,complete information including updated time and created time information of Project
-// @Router /projects [get]
-func GetProjects(input *core.ApiResourceInput) (*core.ApiResourceOutput, errors.Error)
-
-// Used to obtain the corresponding information of the specified Project
-// Request parameters: including project_name
-// response parameter: complete information including updated time and created time information of Project
-// @Router /project [get]
-func GetProject(input *core.ApiResourceInput) (*core.ApiResourceOutput, errors.Error)
-
-// Used to create a new Project data
-// Request parameters: including project_name
-// response parameter: if created successfully
-// @Router /project [post]
-func PostProject(input *core.ApiResourceInput) (*core.ApiResourceOutput,errors.Error)
-
-// Used to update an existing Project data
-// Consider merging with Project into an interface
-// The advantage of separating into two interfaces is to avoid data loss caused by misoperation coverage
-// Request parameters: including project_name
-// response parameter: if updated successfully
-// @Router /project [update]
-func UpdateProject(input *core.ApiResourceInput) (*core.ApiResourceOutput,errors.Error)
-
-// Used to obtain the corresponding information of the specified ProjectMetrics
-// Request parameters: including project_name and plugin_name
-// response parameter: complete information including plugin_options information of ProjectMetrics
-// @Router /projectmetrics [get]
-func GetProjectMetrics(input *core.ApiResourceInput) (*core.ApiResourceOutput, errors.Error)
-
-// Used to create a new ProjectMetrics data
-// Request parameters: including project_name, plugin_name and plugin_options
-// response parameter: if created successfully
-// @Router /projectmetrics [post]
-func PostProjectMetrics(input *core.ApiResourceInput) (*core.ApiResourceOutput,errors.Error)
-
-// Used to update an existing ProjectMetrics data
-// Consider merging with PostProjectMetrics into an interface
-// The advantage of separating into two interfaces is to avoid data loss caused by misoperation coverage
-// Request parameters: including project_name, plugin_name and plugin_options
-// response parameter: if updated successfully
-// @Router /projectmetrics [update]
-func UpdateProjectMetrics(input *core.ApiResourceInput) (*core.ApiResourceOutput,errors.Error)
-
-// Used to obtain the list of all plug-ins registered in the current devlake
-// Request parameters: null
-// response parameter: all plugin detail data
-// @Router /plugininfo [get]
-func Get(c *gin.Context)
-
-// Used to obtain the list of all plug-ins registered in the current devlake
-// Request parameters: null
-// response parameter: all plugin names data
-// @Router /plugins [get]
-func GetPluginNames(c *gin.Context)
 ```
