@@ -41,8 +41,8 @@ Usually, you don't have to modify this part. However, if you don't want to colle
 - Issue Tracking: GitHub issues, issue comments, issue labels, etc.
 - Source Code Management: GitHub repos, refs, commits, etc.
 - Code Review: GitHub PRs, PR comments and reviews, etc.
-- Cross Domain: GitHub accounts, etc.
 - CI/CD: GitHub Workflow runs, GitHub Workflow jobs, etc.
+- Cross Domain: GitHub accounts, etc.
 
 ### Step 3 - Adding Transformation Rules (Optional)
 ![github-add-transformation-rules-list](/img/ConfigUI/github-add-transformation-rules-list.png)
