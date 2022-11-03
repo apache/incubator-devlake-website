@@ -33,7 +33,7 @@ Choose the Jenkins jobs to collect.
 
 #### Data Entities
 
-Jenkins only support only one entity `CI/CD`.
+Jenkins only supports `CI/CD` domain entities, transformed from Jenkins builds and stages.
 
 - CI/CD: Jenkins builds, stages, etc.
 

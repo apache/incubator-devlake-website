@@ -34,15 +34,15 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 #### Projects
 Choose the Gitlab projects to collect. Limited by GitLab API, You need to type more than 2 characters to search.
 
-* If you want to collect public repo in GitLab, please uncheck "Only search my repositories" to find all projects.
+* If you want to collect public repos in GitLab, please uncheck "Only search my repositories" to find all repos.
 
 #### Data Entities
 Usually, you don't have to modify this part. However, if you don't want to collect certain GitLab entities, you can unselect some entities to accerlerate the collection speed.
 - Issue Tracking: GitLab issues, issue comments, issue labels, etc.
 - Source Code Management: GitLab repos, refs, commits, etc.
 - Code Review: GitLab MRs, MR comments and reviews, etc.
+- CI/CD: GitLab pipelines, jobs, etc.
 - Cross Domain: GitLab accounts, etc.
-- CI/CD: GitLab pipelines, etc.
 
 ### Step 3 - Adding Transformation Rules (Optional)
 There are no transformation rules for GitLab repos.
