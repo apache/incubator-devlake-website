@@ -45,29 +45,36 @@ Usually, you don't have to modify this part. However, if you don't want to colle
 
 ### Step 3 - Adding Transformation Rules (Optional)
 ![github-add-transformation-rules-list](/img/ConfigUI/github-add-transformation-rules-list.png)
-![github-add-transformation-rules](/img/ConfigUI/github-add-transformation-rules.png)
- 
+
 Without adding transformation rules, you can still view the "[GitHub Metrics](/livedemo/DataSources/GitHub)" dashboard. However, if you want to view "[Weekly Bug Retro](/livedemo/QAEngineers/WeeklyBugRetro)", "[Weekly Community Retro](/livedemo/OSSMaintainers/WeeklyCommunityRetro)" or other pre-built dashboards, the following transformation rules, especially "Type/Bug", should be added.<br/>
 
 Each GitHub repo has at most ONE set of transformation rules.
 
 #### Issue Tracking
 
+![image](https://user-images.githubusercontent.com/3294100/199646468-2de78fad-f571-4981-a7b9-22c3aca88219.png)
+
 - Severity: Parse the value of `severity` from issue labels.
    - when your issue labels for severity level are like 'severity/p0', 'severity/p1', 'severity/p2', then input 'severity/(.*)$'
    - when your issue labels for severity level are like 'p0', 'p1', 'p2', then input '(p0|p1|p2)$'
-
 - Component: Same as "Severity".
-
 - Priority: Same as "Severity".
-
 - Type/Requirement: The `type` of issues with labels that match given regular expression will be set to "REQUIREMENT". Unlike "PR.type", submatch does nothing, because for issue management analysis, users tend to focus on 3 kinds of types (Requirement/Bug/Incident), however, the concrete naming varies from repo to repo, time to time, so we decided to standardize them to help analysts metrics.
-
 - Type/Bug: Same as "Type/Requirement", with `type` setting to "BUG".
-
 - Type/Incident: Same as "Type/Requirement", with `type` setting to "INCIDENT".
 
+#### CI/CD
+
+![image-20221103125221855](https://user-images.githubusercontent.com/3294100/199653571-a4790158-f20a-4171-8b70-3d4add552ce8.png)
+
+- Deployment Workflow: GitHub Action workflows with the name that matches the given regular expression will be considered as a Deployment workflow. For example:
+    - when your workflow name for Deployment are like 'Build', 'Build For PR' and 'Build For Dubbo 2.6', please input 'Build(.*)$'
+- Deployment Job: Usually, you don't have to fill this part and all jobs in Deployment Workflow will be considered as Deployment Job. However, if you want to collect certain GitHub  job, you can give a regular expression. GitHub Action jobs **in Deployment Workflow** and **with a name that matches the given regular expression** will be considered as a Deployment Job.
+- Production Job: GitHub Action jobs with a name that matches the given regular expression will be considered as a job in the Production environment. If you leave this field empty, all data will be tagged as in the Production environment.
+
 #### Code Review
+
+![image](https://user-images.githubusercontent.com/3294100/199646545-a0a85806-d574-47bf-b36b-faaf4c0fc034.png)
 
 - Type: The `type` of pull requests will be parsed from PR labels by given regular expression. For example:
    - when your labels for PR types are like 'type/feature-development', 'type/bug-fixing' and 'type/docs', please input 'type/(.*)$'
@@ -77,12 +84,17 @@ Each GitHub repo has at most ONE set of transformation rules.
 
 #### Additional Settings (Optional)
 
+![image-20221103121859001](https://user-images.githubusercontent.com/3294100/199653539-7fbbd76e-512f-480b-ba3c-066742ed3c4a.png)
+
+- PR Body Pattern: Extract the issue numbers closed by pull requests. The issue numbers are parsed from PR bodies that meet the following RegEx. For Example:
+   - ✅ Example 1: PR #321 body contains "**Closes #1234**" (PR #321 and issue #1234 will be mapped by the default RegEx)
+   - ❎ Example 2: PR #321 body contains "**Related to #1234**" (PR #321 and issue #1234 will NOT be mapped by the default RegEx)
+   - Default RegEx: `(?mi)(fix|close|resolve|fixes|closes|resolves|fixed|closed|resolved)[\s]*.*(((and )?(#|https:\/\/github.com\/%s\/%s\/issues\/)\d+[ ]*)+)`
+
 - Tags Limit: It'll compare the last N pairs of tags to get the "commit diff', "issue diff" between tags. N defaults to 10.
    - commit diff: new commits for a tag relative to the previous one
    - issue diff: issues solved by the new commits for a tag relative to the previous one
-
 - Tags Pattern: Only tags that meet given regular expression will be counted.
-
 - Tags Order: Only "reverse semver" order is supported for now.
 
 Please click `Save` to save the transformation rules for the repo. In the data scope list, click `Next Step` to continue configuring.

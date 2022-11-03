@@ -65,6 +65,7 @@ In the next section, we'll demonstrate how to configure DevLake to implement DOR
 
 ### Collect GitHub & Jira data via `blueprint`
 1. Visit the config-ui at `http://localhost:4000`
+
 2. Create a `blueprint`, let's name it "Blueprint for DORA", add a Jira and a GitHub connection. Click `Next Step`
 ![](https://i.imgur.com/lpPRZ6v.png)
 
@@ -76,13 +77,14 @@ In the next section, we'll demonstrate how to configure DevLake to implement DOR
 
 5. To make it simple, fields with a ![](https://i.imgur.com/rrLopFx.png) label are DORA-related configurations for every data source. Via these fields, you can define what are "incidents" and "deployments" for each data source. After all data connections have been configured, click `Next Step`
    - This team uses Jira issue types `Crash` and `Incident` as "incident", so choose the two types in field "incident". Jira issues in these two types will be transformed to "incidents" in DevLake.
-   - This team uses the GitHub action jobs named `deploy` and `build-and-deploy` to deploy, so type in `(?i)deploy` to match these jobs. These jobs will be transformed to "deployments" in DevLake.
-   ![](https://i.imgur.com/1JZA2xn.png)
+   - This team uses the GitHub action workflow named `Build workflow` deploy, so type in `(?i)Build` to match these workflows. Jobs in these workflow will be transformed to "deployments" in DevLake.
    
-   Note: The following example shows where to find GitHub action jobs. It's easy to mix them up with GitHub workflows.
-   ![](https://i.imgur.com/Y2hchEh.png)
+   ![1JZA2xn (1)](https://user-images.githubusercontent.com/3294100/199655469-e1cfab00-4a76-4879-830b-8894d8b4b2c7.jpg)
    
-
+   Note: The following example shows where to find GitHub action workflow. It's easy to mix them up with GitHub jobs.
+   
+   ![image](https://user-images.githubusercontent.com/3294100/199654445-052b1ad1-f761-47e2-838e-b42b06b33201.png)
+   
 6. Choose sync frequency, click 'Save and Run Now' to start data collection. The time to completion varies by data source and depends on the volume of data.
 ![](https://i.imgur.com/zPkfzGr.png)
 
