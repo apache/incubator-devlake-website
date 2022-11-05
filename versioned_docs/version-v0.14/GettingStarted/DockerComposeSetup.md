@@ -19,6 +19,8 @@ sidebar_position: 1
 2. Rename `env.example` to `.env`. For Mac/Linux users, please run `mv env.example .env` in the terminal. This file contains the environment variables that the Devlake server will use. Additional ones can be found in the compose file(s).
 3. Run `docker-compose up -d` to launch DevLake.
 
+NOTE：Make sure your `.env` file has read and write permissions set for the current user, else the API Server will not start properly
+
 ## Collect data and view dashboards
 
 1. Visit `config-ui` at `http://localhost:4000` in your browser to configure DevLake and collect data.
