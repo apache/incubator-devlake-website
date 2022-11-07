@@ -452,13 +452,6 @@ A cicd_pipeline is a series of builds that have connections or a standalone buil
 | `repo_id` | varchar | 255 | The repo that this pipeline belongs to                          |  |
 | `repo_url` | longtext |  |                                                                 |  |
 
-#### cicd_pipeline_relationships
-
-| **field** | **type** | **length** | **description**                                   | **key** |
-| :-------- | :-------- | :-------- |:--------------------------------------------------| :-------- |
-| `parent_pipeline_id` | varchar | 255 | The pipeline trigger child_pipeline               | PK |
-| `child_pipeline_id` | varchar | 255 | The pipeline that is triggered by parent_pipeline | PK |
-
 #### cicd_tasks
 
 A cicd_task is a single job of ci/cd.
