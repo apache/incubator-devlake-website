@@ -24,7 +24,18 @@ For help on Username and Password, please see Jenkins docs on [using credentials
 Click `Test Connection`, if the connection is successful, click `Save Connection` to add the connection.
 
 ### Step 2 - Setting Data Scope
-There is no data cope setting for Jenkins.
+
+![image](https://user-images.githubusercontent.com/3294100/199530047-787b25d6-696a-4545-860c-9738d85a0076.png)
+
+#### Jobs
+
+Choose the Jenkins jobs to collect.
+
+#### Data Entities
+
+Jenkins only supports `CI/CD` domain entities, transformed from Jenkins builds and stages.
+
+- CI/CD: Jenkins builds, stages, etc.
 
 ### Step 3 - Adding Transformation Rules (Optional)
 There are no transformation rules for Jenkins.

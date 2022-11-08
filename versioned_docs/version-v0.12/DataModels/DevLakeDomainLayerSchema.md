@@ -481,16 +481,16 @@ A way to link "issue tracking" and "source code management" domain by mapping `b
 This table stores of user accounts across different tools such as GitHub, Jira, GitLab, etc. This table can be joined to get the metadata of all accounts.
  metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contributor',_
 
-| **field**      | **type** | **length** | **description**         | **key** |
-| :------------- | :------- | :--------- | :---------------------- | :------ |
-| `id`           | varchar  | 255        | An account's `id` is the identifier of the account of a specific tool. It is composed of "< Plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github account's id is composed of "< github >:< GithubAccounts >< GithubUserId)". Eg. 'github:GithubUsers:14050754' | PK      |
-| `email`        | varchar  | 255        | Email of the account                                              |         |
-| `full_name`    | varchar  | 255        | Full name                                                         |         |
-| `user_name`    | varchar  | 255        | Username, nickname or Github login of an account                  |         |
-| `avatar_url`   | varchar  | 255        |                                                                   |         |
-| `organization` | varchar  | 255        | User's organization(s)                                            |         |
-| `created_date` | datetime | 3          | User creation time                                                |         |
-| `status`       | int      |            | 0: default, the user is active. 1: the user is not active         |         |
+| **field**      | **type** | **length** | **description**                                                                                                                                                                                                                                                              | **key** |
+| :------------- | :------- | :--------- |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :------ |
+| `id`           | varchar  | 255        | An account's `id` is the identifier of the account of a specific tool. It is composed of "< Plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github account's id is composed of "< github >:< GithubAccounts >:< GithubUserId >)". Eg. 'github:GithubUsers:14050754' | PK      |
+| `email`        | varchar  | 255        | Email of the account                                                                                                                                                                                                                                                         |         |
+| `full_name`    | varchar  | 255        | Full name                                                                                                                                                                                                                                                                    |         |
+| `user_name`    | varchar  | 255        | Username, nickname or Github login of an account                                                                                                                                                                                                                             |         |
+| `avatar_url`   | varchar  | 255        |                                                                                                                                                                                                                                                                              |         |
+| `organization` | varchar  | 255        | User's organization(s)                                                                                                                                                                                                                                                       |         |
+| `created_date` | datetime | 3          | User creation time                                                                                                                                                                                                                                                           |         |
+| `status`       | int      |            | 0: default, the user is active. 1: the user is not active                                                                                                                                                                                                                    |         |
 
 #### users
 | **field** | **type** | **length** | **description**               | **key** |

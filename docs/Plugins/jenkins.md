@@ -35,7 +35,8 @@ To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and pa
     {
       "plugin": "jenkins",
       "options": {
-        "connectionId": 1
+        "connectionId": 1,
+        "jobName": "unit_test"
       }
     }
   ]

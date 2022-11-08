@@ -159,7 +159,7 @@ No package 'libgit2' found pkg-config: exit status 1
 
 ### MacOS
 
-NOTE：Do **NOT** install libgit2 via `MadPorts` or `homebrew`, install from source instead.
+NOTE：Do **NOT** install libgit2 via `MacPorts` or `homebrew`, install from source instead.
 ```
 brew install cmake
 git clone https://github.com/libgit2/libgit2.git

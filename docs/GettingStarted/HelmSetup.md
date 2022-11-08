@@ -11,10 +11,9 @@ sidebar_position: 3
 - Kubernetes >= 1.19.0
 
 
-
 ## Quick Start
 
-#### You can also check https://apache.github.io/incubator-devlake-helm-chart for the easiest way to deploy your devlake
+#### You can also check https://github.com/apache/incubator-devlake-helm-chart to make contribution
 
 ### Install
 
@@ -47,6 +46,7 @@ grafana by url `http://YOUR-NODE-IP:30091`
 
 ```shell
 helm repo update
+helm upgrade --install devlake devlake/devlake
 ```
 
 ### Uninstall
