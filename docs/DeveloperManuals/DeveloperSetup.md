@@ -120,3 +120,7 @@ For provisioning, customizing, and creating dashboards, please refer to our [Gra
     - Compile specific plugins: `PLUGIN=<PLUGIN_NAME> make build-plugin`
     - Compile server: `make build`
     - Compile worker: `make build-worker`
+
+## References
+
+To dig deeper into developing and utilizing our built-in functions and have a better developer experience, feel free to dive into our [godoc](https://pkg.go.dev/github.com/apache/incubator-devlake) reference.
