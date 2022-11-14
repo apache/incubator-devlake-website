@@ -25,10 +25,10 @@ GitHub personal access tokens are required to add a connection.
 
 #### Use Graphql APIs
 
-If you use `github.com` or your private GitHub Service supported, you could open this switcher to collect data more swiftly.
+If you are using `github.com` or your on-premise GitHub version supports GraphQL APIs, toggle on this setting to collect data quicker.
 
-- GraphQL APIs are 10+ times faster than REST APIs, but it may not be supported in GitHub on-premise versions. 
-- GraphQL only uses 1 token to collect data because it's quick enough.
+- GraphQL APIs are 10+ times faster than REST APIs, but they may not be supported in GitHub on-premise versions.
+- Instead of using multiple tokens to collect data, you can use ONLY ONE token because GraphQL APIs are quick enough.
 
 #### Proxy URL (Optional)
 If you are behind a corporate firewall or VPN you may need to utilize a proxy server. Enter a valid proxy server address on your network, e.g. `http://your-proxy-server.com:1080`
