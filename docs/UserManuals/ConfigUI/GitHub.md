@@ -6,7 +6,7 @@ description: Config UI instruction for GitHub
 
 Visit config-ui: `http://localhost:4000`.
 ### Step 1 - Add Data Connections
-![github-add-data-connections](/img/ConfigUI/github-add-data-connections.png)
+![image](https://user-images.githubusercontent.com/3294100/201605649-1b973abe-2ea2-4f35-ba9a-ee22da3589b2.png)
 
 #### Connection Name
 Name your connection.
@@ -14,7 +14,7 @@ Name your connection.
 #### Endpoint URL
 This should be a valid REST API endpoint, eg. `https://api.github.com/`. The url should end with `/`.
 
-#### Auth Token(s)
+#### Basic Auth Token(s)
 GitHub personal access tokens are required to add a connection.
 - Learn about [how to create a GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). The following permissions are required for `Apache DevLake` to collect data from private repositories:
   - `repo:status`
@@ -22,6 +22,13 @@ GitHub personal access tokens are required to add a connection.
   - `read:user`
   - `read:org`
 - The data collection speed is relatively slow for GitHub since they have a **rate limit of [5,000 requests](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) per hour** (15,000 requests/hour if you pay for GitHub enterprise). You can accelerate the process by configuring _multiple_ personal access tokens. Please note that multiple tokens should be created by different GitHub accounts. Tokens belonging to the same GitHub account share the rate limit.
+
+#### Use Graphql APIs
+
+If you use `github.com` or your private GitHub Service supported, you could open this switcher to collect data more swiftly.
+
+- GraphQL APIs are 10+ times faster than REST APIs, but it may not be supported in GitHub on-premise versions. 
+- GraphQL only uses 1 token to collect data because it's quick enough.
 
 #### Proxy URL (Optional)
 If you are behind a corporate firewall or VPN you may need to utilize a proxy server. Enter a valid proxy server address on your network, e.g. `http://your-proxy-server.com:1080`
