@@ -6,11 +6,11 @@ description: >
 
 ## Overview 
 
-An Incoming Webhook allows users to actively push data to DevLake. It's particularly useful when DevLake is missing the plugin that pulls data from your DevOps tool.
+Incoming Webhooks are your solution to bring data to Apache DevLake when there isn't a specific plugin ready for your DevOps tool. An Incoming Webhook allows users to actively push data to DevLake. 
 
-When you create an Incoming Webhook within DevLake, DevLake generates a unique URL. You can post JSON payloads to this URL to push data to DevLake.
+When you create an Incoming Webhook within DevLake, DevLake generates a unique URL. You can then post JSON payloads to this URL to push data directly to your DevLake instance.
 
-As of v0.14.0, users can push incidents and deployments required by DORA metrics to DevLake via Incoming Webhooks.
+In v0.14+, users can push "incidents" and "deployments" required by DORA metrics to DevLake via Incoming Webhooks.
 
 ## Creating webhooks in DevLake
 
@@ -78,7 +78,7 @@ Read more in [Swagger](https://sample-url.com/api/swagger/index.html#/plugins%2F
 
 #### Deployment - A real-world example in CircleCI
 
-The following demo shows how to post "deployments" to DevLake from CircleCI. In this example, the CircleCI job 'deploy' is used to do deployments.
+The following demo shows how to post "deployments" to DevLake from CircleCI. In this example, the CircleCI job 'deploy' is used to manage deployments.
 
 
   ```
