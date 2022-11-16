@@ -7,19 +7,19 @@ description: >
 
 ## Summary
 
-For development workload analysis, we often need to know how many commits have been created between 2 releases. This plugin calculates which commits differ between 2 Ref (branch/tag), and the result will be stored back into database for further analysis.
+For development workload analysis, we often need to know how many commits have been created between 2 releases. This plugin calculates which commits differ between 2 Ref (branch/tag), and the result will be stored back into the database for further analysis.
 
 ## Important Note
 
-You need to run gitextractor before the refdiff plugin. The gitextractor plugin should create records in the `refs` table in your DB before this plugin can be run.
+You need to run `gitextractor` before the `refdiff` plugin. The `gitextractor` plugin should create records in the `refs` table in your database before this plugin can be run.
 
 ## Configuration
 
-This is an enrichment plugin based on Domain Layer data, no configuration needed
+This is an enrichment plugin based on the domain layer data, no configuration is needed.
 
-## How to use
+## How to use refdiff
 
-In order to trigger the enrichment, you need to insert a new task into your pipeline.
+To trigger the enrichment, you need to insert a new task into your pipeline.
 
 1. Make sure `commits` and `refs` are collected into your database, `refs` table should contain records like following:
     ```
@@ -35,7 +35,7 @@ In order to trigger the enrichment, you need to insert a new task into your pipe
     github:GithubRepo:384111310:refs/tags/v0.6.1  TAG
     ```
 2. If you want to run calculatePrCherryPick, please configure GITHUB_PR_TITLE_PATTERN in .env, you can check the example in .env.example(we have a default value, please make sure your pattern is disclosed by single quotes '')
-3. And then, trigger a pipeline like following, you can also define sub-tasks, calculateRefDiff will calculate commits between two ref, and creatRefBugStats will create a table to show bug list between two ref:
+3. And then, trigger a pipeline like the following format, you can also define sub-tasks, calculateRefDiff will calculate commits between two refs, and creatRefBugStats will create a table to show a bug list between two refs:
 ```shell
 curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
 {
@@ -89,7 +89,8 @@ curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
 JSON
 ```
 
-4. Refdiff has a new subtask `calculateProjectDeploymentCommitsDiff`, which can find related deployments according to the project, and then calculate the commits diff between deployments. Such a function can be used to support the calculation of dora indicators.
+## How to use refdiff in DORA
+RefDiff can be called by the [DORA plugin](https://github.com/apache/incubator-devlake/tree/main/plugins/dora) to support the calculation of [DORA metrics](https://devlake.apache.org/docs/UserManuals/DORA). RefDiff has a subtask called 'calculateProjectDeploymentCommitsDiff'. This subtask takes the `project_name` from task options to calculate the commits diff between two consecutive deployments in this project. That is to say, refdiff will generate the relationship between `deployed commit(s)` and the `deployment` in which these commits get deployed.
  
 ```shell
 curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
@@ -113,7 +114,7 @@ curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
 
 ## Development
 
-This plugin depends on `libgit2`, you need to install version 1.3.0 in order to run and debug this plugin on your local
+This plugin depends on `libgit2`, you need to install version 1.3.0 to run and debug this plugin on your local
 machine.
 
 ### Linux
@@ -139,7 +140,7 @@ export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib:/usr/local/lib/pkgconfig
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 ```
 
-#### Troubleshooting (linux)
+#### Troubleshooting (Linux)
 
 > Q: # pkg-config --cflags  -- libgit2 Package libgit2 was not found in the pkg-config search path.
 Perhaps you should add the directory containing `libgit2.pc` to the PKG_CONFIG_PATH environment variable
@@ -159,7 +160,7 @@ No package 'libgit2' found pkg-config: exit status 1
 
 ### MacOS
 
-NOTE：Do **NOT** install libgit2 via `MacPorts` or `homebrew`, install from source instead.
+NOTE: **Do NOT** install libgit2 via `MacPorts` or `homebrew`, install from source instead.
 ```
 brew install cmake
 git clone https://github.com/libgit2/libgit2.git

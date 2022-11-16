@@ -36,8 +36,8 @@ A plugin mainly consists of a collection of subtasks that can be executed by Dev
 3. [PluginTask](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_task.go) enables a plugin to prepare data prior to subtask execution
 4. [PluginApi](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_api.go) lets a plugin exposes some self-defined APIs
 5. [PluginMigration](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_migration.go) is where a plugin manages its database migrations 
-6. [PluginModel](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_model.go) allows other plugins to get the model information of all database tables of the current plugin through the GetTablesInfo() method.If you need to access Domain Layer Models,please visit [DomainLayerSchema](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema/)
-7. [PluginBlueprint](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_blueprint.go) is the foundation for Blueprint and Plugin to collaborate and generate a reasonable Pipeline Plan based on User Settings. For example, a user may declare that he wants to collect data from a Github Repo, which implies that not only the issues/prs, but also the git-meta-data including commits history, branches, tags, etc. needs to be collected. In order to do it and do it faster, leveraging [GitExtractor](../Plugins/gitextractor) is the best and recommended way. So, naturally, The Github/Gitlab/BitBucket plugins would likely to produce 2 concurrent `tasks`, one for itself to collect issues/prs, one for `gitextractor` to collect git-meta-data. For more detail, please read the [source file](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_blueprint.go)
+6. [PluginModel](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_model.go) allows other plugins to get the model information of all database tables of the current plugin through the GetTablesInfo() method. If you need to access Domain Layer Models, please visit [DomainLayerSchema](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema/)
+7. [PluginBlueprint](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_blueprint.go) is the foundation for Blueprint and Plugin to collaborate and generate a reasonable Pipeline Plan based on User Settings. For example, a user may declare that he/she wants to collect data from a GitHub Repo, which implies that not only the issues and PRs, but also the git-meta-data including commits history, branches, tags, etc. need to be collected. To do it and do it faster, leveraging [GitExtractor](../Plugins/gitextractor) is the best and recommended way. So, naturally, The GitHub/GitLab/BitBucket plugins will generate 2 concurrent `tasks`, one for itself to collect issues and PRs, and one for `gitextractor` to collect git-meta-data. For more detail, please read the [source file](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_blueprint.go)
 
 The diagram below shows the control flow of executing a plugin:
 
@@ -76,7 +76,7 @@ flowchart TD;
 ```
 There's a lot of information in the diagram, but we don't expect you to digest it right away. You can simply use it as a reference when you go through the example below.
 
-## A step-by-step guide towards your first conventional plugin
+## A step-by-step guide toward your first conventional plugin
 
 In this section, we will describe how to create a data collection plugin from scratch. The data to be collected is the information about all Committers and Contributors of the Apache project, in order to check whether they have signed the CLA. We are going to
 
@@ -101,19 +101,19 @@ We will focus on demonstrating how to request and cache information about all Co
 >       - task data [template](https://github.com/apache/incubator-devlake/blob/main/generator/template/plugin/tasks/task_data.go-template)
 >       - api client [template](https://github.com/apache/incubator-devlake/blob/main/generator/template/plugin/tasks/task_data_with_api_client.go-template)
 
-Don't worry if you cannot figure out what these concepts mean immediately. We'll explain them one by one later. 
+Don't worry if you cannot figure out what these concepts mean immediately. We'll explain them one by one later.
 
-DevLake provides a generator to create a plugin conveniently. Let's scaffold our new plugin by running `go run generator/main.go create-plugin icla`, which would ask for `with_api_client` and `Endpoint`.
+Apache DevLake provides a generator to create a plugin conveniently. Let's scaffold our new plugin by running `go run generator/main.go create-plugin icla`, which would ask for `with_api_client` and `Endpoint`.
 
 * `with_api_client` is used for choosing if we need to request HTTP APIs by api_client. 
 * `Endpoint` use in which site we will request, in our case, it should be `https://people.apache.org/`.
 
 ![](https://i.imgur.com/itzlFg7.png)
 
-Now we have three files in our plugin. `api_client.go` and `task_data.go` are in subfolder `tasks/`.
+Now we have three files in our plugin. `api_client.go` and `task_data.go` are in the subfolder `tasks/`.
 ![plugin files](https://i.imgur.com/zon5waf.png)
 
-Have a try to run this plugin by function `main` in `plugin_main.go`. When you see result like this:
+Have a try to run this plugin by function `main` in `plugin_main.go`. When you see results like this:
 ```
 $go run plugins/icla/plugin_main.go
 [2022-06-02 18:07:30]  INFO failed to create dir logs: mkdir logs: file exists
@@ -123,10 +123,10 @@ invalid ICLA_TOKEN, but ignore this error now
 [2022-06-02 18:07:30]  INFO  [icla] scheduler for api https://people.apache.org/ worker: 25, request: 18000, duration: 1h0m0s
 [2022-06-02 18:07:30]  INFO  [icla] total step: 0
 ```
-How exciting. It works! The plugin defined and initiated in `plugin_main.go` use some options in `task_data.go`. They are made up as the most straightforward plugin in Apache DevLake, and `api_client.go` will be used in the next step to request HTTP APIs.
+It works! Plugin 'icla' is defined and initiated. This plugin ONLY contains `plugin_main.go` and `task_data.go`, which is the simplest form of a plugin in Apache DevLake. In the next step, we'll show you how to request HTTP APIs by `api_client.go`.
 
 ### Step 2: Create a sub-task for data collection
-Before we start, it is helpful to know how collection task is executed: 
+Before we start, it is helpful to know how a collection task is executed: 
 1. First, Apache DevLake would call `plugin_main.PrepareTaskData()` to prepare needed data before any sub-tasks. We need to create an API client here.
 2. Then Apache DevLake will call the sub-tasks returned by `plugin_main.SubTaskMetas()`. Sub-task is an independent task to do some job, like requesting API, processing data, etc.
 
@@ -145,7 +145,7 @@ Let's run `go run generator/main.go create-collector icla committer` and confirm
 > - Collector will collect data from HTTP or other data sources, and save the data into the raw layer. 
 > - Inside the func `SubTaskEntryPoint` of `Collector`, we use `helper.NewApiCollector` to create an object of [ApiCollector](https://github.com/apache/incubator-devlake/blob/main/generator/template/plugin/tasks/api_collector.go-template), then call `execute()` to do the job. 
 
-Now you can notice `data.ApiClient` is initiated in `plugin_main.go/PrepareTaskData.ApiClient`. `PrepareTaskData` create a new `ApiClient`, which is a tool Apache DevLake suggests to request data from HTTP Apis. This tool support some valuable features for HttpApi, like rateLimit, proxy and retry. Of course, if you like, you may use the lib `http` instead, but it will be more tedious.
+Now you can notice `data.ApiClient` is initiated in `plugin_main.go/PrepareTaskData.ApiClient`. `PrepareTaskData` creates a new `ApiClient`, which is a tool Apache DevLake suggests to request data from HTTP Apis. This tool support some valuable features for HttpApi, like rateLimit, proxy and retry. Of course, if you like, you may use the lib `http` instead, but it will be more tedious.
 
 Let's move forward to use it.
 
@@ -206,7 +206,7 @@ receive data: 272956 /* <- the number means 272956 models received */
 
 We have already collected data from HTTP API and saved them into the DB table `_raw_XXXX`. In this step, we will extract the names of committers from the raw data. As you may infer from the name, raw tables are temporary and not easy to use directly.
 
-Now Apache DevLake suggests to save data by [gorm](https://gorm.io/docs/index.html), so we will create a model by gorm and add it into `plugin_main.go/AutoMigrate()`.
+Now Apache DevLake suggests saving data by [gorm](https://gorm.io/docs/index.html), so we will create a model by gorm and add it into `plugin_main.go/AutoMigrate()`.
 
 plugins/icla/models/committer.go
 ```go
