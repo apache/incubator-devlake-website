@@ -2,7 +2,7 @@
 title: "Deleted Lines of Code"
 description: >
   Deleted Lines of Code
-sidebar_position: 8
+sidebar_position: 12
 ---
 
 ## What is this metric? 
@@ -20,11 +20,56 @@ This metric is calculated by summing the deletions of commits in the given data 
 
 <b>Data Sources Required</b>
 
-This metric relies on commits collected from GitHub, GitLab or BitBucket.
+This metric relies on `commits` collected from GitHub, GitLab or BitBucket.
 
-<b>Transformation Rules Required</b>
+<b>Data Transformation Required</b>
 
 N/A
+
+<b>SQL Queries</b>
+
+The following SQL shows how to find the `deleted lines of code` in specific repositories, eg. 'repo-1' and 'repo-2'.
+
+```
+SELECT
+  sum(c.deletions) as added_lines_of_code
+FROM 
+  commits c
+  LEFT JOIN repo_commits rc ON c.sha = rc.commit_sha
+  LEFT JOIN repos r ON r.id = rc.repo_id
+WHERE
+  -- please replace the repo ids with your own, or create a '$repo_id' variable in Grafana
+  r.id in ('repo-1','repo-2')
+  and message not like '%Merge%'
+  and $__timeFilter(c.authored_date)
+  -- the following condition will remove the month with incomplete data
+  and c.authored_date >= DATE_ADD(DATE_ADD($__timeFrom(), INTERVAL -DAY($__timeFrom())+1 DAY), INTERVAL +1 MONTH)
+```
+
+If you want to measure the monthly trend of `deleted lines of code` in the screenshot below, please run the following SQL in Grafana.
+
+![](/img/Metrics/deleted-loc-monthly.png)
+
+```
+with _commits as(
+  SELECT
+    DATE_ADD(date(authored_date), INTERVAL -DAY(date(authored_date))+1 DAY) as time,
+    sum(deletions) as deleted_lines_of_code
+  FROM commits
+  WHERE
+    message not like '%Merge%'
+    and $__timeFilter(authored_date)
+    -- the following condition will remove the month with incomplete data
+    and authored_date >= DATE_ADD(DATE_ADD($__timeFrom(), INTERVAL -DAY($__timeFrom())+1 DAY), INTERVAL +1 MONTH)
+  group by 1
+)
+
+SELECT 
+  date_format(time,'%M %Y') as month,
+  deleted_lines_of_code
+FROM _commits
+ORDER BY time
+```
 
 ## How to improve?
 1. From the project/team dimension, observe the accumulated change in Added lines to assess the team activity and code growth rate

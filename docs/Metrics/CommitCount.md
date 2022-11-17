@@ -2,7 +2,7 @@
 title: "Commit Count"
 description: >
   Commit Count
-sidebar_position: 6
+sidebar_position: 9
 ---
 
 ## What is this metric? 
@@ -24,30 +24,58 @@ This metric is calculated by counting the number of commits in the given data ra
 
 This metric relies on commits collected from GitHub, GitLab or BitBucket.
 
-<b>Transformation Rules Required</b>
+<b>Data Transformation Required</b>
 
 N/A
 
 <b>SQL Queries</b>
 
-If you want to see the monthly trend, run the following SQL
+The following SQL shows how to find commits in specific repositories, eg. 'repo-1' and 'repo-2'.
 ```
-  with _commits as(
-    SELECT
-      DATE_ADD(date(authored_date), INTERVAL -DAY(date(authored_date))+1 DAY) as time,
-      count(*) as commit_count
-    FROM commits
-    WHERE
-      message not like '%Merge%'
-      and $__timeFilter(authored_date)
-    group by 1
-  )
+SELECT
+  r.id,
+  c.*
+FROM 
+  commits c
+  LEFT JOIN repo_commits rc ON c.sha = rc.commit_sha
+  LEFT JOIN repos r ON r.id = rc.repo_id
+WHERE
+  -- please replace the repo ids with your own, or create a '$repo_id' variable in Grafana
+  r.id in ('repo-1','repo-2')
+  and message not like '%Merge%'
+  and $__timeFilter(c.authored_date)
+  -- the following condition will remove the month with incomplete data
+  and c.authored_date >= DATE_ADD(DATE_ADD($__timeFrom(), INTERVAL -DAY($__timeFrom())+1 DAY), INTERVAL +1 MONTH)
+```
 
-  SELECT 
-    date_format(time,'%M %Y') as month,
-    commit_count as "Commit Count"
-  FROM _commits
-  ORDER BY time
+If you want to measure the monthly trend of `commit count` in the screenshot below, please run the following SQL in Grafana.
+
+![](/img/Metrics/commit-count-monthly.png)
+
+```
+with _commits as(
+  SELECT
+    DATE_ADD(date(c.authored_date), INTERVAL -DAY(date(c.authored_date))+1 DAY) as time,
+    count(c.sha) as commit_count
+  FROM 
+    commits c
+    LEFT JOIN repo_commits rc ON c.sha = rc.commit_sha
+    LEFT JOIN repos r ON r.id = rc.repo_id
+  WHERE
+    -- please replace the repo ids with your own, or create a '$repo_id' variable in Grafana
+    r.id in ($repo_id)
+    and message not like '%Merge%'
+    and $__timeFilter(c.authored_date)
+    -- the following condition will remove the month with incomplete data
+    and c.authored_date >= DATE_ADD(DATE_ADD($__timeFrom(), INTERVAL -DAY($__timeFrom())+1 DAY), INTERVAL +1 MONTH)
+  group by 1
+)
+
+SELECT 
+  date_format(time,'%M %Y') as month,
+  commit_count as "Commit Count"
+FROM _commits
+ORDER BY time
 ```
 
 ## How to improve?
