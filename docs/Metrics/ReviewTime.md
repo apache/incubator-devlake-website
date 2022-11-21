@@ -2,7 +2,7 @@
 title: "PR Review Time"
 description: >
   PR Review Time
-sidebar_position: 2
+sidebar_position: 17
 ---
 
 ## What is this metric? 

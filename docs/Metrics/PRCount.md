@@ -2,7 +2,7 @@
 title: "Pull Request Count"
 description: >
   Pull Request Count
-sidebar_position: 11
+sidebar_position: 13
 ---
 
 ## What is this metric? 

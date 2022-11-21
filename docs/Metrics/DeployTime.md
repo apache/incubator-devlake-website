@@ -2,7 +2,7 @@
 title: "PR Deploy Time"
 description: >
   PR Deploy Time
-sidebar_position: 2
+sidebar_position: 18
 ---
 
 ## What is this metric? 

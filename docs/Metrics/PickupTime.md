@@ -2,7 +2,7 @@
 title: "PR Pickup Time"
 description: >
   PR Pickup Time
-sidebar_position: 2
+sidebar_position: 16
 ---
 
 ## What is this metric? 

@@ -2,7 +2,7 @@
 title: "DORA - Change Failure Rate"
 description: >
   DORA - Change Failure Rate
-sidebar_position: 21
+sidebar_position: 29
 ---
 
 ## What is this metric? 

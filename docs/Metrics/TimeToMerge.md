@@ -2,7 +2,7 @@
 title: "PR Time To Merge"
 description: >
   PR Time To Merge
-sidebar_position: 2
+sidebar_position: 19
 ---
 
 ## What is this metric? 

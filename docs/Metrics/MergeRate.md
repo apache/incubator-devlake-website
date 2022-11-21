@@ -2,7 +2,7 @@
 title: "PR Merge Rate"
 description: >
   Pull Request Merge Rate
-sidebar_position: 12
+sidebar_position: 20
 ---
 
 ## What is this metric? 
