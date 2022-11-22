@@ -2,7 +2,7 @@
 title: "DORA - Lead Time for Changes"
 description: >
   DORA - Lead Time for Changes
-sidebar_position: 19
+sidebar_position: 27
 ---
 
 ## What is this metric? 

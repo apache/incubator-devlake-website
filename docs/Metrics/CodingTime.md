@@ -2,7 +2,7 @@
 title: "PR Coding Time"
 description: >
   PR Coding Time
-sidebar_position: 2
+sidebar_position: 15
 ---
 
 ## What is this metric? 

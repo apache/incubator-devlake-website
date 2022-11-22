@@ -2,7 +2,7 @@
 title: "PR Review Depth"
 description: >
   PR Review Depth
-sidebar_position: 2
+sidebar_position: 21
 ---
 
 ## What is this metric? 

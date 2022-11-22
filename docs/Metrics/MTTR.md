@@ -2,7 +2,7 @@
 title: "DORA - Median Time to Restore Service"
 description: >
   DORA - Median Time to Restore Service
-sidebar_position: 20
+sidebar_position: 28
 ---
 
 ## What is this metric? 

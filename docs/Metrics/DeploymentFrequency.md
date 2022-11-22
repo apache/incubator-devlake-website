@@ -2,7 +2,7 @@
 title: "DORA - Deployment Frequency"
 description: >
   DORA - Deployment Frequency
-sidebar_position: 18
+sidebar_position: 26
 ---
 
 ## What is this metric? 

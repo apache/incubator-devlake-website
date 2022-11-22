@@ -2,7 +2,7 @@
 title: "PR Size"
 description: >
   PR Size
-sidebar_position: 2
+sidebar_position: 22
 ---
 
 ## What is this metric? 

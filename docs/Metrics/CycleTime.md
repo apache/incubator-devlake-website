@@ -2,7 +2,7 @@
 title: "PR Cycle Time"
 description: >
   PR Cycle Time
-sidebar_position: 2
+sidebar_position: 14
 ---
 
 ## What is this metric? 
