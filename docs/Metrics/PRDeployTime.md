@@ -40,10 +40,6 @@ This metric relies on two sources:
    - Releases and PR/MRs from GitHub, GitLab APIs, etc.
 
 
-<b>Transformation Rules Required</b>
-
-N/A
-
 <b>SQL Queries</b>
 
 The following SQL shows how to find the `deploy time` of a specific PR. DevLake pre-calculates the metric and stores it in table.pull_requests.
@@ -58,7 +54,7 @@ FROM
 
 If you want to measure the monthly trend of `PR deploy time` in the screenshot below, please run the following SQL in Grafana. 
 
-![](/img/Metrics/pr-cycle-time-monthly.png)
+![](/img/Metrics/pr-deploy-time-monthly.png)
 
 ```
 SELECT 

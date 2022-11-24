@@ -39,7 +39,7 @@ FROM
 
 If you want to measure the monthly trend of `PR pickup time` in the screenshot below, please run the following SQL in Grafana. 
 
-![](/img/Metrics/pr-cycle-time-monthly.png)
+![](/img/Metrics/pr-pickup-time-monthly.png)
 
 ```
 SELECT 
