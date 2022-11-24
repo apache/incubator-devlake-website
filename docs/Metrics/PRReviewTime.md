@@ -43,7 +43,7 @@ FROM
 
 If you want to measure the monthly trend of `PR review time` in the screenshot below, please run the following SQL in Grafana. 
 
-![](/img/Metrics/pr-cycle-time-monthly.png)
+![](/img/Metrics/pr-review-time-monthly.png)
 
 ```
 SELECT 
