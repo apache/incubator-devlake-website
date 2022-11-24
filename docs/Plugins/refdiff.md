@@ -6,7 +6,12 @@ description: >
 
 ## Summary
 
-For development workload analysis, we often need to know how many commits have been created between 2 releases. This plugin calculates which commits differ between 2 commits, and the commits are produced by Ref (branch/tag) or by deployments, and the result will be stored back into the database for further analysis.
+RefDiff is a plugin that performs calculation tasks and has 2 main purposes.
+
+- Calculate the difference in commits between releases/tags to [analyze the amount of code in each release](add an anchor link)
+- Calculate the difference in commits between deployments to [calculate DORA metrics](add an anchor link)
+
+And the output of RefDiff is stored in the table commits_diffs, finished_commits_diffs, ref_commits.
 
 ## Important Note
 

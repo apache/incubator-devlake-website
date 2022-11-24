@@ -13,30 +13,29 @@ Referring to DevLake's [architecture](../Overview/Architecture.md), the data in 
 
 Domain layer schema itself includes 2 logical layers: a `DWD` layer and a `DWM` layer. The DWD layer stores the detailed data points, while the DWM is the slight aggregation and operation of DWD to store more organized details or middle-level metrics.
 
-
 ## Use Cases
+
 1. [All metrics](../Metrics) from pre-built dashboards are based on this data schema.
 2. As a user, you can create your own customized dashboards based on this data schema.
 3. As a contributor, you can refer to this data schema while working on the ETL logic when adding/updating data source plugins.
 
-
 ## Data Models
 
 This is the up-to-date domain layer schema for DevLake v0.10.x. Tables (entities) are categorized into 5 domains.
+
 1. Issue tracking domain entities: Jira issues, GitHub issues, GitLab issues, etc.
 2. Source code management domain entities: Git/GitHub/Gitlab commits and refs(tags and branches), etc.
 3. Code review domain entities: GitHub PRs, Gitlab MRs, etc.
 4. CI/CD domain entities: Jenkins jobs & builds, etc.
 5. Cross-domain entities: entities that map entities from different domains to break data isolation.
 
-
 ### Schema Diagram
+
 [![Domain Layer Schema](/img/DomainLayerSchema/schema-diagram.png)](/img/DomainLayerSchema/schema-diagram.png)
 
 When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. Github/Gitlab) and allow them to co-exist in a single table.
 
 Tables that end with WIP are still under development.
-
 
 ### Naming Conventions
 
@@ -45,12 +44,13 @@ Tables that end with WIP are still under development.
 3. Value of the field in enum type are in capital letters. Eg. [table.issues.type](#issues) has 3 values, REQUIREMENT, BUG, INCIDENT. Values that are phrases, such as 'IN_PROGRESS' of [table.issues.status](#issues), are separated with underscore '\_'.
 
 ## How to Customize Data Models
+
 Apache DevLake provides 2 plugins:
+
 - [customize](https://devlake.apache.org/docs/Plugins/customize): to create/delete columns in the domain layer schema with the data extracted from [raw layer tables](https://devlake.apache.org/docs/Overview/Architecture/#dataflow)
 - [dbt](https://devlake.apache.org/docs/Plugins/customize): to transform data based on the domain layer schema and generate new tables
 
 <br/>
-
 
 ## DWD Entities - (Data Warehouse Detail)
 
@@ -61,9 +61,9 @@ Apache DevLake provides 2 plugins:
 An `issue` is the abstraction of Jira/Github/GitLab/TAPD/... issues.
 
 | **field**                   | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | **key** |
-| :-------------------------- | :------- | :--------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :------ |
+| :-------------------------- | :------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
 | `id`                        | varchar  | 255        | An issue's `id` is composed of < plugin >:< Entity >:< PK0 >[:PK1]..." <ul><li>For Github issues, a Github issue's id is like "github:GithubIssues:< GithubIssueId >". Eg. 'github:GithubIssues:1049355647'</li> <li>For Jira issues, a Github repo's id is like "jira:JiraIssues:< JiraSourceId >:< JiraIssueId >". Eg. 'jira:JiraIssues:1:10063'. < JiraSourceId > is used to identify which jira source the issue came from, since DevLake users can import data from several different Jira instances at the same time.</li></ul>                                                                    | PK      |
-| `issue_key`                 | varchar  | 255        | The key of this issue. For example, the key of this Github [issue](https://github.com/apache/incubator-devlake/issues/1145) is 1145.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |         |
+| `issue_key`                 | varchar  | 255        | The key of this issue. For example, the key of this Github [issue](https://github.com/apache/incubator-devlake/issues/1145) is 1145.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |         |
 | `url`                       | varchar  | 255        | The url of the issue. It's a web address in most cases.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
 | `title`                     | varchar  | 255        | The title of an issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |         |
 | `description`               | longtext |            | The detailed description/summary of an issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
@@ -77,9 +77,9 @@ An `issue` is the abstraction of Jira/Github/GitLab/TAPD/... issues.
 | `parent_issue_id`           | varchar  | 255        | The id of its parent issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |         |
 | `epic_key`                  | varchar  | 255        | The key of the epic this issue belongs to. For tools with no epic-type issues such as Github and Gitlab, this field is default to an empty string                                                                                                                                                                                                                                                                                                                                                                                                                                                        |         |
 | `original_estimate_minutes` | int      |            | The original estimation of the time allocated for this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
-| `time_spent_minutes`         | int      |            | The original estimation of the time allocated for this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
-| `time_remaining_minutes`     | int      |            | The remaining time to resolve the issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
-| `creator_id`                 | varchar  | 255        | The id of issue creator                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
+| `time_spent_minutes`        | int      |            | The original estimation of the time allocated for this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
+| `time_remaining_minutes`    | int      |            | The remaining time to resolve the issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
+| `creator_id`                | varchar  | 255        | The id of issue creator                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
 | `creator_name`              | varchar  | 255        | The name of the creator                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
 | `assignee_id`               | varchar  | 255        | The id of issue assignee.<ul><li>For Github issues: this is the last assignee of an issue if the issue has multiple assignees</li><li>For Jira issues: this is the assignee of the issue at the time of collection</li></ul>                                                                                                                                                                                                                                                                                                                                                                             |         |
 | `assignee_name`             | varchar  | 255        | The name of the assignee                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |         |
@@ -87,7 +87,7 @@ An `issue` is the abstraction of Jira/Github/GitLab/TAPD/... issues.
 | `updated_date`              | datetime | 3          | The last time issue gets updated                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |         |
 | `resolution_date`           | datetime | 3          | The time the issue changes to 'DONE'.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |         |
 | `lead_time_minutes`         | int      |            | Describes the cycle time from issue creation to issue resolution.<ul><li>For issues whose type = 'REQUIREMENT' and status = 'DONE', lead_time_minutes = resolution_date - created_date. The unit is minute.</li><li>For issues whose type != 'REQUIREMENT' or status != 'DONE', lead_time_minutes is null</li></ul>                                                                                                                                                                                                                                                                                      |         |
-| `deployment_id` | varchar | 255 | The cicd_task that relates to this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |  |
+| `deployment_id`             | varchar  | 255        | The cicd_task that relates to this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |         |
 
 #### issue_labels
 
@@ -98,19 +98,18 @@ This table shows the labels of issues. Multiple entries can exist per issue. Thi
 | `name`     | varchar  | 255        | Label name      |              |
 | `issue_id` | varchar  | 255        | Issue ID        | FK_issues.id |
 
-
 #### issue_comments(WIP)
 
 This table shows the comments of issues. Issues with multiple comments are shown as multiple records. This table can be used to calculate _metric - issue response time_.
 
-| **field**      | **type** | **length** | **description**                                                                                                                                                                               | **key**      |
-| :------------- | :------- | :--------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------- |
-| `id`           | varchar  | 255        | The unique id of a comment                                                                                                                                                                    | PK           |
-| `issue_id`     | varchar  | 255        | Issue ID                                                                                                                                                                                      | FK_issues.id |
-| `account_id`      | varchar  | 255        | The id of the account who made the comment                                                                                                                                                       | FK_accounts.id  |
-| `body`         | longtext |            | The body/detail of the comment                                                                                                                                                                |              |
-| `created_date` | datetime | 3          | The creation date of the comment                                                                                                                                                              |              |
-| `updated_date` | datetime | 3          | The last time comment gets updated                                                                                                                                                            |              |
+| **field**      | **type** | **length** | **description**                            | **key**        |
+| :------------- | :------- | :--------- | :----------------------------------------- | :------------- |
+| `id`           | varchar  | 255        | The unique id of a comment                 | PK             |
+| `issue_id`     | varchar  | 255        | Issue ID                                   | FK_issues.id   |
+| `account_id`   | varchar  | 255        | The id of the account who made the comment | FK_accounts.id |
+| `body`         | longtext |            | The body/detail of the comment             |                |
+| `created_date` | datetime | 3          | The creation date of the comment           |                |
+| `updated_date` | datetime | 3          | The last time comment gets updated         |                |
 
 #### issue_changelogs
 
@@ -130,21 +129,19 @@ This table shows the changelogs of issues. Issues with multiple changelogs are s
 | `to_value`            | varchar  | 255        | The transformed/standardized new value of the changed field      |                |
 | `created_date`        | datetime | 3          | The creation date of the changelog                               |                |
 
-
 #### issue_worklogs
 
 This table shows the work logged under issues. Usually, an issue has multiple worklogs logged by different developers.
 
-| **field**            | **type** | **length** | **description**                                                                              | **key**         |
-| :------------------- | :------- | :--------- | :------------------------------------------------------------------------------------------- |:----------------|
-| `id`                 | varchar  | 255        | The id of the worklog                                                                                      | PK              |
-| `author_id`          | varchar  | 255        | The id of the author who logged the work                                                     | FK_accounts.id  |
-| `comment`            | longtext | 255        | The comment made while logging the work.                                                     |                 |
-| `time_spent_minutes` | int      |            | The time logged. The unit of value is normalized to minute. Eg. 1d =) 480, 4h30m =) 270      |                 |
-| `logged_date`        | datetime | 3          | The time of this logging action                                                              |                 |
-| `started_date`       | datetime | 3          | Start time of the worklog                                                                    |                 |
-| `issue_id`           | varchar  | 255        | Issue ID                                                                                     | FK_issues.id    |
-
+| **field**            | **type** | **length** | **description**                                                                         | **key**        |
+| :------------------- | :------- | :--------- | :-------------------------------------------------------------------------------------- | :------------- |
+| `id`                 | varchar  | 255        | The id of the worklog                                                                   | PK             |
+| `author_id`          | varchar  | 255        | The id of the author who logged the work                                                | FK_accounts.id |
+| `comment`            | longtext | 255        | The comment made while logging the work.                                                |                |
+| `time_spent_minutes` | int      |            | The time logged. The unit of value is normalized to minute. Eg. 1d =) 480, 4h30m =) 270 |                |
+| `logged_date`        | datetime | 3          | The time of this logging action                                                         |                |
+| `started_date`       | datetime | 3          | Start time of the worklog                                                               |                |
+| `issue_id`           | varchar  | 255        | Issue ID                                                                                | FK_issues.id   |
 
 #### boards
 
@@ -153,11 +150,11 @@ A `board` is an issue list or a collection of issues. It's the abstraction of a 
 | **field**      | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                      | **key** |
 | :------------- | :------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
 | `id`           | varchar  | 255        | A board's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..." <ul><li>For a Github repo's issue list, the board id is like "< github >:< GithubRepos >:< GithubRepoId >". Eg. "github:GithubRepo:384111310"</li> <li>For a Jira Board, the id is like the board id is like "< jira >:< JiraSourceId >< JiraBoards >:< JiraBoardsId >". Eg. "jira:1:JiraBoards:12"</li></ul> | PK      |
-| `name`           | varchar  | 255        | The name of the board. Note: the board name of a Github project 'apache/incubator-devlake' is 'apache/incubator-devlake', representing the [default issue list](https://github.com/apache/incubator-devlake/issues).                                                                                                                                                                                            |         |
+| `name`         | varchar  | 255        | The name of the board. Note: the board name of a Github project 'apache/incubator-devlake' is 'apache/incubator-devlake', representing the [default issue list](https://github.com/apache/incubator-devlake/issues).                                                                                                                                                                 |         |
 | `description`  | varchar  | 255        | The description of the board.                                                                                                                                                                                                                                                                                                                                                        |         |
-| `url`          | varchar  | 255        | The url of the board. Eg. https://github.com/apache/incubator-devlake                                                                                                                                                                                                                                                                                                                         |         |
-| `created_date` | datetime | 3          | Board creation time                                                                                                                                                                                                                                                                                                                             |         |
-| `type`         | varchar  | 255        | Identify scrum and non-scrum board                                                                                                                                                                                                                                                                                                                             |         |
+| `url`          | varchar  | 255        | The url of the board. Eg. https://github.com/apache/incubator-devlake                                                                                                                                                                                                                                                                                                                |         |
+| `created_date` | datetime | 3          | Board creation time                                                                                                                                                                                                                                                                                                                                                                  |         |
+| `type`         | varchar  | 255        | Identify scrum and non-scrum board                                                                                                                                                                                                                                                                                                                                                   |         |
 
 #### board_issues
 
@@ -172,16 +169,16 @@ This table shows the relation between boards and issues. This table can be used 
 
 A `sprint` is the abstraction of Jira sprints, TAPD iterations and GitHub milestones. A sprint contains a list of issues.
 
-| **field**           | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | **key**      |
-| :------------------ | :------- | :--------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :----------- |
-| `id`                | varchar  | 255        | A sprint's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<ul><li>A sprint in a Github repo is a milestone, the sprint id is like "< github >:< GithubRepos >:< GithubRepoId >:< milestoneNumber >".<br/>Eg. The id for this [sprint](https://github.com/apache/incubator-devlake/milestone/5) is "github:GithubRepo:384111310:5"</li><li>For a Jira Board, the id is like "< jira >:< JiraSourceId >< JiraBoards >:< JiraBoardsId >".<br/>Eg. "jira:1:JiraBoards:12"</li></ul>                                                                                                                      | PK           |
-| `name`              | varchar  | 255        | The name of sprint.<br/>For Github projects, the sprint name is the milestone name. For instance, 'v0.10.0 - Introduce Temporal to DevLake' is the name of this [sprint](https://github.com/apache/incubator-devlake/milestone/5).                                                                                                                                                                                                                                                                                                                                                                                |              |
-| `url`               | varchar  | 255        | The url of sprint.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |              |
-| `status`            | varchar  | 255        | There're 3 statuses of a sprint:<ul><li>CLOSED: a completed sprint</li><li>ACTIVE: a sprint started but not completed</li><li>FUTURE: a sprint that has not started</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                            |              |
-| `started_date`      | datetime | 3          | The start time of a sprint                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |              |
-| `ended_date`        | datetime | 3          | The planned/estimated end time of a sprint. It's usually set when planning a sprint.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |              |
-| `completed_date`    | datetime | 3          | The actual time to complete a sprint.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |              |
-| `original_board_id` | datetime | 3          | The id of board where the sprint first created. This field is not null only when this entity is transformed from Jira sprints.<br/>In Jira, sprint and board entities have 2 types of relation:<ul><li>A sprint is created based on a specific board. In this case, board(1):(n)sprint. The `original_board_id` is used to show the relation.</li><li>A sprint can be mapped to multiple boards, a board can also show multiple sprints. In this case, board(n):(n)sprint. This relation is shown in [table.board_sprints](#board_sprints)</li></ul>   | FK_boards.id |
+| **field**           | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | **key**      |
+| :------------------ | :------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------- |
+| `id`                | varchar  | 255        | A sprint's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<ul><li>A sprint in a Github repo is a milestone, the sprint id is like "< github >:< GithubRepos >:< GithubRepoId >:< milestoneNumber >".<br/>Eg. The id for this [sprint](https://github.com/apache/incubator-devlake/milestone/5) is "github:GithubRepo:384111310:5"</li><li>For a Jira Board, the id is like "< jira >:< JiraSourceId >< JiraBoards >:< JiraBoardsId >".<br/>Eg. "jira:1:JiraBoards:12"</li></ul>                                                         | PK           |
+| `name`              | varchar  | 255        | The name of sprint.<br/>For Github projects, the sprint name is the milestone name. For instance, 'v0.10.0 - Introduce Temporal to DevLake' is the name of this [sprint](https://github.com/apache/incubator-devlake/milestone/5).                                                                                                                                                                                                                                                                                                                   |              |
+| `url`               | varchar  | 255        | The url of sprint.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |              |
+| `status`            | varchar  | 255        | There're 3 statuses of a sprint:<ul><li>CLOSED: a completed sprint</li><li>ACTIVE: a sprint started but not completed</li><li>FUTURE: a sprint that has not started</li></ul>                                                                                                                                                                                                                                                                                                                                                                        |              |
+| `started_date`      | datetime | 3          | The start time of a sprint                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |              |
+| `ended_date`        | datetime | 3          | The planned/estimated end time of a sprint. It's usually set when planning a sprint.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |              |
+| `completed_date`    | datetime | 3          | The actual time to complete a sprint.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |              |
+| `original_board_id` | datetime | 3          | The id of board where the sprint first created. This field is not null only when this entity is transformed from Jira sprints.<br/>In Jira, sprint and board entities have 2 types of relation:<ul><li>A sprint is created based on a specific board. In this case, board(1):(n)sprint. The `original_board_id` is used to show the relation.</li><li>A sprint can be mapped to multiple boards, a board can also show multiple sprints. In this case, board(n):(n)sprint. This relation is shown in [table.board_sprints](#board_sprints)</li></ul> | FK_boards.id |
 
 #### sprint_issues
 
@@ -212,18 +209,18 @@ This table shows the relation between sprints and issues that have been added to
 
 Information about GitHub or Gitlab repositories. A repository is always owned by a user.
 
-| **field**      | **type** | **length** | **description**                                                                                                                                                                                | **key**     |
-| :------------- | :------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------- |
-| `id`           | varchar  | 255        | A repo's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github repo's id is like "< github >:< GithubRepos >< GithubRepoId >". Eg. 'github:GithubRepos:384111310' | PK          |
-| `name`         | varchar  | 255        | The name of repo.                                                                                                                                                                              |             |
-| `description`  | varchar  | 255        | The description of repo.                                                                                                                                                                       |             |
-| `url`          | varchar  | 255        | The url of repo. Eg. https://github.com/apache/incubator-devlake                                                                                                                                        |             |
-| `owner_id`     | varchar  | 255        | The id of the owner of repo                                                                                                                                                                    | FK_accounts.id |
-| `language`     | varchar  | 255        | The major language of repo. Eg. The language for apache/incubator-devlake is 'Go'                                                                                                                       |             |
-| `forked_from`  | varchar  | 255        | Empty unless the repo is a fork in which case it contains the `id` of the repo the repo is forked from.                                                                                        |             |
-| `deleted`      | tinyint  | 255        | 0: repo is active 1: repo has been deleted                                                                                                                                                     |             |
-| `created_date` | datetime | 3          | Repo creation date                                                                                                                                                                             |             |
-| `updated_date` | datetime | 3          | Last full update was done for this repo                                                                                                                                                        |             |
+| **field**      | **type** | **length** | **description**                                                                                                                                                                                    | **key**        |
+| :------------- | :------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- |
+| `id`           | varchar  | 255        | A repo's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github repo's id is like "< github >:< GithubRepos >< GithubRepoId >". Eg. 'github:GithubRepos:384111310' | PK             |
+| `name`         | varchar  | 255        | The name of repo.                                                                                                                                                                                  |                |
+| `description`  | varchar  | 255        | The description of repo.                                                                                                                                                                           |                |
+| `url`          | varchar  | 255        | The url of repo. Eg. https://github.com/apache/incubator-devlake                                                                                                                                   |                |
+| `owner_id`     | varchar  | 255        | The id of the owner of repo                                                                                                                                                                        | FK_accounts.id |
+| `language`     | varchar  | 255        | The major language of repo. Eg. The language for apache/incubator-devlake is 'Go'                                                                                                                  |                |
+| `forked_from`  | varchar  | 255        | Empty unless the repo is a fork in which case it contains the `id` of the repo the repo is forked from.                                                                                            |                |
+| `deleted`      | tinyint  | 255        | 0: repo is active 1: repo has been deleted                                                                                                                                                         |                |
+| `created_date` | datetime | 3          | Repo creation date                                                                                                                                                                                 |                |
+| `updated_date` | datetime | 3          | Last full update was done for this repo                                                                                                                                                            |                |
 
 #### repo_languages(WIP)
 
@@ -234,7 +231,7 @@ The table is filled in when the repo has been first inserted on when an update r
 | **field**      | **type** | **length** | **description**                                                                                                                                                                                    | **key** |
 | :------------- | :------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
 | `id`           | varchar  | 255        | A repo's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github repo's id is like "< github >:< GithubRepos >< GithubRepoId >". Eg. 'github:GithubRepos:384111310' | PK      |
-| `language`     | varchar  | 255        | The language of repo.<br/>These are the [languages](https://api.github.com/repos/apache/incubator-devlake/languages) for apache/incubator-devlake                                                                    |         |
+| `language`     | varchar  | 255        | The language of repo.<br/>These are the [languages](https://api.github.com/repos/apache/incubator-devlake/languages) for apache/incubator-devlake                                                  |         |
 | `bytes`        | int      |            | The byte counts for all files in those languages                                                                                                                                                   |         |
 | `created_date` | datetime | 3          | The field is filled in with the latest timestamp the query for a specific `repo_id` was done.                                                                                                      |         |
 
@@ -254,44 +251,60 @@ A ref is the abstraction of a branch or tag.
 | **field**    | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                             | **key**     |
 | :----------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------- |
 | `id`         | varchar  | 255        | A ref's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github ref is composed of "github:GithubRepos:< GithubRepoId >:< RefUrl >". Eg. The id of release v5.3.0 of PingCAP/TiDB project is 'github:GithubRepos:384111310:refs/tags/v5.3.0' A repo's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."           | PK          |
-| `ref_name`   | varchar  | 255        | The name of ref. Eg. '[refs/tags/v0.9.3](https://github.com/apache/incubator-devlake/tree/v0.9.3)'                                                                                                                                                                                                                                                                   |             |
+| `ref_name`   | varchar  | 255        | The name of ref. Eg. '[refs/tags/v0.9.3](https://github.com/apache/incubator-devlake/tree/v0.9.3)'                                                                                                                                                                                                                                                          |             |
 | `repo_id`    | varchar  | 255        | The id of repo this ref belongs to                                                                                                                                                                                                                                                                                                                          | FK_repos.id |
 | `commit_sha` | char     | 40         | The commit this ref points to at the time of collection                                                                                                                                                                                                                                                                                                     |             |
 | `is_default` | int      |            | <ul><li>0: the ref is the default branch. By the definition of [Github](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch), the default branch is the base branch for pull requests and code commits.</li><li>1: not the default branch</li></ul> |             |
 | `merge_base` | char     | 40         | The merge base commit of the main ref and the current ref                                                                                                                                                                                                                                                                                                   |             |
 | `ref_type`   | varchar  | 64         | There're 2 typical types:<ul><li>BRANCH</li><li>TAG</li></ul>                                                                                                                                                                                                                                                                                               |             |
 
-#### refs_commits_diffs
+#### commits_diffs
 
-This table shows the commits added in a new ref compared to an old ref. This table can be used to support tag-based analysis, for instance, '_No. of commits of a tag_', '_No. of merged pull request of a tag_', etc.
+This table shows the commits added in a new commit compared to an old commit. This table can be used to support tag-based and deploy-based metrics.
 
 The records of this table are computed by [RefDiff](https://github.com/apache/incubator-devlake/tree/main/plugins/refdiff) plugin. The computation should be manually triggered after using [GitRepoExtractor](https://github.com/apache/incubator-devlake/tree/main/plugins/gitextractor) to collect commits and refs. The algorithm behind is similar to [this](https://github.com/apache/incubator-devlake/compare/v0.8.0%E2%80%A6v0.9.0).
 
-| **field**            | **type** | **length** | **description**                                                 | **key**        |
-| :------------------- | :------- | :--------- | :-------------------------------------------------------------- | :------------- |
-| `commit_sha`         | char     | 40         | One of the added commits in the new ref compared to the old ref | FK_commits.sha |
-| `new_ref_id`         | varchar  | 255        | The new ref's id for comparison                                 | FK_refs.id     |
-| `old_ref_id`         | varchar  | 255        | The old ref's id for comparison                                 | FK_refs.id     |
-| `new_ref_commit_sha` | char     | 40         | The commit new ref points to at the time of collection          |                |
-| `old_ref_commit_sha` | char     | 40         | The commit old ref points to at the time of collection          |                |
-| `sorting_index`      | varchar  | 255        | An index for debugging, please skip it                          |                |
+| **field**        | **type** | **length** | **description**                                                            | **key** |
+| :--------------- | :------- | :--------- | :------------------------------------------------------------------------- | :------ |
+| `new_commit_sha` | char     | 40         | The commit new ref/deployment points to at the time of collection          | PK      |
+| `old_commit_sha` | char     | 40         | The commit old ref/deployment points to at the time of collection          | PK      |
+| `commit_sha`     | char     | 40         | One of the added commits in the new ref compared to the old ref/deployment | PK      |
+| `sorting_index`  | varchar  | 255        | An index for debugging, please skip it                                     |         |
+
+#### finished_commits_diffs
+
+This table shows the commits_diffs `new_commit_sha` and `old_commit_sha` pairs which are calculated successfully.
+
+| **field**        | **type** | **length** | **description**                                                       | **key** |
+| :--------------- | :------- | :--------- | :-------------------------------------------------------------------- | :------ |
+| `new_commit_sha` | char     | 40         | The new commit new ref/deployment points to at the time of collection | PK      |
+| `old_commit_sha` | char     | 40         | The commit old ref/deployment points to at the time of collection     | PK      |
+
+#### ref_commits
+
+| **field**        | **type** | **length** | **description**                                        | **key** |
+| :--------------- | :------- | :--------- | :----------------------------------------------------- | :------ |
+| `new_ref_id`     | varchar  | 255        | The new ref's id for comparison                        | PK      |
+| `old_ref_id`     | varchar  | 255        | The old ref's id for comparison                        | PK      |
+| `new_commit_sha` | char     | 40         | The commit new ref points to at the time of collection |         |
+| `old_commit_sha` | char     | 40         | The commit old ref points to at the time of collection |         |
 
 #### commits
 
-| **field**         | **type** | **length** | **description**                                                                                                                                                  | **key**        |
-| :---------------- | :------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- |
-| `sha`             | char     | 40         | One of the added commits in the new ref compared to the old ref                                                                                                  | FK_commits.sha |
-| `message`         | varchar  | 255        | Commit message                                                                                                                                                   |                |
-| `author_name`     | varchar  | 255        | The value is set with command `git config user.name xxxxx` commit                                                                                                                            |                |
-| `author_email`    | varchar  | 255        | The value is set with command `git config user.email xxxxx` author                                                                                                                                       |                |
-| `authored_date`   | datetime | 3          | The date when this commit was originally made                                                                                                                    |                |
-| `author_id`       | varchar  | 255        | The id of commit author                                                                                                                                          | FK_accounts.id    |
-| `committer_name`  | varchar  | 255        | The name of committer                                                                                                                                            |                |
-| `committer_email` | varchar  | 255        | The email of committer                                                                                                                                           |                |
-| `committed_date`  | datetime | 3          | The last time the commit gets modified.<br/>For example, when rebasing the branch where the commit is in on another branch, the committed_date changes.          |                |
-| `committer_id`    | varchar  | 255        | The id of committer                                                                                                                                              | FK_accounts.id    |
-| `additions`       | int      |            | Added lines of code                                                                                                                                              |                |
-| `deletions`       | int      |            | Deleted lines of code                                                                                                                                            |                |
+| **field**         | **type** | **length** | **description**                                                                                                                                                         | **key**        |
+| :---------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- |
+| `sha`             | char     | 40         | One of the added commits in the new ref compared to the old ref                                                                                                         | FK_commits.sha |
+| `message`         | varchar  | 255        | Commit message                                                                                                                                                          |                |
+| `author_name`     | varchar  | 255        | The value is set with command `git config user.name xxxxx` commit                                                                                                       |                |
+| `author_email`    | varchar  | 255        | The value is set with command `git config user.email xxxxx` author                                                                                                      |                |
+| `authored_date`   | datetime | 3          | The date when this commit was originally made                                                                                                                           |                |
+| `author_id`       | varchar  | 255        | The id of commit author                                                                                                                                                 | FK_accounts.id |
+| `committer_name`  | varchar  | 255        | The name of committer                                                                                                                                                   |                |
+| `committer_email` | varchar  | 255        | The email of committer                                                                                                                                                  |                |
+| `committed_date`  | datetime | 3          | The last time the commit gets modified.<br/>For example, when rebasing the branch where the commit is in on another branch, the committed_date changes.                 |                |
+| `committer_id`    | varchar  | 255        | The id of committer                                                                                                                                                     | FK_accounts.id |
+| `additions`       | int      |            | Added lines of code                                                                                                                                                     |                |
+| `deletions`       | int      |            | Deleted lines of code                                                                                                                                                   |                |
 | `dev_eq`          | int      |            | A metric that quantifies the amount of code contribution. The data can be retrieved from [AE plugin](https://github.com/apache/incubator-devlake/tree/main/plugins/ae). |                |
 
 #### commit_files
@@ -348,14 +361,14 @@ A pull request is the abstraction of GitHub pull request and Gitlab merge reques
 | `title`            | varchar  | 255        | The title of pull request                                                                                                                                                                                                                                                                                                                                                                      |                |
 | `description`      | longtext |            | The body/description of pull request                                                                                                                                                                                                                                                                                                                                                           |                |
 | `status`           | varchar  | 255        | the status of pull requests. For a Github pull request, the status can either be 'open' or 'closed'.                                                                                                                                                                                                                                                                                           |                |
-| `parent_pr_id`     | varchar  | 255        | The id of the parent PR                                                                                                                                                                                                                                                                                               |                |
-| `pull_request_key` | varchar  | 255        | The key of PR. Eg, 1536 is the key of this [PR](https://github.com/apache/incubator-devlake/pull/1563)                                                                                                                                                                                                                                                                                            |                |
+| `parent_pr_id`     | varchar  | 255        | The id of the parent PR                                                                                                                                                                                                                                                                                                                                                                        |                |
+| `pull_request_key` | varchar  | 255        | The key of PR. Eg, 1536 is the key of this [PR](https://github.com/apache/incubator-devlake/pull/1563)                                                                                                                                                                                                                                                                                         |                |
 | `base_repo_id`     | varchar  | 255        | The repo that will be updated.                                                                                                                                                                                                                                                                                                                                                                 |                |
 | `head_reop_id`     | varchar  | 255        | The repo containing the changes that will be added to the base. If the head repository is NULL, this means that the corresponding project had been deleted when DevLake processed the pull request.                                                                                                                                                                                            |                |
 | `base_ref`         | varchar  | 255        | The branch name in the base repo that will be updated                                                                                                                                                                                                                                                                                                                                          |                |
 | `head_ref`         | varchar  | 255        | The branch name in the head repo that contains the changes that will be added to the base                                                                                                                                                                                                                                                                                                      |                |
-| `author_name`      | varchar  | 255        | The author's name of the pull request                                                                                                                                                                                                                                                                                                                                                         |                |
-| `author_id`        | varchar  | 255        | The author's id of the pull request                                                                                                                                                                                                                                                                                                                                                           |                |
+| `author_name`      | varchar  | 255        | The author's name of the pull request                                                                                                                                                                                                                                                                                                                                                          |                |
+| `author_id`        | varchar  | 255        | The author's id of the pull request                                                                                                                                                                                                                                                                                                                                                            |                |
 | `url`              | varchar  | 255        | the web link of the pull request                                                                                                                                                                                                                                                                                                                                                               |                |
 | `type`             | varchar  | 255        | The work-type of a pull request. For example: feature-development, bug-fix, docs, etc.<br/>The value is transformed from Github pull request labels by configuring `GITHUB_PR_TYPE` in `.env` file during installation.                                                                                                                                                                        |                |
 | `component`        | varchar  | 255        | The component this PR affects.<br/>The value is transformed from Github/Gitlab pull request labels by configuring `GITHUB_PR_COMPONENT` in `.env` file during installation.                                                                                                                                                                                                                    |                |
@@ -363,14 +376,13 @@ A pull request is the abstraction of GitHub pull request and Gitlab merge reques
 | `merged_date`      | datetime | 3          | The time PR gets merged. Null when the PR is not merged.                                                                                                                                                                                                                                                                                                                                       |                |
 | `closed_date`      | datetime | 3          | The time PR closed. Null when the PR is not closed.                                                                                                                                                                                                                                                                                                                                            |                |
 | `merge_commit_sha` | char     | 40         | the merge commit of this PR. By the definition of [Github](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch), when you click the default Merge pull request option on a pull request on Github, all commits from the feature branch are added to the base branch in a merge commit. |                |
-| `base_commit_sha`  | char     |  40        | The base commit of this PR.      |                |
-| `head_commit_sha`  | char     |  40        | The head commit of this PR.      |                |
-| `coding_time_span`| bigint     |          | PR created_date - PR's first commit's authored_date      |                |
-| `review_lag`      | bigint     |          | PR's first comment time - PR's created_date      |                |
-| `review_time_span`| bigint     |          | PR merged_date - PR's first comment time     |                |
-| `deploy_timespan` | bigint     |          | PR deployed date - PR merged_date      |                |
-| `change_timespan` | bigint     |          | PR cycle time, equals to coding_time_span + review_lag + review_time_span + deploy_timespan      |                |
-
+| `base_commit_sha`  | char     | 40         | The base commit of this PR.                                                                                                                                                                                                                                                                                                                                                                    |                |
+| `head_commit_sha`  | char     | 40         | The head commit of this PR.                                                                                                                                                                                                                                                                                                                                                                    |                |
+| `coding_time_span` | bigint   |            | PR created_date - PR's first commit's authored_date                                                                                                                                                                                                                                                                                                                                            |                |
+| `review_lag`       | bigint   |            | PR's first comment time - PR's created_date                                                                                                                                                                                                                                                                                                                                                    |                |
+| `review_time_span` | bigint   |            | PR merged_date - PR's first comment time                                                                                                                                                                                                                                                                                                                                                       |                |
+| `deploy_timespan`  | bigint   |            | PR deployed date - PR merged_date                                                                                                                                                                                                                                                                                                                                                              |                |
+| `change_timespan`  | bigint   |            | PR cycle time, equals to coding_time_span + review_lag + review_time_span + deploy_timespan                                                                                                                                                                                                                                                                                                    |                |
 
 #### pull_request_labels
 
@@ -396,18 +408,17 @@ The list is additive. This means if a rebase with commit squashing takes place a
 
 Normal comments, review bodies, reviews' inline comments of GitHub's pull requests or GitLab's merge requests.
 
-| **field**         | **type** | **length** | **description**                                            | **key**             |
-| :---------------- | :------- | :--------- | :--------------------------------------------------------- | :------------------ |
-| `id`              | varchar  | 255        | Comment id                                                 | PK                  |
-| `pull_request_id` | varchar  | 255        | Pull request id                                            | FK_pull_requests.id |
-| `body`            | longtext |            | The body of the comments                                   |                     |
-| `account_id`      | varchar  | 255        | The account who made the comment                           | FK_accounts.id     |
-| `created_date`    | datetime | 3          | Comment creation time                                      |                     |
-| `position`        | int      |            | Deprecated                                                 |                     |
-| `type`            | varchar  | 255        | - For normal comments: NORMAL<br/> - For review comments, ie. diff/inline comments: DIFF<br/> - For reviews' body (exist in GitHub but not GitLab): REVIEW                                                |                     |
-| `review_id`       | varchar  | 255        | Review_id of the comment if the type is `REVIEW` or `DIFF` |                     |
-| `status`          | varchar  | 255        | Status of the comment                                      |                     |
-
+| **field**         | **type** | **length** | **description**                                                                                                                                            | **key**             |
+| :---------------- | :------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------ |
+| `id`              | varchar  | 255        | Comment id                                                                                                                                                 | PK                  |
+| `pull_request_id` | varchar  | 255        | Pull request id                                                                                                                                            | FK_pull_requests.id |
+| `body`            | longtext |            | The body of the comments                                                                                                                                   |                     |
+| `account_id`      | varchar  | 255        | The account who made the comment                                                                                                                           | FK_accounts.id      |
+| `created_date`    | datetime | 3          | Comment creation time                                                                                                                                      |                     |
+| `position`        | int      |            | Deprecated                                                                                                                                                 |                     |
+| `type`            | varchar  | 255        | - For normal comments: NORMAL<br/> - For review comments, ie. diff/inline comments: DIFF<br/> - For reviews' body (exist in GitHub but not GitLab): REVIEW |                     |
+| `review_id`       | varchar  | 255        | Review_id of the comment if the type is `REVIEW` or `DIFF`                                                                                                 |                     |
+| `status`          | varchar  | 255        | Status of the comment                                                                                                                                      |                     |
 
 #### pull_request_events(WIP)
 
@@ -418,7 +429,7 @@ Events of pull requests.
 | `id`              | varchar  | 255        | Event id                                                                                                                                                                                                                                                                                                                                                                                                                                                 | PK                  |
 | `pull_request_id` | varchar  | 255        | Pull request id                                                                                                                                                                                                                                                                                                                                                                                                                                          | FK_pull_requests.id |
 | `action`          | varchar  | 255        | The action to be taken, some values:<ul><li>`opened`: When the pull request has been opened</li><li>`closed`: When the pull request has been closed</li><li>`merged`: When Github detected that the pull request has been merged. No merges outside Github (i.e. Git based) are reported</li><li>`reoponed`: When a pull request is opened after being closed</li><li>`syncrhonize`: When new commits are added/removed to the head repository</li></ul> |                     |
-| `actor_id`        | varchar  | 255        | The account id of the event performer                                                                                                                                                                                                                                                                                                                                                                                                                       | FK_accounts.id         |
+| `actor_id`        | varchar  | 255        | The account id of the event performer                                                                                                                                                                                                                                                                                                                                                                                                                    | FK_accounts.id      |
 | `created_date`    | datetime | 3          | Event creation time                                                                                                                                                                                                                                                                                                                                                                                                                                      |                     |
 
 <br/>
@@ -429,46 +440,45 @@ Events of pull requests.
 
 A cicd_pipeline is a series of builds that have connections or a standalone build.
 
-| **field** | **type** | **length** | **description**                                                                               | **key** |
-| :-------- | :-------- | :-------- |:----------------------------------------------------------------------------------------------| :-------- |
-| `id` | varchar | 255 | This key is generated based on details from the original plugin                               | PK |
-| `name` | varchar | 255 | For gitlab, as there is no name for pipeline, so we use projectId, others have their own name |  |
-| `result` | varchar | 100                           | The result of this task                                                                       |  |
-| `status` | varchar | 100                           | The status of this task                                                                       |  |
-| `type` | varchar | 100                           | To indicate if this is a DEPLOYMENT                                                           |  |
-| `duration_sec` | bigint unsigned |                                | how long does this task take                                                                  |  |
-| `started_date` | datetime | 3                             | when did this task start                                                                      |  |
-| `finished_date` | datetime | 3                             | when did this task finish                                                                     |  |
-| `environment` | varchar | 255                           | To indicate the environment in which the task is running                                                       |  |
+| **field**       | **type**        | **length** | **description**                                                                               | **key** |
+| :-------------- | :-------------- | :--------- | :-------------------------------------------------------------------------------------------- | :------ |
+| `id`            | varchar         | 255        | This key is generated based on details from the original plugin                               | PK      |
+| `name`          | varchar         | 255        | For gitlab, as there is no name for pipeline, so we use projectId, others have their own name |         |
+| `result`        | varchar         | 100        | The result of this task                                                                       |         |
+| `status`        | varchar         | 100        | The status of this task                                                                       |         |
+| `type`          | varchar         | 100        | To indicate if this is a DEPLOYMENT                                                           |         |
+| `duration_sec`  | bigint unsigned |            | how long does this task take                                                                  |         |
+| `started_date`  | datetime        | 3          | when did this task start                                                                      |         |
+| `finished_date` | datetime        | 3          | when did this task finish                                                                     |         |
+| `environment`   | varchar         | 255        | To indicate the environment in which the task is running                                      |         |
 
 #### cicd_pipeline_commits
 
-| **field** | **type** | **length** | **description**                                                 | **key** |
-| :-------- | :-------- | :-------- |:----------------------------------------------------------------| :-------- |
-| `pipeline_id` | varchar | 255 | This key is generated based on details from the original plugin | PK |
-| `commit_sha` | varchar | 255 | The commit that trigger this pipeline                           | PK |
-| `branch` | varchar | 255 | The branch that trigger this pipeline                           |  |
-| `repo` | varchar | 255 |                                                                 |  |
-| `repo_id` | varchar | 255 | The repo that this pipeline belongs to                          |  |
-| `repo_url` | longtext |  |                                                                 |  |
+| **field**     | **type** | **length** | **description**                                                 | **key** |
+| :------------ | :------- | :--------- | :-------------------------------------------------------------- | :------ |
+| `pipeline_id` | varchar  | 255        | This key is generated based on details from the original plugin | PK      |
+| `commit_sha`  | varchar  | 255        | The commit that trigger this pipeline                           | PK      |
+| `branch`      | varchar  | 255        | The branch that trigger this pipeline                           |         |
+| `repo`        | varchar  | 255        |                                                                 |         |
+| `repo_id`     | varchar  | 255        | The repo that this pipeline belongs to                          |         |
+| `repo_url`    | longtext |            |                                                                 |         |
 
 #### cicd_tasks
 
 A cicd_task is a single job of ci/cd.
 
-| **field** | **type** | **length**                     | **description**                                                 | **key** |
-| :-------- | :-------- |:-------------------------------|:----------------------------------------------------------------| :-------- |
-| `id` | varchar | 255                           | This key is generated based on details from the original plugin | PK |
-| `name` | varchar | 255                           |                                                                 |  |
-| `pipeline_id` | varchar | 255                           | The id of pipeline                                              |  |
-| `result` | varchar | 100                           | The result of this task                                         |  |
-| `status` | varchar | 100                           | The status of this task                                         |  |
-| `type` | varchar | 100                           | To indicate if this is a DEPLOYMENT                             |  |
-| `duration_sec` | bigint unsigned |                                | how long does this task take                                    |  |
-| `started_date` | datetime | 3                             | when did this task start                                        |  |
-| `finished_date` | datetime | 3                             | when did this task finish                                       |  |
-| `environment` | varchar | 255                           | To indicate the environment in which the task is running                         |  |
-
+| **field**       | **type**        | **length** | **description**                                                 | **key** |
+| :-------------- | :-------------- | :--------- | :-------------------------------------------------------------- | :------ |
+| `id`            | varchar         | 255        | This key is generated based on details from the original plugin | PK      |
+| `name`          | varchar         | 255        |                                                                 |         |
+| `pipeline_id`   | varchar         | 255        | The id of pipeline                                              |         |
+| `result`        | varchar         | 100        | The result of this task                                         |         |
+| `status`        | varchar         | 100        | The status of this task                                         |         |
+| `type`          | varchar         | 100        | To indicate if this is a DEPLOYMENT                             |         |
+| `duration_sec`  | bigint unsigned |            | how long does this task take                                    |         |
+| `started_date`  | datetime        | 3          | when did this task start                                        |         |
+| `finished_date` | datetime        | 3          | when did this task finish                                       |         |
+| `environment`   | varchar         | 255        | To indicate the environment in which the task is running        |         |
 
 ### Cross-Domain Entities
 
@@ -495,12 +505,12 @@ This table shows the issues closed by pull requests. It's a medium-level mapping
 
 The data is extracted from the body of pull requests conforming to certain regular expression. The regular expression can be defined in GITHUB_PR_BODY_CLOSE_PATTERN in the .env file
 
-| **field**             | **type** | **length** | **description**     | **key**             |
-| :-------------------- | :------- | :--------- | :------------------ | :------------------ |
-| `pull_request_id`     | char     | 40         | Pull request id     | FK_pull_requests.id |
-| `issue_id`            | varchar  | 255        | Issue id            | FK_issues.id        |
-| `pull_request_number` | varchar  | 255        | Pull request key    |                     |
-| `issue_number`        | varchar  | 255        | Issue key           |                     |
+| **field**             | **type** | **length** | **description**  | **key**             |
+| :-------------------- | :------- | :--------- | :--------------- | :------------------ |
+| `pull_request_id`     | char     | 40         | Pull request id  | FK_pull_requests.id |
+| `issue_id`            | varchar  | 255        | Issue id         | FK_issues.id        |
+| `pull_request_number` | varchar  | 255        | Pull request key |                     |
+| `issue_number`        | varchar  | 255        | Issue key        |                     |
 
 #### board_repos (Deprecated)
 
@@ -514,10 +524,10 @@ A way to link "issue tracking" and "source code management" domain by mapping `b
 #### accounts
 
 This table stores of user accounts across different tools such as GitHub, Jira, GitLab, etc. This table can be joined to get the metadata of all accounts.
- metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contributor',_
+metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contributor',_
 
 | **field**      | **type** | **length** | **description**                                                                                                                                                                                                                                                              | **key** |
-| :------------- | :------- | :--------- |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :------ |
+| :------------- | :------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
 | `id`           | varchar  | 255        | An account's `id` is the identifier of the account of a specific tool. It is composed of "< Plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github account's id is composed of "< github >:< GithubAccounts >:< GithubUserId >)". Eg. 'github:GithubUsers:14050754' | PK      |
 | `email`        | varchar  | 255        | Email of the account                                                                                                                                                                                                                                                         |         |
 | `full_name`    | varchar  | 255        | Full name                                                                                                                                                                                                                                                                    |         |
@@ -528,6 +538,7 @@ This table stores of user accounts across different tools such as GitHub, Jira, 
 | `status`       | int      |            | 0: default, the user is active. 1: the user is not active                                                                                                                                                                                                                    |         |
 
 #### users
+
 | **field** | **type** | **length** | **description**               | **key** |
 | --------- | -------- | ---------- | ----------------------------- | ------- |
 | `id`      | varchar  | 255        | id of a person                | PK      |
@@ -535,12 +546,14 @@ This table stores of user accounts across different tools such as GitHub, Jira, 
 | `name`    | varchar  | 255        | name of a person              |         |
 
 #### user_accounts
+
 | **field**    | **type** | **length** | **description** | **key**          |
 | ------------ | -------- | ---------- | --------------- | ---------------- |
 | `user_id`    | varchar  | 255        | users.id        | Composite PK, FK |
 | `account_id` | varchar  | 255        | accounts.id     | Composite PK, FK |
 
 #### teams
+
 | **field**       | **type** | **length** | **description**                                    | **key** |
 | --------------- | -------- | ---------- | -------------------------------------------------- | ------- |
 | `id`            | varchar  | 255        | id from the data sources, decided by DevLake users | PK      |
@@ -550,11 +563,11 @@ This table stores of user accounts across different tools such as GitHub, Jira, 
 | `sorting_index` | int      | 255        | the field to sort team                             |         |
 
 #### team_users
+
 | **field** | **type** | **length** | **description**                                 | **key**          |
 | --------- | -------- | ---------- | ----------------------------------------------- | ---------------- |
 | `team_id` | varchar  | 255        | Full name of the team. Eg. team A, team B, etc. | Composite PK, FK |
 | `user_id` | varchar  | 255        | users.id                                        | Composite PK, FK |
-
 
 <br/>
 
@@ -562,10 +575,9 @@ This table stores of user accounts across different tools such as GitHub, Jira, 
 
 DWM entities are the slight aggregation and operation of DWD to store more organized details or middle-level metrics.
 
-
 #### refs_issues_diffs
 
-This table shows the issues fixed by commits added in a new ref compared to an old one. The data is computed from [table.ref_commits_diff](#refs_commits_diffs), [table.pull_requests](#pull_requests), [table.pull_request_commits](#pull_request_commits), and [table.pull_request_issues](#pull_request_issues).
+This table shows the issues fixed by commits added in a new ref compared to an old one. The data is computed from [table.commits_diffs](#commits_diffs), [table.finished_commits_diffs](#finished_commits_diffs), [table.pull_requests](#pull_requests), [table.pull_request_commits](#pull_request_commits), and [table.pull_request_issues](#pull_request_issues).
 
 This table can support tag-based analysis, for instance, '_No. of bugs closed in a tag_'.
 
@@ -578,7 +590,6 @@ This table can support tag-based analysis, for instance, '_No. of bugs closed in
 | `issue_number`       | varchar  | 255        | Issue number                                           |              |
 | `issue_id`           | varchar  | 255        | Issue id                                               | FK_issues.id |
 
-
 ## Get Domain Layer Models in Developer Mode
 
 When developing a new plugin, you need to refer to domain layer models, as all raw data should be transformed to domain layer data to provide standardized metrics across tools. Please use the following method to access the domain data models.
@@ -588,7 +599,7 @@ import "github.com/apache/incubator-devlake/models/domainlayer/domaininfo"
 
 domaininfo := domaininfo.GetDomainTablesInfo()
 for _, table := range domaininfo {
-  // do something 
+  // do something
 }
 ```
 
