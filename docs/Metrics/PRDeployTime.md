@@ -13,7 +13,8 @@ The time it takes from when a PR is merged to when it is deployed.
 2. Evaluate whether the delivery capacity matches the business phase and demand scale. Identify key bottlenecks and reasonably allocate resources.
 
 ## Which dashboard(s) does it exist in?
-
+- [Engineering Throughput and Cycle Time](../../../livedemo/EngineeringLeads/EngineeringThroughputAndCycleTime)
+- [Engineering Throughput and Cycle Time - Team View](../../../livedemo/EngineeringLeads/EngineeringThroughputAndCycleTimeTeamView)
 
 ## How is it calculated?
 `PR deploy time` is calculated by subtracting a PR's deployed_date and merged_date. Hence, we should associate PR/MRs with deployments.
@@ -29,7 +30,7 @@ under the same scope and environment (in terms of TESTING/STAGING/PRODUCTION),
 we get pr-3 connected to commit-3
 3. Now we can get pr-3's deploy time by finish_time of deployment-2 minus merge_time of pr-3.
 
-<b>Data Sources Required</b>
+<b>Data Transformation Required</b>
 
 This metric relies on two sources:
 1. PR/MRs collected from GitHub or GitLab by enabling "Code Review" under the Data Entities section.
@@ -43,5 +44,31 @@ This metric relies on two sources:
 
 N/A
 
+<b>SQL Queries</b>
+
+The following SQL shows how to find the `deploy time` of a specific PR. DevLake pre-calculates the metric and stores it in table.pull_requests.
+
+```
+SELECT
+  deploy_timespan/60 as 'PR Deploy Time(h)'
+FROM
+  pull_requests
+```
+
+
+If you want to measure the monthly trend of `PR deploy time` in the screenshot below, please run the following SQL in Grafana. 
+
+![](/img/Metrics/pr-cycle-time-monthly.png)
+
+```
+SELECT 
+  DATE_ADD(date(created_date), INTERVAL -DAY(date(created_date))+1 DAY) as time,
+  avg(deploy_timespan)/60 as 'PR Deploy Time(h)'
+FROM pull_requests
+GROUP BY 1
+ORDER BY 1
+```
+
 ## How to improve?
+N/A
 
