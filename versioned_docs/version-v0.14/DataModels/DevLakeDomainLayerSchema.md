@@ -365,9 +365,9 @@ A pull request is the abstraction of GitHub pull request and Gitlab merge reques
 | `merge_commit_sha` | char     | 40         | the merge commit of this PR. By the definition of [Github](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch), when you click the default Merge pull request option on a pull request on Github, all commits from the feature branch are added to the base branch in a merge commit. |                |
 | `base_commit_sha`  | char     |  40        | The base commit of this PR.      |                |
 | `head_commit_sha`  | char     |  40        | The head commit of this PR.      |                |
-| `coding_time_span`| bigint     |          | PR created_date - PR's first commit's authored_date      |                |
+| `coding_timespan`| bigint     |          | PR created_date - PR's first commit's authored_date      |                |
 | `review_lag`      | bigint     |          | PR's first comment time - PR's created_date      |                |
-| `review_time_span`| bigint     |          | PR merged_date - PR's first comment time     |                |
+| `review_timespan`| bigint     |          | PR merged_date - PR's first comment time     |                |
 | `deploy_timespan` | bigint     |          | PR deployed date - PR merged_date      |                |
 | `change_timespan` | bigint     |          | PR cycle time, equals to coding_time_span + review_lag + review_time_span + deploy_timespan      |                |
 
