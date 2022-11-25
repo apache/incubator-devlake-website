@@ -50,7 +50,7 @@ where
 
 If you want to measure the monthly trend of `PR merge rate` in the screenshot below, please run the following SQL in Grafana.
 
-![](/img/Metrics/pr-merged-rate-monthly.png)
+![](/img/Metrics/pr-merge-rate-monthly.png)
 
 ```
 SELECT
