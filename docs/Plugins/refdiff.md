@@ -8,8 +8,8 @@ description: >
 
 RefDiff is a plugin that performs calculation tasks and has 2 main purposes.
 
-- Calculate the difference in commits between releases/tags to [analyze the amount of code in each release](add an anchor link)
-- Calculate the difference in commits between deployments to [calculate DORA metrics](add an anchor link)
+- Calculate the difference in commits between releases/tags to [analyze the amount of code in each release](https://github.com/apache/incubator-devlake/blob/main/plugins/refdiff/tasks/commit_diff_calculator.go)
+- Calculate the difference in commits between deployments to [calculate DORA metrics](https://github.com/apache/incubator-devlake/blob/main/plugins/refdiff/tasks/project_deployment_commit_diff_calculator.go)
 
 And the output of RefDiff is stored in the table commits_diffs, finished_commits_diffs, ref_commits.
 
@@ -39,7 +39,7 @@ To trigger the enrichment, you need to insert a new task into your pipeline.
    github:GithubRepo:1:384111310:refs/tags/v0.6.1  TAG
    ```
 2. If you want to run calculatePrCherryPick, please configure GITHUB_PR_TITLE_PATTERN in .env, you can check the example in .env.example(we have a default value, please make sure your pattern is disclosed by single quotes '')
-3. And then, trigger a pipeline like the following format, you can also define sub-tasks, calculateRefDiff will calculate commits between two refs, and creatRefBugStats will create a table to show a bug list between two refs:
+3. And then, trigger a pipeline like the following format:
 
 ```shell
 curl 'http://localhost:8080/pipelines' \
