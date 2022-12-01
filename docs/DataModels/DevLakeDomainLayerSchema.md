@@ -87,7 +87,6 @@ An `issue` is the abstraction of Jira/Github/GitLab/TAPD/... issues.
 | `updated_date`              | datetime | 3          | The last time issue gets updated                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |         |
 | `resolution_date`           | datetime | 3          | The time the issue changes to 'DONE'.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |         |
 | `lead_time_minutes`         | int      |            | Describes the cycle time from issue creation to issue resolution.<ul><li>For issues whose type = 'REQUIREMENT' and status = 'DONE', lead_time_minutes = resolution_date - created_date. The unit is minute.</li><li>For issues whose type != 'REQUIREMENT' or status != 'DONE', lead_time_minutes is null</li></ul>                                                                                                                                                                                                                                                                                      |         |
-| `deployment_id`             | varchar  | 255        | The cicd_task that relates to this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |         |
 
 #### issue_labels
 
@@ -378,11 +377,6 @@ A pull request is the abstraction of GitHub pull request and Gitlab merge reques
 | `merge_commit_sha` | char     | 40         | the merge commit of this PR. By the definition of [Github](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch), when you click the default Merge pull request option on a pull request on Github, all commits from the feature branch are added to the base branch in a merge commit. |                |
 | `base_commit_sha`  | char     | 40         | The base commit of this PR.                                                                                                                                                                                                                                                                                                                                                                    |                |
 | `head_commit_sha`  | char     | 40         | The head commit of this PR.                                                                                                                                                                                                                                                                                                                                                                    |                |
-| `coding_time_span` | bigint   |            | PR created_date - PR's first commit's authored_date                                                                                                                                                                                                                                                                                                                                            |                |
-| `review_lag`       | bigint   |            | PR's first comment time - PR's created_date                                                                                                                                                                                                                                                                                                                                                    |                |
-| `review_time_span` | bigint   |            | PR merged_date - PR's first comment time                                                                                                                                                                                                                                                                                                                                                       |                |
-| `deploy_timespan`  | bigint   |            | PR deployed date - PR merged_date                                                                                                                                                                                                                                                                                                                                                              |                |
-| `change_timespan`  | bigint   |            | PR cycle time, equals to coding_time_span + review_lag + review_time_span + deploy_timespan                                                                                                                                                                                                                                                                                                    |                |
 
 #### pull_request_labels
 
@@ -479,6 +473,31 @@ A cicd_task is a single job of ci/cd.
 | `started_date`  | datetime        | 3          | when did this task start                                        |         |
 | `finished_date` | datetime        | 3          | when did this task finish                                       |         |
 | `environment`   | varchar         | 255        | To indicate the environment in which the task is running        |         |
+
+### Project Metric Entities
+
+#### project_pr_metrics 
+
+| **field** | **type** | **length** | **description**                                                                        | **key** |
+| :-------- | :-------- |:-----------|:---------------------------------------------------------------------------------------| :-------- |
+| `id` | varchar | 255        | Id of PR                                                                               | PK |
+| `project_name` | varchar | 100        | The project that this PR belongs to                                                    | PK |
+| `first_review_id` | longtext |            | The id of the first review on this pr                                                  |  |
+| `first_commit_sha` | longtext |            | The sha of the first commit                                                            |  |
+| `pr_coding_time` | bigint |            | The time it takes from the first commit until a PR is issued                           |  |
+| `pr_pickup_time` | bigint |            | The time it takes from when a PR is issued until the first comment is added to that PR |  |
+| `pr_review_time` | bigint |            | The time it takes to complete a code review of a PR before it gets merged              |  |
+| `deployment_id` | longtext |            | The id of cicd_task which deploy the commits of this PR                                |  |
+| `pr_deploy_time` | bigint |            | The time it takes from when a PR is merged to when it is deployed                      |  |
+| `pr_cycle_time` | bigint |            | The total time from the first commit to when the PR is deployed                        |  |
+
+#### project_issue_metrics
+
+| **field** | **type** | **length** | **description**                             | **key** |
+| :-------- | :-------- |:-----------|:--------------------------------------------| :-------- |
+| `id` | varchar | 255        | Id of Issue                                 | PK |
+| `project_name` | varchar | 100        | The project that this Issue belongs to      | PK |
+| `deployment_id` | longtext |            | The id of cicd_task which cause an incident |  |
 
 ### Cross-Domain Entities
 
