@@ -31,7 +31,7 @@ export const TextLink = ({ link, children }: { link: string, children: React.Rea
   </a>
 
 export const TextSection = ({ children }: { children: React.ReactNode }) =>
-  <div className={`text-start sm:text-center w-[338px] sm:w-auto`}>
+  <div className={`text-start sm:text-center w-auto sm:w-auto lg:w-[300px] xl:w-[332px]`}>
     {children}
   </div>
 

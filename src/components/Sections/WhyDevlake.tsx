@@ -69,6 +69,7 @@ export function WhyDevlake() {
     <div
       className="
         flex flex-row mobile:flex-col sm:flex-col
+        justify-center
         mb-[72px] 
         sm:px-[0px] sm:space-y-[36px] sm:mb-[36px]
         mobile:mb-4 mobile:space-y-4
