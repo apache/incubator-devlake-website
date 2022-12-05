@@ -55,6 +55,6 @@ Here is a example for the `docker-compose` installation, the idea is applicable 
 ```
 
 
-## None of them solve my problem!
+## None of them solve your problem?
 
 Sorry for the inconvenience, please help us improve by [creating an issue](https://github.com/apache/incubator-devlake/issues)
