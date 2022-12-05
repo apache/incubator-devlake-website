@@ -1,8 +1,8 @@
 ﻿---
 title: "Domain Layer Schema"
 description: >
-  DevLake Domain Layer Schema
-sidebar_position: 2
+  The data tables to query engineering metrics
+sidebar_position: 1
 ---
 
 ## Summary
@@ -10,6 +10,9 @@ sidebar_position: 2
 This document describes Apache DevLake's domain layer schema.
 
 Referring to DevLake's [architecture](../Overview/Architecture.md), the data in the domain layer is transformed from the data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, Gitlab, Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
+
+<p align="center"><img src="/img/Architecture/arch-dataflow.svg" /></p>
+<p align="center">DevLake Dataflow</p>
 
 Domain layer schema itself includes 2 logical layers: a `DWD` layer and a `DWM` layer. The DWD layer stores the detailed data points, while the DWM is the slight aggregation and operation of DWD to store more organized details or middle-level metrics.
 
