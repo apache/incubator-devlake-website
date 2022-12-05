@@ -54,4 +54,3 @@ You can choose how often you would like to sync your data in this step by select
 ## FAQ
 
 If you run into any problem, please check the [FAQ](../FAQ.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)
-
