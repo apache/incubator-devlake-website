@@ -53,25 +53,5 @@ You can choose how often you would like to sync your data in this step by select
 
 ## FAQ
 
-### How to collect data from Gitlab server with Self-Signed Certificate
+If you run into any problem, try finding the answer in [FAQ](../FAQ.md)
 
-There might be two problems when trying to collect data from a private GitLab server with a self-signed certificate:
-
-1. "Test Connection" error. This can be solved by setting the environment variable `IN_SECURE_SKIP_VERIFY=true` for the `devlake` container
-2. "GitExtractor" fails to clone the repository due to certificate verification, sadly, neither gogit nor git2go we are using supports insecure HTTPS.
-
-A better approach would be adding your root CA to the `devlake` container:
-
-1. Mount your `rootCA.crt` into the `devlake` container
-2. Add a `command` node to install the mounted certificate
-
-```
-  devlake:
-    image: apache/devlake:v...
-    ...
-    volumes:
-      ...
-      - /path/to/your/rootCA.crt:/usr/local/share/ca-certificates/rootCA.crt
-    command: [ "sh", "-c", "update-ca-certificates; lake" ]
-    ...
-```
