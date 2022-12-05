@@ -5,7 +5,7 @@ description: >
   Frequently Asked Questions
 ---
 
-## How to collect data from server with Self-Signed Certificate
+## Failed to collect data from the server with a self-signed certificate
 
 There might be two problems when trying to collect data from a private GitLab server with a self-signed certificate:
 
@@ -53,3 +53,8 @@ Here is a example for the `docker-compose` installation, the idea is applicable 
     # add the follow line to the mysql container
     command: --innodb-buffer-pool-size=200M
 ```
+
+
+## None of them solve my problem!
+
+Sorry for the inconvenience, please help us improve by [creating an issue](https://github.com/apache/incubator-devlake/issues)
