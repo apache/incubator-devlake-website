@@ -21,7 +21,7 @@ A plugin may extend DevLake's capability in three ways:
 
 There are, as of now, support for two types of plugins:
 
-1. __*Conventional plugins*__: These are the primary type of plugins used by Devlake, and require the developer to write the most amount of code starting from fetching (collecting) data from data sources to converting them into our normalized datamodels and storing them.
+1. __*Conventional plugins*__: These are the primary type of plugins used by Devlake, and require the developer to write the most amount of code starting from fetching (collecting) data from data sources to converting them into our normalized data models and storing them.
 2. __*Singer-spec plugins*__: These plugins utilize [Singer-taps](https://www.singer.io/) to retrieve data from data-sources thereby eliminating the developer's burden of writing the collection logic. More on them [here](#how-do-singer-spec-plugins-work).
 
 
@@ -519,14 +519,14 @@ var CollectIssuesMeta = core.SubTaskMeta{
 ```
 
 
-*3.5*. Generate the datamodels corresponding to the JSON schemas of the streams of interest. These make life easy at the Extractor stage as we will not need to write "Response" structs by hand.
+*3.5*. Generate the data models corresponding to the JSON schemas of the streams of interest. These make life easy at the Extractor stage as we will not need to write "Response" structs by hand.
 We have a custom script that gets this job done. See `scripts/singer-model-generator.sh`. For our example, if we care about
 writing an extractor for GitHub Issues, we'll have to refer to the properties.json (or github.json) file to identify the stream name associated with it. In this case, it is called "issues". Next, we run the following
 command: ```sh ./scripts/singer-model-generator.sh "./config/tap/github.json" "./plugins/github_singer" "issues"```. (Make sure the script has execution permissions - ```sh chmod +x ./scripts/singer-model-generator.sh```.
 For the sake of convenience, the script supports an `--all` flag in place of the stream. This will generate source files for all stream. Also, see the `tap-models` target in the Makefile for references, and add your invocations
 there.
 
-This will generate Go (raw) datamodels and place them under `github_singer/models/generated`. Do not modify these files manually.
+This will generate Go (raw) data models and place them under `github_singer/models/generated`. Do not modify these files manually.
 
 *3.5.1*. Note: Occasionally, the tap properties will not expose all the supported fields in the JSON schema - you can go and manually add them there in the JSON file. Additionally, you might run into type-problems (for instance IDs coming back as strings but declared as integers). In general, these would be rare scenarios, and technically bugs for the tap that you would experimentally run into while testing.
 Either way, if you need to modify these data-types, do it in the JSON file.
