@@ -9,7 +9,7 @@ sidebar_position: 2
 
 This document describes Apache DevLake's tool layer schema.
 
-Referring to DevLake's [architecture](../Overview/Architecture.md), the Tool layer extracts raw data from JSONs into a relational schema that's easier to consume by analytical tasks. Each DevOps tool would have a schema that's tailored to their data structure, hence the name, the Tool layer.
+Referring to DevLake's [architecture](../Overview/Architecture.md), the Tool layer extracts raw data from JSONs into a relational schema that's easier to consume by analytical tasks. Each DevOps tool would have a schema that's tailored to its data structure, hence the name, the Tool layer.
 
 
 ## Use Cases
@@ -25,4 +25,4 @@ Tool layer tables start with a prefix `_tool_`. Each plugin contains multiple to
 - _tool_jira_board_issues`
 - ...
 
-Normally, you do not need to use tool layer tables, unless you have use cases above.
+Normally, you do not need to use tool layer tables, unless you have one of the above use cases.
