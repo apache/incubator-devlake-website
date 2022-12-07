@@ -26,4 +26,4 @@ Raw layer tables start with a prefix `_raw_`. Each plugin contains multiple raw 
 - _raw_jira_board_issues
 - ...
 
-Normally, you do not need to use these tables, unless you have use cases above.
+Normally, you do not need to use these tables, unless you have one of the above use cases.

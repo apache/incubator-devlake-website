@@ -7,7 +7,7 @@ sidebar_position: 4
 
 ## Summary
 
-This document describes Apache DevLake's data models of its own entities.
+This document describes Apache DevLake's data models of its own entities. These tables are used and managed by the Devlake framework. 
 
 
 ## Use Cases
@@ -25,4 +25,4 @@ These tables start with a prefix `_devlake`. Unlike raw or tool data tables, Dev
 - _devlake_subtasks
 - ...
 
-Normally, you do not need to use these tables, unless you have use cases above.
+Normally, you do not need to use these tables, unless you have one of the above use cases.
