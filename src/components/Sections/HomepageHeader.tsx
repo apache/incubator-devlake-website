@@ -153,6 +153,7 @@ export function HomepageHeader() {
         className=" 
               pl-[30px] pr-[30px]
               flex 
+              justify-between
               sm:flex-wrap
               xl:justify-between
               sm:justify-around
