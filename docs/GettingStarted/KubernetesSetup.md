@@ -49,3 +49,8 @@ We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlak
      * `MYSQL_DATABASE`: use your RDS instance's DB name, you may need to create a database first with `CREATE DATABASE <DB name>;`
      * `MYSQL_URL`: set this for `grafana` in `$HOST:$PORT` format, where $HOST and $PORT should be your RDS instance's endpoint and port respectively
      * `DB_URL`: update the connection string with your RDS instance's info for `devlake`
+
+
+## Troubleshooting
+
+If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Installation.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)

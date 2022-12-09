@@ -95,3 +95,8 @@ This section is for editing a Blueprint in the Advanced Mode. To edit in the Nor
 To edit a Blueprint created in the Advanced mode, you can simply go the Settings page of that Blueprint and click on Edit JSON to edit its configuration.
 
 ![img](/img/ConfigUI/BlueprintEditing/blueprint-edit2.png)
+
+
+## Troubleshooting
+
+If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)

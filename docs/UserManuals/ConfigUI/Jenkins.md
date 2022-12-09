@@ -42,3 +42,8 @@ There are no transformation rules for Jenkins.
 
 ### Step 4 - Setting Sync Frequency
 You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your prefered schedule.
+
+
+## Troubleshooting
+
+If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)

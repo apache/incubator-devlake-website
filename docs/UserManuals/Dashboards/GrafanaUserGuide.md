@@ -118,3 +118,8 @@ To ensure we have properly connected our database to the data source in Grafana,
 - `database`
 - `user`
 - `secureJsonData/password`
+
+
+## Troubleshooting
+
+If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Dashboard.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)

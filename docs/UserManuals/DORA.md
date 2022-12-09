@@ -180,3 +180,8 @@ If you aren't familiar with Grafana, please refer to our [Grafana doc](./Dashboa
 
 <br/><br/><br/>
 
+
+
+## Troubleshooting
+
+If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)

@@ -32,3 +32,8 @@ Install DevLake in Rainbond is the easiest way to get started.
 ## Next Step
 
 Creating a Blueprint, ref [Tutorial](/docs/UserManuals/ConfigUI/Tutorial#creating-a-blueprint)
+
+
+## Troubleshooting
+
+If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Installation.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)

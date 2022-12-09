@@ -51,6 +51,6 @@ There are no transformation rules for GitLab repos.
 You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your prefered schedule.
 
 
-## FAQ
+## Troubleshooting
 
-If you run into any problem, please check the [FAQ](../FAQ.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)
+If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)

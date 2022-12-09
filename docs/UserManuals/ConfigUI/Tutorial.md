@@ -68,3 +68,8 @@ The Settings page for editing Blueprints:
 
 ## Creating and Managing Data Connections
 The Data Connections page allows you to view, create and manage all your data connections in one place. 
+
+
+## Troubleshooting
+
+If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)

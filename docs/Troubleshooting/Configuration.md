@@ -1,8 +1,8 @@
 ---
-title: "FAQ"
-sidebar_position: 10
+title: "Configuration Troubleshotting"
+sidebar_position: 2
 description: >
-  Frequently Asked Questions
+  Configuration Troubleshotting
 ---
 
 ## Failed to collect data from the server with a self-signed certificate

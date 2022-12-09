@@ -29,4 +29,8 @@ For tapd, we suggest you to set rate limit to 3500
 #### Test and Save Connection
 Click `Test Connection`, if the connection is successful, click `Save Connection` to add the connection.
 
-###
+
+
+## Troubleshooting
+
+If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)

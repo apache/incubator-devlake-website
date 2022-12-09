@@ -18,3 +18,8 @@ After clicking on "Generate POST URL", you will find four webhook URLs. Copy the
 ![image](https://user-images.githubusercontent.com/3294100/191400110-327c153f-b236-47e3-88cc-85bf8fcae310.png)
 
 For more usage: [plugins/webhook](/Plugins/webhook.md).
+
+
+## Troubleshooting
+
+If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)
