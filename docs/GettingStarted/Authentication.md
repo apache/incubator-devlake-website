@@ -36,3 +36,8 @@ THIS IS DANGEROUS, DON'T DO IT. If you insist, here are some suggestions you may
 ## Disclaimer
 
 Security is complicated, all suggestions listed above are based on what we learned so far. Apache Devlake makes no guarantee of any kind, please consult your Security Advisor before applying.
+
+
+## Troubleshooting
+
+If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Installation.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)

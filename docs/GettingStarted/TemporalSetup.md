@@ -33,3 +33,8 @@ But, be careful, many API services like JIRA/GITHUB have a request rate limit me
 
 1. Clone and fire up the [temporalio](https://temporal.io/) services
 2. Clone this repo, and fire up DevLake with command `docker-compose -f deployment/temporal/docker-compose-temporal.yml up -d`
+
+
+## Troubleshooting
+
+If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Installation.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)

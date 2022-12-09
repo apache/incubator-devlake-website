@@ -186,3 +186,8 @@ FROM accounts a
         join user_accounts ua on a.id = ua.account_id
         join users u on ua.user_id = u.id
 ```
+
+
+## Troubleshooting
+
+If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Installation.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)
