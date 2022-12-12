@@ -4,8 +4,6 @@ description: >
   GitHub Plugin
 ---
 
-
-
 ## Summary
 
 This plugin gathers data from `GitHub` to display information to the user in `Grafana`. We can help tech leaders answer such questions as:
@@ -14,23 +12,29 @@ This plugin gathers data from `GitHub` to display information to the user in `Gr
 - How fast do we respond to customer requirements?
 - Was our quality improved or not?
 
+## Entities
+
+- [entities](https://devlake.apache.org/docs/next/Overview/SupportedDataSources)
+
 ## Metrics
 
-Here are some examples metrics using `GitHub` data:
-- Avg Requirement Lead Time By Assignee
-- Bug Count per 1k Lines of Code
-- Commit Count over Time
-
-## Screenshot
-
-![image](/img/Plugins/github-demo.png)
-
+- [Requirement Count](https://devlake.apache.org/docs/next/Metrics/RequirementCount)
+- [Requirement Lead Time](https://devlake.apache.org/docs/next/Metrics/RequirementLeadTime)
+- [Requirement Delivery Rate](https://devlake.apache.org/docs/next/Metrics/RequirementDeliveryRate)
+- [Requirement Granularity](https://devlake.apache.org/docs/next/Metrics/RequirementGranularity)
+- [Bug Age](https://devlake.apache.org/docs/next/Metrics/BugAge)
+- [Incident Age](https://devlake.apache.org/docs/next/Metrics/IncidentAge)
+- [PR Count](https://devlake.apache.org/docs/next/Metrics/PRCount)
+- [PR Time To Merge](https://devlake.apache.org/docs/next/Metrics/PRTimeToMerge)
+- [PR Merge Rate](https://devlake.apache.org/docs/next/Metrics/PRMergeRate)
 
 ## Configuration
-- Configuring GitHub via [config-ui](/UserManuals/ConfigUI/GitHub.md).
 
-## Sample Request
-To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and paste a JSON config like the following:
+- Configuring GitHub via [config-ui](https://devlake.apache.org/docs/next/UserManuals/ConfigUI/GitHub)
+
+## API Sample Request
+
+To collect data, select `Advanced Mode` on the `Create Blueprint` page and paste a JSON config like the following:
 
 ```json
 [
@@ -39,29 +43,26 @@ To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and pa
       "plugin": "github",
       "options": {
         "connectionId": 1,
-        "repo": "lake",
-        "owner": "merico-dev"
+        "owner": "apache",
+        "repo": "incubator-devlake",
+        "transformationRules": {
+          "deploymentPattern": "",
+          "issueComponent": "",
+          "issuePriority": "(high|medium|low)$",
+          "issueSeverity": "",
+          "issueTypeBug": "(bug)$",
+          "issueTypeIncident": "",
+          "issueTypeRequirement": "(feature|feature-request)$",
+          "prBodyClosePattern": "",
+          "prComponent": "",
+          "prType": "(?i)push"
+        }
       }
     }
   ]
 ]
 ```
 
-You can also trigger data collection by making a POST request to `/pipelines`.
-```
-curl 'http://localhost:8080/pipelines' \
---header 'Content-Type: application/json' \
---data-raw '
-{
-    "name": "github 20211126",
-    "tasks": [[{
-        "plugin": "github",
-        "options": {
-            "connectionId": 1,
-            "repo": "lake",
-            "owner": "merico-dev"
-        }
-    }]]
-}
-'
-```
+## References
+
+- [references](https://devlake.apache.org/docs/next/DeveloperManuals)
