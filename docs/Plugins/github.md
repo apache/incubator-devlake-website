@@ -14,55 +14,64 @@ This plugin gathers data from `GitHub` to display information to the user in `Gr
 
 ## Entities
 
-- [entities](https://devlake.apache.org/docs/next/Overview/SupportedDataSources)
+Look at the entities collected by this plugin.
+
+- [entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin)
 
 ## Metrics
 
-- [Requirement Count](https://devlake.apache.org/docs/next/Metrics/RequirementCount)
-- [Requirement Lead Time](https://devlake.apache.org/docs/next/Metrics/RequirementLeadTime)
-- [Requirement Delivery Rate](https://devlake.apache.org/docs/next/Metrics/RequirementDeliveryRate)
-- [Requirement Granularity](https://devlake.apache.org/docs/next/Metrics/RequirementGranularity)
-- [Bug Age](https://devlake.apache.org/docs/next/Metrics/BugAge)
-- [Incident Age](https://devlake.apache.org/docs/next/Metrics/IncidentAge)
-- [PR Count](https://devlake.apache.org/docs/next/Metrics/PRCount)
-- [PR Time To Merge](https://devlake.apache.org/docs/next/Metrics/PRTimeToMerge)
-- [PR Merge Rate](https://devlake.apache.org/docs/next/Metrics/PRMergeRate)
+- [Requirement Count](/Metrics/RequirementCount.md)
+- [Requirement Lead Time](/Metrics/RequirementLeadTime.md)
+- [Requirement Delivery Rate](/Metrics/RequirementDeliveryRate.md)
+- [Requirement Granularity](/Metrics/RequirementGranularity.md)
+- [Bug Age](/Metrics/BugAge.md)
+- [Incident Age](/Metrics/IncidentAge.md)
+- [PR Count](/Metrics/PRCount.md)
+- [PR Time To Merge](/Metrics/PRTimeToMerge.md)
+- [PR Merge Rate](/Metrics/PRMergeRate.md)
 
 ## Configuration
 
-- Configuring GitHub via [config-ui](https://devlake.apache.org/docs/next/UserManuals/ConfigUI/GitHub)
+- Configuring GitHub via [Config UI](/UserManuals/ConfigUI/GitHub.md)
 
 ## API Sample Request
 
-To collect data, select `Advanced Mode` on the `Create Blueprint` page and paste a JSON config like the following:
+You can trigger data collection by making a POST request to `/pipelines`.
 
-```json
-[
-  [
-    {
-      "plugin": "github",
-      "options": {
-        "connectionId": 1,
-        "owner": "apache",
-        "repo": "incubator-devlake",
-        "transformationRules": {
-          "deploymentPattern": "",
-          "issueComponent": "",
-          "issuePriority": "(high|medium|low)$",
-          "issueSeverity": "",
-          "issueTypeBug": "(bug)$",
-          "issueTypeIncident": "",
-          "issueTypeRequirement": "(feature|feature-request)$",
-          "prBodyClosePattern": "",
-          "prComponent": "",
-          "prType": "(?i)push"
+```
+curl 'http://localhost:8080/pipelines' \
+--header 'Content-Type: application/json' \
+--data-raw '
+{
+  "name": "project1-BLUEPRINT",
+  "blueprintId": 1,
+  "plan": [
+    [
+      {
+        "plugin": "github",
+        "options": {
+          "connectionId": 1,
+          "scopeId": "384111310",
+          "transformationRules":{
+            "deploymentPattern":"",
+            "issueComponent":"",
+            "issuePriority":"(high|medium|low)$",
+            "issueSeverity":"",
+            "issueTypeBug":"(bug)$",
+            "issueTypeIncident":"",
+            "issueTypeRequirement":"(feature|feature-request)$",
+            "prBodyClosePattern":"",
+            "prComponent":"",
+            "prType":""
+          }
         }
       }
-    }
+    ]
   ]
-]
+}
+'
 ```
 
 ## References
 
-- [references](https://devlake.apache.org/docs/next/DeveloperManuals)
+- [references](/DeveloperManuals/DeveloperSetup.md#references)
