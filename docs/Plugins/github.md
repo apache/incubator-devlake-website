@@ -18,7 +18,7 @@ Check out the [GitHub entities](/Overview/SupportedDataSources.md#data-collectio
 
 ## Data Refresh Policy
 
-- [data refresh policy](/Overview/SupportedDataSources.md#github)
+Check out the [data refresh policy](/Overview/SupportedDataSources.md#github) of this plugin.
 
 ## Metrics
 
