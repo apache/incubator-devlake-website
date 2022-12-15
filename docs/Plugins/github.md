@@ -14,11 +14,15 @@ This plugin gathers data from `GitHub` to display information to the user in `Gr
 
 ## Entities
 
-Look at the entities collected by this plugin.
+Check out the [GitHub entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.
 
-- [entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin)
+## Data Refresh Policy
+
+- [data refresh policy](/Overview/SupportedDataSources.md#github)
 
 ## Metrics
+
+Metrics that can be calculated based on the data collected from GitHub:
 
 - [Requirement Count](/Metrics/RequirementCount.md)
 - [Requirement Lead Time](/Metrics/RequirementLeadTime.md)
