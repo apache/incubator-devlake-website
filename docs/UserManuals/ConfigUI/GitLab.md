@@ -34,7 +34,7 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 #### Projects
 Choose the Gitlab projects to collect. Limited by GitLab API, You need to type more than 2 characters to search.
 
-* If you want to collect public repos in GitLab, please uncheck "Only search my repositories" to find all repos.
+* If you want to collect public repositories in GitLab, please uncheck "Only search my repositories" to search all repositories.
 
 #### Data Entities
 Usually, you don't have to modify this part. However, if you don't want to collect certain GitLab entities, you can unselect some entities to accerlerate the collection speed.
@@ -45,7 +45,17 @@ Usually, you don't have to modify this part. However, if you don't want to colle
 - Cross Domain: GitLab accounts, etc.
 
 ### Step 3 - Adding Transformation Rules (Optional)
-There are no transformation rules for GitLab repos.
+
+#### CI/CD
+This set of configurations is used for calculating [DORA metrics](../DORA.md).
+
+If you're using GitLab CI to conduct `deployments`, please select "Detect Deployment from Jobs in GitLab CI", and input the RegEx in the following fields:
+- Deployment: A GitLab CI job with a name that matches the given regEx will be considered as a deployment.
+- Production: A GitLab CI job with a name that matches the given regEx will be considered a job in the production environment.
+
+By the above two fields, DevLake can identify a production deployment among massive CI jobs.
+
+You can also select "Not using Jobs in GitLab CI as Deployments" if you're not using GitLab CI to conduct deployments.
 
 ### Step 4 - Setting Sync Frequency
 You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your prefered schedule.
