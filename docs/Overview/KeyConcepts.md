@@ -13,6 +13,13 @@ description: >
 
 The following terms are arranged in the order of their appearance in the actual user workflow.
 
+### Projects
+**A project is a method to group data**. Apache DevLake supports users to view metrics based on projects. A `project` is associated with multiple sets of [Data Scope](#data-scope), such as GitHub/GitLab repositories, Jira boards, Jenkins pipelines, etc. Metrics for a project are calculated based on the data entities(#data-entities) under the project's data scope. 
+
+A project has one [Blueprint](#Bluepirnts) for data collection and metric computation.
+
+For example, when a user associates 'Jenkins Job A' and  'Jira board B' with project 1, then ONLY `deployments` in 'Jenkins Job A' and `incidents` in 'Jira board B' will be used to calculate **Change Failure Rate** for project 1.
+
 ### Blueprints
 **A blueprint is the plan that covers all the work to get your raw data ready for query and metric computation in the dashboards.** Creating a blueprint consists of four steps:
 1. **Adding [Data Connections](#data-connections)**: For each [data source](#data-sources), one or more data connections can be added to a single blueprint, depending on the data you want to sync to DevLake.
