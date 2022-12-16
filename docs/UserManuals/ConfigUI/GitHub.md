@@ -12,16 +12,23 @@ Visit config-ui: `http://localhost:4000`.
 Name your connection.
 
 #### Endpoint URL
-This should be a valid REST API endpoint, eg. `https://api.github.com/`. The url should end with `/`.
+This should be a valid REST API endpoint, eg. `https://api.github.com/`. The URL should end with `/`.
 
-#### Basic Auth Token(s)
-GitHub personal access tokens are required to add a connection.
-- Learn about [how to create a GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). The following permissions are required for `Apache DevLake` to collect data from private repositories:
+#### Auth Token(s)
+You can use one of the following GitHub tokens: personal access tokens(PATs) or fine-grained personal access tokens.
+
+###### GitHub personal access tokens(PATs)
+Learn about [how to create a GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). The following permissions are required to collect data from repositories:
   - `repo:status`
   - `repo_deployment`
   - `read:user`
   - `read:org`
-- The data collection speed is relatively slow for GitHub since they have a **rate limit of [5,000 requests](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) per hour** (15,000 requests/hour if you pay for GitHub enterprise). You can accelerate the process by configuring _multiple_ personal access tokens. Please note that multiple tokens should be created by different GitHub accounts. Tokens belonging to the same GitHub account share the rate limit.
+
+###### Fine-grained personal access tokens(Fine-grained PATs)
+If you're concerned with giving classic PATs full unrestricted access to your repositories, you can use fine-grained PATs announced by GitHub recently. With fine-grained PATs, GitHub users can create read-only PATs that only have access to repositories under certain GitHub orgs. But in order to do that, org admin needs to enroll that org with fine-grained PATs beta feature first. Please check [this doc](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-fine-grained-personal-access-token) for more details.
+
+Token Rate Limit:<br/>
+The data collection speed is restricted by the **rate limit of [5,000 requests](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) per hour per token** (15,000 requests/hour if you pay for GitHub enterprise). You can accelerate data collection by configuring _multiple_ personal access tokens. Please note that multiple tokens should be created by different GitHub accounts. Tokens belonging to the same GitHub account share the rate limit.
 
 #### Use Graphql APIs
 
