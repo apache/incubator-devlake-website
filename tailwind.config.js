@@ -5,6 +5,7 @@ tailwindConfig.theme.extend.fontSize = {
     ...tailwindConfig.theme.extend.fontSize,
     label40: ['40px', { lineHeight : '56px' }],
     label20: ['20px', { lineHeight: '30px' }],
+    label12: ['12px', { lineHeight: '15px' }],
     label16Lake: ['16px', { lineHeight: '22px' }]
 }
 module.exports = tailwindConfig;
