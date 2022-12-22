@@ -8,41 +8,56 @@ description: >
 
 This plugin collects Jenkins data through [Remote Access API](https://www.jenkins.io/doc/book/using/remote-access-api/). It then computes and visualizes various DevOps metrics from the Jenkins data.
 
-![image](https://user-images.githubusercontent.com/61080/141943122-dcb08c35-cb68-4967-9a7c-87b63c2d6988.png)
+## Entities
+
+Check out the [Jenkins entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.
+
+## Data Refresh Policy
+
+Check out the [data refresh policy](/Overview/SupportedDataSources.md#jenkins) of this plugin.
 
 ## Metrics
 
-| Metric Name        | Description                         |
-|:-------------------|:------------------------------------|
-| Build Count        | The number of builds created        |
-| Build Success Rate | The percentage of successful builds |
+Metrics that can be calculated based on the data collected from Jenkins:
+
+- [Build Count](/Metrics/BuildCount.md)
+- [Build Duration](/Metrics/BuildDuration.md)
+- [Build Success Rate](/Metrics/BuildSuccessRate.md)
 
 ## Configuration
 
-In order to fully use this plugin, you will need to set various configurations via Dev Lake's `config-ui`.
+- Configuring Jenkins via [Config UI](/UserManuals/ConfigUI/Jenkins.md)
 
-### By `config-ui`
+## API Sample Request
 
-The connection section of the configuration screen requires the following key fields to connect to the Jenkins API.
+You can trigger data collection by making a POST request to `/pipelines`.
 
-## Collect Data From Jenkins
-
-To collect data, select `Advanced Mode` on the `Create Pipeline Run` page and paste a JSON config like the following:
-
-```json
-[
-  [
-    {
-      "plugin": "jenkins",
-      "options": {
-        "connectionId": 1,
-        "jobName": "unit_test"
+```
+curl 'http://localhost:8080/pipelines' \
+--header 'Content-Type: application/json' \
+--data-raw '
+{
+  "name": "project1-BLUEPRINT",
+  "blueprintId": 1,
+  "plan": [
+    [
+      {
+        "plugin": "jenkins",
+        "options": {
+          "connectionId": 1,
+          "scopeId": "auto_deploy",
+          "transformationRules":{
+            "deploymentPattern":"",
+            "productionPattern":""
+          }
+        }
       }
-    }
+    ]
   ]
-]
+}
+'
 ```
 
-## Relationship between job and build
+## References
 
-Build is kind of a snapshot of job. Running job each time creates a build.
+- [references](/DeveloperManuals/DeveloperSetup.md#references)

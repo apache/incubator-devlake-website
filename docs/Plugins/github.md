@@ -58,6 +58,7 @@ curl 'http://localhost:8080/pipelines' \
           "scopeId": "384111310",
           "transformationRules":{
             "deploymentPattern":"",
+            "productionPattern":"",
             "issueComponent":"",
             "issuePriority":"(high|medium|low)$",
             "issueSeverity":"",
