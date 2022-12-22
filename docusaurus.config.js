@@ -157,6 +157,11 @@ const versions = require('./versions.json');
             docsPluginId: 'community'
           },
           {
+            to: '/team',
+            label: 'Team',
+            position: 'right'
+          },
+          {
             to: '/blog',
             label: 'Blog',
             position: 'right'

@@ -1,0 +1,95 @@
+{
+  "data": [
+    {
+      "realName": "Willem Ning Jiang",
+      "githubId": "WillemJiang",
+      "email": "willem.jiang@gmail.com",
+      "avatar": "https://avatars.githubusercontent.com/u/219644?v=4",
+      "githubLink": "https://github.com/WillemJiang"
+    },
+    {
+      "realName": "Liang Zhang",
+      "githubId": "terrymanu",
+      "email": "zhangliang@apache.org",
+      "avatar": "https://avatars.githubusercontent.com/u/5516298?v=4",
+      "githubLink": "https://github.com/terrymanu"
+    },
+    {
+      "realName": "Lidong Dai",
+      "githubId": "davidzollo",
+      "email": "davidzollo365@gmail.com",
+      "avatar": "https://avatars.githubusercontent.com/u/15833811?v=4",
+      "githubLink": "https://github.com/davidzollo"
+    },
+    {
+      "realName": "Sijie Guo",
+      "githubId": "sijie",
+      "email": "",
+      "avatar": "https://avatars.githubusercontent.com/u/1217863?v=4",
+      "githubLink": "https://github.com/sijie"
+    },
+    {
+      "realName": "Felix Cheung",
+      "githubId": "felixcheung",
+      "email": "j.c@shogun.io",
+      "avatar": "https://avatars.githubusercontent.com/u/8969467?v=4",
+      "githubLink": "https://github.com/felixcheung"
+    },
+    {
+      "realName": "Jean-Baptiste Onofré",
+      "githubId": "jbonofre",
+      "email": "jbonofre@apache.org",
+      "avatar": "https://avatars.githubusercontent.com/u/158903?v=4",
+      "githubLink": "https://github.com/jbonofre"
+    },
+    {
+      "realName": "Klesh Wong",
+      "githubId": "klesh",
+      "email": "",
+      "avatar": "https://avatars.githubusercontent.com/u/61080?v=4",
+      "githubLink": "https://github.com/klesh"
+    },
+    {
+      "realName": "Julien Chinapen",
+      "githubId": "e2corporation",
+      "email": "j.c@shogun.io",
+      "avatar": "https://avatars.githubusercontent.com/u/1742233?v=4",
+      "githubLink": "https://github.com/e2corporation"
+    },
+    {
+      "realName": "Liang Zhang",
+      "githubId": "mindlesscloud",
+      "email": "liang.zhang@merico.dev",
+      "avatar": "https://avatars.githubusercontent.com/u/8455907?v=4",
+      "githubLink": "https://github.com/mindlesscloud"
+    },
+    {
+      "realName": "Yingchu Chen",
+      "githubId": "warren830",
+      "email": "",
+      "avatar": "https://avatars.githubusercontent.com/u/39366025?v=4",
+      "githubLink": "https://github.com/warren830"
+    },
+    {
+      "realName": "Oliver O'Donnell",
+      "githubId": "joncodo",
+      "email": "joncodo@gmail.com",
+      "avatar": "https://avatars.githubusercontent.com/u/3011407?v=4",
+      "githubLink": "https://github.com/joncodo"
+    },
+    {
+      "realName": "Hezheng Yin",
+      "githubId": "hezyin",
+      "email": "hezheng@merico.dev",
+      "avatar": "https://avatars.githubusercontent.com/u/2908155?v=4",
+      "githubLink": "https://github.com/hezyin"
+    },
+    {
+      "realName": "Maxim Wheatley",
+      "githubId": "MaximDub",
+      "email": "maxim@merico.dev",
+      "avatar": "https://avatars.githubusercontent.com/u/84928455?v=4",
+      "githubLink": "https://github.com/MaximDub"
+    }
+  ]
+}
