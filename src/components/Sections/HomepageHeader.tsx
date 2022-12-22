@@ -54,7 +54,7 @@ export function HomepageHeader() {
             text-label40 sm:text-heading2 mobile:text-label20
             sm:font-semibold"
           >
-            Debug Engineering Processes <br className="sm:hidden mobile:block" />Discover Opportunities with DORA Metrics
+            Debug engineering processes and discover opportunities with DORA, Community Growth, Engineering Throughput and more DevLake dashboards...
           </div>
           <div
             className="
