@@ -29,7 +29,7 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 
 #### Jobs
 
-Choose the Jenkins jobs to collect.
+Choose the Jenkins jobs. All `Jenkins builds` under these jobs will be collected.
 
 #### Data Entities
 
@@ -38,7 +38,15 @@ Jenkins only supports `CI/CD` domain entities, transformed from Jenkins builds a
 - CI/CD: Jenkins builds, stages, etc.
 
 ### Step 3 - Adding Transformation Rules (Optional)
-There are no transformation rules for Jenkins.
+This set of configurations is used for calculating [DORA metrics](../DORA.md).
+
+If you're using Jenkins builds to conduct `deployments`, please select "Detect Deployment from Jenkins Builds", and input the RegEx in the following fields:
+- Deployment: A Jenkins build with a name that matches the given regEx will be considered as a deployment.
+- Production: A Jenkins build with a name that matches the given regEx will be considered a build in the production environment.
+
+By the above two fields, DevLake can identify a production deployment among massive CI jobs.
+
+You can also select "Not using Jenkins builds as Deployments" if you're not using Jenkins to conduct deployments.
 
 ### Step 4 - Setting Sync Frequency
 You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your prefered schedule.
