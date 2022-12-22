@@ -12,8 +12,8 @@ const meau = [
   'Oct-Dec-2022',
   'July-Sept-2022',
   'April-June-2022',
-  'Jan-March-2022',
-  'Time-Not-Specified'
+  // 'Jan-March-2022',
+  'Time Not Specified'
 ]
 
 
@@ -110,20 +110,19 @@ function MakeContributions() {
             Anyone can be a contributor of Apache DevLake. Come grow with us!
           </p>
         </div>
-        <div className="">
           <Link
           className="
+            relative z-20
             mobile:mt-4
             bg-primary-500
             primary-button
             w-[160px] h-[48px] 
             rounded-[10px] font-normal text-heading4
             "
-          to="https://devlake.apache.org/docs/UserManuals/DORA"
+            to="https://devlake.apache.org/community/make-contribution/contributor-growth-program"
         >
             Start Contributing
           </Link>
-        </div>
       </div>
     </div>
   );
