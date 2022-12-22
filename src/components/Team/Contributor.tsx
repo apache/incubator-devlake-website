@@ -119,7 +119,7 @@ function MakeContributions() {
             w-[160px] h-[48px] 
             rounded-[10px] font-normal text-heading4
             "
-            to="https://devlake.apache.org/community/make-contribution/contributor-growth-program"
+            to="https://devlake.apache.org/community/make-contribution/development-workflow"
         >
             Start Contributing
           </Link>
