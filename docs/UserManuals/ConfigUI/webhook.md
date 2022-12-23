@@ -4,21 +4,30 @@ sidebar_position: 7
 description: Config UI instruction for Webhook
 ---
 
-Visit the config-ui via the Domain Name or IP Address and Port, 
+Visit config-ui: `http://localhost:4000`.
 
-### Add a new incoming webhook
-![image](https://user-images.githubusercontent.com/3294100/191309840-460fbc9c-15a1-4b12-a510-9ed5ccd8f2b0.png)
+### Step 1 - Add Data Connections
+
+![webhook-add-data-connections](/img/ConfigUI/webhook-add-data-connections.png)
 
 #### Webhook name
+
 We recommend that you give your webhook connection a unique name so that you can identify and manage where you have used it later.
 
 ### Use Webhooks
+
 After clicking on "Generate POST URL", you will find four webhook URLs. Copy the ones that suit your usage into your CI or issue-tracking systems. You can always come back to the webhook page to copy the URLs later on.
 
-![image](https://user-images.githubusercontent.com/3294100/191400110-327c153f-b236-47e3-88cc-85bf8fcae310.png)
+![webhook-use](/img/ConfigUI/webhook-use.png)
 
-For more usage: [plugins/webhook](/Plugins/webhook.md).
+### Put webhook on the internet
 
+For the new webhook to work, it needs to be accessible from the DevOps tools from which you would like to push data to DevLake. If DevLake is deployed in your private network and your DevOps tool (e.g. CircleCI) is a cloud service that lives outside of your private network, then you need to make DevLake's webhook accessible to the outside cloud service.
+
+There're many tools for this:
+
+- For testing and quick setup, [ngrok](https://ngrok.com/) is a useful utility that provides a publicly accessible web URL to any locally hosted application. You can put DevLake's webhook on the internet within 5 mins by following ngrok's [Getting Started](https://ngrok.com/docs/getting-started) guide. Note that, when posting to webhook, you may need to replace the `localhost` part in the webhook URL with the forwarding URL that ngrok provides.
+- If you prefer DIY, please checkout open-source reverse proxies like [fatedier/frp](https://github.com/fatedier/frp) or go for the classic [nginx](https://www.nginx.com/).
 
 ## Troubleshooting
 
