@@ -21,7 +21,7 @@ A plugin may extend DevLake's capability in three ways:
 
 There are, as of now, support for two types of plugins:
 
-1. __*Conventional plugins*__: These are the primary type of plugins used by Devlake, and require the developer to write the most amount of code starting from fetching (collecting) data from data sources to converting them into our normalized datamodels and storing them.
+1. __*Conventional plugins*__: These are the primary type of plugins used by Devlake, and require the developer to write the most amount of code starting from fetching (collecting) data from data sources to converting them into our normalized data models and storing them.
 2. __*Singer-spec plugins*__: These plugins utilize [Singer-taps](https://www.singer.io/) to retrieve data from data-sources thereby eliminating the developer's burden of writing the collection logic. More on them [here](#how-do-singer-spec-plugins-work).
 
 
@@ -348,7 +348,7 @@ Congratulations! The first plugin has been created! 🎖
 
 ## How do Singer-spec plugins work?
 
-These plugins share a lot in common with [conventional plugins](#how-do-conventional-plugins-work), except the collector stage is eliminated. You will additionally need to configure JSON files for the [singer-tap] that
+These plugins share a lot in common with [conventional plugins](#how-do-conventional-plugins-work), except the collector stage uses the `Tap` abstraction. You will additionally need to configure JSON files for the [singer-tap] that
 you are intending to use. These configuration files will tell the tap what APIs are available and what schema of data is expected to be returned by each of them.
 
 ## A step-by-step guide towards your first Singer-spec plugin
@@ -361,11 +361,11 @@ Consult the documentation of the specific tap before getting started. Usually th
 
 *1.1*. Make sure you have Python 3+ with `pip` installed.
 
-*1.2*. Install the required singer tap using `pip`. In our case `pip install tap-github`.
+*1.2*. Add the python module for the singer tap to the `requirements.txt` in the root Devlake directory.
 
-*1.3*. You now have the tap binary installed and available on your $PATH.
+*1.3*. Run `make dep` to get the tap as well other dependencies, if missing, installed.
 
-*1.4*. Install the GoJsonSchema binary from [here](https://github.com/atombender/go-jsonschema). This is needed for the data-model code generation outlined in step 3.4.
+*1.4*. You now have the tap binary installed and available on your $PATH.
 
 ### Step 2: Setting up Singer tap config
 
@@ -398,18 +398,21 @@ type GithubConfig struct {
 the connection-ID, and a function pointer that returns a Tap client. In our example, we could have:
 ```go
 type GithubSingerOptions struct {
-    // TODO add some custom options here if necessary
-    // options means some custom params required by plugin running.
-    // Such As How many rows do your want
-    // You can use it in sub tasks and you need pass it in main.go and pipelines.
     ConnectionId uint64   `json:"connectionId"`
+    Owner        string   `json:"owner"`
     Tasks        []string `json:"tasks,omitempty"`
-    TapProvider  func() (tap.Tap, errors.Error)
 }
 
 type GithubSingerTaskData struct {
-    Options *GithubSingerOptions `json:"-"`
-    Config  *models.GithubConfig
+    Options   *GithubSingerOptions `json:"-"`
+    TapConfig *models.GithubConfig
+    TapClient *tap.SingerTap
+}
+
+type GithubApiParams struct {
+    Repo         string
+    Owner        string
+    ConnectionId uint64
 }
 
 func DecodeAndValidateTaskOptions(options map[string]interface{}) (*GithubSingerOptions, errors.Error) {
@@ -440,90 +443,96 @@ func (plugin GithubSinger) PrepareTaskData(taskCtx core.TaskContext, options map
         return nil, errors.Default.Wrap(err, "unable to get GithubSinger connection by the given connection ID")
     }
     endpoint := strings.TrimSuffix(connection.Endpoint, "/")
-    config := &models.GithubConfig{
-        AccessToken:    connection.Token,
-        Repository:     options["repo"].(string),
-        StartDate:      options["start_date"].(time.Time),
-        RequestTimeout: 300,
-        BaseUrl:        endpoint,
-    }
-    op.TapProvider = func() (tap.Tap, errors.Error) {
-        return helper.NewSingerTapClient(&helper.SingerTapArgs{
-            Config:               config,
-            TapClass:             "TAP_GITHUB",
-            StreamPropertiesFile: "github.json",
-        })
+    tapClient, err := tap.NewSingerTap(&tap.SingerTapConfig{
+        TapExecutable:        "tap-github",
+        StreamPropertiesFile: "github_keon.json",
+        IsLegacy:             true,
+    })
+    if err != nil {
+        return nil, err
     }
     return &tasks.GithubSingerTaskData{
-        Options: op,
-        Config:  config,
+        Options:   op,
+        TapClient: tapClient,
+        TapConfig: &models.GithubConfig{
+            AccessToken:    connection.Token,
+            Repository:     options["repo"].(string),
+            StartDate:      options["start_date"].(time.Time),
+            RequestTimeout: 300,
+            BaseUrl:        endpoint,
+        },
     }, nil
 }
 ```
 
-Note that the TapClass variable here was set to `"TAP_GITHUB"`. In general, this will be the name of the environment variable that expands to the full path of the tap executable. 
-The `StreamPropertiesFile` is the name of the properties file of interest, and is expected to reside in the directory referenced by the environment variable `"SINGER_PROPERTIES_DIR"`. This directory is
-expected to be shared for all these JSON files. In our example, this directory is `<devlake-root>/config/singer`.
+Note that the TapExecutable variable here was set to `"tap-github"`, which is the name of the python executable for the tap.
+The `StreamPropertiesFile` is the name of the properties file of interest, and is expected to reside in the directory referenced by the environment variable `"TAP_PROPERTIES_DIR"`. This directory is
+expected to be shared for all these JSON files. In our example, this directory is `<devlake-root>/config/tap`.
 Furthermore, observe how we created the `GithubConfig` object: The raw options needed two variables "repo" and "start_date", and the remaining fields were derivable from the connection instance.
 These details will vary from tap to tap, but the gist will be the same.
 
-
-*3.4*. Generate the datamodels corresponding to the JSON schemas of the streams of interest. We have a custom script that gets this job done. See `singer/singer-model-generator.sh`. For our example, if we care about
-writing an extractor for GitHub Issues, we'll have to refer to the properties.json (or github.json) file to identify the stream name associated with it. In this case, it is called "issues". Next, we run the following
-command: ```sh ./scripts/singer-model-generator.sh "./config/singer/github.json" "issues" "./plugins/github_singer"```. (Make sure the script has execution permissions - ```sh chmod +x ./scripts/singer-model-generator.sh```.
-
-This will generate Go (raw) datamodels for "issues" and place them under `github_singer/models/generated`. Do not modify these files manually. 
-
-*3.4.1*. Note: Occasionally, the tap properties will not expose all the supported fields in the JSON schema - you can go and manually add them there in the JSON file. Additionally, you might run into type-problems (for instance IDs coming back as strings but declared as integers). In general, these would be rare scenarios, and technically bugs for the tap that you would experimentally run into while testing. 
-Either way, if you need to modify these data-types, do it in the JSON file.
-
-*3.5*. Since this is a Singer plugin, we won't need collectors. Remove any previously generated collector.go files under `github_singer/tasks`, and modify (actually rewrite) the extractors. Here's what the extractor for
-GitHub issues would look like:
+*3.4*. Since this is a Singer plugin, the collector will have to be modified to look like this:
 
 ```go
 package tasks
 
 import (
 	"github.com/apache/incubator-devlake/errors"
+	"github.com/apache/incubator-devlake/helpers/pluginhelper/tap"
 	"github.com/apache/incubator-devlake/plugins/core"
-	"github.com/apache/incubator-devlake/plugins/github_singer/models/generated"
 	"github.com/apache/incubator-devlake/plugins/helper"
 )
 
-var _ core.SubTaskEntryPoint = ExtractIssues
+var _ core.SubTaskEntryPoint = CollectIssues
 
-func ExtractIssues(taskCtx core.SubTaskContext) errors.Error {
+func CollectIssues(taskCtx core.SubTaskContext) errors.Error {
 	data := taskCtx.GetData().(*GithubSingerTaskData)
-	extractor, err := helper.NewTapExtractor(
-		&helper.TapExtractorArgs[generated.Issues]{
-			Ctx:          taskCtx,
-			TapProvider:  data.Options.TapProvider,
-			ConnectionId: data.Options.ConnectionId,
-			Extract: func(resData *generated.Issues) ([]interface{}, errors.Error) {
-				// TODO decode some db models from api result
-				return nil, nil
+	collector, err := tap.NewTapCollector(
+		&tap.CollectorArgs[tap.SingerTapStream]{
+			RawDataSubTaskArgs: helper.RawDataSubTaskArgs{
+				Ctx:   taskCtx,
+				Table: "singer_github_issue",
+				Params: GithubApiParams{
+					Repo:         data.TapConfig.Repository,
+					Owner:        data.Options.Owner,
+					ConnectionId: data.Options.ConnectionId,
+				},
 			},
-			StreamName: "issues",
+			TapClient:    data.TapClient,
+			TapConfig:    data.TapConfig,
+			ConnectionId: data.Options.ConnectionId,
+			StreamName:   "issues",
 		},
 	)
 	if err != nil {
 		return err
 	}
-	return extractor.Execute()
+	return collector.Execute()
 }
 
-var ExtractIssuesMeta = core.SubTaskMeta{
-	Name:             "ExtractIssues",
-	EntryPoint:       ExtractIssues,
+var CollectIssuesMeta = core.SubTaskMeta{
+	Name:             "CollectIssues",
+	EntryPoint:       CollectIssues,
 	EnabledByDefault: true,
-	Description:      "Extract singer-tap Github issues",
+	Description:      "Collect singer-tap Github issues",
 }
 ```
-The `Extract` function is where you write the "normalization" logic that transforms the raw datatypes to the "tools" ones. Note that framework uses Generics to simplify some boilerplate. The
-Generic type for this example is ```generated.Issues``` which the generator script from step 4 produced. This function, just like for conventional plugins, should return tools-normalized type(s).
-The `StreamName` variable is self-explanatory: the stream name according to the properties JSON.
 
-*3.6*. The remaining steps are just like what you would do for conventional plugins (e.g. the REST APIs, migrations, etc).
+
+*3.5*. Generate the data models corresponding to the JSON schemas of the streams of interest. These make life easy at the Extractor stage as we will not need to write "Response" structs by hand.
+We have a custom script that gets this job done. See `scripts/singer-model-generator.sh`. For our example, if we care about
+writing an extractor for GitHub Issues, we'll have to refer to the properties.json (or github.json) file to identify the stream name associated with it. In this case, it is called "issues". Next, we run the following
+command: ```sh ./scripts/singer-model-generator.sh "./config/tap/github.json" "./plugins/github_singer" "issues"```. (Make sure the script has execution permissions - ```sh chmod +x ./scripts/singer-model-generator.sh```.
+For the sake of convenience, the script supports an `--all` flag in place of the stream. This will generate source files for all stream. Also, see the `tap-models` target in the Makefile for references, and add your invocations
+there.
+
+This will generate Go (raw) data models and place them under `github_singer/models/generated`. Do not modify these files manually.
+
+*3.5.1*. Note: Occasionally, the tap properties will not expose all the supported fields in the JSON schema - you can go and manually add them there in the JSON file. Additionally, you might run into type-problems (for instance IDs coming back as strings but declared as integers). In general, these would be rare scenarios, and technically bugs for the tap that you would experimentally run into while testing.
+Either way, if you need to modify these data-types, do it in the JSON file.
+
+*3.6*. The remaining steps are just like what you would do for conventional plugins (e.g. the REST APIs, migrations, etc). Again, the generated source files from step *3.5* can be used in the
+extractor for row-data deserialization.
 
 **Final step:** [Submit the code as open source code](#final-step-submit-the-code-as-open-source-code)
 
