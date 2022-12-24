@@ -102,7 +102,7 @@ This table shows the entities collected by each plugin. Domain layer entities in
 | CollectApiMrNotesMeta       | <10^5                           | ❌                                       | ✅                            |
 | CollectApiMrCommitsMeta     | <10^5                           | ❌                                       | ✅                            |
 | **CollectApiPipelinesMeta** | <10^4                           | ✅                                       | ❌                            |
-| **CollectApiJobsMeta**      | <10^5                           | ❌                                       | ❌                            |
+| CollectApiJobsMeta          | <10^5                           | ❌                                       | ✅                            |
 
 
 
@@ -128,7 +128,7 @@ This table shows the entities collected by each plugin. Domain layer entities in
 | **CollectApiPrReviewCommentsMeta** | ≈10^4                           | ✅                                       | ❌                            |
 | **CollectAccountsMeta**            | ≈10^4                           | ❌                                       | ❌                            |
 | **CollectAccountOrgMeta**          | ≈10^4                           | ❌                                       | ❌                            |
-| **\*CollectJobsMeta\***            | <**10^6**                       | ❌                                       | ❌                            |
+| CollectJobsMeta                    | <10^6                           | ❌                                       | ✅                            |
 | CollectApiCommitsMeta              | Not enabled                     | -                                       | -                            |
 | CollectApiCommitStatsMeta          | Not enabled                     | -                                       | -                            |
 

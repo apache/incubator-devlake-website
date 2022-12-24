@@ -69,11 +69,25 @@ Each GitHub repo has at most ONE set of transformation rules.
 
 - Priority: Same as "Severity".
 
-- Type/Requirement: The `type` of issues with labels that match given regular expression will be set to "REQUIREMENT". Unlike "PR.type", submatch does nothing, because for issue management analysis, users tend to focus on 3 kinds of types (Requirement/Bug/Incident), however, the concrete naming varies from repo to repo, time to time, so we decided to standardize them to help analysts metrics.
+- Type/Requirement: The `type` of issues with labels that match the given regular expression will be set to "REQUIREMENT". Unlike "PR.type", submatch does nothing, because for issue management analysis, users tend to focus on 3 kinds of types (Requirement/Bug/Incident), however, the concrete naming varies from repo to repo, from time to time, so we decided to standardize them to help analysts metrics.
 
-- Type/Bug: Same as "Type/Requirement", with `type` setting to "BUG".
+- Type/Bug: Same as "Type/Requirement", with `type` set to "BUG".
 
-- Type/Incident: Same as "Type/Requirement", with `type` setting to "INCIDENT".
+- Type/Incident: Same as "Type/Requirement", with `type` set to "INCIDENT".
+
+#### CI/CD
+![image](https://user-images.githubusercontent.com/14050754/208100921-abc28c75-6001-493d-b307-3fd9879db552.png)
+
+This set of configurations is used for calculating [DORA metrics](../DORA.md).
+
+If you're using GitHub Action to conduct `deployments`, please select "Detect Deployment from Jobs in GitHub Action", and input the RegEx in the following fields:
+- Deployment: A GitHub Action job with a name that matches the given regEx will be considered as a deployment.
+- Production: A GitHub Action job with a name that matches the given regEx will be considered a job in the production environment.
+
+By the above two fields, DevLake can identify a production deployment among massive CI jobs.
+
+You can also select "Not using Jobs in GitHub Action as Deployments" if you're not using GitHub action for deployments.
+
 
 #### Code Review
 
@@ -82,6 +96,7 @@ Each GitHub repo has at most ONE set of transformation rules.
    - when your labels for PR types are like 'feature-development', 'bug-fixing' and 'docs', please input '(feature-development|bug-fixing|docs)$'
 
 - Component: The `component` of pull requests will be parsed from PR labels by given regular expression.
+
 
 #### Additional Settings (Optional)
 

@@ -82,6 +82,19 @@ Each GitHub repo has at most ONE set of transformation rules.
 
 - Type/Incident: Same as "Type/Requirement", with `type` setting to "INCIDENT".
 
+#### CI/CD
+![image](https://user-images.githubusercontent.com/14050754/208100921-abc28c75-6001-493d-b307-3fd9879db552.png)
+
+This set of configurations is used for calculating [DORA metrics](../DORA.md).
+
+If you're using GitHub Action to conduct `deployments`, please select "Detect Deployment from Jobs in GitHub Action", and input the RegEx in the following fields:
+- Deployment: A GitHub Action job with a name that matches the given regEx will be considered as a deployment.
+- Production: A GitHub Action job with a name that matches the given regEx will be considered a job in the production environment.
+
+By the above two fields, DevLake can identify a production deployment among massive CI jobs.
+
+You can also select "Not using Jobs in GitHub Action as Deployments" if you're not using GitHub action to conduct deployments.
+
 #### Code Review
 
 - Type: The `type` of pull requests will be parsed from PR labels by given regular expression. For example:

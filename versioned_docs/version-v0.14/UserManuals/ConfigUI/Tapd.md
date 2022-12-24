@@ -1,5 +1,5 @@
 ---
-title: "Configuring Tapd"
+title: "Configuring Tapd(WIP)"
 sidebar_position: 6
 description: Config UI instruction for Tapd
 ---
