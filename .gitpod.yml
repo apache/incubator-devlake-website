@@ -3,7 +3,7 @@ tasks:
     init: |
       yarn install
     command: |
-      nvm use v16.14.0 && sh gitpod-scripts/startCloudDev.sh
+      nvm use v16.14.0 && sh gitpod-scripts/startCloudDevEnv.sh
 
 ports:
   - port: 3000
