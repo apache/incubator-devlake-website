@@ -57,6 +57,8 @@ Metrics that can be calculated based on the data collected from GitHub:
 ## Configuration
 
 - Configuring GitHub via [Config UI](/UserManuals/ConfigUI/GitHub.md)
+- Configuring GitHub via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#2-github).
+
 
 ## API Sample Request
 
