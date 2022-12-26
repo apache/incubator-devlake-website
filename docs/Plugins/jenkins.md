@@ -6,7 +6,11 @@ description: >
 
 ## Summary
 
-This plugin collects Jenkins data through [Remote Access API](https://www.jenkins.io/doc/book/using/remote-access-api/). It then computes and visualizes various DevOps metrics from the Jenkins data.
+This plugin collects Jenkins data through [Remote Access API](https://www.jenkins.io/doc/book/using/remote-access-api/). It then computes and visualizes various DevOps metrics from the Jenkins data, which helps tech leads and DevOps engineers to answer questions such as:
+
+- What is the deployment frequency of your team?
+- What is the build success rate?
+- How long does it take for a code change to be deployed into production?
 
 ## Entities
 
