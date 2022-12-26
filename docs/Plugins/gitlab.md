@@ -4,42 +4,92 @@ description: >
   GitLab Plugin
 ---
 
+## Summary
+
+This plugin collects GitLab data through [API](https://docs.gitlab.com/ee/api/). It then computes and visualizes various DevOps metrics from the GitLab data, which helps tech leads, QA and DevOps engineers, and project managers to answer questions such as:
+
+- How long does it take for your codes to get merged?
+- How much time is spent on code review?
+- How long does it take for your codes to get merged?
+- How much time is spent on code review?
+
+## Entities
+
+Check out the [GitLab entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.
+
+## Data Refresh Policy
+
+Check out the [data refresh policy](/Overview/SupportedDataSources.md#gitlab) of this plugin.
 
 ## Metrics
 
-| Metric Name                 | Description                                                  |
-|:----------------------------|:-------------------------------------------------------------|
-| Pull Request Count          | Number of Pull/Merge Requests                                |
-| Pull Request Pass Rate      | Ratio of Pull/Merge Review requests to merged                |
-| Pull Request Reviewer Count | Number of Pull/Merge Reviewers                               |
-| Pull Request Review Time    | Time from Pull/Merge created time until merged               |
-| Commit Author Count         | Number of Contributors                                       |
-| Commit Count                | Number of Commits                                            |
-| Added Lines                 | Accumulated Number of New Lines                              |
-| Deleted Lines               | Accumulated Number of Removed Lines                          |
-| Pull Request Review Rounds  | Number of cycles of commits followed by comments/final merge |
+Metrics that can be calculated based on the data collected from GitLab:
+
+- [Commit Count](/Metrics/CommitCount.md)
+- [Commit Author Count](/Metrics/CommitAuthorCount.md)
+- [Added Lines of Code](/Metrics/AddedLinesOfCode.md)
+- [Deleted Lines of Code](/Metrics/DeletedLinesOfCode.md)
+- [PR Count](/Metrics/PRCount.md)
+- [PR Cycle Time](/Metrics/PRCycleTime.md)
+- [PR Coding Time](/Metrics/PRCodingTime.md)
+- [PR Pickup Time](/Metrics/PRPickupTime.md)
+- [PR Review Time](/Metrics/PRReviewTime.md)
+- [PR Deploy Time](/Metrics/PRDeployTime.md)
+- [PR Time To Merge](/Metrics/PRTimeToMerge.md)
+- [PR Merge Rate](/Metrics/PRMergeRate.md)
+- [PR Review Depth](/Metrics/PRReviewDepth.md)
+- [PR Size](/Metrics/PRSize.md)
+- [Build Count](/Metrics/BuildCount.md)
+- [Build Duration](/Metrics/BuildDuration.md)
+- [Build Success Rate](/Metrics/BuildSuccessRate.md)
+- [DORA - Deployment Frequency](/Metrics/DeploymentFrequency.md)
+- [DORA - Lead Time for Changes](/Metrics/LeadTimeForChanges.md)
+- [DORA - Median Time to Restore Service](/Metrics/MTTR.md)
+- [DORA - Change Failure Rate](/Metrics/CFR.md)
 
 ## Configuration
+
 Configuring GitLab via [config-ui](/UserManuals/ConfigUI/GitLab.md).
 
-## Gathering Data with GitLab
+## API Sample Request
 
-To collect data, you can make a POST request to `/pipelines`
+You can trigger data collection by making a POST request to `/pipelines`.
 
 ```
-curl --location --request POST 'localhost:8080/pipelines' \
+curl 'http://localhost:8080/pipelines' \
 --header 'Content-Type: application/json' \
 --data-raw '
 {
-    "name": "gitlab 20211126",
-    "tasks": [[{
+  "name": "project1-BLUEPRINT",
+  "blueprintId": 1,
+  "plan": [
+    [
+      {
         "plugin": "gitlab",
         "options": {
-            "projectId": <Your gitlab project id>
+          "connectionId": 1,
+          "projectId": 33728042,
+          "transformationRules":{
+            "deploymentPattern":"",
+            "productionPattern":"",
+            "issueComponent":"",
+            "issuePriority":"(high|medium|low)$",
+            "issueSeverity":"",
+            "issueTypeBug":"(bug)$",
+            "issueTypeIncident":"",
+            "issueTypeRequirement":"(feature|feature-request)$",
+            "prBodyClosePattern":"",
+            "prComponent":"",
+            "prType":""
+          }
         }
-    }]]
+      }
+    ]
+  ]
 }
 '
 ```
 
-<br/><br/><br/>
+## References
+
+- [references](/DeveloperManuals/DeveloperSetup.md#references)
