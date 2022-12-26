@@ -6,7 +6,7 @@ description: >
 
 ## Summary
 
-This plugin collects GitHub data through [API](https://docs.github.com/en/rest/). It then computes and visualizes various DevOps metrics from the GitHub data, which helps tech leads, QA and DevOps engineers, and project managers to answer questions such as:
+This plugin collects GitHub data through [REST API](https://docs.github.com/en/rest/) and [GraphQL API](https://docs.github.com/en/graphql). It then computes and visualizes various DevOps metrics from the GitHub data, which helps tech leads, QA and DevOps engineers, and project managers to answer questions such as:
 
 - Is this month more productive than last?
 - How fast do we respond to customer requirements?
