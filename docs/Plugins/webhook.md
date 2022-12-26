@@ -79,7 +79,7 @@ curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -u 'user
   }'
 ```
 
-#### Deployment - A real-world example in CircleCI
+#### A real-world example - Push CircleCI deployments to DevLake
 
 The following demo shows how to post "deployments" to DevLake from CircleCI. In this example, the CircleCI job 'deploy' is used to manage deployments.
 

@@ -4,11 +4,11 @@ sidebar_position: 7
 description: Config UI instruction for Webhook
 ---
 
-Visit config-ui: `http://localhost:4000`.
+Visit config-ui: `http://{localhost}:4000`.
 
 ### Step 1 - Add a new incoming webhook
 
-Users can go to 'Data Connections' to achieve webhook data connections configure.
+Go to the 'Data Connections' page. Create a webhook.
 
 ![webhook-add-data-connections](/img/ConfigUI/webhook-add-data-connections.png)
 
@@ -16,7 +16,7 @@ We recommend that you give your webhook connection a unique name so that you can
 
 ### Step 2 - Use Webhooks
 
-After clicking on "Generate POST URL", you will find four webhook URLs. Copy the ones that suit your usage into your CI or issue-tracking systems. You can always come back to the webhook page to copy the URLs later on.
+Click on Generate POST URL, and you will find four webhook URLs. Copy the ones that suit your usage into your CI or issue-tracking systems. You can always come back to the webhook page to copy the URLs later on.
 
 ![webhook-use](/img/ConfigUI/webhook-use.png)
 
