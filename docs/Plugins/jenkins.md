@@ -23,6 +23,10 @@ Metrics that can be calculated based on the data collected from Jenkins:
 - [Build Count](/Metrics/BuildCount.md)
 - [Build Duration](/Metrics/BuildDuration.md)
 - [Build Success Rate](/Metrics/BuildSuccessRate.md)
+- [DORA - Deployment Frequency](/Metrics/DeploymentFrequency.md)
+- [DORA - Lead Time for Changes](/Metrics/LeadTimeForChanges.md)
+- [DORA - Median Time to Restore Service](/Metrics/MTTR.md)
+- [DORA - Change Failure Rate](/Metrics/CFR.md)
 
 ## Configuration
 
