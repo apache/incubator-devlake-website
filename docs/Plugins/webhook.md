@@ -12,15 +12,36 @@ When you create an Incoming Webhook within DevLake, DevLake generates a unique U
 
 In v0.14+, users can push "incidents" and "deployments" required by DORA metrics to DevLake via Incoming Webhooks.
 
+## Entities
+
+Check out the [Incoming Webhooks entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.
+
+## Metrics
+
+Metrics that can be calculated based on the data collected from Incoming Webhooks:
+
+- [Requirement Delivery Rate](/Metrics/RequirementDeliveryRate.md)
+- [Requirement Granularity](/Metrics/RequirementGranularity.md)
+- [Bug Age](/Metrics/BugAge.md)
+- [Bug Count per 1k Lines of Code](/Metrics/BugCountPer1kLinesOfCode.md)
+- [Incident Age](/Metrics/IncidentAge.md)
+- [Incident Count per 1k Lines of Code](/Metrics/IncidentCountPer1kLinesOfCode.md)
+- [DORA - Deployment Frequency](/Metrics/DeploymentFrequency.md)
+- [DORA - Lead Time for Changes](/Metrics/LeadTimeForChanges.md)
+- [DORA - Median Time to Restore Service](/Metrics/MTTR.md)
+- [DORA - Change Failure Rate](/Metrics/CFR.md)
+
 ## Configuration
 
-- Configuring Webhook via [Config UI](/UserManuals/ConfigUI/webhook.md)
+- Configuring Incoming Webhooks via [Config UI](/UserManuals/ConfigUI/webhook.md)
 
 ## API Sample Request
 
 ### Deployment
 
-#### Register a deployment
+If you want to collect deployment data from your system, you can use the incoming webhooks for deployment.
+
+#### Payload Schema
 
 You can copy the generated deployment curl commands to your CI/CD script to post deployments to Apache DevLake. Below is the detailed payload schema:
 
@@ -32,7 +53,7 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 | start_time  |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                   |
 |  end_time   |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/>The default value is the time when DevLake receives the POST request.                                |
 
-#### Deployment - Sample API Calls
+#### Register a Deployment - Sample API Calls
 
 Sample CURL to post deployments to DevLake. The following command should be replaced with the actual curl command copied from your Config UI:
 
@@ -109,7 +130,7 @@ workflows:
 
 If you want to collect issue or incident data from your system, you can use the two webhooks for issues.
 
-#### Update or Create Issues
+#### Register Issues - Update or Create Issues
 
 `POST https://sample-url.com/api/plugins/webhook/1/issues`
 
@@ -145,13 +166,13 @@ needs to be called when an issue or incident is created. The body should be a JS
 
 More information about these columns at [DomainLayerIssueTracking](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema#domain-1---issue-tracking).
 
-#### Close Issues (Optional)
+#### Register Issues - Close Issues (Optional)
 
 `POST https://sample-url.com/api/plugins/webhook/1/issue/:boardKey/:issueId/close`
 
 needs to be called when an issue or incident is closed. Replace `:boardKey` and `:issueId` with specific strings and keep the body empty.
 
-#### Issues Sample API Calls
+#### Register Issues - Sample API Calls
 
 Sample CURL for Issue Creating :
 
