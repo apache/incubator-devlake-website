@@ -33,7 +33,8 @@ Advanced mode gives utmost flexibility to users by exposing the JSON API.
 
 ## Examples
 
-1. Collect multiple GitLab repos sequentially.
+### 1. Gitlab
+Collect multiple GitLab repos sequentially.
 
 > When there're multiple collection tasks against a single data source, we recommend running these tasks sequentially since the collection speed is mostly limited by the API rate limit of the data source.
 > Running multiple tasks against the same data source is unlikely to speed up the process and may overwhelm the data source.
@@ -61,7 +62,8 @@ Below is an example for collecting 2 GitLab repos sequentially. It has 2 stages,
 ]
 ```
 
-2. Collect a GitHub repo and a Jira board in parallel
+### 2. Github
+Collect a GitHub repo and a Jira board in parallel
 
 Below is an example for collecting a GitHub repo and a Jira board in parallel. It has a single stage with a GitHub task and a Jira task. Since users can configure multiple Jira connection, it's required to pass in a `connectionId` for Jira task to specify which connection to use.
 
@@ -85,6 +87,99 @@ Below is an example for collecting a GitHub repo and a Jira board in parallel. I
   ]
 ]
 ```
+
+### 3. Zentao
+Below is an example for collecting a Zentao workspace. Since users can configure multiple Zentao connection, it's required to pass in a `connectionId` for Tapd task to specify which connection to use.
+
+```
+[
+  [
+    {
+      plugin: 'zentao',
+      options: {
+        connectionId: 1,
+        productId: 1,
+        projectId: 1,
+        executionId: 1
+      }
+    }
+  ]
+]
+```
+
+- `connectionId`: The `ID` field from **ZENTAO Integration** page.
+- `productId`: optional, ZENTAO product id, see "Find Product Id" for details.
+- `projectId`: optional, ZENTAO product id, see "Find Project Id" for details.
+- `executionId`: optional, ZENTAO product id, see "Find Execution Id" for details.
+
+You must choose at least one of `productId`, `projectId` and `executionId`.
+
+#### Find Product Id
+1. Navigate to the Zentao Product in the browser
+   ![](zentao-product.png)
+2. Click the red square annotated in the pic above
+   ![](zentao-product-id.png)
+3. Then the number in the red circle above is `ProductId`
+
+#### Find Project Id
+1. Navigate to the Zentao Project in the browser
+   ![](zentao-project-id.png)
+2. Then the number in the red square above is `ProjectId`
+
+#### Find Execution Id
+1. Navigate to the Zentao Execution in the browser
+   ![](zentao-execution-id.png)
+2. Then the number in the red square above is `ExecutionId`
+
+### 4. Tapd
+Below is an example for collecting a Tapd workspace. Since users can configure multiple Tapd connection, it's required to pass in a `connectionId` for Tapd task to specify which connection to use.
+```
+[
+    [
+        {
+            "plugin": "tapd",
+            "options": {
+                "workspaceId": 34***66,
+                "connectionId": 1
+            }
+        }
+    ],
+    [
+        {
+            "plugin": "tapd",
+            "options": {
+                "workspaceId": 6***14,
+                "connectionId": 1
+            }
+        }
+    ]
+]
+```
+
+- `connectionId`: The `ID` field from **TAPD Integration** page.
+- `workspaceId`: TAPD workspace id, you can get it from two ways:
+  - url: ![tapd-workspace-id](/img/ConfigUI/tapd-find-workspace-id.png)
+  - db: you can check workspace info from db._tool_tapd_workspaces and get all workspaceId you want to collect after execution of the following json in `advanced mode`
+    ```json
+    [
+            [
+                    {
+                            "plugin": "tapd",
+                            "options": {
+                                    "companyId": 55850509,
+                                    "workspaceId": 1,
+                                    "connectionId": 1
+                            },
+                            "subtasks": [
+                                    "collectCompanies",
+                                    "extractCompanies"
+                            ]
+                    }
+            ]
+    ]
+    ```
+
+
 
 ## Editing a Blueprint (Advanced Mode)
 
