@@ -5,7 +5,6 @@ description: >
   Using the advanced mode of Config-UI
 ---
 
-
 ## Why advanced mode?
 
 Advanced mode allows users to create any pipeline by writing JSON. This is useful for users who want to:
@@ -36,12 +35,10 @@ Advanced mode gives utmost flexibility to users by exposing the JSON API.
 
 1. Collect multiple GitLab repos sequentially.
 
->When there're multiple collection tasks against a single data source, we recommend running these tasks sequentially since the collection speed is mostly limited by the API rate limit of the data source.
->Running multiple tasks against the same data source is unlikely to speed up the process and may overwhelm the data source.
-
+> When there're multiple collection tasks against a single data source, we recommend running these tasks sequentially since the collection speed is mostly limited by the API rate limit of the data source.
+> Running multiple tasks against the same data source is unlikely to speed up the process and may overwhelm the data source.
 
 Below is an example for collecting 2 GitLab repos sequentially. It has 2 stages, each contains a GitLab task.
-
 
 ```
 [
@@ -63,7 +60,6 @@ Below is an example for collecting 2 GitLab repos sequentially. It has 2 stages,
   ]
 ]
 ```
-
 
 2. Collect a GitHub repo and a Jira board in parallel
 
@@ -89,13 +85,14 @@ Below is an example for collecting a GitHub repo and a Jira board in parallel. I
   ]
 ]
 ```
+
 ## Editing a Blueprint (Advanced Mode)
+
 This section is for editing a Blueprint in the Advanced Mode. To edit in the Normal mode, please refer to [this guide](Tutorial.md#editing-a-blueprint-normal-mode).
 
-To edit a Blueprint created in the Advanced mode, you can simply go the Settings page of that Blueprint and click on Edit JSON to edit its configuration.
+To edit a Blueprint created in the Advanced mode, you can simply go the Configuration page of that Blueprint and edit its configuration.
 
 ![img](/img/ConfigUI/BlueprintEditing/blueprint-edit2.png)
-
 
 ## Troubleshooting
 
