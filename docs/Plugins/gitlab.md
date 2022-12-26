@@ -6,7 +6,7 @@ description: >
 
 ## Summary
 
-This plugin gathers data from `GitLab` to display information to the user in `Grafana`. It helps tech leads, QA and DevOps engineers, and project managers to answer questions such as:
+This plugin collects GitLab data through [API](https://docs.gitlab.com/ee/api/). It then computes and visualizes various DevOps metrics from the GitLab data. It helps tech leads, QA and DevOps engineers, and project managers to answer questions such as:
 
 - How long does it take for your codes to get merged?
 - How much time is spent on code review?
