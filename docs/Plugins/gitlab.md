@@ -10,6 +10,8 @@ This plugin gathers data from `GitLab` to display information to the user in `Gr
 
 - How long does it take for your codes to get merged?
 - How much time is spent on code review?
+- How long does it take for your codes to get merged?
+- How much time is spent on code review?
 
 ## Entities
 
