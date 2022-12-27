@@ -24,58 +24,58 @@ Apache DevLake(incubating) supports the following data sources. The data from ea
 ## Data Collection Scope By Each Plugin
 
 This table shows the entities collected by each plugin. Domain layer entities in this table are consistent with the entities [here](/DataModels/DevLakeDomainLayerSchema.md).
+✅ : default collected.
+💪 : not by default collected.
 
-| Domain Layer Entities  | ae             | dora    | gitextractor | incoming webhook | github         | gitlab         | jenkins | jira    | refdiff | tapd    |
-| ---------------------- | -------------- | ------- | ------------ | ---------------- | -------------- | -------------- | ------- | ------- | ------- | ------- |
-| accounts               |                |         |              |                  | default        | default        |         | default |         | default |
-| board_issues           |                |         |              |                  | default        | default        |         | default |         | default |
-| board_repos            |                |         |              |                  | default        | default        |         | default |         |         |
-| board_sprints          |                |         |              |                  | default        |                |         | default |         | default |
-| boards                 |                |         |              |                  | default        | default        |         | default |         | default |
-| cicd_pipeline_commits  |                | default |              |                  | default        | default        | default |         |         |         |
-| cicd_pipelines         |                | default |              |                  | default        | default        | default |         |         |         |
-| cicd_scopes            |                | default |              |                  | default        | default        | default |         |         |         |
-| cicd_tasks             |                | default |              | not-by-default   | default        | default        | default |         |         |         |
-| commit_file_components |                |         | default      |                  |                |                |         |         |         |         |
-| commit_files           |                |         | default      |                  |                |                |         |         |         |         |
-| commit_line_change     |                |         | default      |                  |                |                |         |         |         |         |
-| commit_parents         |                |         | default      |                  |                |                |         |         |         |         |
-| commits                | update commits |         | default      |                  | not-by-default | not-by-default |         |         |         |         |
-| commits_diffs          |                |         |              |                  |                |                |         |         | default |         |
-| components             |                |         |              |                  |                |                |         |         |         |         |
-| dora_benchmarks        |                |         |              |                  |                |                |         |         |         |         |
-| finished_commits_diffs |                |         |              |                  |                |                |         |         |         |         |
-| dora_benchmarks        |                |         |              |                  |                |                |         |         |         |         |
-| issue_changelogs       |                |         |              |                  |                |                |         | default |         | default |
-| issue_comments         |                |         |              |                  | default        |                |         |         |         | default |
-| issue_commits          |                |         |              |                  |                |                |         | default |         | default |
-| issue_labels           |                |         |              |                  | default        | default        |         |         |         | default |
-| issue_repo_commits     |                |         |              |                  |                |                |         | default |         |         |
-| issue_worklogs         |                |         |              |                  |                |                |         | default |         | default |
-| issues                 |                |         |              | not-by-default   | default        |                |         | default |         | default |
-| project_issue_metrics  |                | default |              |                  | default        | default        |         | default |         | default |
-| project_mapping        |                | default |              |                  | default        | default        | default | default |         | default |
-| project_metrics        |                | default |              |                  | default        | default        | default | default |         | default |
-| project_pr_metrics     |                | default |              |                  | default        | default        |         |         |         | default |
-| projects               |                | default |              |                  | default        | default        | default | default |         | default |
-| pull_request_comments  |                |         |              |                  | default        | default        |         |         |         |         |
-| pull_request_commits   |                |         |              |                  | default        | default        |         |         |         |         |
-| pull_request_issues    |                |         |              |                  | default        |                |         |         |         |         |
-| pull_request_labels    |                |         |              |                  | default        | default        |         |         |         |         |
-| pull_requests          |                |         |              |                  | default        | default        |         |         |         |         |
-| ref_commits            |                |         |              |                  |                |                |         |         | default |         |
-| refs                   |                |         | default      |                  |                |                |         |         | default |         |
-| refs_issues_diffs      |                |         |              |                  |                |                |         |         | default |         |
-| ref_pr_cherry_picks    |                |         |              |                  |                |                |         |         | default |         |
-| repo_commits           |                |         | default      |                  | not-by-default | not-by-default |         |         |         |         |
-| repo_snapshot          |                |         | default      |                  |                |                |         |         |         |         |
-| repos                  |                |         |              |                  | default        | default        |         |         |         |         |
-| sprint_issues          |                |         |              |                  | default        |                |         | default |         | default |
-| sprints                |                |         |              |                  | default        |                |         | default |         | default |
-| team_users             |                |         |              |                  |                |                |         |         |         |         |
-| teams                  |                |         |              |                  |                |                |         |         |         |         |
-| user_account           |                |         |              |                  |                |                |         |         |         |         |
-| users                  |                |         |              |                  |                |                |         | default |         | default |
+| Domain Layer Entities                                                                       | ae  | dora | gitextractor | incoming webhook | github | gitlab | jenkins | jira | refdiff | tapd |
+| ------------------------------------------------------------------------------------------- | --- | ---- | ------------ | ---------------- | ------ | ------ | ------- | ---- | ------- | ---- |
+| [accounts](../DataModels/DevLakeDomainLayerSchema.md/#accounts)                             |     |      |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |
+| [board_issues](../DataModels/DevLakeDomainLayerSchema.md/#board_issues)                     |     |      |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |
+| [board_repos](../DataModels/DevLakeDomainLayerSchema.md/#board_repos)                       |     |      |              |                  | ✅     | ✅     |         | ✅   |         |      |
+| [board_sprints](../DataModels/DevLakeDomainLayerSchema.md/#board_sprints)                   |     |      |              |                  | ✅     |        |         | ✅   |         | ✅   |
+| [boards](../DataModels/DevLakeDomainLayerSchema.md/#boards)                                 |     |      |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |
+| [cicd_pipeline_commits](../DataModels/DevLakeDomainLayerSchema.md/#cicd_pipeline_commits)   |     | ✅   |              |                  | ✅     | ✅     | ✅      |      |         |      |
+| [cicd_pipelines](../DataModels/DevLakeDomainLayerSchema.md/#cicd_pipelines)                 |     | ✅   |              |                  | ✅     | ✅     | ✅      |      |         |      |
+| [cicd_scopes](../DataModels/DevLakeDomainLayerSchema.md/#cicd_scopes)                       |     | ✅   |              |                  | ✅     | ✅     | ✅      |      |         |      |
+| [cicd_tasks](../DataModels/DevLakeDomainLayerSchema.md/#cicd_tasks)                         |     | ✅   |              | 💪               | ✅     | ✅     | ✅      |      |         |      |
+| [commit_file_components](../DataModels/DevLakeDomainLayerSchema.md/#commit_file_components) |     |      | ✅           |                  |        |        |         |      |         |      |
+| [commit_files](../DataModels/DevLakeDomainLayerSchema.md/#commit_files)                     |     |      | ✅           |                  |        |        |         |      |         |      |
+| [commit_line_change](../DataModels/DevLakeDomainLayerSchema.md/#commit_line_change)         |     |      | ✅           |                  |        |        |         |      |         |      |
+| [commit_parents](../DataModels/DevLakeDomainLayerSchema.md/#commit_parents)                 |     |      | ✅           |                  |        |        |         |      |         |      |
+| [commits](../DataModels/DevLakeDomainLayerSchema.md/#commits)                               | ✅  |      | ✅           |                  | 💪     | 💪     |         |      |         |      |
+| [commits_diffs](../DataModels/DevLakeDomainLayerSchema.md/#commits_diffs)                   |     |      |              |                  |        |        |         |      | ✅      |      |
+| [components](../DataModels/DevLakeDomainLayerSchema.md/#components)                         |     |      |              |                  |        |        |         |      |         |      |
+| [finished_commits_diffs](../DataModels/DevLakeDomainLayerSchema.md/#finished_commits_diffs) |     |      |              |                  |        |        |         |      |         |      |
+| [issue_changelogs](../DataModels/DevLakeDomainLayerSchema.md/#issue_changelogs)             |     |      |              |                  |        |        |         | ✅   |         | ✅   |
+| [issue_comments](../DataModels/DevLakeDomainLayerSchema.md/#issue_commentswip)              |     |      |              |                  | ✅     |        |         |      |         | ✅   |
+| [issue_commits](../DataModels/DevLakeDomainLayerSchema.md/#issue_commits)                   |     |      |              |                  |        |        |         | ✅   |         | ✅   |
+| [issue_labels](../DataModels/DevLakeDomainLayerSchema.md/#issue_labels)                     |     |      |              |                  | ✅     | ✅     |         |      |         | ✅   |
+| [issue_repo_commits](../DataModels/DevLakeDomainLayerSchema.md/#issue_repo_commits)         |     |      |              |                  |        |        |         | ✅   |         |      |
+| [issue_worklogs](../DataModels/DevLakeDomainLayerSchema.md/#issue_worklogs)                 |     |      |              |                  |        |        |         | ✅   |         | ✅   |
+| [issues](../DataModels/DevLakeDomainLayerSchema.md/#issues)                                 |     |      |              |                  | ✅     |        |         | ✅   |         | ✅   |
+| [project_issue_metrics](../DataModels/DevLakeDomainLayerSchema.md/#project_issue_metrics)   |     | ✅   |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |
+| [project_mapping](../DataModels/DevLakeDomainLayerSchema.md/#project_mapping)               |     | ✅   |              |                  | ✅     | ✅     | ✅      | ✅   |         | ✅   |
+| [project_metrics](../DataModels/DevLakeDomainLayerSchema.md/#project_metrics)               |     | ✅   |              |                  | ✅     | ✅     | ✅      | ✅   |         | ✅   |
+| [project_pr_metrics](../DataModels/DevLakeDomainLayerSchema.md/#project_pr_metrics)         |     | ✅   |              |                  | ✅     | ✅     |         |      |         | ✅   |
+| [projects](../DataModels/DevLakeDomainLayerSchema.md/#project)                              |     | ✅   |              |                  | ✅     | ✅     | ✅      | ✅   |         | ✅   |
+| [pull_request_comments](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_comments)   |     |      |              |                  | ✅     | ✅     |         |      |         |      |
+| [pull_request_commits](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_commits)     |     |      |              |                  | ✅     | ✅     |         |      |         |      |
+| [pull_request_issues](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_issues)       |     |      |              |                  | ✅     |        |         |      |         |      |
+| [pull_request_labels](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_labels)       |     |      |              |                  | ✅     | ✅     |         |      |         |      |
+| [pull_requests](../DataModels/DevLakeDomainLayerSchema.md/#pull_requests)                   |     |      |              |                  | ✅     | ✅     |         |      |         |      |
+| [ref_commits](../DataModels/DevLakeDomainLayerSchema.md/#ref_commits)                       |     |      |              |                  |        |        |         |      | ✅      |      |
+| [refs](../DataModels/DevLakeDomainLayerSchema.md/#refs)                                     |     |      | ✅           |                  |        |        |         |      | ✅      |      |
+| [refs_issues_diffs](../DataModels/DevLakeDomainLayerSchema.md/#refs_issues_diffs)           |     |      |              |                  |        |        |         |      | ✅      |      |
+| [ref_pr_cherry_picks](../DataModels/DevLakeDomainLayerSchema.md/#ref_pr_cherry_picks)       |     |      |              |                  |        |        |         |      | ✅      |      |
+| [repo_commits](../DataModels/DevLakeDomainLayerSchema.md/#repo_commits)                     |     |      | ✅           |                  | 💪     | 💪     |         |      |         |      |
+| [repo_snapshot](../DataModels/DevLakeDomainLayerSchema.md/#repo_snapshot)                   |     |      | ✅           |                  |        |        |         |      |         |      |
+| [repos](../DataModels/DevLakeDomainLayerSchema.md/#repos)                                   |     |      |              |                  | ✅     | ✅     |         |      |         |      |
+| [sprint_issues](../DataModels/DevLakeDomainLayerSchema.md/#sprint_issues)                   |     |      |              |                  | ✅     |        |         | ✅   |         | ✅   |
+| [sprints](../DataModels/DevLakeDomainLayerSchema.md/#sprints)                               |     |      |              |                  | ✅     |        |         | ✅   |         | ✅   |
+| [team_users](../DataModels/DevLakeDomainLayerSchema.md/#team_users)                         |     |      |              |                  |        |        |         |      |         |      |
+| [teams](../DataModels/DevLakeDomainLayerSchema.md/#teams)                                   |     |      |              |                  |        |        |         |      |         |      |
+| [user_account](../DataModels/DevLakeDomainLayerSchema.md/#user_accounts)                    |     |      |              |                  |        |        |         |      |         |      |
+| [users](../DataModels/DevLakeDomainLayerSchema.md/#users)                                   |     |      |              |                  |        |        |         | ✅   |         | ✅   |
 
 ## Data Sync Policy
 
