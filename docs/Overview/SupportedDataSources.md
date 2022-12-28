@@ -24,8 +24,8 @@ Apache DevLake(incubating) supports the following data sources. The data from ea
 ## Data Collection Scope By Each Plugin
 
 This table shows the entities collected by each plugin. Domain layer entities in this table are consistent with the entities [here](/DataModels/DevLakeDomainLayerSchema.md).
-✅ : default collected.
-💪 : not by default collected.
+✅ : Collect by default.
+💪 : Collect not by default, You need to add the corresponding subtasks to collect these entities in the [advanced mode](../UserManuals/ConfigUI/AdvancedMode.md).
 
 | Domain Layer Entities                                                                       | ae  | dora | gitextractor | incoming webhook | github | gitlab | jenkins | jira | refdiff | tapd |
 | ------------------------------------------------------------------------------------------- | --- | ---- | ------------ | ---------------- | ------ | ------ | ------- | ---- | ------- | ---- |
