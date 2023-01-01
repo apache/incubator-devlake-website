@@ -252,6 +252,10 @@ const versions = require('./versions.json');
                 label: 'GitHub',
                 to: 'https://github.com/apache/incubator-devlake',
               },
+              {
+                label: 'Twitter',
+                to: 'https://twitter.com/ApacheDevLake',
+              },
             ],
           },
         ],
