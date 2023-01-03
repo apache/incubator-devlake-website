@@ -243,6 +243,10 @@ const versions = require('./versions.json');
                 label: 'GitHub Issue Tracker',
                 to: 'https://github.com/apache/incubator-devlake/issues',
               },
+              {
+                label: 'GitHub Issue Tracker For Docs',
+                to: 'https://github.com/apache/incubator-devlake-website/issues',
+              },
             ],
           },
           {
