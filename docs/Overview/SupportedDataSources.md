@@ -118,29 +118,29 @@ This table shows the entities collected by each plugin. Domain layer entities in
 
 ### Github
 
-| Subtask Name                       | Estimated Max Number of Request | Does It support Incremental Collection? | Does It Support Time Filter? |
-| ---------------------------------- | ------------------------------- | --------------------------------------- | ---------------------------- |
-| ---------------------------------  | Common                          | -----------------------                 |                              |
-| CollectMilestonesMeta              | ≈10                             | ✅                                      | ❌                           |
-| CollectRunsMeta                    | <10^4                           | ❌                                      | ✅                           |
-| CollectApiCommentsMeta             | 400 (max page github supported) | ✅                                      | ❌                           |
-| **CollectApiEventsMeta**           | 400 (max page github supported) | ❌                                      | ❌                           |
-| CollectApiPullRequestReviewsMeta   | <10^5                           | ✅                                      | ✅                           |
-| ---------------------------------  | Graphql Only (Default)          | -----------------------                 |                              |
-| CollectIssueMeta                   | ≈10^4                           | ❌                                      | ✅                           |
-| CollectPrMeta                      | ≈10^3                           | ❌                                      | ✅                           |
-| CollectCheckRunMeta                | <10^4                           | ❌                                      | ✅                           |
-| CollectAccountMeta                 | ≈10^2                           | ❌                                      | -                            |
-| ---------------------------------  | Restful Only (Not Default)      | -----------------------                 |                              |
-| CollectApiIssuesMeta               | ≈10^4                           | ✅                                      | ❌                           |
-| CollectApiPullRequestsMeta         | ≈10^2                           | ✅                                      | ❌                           |
-| CollectApiPullRequestCommitsMeta   | ≈10^4                           | ✅                                      | ✅                           |
-| **CollectApiPrReviewCommentsMeta** | ≈10^4                           | ✅                                      | ❌                           |
-| **CollectAccountsMeta**            | ≈10^4                           | ❌                                      | ❌                           |
-| **CollectAccountOrgMeta**          | ≈10^4                           | ❌                                      | ❌                           |
-| CollectJobsMeta                    | <10^6                           | ❌                                      | ✅                           |
-| CollectApiCommitsMeta              | Not enabled                     | -                                       | -                            |
-| CollectApiCommitStatsMeta          | Not enabled                     | -                                       | -                            |
+| Subtask Name                       | Estimated Max Number of Request     | Does It support Incremental Collection? | Does It Support Time Filter? |
+| ---------------------------------- | ----------------------------------- | --------------------------------------- | ---------------------------- |
+| ---------------------------------  | Common                              | -----------------------                 |                              |
+| CollectMilestonesMeta              | ≈10                                 | ✅                                       | ❌                            |
+| CollectRunsMeta                    | <10^4                               | ✅                                       | ✅                            |
+| CollectApiCommentsMeta             | 400 (max page that GitHub supports) | ✅                                       | ✅                            |
+| **CollectApiEventsMeta**           | 400 (max page that GitHub supports) | ❌                                       | ❌                            |
+| CollectApiPullRequestReviewsMeta   | <10^5                               | ✅                                       | ✅                            |
+| ---------------------------------  | Graphql Only (Default)              | -----------------------                 |                              |
+| CollectIssueMeta                   | ≈10^4                               | ❌                                       | ✅                            |
+| CollectPrMeta                      | ≈10^3                               | ❌                                       | ✅                            |
+| CollectCheckRunMeta                | <10^4                               | ❌                                       | ✅                            |
+| CollectAccountMeta                 | ≈10^2                               | ❌                                       | -                            |
+| ---------------------------------  | Restful Only (Not by Default)       | -----------------------                 |                              |
+| CollectApiIssuesMeta               | ≈10^4                               | ✅                                       | ❌                            |
+| CollectApiPullRequestsMeta         | ≈10^2                               | ❌                                       | ❌                            |
+| CollectApiPullRequestCommitsMeta   | ≈10^4                               | ✅                                       | ✅                            |
+| **CollectApiPrReviewCommentsMeta** | ≈10^4                               | ✅                                       | ✅                            |
+| **CollectAccountsMeta**            | ≈10^4                               | ❌                                       | ❌                            |
+| **CollectAccountOrgMeta**          | ≈10^4                               | ❌                                       | ❌                            |
+| CollectJobsMeta                    | <10^6                               | ❌                                       | ✅                            |
+| CollectApiCommitsMeta              | Not enabled                         | -                                       | -                            |
+| CollectApiCommitStatsMeta          | Not enabled                         | -                                       | -                            |
 
 ### Feishu
 
