@@ -179,6 +179,34 @@ Below is an example for collecting a Tapd workspace. Since users can configure m
     ]
     ```
 
+### 5. Jira
+Below is an example for collecting 2 Jira boards sequentially.
+```
+[
+    [
+        {
+            "plugin": "jira",
+            "options": {
+                "boardId": 8,
+                "connectionId": 1
+            }
+        }
+    ],
+    [
+        {
+            "plugin": "jira",
+            "options": {
+                "boardId": 26,
+                "connectionId": 1
+            }
+        }
+    ]
+]
+```
+
+- `connectionId`: The `ID` field of the table `_tool_jira_connections`.
+- `boardId`: Jira board id, it is the `ID` field of the table `_tool_jira_boards`.
+    
 
 
 ## Editing a Blueprint (Advanced Mode)
