@@ -9,11 +9,11 @@ description: >
 
 For some metric calculations such as the `DORA` metric, we often encounter situations requiring comprehensive calculations based on data from multiple data sources.
 
-For example, we may use `Gitlab` for code version control, `Jenkins` for CI/CD, to calculate PR deployment cycle time, we need to know which `Gitlab Projects` and `Jenkins Jobs` are related for correctness and performance reasons.
+For example, we may use `GitLab` for code hosting, `Jenkins` for CI/CD, to calculate PR deployment cycle time, we need to know which `GitLab Projects` and `Jenkins Jobs` are related for correctness and performance reasons.
 
-However, in most cases, we have multiple `Gitlab Projects` / `Jenkins Jobs` that belong to different teams/agendas in our Apache DevLake database.
+However, in most cases, we have multiple `GitLab Projects` / `Jenkins Jobs` that belong to different teams in our Apache DevLake database.
 
-To distinguish them into different groups. The `Project` is introduced in v0.15. Essentially, a `project` consists of a set of [Scopes](../Overview/KeyConcepts.md#data-scope), i.e., a couple of `Gitlab Projects`, `Jira Boards` or `Jenkins Jobs`, etc.
+To distinguish them into different groups. The `Project` is introduced in v0.15. Essentially, a `project` consists of a set of [Scopes](../Overview/KeyConcepts.md#data-scope), i.e., a couple of `GitLab Projects`, `Jira Boards` or `Jenkins Jobs`, etc.
 
 `Project` is **a set of [Scope](../Overview/KeyConcepts.md#data-scope) from different domains**, a way to group different resources, and it is crucial for some metric calculation like `Dora`.
 
@@ -22,14 +22,14 @@ Next, let us introduce `Project` in the following order:
 - Related APIs that can be used to manipulate `Project` models
 - The interface that needs to be implemented when developing various plugins to support the `Project`.
 	- The interface that needs to be implemented to develop the `Data Source Plugin`
-	- The interface that needs to be implemented to develop the `Metrics Plugin`
+	- The interface that needs to be implemented to develop the `Metric Plugins`
 
 # Models
 
 To support project we contains the following three models:
  - `projects` describes a project object, including its name, creation and update time and other basic information
- - `project_metric_settings` describes what metrics plugin a project had enabled.
- - `project_mapping` describes the mapping relationship of project and scope, including the name of the project、table and row_id.
+ - `project_metric_settings` describes what metric plugins a project had enabled.
+ - `project_mapping` describes the mapping relationship of project and scope, including the name of the project、the table name of [Scope](../Overview/KeyConcepts.md#data-scope) and the row_id in the [Scope](../Overview/KeyConcepts.md#data-scope) table.
 
 ## projects
 
@@ -40,6 +40,7 @@ To support project we contains the following three models:
 | `created_at`  | datetime | 3          | created time of project       |         |
 | `updated_at`  | datetime | 3          | last updated time of project  |         | 
 
+### example
 
 | **name**  | **describe**                         | **created_at**          | **updated_at**          |
 | --------- | ------------------------------------ | ----------------------- | ------------------------|
@@ -55,6 +56,7 @@ To support project we contains the following three models:
 | `plugin_option` | longtext |            | check if metric plugins have been enabled by the project   |         |
 | `enable`        | tinyint  | 1          | if the metric plugins is enabled                           |         |
 
+### example
 
 | **project_name** | **plugin_name** | **plugin_option** | **enable** |
 | ---------------- | --------------- | ----------------- | ---------- |
@@ -69,6 +71,7 @@ To support project we contains the following three models:
 | `table`        | varchar  | 255        | the table name of [Scope](../Overview/KeyConcepts.md#data-scope)          | PK      |
 | `row_id`       | varchar  | 255        | the row_id in the [Scope](../Overview/KeyConcepts.md#data-scope) table    | PK      |
 
+###  example
 
 | **project_name** | **table** | **row_id**               |
 | ---------------- | --------- | ------------------------ |
@@ -89,7 +92,7 @@ Related endpoints:
 
 We divide plugins into two categories
 - The first category is `Data Source Plugin`, such as `GitLab` `GitHub` `Jira` `Jenkins`, etc. These plugins collect data from various data sources
-- The second category is `Metrics Plugin`, such as `Dora`, etc. These plug-ins do not directly contact the data source but do secondary calculations based on the collected data after the `Data Source Plugin` works
+- The second category is `Metric Plugin`, such as `Dora`, etc. These plugins do not directly contact the data source but do secondary calculations based on the collected data after the `Data Source Plugin` works
 
 ## Data Source Plugin
 
@@ -116,14 +119,85 @@ type DataSourcePluginBlueprintV200 interface {
 }
 ```
 
-`project` needs to provide a specific set of [Scopes](../Overview/KeyConcepts.md#data-scope) for a specific `connection` to the plug-in through this interface, and then obtain the plug-in involved in the `PipelineTask` All `plugins` and corresponding parameter information. At the same time, the plug-in needs to convert entities like `repo` and `board` in the data source into a `scope interface` that `project` can understand
+`scopes` in input parameters is a set of arrays containing IDs, Names, and Entities.
+
+The input data format is as follows:
+
+```go
+[]*core.BlueprintScopeV200{
+	{
+		Entities: []string{"CODE", "TICKET",  "CICD"},
+		Id:       "37",
+		Name:     "test",
+	},
+}
+```
+
+`syncPolicy` in input parameters contains some option settings, whose structure is defined as follows:
+
+```go
+type BlueprintSyncPolicy struct {
+	Version          string     `json:"version" validate:"required,semver,oneof=1.0.0"`
+	SkipOnFail       bool       `json:"skipOnFail"`
+	CreatedDateAfter *time.Time `json:"createdDateAfter"`
+}
+```
+
+`PipelinePlan` in output is a part of blueprint JSON:
+
+The input data format is as follows:(Take GitLab plugin as an example)
+
+```go
+core.PipelinePlan{
+	{
+		{
+			Plugin: "gitlab",
+			Subtasks: []string{
+				tasks.ConvertProjectMeta.Name,
+				tasks.CollectApiIssuesMeta.Name,
+				tasks.ExtractApiIssuesMeta.Name,
+				tasks.ConvertIssuesMeta.Name,
+				tasks.ConvertIssueLabelsMeta.Name,
+				tasks.CollectApiJobsMeta.Name,
+				tasks.ExtractApiJobsMeta.Name,
+				tasks.CollectApiPipelinesMeta.Name,
+				tasks.ExtractApiPipelinesMeta.Name,
+			},
+			Options: map[string]interface{}{
+				"connectionId": uint64(1),
+				"projectId":    testID,
+			},
+		},
+		{
+			Plugin: "gitextractor",
+			Options: map[string]interface{}{
+				"proxy":  "",
+				"repoId": repoId,
+				"url":    "https://git:nddtf@this_is_cloneUrl",
+			},
+		},
+	},
+	{
+		{
+			Plugin: "refdiff",
+			Options: map[string]interface{}{
+				"tagsLimit":   10,
+				"tagsOrder":   "reverse semver",
+				"tagsPattern": "pattern",
+			},
+		},
+	},
+}
+```
+
+`project` needs to provide a specific set of [Scopes](../Overview/KeyConcepts.md#data-scope) for a specific `connection` to the plugin through this interface, and then obtain the plugin involved in the `PipelineTask` All `plugins` and corresponding parameter information. At the same time, the plugin needs to convert entities like `repo` and `board` in the data source into a `scope interface` that `project` can understand
    
 The corresponding `scope interface` has been implemented at following files of in the framework layer:
 - `models/domainlayer/devops/cicd_scope.go`
 - `models/domainlayer/ticket/board.go`
 - `models/domainlayer/code/repo.go`
 
-In the `plugins/gitlab/impl/impl.go` file, there is a `Gitlab` plugin implementation of the above interface, which can be used as a reference.
+In the `plugins/gitlab/impl/impl.go` file, there is a `GitLab` plugin implementation of the above interface, which can be used as a reference.
 
 And the `plugins/gitlab/api/blueprint_v200.go` contains implementation details. 
 
@@ -131,15 +205,15 @@ The following files contain the models that the relevant implementations depend 
 - `plugins/gitlab/models/project.go`
 - `plugins/gitlab/models/transformation_rule.go`
 
-## Metrics Plugin
+## Metric Plugins
 
-For example `Dora`, and `Refdff` plugins belong to the `Metrics Plugin`
+For example `Dora`, and `Refdff` plugins belong to the `Metric Plugins`
 
-These plugins are mainly for calculating various metrics, they do not directly contact the data source, so we classify them as `Metrics Plugin`.
+These plugins are mainly for calculating various metrics, they do not directly contact the data source, so we classify them as `Metric Plugins`.
 
 ## The PluginMetric Interface
 
-`Metrics Plugin` needs to implement the `PluginMetric` interface to support `project`
+`Metric Plugins` needs to implement the `PluginMetric` interface to support `project`
 
 The interface definition for this interface looks like this:
 
@@ -164,7 +238,7 @@ type PluginMetric interface {
 
 ```
 
-`Project` needs `PluginMetric` to know whether a `Metrics Plugin` is dependent on `project`, and the tables and fields required in its calculation process.
+`Project` needs `PluginMetric` to know whether a `Metric Plugin` is dependent on `project`, and the tables and fields required in its calculation process.
  
 In the `plugins/dora/impl/impl.go` file, there is a `Dora` plugin implementation of the above interface, which can be used as a sample reference.You can find it by searching the following fields:
 - `func (plugin Dora) RequiredDataEntities() (data []map[string]interface{}, err errors.Error)`
