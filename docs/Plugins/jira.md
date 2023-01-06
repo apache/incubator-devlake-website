@@ -32,7 +32,7 @@ Metrics that can be calculated based on the data collected from Jira:
 ## Configuration
 
 - Configuring Jira via [config-ui](/UserManuals/ConfigUI/Jira.md).
-- Configuring Jira via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#3-jira).
+- Configuring Jira via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#4-jira).
 
 ## API Sample Request
 
