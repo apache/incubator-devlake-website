@@ -37,7 +37,7 @@ curl --location --request POST 'http://localhost:8080/plugins/bitbucket/connecti
 curl --location --request POST 'http://localhost:8080/blueprints' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "enabled": true,
+    "enable": true,
     "mode": "NORMAL",
     "name": "My Bitbucket Blueprint",
     "cronConfig": "<cron string of your choice>",
