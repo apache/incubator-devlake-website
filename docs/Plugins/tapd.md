@@ -5,6 +5,7 @@ description: >
 ---
 
 ## Summary
+
 This plugin collects TAPD data through its REST APIs. TAPD is an issue-tracking tool similar to Jira.
 
 ## Metrics
@@ -18,6 +19,6 @@ Metrics that can be calculated based on the data collected from Tapd:
 - [Incident Age](/Metrics/IncidentAge.md)
 
 ## Configuration
-- Configuring Tapd via [config-ui](/UserManuals/ConfigUI/Tapd.md).
-- Configuring Tapd via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#4-tapd).
 
+- Configuring Tapd via [config-ui](/UserManuals/ConfigUI/Tapd.md).
+- Configuring Tapd via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#6-tapd).

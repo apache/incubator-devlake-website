@@ -34,6 +34,7 @@ Advanced mode gives utmost flexibility to users by exposing the JSON API.
 ## Examples
 
 ### 1. Gitlab
+
 Collect multiple GitLab repos sequentially.
 
 > When there're multiple collection tasks against a single data source, we recommend running these tasks sequentially since the collection speed is mostly limited by the API rate limit of the data source.
@@ -47,6 +48,7 @@ Below is an example for collecting 2 GitLab repos sequentially. It has 2 stages,
     {
       "Plugin": "gitlab",
       "Options": {
+        "connectionId": 1,
         "projectId": 15238074
       }
     }
@@ -55,6 +57,7 @@ Below is an example for collecting 2 GitLab repos sequentially. It has 2 stages,
     {
       "Plugin": "gitlab",
       "Options": {
+        "connectionId": 2,
         "projectId": 11624398
       }
     }
@@ -63,9 +66,10 @@ Below is an example for collecting 2 GitLab repos sequentially. It has 2 stages,
 ```
 
 ### 2. Github
+
 Collect a GitHub repo and a Jira board in parallel
 
-Below is an example for collecting a GitHub repo and a Jira board in parallel. It has a single stage with a GitHub task and a Jira task. Since users can configure multiple Jira connection, it's required to pass in a `connectionId` for Jira task to specify which connection to use.
+Below is an example for collecting a GitHub repo and a Jira board in parallel. It has a single stage with a GitHub task and a Jira task.
 
 ```
 [
@@ -73,8 +77,9 @@ Below is an example for collecting a GitHub repo and a Jira board in parallel. I
     {
       "Plugin": "github",
       "Options": {
-        "repo": "lake",
-        "owner": "merico-dev"
+        "connectionId": 1,
+        "repo": "incubator-devlake",
+        "owner": "apache"
       }
     },
     {
@@ -88,7 +93,76 @@ Below is an example for collecting a GitHub repo and a Jira board in parallel. I
 ]
 ```
 
-### 3. Zentao
+Github:
+
+- `connectionId`: The `ID` field from **Connections Github** page.
+- `owner`: Just take a look at the URL: https://github.com/apache/incubator-devlake, owner is `apache`.
+- `repo`: Just take a look at the URL: https://github.com/apache/incubator-devlake, repo is `incubator-devlake`.
+
+Jira: You can refer to this for jira related [configuration](#3-jira).
+
+### 3. Jira
+
+Below is an example for collecting 2 Jira boards sequentially. It has 2 stages, each contains a Jira task.
+
+```
+[
+    [
+        {
+            "plugin": "jira",
+            "options": {
+                "boardId": 8,
+                "connectionId": 1
+            }
+        }
+    ],
+    [
+        {
+            "plugin": "jira",
+            "options": {
+                "boardId": 26,
+                "connectionId": 1
+            }
+        }
+    ]
+]
+```
+
+- `connectionId`: The `ID` field from **Connections Jira** page.
+- `boardId`: Just take a look at the URL - it will be the last number in the address. Should look something like this at the end: `RapidBoard.jspa?rapidView=8` or `/projects/xxx/boards/8`. So `8` would be the board ID in that case.
+
+### 4. Jenkins
+
+Below is an example for collecting 2 Jenkins jobs sequentially. It has 2 stages, each contains a Jenkins task.
+
+```
+[
+    [
+        {
+            "plugin": "jenkins",
+            "options": {
+                "connectionId": 1,
+                "scopeId": "auto_deploy"
+            }
+        }
+    ],
+    [
+        {
+            "plugin": "jenkins",
+            "options": {
+                "connectionId": 2,
+                "scopeId": "Deploy test"
+            }
+        }
+    ]
+]
+```
+
+- `connectionId`: The `ID` field from **Connections Jenkins** page.
+- `scopeId`: Jenkins job name.
+
+### 5. Zentao
+
 Below is an example for collecting a Zentao workspace. Since users can configure multiple Zentao connection, it's required to pass in a `connectionId` for Tapd task to specify which connection to use.
 
 ```
@@ -107,7 +181,7 @@ Below is an example for collecting a Zentao workspace. Since users can configure
 ]
 ```
 
-- `connectionId`: The `ID` field from **ZENTAO Integration** page.
+- `connectionId`: The `ID` field from **Connections ZENTAO** page.
 - `productId`: optional, ZENTAO product id, see "Find Product Id" for details.
 - `projectId`: optional, ZENTAO product id, see "Find Project Id" for details.
 - `executionId`: optional, ZENTAO product id, see "Find Execution Id" for details.
@@ -115,6 +189,7 @@ Below is an example for collecting a Zentao workspace. Since users can configure
 You must choose at least one of `productId`, `projectId` and `executionId`.
 
 #### Find Product Id
+
 1. Navigate to the Zentao Product in the browser
    ![](zentao-product.png)
 2. Click the red square annotated in the pic above
@@ -122,17 +197,21 @@ You must choose at least one of `productId`, `projectId` and `executionId`.
 3. Then the number in the red circle above is `ProductId`
 
 #### Find Project Id
+
 1. Navigate to the Zentao Project in the browser
    ![](zentao-project-id.png)
 2. Then the number in the red square above is `ProjectId`
 
 #### Find Execution Id
+
 1. Navigate to the Zentao Execution in the browser
    ![](zentao-execution-id.png)
 2. Then the number in the red square above is `ExecutionId`
 
-### 4. Tapd
+### 6. Tapd
+
 Below is an example for collecting a Tapd workspace. Since users can configure multiple Tapd connection, it's required to pass in a `connectionId` for Tapd task to specify which connection to use.
+
 ```
 [
     [
@@ -159,55 +238,22 @@ Below is an example for collecting a Tapd workspace. Since users can configure m
 - `connectionId`: The `ID` field from **TAPD Integration** page.
 - `workspaceId`: TAPD workspace id, you can get it from two ways:
   - url: ![tapd-workspace-id](/img/ConfigUI/tapd-find-workspace-id.png)
-  - db: you can check workspace info from db._tool_tapd_workspaces and get all workspaceId you want to collect after execution of the following json in `advanced mode`
+  - db: you can check workspace info from db.\_tool_tapd_workspaces and get all workspaceId you want to collect after execution of the following json in `advanced mode`
     ```json
     [
-            [
-                    {
-                            "plugin": "tapd",
-                            "options": {
-                                    "companyId": 55850509,
-                                    "workspaceId": 1,
-                                    "connectionId": 1
-                            },
-                            "subtasks": [
-                                    "collectCompanies",
-                                    "extractCompanies"
-                            ]
-                    }
-            ]
+      [
+        {
+          "plugin": "tapd",
+          "options": {
+            "companyId": 55850509,
+            "workspaceId": 1,
+            "connectionId": 1
+          },
+          "subtasks": ["collectCompanies", "extractCompanies"]
+        }
+      ]
     ]
     ```
-
-### 5. Jira
-Below is an example for collecting 2 Jira boards sequentially.
-```
-[
-    [
-        {
-            "plugin": "jira",
-            "options": {
-                "boardId": 8,
-                "connectionId": 1
-            }
-        }
-    ],
-    [
-        {
-            "plugin": "jira",
-            "options": {
-                "boardId": 26,
-                "connectionId": 1
-            }
-        }
-    ]
-]
-```
-
-- `connectionId`: The `ID` field of the table `_tool_jira_connections`.
-- `boardId`: Jira board id, it is the `ID` field of the table `_tool_jira_boards`.
-    
-
 
 ## Editing a Blueprint (Advanced Mode)
 
