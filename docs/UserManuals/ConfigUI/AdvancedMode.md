@@ -62,7 +62,7 @@ Collect multiple GitHub repos sequentially. Below is an example for collecting 2
 
 GitHub:
 
-- `connectionId`: The `ID` field from **Connections GitHub** page.
+- `connectionId`: The ID of your GitHub connection at page http://localhost:4000/connections/github.
 - `owner`: Just take a look at the URL: https://github.com/apache/incubator-devlake, owner is `apache`.
 - `repo`: Just take a look at the URL: https://github.com/apache/incubator-devlake, repo is `incubator-devlake`.
 
@@ -98,6 +98,9 @@ Below is an example for collecting 2 GitLab repos sequentially. It has 2 stages,
 ]
 ```
 
+- `connectionId`: The ID of your GitLab connection at page http://localhost:4000/connections/gitlab.
+- `projectId`: GitLab repo's Project ID.
+
 ### 3. Jenkins
 
 Collect multiple Jenkins jobs sequentially. Below is an example for collecting 2 Jenkins jobs sequentially. It has 2 stages, each contains a Jenkins task.
@@ -125,7 +128,7 @@ Collect multiple Jenkins jobs sequentially. Below is an example for collecting 2
 ]
 ```
 
-- `connectionId`: The `ID` field from **Connections Jenkins** page.
+- `connectionId`: The ID of your Jenkins connection at page http://localhost:4000/connections/jenkins.
 - `scopeId`: Jenkins job name.
 
 ### 4. Jira
@@ -155,12 +158,12 @@ Collect multiple Jira boards sequentially. Below is an example for collecting 2 
 ]
 ```
 
-- `connectionId`: The `ID` field from **Connections Jira** page.
+- `connectionId`: The ID of your Jira connection at page http://localhost:4000/connections/jira.
 - `boardId`: Just take a look at the URL - it will be the last number in the address. Should look something like this at the end: `RapidBoard.jspa?rapidView=8` or `/projects/xxx/boards/8`. So `8` would be the board ID in that case.
 
 ### 5. Jira + GitLab
 
-Below is an example for collecting a GitLab repo and a Jira board in parallel. It has a single stage with a GitLab task and a Jira task.
+Below is an example for collecting a GitLab repo and a Jira board in parallel. It has a single stage with a GitLab task and a Jira task. As GitLab and Jira are using their own tokens, they can be executed in parallel.
 
 ```
 [
@@ -212,7 +215,7 @@ Below is an example for collecting a TAPD workspace. Since users can configure m
 ]
 ```
 
-- `connectionId`: The `ID` field from **TAPD Integration** page.
+- `connectionId`: The ID of your TAPD connection at page http://localhost:4000/connections/tapd.
 - `workspaceId`: TAPD workspace id, you can get it from two ways:
   - url: ![tapd-workspace-id](/img/ConfigUI/tapd-find-workspace-id.png)
   - db: you can check workspace info from db.\_tool_tapd_workspaces and get all workspaceId you want to collect after execution of the following json in `advanced mode`
@@ -279,7 +282,7 @@ Below is an example for collecting a Zentao workspace. Since users can configure
 ]
 ```
 
-- `connectionId`: The `ID` field from **Connections ZENTAO** page.
+- `connectionId`: The ID of your Zentao connection at page http://localhost:4000/connections/zentao.
 - `productId`: optional, ZENTAO product id, see "Find Product Id" for details.
 - `projectId`: optional, ZENTAO product id, see "Find Project Id" for details.
 - `executionId`: optional, ZENTAO product id, see "Find Execution Id" for details.
