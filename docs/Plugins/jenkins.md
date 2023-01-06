@@ -35,6 +35,7 @@ Metrics that can be calculated based on the data collected from Jenkins:
 ## Configuration
 
 - Configuring Jenkins via [Config UI](/UserManuals/ConfigUI/Jenkins.md)
+- Configuring Jenkins via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#3-jenkins).
 
 ## API Sample Request
 
@@ -54,6 +55,34 @@ curl 'http://localhost:8080/pipelines' \
         "options": {
           "connectionId": 1,
           "scopeId": "auto_deploy",
+          "transformationRules":{
+            "deploymentPattern":"",
+            "productionPattern":""
+          }
+        }
+      }
+    ]
+  ]
+}
+'
+```
+
+or
+
+```
+curl 'http://localhost:8080/pipelines' \
+--header 'Content-Type: application/json' \
+--data-raw '
+{
+  "name": "project1-BLUEPRINT",
+  "blueprintId": 2,
+  "plan": [
+    [
+      {
+        "plugin": "jenkins",
+        "options": {
+          "connectionId": 1,
+          "jobFullName": "auto_deploy",
           "transformationRules":{
             "deploymentPattern":"",
             "productionPattern":""

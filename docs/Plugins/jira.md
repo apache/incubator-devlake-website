@@ -4,7 +4,6 @@ description: >
   Jira Plugin
 ---
 
-
 ## Summary
 
 This plugin collects Jira data through Jira REST API. It then computes and visualizes various engineering metrics from the Jira data.
@@ -31,13 +30,13 @@ Metrics that can be calculated based on the data collected from Jira:
 - [Incident Count per 1k Lines of Code](/Metrics/IncidentCountPer1kLinesOfCode.md)
 
 ## Configuration
+
 - Configuring Jira via [config-ui](/UserManuals/ConfigUI/Jira.md).
-- Configuring Jira via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#5-jira).
+- Configuring Jira via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#4-jira).
 
 ## API Sample Request
 
 You can trigger data collection by making a POST request to `/pipelines`.
-
 
 ```shell
 curl 'http://localhost:8080/pipelines' \

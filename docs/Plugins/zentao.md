@@ -5,6 +5,7 @@ description: >
 ---
 
 ## Summary
+
 This plugin collects Zentao data through its REST APIs. [Zentao](https://github.com/easysoft/zentaopms) is an issue-tracking tool similar to Jira.
 
 ## Metrics
@@ -18,5 +19,6 @@ Metrics that can be calculated based on the data collected from Zentao:
 - [Incident Age](/Metrics/IncidentAge.md)
 
 ## Configuration
+
 - Configuring Zentao via [config-ui](/UserManuals/ConfigUI/Zentao.md).
-- Configuring Zentao via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#3-zentao).
+- Configuring Zentao via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#8-zentao).
