@@ -55,6 +55,10 @@ In the current version, the Blueprint editing feature **allows** editing:
 - The data entities of the data scope
 - The transformation rules of any data scope
 
+## Blueprint execution runs' logs can be found here:
+
+![img](/img/ConfigUI/BlueprintEditing/blueprint-edit3.png)
+
 and does **NOT allow**:
 - Adding or deleting connections to an existing blueprint (will be available in the future)
 - Editing any connections
