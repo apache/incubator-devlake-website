@@ -55,7 +55,7 @@ In the current version, the Blueprint editing feature **allows** editing:
 - The data entities of the data scope
 - The transformation rules of any data scope
 
-## Blueprint execution runs' logs can be found here:
+## Download Logs for Blueprint Historical Runs
 
 ![img](/img/ConfigUI/BlueprintEditing/blueprint-edit3.png)
 
