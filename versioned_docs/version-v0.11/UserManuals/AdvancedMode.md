@@ -88,12 +88,3 @@ Below is an example for collecting a GitHub repo and a Jira board in parallel. I
 ]
 
 ```
-
-# How to download pipeline execution logs
-
-To download pipeline execution logs, follow these steps:
-
-1. Open the pipeline execution logs page by clicking the **Logs** tab in the pipeline execution details page.
-
-2. Click the **Download** button to download the logs.
-
