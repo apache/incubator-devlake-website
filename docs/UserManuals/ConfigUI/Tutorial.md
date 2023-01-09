@@ -69,6 +69,9 @@ The Settings page for editing Blueprints:
 ## Creating and Managing Data Connections
 The Data Connections page allows you to view, create and manage all your data connections in one place. 
 
+## Download Logs for Blueprint Historical Runs
+
+![img](/img/ConfigUI/BlueprintEditing/blueprint-edit3.png)
 
 ## Troubleshooting
 
