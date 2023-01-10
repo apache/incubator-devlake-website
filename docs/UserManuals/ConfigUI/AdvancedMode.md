@@ -198,16 +198,8 @@ Below is an example for collecting a TAPD workspace. Since users can configure m
         {
             "plugin": "tapd",
             "options": {
+                "createdDateAfter": "2006-01-02T15:04:05Z",
                 "workspaceId": 34***66,
-                "connectionId": 1
-            }
-        }
-    ],
-    [
-        {
-            "plugin": "tapd",
-            "options": {
-                "workspaceId": 6***14,
                 "connectionId": 1
             }
         }
@@ -215,6 +207,7 @@ Below is an example for collecting a TAPD workspace. Since users can configure m
 ]
 ```
 
+- `createdDateAfter`: The data range you wish to collect after the given date.
 - `connectionId`: The ID of your TAPD connection at page http://localhost:4000/connections/tapd.
 - `workspaceId`: TAPD workspace id, you can get it from two ways:
   - url: ![tapd-workspace-id](/img/ConfigUI/tapd-find-workspace-id.png)
@@ -245,6 +238,7 @@ Below is an example for collecting a TAPD workspace and a GitLab repo in paralle
         {
             "plugin": "tapd",
             "options": {
+                "createdDateAfter": "2006-01-02T15:04:05Z",
                 "workspaceId": 6***14,
                 "connectionId": 1
             }
@@ -264,7 +258,7 @@ Below is an example for collecting a TAPD workspace and a GitLab repo in paralle
 
 ### 8. Zentao
 
-Below is an example for collecting a Zentao workspace. Since users can configure multiple Zentao connection, it's required to pass in a `connectionId` for TAPD task to specify which connection to use.
+Below is an example for collecting a Zentao workspace. Since users can configure multiple Zentao connection, it's required to pass in a `connectionId` for Zentao task to specify which connection to use.
 
 ```
 [
