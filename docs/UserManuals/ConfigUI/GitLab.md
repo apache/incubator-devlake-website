@@ -26,7 +26,7 @@ This should be a valid REST API endpoint.
 
 GitLab personal access tokens are required to add a connection. Learn about [how to create a GitLab personal access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html).
 
-###### GitLab personal access tokens(Recommended)
+###### GitLab personal access tokens
 
 The following permissions are required to collect data from repositories:
 
@@ -35,7 +35,10 @@ The following permissions are required to collect data from repositories:
 - `read_user`
 - `read_repository`
 
-And GitLab users have five permissions in the group: Guest, Reporter, Developer, Master, Owner. You can check your user permission level at In `Max role` column of `Project information -> Menbers`. If you are a Guest role, you can only create issues and post comments, but you cannot read or write the repository.
+You also have to double-check your GitLab user permission settings.
+
+1. Go to the Project information -> Members page of the GitLab projects you wish to collect.
+2. Check your role in this project from the Max role column. Make sure you are not the Guest role, otherwise, you will not be able to collect data from this project.
 
 ###### Rate Limit
 
