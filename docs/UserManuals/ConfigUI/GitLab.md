@@ -26,9 +26,20 @@ This should be a valid REST API endpoint.
 
 GitLab personal access tokens are required to add a connection. Learn about [how to create a GitLab personal access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html).
 
-###### Rate Limit
-The data collection speed is restricted by the **rate limit of [120,000 requests/hour](https://docs.gitlab.com/ee/user/gitlab_com/index.html#gitlabcom-specific-rate-limits)** for GitLab Cloud. Tokens under the same IP address share the rate limit, so the actual rate limit for your token will be lower than this number.
+###### GitLab personal access tokens(Recommended)
 
+The following permissions are required to collect data from repositories:
+
+- `api`
+- `read_api`
+- `read_user`
+- `read_repository`
+
+And GitLab users have five permissions in the group: Guest, Reporter, Developer, Master, Owner. You can check your user permission level at In `Max role` column of `Project information -> Menbers`. If you are a Guest role, you can only create issues and post comments, but you cannot read or write the repository.
+
+###### Rate Limit
+
+The data collection speed is restricted by the **rate limit of [120,000 requests/hour](https://docs.gitlab.com/ee/user/gitlab_com/index.html#gitlabcom-specific-rate-limits)** for GitLab Cloud. Tokens under the same IP address share the rate limit, so the actual rate limit for your token will be lower than this number.
 
 #### Proxy URL (Optional)
 
