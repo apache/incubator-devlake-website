@@ -2,8 +2,14 @@
 title: "Install via Kubernetes"
 description: >
   The steps to install Apache DevLake via Kubernetes
-sidebar_position: 2
+sidebar_position: 3
 ---
+
+:::caution
+
+We highly recommend the [helm approach](./HelmSetup.md), this page is for Advanced Installation only
+
+:::
 
 We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/deployment/k8s/k8s-deploy.yaml) to help deploy DevLake to Kubernetes
 
