@@ -144,7 +144,7 @@ const versions = require('./versions.json');
           {
             type: 'doc',
             position: 'right',
-            label: 'Live Demo',
+            label: 'Use Cases',
             to: 'livedemo',
             docsPluginId: 'livedemo',
             docId: 'EngineeringLeads/DORA',
