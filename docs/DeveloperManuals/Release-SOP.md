@@ -10,14 +10,20 @@
    ```
 2. Append your public key to the KEYS file
    cd devlake
-   - Judging that your key is already in the file
+
+   - Check if your public key is in the KEYS file
+   - If it does not, create a new [GPG key](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key), and then run the following command to see if it was successful.
+
    ```shell
-    gpg --list-sigs <your name>
+   gpg --list-sigs <your name>
    ```
-   - If not, append your publick key
+
+   - Append your publick key
+
    ```shell
        gpg --armor --export <your name> >> KEYS
    ```
+
 3. Upload
    ```shell
    svn add KEYS
