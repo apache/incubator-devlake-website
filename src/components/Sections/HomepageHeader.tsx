@@ -162,28 +162,28 @@ export function HomepageHeader() {
               max-w-[90%]"
       >
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <RedHatIcon className="mobile:w-[72px]" />
+          <a href="https://www.redhat.com/en"><RedHatIcon className="mobile:w-[72px]" /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <StripeIcon className="mobile:w-[36px]" />
+          <a href="https://stripe.com/gb"><StripeIcon className="mobile:w-[36px]" /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <img className="w-[88px] mobile:w-[48px]" src={OrkesIcon} />
+          <a href="https://orkes.io/"><img className="w-[88px] mobile:w-[48px]" src={OrkesIcon} /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <img className="w-[140px] mobile:w-[71px]" src={ClickHouseIcon} />
+          <a href="https://clickhouse.com/"><img className="w-[140px] mobile:w-[71px]" src={ClickHouseIcon} /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <img className="w-[80px] mobile:w-[36px]" src={CrozIcon} />
+          <a href="https://croz.net/"><img className="w-[80px] mobile:w-[36px]" src={CrozIcon} /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <img className="w-[120px] mobile:w-[60px]" src={CoderIcon} />
+          <a href="https://coder.com/"><img className="w-[120px] mobile:w-[60px]" src={CoderIcon} /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <ScarfIcon className="mobile:w-[48px]" />
+          <a href="https://about.scarf.sh/"><ScarfIcon className="mobile:w-[48px]" /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <IBMIcon className="mobile:w-[30px]" />
+          <a href="https://www.ibm.com/"><IBMIcon className="mobile:w-[30px]" /></a>
         </div>
       </div>
     </div>
