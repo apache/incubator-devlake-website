@@ -21,11 +21,11 @@ Here are some resources for writing UnitTest for golang:
 - [How To Write Unit Tests in Go | DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-write-unit-tests-in-go-using-go-test-and-the-testing-package)
 
 
-# Test case source file 
+# Test case examples 
 
 - [Source code](https://github.com/apache/incubator-devlake/blob/243cc8a80aa5b37828e2a142ac9f7e3269b7e1dc/backend/core/migration/migrator_test.go)
 
-# Write Unit-Test case library
+# Recommended Libraries for writing UnitTest cases
 
 - [Library-1](https://github.com/stretchr/testify/tree/master/assert)
 - [Library-2](https://github.com/stretchr/testify/tree/master/mock)
