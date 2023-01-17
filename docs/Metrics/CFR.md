@@ -105,7 +105,7 @@ ORDER BY 1
 
 If you want to measure in which category your team falls into as the picture shown below, run the following SQL in Grafana.
 
-![](/img/Metrics/cfr-monthly.jpeg)
+![](/img/Metrics/cfr-text.jpeg)
 
 ```
 with _deployment_count as (
