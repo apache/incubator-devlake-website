@@ -1,5 +1,5 @@
 ---
-title: "Configuring Zentao(WIP)"
+title: "Configuring Zentao(Beta)"
 sidebar_position: 6
 description: Config UI instruction for Zentao
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Zentao"
+title: "Zentao(Beta)"
 description: >
   Zentao Plugin
 ---

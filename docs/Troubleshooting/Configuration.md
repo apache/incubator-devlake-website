@@ -1,8 +1,8 @@
 ---
-title: "Configuration Troubleshotting"
+title: "Configuration and Blueprint Troubleshooting"
 sidebar_position: 2
 description: >
-  Configuration Troubleshotting
+  Configuration Troubleshooting
 ---
 
 ## Failed to collect data from the server with a self-signed certificate
