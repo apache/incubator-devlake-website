@@ -26,6 +26,12 @@ Your User ID for the Jenkins Instance.
 
 For help on Username and Password, please see Jenkins docs on [using credentials](https://www.jenkins.io/doc/book/using/using-credentials/). You can also use "API Access Token" for this field, which can be generated at `User` -> `Configure` -> `API Token` section on Jenkins.
 
+#### Fixed Rate Limit (Optional)
+
+DevLake uses a dynamic rate limit to collect Jenkins data. You can adjust the rate limit if you want to increase or lower the speed.
+
+There is not any doc about Jenkins rate limiting. Please put up an issue if you find one.
+
 #### Test and Save Connection
 
 Click `Test Connection`, if the connection is successful, click `Save Connection` to add the connection.

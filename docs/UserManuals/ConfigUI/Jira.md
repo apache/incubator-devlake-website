@@ -5,6 +5,7 @@ description: Config UI instruction for Jira
 ---
 
 Visit config-ui: `http://localhost:4000`.
+
 ### Step 1 - Add Data Connections
 ![jira-add-data-connections](/img/ConfigUI/jira-add-data-connections.png)
 
@@ -20,13 +21,19 @@ The endpoint url should end with `/`.
 #### Username / Email
 Input the username or email of your Jira account.
 
-
 #### Password
 - If you are using Jira Cloud, please input the [Jira personal access token](https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html).
 - If you are using Jira Server v8+, please input the password of your Jira account.
 
 #### Proxy URL (Optional)
 If you are behind a corporate firewall or VPN you may need to utilize a proxy server. Enter a valid proxy server address on your network, e.g. `http://your-proxy-server.com:1080`
+
+#### Fixed Rate Limit (Optional)
+
+DevLake uses a dynamic rate limit to collect Jira data. You can adjust the rate limit if you want to increase or lower the speed. If you encounter a 403 error during data collection, please lower the rate limit.
+
+Jira(Cloud) uses a dynamic rate limit and has no clear rate limit. For Jira Server's rate limiting, please contact your Jira Server admin to [get or set the maximum rate limit](https://repository.prace-ri.eu/git/help/security/rate_limits.md) of your Jira instance. Please do not use a rate that exceeds this number.
+
 
 #### Test and Save Connection
 Click `Test Connection`, if the connection is successful, click `Save Connection` to add the connection.

@@ -20,7 +20,7 @@ This should be a valid REST API endpoint.
 
 - If you are using gitlab.com, the endpoint will be `https://gitlab.com/api/v4/`
 - If you are self-hosting GitLab, the endpoint will look like `https://gitlab.example.com/api/v4/`
-  The endpoint url should end with `/`.
+  The endpoint URL should end with `/`.
 
 #### Auth Token(s)
 
@@ -40,13 +40,17 @@ You also have to double-check your GitLab user permission settings.
 1. Go to the Project information -> Members page of the GitLab projects you wish to collect.
 2. Check your role in this project from the Max role column. Make sure you are not the Guest role, otherwise, you will not be able to collect data from this project.
 
-###### Rate Limit
-
-The data collection speed is restricted by the **rate limit of [120,000 requests/hour](https://docs.gitlab.com/ee/user/gitlab_com/index.html#gitlabcom-specific-rate-limits)** for GitLab Cloud. Tokens under the same IP address share the rate limit, so the actual rate limit for your token will be lower than this number.
-
 #### Proxy URL (Optional)
 
 If you are behind a corporate firewall or VPN you may need to utilize a proxy server. Enter a valid proxy server address on your network, e.g. `http://your-proxy-server.com:1080`
+
+#### Fixed Rate Limit (Optional)
+
+DevLake uses a dynamic rate limit at around 12,000 requests/hour to collect GitLab data. You can adjust the rate limit if you want to increase or lower the speed.
+
+The maximum rate limit for GitLab Cloud is ** [120,000 requests/hour](https://docs.gitlab.com/ee/user/gitlab_com/index.html#gitlabcom-specific-rate-limits)**. Tokens under the same IP address share the rate limit, so the actual rate limit for your token will be lower than this number.
+
+For self-managed GitLab rate limiting, please contact your GitLab admin to [get or set the maximum rate limit](https://repository.prace-ri.eu/git/help/security/rate_limits.md) of your GitLab instance. Please do not use a rate that exceeds this number.
 
 #### Test and Save Connection
 
