@@ -1,5 +1,5 @@
 ---
-title: "Tapd"
+title: "Tapd(Beta)"
 description: >
   Tapd Plugin
 ---

@@ -286,21 +286,21 @@ You must choose at least one of `productId`, `projectId` and `executionId`.
 #### Find Product Id
 
 1. Navigate to the Zentao Product in the browser
-   ![](zentao-product.png)
+   ![](/img/ConfigUI/zentao-product.png)
 2. Click the red square annotated in the pic above
-   ![](zentao-product-id.png)
+   ![](/img/ConfigUI/zentao-product-id.png)
 3. Then the number in the red circle above is `ProductId`
 
 #### Find Project Id
 
 1. Navigate to the Zentao Project in the browser
-   ![](zentao-project-id.png)
+   ![](/img/ConfigUI/zentao-project-id.png)
 2. Then the number in the red square above is `ProjectId`
 
 #### Find Execution Id
 
 1. Navigate to the Zentao Execution in the browser
-   ![](zentao-execution-id.png)
+   ![](/img/ConfigUI/zentao-execution-id.png)
 2. Then the number in the red square above is `ExecutionId`
 
 ## Editing a Blueprint (Advanced Mode)
