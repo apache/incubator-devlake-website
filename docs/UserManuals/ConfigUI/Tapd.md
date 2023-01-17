@@ -4,7 +4,8 @@ sidebar_position: 6
 description: Config UI instruction for Tapd
 ---
 
-Visit config-ui: `http://localhost:4000`.
+Visit config-ui: `http://localhost:4000` and go to `Connections` page.
+
 ### Step 1 - Add Data Connections
 ![tapd-add-data-connections](/img/ConfigUI/tapd-add-data-connections.png)
 
@@ -29,8 +30,12 @@ For TAPD, we suggest you setting the rate limit to 3500
 #### Test and Save Connection
 Click `Test Connection`, if the connection is successful, click `Save Connection` to add the connection.
 
+### Step 2 - Configure Blueprint
 
+Similar to other beta plugins, TAPD does not support `project`, which means, you can only collect TAPD data via blueprint's advanced mode.
 
-## Troubleshooting
+Please go to the `Blueprints` page and switch to advanced mode. See how to use advanced mode and JSON [examples](AdvancedMode.md#6-tapd).
+
+### Troubleshooting
 
 If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)
