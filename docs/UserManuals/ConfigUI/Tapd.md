@@ -34,7 +34,7 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 
 Similar to other beta plugins, TAPD does not support `project`, which means, you can only collect TAPD data via blueprint's advanced mode.
 
-Please go to the `Blueprints` page and switch to advanced mode. See how to use advanced mode and JSON [examples](AdvancedMode.md#tapd).
+Please go to the `Blueprints` page and switch to advanced mode. See how to use advanced mode and JSON [examples](AdvancedMode.md#6-tapd).
 
 ### Troubleshooting
 

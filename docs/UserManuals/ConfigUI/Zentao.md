@@ -30,7 +30,7 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 
 Similar to other beta plugins, Zentao does not support `project`, which means, you can only collect Zentao data via blueprint's advanced mode.
 
-Please go to the `Blueprints` page and switch to advanced mode. See how to use advanced mode and JSON [examples](AdvancedMode.md#zentao).
+Please go to the `Blueprints` page and switch to advanced mode. See how to use advanced mode and JSON [examples](AdvancedMode.md#8-zentao).
 
 ### Troubleshooting
 

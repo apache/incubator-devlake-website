@@ -188,7 +188,7 @@ Below is an example for collecting a GitLab repo and a Jira board in parallel. I
 ]
 ```
 
-### 6. [TAPD](#tapd)
+### 6. TAPD
 
 Below is an example for collecting a TAPD workspace. Since users can configure multiple TAPD connection, it's required to pass in a `connectionId` for TAPD task to specify which connection to use.
 
@@ -256,7 +256,7 @@ Below is an example for collecting a TAPD workspace and a GitLab repo in paralle
 ]
 ```
 
-### 8. [Zentao](#zentao)
+### 8. Zentao
 
 Below is an example for collecting a Zentao workspace. Since users can configure multiple Zentao connection, it's required to pass in a `connectionId` for Zentao task to specify which connection to use.
 
