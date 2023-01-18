@@ -11,3 +11,7 @@ We hold community meetups in Chinese and English every week alternately. The age
 
 
 ## Latest Agenda for English Meetups
+### Thursday, Jan 19, 2023
+![Jan 19 Community Huddle](https://user-images.githubusercontent.com/31725457/213015469-3bf508ed-d813-437a-a7dd-6460a9db64e9.png)
+- [Register Here](https://merico-dev.zoom.us/webinar/register/WN_ho68QdLETgOLYgOnTWL1ww)
+- Watch on YouTube (will be updated soon..)
