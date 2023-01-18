@@ -1,8 +1,8 @@
 ---
-title: "Configuration and Blueprint Troubleshooting"
-sidebar_position: 2
+title: "Troubleshooting"
+sidebar_position: 10
 description: >
-  Debug errors found in Config UI or during data collection.
+  DevLake Troubleshooting
 ---
 
 ### Common Error Code while collecting/processing data

@@ -20,6 +20,8 @@ The endpoint url should end with `/`.
 #### Auth Token(s)
 GitLab personal access tokens are required to add a connection. Learn about [how to create a GitLab personal access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html).
 
+###### Rate Limit
+The data collection speed is restricted by the **rate limit of [120,000 requests/hour](https://docs.gitlab.com/ee/user/gitlab_com/index.html#gitlabcom-specific-rate-limits)** for GitLab Cloud. Tokens under the same IP address share the rate limit, so the actual rate limit for your token will be lower than this number.
 
 #### Proxy URL (Optional)
 If you are behind a corporate firewall or VPN you may need to utilize a proxy server. Enter a valid proxy server address on your network, e.g. `http://your-proxy-server.com:1080`

@@ -31,8 +31,16 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-html[data-theme='dark'] .docusaurus-highlight-code-line {
+html[data-theme="dark"] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.rightArrow .moveArrow {
+  display: inline-block;
+  transition: 0.1s ease-in;
+}
+.rightArrow:hover .moveArrow {
+  transform: translate(50%);
 }
 
 @media screen and (min-width: 576px) {
@@ -48,7 +56,7 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
     @apply hover:no-underline hover:text-neutral-invert;
     @apply text-neutral-invert text-[16px] leading-[20px] font-semibold;
     @apply rounded-[10px] sm:text-[14px];
-    @apply shadow-sm shadow-primary/20 ;
+    @apply shadow-sm shadow-primary/20;
   }
 
   .section-title {
@@ -67,6 +75,6 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   }
 
   .use-case-card {
-    background: linear-gradient(105.48deg, #DBE4FD 16.79%, #F0F4FE 93.34%);
+    background: linear-gradient(105.48deg, #dbe4fd 16.79%, #f0f4fe 93.34%);
   }
 }

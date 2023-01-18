@@ -57,8 +57,7 @@ Metrics that can be calculated based on the data collected from GitHub:
 ## Configuration
 
 - Configuring GitHub via [Config UI](/UserManuals/ConfigUI/GitHub.md)
-- Configuring GitHub via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#2-github).
-
+- Configuring GitHub via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#1-github).
 
 ## API Sample Request
 
@@ -78,6 +77,44 @@ curl 'http://localhost:8080/pipelines' \
         "options": {
           "connectionId": 1,
           "scopeId": "384111310",
+          "transformationRules":{
+            "deploymentPattern":"",
+            "productionPattern":"",
+            "issueComponent":"",
+            "issuePriority":"(high|medium|low)$",
+            "issueSeverity":"",
+            "issueTypeBug":"(bug)$",
+            "issueTypeIncident":"",
+            "issueTypeRequirement":"(feature|feature-request)$",
+            "prBodyClosePattern":"",
+            "prComponent":"",
+            "prType":""
+          }
+        }
+      }
+    ]
+  ]
+}
+'
+```
+
+or
+
+```
+curl 'http://localhost:8080/pipelines' \
+--header 'Content-Type: application/json' \
+--data-raw '
+{
+  "name": "project1-BLUEPRINT",
+  "blueprintId": 1,
+  "plan": [
+    [
+      {
+        "plugin": "github",
+        "options": {
+          "connectionId": 1,
+          "owner": "apache",
+          "repo": "incubator-devlake",
           "transformationRules":{
             "deploymentPattern":"",
             "productionPattern":"",

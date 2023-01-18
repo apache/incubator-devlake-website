@@ -22,7 +22,7 @@ This should be a valid REST API endpoint, eg. `https://api.github.com/`. The URL
 
 You can use one of the following GitHub tokens: personal access tokens(PATs) or fine-grained personal access tokens.
 
-###### GitHub personal access tokens(PATs)
+###### GitHub personal access tokens(Recommended)
 
 Learn about [how to create a GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). The following permissions are required to collect data from repositories:
 
@@ -31,19 +31,20 @@ Learn about [how to create a GitHub personal access token](https://docs.github.c
 - `read:user`
 - `read:org`
 
-###### Fine-grained personal access tokens(Fine-grained PATs)
+The data collection speed is restricted by the **rate limit of [5,000 requests](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) per hour per token** (15,000 requests/hour if you pay for GitHub enterprise). You can accelerate data collection by configuring _multiple_ personal access tokens. Please note that multiple tokens should be created by different GitHub accounts. Tokens belonging to the same GitHub account share the rate limit.
+
+###### Fine-grained personal access tokens
+
+Note: this token doesn't support GraphQL APIs. You have to disable `Use GraphQL APIs` on the connection page if you want to use it. However, this will significantly increase the data collection time.
 
 If you're concerned with giving classic PATs full unrestricted access to your repositories, you can use fine-grained PATs announced by GitHub recently. With fine-grained PATs, GitHub users can create read-only PATs that only have access to repositories under certain GitHub orgs. But in order to do that, org admin needs to enroll that org with fine-grained PATs beta feature first. Please check [this doc](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-fine-grained-personal-access-token) for more details.
-The token should be granted the read-only permission for the following entities.
+The token should be granted read-only permission for the following entities.
   - `Actions`
   - `Contents`
   - `Discussions`
   - `Issues`
   - `Metadata`
   - `Pull requests`
-
-Token Rate Limit:<br/>
-The data collection speed is restricted by the **rate limit of [5,000 requests](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) per hour per token** (15,000 requests/hour if you pay for GitHub enterprise). You can accelerate data collection by configuring _multiple_ personal access tokens. Please note that multiple tokens should be created by different GitHub accounts. Tokens belonging to the same GitHub account share the rate limit.
 
 #### Use Graphql APIs
 
@@ -55,6 +56,12 @@ If you are using `github.com` or your on-premise GitHub version supports GraphQL
 #### Proxy URL (Optional)
 
 If you are behind a corporate firewall or VPN you may need to utilize a proxy server. Enter a valid proxy server address on your network, e.g. `http://your-proxy-server.com:1080`
+
+#### Fixed Rate Limit (Optional)
+
+DevLake uses a dynamic rate limit to collect GitHub data. You can adjust the rate limit if you want to increase or lower the speed.
+
+The maximum rate limit for GitHub is ** [5,000 requests/hour](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting)** (15,000 requests/hour if you pay for GitHub enterprise). Please do not use a rate that exceeds this number.
 
 #### Test and Save Connection
 

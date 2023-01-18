@@ -86,4 +86,5 @@ Below is an example for collecting a GitHub repo and a Jira board in parallel. I
     }
   ]
 ]
+
 ```
