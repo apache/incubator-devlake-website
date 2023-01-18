@@ -162,7 +162,7 @@ const versions = require('./versions.json');
             position: 'right'
           },
           {
-            to: '/blog',
+            to: '/blogOverview',
             label: 'Blog',
             position: 'right'
           },
