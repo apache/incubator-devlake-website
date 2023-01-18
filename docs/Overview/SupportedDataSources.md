@@ -7,7 +7,7 @@ sidebar_position: 5
 
 ## Data Sources and Data Plugins
 
-Apache DevLake(incubating) supports the following data sources. The data from each data source is collected with one or more plugins.
+Apache DevLake(incubating) supports the following data sources. The data from each data source is collected with one or more plugins. Detailed plugin docs can be found [here](/docs/Plugins).
 
 | Data Source      | Domain(s)                                                                   | Supported Versions                   | Config UI Availability | Triggered Plugins           | Collection Mode                                                |
 |------------------|-----------------------------------------------------------------------------|--------------------------------------|------------------------|-----------------------------|----------------------------------------------------------------|
