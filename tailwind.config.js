@@ -6,8 +6,12 @@ tailwindConfig.theme.extend.fontSize = {
     label40: ['40px', { lineHeight : '56px' }],
     label20: ['20px', { lineHeight: '30px' }],
     label12: ['12px', { lineHeight: '15px' }],
+    label14Lake: ['14px', { lineHeight: '17px' }],
     label16Lake: ['16px', { lineHeight: '22px' }]
 }
+tailwindConfig.plugins = [
+    require('@tailwindcss/line-clamp'),
+];
 module.exports = tailwindConfig;
 
 // pre config 
