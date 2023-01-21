@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Contributors from '../../../info/Team/contributors.json';
+import Contributors from '/info/Team/contributors.json';
 import { PersonCard } from "./PersonCard";
 import { ContributorInfo } from "./types";
 import { TeampageBottomBG } from "./TeampageBG";

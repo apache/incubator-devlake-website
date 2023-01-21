@@ -1,5 +1,5 @@
 import React from "react";
-import BlogInfo from "../../../info/Blog/AllPosts.json";
+import BlogInfo from "/info/Blog/AllPosts.json";
 import { BlogpageBottomBG } from './BlogpageBG';
 import { BlogInfoType } from "./types";
 import dateFormatter from "./utils";
@@ -17,7 +17,7 @@ const ListItem = (props: { cardInfo: BlogInfoType }) => {
     >
       <a href={cardInfo.detailLink}>
         <img
-          src={require(`../../../static/img/Blog/${cardInfo.coverTitle}.png`).default}
+          src={require(`/static/img/Blog/${cardInfo.coverTitle}.png`).default}
           className="
         m-[auto] ml-[88px] sm:ml-[24px] mobile:ml-[0] mobile:mt-4
         w-[400px] sm:w-[310px] mobile:w-[100%] 

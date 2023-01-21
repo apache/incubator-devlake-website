@@ -1,10 +1,10 @@
 import React from "react";
-import BlogInfo from "../../../info/Blog/EditorPickBlog.json";
+import BlogInfo from "/info/Blog/EditorPickBlog.json";
 import { BlogInfoType } from './types';
 import dateFormatter from "./utils";
-import apacheWelcomesDevLake from '../../../static/img/Blog/apache-welcomes-devLake.png';
-import compatibilityOfApacheDevLakeWithPostgreSQL from '../../../static/img/Blog/compatibility-of-apache-devLake-with-postgreSQL.png';
-import HowDevLakeIsUpAndRunning from '../../../static/img/Blog/How DevLake is up and running.png';
+import apacheWelcomesDevLake from '/static/img/Blog/apache-welcomes-devLake.png';
+import compatibilityOfApacheDevLakeWithPostgreSQL from '/static/img/Blog/compatibility-of-apache-devLake-with-postgreSQL.png';
+import HowDevLakeIsUpAndRunning from '/static/img/Blog/How DevLake is up and running.png';
 
 const coverImgArr = [HowDevLakeIsUpAndRunning, apacheWelcomesDevLake, compatibilityOfApacheDevLakeWithPostgreSQL];
 const Card = function (props: {cardInfo: BlogInfoType, index: number}) {
