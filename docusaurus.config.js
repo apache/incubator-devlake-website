@@ -146,7 +146,7 @@ const versions = require('./versions.json');
           {
             type: 'doc',
             position: 'right',
-            label: 'Live Demo',
+            label: 'Use Cases',
             to: 'livedemo',
             docsPluginId: 'livedemo',
             docId: 'EngineeringLeads/DORA',
@@ -164,7 +164,7 @@ const versions = require('./versions.json');
             position: 'right'
           },
           {
-            to: '/blog',
+            to: '/blogOverview',
             label: 'Blog',
             position: 'right'
           },
@@ -244,6 +244,10 @@ const versions = require('./versions.json');
               {
                 label: 'GitHub Issue Tracker',
                 to: 'https://github.com/apache/incubator-devlake/issues',
+              },
+              {
+                label: 'GitHub Issue Tracker For Docs',
+                to: 'https://github.com/apache/incubator-devlake-website/issues',
               },
             ],
           },

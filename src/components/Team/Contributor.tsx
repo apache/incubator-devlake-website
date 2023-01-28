@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Contributors from '../../../info/Team/contributors.json';
+import Contributors from '/info/Team/contributors.json';
 import { PersonCard } from "./PersonCard";
 import { ContributorInfo } from "./types";
 import { TeampageBottomBG } from "./TeampageBG";
@@ -9,6 +9,7 @@ import { Dropdown } from "../Dropdown";
 
 
 const meau = [
+  'Jan-Mar-2023',
   'Oct-Dec-2022',
   'July-Sept-2022',
   'April-June-2022',

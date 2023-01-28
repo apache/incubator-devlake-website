@@ -1,5 +1,5 @@
 import React from "react";
-import committerInfo from '../../../info/Team/committers.json';
+import committerInfo from '/info/Team/committers.json';
 import { PersonCard } from './PersonCard';
 import { ContributorInfo } from './types';
 

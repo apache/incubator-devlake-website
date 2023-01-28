@@ -1,5 +1,5 @@
 import React from "react";
-import ppmcInfo from '../../../info/Team/ppmc.json';
+import ppmcInfo from '/info/Team/ppmc.json';
 import { PersonCard } from './PersonCard';
 import { ContributorInfo } from './types';
 
