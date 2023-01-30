@@ -593,6 +593,32 @@ metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contr
 | `team_id` | varchar  | 255        | Full name of the team. Eg. team A, team B, etc. | Composite PK, FK |
 | `user_id` | varchar  | 255        | users.id                                        | Composite PK, FK |
 
+#### project
+
+|   **field**   | **type** | **length** | **description**               | **key** |
+| ------------- | -------- | ---------- | ----------------------------- | ------- |
+| `name`        | varchar  | 255        | name for project              | PK      |
+| `description` | longtext |            | description of the project    |         |
+| `created_at`  | datetime | 3          | created time of project       |         |
+| `updated_at`  | datetime | 3          | last updated time of project  |         | 
+
+#### project_metric_settings
+
+|    **field**    | **type** | **length** | **description**                                            | **key** |
+| --------------- | -------- | ---------- | ---------------------------------------------------------- | ------- |
+| `project_name`  | varchar  | 255        | name for project                                           | PK      |
+| `plugin_name`   | varchar  | 255        | name for plugin                                            | PK      |
+| `plugin_option` | longtext |            | check if metric plugins have been enabled by the project   |         |
+| `enable`        | tinyint  | 1          | if the metric plugins is enabled                           |         |
+
+#### project_mapping
+
+|   **field**    | **type** | **length** | **description**                                               | **key** |
+| -------------- | -------- | ---------- | ------------------------------------------------------------- | ------- |
+| `project_name` | varchar  | 255        | name for project                                              | PK      |
+| `table`        | varchar  | 255        | the table name of [Scope](../Overview/KeyConcepts.md#data-scope)          | PK      |
+| `row_id`       | varchar  | 255        | the row_id in the [Scope](../Overview/KeyConcepts.md#data-scope) table    | PK      |
+
 <br/>
 
 ## DWM Entities - (Data Warehouse Middle)
