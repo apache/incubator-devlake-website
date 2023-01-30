@@ -14,7 +14,7 @@ As of v0.14.2, `bitbucket` plugin can only be invoked through DevLake API. Its s
 
 ## Entities
 
-Check out the [Bitbucket entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.
+Check out the [BitBucket entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.
 
 ## Metrics
 
@@ -36,7 +36,7 @@ Metrics that can be calculated based on the data collected from bitbucket:
 ## Configuration
 
 - Configuring Bitbucket via [Config UI](/UserManuals/ConfigUI/BitBucket.md)
-- Configuring Bitbucket via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md).
+- Configuring Bitbucket via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#9-BitBucket).
 
 ## API Sample Request
 
@@ -54,7 +54,7 @@ curl 'http://localhost:8080/pipelines' \
         "plugin": "bitbucket",
         "options": {
           "connectionId": 1,
-          "owner": "merico",
+          "owner": "apache",
           "repo": "devlake",
         }
       }

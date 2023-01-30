@@ -303,7 +303,7 @@ You must choose at least one of `productId`, `projectId` and `executionId`.
    ![](/img/ConfigUI/zentao-execution-id.png)
 2. Then the number in the red square above is `ExecutionId`
 
-### 9. Bitbucket
+### 9. BitBucket
 Below is an example for collecting a bitbucket repo.
 
 ```json
@@ -313,7 +313,7 @@ Below is an example for collecting a bitbucket repo.
       "plugin": "bitbucket",
       "options": {
         "connectionId": 1,
-        "owner": "merico",
+        "owner": "apache",
         "repo": "devlake"
       }
     }
