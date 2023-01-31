@@ -23,7 +23,7 @@ The following guide will walk through how to run DevLake's frontend (`config-ui`
 1. Navigate to where you would like to install this project and clone the repository:
 
    ```sh
-   git clone https://github.com/apache/incubator-devlake
+   git clone https://github.com/apache/incubator-devlake.git
    cd incubator-devlake
    ```
 
@@ -34,7 +34,9 @@ The following guide will walk through how to run DevLake's frontend (`config-ui`
 3. Install Go packages
 
     ```sh
+    cd backend
 	go get
+    cd ..
     ```
 
 4. Copy the sample config file to new local file:
