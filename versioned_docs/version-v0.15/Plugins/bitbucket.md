@@ -39,29 +39,64 @@ Metrics that can be calculated based on the data collected from bitbucket:
 - Configuring Bitbucket via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#9-BitBucket).
 
 ## API Sample Request
+> Note: Please replace the `http://localhost:8080` in the sample requests with your actual DevLake API endpoint. For how to view DevLake API's swagger documentation, please refer to the "Using DevLake API" section of [Developer Setup](../DeveloperManuals/DeveloperSetup.md).
 
-You can trigger data collection by making a POST request to `/pipelines`.
+1. Create a Bitbucket data connection: `POST /plugins/bitbucket/connections`. Please see a sample request below:
 
 ```shell
-curl 'http://localhost:8080/pipelines' \
+curl --location --request POST 'http://localhost:8080/plugins/bitbucket/connections' \
 --header 'Content-Type: application/json' \
---data-raw '
-{
-  "name": "project1",
-  "plan": [
-    [
-      {
-        "plugin": "bitbucket",
-        "options": {
-          "connectionId": 1,
-          "owner": "apache",
-          "repo": "devlake",
-        }
-      }
-    ]
-  ]
-}
-'
+--data-raw '{
+    "endpoint": "https://api.bitbucket.org/2.0/",
+    "username": "<your username>",
+    "password": "<your app password>",
+    "name": "Bitbucket Cloud"
+}'
+```
+
+2. Create a blueprint to collect data from Bitbucket: `POST /blueprints`. Please see a sample request below:
+
+```shell
+curl --location --request POST 'http://localhost:8080/blueprints' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "enable": true,
+    "mode": "NORMAL",
+    "name": "My Bitbucket Blueprint",
+    "cronConfig": "<cron string of your choice>",
+    "isManual": false,
+    "plan": [[]],
+    "settings": {
+        "connections": [
+            {
+                "plugin": "bitbucket",
+                "connectionId": 1,
+                "scope": [
+                    {
+                        "entities": [
+                            "CODE",
+                            "TICKET",
+                            "CODEREVIEW",
+                            "CROSS"
+                        ],
+                        "options": {
+                            "owner": "<owner of your repo>",
+                            "repo": "<your repo name>"
+                        }
+                    }
+                ]
+            }
+        ],
+        "version": "1.0.0"
+    }
+}'
+```
+
+3. [Optional] Trigger the blueprint manually: `POST /blueprints/{blueprintId}/trigger`. Run this step if you want to trigger the newly created blueprint right away. See an example request below:
+
+```shell
+curl --location --request POST 'http://localhost:8080/blueprints/<blueprintId>/trigger' \
+--header 'Content-Type: application/json'
 ```
 
 ## References
