@@ -13,6 +13,7 @@ export function BlogHeader() {
           <p className="m-[0]">
           Gain insights into data-driven engineering from our passionate developers.
           </p>
+          <a href="https://devlake.apache.org/community/make-contribution/BlogSubmission/"><button>Contribute</button></a>
         </div>
     </div>
   );
