@@ -36,7 +36,6 @@ Metrics that can be calculated based on the data collected from bitbucket:
 ## Configuration
 
 - Configuring Bitbucket via [Config UI](/Configuration/BitBucket.md)
-- Configuring Bitbucket via Config UI's [advanced mode](/Configuration/AdvancedMode.md#9-BitBucket).
 
 ## API Sample Request
 > Note: Please replace the `http://localhost:8080` in the sample requests with your actual DevLake API endpoint. For how to view DevLake API's swagger documentation, please refer to the "Using DevLake API" section of [Developer Setup](../DeveloperManuals/DeveloperSetup.md).
