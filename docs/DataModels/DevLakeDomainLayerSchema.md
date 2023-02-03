@@ -435,6 +435,20 @@ Events of pull requests.
 
 ### Domain 4 - CI/CD(WIP)
 
+#### cicd_scopes
+
+Information about Jenkins Job, GitHub Action or Gitlab CI. 
+
+| **field**      | **type** | **length** | **description**                                                                                                                                                                                                | **key**        |
+| :------------- | :------- | :--------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :------------- |
+| `id`           | varchar  | 255        | A cicd_scope's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github cicd_scope's id is like "< github >:< GithubRepos >< GithubRepoId >". Eg. 'github:GithubRepos:384111310' | PK             |
+| `name`         | varchar  | 255        | The name of cicd_scope.                                                                                                                                                                                        |                |
+| `description`  | varchar  | 255        | The description of cicd_scope.                                                                                                                                                                                 |                |
+| `url`          | varchar  | 255        | The url of cicd_scope. Eg. https://github.com/apache/incubator-devlake or https://jenkins.xxx.cn/view/PROD/job/OPS_releasev2/                                                                                  |                |
+| `created_date` | datetime | 3          | cicd_scope creation date                                                                                                                                                                                       |                |
+| `updated_date` | datetime | 3          | Last full update was done for this cicd_scope                                                                                                                                                                  |                |
+
+
 #### cicd_pipelines
 
 A cicd_pipeline is a series of builds that have connections or a standalone build.

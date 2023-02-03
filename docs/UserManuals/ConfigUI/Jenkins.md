@@ -59,6 +59,14 @@ If you're using Jenkins builds to conduct `deployments`, please select "Detect D
 - Deployment: A Jenkins build with a name that matches the given regEx will be considered as a deployment.
 - Production: A Jenkins build with a name that matches the given regEx will be considered a build in the production environment.
 
+There're two cases. If a Jenkins build has no stage, it's converted to both a cicd_task and a cicd_pipeline,
+both have the same name as the Jenkins job's name.
+If a Jenkins build has stages, it's converted to a cicd_pipeline and its
+stages are converted to cicd_tasks in the domain layer.
+![jenkins-job-build-stage](/img/ConfigUI/jenkins-job-build-stage.png)
+
+The deployment and production regex is always applied to the records in the cicd_tasks table.
+
 By the above two fields, DevLake can identify a production deployment among massive CI jobs.
 
 You can also select "Not using Jenkins builds as Deployments" if you're not using Jenkins to conduct deployments.

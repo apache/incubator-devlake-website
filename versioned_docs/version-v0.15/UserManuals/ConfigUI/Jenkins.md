@@ -51,13 +51,21 @@ Jenkins only supports `CI/CD` domain entities, transformed from Jenkins builds a
 - CI/CD: Jenkins builds, stages, etc.
 
 ### Step 3 - Adding Transformation Rules (Optional)
-
+Before you start, you should understand that 
 This set of configurations is used for calculating [DORA metrics](../DORA.md).
 
 If you're using Jenkins builds to conduct `deployments`, please select "Detect Deployment from Jenkins Builds", and input the RegEx in the following fields:
 
-- Deployment: A Jenkins build with a name that matches the given regEx will be considered as a deployment.
+- Deployment: A Jenkins build with its job name or a Jenkins build stage with its name that matches the given regEx will be considered as a deployment.
 - Production: A Jenkins build with a name that matches the given regEx will be considered a build in the production environment.
+
+There're two cases. If a Jenkins build has no stage, it's converted to both a cicd_task and a cicd_pipeline, 
+both have the same name as the Jenkins job's name. 
+If a Jenkins build has stages, it's converted to a cicd_pipeline and its 
+stages are converted to cicd_tasks in the domain layer.
+![jenkins-job-build-stage](/img/ConfigUI/jenkins-job-build-stage.png)
+
+The deployment and production regex is always applied to the records in the cicd_tasks table.
 
 By the above two fields, DevLake can identify a production deployment among massive CI jobs.
 
