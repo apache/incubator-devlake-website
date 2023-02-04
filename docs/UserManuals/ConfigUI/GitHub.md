@@ -127,8 +127,6 @@ cicd_pipeline in the domain layer and each GitHub Action job is converted to a c
 
 The deployment and production regex is always applied to the records in the cicd_tasks table.
 
-By the above two fields, DevLake can identify a production deployment among massive CI jobs.
-
 You can also select "Not using Jobs in GitHub Action as Deployments" if you're not using GitHub action to conduct deployments.
 
 #### Code Review

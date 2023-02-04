@@ -54,20 +54,18 @@ Jenkins only supports `CI/CD` domain entities, transformed from Jenkins builds a
 
 This set of configurations is used for calculating [DORA metrics](../DORA.md).
 
-If you're using Jenkins builds to conduct `deployments`, please select "Detect Deployment from Jenkins Builds", and input the RegEx in the following fields:
+If you'd like to define `deployments` with Jenkins, please select "Detect Deployment from Jenkins Builds", and provide the following regexes
 
-- Deployment: A Jenkins build with a name that matches the given regEx will be considered as a deployment.
-- Production: A Jenkins build with a name that matches the given regEx will be considered a build in the production environment.
+- Deployment: Jenkins stages whose names match the regex will be registered as deployments (if a Jenkins build has no stage, its job name will be used to match the regex)
+- Production: Jenkins stages whose names match the regex will be assigned environment 'PRODUCTION' (if a Jenkins build has no stage, its job name will be used to match the regex)
 
-There're two cases. If a Jenkins build has no stage, it's converted to both a cicd_task and a cicd_pipeline,
-both have the same name as the Jenkins job's name.
-If a Jenkins build has stages, it's converted to a cicd_pipeline and its
-stages are converted to cicd_tasks in the domain layer.
+This is how it works behind the scene:
+
+- If a Jenkins build has stages, it's converted to a cicd_pipeline and its stages are converted to cicd_tasks in DevLake's domain layer schema.
+- If a Jenkins build has no stage, it's converted to both a cicd_pipeline and a cicd_task whose names are the build's jobName.
+
+After the conversion, the two regexes are applied to the records in the cicd_tasks table.
 ![jenkins-job-build-stage](/img/ConfigUI/jenkins-job-build-stage.png)
-
-The deployment and production regex is always applied to the records in the cicd_tasks table.
-
-By the above two fields, DevLake can identify a production deployment among massive CI jobs.
 
 You can also select "Not using Jenkins builds as Deployments" if you're not using Jenkins to conduct deployments.
 

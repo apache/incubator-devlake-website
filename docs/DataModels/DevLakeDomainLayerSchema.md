@@ -151,14 +151,14 @@ This table shows the work logged under issues. Usually, an issue has multiple wo
 
 A `board` is an issue list or a collection of issues. It's the abstraction of a Jira board, a Jira project, a [GitHub issue list](https://github.com/apache/incubator-devlake/issues) or a GitLab issue list. This table can be used to filter issues by the boards they belong to.
 
-| **field**      | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                      | **key** |
-| :------------- | :------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
-| `id`           | varchar  | 255        | A board's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..." <ul><li>For a Github repo's issue list, the board id is like "< github >:< GithubRepos >:< GithubRepoId >". Eg. "github:GithubRepo:384111310"</li> <li>For a Jira Board, the id is like the board id is like "< jira >:< JiraSourceId >< JiraBoards >:< JiraBoardsId >". Eg. "jira:1:JiraBoards:12"</li></ul> | PK      |
-| `name`         | varchar  | 255        | The name of the board. Note: the board name of a Github project 'apache/incubator-devlake' is 'apache/incubator-devlake', representing the [default issue list](https://github.com/apache/incubator-devlake/issues).                                                                                                                                                                 |         |
-| `description`  | varchar  | 255        | The description of the board.                                                                                                                                                                                                                                                                                                                                                        |         |
-| `url`          | varchar  | 255        | The url of the board. Eg. https://github.com/apache/incubator-devlake                                                                                                                                                                                                                                                                                                                |         |
-| `created_date` | datetime | 3          | Board creation time                                                                                                                                                                                                                                                                                                                                                                  |         |
-| `type`         | varchar  | 255        | Identify scrum and non-scrum board                                                                                                                                                                                                                                                                                                                                                   |         |
+| **field**      | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                                          | **key** |
+| :------------- | :------- | :--------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :------ |
+| `id`           | varchar  | 255        | A board's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..." <ul><li>For a Github repo's issue list, the board id is like "< github >:< GithubRepos >:< ConnectionId >:< GithubRepoId >". Eg. "github:GithubRepo:384111310"</li> <li>For a Jira Board, the id is like the board id is like "< jira >:< JiraSourceId >< JiraBoards >:< ConnectionId >:< JiraBoardsId >". Eg. "jira:1:JiraBoards:1:12"</li></ul> | PK      |
+| `name`         | varchar  | 255        | The name of the board. Note: the board name of a Github project 'apache/incubator-devlake' is 'apache/incubator-devlake', representing the [default issue list](https://github.com/apache/incubator-devlake/issues).                                                                                                                                                                                                     |         |
+| `description`  | varchar  | 255        | The description of the board.                                                                                                                                                                                                                                                                                                                                                                                            |         |
+| `url`          | varchar  | 255        | The url of the board. Eg. https://github.com/apache/incubator-devlake                                                                                                                                                                                                                                                                                                                                                    |         |
+| `created_date` | datetime | 3          | Board creation time                                                                                                                                                                                                                                                                                                                                                                                                      |         |
+| `type`         | varchar  | 255        | Identify scrum and non-scrum board                                                                                                                                                                                                                                                                                                                                                                                       |         |
 
 #### board_issues
 
@@ -213,18 +213,18 @@ This table shows the relation between sprints and issues that have been added to
 
 Information about GitHub or Gitlab repositories. A repository is always owned by a user.
 
-| **field**      | **type** | **length** | **description**                                                                                                                                                                                    | **key**        |
-| :------------- | :------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- |
-| `id`           | varchar  | 255        | A repo's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github repo's id is like "< github >:< GithubRepos >< GithubRepoId >". Eg. 'github:GithubRepos:384111310' | PK             |
-| `name`         | varchar  | 255        | The name of repo.                                                                                                                                                                                  |                |
-| `description`  | varchar  | 255        | The description of repo.                                                                                                                                                                           |                |
-| `url`          | varchar  | 255        | The url of repo. Eg. https://github.com/apache/incubator-devlake                                                                                                                                   |                |
-| `owner_id`     | varchar  | 255        | The id of the owner of repo                                                                                                                                                                        | FK_accounts.id |
-| `language`     | varchar  | 255        | The major language of repo. Eg. The language for apache/incubator-devlake is 'Go'                                                                                                                  |                |
-| `forked_from`  | varchar  | 255        | Empty unless the repo is a fork in which case it contains the `id` of the repo the repo is forked from.                                                                                            |                |
-| `deleted`      | tinyint  | 255        | 0: repo is active 1: repo has been deleted                                                                                                                                                         |                |
-| `created_date` | datetime | 3          | Repo creation date                                                                                                                                                                                 |                |
-| `updated_date` | datetime | 3          | Last full update was done for this repo                                                                                                                                                            |                |
+| **field**      | **type** | **length** | **description**                                                                                                                                                                                                        | **key**        |
+| :------------- | :------- | :--------- |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :------------- |
+| `id`           | varchar  | 255        | A repo's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github repo's id is like "< github >:< GithubRepos >:< ConnectionId >:< GithubRepoId >". Eg. 'github:GithubRepos:1:384111310' | PK             |
+| `name`         | varchar  | 255        | The name of repo.                                                                                                                                                                                                      |                |
+| `description`  | varchar  | 255        | The description of repo.                                                                                                                                                                                               |                |
+| `url`          | varchar  | 255        | The url of repo. Eg. https://github.com/apache/incubator-devlake                                                                                                                                                       |                |
+| `owner_id`     | varchar  | 255        | The id of the owner of repo                                                                                                                                                                                            | FK_accounts.id |
+| `language`     | varchar  | 255        | The major language of repo. Eg. The language for apache/incubator-devlake is 'Go'                                                                                                                                      |                |
+| `forked_from`  | varchar  | 255        | Empty unless the repo is a fork in which case it contains the `id` of the repo the repo is forked from.                                                                                                                |                |
+| `deleted`      | tinyint  | 255        | 0: repo is active 1: repo has been deleted                                                                                                                                                                             |                |
+| `created_date` | datetime | 3          | Repo creation date                                                                                                                                                                                                     |                |
+| `updated_date` | datetime | 3          | Last full update was done for this repo                                                                                                                                                                                |                |
 
 #### repo_languages(WIP)
 
@@ -437,16 +437,19 @@ Events of pull requests.
 
 #### cicd_scopes
 
-Information about Jenkins Job, GitHub Action or Gitlab CI. 
+Information about Jenkins Job, GitHub Action or Gitlab CI.
+- For GitHub: a GitHub repo is converted to a cicd_scope
+- For Jenkins: a GitLab project is converted to a cicd_scope
+- For GitLab: a Jenkins job is converted to a cicd_scope
 
-| **field**      | **type** | **length** | **description**                                                                                                                                                                                                | **key**        |
-| :------------- | :------- | :--------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :------------- |
-| `id`           | varchar  | 255        | A cicd_scope's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github cicd_scope's id is like "< github >:< GithubRepos >< GithubRepoId >". Eg. 'github:GithubRepos:384111310' | PK             |
-| `name`         | varchar  | 255        | The name of cicd_scope.                                                                                                                                                                                        |                |
-| `description`  | varchar  | 255        | The description of cicd_scope.                                                                                                                                                                                 |                |
-| `url`          | varchar  | 255        | The url of cicd_scope. Eg. https://github.com/apache/incubator-devlake or https://jenkins.xxx.cn/view/PROD/job/OPS_releasev2/                                                                                  |                |
-| `created_date` | datetime | 3          | cicd_scope creation date                                                                                                                                                                                       |                |
-| `updated_date` | datetime | 3          | Last full update was done for this cicd_scope                                                                                                                                                                  |                |
+| **field**      | **type** | **length** | **description**                                                                                                                                                                                                                    | **key**        |
+| :------------- | :------- | :--------- |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :------------- |
+| `id`           | varchar  | 255        | A cicd_scope's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github cicd_scope's id is like "< github >:< GithubRepos >:< ConnectionId >:< GithubRepoId >". Eg. 'github:GithubRepos:1:384111310' | PK             |
+| `name`         | varchar  | 255        | The name of cicd_scope.                                                                                                                                                                                                            |                |
+| `description`  | varchar  | 255        | The description of cicd_scope.                                                                                                                                                                                                     |                |
+| `url`          | varchar  | 255        | The url of cicd_scope. Eg. https://github.com/apache/incubator-devlake or https://jenkins.xxx.cn/view/PROD/job/OPS_releasev2/                                                                                                      |                |
+| `created_date` | datetime | 3          | cicd_scope creation date                                                                                                                                                                                                           |                |
+| `updated_date` | datetime | 3          | Date of the last data collection for this cicd_scope                                                                                                                                                                               |                |
 
 
 #### cicd_pipelines
@@ -495,7 +498,7 @@ A cicd_task is a single job of ci/cd.
 
 ### Project Metric Entities
 
-#### project_pr_metrics 
+#### project_pr_metrics
 
 | **field** | **type** | **length** | **description**                                                                        | **key** |
 | :-------- | :-------- |:-----------|:---------------------------------------------------------------------------------------| :-------- |
@@ -663,7 +666,7 @@ import "github.com/apache/incubator-devlake/models/domainlayer/domaininfo"
 
 domaininfo := domaininfo.GetDomainTablesInfo()
 for _, table := range domaininfo {
-  // do something
+// do something
 }
 ```
 

@@ -126,8 +126,6 @@ A GitHub workflow run has many jobs. Each GitHub workflow run is converted to a 
 
 The deployment and production regex is always applied to the records in the cicd_tasks table.
 
-By the above two fields, DevLake can identify a production deployment among massive CI jobs.
-
 You can also select "Not using Jobs in GitHub Action as Deployments" if you're not using GitHub action to conduct deployments.
 
 #### Code Review
