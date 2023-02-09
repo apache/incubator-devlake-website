@@ -20,5 +20,5 @@ Metrics that can be calculated based on the data collected from Tapd:
 
 ## Configuration
 
-- Configuring Tapd via [config-ui](/UserManuals/ConfigUI/Tapd.md).
-- Configuring Tapd via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#6-tapd).
+- Configuring Tapd via [config-ui](/Configuration/Tapd.md).
+- Configuring Tapd via Config UI's [advanced mode](/Configuration/AdvancedMode.md#6-tapd).

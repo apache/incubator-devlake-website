@@ -1,5 +1,5 @@
 ---
-title: "Configuring Jenkins"
+title: "Jenkins"
 sidebar_position: 5
 description: Config UI instruction for Jenkins
 ---

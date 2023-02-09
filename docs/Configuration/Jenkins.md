@@ -1,5 +1,5 @@
 ---
-title: "Configuring Jenkins"
+title: "Jenkins"
 sidebar_position: 5
 description: Config UI instruction for Jenkins
 ---
@@ -51,6 +51,7 @@ Jenkins only supports `CI/CD` domain entities, transformed from Jenkins builds a
 - CI/CD: Jenkins builds, stages, etc.
 
 ### Step 3 - Adding Transformation Rules (Optional)
+
 This set of configurations is used for calculating [DORA metrics](../DORA.md).
 
 If you'd like to define `deployments` with Jenkins, please select "Detect Deployment from Jenkins Builds", and provide the following regexes

@@ -1,5 +1,5 @@
 ---
-title: "Configuring GitHub"
+title: "GitHub"
 sidebar_position: 2
 description: Config UI instruction for GitHub
 ---

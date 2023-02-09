@@ -498,7 +498,7 @@ A cicd_task is a single job of ci/cd.
 
 ### Project Metric Entities
 
-#### project_pr_metrics 
+#### project_pr_metrics
 
 | **field** | **type** | **length** | **description**                                                                        | **key** |
 | :-------- | :-------- |:-----------|:---------------------------------------------------------------------------------------| :-------- |
@@ -666,7 +666,7 @@ import "github.com/apache/incubator-devlake/models/domainlayer/domaininfo"
 
 domaininfo := domaininfo.GetDomainTablesInfo()
 for _, table := range domaininfo {
-  // do something
+// do something
 }
 ```
 

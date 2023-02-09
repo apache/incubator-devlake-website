@@ -50,7 +50,7 @@ export function HeaderLearnMore() {
             mobile:my-[8px] sm:my-[8px]
             mobile:mx-auto sm:mx-auto
             "
-          to="https://devlake.apache.org/docs/UserManuals/DORA"
+          to="https://devlake.apache.org/docs/DORA"
         >
           Learn More
         </Link>
