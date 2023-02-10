@@ -22,11 +22,11 @@ sidebar_position: 1
 ## Collect data and view dashboards
 
 1. Visit `config-ui` at `http://localhost:4000` in your browser to configure DevLake and collect data.
-   - Please follow the [tutorial](Configuration/Tutorial.md)
+   - Please follow the [tutorial](UserManuals/ConfigUI/Tutorial.md)
    - `devlake` container takes a while to fully boot up. If `config-ui` complains about API being unreachable, please wait a few seconds and refresh the page.
 2. To view dashboards, click *View Dashboards* button in the top left corner, or visit `localhost:3002` (username: `admin`, password: `admin`).
    - We use [Grafana](https://grafana.com/) to visualize the DevOps [data](/Overview/SupportedDataSources.md) and build dashboards.
-   - For how to customize and provision dashboards, please see our [Grafana doc](../Configuration/Dashboards/GrafanaUserGuide.md).
+   - For how to customize and provision dashboards, please see our [Grafana doc](../UserManuals/Dashboards/GrafanaUserGuide.md).
 
 
 ## Upgrade to a newer version

@@ -68,6 +68,9 @@ In the current version, the Blueprint editing feature **allows** editing:
 - The data scope of a connection
 - The data entities of the data scope
 - The transformation rules of any data scope
+
+and currently does **NOT allow**:
+- Adding or deleting connections of an existing Blueprint (will be available in the future)
 - Editing any connections
 
 Please note: 

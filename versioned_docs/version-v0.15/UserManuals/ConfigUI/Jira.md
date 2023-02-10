@@ -1,5 +1,5 @@
 ---
-title: "Jira"
+title: "Configuring Jira"
 sidebar_position: 4
 description: Config UI instruction for Jira
 ---

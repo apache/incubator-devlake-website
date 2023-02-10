@@ -1,8 +1,8 @@
 {
-  "label": "Configuration",
+  "label": "User Manuals",
   "position": 3,
   "link":{
     "type": "generated-index",
-    "slug": "Configuration"
+    "slug": "UserManuals"
   }
 }

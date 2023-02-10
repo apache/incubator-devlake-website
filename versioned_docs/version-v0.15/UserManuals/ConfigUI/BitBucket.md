@@ -1,5 +1,5 @@
 ---
-title: "BitBucket(Beta)"
+title: "Configuring BitBucket(Beta)"
 sidebar_position: 2
 description: Config UI instruction for BitBucket(Cloud)
 ---

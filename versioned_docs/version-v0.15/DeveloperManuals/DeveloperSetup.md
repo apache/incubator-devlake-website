@@ -23,7 +23,7 @@ The following guide will walk through how to run DevLake's frontend (`config-ui`
 1. Navigate to where you would like to install this project and clone the repository:
 
    ```sh
-   git clone https://github.com/apache/incubator-devlake.git
+   git clone https://github.com/apache/incubator-devlake
    cd incubator-devlake
    ```
 
@@ -34,9 +34,7 @@ The following guide will walk through how to run DevLake's frontend (`config-ui`
 3. Install Go packages
 
     ```sh
-    cd backend
 	go get
-    cd ..
     ```
 
 4. Copy the sample config file to new local file:
@@ -69,7 +67,7 @@ The following guide will walk through how to run DevLake's frontend (`config-ui`
     For common errors, please see [Troubleshooting](#troubleshotting).
 
 8.  Config UI is running at `localhost:4000`
-    - For how to use Config UI, please refer to our [tutorial](Configuration/Tutorial.md)
+    - For how to use Config UI, please refer to our [tutorial](UserManuals/ConfigUI/Tutorial.md)
 
 ## Running Tests
 
@@ -99,7 +97,7 @@ All DevLake APIs (core service + plugin API) are documented with swagger. To see
 
 To access Grafana, click *View Dashboards* button in the top left corner of Config UI, or visit `localhost:3002` (username: `admin`, password: `admin`).
 
-For provisioning, customizing, and creating dashboards, please refer to our [Grafana Doc](../Configuration/Dashboards/GrafanaUserGuide.md).
+For provisioning, customizing, and creating dashboards, please refer to our [Grafana Doc](../UserManuals/Dashboards/GrafanaUserGuide.md).
 
 
 ## Troubleshooting

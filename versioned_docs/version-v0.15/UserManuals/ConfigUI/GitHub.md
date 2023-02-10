@@ -1,5 +1,5 @@
 ---
-title: "GitHub"
+title: "Configuring GitHub"
 sidebar_position: 2
 description: Config UI instruction for GitHub
 ---
@@ -120,8 +120,7 @@ If you're using GitHub Action to conduct `deployments`, please select "Detect De
 - Deployment: A GitHub Action job with a name that matches the given regEx will be considered as a deployment.
 - Production: A GitHub Action job with a name that matches the given regEx will be considered a job in the production environment.
 
-A GitHub workflow run has many jobs. Each GitHub workflow run is converted to a 
-cicd_pipeline in the domain layer and each GitHub Action job is converted to a cicd_task in the domain layer.
+A GitHub workflow run has many jobs. Each GitHub workflow run is converted to a cicd_pipeline in the domain layer and each GitHub Action job is converted to a cicd_task in the domain layer.
 ![github-action-run](/img/ConfigUI/github-action-run.png)
 ![github-action-job](/img/ConfigUI/github-action-job.png)
 
