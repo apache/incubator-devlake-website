@@ -49,8 +49,8 @@ Metrics that can be calculated based on the data collected from GitLab:
 
 ## Configuration
 
-- Configuring GitLab via [config-ui](/UserManuals/ConfigUI/GitLab.md).
-- Configuring GitLab via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#2-gitlab).
+- Configuring GitLab via [config-ui](/Configuration/GitLab.md).
+- Configuring GitLab via Config UI's [advanced mode](/Configuration/AdvancedMode.md#2-gitlab).
 
 ## API Sample Request
 

@@ -100,7 +100,7 @@ curl 'http://localhost:8080/pipelines' \
 
 ## How to use refdiff in DORA
 
-RefDiff can be called by the [DORA plugin](https://github.com/apache/incubator-devlake/tree/main/plugins/dora) to support the calculation of [DORA metrics](https://devlake.apache.org/docs/UserManuals/DORA). RefDiff has a subtask called 'calculateProjectDeploymentCommitsDiff'. This subtask takes the `project_name` from task options to calculate the commits diff between two consecutive deployments in this project. That is to say, refdiff will generate the relationship between `deployed commit(s)` and the `deployment` in which these commits get deployed.
+RefDiff can be called by the [DORA plugin](https://github.com/apache/incubator-devlake/tree/main/plugins/dora) to support the calculation of [DORA metrics](https://devlake.apache.org/docs/DORA). RefDiff has a subtask called 'calculateProjectDeploymentCommitsDiff'. This subtask takes the `project_name` from task options to calculate the commits diff between two consecutive deployments in this project. That is to say, refdiff will generate the relationship between `deployed commit(s)` and the `deployment` in which these commits get deployed.
 
 ```shell
 curl 'http://localhost:8080/pipelines' \

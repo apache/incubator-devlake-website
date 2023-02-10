@@ -1,8 +1,0 @@
-{
-  "label": "User Manuals",
-  "position": 3,
-  "link":{
-    "type": "generated-index",
-    "slug": "UserManuals"
-  }
-}

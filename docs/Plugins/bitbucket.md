@@ -35,8 +35,8 @@ Metrics that can be calculated based on the data collected from bitbucket:
 
 ## Configuration
 
-- Configuring Bitbucket via [Config UI](/UserManuals/ConfigUI/BitBucket.md)
-- Configuring Bitbucket via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#9-BitBucket).
+- Configuring Bitbucket via [Config UI](/Configuration/BitBucket.md)
+- Configuring Bitbucket via Config UI's [advanced mode](/Configuration/AdvancedMode.md#9-BitBucket).
 
 ## API Sample Request
 

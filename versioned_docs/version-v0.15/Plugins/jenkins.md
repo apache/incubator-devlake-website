@@ -34,8 +34,8 @@ Metrics that can be calculated based on the data collected from Jenkins:
 
 ## Configuration
 
-- Configuring Jenkins via [Config UI](/UserManuals/ConfigUI/Jenkins.md)
-- Configuring Jenkins via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#3-jenkins).
+- Configuring Jenkins via [Config UI](/Configuration/Jenkins.md)
+- Configuring Jenkins via Config UI's [advanced mode](/Configuration/AdvancedMode.md#3-jenkins).
 
 ## API Sample Request
 
