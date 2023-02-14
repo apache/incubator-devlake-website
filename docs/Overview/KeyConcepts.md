@@ -14,7 +14,7 @@ description: >
 The following terms are arranged in the order of their appearance in the actual user workflow.
 
 ### Projects
-**A project is a method to group data**. Apache DevLake supports users to view metrics based on projects. A `project` is associated with multiple sets of [Data Scope](#data-scope), such as GitHub/GitLab repositories, Jira boards, Jenkins pipelines, etc. Metrics for a project are calculated based on the data entities(#data-entities) under the project's data scope. 
+**A project is a method to group data**. Apache DevLake supports users to view metrics based on projects. A `project` is associated with multiple sets of [Data Scope](#data-scope), such as GitHub/GitLab repositories, Jira boards, Jenkins pipelines, etc. Metrics for a project are calculated based on the [Data Entities](#data-entities) under the project's data scope. 
 
 A project has one [Blueprint](#Bluepirnts) for data collection and metric computation.
 
