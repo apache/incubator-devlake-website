@@ -31,6 +31,14 @@ Learn about [how to create a GitHub personal access token](https://docs.github.c
 - `read:user`
 - `read:org`
 
+However, if you want to collect data from private repositories, the following permissions are required:
+
+- `repo`
+- `read:user`
+- `read:org`
+
+The difference is that you have to give full permission for `repos`, not just `repo:status` and `repo_deployment`.
+
 The data collection speed is restricted by the **rate limit of [5,000 requests](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) per hour per token** (15,000 requests/hour if you pay for GitHub enterprise). You can accelerate data collection by configuring _multiple_ personal access tokens. Please note that multiple tokens should be created by different GitHub accounts. Tokens belonging to the same GitHub account share the rate limit.
 
 ###### Fine-grained personal access tokens
