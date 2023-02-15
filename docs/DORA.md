@@ -178,9 +178,14 @@ If you aren't familiar with Grafana, please refer to our [Grafana doc](Configura
 
 :tada::tada::tada: Congratulations! You are now a DevOps Hero, with your own DORA dashboard! 
 
-<br/><br/><br/>
+<br/><br/>
 
 
+## Try it Out
+
+To create the DORA dashboard with your own toolchain, please look at the [configuration tutorial](Configuration/Tutorial.md) for more details.
+
+<br/>
 
 ## Troubleshooting
 
