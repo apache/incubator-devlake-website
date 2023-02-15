@@ -7,7 +7,7 @@ description: >
 
 # DORA
 
-To set up your own DORA metrics dashboard, you can checkout our detailed [DORA user guide](https://devlake.apache.org/docs/DORA).
+To set up your own DORA metrics dashboard, you can checkout our detailed [DORA user guide](https://devlake.apache.org/docs/UserManuals/DORA).
 
 <div className="info">
   <h5>
