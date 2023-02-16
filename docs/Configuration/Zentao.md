@@ -18,7 +18,7 @@ Name your connection.
 
 This should be a valid REST API endpoint
 
-- `http://<host>:<port>`
+- `http://<host>:<port>/api.php/v1/`
   The endpoint url should end with `/`.
 
 #### Username/Password
