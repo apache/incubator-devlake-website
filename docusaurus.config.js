@@ -262,6 +262,10 @@ const versions = require('./versions.json');
                 label: 'Twitter',
                 to: 'https://twitter.com/ApacheDevLake',
               },
+              {
+                label: 'Trademark Guidelines',
+                to: 'community/trademark',
+              },
             ],
           },
         ],
