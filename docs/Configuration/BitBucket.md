@@ -47,7 +47,7 @@ If you are behind a corporate firewall or VPN you may need to utilize a proxy se
 
 DevLake uses a dynamic rate limit to collect BitBucket data. You can adjust the rate limit if you want to increase or lower the speed.
 
-The maximum rate limit for different entities in BitBucket(Cloud) is [1,000 requests/hour](https://support.atlassian.com/bitbucket-cloud/docs/api-request-limits/). But we find it can run when we try rate limit more than 1000/h. So you can try the bigger maximum if you repo is big enough.
+The maximum rate limit for different entities in BitBucket(Cloud) is [1,000 requests/hour](https://support.atlassian.com/bitbucket-cloud/docs/api-request-limits/). But we find it can run when we try a rate limit of more than 1000/h. So you can try the bigger maximum if your repo is big enough.
 
 <!-- ![image](https://user-images.githubusercontent.com/3294100/220094172-9e8e9e8b-75ea-4c3e-8e5b-716320dabb64.png) -->
 
@@ -80,7 +80,7 @@ Please go to the `Blueprints` page and switch to advanced mode. See how to use a
 
 ![image](https://user-images.githubusercontent.com/3294100/220338276-a67cd8cc-ea76-4cb2-bb7b-bba581d21d70.png)
 
-Without change default transformation rules, you can still view the Metrics dashboard. However, if you want to view pre-built dashboards, the following transformation rules, especially "Type/Bug", should be added.<br/>
+Without changing default transformation rules, you can still view the Metrics dashboard. However, if you want to view pre-built dashboards, the following transformation rules, especially "Type/Bug", should be added.<br/>
 
 Each Bitbucket repo has at most ONE set of transformation rules.
 
@@ -96,20 +96,20 @@ Each Bitbucket repo has at most ONE set of transformation rules.
 
 This set of configurations is used for calculating [DORA metrics](../DORA.md).
 
-A Bitbucket pipelines has many steps. Each Bitbucket pipeline is converted to a 
+A Bitbucket pipeline has many steps. Each Bitbucket pipeline is converted to a 
 cicd_pipeline in the domain layer and each Bitbucket pipeline step is converted to a cicd_task in the domain layer.
 ![image](https://user-images.githubusercontent.com/3294100/220288225-71bee07d-c319-45bd-98e5-f4d01359840e.png)
 
 ![image](https://user-images.githubusercontent.com/3294100/220289726-3909d368-1414-456c-a527-12a693745611.png)
 
-If you are using Bitbucket Deployments and Environments , please select "Detect Deployment from Environment in BitBucket". DevLake will consider  the pipeline steps with deployment as  a deployment and use the environment type of deployment in cicd_task.
+If you are using Bitbucket Deployments and Environments, please select "Detect Deployment from Environment in BitBucket". DevLake will consider the pipeline steps with deployment as a deployment and use the environment type of deployment in cicd_task.
 
 Or if you're using Bitbucket pipelines to conduct `deployments`, please select "Detect Deployment from Pipeline Step Names in BitBucket", and input the RegEx in the following fields:
 
 - Deployment: A Bitbucket pipeline steps with a name that matches the given regEx will be considered as a deployment.
 - Production: A Bitbucket pipeline steps with a name that matches the given regEx will be considered a job in the production environment.
 
-The deployment and production regex is only applied to the records in the cicd_tasks table when Bitbucket Deployments not exists.
+The deployment and production regex are only applied to the records in the cicd_tasks table when Bitbucket Deployments not exists.
 
 #### Additional Settings (Optional)
 
@@ -118,7 +118,7 @@ The deployment and production regex is only applied to the records in the cicd_t
     - commit diff: new commits for a tag relative to the previous one
     - issue diff: issues solved by the new commits for a tag relative to the previous one
 
-- Tags Pattern: Only tags that meet given regular expression will be counted.
+- Tags Pattern: Only tags that meet the given regular expression will be counted.
 
 - Tags Order: Only "reverse semver" order is supported for now.
 
