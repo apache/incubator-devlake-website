@@ -1,11 +1,11 @@
 {
   "paper": {
-    "name": "A2",
+    "name": "A4",
     "leftMargin": 0.5,
     "rightMargin": 0.5,
     "topMargin": 0.5,
     "bottomMargin": 0.5,
-    "isPortriat": false
+    "isPortriat": true
   },
   "modelVersion": 2.01,
   "defaultSchema": "Default",
@@ -9293,7 +9293,7 @@
                   "old_commit_sha"
                 ],
                 "referenceSchema": "lake",
-                "referenceTable": "cicd_pipeline_commits",
+                "referenceTable": "cicd_pipeline_commits (WIP)",
                 "referenceFields": [
                   "commit_sha"
                 ],
@@ -10431,7 +10431,7 @@
                   "deployment_id"
                 ],
                 "referenceSchema": "lake",
-                "referenceTable": "cicd_tasks",
+                "referenceTable": "cicd_tasks (WIP)",
                 "referenceFields": [
                   "id"
                 ],
@@ -11017,7 +11017,535 @@
         "tables": [
           {
             "objectType": "Table_MYSQL",
-            "name": "cicd_tasks",
+            "name": "cicd_pipeline_relationships",
+            "comment": "",
+            "engine": "InnoDB",
+            "characterSet": "utf8mb4",
+            "collation": "utf8mb4_bin",
+            "autoIncrement": 0,
+            "tablespace": "",
+            "storage": "",
+            "insertMethod": "",
+            "connection": "",
+            "checksum": false,
+            "rowFormat": "Dynamic",
+            "avgRowLength": 0,
+            "maxRows": 0,
+            "minRows": 0,
+            "keyBlockSize": 0,
+            "packKeys": "",
+            "delayKeyWrite": false,
+            "dataDirectory": "",
+            "indexDirectory": "",
+            "statsAutoRecalc": "",
+            "statsPersistent": "",
+            "statsSamplePages": 0,
+            "union": "",
+            "pageCheckSum": false,
+            "transactional": false,
+            "compression": "",
+            "oldName": "cicd_pipeline_relationships",
+            "encryption": false,
+            "createOptions": "",
+            "createTime": "2022-09-19 11:30:48",
+            "checkTime": "",
+            "dataFree": 0,
+            "dataLength": 16384,
+            "indexLength": 16384,
+            "maxDataLength": 0,
+            "rows": 47,
+            "updateTime": "2022-09-23 02:22:56",
+            "DDL": "CREATE TABLE `cicd_pipeline_relationships` (\n  `parent_pipeline_id` varchar(255) COLLATE utf8mb4_bin NOT NULL,\n  `child_pipeline_id` varchar(255) COLLATE utf8mb4_bin NOT NULL,\n  `created_at` datetime(3) DEFAULT NULL,\n  `updated_at` datetime(3) DEFAULT NULL,\n  `_raw_data_params` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,\n  `_raw_data_table` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,\n  `_raw_data_id` bigint unsigned DEFAULT NULL,\n  `_raw_data_remark` longtext COLLATE utf8mb4_bin,\n  PRIMARY KEY (`parent_pipeline_id`,`child_pipeline_id`),\n  KEY `idx_cicd_pipeline_relationships_raw_data_params` (`_raw_data_params`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin",
+            "partitionBy": "",
+            "partitionByExpr": "",
+            "partitions": 0,
+            "partitionKeyAlgorithm": "",
+            "subPartitionBy": "",
+            "subPartitionByExpr": "",
+            "subPartitions": 0,
+            "subPartitionKeyAlgorithm": "",
+            "fields": [
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "parent_pipeline_id",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "utf8mb4",
+                "collation": "utf8mb4_bin",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "parent_pipeline_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "child_pipeline_id",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "utf8mb4",
+                "collation": "utf8mb4_bin",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "child_pipeline_id"
+              }
+            ],
+            "indexes": [
+              {
+                "objectType": "Index_MYSQL",
+                "name": "idx_cicd_pipeline_relationships_raw_data_params",
+                "type": "NORMAL",
+                "method": "BTREE",
+                "comment": "",
+                "oldName": "idx_cicd_pipeline_relationships_raw_data_params",
+                "online": false,
+                "keyBlockSize": 0,
+                "parser": "",
+                "algorithm": "",
+                "lock": "",
+                "collation": "A",
+                "cardinality": "1",
+                "packed": "",
+                "IsVisibleIndex": true,
+                "fields": [
+                  {
+                    "objectType": "IndexField_MYSQL",
+                    "name": "_raw_data_params",
+                    "keyLength": 0,
+                    "order": "ASC",
+                    "oldName": "_raw_data_params"
+                  }
+                ]
+              }
+            ],
+            "primaryKey": {
+              "objectType": "PrimaryKey_MYSQL",
+              "name": "",
+              "fields": [
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "parent_pipeline_id",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": "parent_pipeline_id"
+                },
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "child_pipeline_id",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": "child_pipeline_id"
+                }
+              ],
+              "oldName": "",
+              "indexMethod": "BTREE",
+              "comment": ""
+            },
+            "foreignKeys": [
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_parent_pipeline",
+                "fields": [
+                  "parent_pipeline_id"
+                ],
+                "referenceSchema": "lake",
+                "referenceTable": "cicd_pipelines (WIP)",
+                "referenceFields": [
+                  "id"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              },
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_child_pipeline",
+                "fields": [
+                  "child_pipeline_id"
+                ],
+                "referenceSchema": "lake",
+                "referenceTable": "cicd_pipelines (WIP)",
+                "referenceFields": [
+                  "id"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              }
+            ],
+            "checks": [],
+            "triggers": [],
+            "tablePartitions": []
+          },
+          {
+            "objectType": "Table_MYSQL",
+            "name": "cicd_pipelines (WIP)",
+            "comment": "",
+            "engine": "InnoDB",
+            "characterSet": "utf8mb4",
+            "collation": "utf8mb4_bin",
+            "autoIncrement": 0,
+            "tablespace": "",
+            "storage": "",
+            "insertMethod": "",
+            "connection": "",
+            "checksum": false,
+            "rowFormat": "Dynamic",
+            "avgRowLength": 0,
+            "maxRows": 0,
+            "minRows": 0,
+            "keyBlockSize": 0,
+            "packKeys": "",
+            "delayKeyWrite": false,
+            "dataDirectory": "",
+            "indexDirectory": "",
+            "statsAutoRecalc": "",
+            "statsPersistent": "",
+            "statsSamplePages": 0,
+            "union": "",
+            "pageCheckSum": false,
+            "transactional": false,
+            "compression": "",
+            "oldName": "cicd_pipelines",
+            "encryption": false,
+            "createOptions": "",
+            "createTime": "2022-09-19 11:30:48",
+            "checkTime": "",
+            "dataFree": 4194304,
+            "dataLength": 1589248,
+            "indexLength": 1589248,
+            "maxDataLength": 0,
+            "rows": 8074,
+            "updateTime": "2022-09-25 13:33:39",
+            "DDL": "CREATE TABLE `cicd_pipelines` (\n  `id` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT 'This key is generated based on details from the original plugin',\n  `created_at` datetime(3) DEFAULT NULL,\n  `updated_at` datetime(3) DEFAULT NULL,\n  `_raw_data_params` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,\n  `_raw_data_table` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,\n  `_raw_data_id` bigint unsigned DEFAULT NULL,\n  `_raw_data_remark` longtext COLLATE utf8mb4_bin,\n  `name` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,\n  `result` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,\n  `status` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,\n  `type` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL COMMENT ' to indicate this is CI or CD',\n  `duration_sec` bigint unsigned DEFAULT NULL,\n  `created_date` datetime(3) DEFAULT NULL,\n  `finished_date` datetime(3) DEFAULT NULL,\n  `environment` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,\n  PRIMARY KEY (`id`),\n  KEY `idx_cicd_pipelines_raw_data_params` (`_raw_data_params`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin",
+            "partitionBy": "",
+            "partitionByExpr": "",
+            "partitions": 0,
+            "partitionKeyAlgorithm": "",
+            "subPartitionBy": "",
+            "subPartitionByExpr": "",
+            "subPartitions": 0,
+            "subPartitionKeyAlgorithm": "",
+            "fields": [
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "id",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "utf8mb4",
+                "collation": "utf8mb4_bin",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "This key is generated based on details from the original plugin",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "name",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "utf8mb4",
+                "collation": "utf8mb4_bin",
+                "isNullable": true,
+                "defaultType": "Null",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "name"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "result",
+                "type": "varchar",
+                "length": 100,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "utf8mb4",
+                "collation": "utf8mb4_bin",
+                "isNullable": true,
+                "defaultType": "Null",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "result"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "status",
+                "type": "varchar",
+                "length": 100,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "utf8mb4",
+                "collation": "utf8mb4_bin",
+                "isNullable": true,
+                "defaultType": "Null",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "status"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "type",
+                "type": "varchar",
+                "length": 100,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "utf8mb4",
+                "collation": "utf8mb4_bin",
+                "isNullable": true,
+                "defaultType": "Null",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": " to indicate this is CI or CD",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "type"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "duration_sec",
+                "type": "bigint",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": true,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Null",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "duration_sec"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "created_date",
+                "type": "datetime",
+                "length": 3,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Null",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "created_date"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "finished_date",
+                "type": "datetime",
+                "length": 3,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Null",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "finished_date"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "environment",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "utf8mb4",
+                "collation": "utf8mb4_bin",
+                "isNullable": true,
+                "defaultType": "Null",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "environment"
+              }
+            ],
+            "indexes": [
+              {
+                "objectType": "Index_MYSQL",
+                "name": "idx_cicd_pipelines_raw_data_params",
+                "type": "NORMAL",
+                "method": "BTREE",
+                "comment": "",
+                "oldName": "idx_cicd_pipelines_raw_data_params",
+                "online": false,
+                "keyBlockSize": 0,
+                "parser": "",
+                "algorithm": "",
+                "lock": "",
+                "collation": "A",
+                "cardinality": "1",
+                "packed": "",
+                "IsVisibleIndex": true,
+                "fields": [
+                  {
+                    "objectType": "IndexField_MYSQL",
+                    "name": "_raw_data_params",
+                    "keyLength": 0,
+                    "order": "ASC",
+                    "oldName": "_raw_data_params"
+                  }
+                ]
+              }
+            ],
+            "primaryKey": {
+              "objectType": "PrimaryKey_MYSQL",
+              "name": "",
+              "fields": [
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "id",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": "id"
+                }
+              ],
+              "oldName": "",
+              "indexMethod": "BTREE",
+              "comment": ""
+            },
+            "foreignKeys": [],
+            "checks": [],
+            "triggers": [],
+            "tablePartitions": []
+          },
+          {
+            "objectType": "Table_MYSQL",
+            "name": "cicd_tasks (WIP)",
             "comment": "",
             "engine": "InnoDB",
             "characterSet": "utf8mb4",
@@ -11404,7 +11932,7 @@
                   "pipeline_id"
                 ],
                 "referenceSchema": "lake",
-                "referenceTable": "cicd_pipelines",
+                "referenceTable": "cicd_pipelines (WIP)",
                 "referenceFields": [
                   "id"
                 ],
@@ -11421,7 +11949,7 @@
                   "pipeline_id"
                 ],
                 "referenceSchema": "lake",
-                "referenceTable": "cicd_pipeline_commits",
+                "referenceTable": "cicd_pipeline_commits (WIP)",
                 "referenceFields": [
                   "pipeline_id"
                 ],
@@ -11438,7 +11966,7 @@
           },
           {
             "objectType": "Table_MYSQL",
-            "name": "cicd_pipeline_commits",
+            "name": "cicd_pipeline_commits (WIP)",
             "comment": "",
             "engine": "InnoDB",
             "characterSet": "utf8mb4",
@@ -11728,7 +12256,7 @@
                   "pipeline_id"
                 ],
                 "referenceSchema": "lake",
-                "referenceTable": "cicd_pipelines",
+                "referenceTable": "cicd_pipelines (WIP)",
                 "referenceFields": [
                   "id"
                 ],
@@ -11739,534 +12267,6 @@
                 "oldName": ""
               }
             ],
-            "checks": [],
-            "triggers": [],
-            "tablePartitions": []
-          },
-          {
-            "objectType": "Table_MYSQL",
-            "name": "cicd_pipeline_relationships",
-            "comment": "",
-            "engine": "InnoDB",
-            "characterSet": "utf8mb4",
-            "collation": "utf8mb4_bin",
-            "autoIncrement": 0,
-            "tablespace": "",
-            "storage": "",
-            "insertMethod": "",
-            "connection": "",
-            "checksum": false,
-            "rowFormat": "Dynamic",
-            "avgRowLength": 0,
-            "maxRows": 0,
-            "minRows": 0,
-            "keyBlockSize": 0,
-            "packKeys": "",
-            "delayKeyWrite": false,
-            "dataDirectory": "",
-            "indexDirectory": "",
-            "statsAutoRecalc": "",
-            "statsPersistent": "",
-            "statsSamplePages": 0,
-            "union": "",
-            "pageCheckSum": false,
-            "transactional": false,
-            "compression": "",
-            "oldName": "cicd_pipeline_relationships",
-            "encryption": false,
-            "createOptions": "",
-            "createTime": "2022-09-19 11:30:48",
-            "checkTime": "",
-            "dataFree": 0,
-            "dataLength": 16384,
-            "indexLength": 16384,
-            "maxDataLength": 0,
-            "rows": 47,
-            "updateTime": "2022-09-23 02:22:56",
-            "DDL": "CREATE TABLE `cicd_pipeline_relationships` (\n  `parent_pipeline_id` varchar(255) COLLATE utf8mb4_bin NOT NULL,\n  `child_pipeline_id` varchar(255) COLLATE utf8mb4_bin NOT NULL,\n  `created_at` datetime(3) DEFAULT NULL,\n  `updated_at` datetime(3) DEFAULT NULL,\n  `_raw_data_params` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,\n  `_raw_data_table` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,\n  `_raw_data_id` bigint unsigned DEFAULT NULL,\n  `_raw_data_remark` longtext COLLATE utf8mb4_bin,\n  PRIMARY KEY (`parent_pipeline_id`,`child_pipeline_id`),\n  KEY `idx_cicd_pipeline_relationships_raw_data_params` (`_raw_data_params`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin",
-            "partitionBy": "",
-            "partitionByExpr": "",
-            "partitions": 0,
-            "partitionKeyAlgorithm": "",
-            "subPartitionBy": "",
-            "subPartitionByExpr": "",
-            "subPartitions": 0,
-            "subPartitionKeyAlgorithm": "",
-            "fields": [
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "parent_pipeline_id",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "utf8mb4",
-                "collation": "utf8mb4_bin",
-                "isNullable": false,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "parent_pipeline_id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "child_pipeline_id",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "utf8mb4",
-                "collation": "utf8mb4_bin",
-                "isNullable": false,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "child_pipeline_id"
-              }
-            ],
-            "indexes": [
-              {
-                "objectType": "Index_MYSQL",
-                "name": "idx_cicd_pipeline_relationships_raw_data_params",
-                "type": "NORMAL",
-                "method": "BTREE",
-                "comment": "",
-                "oldName": "idx_cicd_pipeline_relationships_raw_data_params",
-                "online": false,
-                "keyBlockSize": 0,
-                "parser": "",
-                "algorithm": "",
-                "lock": "",
-                "collation": "A",
-                "cardinality": "1",
-                "packed": "",
-                "IsVisibleIndex": true,
-                "fields": [
-                  {
-                    "objectType": "IndexField_MYSQL",
-                    "name": "_raw_data_params",
-                    "keyLength": 0,
-                    "order": "ASC",
-                    "oldName": "_raw_data_params"
-                  }
-                ]
-              }
-            ],
-            "primaryKey": {
-              "objectType": "PrimaryKey_MYSQL",
-              "name": "",
-              "fields": [
-                {
-                  "objectType": "IndexField_MYSQL",
-                  "name": "parent_pipeline_id",
-                  "keyLength": 0,
-                  "order": "",
-                  "oldName": "parent_pipeline_id"
-                },
-                {
-                  "objectType": "IndexField_MYSQL",
-                  "name": "child_pipeline_id",
-                  "keyLength": 0,
-                  "order": "",
-                  "oldName": "child_pipeline_id"
-                }
-              ],
-              "oldName": "",
-              "indexMethod": "BTREE",
-              "comment": ""
-            },
-            "foreignKeys": [
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_parent_pipeline",
-                "fields": [
-                  "parent_pipeline_id"
-                ],
-                "referenceSchema": "lake",
-                "referenceTable": "cicd_pipelines",
-                "referenceFields": [
-                  "id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              },
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_child_pipeline",
-                "fields": [
-                  "child_pipeline_id"
-                ],
-                "referenceSchema": "lake",
-                "referenceTable": "cicd_pipelines",
-                "referenceFields": [
-                  "id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              }
-            ],
-            "checks": [],
-            "triggers": [],
-            "tablePartitions": []
-          },
-          {
-            "objectType": "Table_MYSQL",
-            "name": "cicd_pipelines",
-            "comment": "",
-            "engine": "InnoDB",
-            "characterSet": "utf8mb4",
-            "collation": "utf8mb4_bin",
-            "autoIncrement": 0,
-            "tablespace": "",
-            "storage": "",
-            "insertMethod": "",
-            "connection": "",
-            "checksum": false,
-            "rowFormat": "Dynamic",
-            "avgRowLength": 0,
-            "maxRows": 0,
-            "minRows": 0,
-            "keyBlockSize": 0,
-            "packKeys": "",
-            "delayKeyWrite": false,
-            "dataDirectory": "",
-            "indexDirectory": "",
-            "statsAutoRecalc": "",
-            "statsPersistent": "",
-            "statsSamplePages": 0,
-            "union": "",
-            "pageCheckSum": false,
-            "transactional": false,
-            "compression": "",
-            "oldName": "cicd_pipelines",
-            "encryption": false,
-            "createOptions": "",
-            "createTime": "2022-09-19 11:30:48",
-            "checkTime": "",
-            "dataFree": 4194304,
-            "dataLength": 1589248,
-            "indexLength": 1589248,
-            "maxDataLength": 0,
-            "rows": 8074,
-            "updateTime": "2022-09-25 13:33:39",
-            "DDL": "CREATE TABLE `cicd_pipelines` (\n  `id` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT 'This key is generated based on details from the original plugin',\n  `created_at` datetime(3) DEFAULT NULL,\n  `updated_at` datetime(3) DEFAULT NULL,\n  `_raw_data_params` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,\n  `_raw_data_table` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,\n  `_raw_data_id` bigint unsigned DEFAULT NULL,\n  `_raw_data_remark` longtext COLLATE utf8mb4_bin,\n  `name` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,\n  `result` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,\n  `status` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,\n  `type` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL COMMENT ' to indicate this is CI or CD',\n  `duration_sec` bigint unsigned DEFAULT NULL,\n  `created_date` datetime(3) DEFAULT NULL,\n  `finished_date` datetime(3) DEFAULT NULL,\n  `environment` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,\n  PRIMARY KEY (`id`),\n  KEY `idx_cicd_pipelines_raw_data_params` (`_raw_data_params`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin",
-            "partitionBy": "",
-            "partitionByExpr": "",
-            "partitions": 0,
-            "partitionKeyAlgorithm": "",
-            "subPartitionBy": "",
-            "subPartitionByExpr": "",
-            "subPartitions": 0,
-            "subPartitionKeyAlgorithm": "",
-            "fields": [
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "id",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "utf8mb4",
-                "collation": "utf8mb4_bin",
-                "isNullable": false,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "This key is generated based on details from the original plugin",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "name",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "utf8mb4",
-                "collation": "utf8mb4_bin",
-                "isNullable": true,
-                "defaultType": "Null",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "name"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "result",
-                "type": "varchar",
-                "length": 100,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "utf8mb4",
-                "collation": "utf8mb4_bin",
-                "isNullable": true,
-                "defaultType": "Null",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "result"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "status",
-                "type": "varchar",
-                "length": 100,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "utf8mb4",
-                "collation": "utf8mb4_bin",
-                "isNullable": true,
-                "defaultType": "Null",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "status"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "type",
-                "type": "varchar",
-                "length": 100,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "utf8mb4",
-                "collation": "utf8mb4_bin",
-                "isNullable": true,
-                "defaultType": "Null",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": " to indicate this is CI or CD",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "type"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "duration_sec",
-                "type": "bigint",
-                "length": -2147483648,
-                "decimals": -2147483648,
-                "isUnsigned": true,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Null",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "duration_sec"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "created_date",
-                "type": "datetime",
-                "length": 3,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Null",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "created_date"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "finished_date",
-                "type": "datetime",
-                "length": 3,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Null",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "finished_date"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "environment",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "utf8mb4",
-                "collation": "utf8mb4_bin",
-                "isNullable": true,
-                "defaultType": "Null",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "environment"
-              }
-            ],
-            "indexes": [
-              {
-                "objectType": "Index_MYSQL",
-                "name": "idx_cicd_pipelines_raw_data_params",
-                "type": "NORMAL",
-                "method": "BTREE",
-                "comment": "",
-                "oldName": "idx_cicd_pipelines_raw_data_params",
-                "online": false,
-                "keyBlockSize": 0,
-                "parser": "",
-                "algorithm": "",
-                "lock": "",
-                "collation": "A",
-                "cardinality": "1",
-                "packed": "",
-                "IsVisibleIndex": true,
-                "fields": [
-                  {
-                    "objectType": "IndexField_MYSQL",
-                    "name": "_raw_data_params",
-                    "keyLength": 0,
-                    "order": "ASC",
-                    "oldName": "_raw_data_params"
-                  }
-                ]
-              }
-            ],
-            "primaryKey": {
-              "objectType": "PrimaryKey_MYSQL",
-              "name": "",
-              "fields": [
-                {
-                  "objectType": "IndexField_MYSQL",
-                  "name": "id",
-                  "keyLength": 0,
-                  "order": "",
-                  "oldName": "id"
-                }
-              ],
-              "oldName": "",
-              "indexMethod": "BTREE",
-              "comment": ""
-            },
-            "foreignKeys": [],
             "checks": [],
             "triggers": [],
             "tablePartitions": []
@@ -12295,7 +12295,7 @@
           "schemaName": "Default",
           "tableName": "issues",
           "x": 106,
-          "y": 1044,
+          "y": 1074,
           "width": 200,
           "height": 597,
           "isBold": false,
@@ -12311,7 +12311,7 @@
           "schemaName": "Default",
           "tableName": "board_issues",
           "x": 349,
-          "y": 643,
+          "y": 673,
           "width": 200,
           "height": 89,
           "isBold": false,
@@ -12327,7 +12327,7 @@
           "schemaName": "Default",
           "tableName": "board_repos(WIP)",
           "x": 849,
-          "y": 771,
+          "y": 801,
           "width": 200,
           "height": 92,
           "isBold": false,
@@ -12343,7 +12343,7 @@
           "schemaName": "Default",
           "tableName": "repos",
           "x": 1249,
-          "y": 793,
+          "y": 823,
           "width": 200,
           "height": 259,
           "isBold": false,
@@ -12359,7 +12359,7 @@
           "schemaName": "Default",
           "tableName": "boards",
           "x": 599,
-          "y": 641,
+          "y": 671,
           "width": 200,
           "height": 152,
           "isBold": false,
@@ -12375,7 +12375,7 @@
           "schemaName": "Default",
           "tableName": "commits",
           "x": 1251,
-          "y": 1194,
+          "y": 1224,
           "width": 200,
           "height": 316,
           "isBold": false,
@@ -12391,7 +12391,7 @@
           "schemaName": "Default",
           "tableName": "pull_requests",
           "x": 1587,
-          "y": 580,
+          "y": 610,
           "width": 197,
           "height": 679,
           "isBold": false,
@@ -12407,7 +12407,7 @@
           "schemaName": "Default",
           "tableName": "sprints",
           "x": 600,
-          "y": 922,
+          "y": 952,
           "width": 200,
           "height": 215,
           "isBold": false,
@@ -12423,7 +12423,7 @@
           "schemaName": "Default",
           "tableName": "accounts",
           "x": 673,
-          "y": 1586,
+          "y": 1616,
           "width": 204,
           "height": 218,
           "isBold": false,
@@ -12439,7 +12439,7 @@
           "schemaName": "Default",
           "tableName": "sprint_issues",
           "x": 351,
-          "y": 959,
+          "y": 989,
           "width": 200,
           "height": 193,
           "isBold": false,
@@ -12455,7 +12455,7 @@
           "schemaName": "Default",
           "tableName": "issue_worklogs",
           "x": 351,
-          "y": 1192,
+          "y": 1222,
           "width": 200,
           "height": 191,
           "isBold": false,
@@ -12497,7 +12497,7 @@
           "schemaName": "Default",
           "tableName": "repo_languages(WIP)",
           "x": 1248,
-          "y": 631,
+          "y": 661,
           "width": 200,
           "height": 129,
           "isBold": false,
@@ -12513,7 +12513,7 @@
           "schemaName": "Default",
           "tableName": "repo_commits",
           "x": 1251,
-          "y": 1068,
+          "y": 1098,
           "width": 200,
           "height": 88,
           "isBold": false,
@@ -12529,7 +12529,7 @@
           "schemaName": "Default",
           "tableName": "pull_request_commits",
           "x": 1590,
-          "y": 1261,
+          "y": 1291,
           "width": 200,
           "height": 88,
           "isBold": false,
@@ -12545,7 +12545,7 @@
           "schemaName": "Default",
           "tableName": "pull_request_events(WIP)",
           "x": 1849,
-          "y": 1083,
+          "y": 1113,
           "width": 200,
           "height": 154,
           "isBold": false,
@@ -12561,7 +12561,7 @@
           "schemaName": "Default",
           "tableName": "commit_parents",
           "x": 1585,
-          "y": 1515,
+          "y": 1545,
           "width": 200,
           "height": 88,
           "isBold": false,
@@ -12575,8 +12575,8 @@
         {
           "type": "rectangle",
           "name": "issue tracking",
-          "x": 600,
-          "y": 386,
+          "x": 592,
+          "y": 376,
           "width": 274,
           "height": 56,
           "opacity": 1.0,
@@ -12595,8 +12595,8 @@
           },
           "shapeStyle": "version1",
           "label": {
-            "x": 608,
-            "y": 442,
+            "x": 600,
+            "y": 432,
             "width": 94,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12615,13 +12615,13 @@
         {
           "type": "label",
           "name": "Label 3",
-          "x": 640,
-          "y": 397,
-          "width": 210,
+          "x": 658,
+          "y": 386,
+          "width": 160,
           "height": 40,
-          "text": "issue tracking domain",
+          "text": "Issue Tracking",
           "fontName": "Arial Unicode MS",
-          "fontSize": 18,
+          "fontSize": 20,
           "fontColor": {
             "r": 254,
             "g": 254,
@@ -12634,8 +12634,8 @@
         {
           "type": "rectangle",
           "name": "source code management",
-          "x": 890,
-          "y": 386,
+          "x": 882,
+          "y": 376,
           "width": 284,
           "height": 56,
           "opacity": 1.0,
@@ -12654,8 +12654,8 @@
           },
           "shapeStyle": "version1",
           "label": {
-            "x": 908,
-            "y": 442,
+            "x": 900,
+            "y": 432,
             "width": 170,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12674,13 +12674,13 @@
         {
           "type": "label",
           "name": "Label 3 Copy 1",
-          "x": 900,
-          "y": 397,
-          "width": 270,
+          "x": 897,
+          "y": 386,
+          "width": 258,
           "height": 40,
-          "text": "source code management domain",
+          "text": "Source Code Management",
           "fontName": "Arial Unicode MS",
-          "fontSize": 16,
+          "fontSize": 20,
           "fontColor": {
             "r": 254,
             "g": 254,
@@ -12693,8 +12693,8 @@
         {
           "type": "rectangle",
           "name": "CI/CD",
-          "x": 1503,
-          "y": 387,
+          "x": 1495,
+          "y": 377,
           "width": 274,
           "height": 56,
           "opacity": 1.0,
@@ -12713,8 +12713,8 @@
           },
           "shapeStyle": "version1",
           "label": {
-            "x": 1511,
-            "y": 443,
+            "x": 1503,
+            "y": 433,
             "width": 50,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12733,11 +12733,11 @@
         {
           "type": "label",
           "name": "Label 3 Copy 1 Copy 1",
-          "x": 1540,
-          "y": 398,
-          "width": 187,
+          "x": 1600,
+          "y": 388,
+          "width": 59,
           "height": 40,
-          "text": "CI/CD domain (WIP)",
+          "text": "CI/CD",
           "fontName": "Arial Unicode MS",
           "fontSize": 18,
           "fontColor": {
@@ -12752,8 +12752,8 @@
         {
           "type": "rectangle",
           "name": "Cross-domain",
-          "x": 1802,
-          "y": 388,
+          "x": 1794,
+          "y": 378,
           "width": 274,
           "height": 56,
           "opacity": 1.0,
@@ -12772,8 +12772,8 @@
           },
           "shapeStyle": "version1",
           "label": {
-            "x": 1810,
-            "y": 444,
+            "x": 1802,
+            "y": 434,
             "width": 96,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12792,13 +12792,13 @@
         {
           "type": "label",
           "name": "Label 3 Copy 1 Copy 1 Copy 1",
-          "x": 1870,
-          "y": 396,
-          "width": 128,
-          "height": 40,
+          "x": 1862,
+          "y": 386,
+          "width": 132,
+          "height": 39,
           "text": "Cross-domain",
           "fontName": "Arial Unicode MS",
-          "fontSize": 18,
+          "fontSize": 20,
           "fontColor": {
             "r": 0,
             "g": 0,
@@ -12813,7 +12813,7 @@
           "schemaName": "Default",
           "tableName": "pull_request_comments",
           "x": 1850,
-          "y": 854,
+          "y": 884,
           "width": 200,
           "height": 230,
           "isBold": false,
@@ -12829,7 +12829,7 @@
           "schemaName": "Default",
           "tableName": "refs",
           "x": 977,
-          "y": 936,
+          "y": 966,
           "width": 200,
           "height": 171,
           "isBold": false,
@@ -12845,7 +12845,7 @@
           "schemaName": "Default",
           "tableName": "commit_files",
           "x": 1588,
-          "y": 1357,
+          "y": 1387,
           "width": 200,
           "height": 150,
           "isBold": false,
@@ -12861,7 +12861,7 @@
           "schemaName": "Default",
           "tableName": "issue_labels",
           "x": 98,
-          "y": 772,
+          "y": 802,
           "width": 200,
           "height": 89,
           "isBold": false,
@@ -12877,7 +12877,7 @@
           "schemaName": "Default",
           "tableName": "board_sprints",
           "x": 600,
-          "y": 813,
+          "y": 843,
           "width": 200,
           "height": 89,
           "isBold": false,
@@ -12893,7 +12893,7 @@
           "schemaName": "Default",
           "tableName": "pull_request_labels",
           "x": 1852,
-          "y": 640,
+          "y": 670,
           "width": 200,
           "height": 91,
           "isBold": false,
@@ -12909,7 +12909,7 @@
           "schemaName": "Default",
           "tableName": "commits_diffs",
           "x": 976,
-          "y": 1169,
+          "y": 1199,
           "width": 200,
           "height": 172,
           "isBold": false,
@@ -12923,8 +12923,8 @@
         {
           "type": "rectangle",
           "name": "code review",
-          "x": 1199,
-          "y": 385,
+          "x": 1191,
+          "y": 375,
           "width": 274,
           "height": 56,
           "opacity": 1.0,
@@ -12943,8 +12943,8 @@
           },
           "shapeStyle": "version1",
           "label": {
-            "x": 1207,
-            "y": 441,
+            "x": 1199,
+            "y": 431,
             "width": 83,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12963,13 +12963,13 @@
         {
           "type": "label",
           "name": "Label 3 Copy 1 Copy 2",
-          "x": 1240,
-          "y": 395,
-          "width": 180,
+          "x": 1262,
+          "y": 385,
+          "width": 129,
           "height": 40,
-          "text": "code review domain",
+          "text": "Code Review",
           "fontName": "Arial Unicode MS",
-          "fontSize": 18,
+          "fontSize": 20,
           "fontColor": {
             "r": 254,
             "g": 254,
@@ -12983,10 +12983,10 @@
           "type": "label",
           "name": "Label 3 Copy 1 Copy 1 Copy 1 Copy 1",
           "x": 59,
-          "y": 453,
-          "width": 486,
-          "height": 37,
-          "text": "Note: tables ending with \"(WIP)\" are still under development",
+          "y": 473,
+          "width": 389,
+          "height": 40,
+          "text": "Note: WIP tables are still under development",
           "fontName": "Arial Unicode MS",
           "fontSize": 18,
           "fontColor": {
@@ -13019,7 +13019,7 @@
           "schemaName": "Default",
           "tableName": "pull_request_issues",
           "x": 1585,
-          "y": 441,
+          "y": 471,
           "width": 200,
           "height": 133,
           "isBold": false,
@@ -13035,7 +13035,7 @@
           "schemaName": "Default",
           "tableName": "users",
           "x": 1267,
-          "y": 1669,
+          "y": 1699,
           "width": 200,
           "height": 113,
           "isBold": false,
@@ -13051,7 +13051,7 @@
           "schemaName": "Default",
           "tableName": "user_accounts",
           "x": 968,
-          "y": 1672,
+          "y": 1702,
           "width": 200,
           "height": 94,
           "isBold": false,
@@ -13067,7 +13067,7 @@
           "schemaName": "Default",
           "tableName": "teams",
           "x": 968,
-          "y": 1855,
+          "y": 1885,
           "width": 200,
           "height": 151,
           "isBold": false,
@@ -13083,7 +13083,7 @@
           "schemaName": "Default",
           "tableName": "team_users",
           "x": 1269,
-          "y": 1853,
+          "y": 1883,
           "width": 200,
           "height": 95,
           "isBold": false,
@@ -13099,7 +13099,7 @@
           "schemaName": "Default",
           "tableName": "commit_file_components",
           "x": 1849,
-          "y": 1274,
+          "y": 1304,
           "width": 200,
           "height": 87,
           "isBold": false,
@@ -13115,7 +13115,7 @@
           "schemaName": "Default",
           "tableName": "components",
           "x": 1850,
-          "y": 1399,
+          "y": 1429,
           "width": 200,
           "height": 112,
           "isBold": false,
@@ -13129,10 +13129,10 @@
         {
           "type": "table",
           "schemaName": "lake",
-          "tableName": "cicd_pipeline_commits",
+          "tableName": "cicd_pipeline_commits (WIP)",
           "x": 2428,
-          "y": 914,
-          "width": 203,
+          "y": 944,
+          "width": 212,
           "height": 175,
           "isBold": false,
           "titleColor": {
@@ -13145,9 +13145,9 @@
         {
           "type": "table",
           "schemaName": "lake",
-          "tableName": "cicd_pipelines",
+          "tableName": "cicd_pipelines (WIP)",
           "x": 2163,
-          "y": 711,
+          "y": 741,
           "width": 219,
           "height": 237,
           "isBold": false,
@@ -13161,9 +13161,9 @@
         {
           "type": "table",
           "schemaName": "lake",
-          "tableName": "cicd_tasks",
+          "tableName": "cicd_tasks (WIP)",
           "x": 2154,
-          "y": 1049,
+          "y": 1079,
           "width": 242,
           "height": 260,
           "isBold": false,
@@ -13179,7 +13179,7 @@
           "schemaName": "Default",
           "tableName": "finished_commits_diffs",
           "x": 981,
-          "y": 1399,
+          "y": 1429,
           "width": 197,
           "height": 94,
           "isBold": false,
@@ -13195,7 +13195,7 @@
           "schemaName": "Default",
           "tableName": "ref_commits",
           "x": 671,
-          "y": 1404,
+          "y": 1434,
           "width": 197,
           "height": 138,
           "isBold": false,
@@ -13211,7 +13211,7 @@
           "schemaName": "Default",
           "tableName": "project",
           "x": 1600,
-          "y": 1670,
+          "y": 1700,
           "width": 200,
           "height": 151,
           "isBold": false,
@@ -13227,7 +13227,7 @@
           "schemaName": "Default",
           "tableName": "project_metric_settings",
           "x": 1920,
-          "y": 1670,
+          "y": 1700,
           "width": 200,
           "height": 151,
           "isBold": false,
@@ -13243,9 +13243,9 @@
           "schemaName": "Default",
           "tableName": "project_mapping",
           "x": 1600,
-          "y": 1880,
+          "y": 1910,
           "width": 200,
-          "height": 151,
+          "height": 120,
           "isBold": false,
           "titleColor": {
             "r": 92,
@@ -13266,20 +13266,20 @@
           "vertices": [
             {
               "x": 1572,
-              "y": 889
+              "y": 920
             },
             {
-              "x": 1571,
-              "y": 830
+              "x": 1570,
+              "y": 860
             },
             {
               "x": 1464,
-              "y": 830
+              "y": 860
             }
           ],
           "label": {
             "x": 1532,
-            "y": 850,
+            "y": 881,
             "width": 50,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13304,16 +13304,16 @@
           "vertices": [
             {
               "x": 564,
-              "y": 687
+              "y": 720
             },
             {
               "x": 584,
-              "y": 687
+              "y": 720
             }
           ],
           "label": {
             "x": 560,
-            "y": 689,
+            "y": 722,
             "width": 173,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13338,24 +13338,24 @@
           "vertices": [
             {
               "x": 334,
-              "y": 710
+              "y": 740
             },
             {
-              "x": 315,
-              "y": 710
+              "x": 320,
+              "y": 740
             },
             {
-              "x": 315,
-              "y": 886
+              "x": 320,
+              "y": 1120
             },
             {
               "x": 321,
-              "y": 1085
+              "y": 1120
             }
           ],
           "label": {
             "x": 174,
-            "y": 671,
+            "y": 701,
             "width": 170,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13380,16 +13380,16 @@
           "vertices": [
             {
               "x": 834,
-              "y": 819
+              "y": 850
             },
             {
               "x": 814,
-              "y": 690
+              "y": 720
             }
           ],
           "label": {
             "x": 722,
-            "y": 780,
+            "y": 811,
             "width": 201,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13414,16 +13414,16 @@
           "vertices": [
             {
               "x": 1064,
-              "y": 839
+              "y": 870
             },
             {
               "x": 1234,
-              "y": 839
+              "y": 870
             }
           ],
           "label": {
             "x": 1060,
-            "y": 841,
+            "y": 872,
             "width": 194,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13448,24 +13448,24 @@
           "vertices": [
             {
               "x": 1799,
-              "y": 828
+              "y": 860
             },
             {
-              "x": 2081,
-              "y": 822
+              "x": 2080,
+              "y": 850
             },
             {
-              "x": 2081,
-              "y": 1650
+              "x": 2080,
+              "y": 1680
             },
             {
               "x": 892,
-              "y": 1650
+              "y": 1680
             }
           ],
           "label": {
             "x": 1795,
-            "y": 830,
+            "y": 862,
             "width": 137,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13490,24 +13490,24 @@
           "vertices": [
             {
               "x": 1236,
-              "y": 1345
+              "y": 1380
             },
             {
-              "x": 1219,
-              "y": 1345
+              "x": 1220,
+              "y": 1380
             },
             {
-              "x": 1219,
-              "y": 1565
+              "x": 1220,
+              "y": 1660
             },
             {
               "x": 892,
-              "y": 1630
+              "y": 1660
             }
           ],
           "label": {
             "x": 1252,
-            "y": 1347,
+            "y": 1382,
             "width": 170,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13532,24 +13532,24 @@
           "vertices": [
             {
               "x": 1236,
-              "y": 1429
+              "y": 1460
             },
             {
-              "x": 1223,
-              "y": 1429
+              "x": 1220,
+              "y": 1460
             },
             {
-              "x": 1223,
-              "y": 1569
+              "x": 1220,
+              "y": 1660
             },
             {
               "x": 892,
-              "y": 1634
+              "y": 1660
             }
           ],
           "label": {
             "x": 1252,
-            "y": 1431,
+            "y": 1462,
             "width": 170,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13574,24 +13574,24 @@
           "vertices": [
             {
               "x": 321,
-              "y": 1449
+              "y": 1480
             },
             {
-              "x": 646,
-              "y": 1449
+              "x": 650,
+              "y": 1480
             },
             {
-              "x": 646,
-              "y": 1631
+              "x": 650,
+              "y": 1660
             },
             {
               "x": 658,
-              "y": 1631
+              "y": 1660
             }
           ],
           "label": {
             "x": 311,
-            "y": 1410,
+            "y": 1441,
             "width": 122,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13616,24 +13616,24 @@
           "vertices": [
             {
               "x": 321,
-              "y": 1469
+              "y": 1500
             },
             {
-              "x": 632,
-              "y": 1469
+              "x": 630,
+              "y": 1500
             },
             {
-              "x": 632,
-              "y": 1636
+              "x": 630,
+              "y": 1670
             },
             {
               "x": 658,
-              "y": 1636
+              "y": 1670
             }
           ],
           "label": {
             "x": 311,
-            "y": 1430,
+            "y": 1461,
             "width": 122,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13658,20 +13658,20 @@
           "vertices": [
             {
               "x": 566,
-              "y": 1004
+              "y": 1030
             },
             {
-              "x": 566,
-              "y": 967
+              "x": 570,
+              "y": 1000
             },
             {
               "x": 585,
-              "y": 967
+              "y": 1000
             }
           ],
           "label": {
             "x": 556,
-            "y": 965,
+            "y": 991,
             "width": 253,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13696,16 +13696,16 @@
           "vertices": [
             {
               "x": 336,
-              "y": 1026
+              "y": 1060
             },
             {
               "x": 321,
-              "y": 1091
+              "y": 1120
             }
           ],
           "label": {
             "x": 119,
-            "y": 987,
+            "y": 1021,
             "width": 245,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13730,20 +13730,20 @@
           "vertices": [
             {
               "x": 336,
-              "y": 1363
+              "y": 1390
             },
             {
-              "x": 315,
-              "y": 1363
+              "x": 320,
+              "y": 1130
             },
             {
               "x": 321,
-              "y": 1101
+              "y": 1130
             }
           ],
           "label": {
             "x": 203,
-            "y": 1324,
+            "y": 1351,
             "width": 143,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13768,20 +13768,20 @@
           "vertices": [
             {
               "x": 321,
-              "y": 1490
+              "y": 1520
             },
             {
-              "x": 321,
-              "y": 1645
+              "x": 320,
+              "y": 1670
             },
             {
               "x": 658,
-              "y": 1643
+              "y": 1670
             }
           ],
           "label": {
             "x": 311,
-            "y": 1451,
+            "y": 1481,
             "width": 122,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13806,24 +13806,24 @@
           "vertices": [
             {
               "x": 1466,
-              "y": 1115
+              "y": 1150
             },
             {
-              "x": 1487,
-              "y": 1115
+              "x": 1490,
+              "y": 1150
             },
             {
-              "x": 1487,
-              "y": 839
+              "x": 1490,
+              "y": 870
             },
             {
               "x": 1464,
-              "y": 839
+              "y": 870
             }
           ],
           "label": {
             "x": 1462,
-            "y": 1086,
+            "y": 1121,
             "width": 170,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13848,16 +13848,16 @@
           "vertices": [
             {
               "x": 1466,
-              "y": 1137
+              "y": 1170
             },
             {
               "x": 1466,
-              "y": 1225
+              "y": 1260
             }
           ],
           "label": {
             "x": 1462,
-            "y": 1139,
+            "y": 1172,
             "width": 187,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13882,16 +13882,16 @@
           "vertices": [
             {
               "x": 1805,
-              "y": 1306
+              "y": 1340
             },
             {
               "x": 1799,
-              "y": 730
+              "y": 760
             }
           ],
           "label": {
             "x": 1801,
-            "y": 1277,
+            "y": 1311,
             "width": 265,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13916,20 +13916,20 @@
           "vertices": [
             {
               "x": 1575,
-              "y": 1328
+              "y": 1360
             },
             {
-              "x": 1571,
-              "y": 1237
+              "x": 1570,
+              "y": 1270
             },
             {
               "x": 1466,
-              "y": 1237
+              "y": 1270
             }
           ],
           "label": {
             "x": 1350,
-            "y": 1289,
+            "y": 1321,
             "width": 235,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13954,16 +13954,16 @@
           "vertices": [
             {
               "x": 1464,
-              "y": 846
+              "y": 880
             },
             {
               "x": 1464,
-              "y": 985
+              "y": 1020
             }
           ],
           "label": {
             "x": 1454,
-            "y": 807,
+            "y": 841,
             "width": 118,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -13988,20 +13988,20 @@
           "vertices": [
             {
               "x": 1570,
-              "y": 1581
+              "y": 1610
+            },
+            {
+              "x": 1470,
+              "y": 1280
             },
             {
               "x": 1466,
-              "y": 1547
-            },
-            {
-              "x": 1466,
-              "y": 1252
+              "y": 1280
             }
           ],
           "label": {
             "x": 1381,
-            "y": 1542,
+            "y": 1571,
             "width": 199,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14026,24 +14026,24 @@
           "vertices": [
             {
               "x": 1570,
-              "y": 1563
+              "y": 1590
             },
             {
-              "x": 1474,
-              "y": 1529
+              "x": 1470,
+              "y": 1560
             },
             {
-              "x": 1474,
-              "y": 1246
+              "x": 1470,
+              "y": 1280
             },
             {
               "x": 1466,
-              "y": 1246
+              "y": 1280
             }
           ],
           "label": {
             "x": 1381,
-            "y": 1524,
+            "y": 1551,
             "width": 199,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14068,20 +14068,20 @@
           "vertices": [
             {
               "x": 1234,
-              "y": 925
+              "y": 960
             },
             {
-              "x": 886,
-              "y": 925
+              "x": 890,
+              "y": 1650
             },
             {
               "x": 892,
-              "y": 1624
+              "y": 1650
             }
           ],
           "label": {
             "x": 1127,
-            "y": 886,
+            "y": 921,
             "width": 117,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14106,24 +14106,24 @@
           "vertices": [
             {
               "x": 1834,
-              "y": 1150
+              "y": 1180
             },
             {
-              "x": 1814,
-              "y": 1150
+              "x": 1810,
+              "y": 1180
             },
             {
-              "x": 1814,
-              "y": 723
+              "x": 1810,
+              "y": 750
             },
             {
               "x": 1799,
-              "y": 723
+              "y": 750
             }
           ],
           "label": {
             "x": 1583,
-            "y": 1111,
+            "y": 1141,
             "width": 261,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14148,24 +14148,24 @@
           "vertices": [
             {
               "x": 2064,
-              "y": 1190
+              "y": 1220
             },
             {
-              "x": 2064,
-              "y": 1213
+              "x": 2060,
+              "y": 1240
             },
             {
-              "x": 2064,
-              "y": 1639
+              "x": 2060,
+              "y": 1670
             },
             {
               "x": 892,
-              "y": 1639
+              "y": 1670
             }
           ],
           "label": {
             "x": 1841,
-            "y": 1151,
+            "y": 1181,
             "width": 213,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14190,16 +14190,16 @@
           "vertices": [
             {
               "x": 1233,
-              "y": 675
+              "y": 710
             },
             {
               "x": 1234,
-              "y": 833
+              "y": 860
             }
           ],
           "label": {
             "x": 1249,
-            "y": 677,
+            "y": 712,
             "width": 190,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14224,20 +14224,20 @@
           "vertices": [
             {
               "x": 1835,
-              "y": 923
+              "y": 950
             },
             {
-              "x": 1835,
-              "y": 717
+              "x": 1840,
+              "y": 750
             },
             {
               "x": 1799,
-              "y": 717
+              "y": 750
             }
           ],
           "label": {
             "x": 1532,
-            "y": 884,
+            "y": 911,
             "width": 313,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14262,24 +14262,24 @@
           "vertices": [
             {
               "x": 2065,
-              "y": 962
+              "y": 990
             },
             {
-              "x": 2076,
-              "y": 962
+              "x": 2080,
+              "y": 990
             },
             {
-              "x": 2076,
-              "y": 1644
+              "x": 2080,
+              "y": 1670
             },
             {
               "x": 892,
-              "y": 1644
+              "y": 1670
             }
           ],
           "label": {
             "x": 1791,
-            "y": 923,
+            "y": 951,
             "width": 264,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14304,16 +14304,16 @@
           "vertices": [
             {
               "x": 91,
-              "y": 1096
+              "y": 1130
             },
             {
               "x": 91,
-              "y": 1386
+              "y": 1420
             }
           ],
           "label": {
             "x": 101,
-            "y": 1057,
+            "y": 1091,
             "width": 128,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14338,20 +14338,20 @@
           "vertices": [
             {
               "x": 1573,
-              "y": 1403
+              "y": 1430
             },
             {
-              "x": 1484,
-              "y": 1241
+              "x": 1480,
+              "y": 1270
             },
             {
               "x": 1466,
-              "y": 1241
+              "y": 1270
             }
           ],
           "label": {
             "x": 1583,
-            "y": 1364,
+            "y": 1391,
             "width": 177,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14376,24 +14376,24 @@
           "vertices": [
             {
               "x": 1192,
-              "y": 995
+              "y": 1030
+            },
+            {
+              "x": 1230,
+              "y": 1030
+            },
+            {
+              "x": 1230,
+              "y": 870
             },
             {
               "x": 1234,
-              "y": 995
-            },
-            {
-              "x": 1234,
-              "y": 846
-            },
-            {
-              "x": 1234,
-              "y": 843
+              "y": 870
             }
           ],
           "label": {
             "x": 1182,
-            "y": 956,
+            "y": 991,
             "width": 107,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14418,20 +14418,20 @@
           "vertices": [
             {
               "x": 1192,
-              "y": 1044
+              "y": 1070
+            },
+            {
+              "x": 1240,
+              "y": 1260
             },
             {
               "x": 1236,
-              "y": 1044
-            },
-            {
-              "x": 1236,
-              "y": 1231
+              "y": 1260
             }
           ],
           "label": {
             "x": 1182,
-            "y": 1005,
+            "y": 1031,
             "width": 124,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14456,24 +14456,24 @@
           "vertices": [
             {
               "x": 83,
-              "y": 839
+              "y": 870
             },
             {
-              "x": 74,
-              "y": 839
+              "x": 70,
+              "y": 870
             },
             {
-              "x": 74,
-              "y": 1018
+              "x": 70,
+              "y": 1110
             },
             {
               "x": 91,
-              "y": 1083
+              "y": 1110
             }
           ],
           "label": {
             "x": 99,
-            "y": 810,
+            "y": 841,
             "width": 124,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14498,16 +14498,16 @@
           "vertices": [
             {
               "x": 585,
-              "y": 859
+              "y": 890
             },
             {
               "x": 584,
-              "y": 690
+              "y": 720
             }
           ],
           "label": {
             "x": 601,
-            "y": 830,
+            "y": 861,
             "width": 175,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14532,16 +14532,16 @@
           "vertices": [
             {
               "x": 815,
-              "y": 879
+              "y": 910
             },
             {
               "x": 815,
-              "y": 967
+              "y": 1000
             }
           ],
           "label": {
             "x": 811,
-            "y": 881,
+            "y": 912,
             "width": 173,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14566,16 +14566,16 @@
           "vertices": [
             {
               "x": 1837,
-              "y": 705
+              "y": 740
             },
             {
               "x": 1799,
-              "y": 711
+              "y": 740
             }
           ],
           "label": {
             "x": 1853,
-            "y": 707,
+            "y": 742,
             "width": 250,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14600,20 +14600,20 @@
           "vertices": [
             {
               "x": 1191,
-              "y": 1216
+              "y": 1250
             },
             {
-              "x": 1191,
-              "y": 1237
+              "x": 1190,
+              "y": 1270
             },
             {
               "x": 1236,
-              "y": 1237
+              "y": 1270
             }
           ],
           "label": {
             "x": 1181,
-            "y": 1177,
+            "y": 1211,
             "width": 149,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14638,16 +14638,16 @@
           "vertices": [
             {
               "x": 961,
-              "y": 1214
+              "y": 1240
             },
             {
               "x": 962,
-              "y": 1046
+              "y": 1080
             }
           ],
           "label": {
             "x": 977,
-            "y": 1185,
+            "y": 1211,
             "width": 187,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14672,24 +14672,24 @@
           "vertices": [
             {
               "x": 1572,
-              "y": 908
+              "y": 940
             },
             {
-              "x": 1568,
-              "y": 902
+              "x": 1570,
+              "y": 930
             },
             {
-              "x": 1568,
-              "y": 835
+              "x": 1570,
+              "y": 870
             },
             {
               "x": 1464,
-              "y": 835
+              "y": 870
             }
           ],
           "label": {
             "x": 1416,
-            "y": 869,
+            "y": 901,
             "width": 166,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14714,16 +14714,16 @@
           "vertices": [
             {
               "x": 1800,
-              "y": 491
+              "y": 520
             },
             {
               "x": 1799,
-              "y": 706
+              "y": 740
             }
           ],
           "label": {
             "x": 1796,
-            "y": 493,
+            "y": 522,
             "width": 253,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14748,24 +14748,24 @@
           "vertices": [
             {
               "x": 1570,
-              "y": 507
+              "y": 540
             },
             {
-              "x": 67,
-              "y": 507
+              "x": 70,
+              "y": 540
             },
             {
-              "x": 67,
-              "y": 1019
+              "x": 70,
+              "y": 1110
             },
             {
               "x": 91,
-              "y": 1084
+              "y": 1110
             }
           ],
           "label": {
             "x": 1370,
-            "y": 468,
+            "y": 501,
             "width": 210,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14790,20 +14790,20 @@
           "vertices": [
             {
               "x": 566,
-              "y": 1260
+              "y": 1290
             },
             {
-              "x": 652,
-              "y": 1260
+              "x": 650,
+              "y": 1660
             },
             {
               "x": 658,
-              "y": 1625
+              "y": 1660
             }
           ],
           "label": {
             "x": 556,
-            "y": 1221,
+            "y": 1251,
             "width": 159,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14828,24 +14828,24 @@
           "vertices": [
             {
               "x": 1572,
-              "y": 1092
+              "y": 1120
             },
             {
               "x": 1560,
-              "y": 1092
+              "y": 1120
             },
             {
               "x": 1560,
-              "y": 1228
+              "y": 1260
             },
             {
               "x": 1466,
-              "y": 1228
+              "y": 1260
             }
           ],
           "label": {
             "x": 1399,
-            "y": 1053,
+            "y": 1081,
             "width": 183,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14870,24 +14870,24 @@
           "vertices": [
             {
               "x": 1572,
-              "y": 1114
+              "y": 1140
             },
             {
-              "x": 1566,
-              "y": 1114
+              "x": 1570,
+              "y": 1140
             },
             {
-              "x": 1566,
-              "y": 1232
+              "x": 1570,
+              "y": 1260
             },
             {
               "x": 1466,
-              "y": 1232
+              "y": 1260
             }
           ],
           "label": {
             "x": 1399,
-            "y": 1075,
+            "y": 1101,
             "width": 183,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14912,20 +14912,20 @@
           "vertices": [
             {
               "x": 1572,
-              "y": 1142
+              "y": 1170
             },
             {
-              "x": 1571,
-              "y": 1234
+              "x": 1570,
+              "y": 1260
             },
             {
               "x": 1466,
-              "y": 1234
+              "y": 1260
             }
           ],
           "label": {
             "x": 1399,
-            "y": 1103,
+            "y": 1131,
             "width": 183,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14950,16 +14950,16 @@
           "vertices": [
             {
               "x": 1183,
-              "y": 1719
+              "y": 1750
             },
             {
               "x": 1252,
-              "y": 1719
+              "y": 1750
             }
           ],
           "label": {
             "x": 1173,
-            "y": 1680,
+            "y": 1711,
             "width": 173,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -14984,16 +14984,16 @@
           "vertices": [
             {
               "x": 1254,
-              "y": 1900
+              "y": 1930
             },
             {
               "x": 1183,
-              "y": 1900
+              "y": 1930
             }
           ],
           "label": {
             "x": 1105,
-            "y": 1861,
+            "y": 1891,
             "width": 159,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15018,16 +15018,16 @@
           "vertices": [
             {
               "x": 1484,
-              "y": 1919
+              "y": 1950
             },
             {
               "x": 1482,
-              "y": 1714
+              "y": 1740
             }
           ],
           "label": {
             "x": 1480,
-            "y": 1890,
+            "y": 1921,
             "width": 155,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15052,16 +15052,16 @@
           "vertices": [
             {
               "x": 1183,
-              "y": 1910
+              "y": 1940
             },
             {
               "x": 1183,
-              "y": 1963
+              "y": 1990
             }
           ],
           "label": {
             "x": 1173,
-            "y": 1871,
+            "y": 1901,
             "width": 124,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15086,16 +15086,16 @@
           "vertices": [
             {
               "x": 953,
-              "y": 1719
+              "y": 1750
             },
             {
               "x": 892,
-              "y": 1654
+              "y": 1680
             }
           ],
           "label": {
             "x": 769,
-            "y": 1680,
+            "y": 1711,
             "width": 194,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15120,16 +15120,16 @@
           "vertices": [
             {
               "x": 1834,
-              "y": 1317
+              "y": 1350
             },
             {
               "x": 1803,
-              "y": 1399
+              "y": 1430
             }
           ],
           "label": {
             "x": 1566,
-            "y": 1278,
+            "y": 1311,
             "width": 278,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15147,23 +15147,23 @@
         },
         {
           "name": "fk_pipeline_id",
-          "sourceTableName": "cicd_pipeline_commits",
+          "sourceTableName": "cicd_pipeline_commits (WIP)",
           "sourceSchemaName": "lake",
           "lineWidth": 1,
           "visible": true,
           "vertices": [
             {
               "x": 2413,
-              "y": 961
+              "y": 990
             },
             {
-              "x": 2294,
-              "y": 963
+              "x": 2290,
+              "y": 993
             }
           ],
           "label": {
             "x": 2330,
-            "y": 922,
+            "y": 951,
             "width": 93,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15181,23 +15181,23 @@
         },
         {
           "name": "fk_pipeline_id_1",
-          "sourceTableName": "cicd_tasks",
+          "sourceTableName": "cicd_tasks (WIP)",
           "sourceSchemaName": "lake",
           "lineWidth": 1,
           "visible": true,
           "vertices": [
             {
-              "x": 2287,
-              "y": 1034
+              "x": 2290,
+              "y": 1064
             },
             {
-              "x": 2287,
-              "y": 963
+              "x": 2290,
+              "y": 993
             }
           ],
           "label": {
-            "x": 2295,
-            "y": 1013,
+            "x": 2298,
+            "y": 1043,
             "width": 108,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15215,23 +15215,23 @@
         },
         {
           "name": "fk_pipeline_id_2",
-          "sourceTableName": "cicd_tasks",
+          "sourceTableName": "cicd_tasks (WIP)",
           "sourceSchemaName": "lake",
           "lineWidth": 1,
           "visible": true,
           "vertices": [
             {
               "x": 2411,
-              "y": 1136
+              "y": 1170
             },
             {
               "x": 2413,
-              "y": 971
+              "y": 1000
             }
           ],
           "label": {
             "x": 2401,
-            "y": 1097,
+            "y": 1131,
             "width": 108,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15256,24 +15256,24 @@
           "vertices": [
             {
               "x": 91,
-              "y": 1612
+              "y": 1640
             },
             {
-              "x": 91,
-              "y": 2116
+              "x": 90,
+              "y": 2070
             },
             {
-              "x": 2278,
-              "y": 2116
+              "x": 2280,
+              "y": 2070
             },
             {
-              "x": 2278,
-              "y": 1324
+              "x": 2280,
+              "y": 1354
             }
           ],
           "label": {
             "x": 101,
-            "y": 1573,
+            "y": 1601,
             "width": 91,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15298,16 +15298,16 @@
           "vertices": [
             {
               "x": 966,
-              "y": 1464
+              "y": 1490
             },
             {
               "x": 961,
-              "y": 1241
+              "y": 1270
             }
           ],
           "label": {
             "x": 982,
-            "y": 1435,
+            "y": 1461,
             "width": 310,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15332,16 +15332,16 @@
           "vertices": [
             {
               "x": 1193,
-              "y": 1443
+              "y": 1470
             },
             {
               "x": 1191,
-              "y": 1262
+              "y": 1290
             }
           ],
           "label": {
             "x": 1189,
-            "y": 1414,
+            "y": 1441,
             "width": 310,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15365,25 +15365,25 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1076,
-              "y": 1508
+              "x": 1080,
+              "y": 1538
             },
             {
-              "x": 1076,
-              "y": 1666
-            },
-            {
-              "x": 2550,
-              "y": 1666
+              "x": 1080,
+              "y": 1690
             },
             {
               "x": 2550,
-              "y": 1104
+              "y": 1690
+            },
+            {
+              "x": 2550,
+              "y": 1134
             }
           ],
           "label": {
-            "x": 1078,
-            "y": 1457,
+            "x": 1082,
+            "y": 1487,
             "width": 310,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15408,16 +15408,16 @@
           "vertices": [
             {
               "x": 883,
-              "y": 1473
+              "y": 1500
             },
             {
               "x": 966,
-              "y": 1473
+              "y": 1500
             }
           ],
           "label": {
             "x": 873,
-            "y": 1434,
+            "y": 1461,
             "width": 202,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15442,16 +15442,16 @@
           "vertices": [
             {
               "x": 883,
-              "y": 1450
+              "y": 1480
             },
             {
               "x": 966,
-              "y": 1448
+              "y": 1480
             }
           ],
           "label": {
             "x": 873,
-            "y": 1411,
+            "y": 1441,
             "width": 202,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -15476,24 +15476,24 @@
           "vertices": [
             {
               "x": 1905,
-              "y": 1750
+              "y": 1780
             },
             {
               "x": 1910,
-              "y": 1750
+              "y": 1780
             },
             {
               "x": 1910,
-              "y": 1750
+              "y": 1780
             },
             {
               "x": 1815,
-              "y": 1750
+              "y": 1780
             }
           ],
           "label": {
             "x": 1669,
-            "y": 1712,
+            "y": 1742,
             "width": 246,
             "height": 30,
             "fontName": "Arial Unicode MS",
@@ -15518,24 +15518,24 @@
           "vertices": [
             {
               "x": 1700,
-              "y": 1865
+              "y": 1895
             },
             {
               "x": 1700,
-              "y": 1890
+              "y": 1920
             },
             {
               "x": 1700,
-              "y": 1890
+              "y": 1920
             },
             {
               "x": 1700,
-              "y": 1836
+              "y": 1866
             }
           ],
           "label": {
             "x": 1708,
-            "y": 1845,
+            "y": 1875,
             "width": 207,
             "height": 30,
             "fontName": "Arial Unicode MS",

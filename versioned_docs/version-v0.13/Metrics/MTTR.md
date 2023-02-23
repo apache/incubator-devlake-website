@@ -40,8 +40,7 @@ This metric relies on:
   - Releases and PR/MRs from GitHub, GitLab APIs, etc.
 - `Incidents` collected in one of the following ways:
   - Issue tracking tools such as Jira, TAPD, GitHub, etc.
-  - Bug or Service Monitoring tools such as PagerDuty, Sentry, etc.
-  - CI pipelines that marked the 'failed' deployments.
+  - Incident or Service Monitoring tools such as PagerDuty, ServiceNow, etc.
 
 <b>Transformation Rules Required</b>
 

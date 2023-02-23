@@ -20,5 +20,5 @@ Metrics that can be calculated based on the data collected from Zentao:
 
 ## Configuration
 
-- Configuring Zentao via [config-ui](/UserManuals/ConfigUI/Zentao.md).
-- Configuring Zentao via Config UI's [advanced mode](/UserManuals/ConfigUI/AdvancedMode.md#8-zentao).
+- Configuring Zentao via [config-ui](/Configuration/Zentao.md).
+- Configuring Zentao via Config UI's [advanced mode](/Configuration/AdvancedMode.md#8-zentao).

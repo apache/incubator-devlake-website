@@ -1,6 +1,6 @@
 ---
-title: "Using Advanced Mode"
-sidebar_position: 7
+title: "Blueprint Advanced Mode"
+sidebar_position: 8
 description: >
   Using the advanced mode of Config-UI
 ---
@@ -302,6 +302,28 @@ You must choose at least one of `productId`, `projectId` and `executionId`.
 1. Navigate to the Zentao Execution in the browser
    ![](/img/ConfigUI/zentao-execution-id.png)
 2. Then the number in the red square above is `ExecutionId`
+
+### 9. BitBucket
+Below is an example for collecting a bitbucket repo.
+
+```json
+[
+  [
+    {
+      "plugin": "bitbucket",
+      "options": {
+        "connectionId": 1,
+        "owner": "apache",
+        "repo": "devlake"
+      }
+    }
+  ]
+]
+```
+
+- `connectionId`: The ID of your bitbucket connection at page http://localhost:4000/connections/bitbucket.
+- `owner`: the owner of the repository.
+- `repo`: the bitbucket repository name.
 
 ## Editing a Blueprint (Advanced Mode)
 

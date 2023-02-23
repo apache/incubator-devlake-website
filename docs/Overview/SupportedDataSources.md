@@ -15,9 +15,9 @@ Apache DevLake(incubating) supports the following data sources. The data from ea
 | GitLab           | Source Code Management, Code Review, Issue Tracking, CI/CD (GitLab CI)      | Cloud, Community Edition 13.x+       | Available              | `gitlab`, `gitextractor`    | Full Refresh, Incremental Sync(for `issues`,`MRs`)             |
 | Jira             | Issue Tracking                                                              | Cloud, Server 7.x+, Data Center 7.x+ | Available              | `jira`                      | Full Refresh, Incremental Sync(for `issues` and related)       |
 | Jenkins          | CI/CD                                                                       | 2.263.x+                             | Available              | `jenkins`                   | Full Refresh                                                   |
-| BitBucket (Beta) | Source Code Management, Code Review                                         | Cloud                                | WIP                    | `bitbucket`, `gitextractor` | Full Refresh                                                   |
-| TAPD (Beta)      | Issue Tracking                                                              | Cloud                                | Not Available          | `tapd`                      | Full Refresh, Incremental Sync(for `stories`, `bugs`, `tasks`) |
-| Zentao (Beta)    | Issue Tracking                                                              | Cloud                                | Not Available          | `zentao`                    | Full Refresh                                                   |
+| BitBucket (Beta) | Source Code Management, Code Review                                         | Cloud                                | Advanced Mode Available                    | `bitbucket`, `gitextractor` | Full Refresh                                                   |
+| TAPD (Beta)      | Issue Tracking                                                              | Cloud                                | Advanced Mode Available          | `tapd`                      | Full Refresh, Incremental Sync(for `stories`, `bugs`, `tasks`) |
+| Zentao (Beta)    | Issue Tracking                                                              | Cloud                                | Advanced Mode Available          | `zentao`                    | Full Refresh                                                   |
 | Gitee (WIP)      | Source Code Management, Code Review, Issue Tracking                         | Cloud                                | Not Available          | `gitee`, `gitextractor`     | Full Refresh, Incremental Sync(for `issues`,`MRs`)             |
 | PagerDuty (WIP)  | Issue Tracking                                                              | Cloud                                | Not Available          | `pagerduty`                 | Full Refresh                                                   |
 | Feishu (WIP)     | Calendar                                                                    | Cloud                                | Not Available          | `feishu`                    | Full Refresh                                                   |
@@ -29,7 +29,7 @@ Apache DevLake(incubating) supports the following data sources. The data from ea
 
 This table shows the entities collected by each plugin. Domain layer entities in this table are consistent with the entities [here](/DataModels/DevLakeDomainLayerSchema.md).
 ✅ : Collect by default.
-💪 : Collect not by default. You need to add the corresponding subtasks to collect these entities in the [advanced mode](../UserManuals/ConfigUI/AdvancedMode.md).
+💪 : Collect not by default. You need to add the corresponding subtasks to collect these entities in the [advanced mode](../Configuration/AdvancedMode.md).
 
 | Domain Layer Entities                                                                       | ae  | dora | gitextractor | incoming webhook | github | gitlab | jenkins | jira | refdiff | tapd |
 | ------------------------------------------------------------------------------------------- | --- | ---- | ------------ | ---------------- | ------ | ------ | ------- | ---- | ------- | ---- |

@@ -13,6 +13,7 @@ const versions = require('./versions.json');
   title: 'Apache DevLake (Incubating)',
   tagline: 'Apache DevLake is an open-source dev data platform that ingests, analyzes, and visualizes the fragmented data from DevOps tools to distill insights for engineering productivity.',
   url: 'https://devlake.apache.org',
+  
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
@@ -90,6 +91,7 @@ const versions = require('./versions.json');
         name: 'docusaurus-tailwindcss',
         configurePostCss(postcssOptions) {
           // Appends TailwindCSS and AutoPrefixer.
+          // @ts-ignore
           postcssOptions.plugins.push(require('tailwindcss'));
           postcssOptions.plugins.push(require('autoprefixer'));
           postcssOptions.plugins.push(require('postcss-gap-properties'));
@@ -259,6 +261,10 @@ const versions = require('./versions.json');
               {
                 label: 'Twitter',
                 to: 'https://twitter.com/ApacheDevLake',
+              },
+              {
+                label: 'Trademark Guidelines',
+                to: 'community/trademark',
               },
             ],
           },

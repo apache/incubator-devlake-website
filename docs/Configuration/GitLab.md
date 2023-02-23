@@ -1,5 +1,5 @@
 ---
-title: "Configuring GitLab"
+title: "GitLab"
 sidebar_position: 3
 description: Config UI instruction for GitLab
 ---
