@@ -68,7 +68,7 @@ Conditions:
  - Want to visit devlake with port 30000.
 
 ```
-helm install devlake . --set service.uiPort=30000
+helm install devlake devlake/devlake --set service.uiPort=30000
 ```
 
 After deployed, visit devlake: http://192.168.0.6:30000
@@ -80,7 +80,7 @@ Conditions:
  - I want to use http://devlake.example.com for visiting devlake
 
 ```
-helm install devlake . --set "ingress.enabled=true,ingress.hostname=devlake.example.com"
+helm install devlake devlake/devlake --set "ingress.enabled=true,ingress.hostname=devlake.example.com"
 ```
 
 After deployed, visit devlake: http://devlake.example.com, and grafana at http://devlake.example.com/grafana
@@ -99,7 +99,7 @@ kubectl create secret tls ssl-certificate --cert cert.pem --key secret.pem
 
 Then, deploy the devlake:
 ```
-helm install devlake . \
+helm install devlake devlake/devlake \
     --set "ingress.enabled=true,ingress.enableHttps=true,ingress.hostname=devlake-0.example.com" \
     --set "ingress.className=nginx,ingress.httpsPort=8443" \
     --set "ingress.tlsSecretName=ssl-certificate"
@@ -112,45 +112,86 @@ After deployed, visit devlake: https://devlake-0.example.com:8443, and grafana a
 
 Some useful parameters for the chart, you could also check them in values.yaml
 
-| Parameter | Description | Default |
-|-----------|-------------|----|
-| replicaCount  | Replica Count for devlake, currently not used  | 1  |
-| mysql.useExternal  | If use external mysql server, currently not used  |  false |
-| mysql.externalServer  | External mysql server address  | 127.0.0.1 |
-| mysql.externalPort  | External mysql server port  | 3306 |
-| mysql.username  | username for mysql | merico |
-| mysql.password  | password for mysql | merico |
-| mysql.database  | database for mysql | lake |
-| mysql.rootPassword  | root password for mysql | admin |
-| mysql.storage.class  | storage class for mysql's volume | "" |
-| mysql.storage.size  | volume size for mysql's data | 5Gi |
-| mysql.image.repository  | repository for mysql's image | mysql |
-| mysql.image.tag  | image tag for mysql's image | 8  |
-| mysql.image.pullPolicy  | pullPolicy for mysql's image | IfNotPresent |
-| grafana.image.repository  | repository for grafana's image | apache/devlake-dashboard |
-| grafana.image.tag  | image tag for grafana's image | latest |
-| grafana.image.pullPolicy  | pullPolicy for grafana's image | Always |
-| lake.storage.class  | storage class for lake's volume | "" |
-| lake.storage.size  | volume size for lake's data | 100Mi |
-| lake.image.repository  | repository for lake's image | apache/devlake |
-| lake.image.tag  | image tag for lake's image | latest |
-| lake.image.pullPolicy  | pullPolicy for lake's image | Always |
-| lake.loggingDir | the root logging directory of Devlake | /app/logs | 
-| ui.image.repository  | repository for ui's image | apache/devlake-config-ui |
-| ui.image.tag  | image tag for ui's image | latest |
-| ui.image.pullPolicy  | pullPolicy for ui's image | Always |
-| service.type  | Service type for exposed service | NodePort |
-| service.uiPort  | Service port for config ui | 32001 |
-| service.ingress.enabled  | If enable ingress  |  false |
-| service.ingress.enableHttps  | If enable https  |  false |
-| service.ingress.className  | The class name for ingressClass. If leave empty, the default IngressClass will be used  | "" |
-| service.ingress.hostname  | The hostname/domainname for ingress  | localhost |
-| service.ingress.prefix | The prefix for endpoints, currently not supported due to devlake's implementation  | /  |
-| service.ingress.tlsSecretName  | The secret name for tls's certificate, required when https enabled  | "" |
-| service.ingress.httpPort  | The http port for ingress  | 80 |
-| service.ingress.httpsPort  | The https port for ingress  | 443 |
-| option.localtime  | The hostpath for mount as /etc/localtime | /etc/localtime |
+| Parameter                     | Description                                                | Default                    |
+| ----------------------------- | ---------------------------------------------------------- | -------------------------- |
+| replicaCount                  | Replica Count for devlake, currently not used              | 1                          |
+| imageTag                      | The version tag for all images                             | see Values.yaml            |
+| mysql.useExternal             | If use external mysql server, set true                     | false                      |
+| mysql.externalServer          | External mysql server address                              | 127.0.0.1                  |
+| mysql.externalPort            | External mysql server port                                 | 3306                       |
+| mysql.username                | username for mysql                                         | merico                     |
+| mysql.password                | password for mysql                                         | merico                     |
+| mysql.database                | database for mysql                                         | lake                       |
+| mysql.rootPassword            | root password for mysql                                    | admin                      |
+| mysql.storage.class           | storage class for mysql's volume                           | ""                         |
+| mysql.storage.size            | volume size for mysql's data                               | 5Gi                        |
+| mysql.image.repository        | repository for mysql's image                               | mysql                      |
+| mysql.image.tag               | image tag for mysql's image                                | 8                          |
+| mysql.image.pullPolicy        | pullPolicy for mysql's image                               | IfNotPresent               |
+| pgsql.useExternal             | If use external pgsql server, set true                     | false                      |
+| pgsql.externalServer          | External pgsql server address                              | 127.0.0.1                  |
+| pgsql.externalPort            | External pgsql server port                                 | 3306                       |
+| pgsql.username                | username for pgsql                                         | merico                     |
+| pgsql.password                | password for pgsql                                         | merico                     |
+| pgsql.database                | database for pgsql                                         | lake                       |
+| pgsql.storage.class           | storage class for pgsql's volume                           | ""                         |
+| pgsql.storage.size            | volume size for pgsql's data                               | 5Gi                        |
+| pgsql.image.repository        | repository for pgsql's image                               | postgres                   |
+| pgsql.image.tag               | image tag for pgsql's image                                | 14.5                       |
+| pgsql.image.pullPolicy        | pullPolicy for pgsql's image                               | IfNotPresent               |
+| grafana.image.repository      | repository for grafana's image                             | apache/devlake-dashboard   |
+| grafana.image.pullPolicy      | pullPolicy for grafana's image                             | Always                     |
+| lake.storage.class            | storage class for lake's volume                            | ""                         |
+| lake.storage.size             | volume size for lake's data                                | 100Mi                      |
+| lake.image.repository         | repository for lake's image                                | apache/devlake             |
+| lake.image.pullPolicy         | pullPolicy for lake's image                                | Always                     |
+| lake.loggingDir               | log dir for the lake server                                | /app/logs                  |
+| lake.loggingLevel             | log level for the lake server                              | info                       |
+| lake.dotenv                   | initial configurations for injecting to lake's .env        | see Values.yaml            |
+| ui.image.repository           | repository for ui's image                                  | apache/devlake-config-ui   |
+| ui.image.pullPolicy           | pullPolicy for ui's image                                  | Always                     |
+| ui.basicAuth.enabled          | If the basic auth in ui is enabled                         | false                      |
+| ui.basicAuth.user             | The user name for the basic auth                           | "admin"                    |
+| ui.basicAuth.password         | The password for the basic auth                            | "admin"                    |
+| service.type                  | Service type for exposed service                           | NodePort                   |
+| service.uiPort                | Node port for config ui                                    | 32001                      |
+| service.ingress.enabled       | If enable ingress                                          | false                      |
+| service.ingress.enableHttps   | If enable https                                            | false                      |
+| service.ingress.className     | Class name for ingressClass. leave empty for using default | ""                         |
+| service.ingress.hostname      | The hostname/domainname for ingress                        | localhost                  |
+| service.ingress.prefix        | The prefix for endpoints, currently not used               | /                          |
+| service.ingress.tlsSecretName | The secret name for tls's certificate for https            | ""                         |
+| service.ingress.httpPort      | The http port for ingress                                  | 80                         |
+| service.ingress.httpsPort     | The https port for ingress                                 | 443                        |
+| option.localtime              | The hostpath for mount as /etc/localtime                   | /etc/localtime             |
+| option.database               | The database type, valids: mysql, pgsql                    | mysql                      |
 
+## FAQ
+1. Can I use a managed Cloud database service instead of running database in docker?
+
+  Yes, it just set useExternal value to true while you deploy devlake with helm chart. Below we'll use MySQL on AWS RDS as an example.
+  1. (Optional) Create a MySQL instance on AWS RDS following this [doc](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html), skip this step if you'd like to use an existing instance
+  2. Proviede below values while install from helm:
+    * `mysql.useExternal`: this should be `true`
+    * `mysql.externalServer`: use your RDS instance's IP address or domain name.
+    * `mysql.externalPort`: use your RDS instance's database port.
+    * `mysql.username`: use your `username` for access RDS instance's DB
+    * `mysql.password`: use your `password` for access RDS instance's DB
+    * `mysql.database`: use your RDS instance's DB name, you may need to create a database first with `CREATE DATABASE <DB name>;`
+  
+  Here is the example:
+  ```
+  helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
+  helm repo update
+  helm install devlake devlake/devlake \
+    --set mysql.useExternal=true \
+    --set mysql.externalServer=db.example.com \
+    --set mysql.externalPort=3306 \
+    --set mysql.username=admin \
+    --set mysql.password=password_4_admin \
+    --set mysql.database=devlake
+  ```
+  
 
 ## Troubleshooting
 
