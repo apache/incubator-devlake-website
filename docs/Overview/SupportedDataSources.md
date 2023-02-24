@@ -22,7 +22,7 @@ Apache DevLake(incubating) supports the following data sources. The data from ea
 | PagerDuty (WIP)  | Issue Tracking                                                              | Cloud                                | Not Available          | `pagerduty`                 | Full Refresh                                                   |
 | Feishu (WIP)     | Calendar                                                                    | Cloud                                | Not Available          | `feishu`                    | Full Refresh                                                   |
 | AE               | Source Code Management                                                      | On-prem                              | Not Available          | `ae`                        | Full Refresh                                                   |
-
+| Bamboo           | CI/CD                                                                       | 6.8.1                                | Not Available          | `bamboo`                    | Full Refresh                                                   |
 
 
 ## Data Collection Scope By Each Plugin
@@ -31,55 +31,55 @@ This table shows the entities collected by each plugin. Domain layer entities in
 ✅ : Collect by default.
 💪 : Collect not by default. You need to add the corresponding subtasks to collect these entities in the [advanced mode](../UserManuals/ConfigUI/AdvancedMode.md).
 
-| Domain Layer Entities                                                                       | ae  | dora | gitextractor | incoming webhook | github | gitlab | jenkins | jira | refdiff | tapd |
-| ------------------------------------------------------------------------------------------- | --- | ---- | ------------ | ---------------- | ------ | ------ | ------- | ---- | ------- | ---- |
-| [accounts](../DataModels/DevLakeDomainLayerSchema.md/#accounts)                             |     |      |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |
-| [board_issues](../DataModels/DevLakeDomainLayerSchema.md/#board_issues)                     |     |      |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |
-| [board_repos](../DataModels/DevLakeDomainLayerSchema.md/#board_repos)                       |     |      |              |                  | ✅     | ✅     |         | ✅   |         |      |
-| [board_sprints](../DataModels/DevLakeDomainLayerSchema.md/#board_sprints)                   |     |      |              |                  | ✅     |        |         | ✅   |         | ✅   |
-| [boards](../DataModels/DevLakeDomainLayerSchema.md/#boards)                                 |     |      |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |
-| [cicd_pipeline_commits](../DataModels/DevLakeDomainLayerSchema.md/#cicd_pipeline_commits)   |     | ✅   |              |                  | ✅     | ✅     | ✅      |      |         |      |
-| [cicd_pipelines](../DataModels/DevLakeDomainLayerSchema.md/#cicd_pipelines)                 |     | ✅   |              |                  | ✅     | ✅     | ✅      |      |         |      |
-| [cicd_scopes](../DataModels/DevLakeDomainLayerSchema.md/#cicd_scopes)                       |     | ✅   |              |                  | ✅     | ✅     | ✅      |      |         |      |
-| [cicd_tasks](../DataModels/DevLakeDomainLayerSchema.md/#cicd_tasks)                         |     | ✅   |              | 💪               | ✅     | ✅     | ✅      |      |         |      |
-| [commit_file_components](../DataModels/DevLakeDomainLayerSchema.md/#commit_file_components) |     |      | ✅           |                  |        |        |         |      |         |      |
-| [commit_files](../DataModels/DevLakeDomainLayerSchema.md/#commit_files)                     |     |      | ✅           |                  |        |        |         |      |         |      |
-| [commit_line_change](../DataModels/DevLakeDomainLayerSchema.md/#commit_line_change)         |     |      | ✅           |                  |        |        |         |      |         |      |
-| [commit_parents](../DataModels/DevLakeDomainLayerSchema.md/#commit_parents)                 |     |      | ✅           |                  |        |        |         |      |         |      |
-| [commits](../DataModels/DevLakeDomainLayerSchema.md/#commits)                               | ✅  |      | ✅           |                  | 💪     | 💪     |         |      |         |      |
-| [commits_diffs](../DataModels/DevLakeDomainLayerSchema.md/#commits_diffs)                   |     |      |              |                  |        |        |         |      | ✅      |      |
-| [components](../DataModels/DevLakeDomainLayerSchema.md/#components)                         |     |      |              |                  |        |        |         |      |         |      |
-| [finished_commits_diffs](../DataModels/DevLakeDomainLayerSchema.md/#finished_commits_diffs) |     |      |              |                  |        |        |         |      |         |      |
-| [issue_changelogs](../DataModels/DevLakeDomainLayerSchema.md/#issue_changelogs)             |     |      |              |                  |        |        |         | ✅   |         | ✅   |
-| [issue_comments](../DataModels/DevLakeDomainLayerSchema.md/#issue_commentswip)              |     |      |              |                  | ✅     |        |         |      |         | ✅   |
-| [issue_commits](../DataModels/DevLakeDomainLayerSchema.md/#issue_commits)                   |     |      |              |                  |        |        |         | ✅   |         | ✅   |
-| [issue_labels](../DataModels/DevLakeDomainLayerSchema.md/#issue_labels)                     |     |      |              |                  | ✅     | ✅     |         |      |         | ✅   |
-| [issue_repo_commits](../DataModels/DevLakeDomainLayerSchema.md/#issue_repo_commits)         |     |      |              |                  |        |        |         | ✅   |         |      |
-| [issue_worklogs](../DataModels/DevLakeDomainLayerSchema.md/#issue_worklogs)                 |     |      |              |                  |        |        |         | ✅   |         | ✅   |
-| [issues](../DataModels/DevLakeDomainLayerSchema.md/#issues)                                 |     |      |              |                  | ✅     |        |         | ✅   |         | ✅   |
-| [project_issue_metrics](../DataModels/DevLakeDomainLayerSchema.md/#project_issue_metrics)   |     | ✅   |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |
-| [project_mapping](../DataModels/DevLakeDomainLayerSchema.md/#project_mapping)               |     | ✅   |              |                  | ✅     | ✅     | ✅      | ✅   |         | ✅   |
-| [project_metrics](../DataModels/DevLakeDomainLayerSchema.md/#project_metrics)               |     | ✅   |              |                  | ✅     | ✅     | ✅      | ✅   |         | ✅   |
-| [project_pr_metrics](../DataModels/DevLakeDomainLayerSchema.md/#project_pr_metrics)         |     | ✅   |              |                  | ✅     | ✅     |         |      |         | ✅   |
-| [projects](../DataModels/DevLakeDomainLayerSchema.md/#project)                              |     | ✅   |              |                  | ✅     | ✅     | ✅      | ✅   |         | ✅   |
-| [pull_request_comments](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_comments)   |     |      |              |                  | ✅     | ✅     |         |      |         |      |
-| [pull_request_commits](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_commits)     |     |      |              |                  | ✅     | ✅     |         |      |         |      |
-| [pull_request_issues](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_issues)       |     |      |              |                  | ✅     |        |         |      |         |      |
-| [pull_request_labels](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_labels)       |     |      |              |                  | ✅     | ✅     |         |      |         |      |
-| [pull_requests](../DataModels/DevLakeDomainLayerSchema.md/#pull_requests)                   |     |      |              |                  | ✅     | ✅     |         |      |         |      |
-| [ref_commits](../DataModels/DevLakeDomainLayerSchema.md/#ref_commits)                       |     |      |              |                  |        |        |         |      | ✅      |      |
-| [refs](../DataModels/DevLakeDomainLayerSchema.md/#refs)                                     |     |      | ✅           |                  |        |        |         |      | ✅      |      |
-| [refs_issues_diffs](../DataModels/DevLakeDomainLayerSchema.md/#refs_issues_diffs)           |     |      |              |                  |        |        |         |      | ✅      |      |
-| [ref_pr_cherry_picks](../DataModels/DevLakeDomainLayerSchema.md/#ref_pr_cherry_picks)       |     |      |              |                  |        |        |         |      | ✅      |      |
-| [repo_commits](../DataModels/DevLakeDomainLayerSchema.md/#repo_commits)                     |     |      | ✅           |                  | 💪     | 💪     |         |      |         |      |
-| [repo_snapshot](../DataModels/DevLakeDomainLayerSchema.md/#repo_snapshot)                   |     |      | ✅           |                  |        |        |         |      |         |      |
-| [repos](../DataModels/DevLakeDomainLayerSchema.md/#repos)                                   |     |      |              |                  | ✅     | ✅     |         |      |         |      |
-| [sprint_issues](../DataModels/DevLakeDomainLayerSchema.md/#sprint_issues)                   |     |      |              |                  | ✅     |        |         | ✅   |         | ✅   |
-| [sprints](../DataModels/DevLakeDomainLayerSchema.md/#sprints)                               |     |      |              |                  | ✅     |        |         | ✅   |         | ✅   |
-| [team_users](../DataModels/DevLakeDomainLayerSchema.md/#team_users)                         |     |      |              |                  |        |        |         |      |         |      |
-| [teams](../DataModels/DevLakeDomainLayerSchema.md/#teams)                                   |     |      |              |                  |        |        |         |      |         |      |
-| [user_account](../DataModels/DevLakeDomainLayerSchema.md/#user_accounts)                    |     |      |              |                  |        |        |         |      |         |      |
-| [users](../DataModels/DevLakeDomainLayerSchema.md/#users)                                   |     |      |              |                  |        |        |         | ✅   |         | ✅   |
+| Domain Layer Entities                                                                       | ae  | dora | gitextractor | incoming webhook | github | gitlab | jenkins | jira | refdiff | tapd | bamboo |
+| ------------------------------------------------------------------------------------------- | --- | ---- | ------------ | ---------------- | ------ | ------ | ------- | ---- | ------- | ---- | ------ |
+| [accounts](../DataModels/DevLakeDomainLayerSchema.md/#accounts)                             |     |      |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |        |
+| [board_issues](../DataModels/DevLakeDomainLayerSchema.md/#board_issues)                     |     |      |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |        |
+| [board_repos](../DataModels/DevLakeDomainLayerSchema.md/#board_repos)                       |     |      |              |                  | ✅     | ✅     |         | ✅   |         |      |        |
+| [board_sprints](../DataModels/DevLakeDomainLayerSchema.md/#board_sprints)                   |     |      |              |                  | ✅     |        |         | ✅   |         | ✅   |        |
+| [boards](../DataModels/DevLakeDomainLayerSchema.md/#boards)                                 |     |      |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |        |
+| [cicd_pipeline_commits](../DataModels/DevLakeDomainLayerSchema.md/#cicd_pipeline_commits)   |     | ✅   |              |                  | ✅     | ✅     | ✅      |      |         |      |        |
+| [cicd_pipelines](../DataModels/DevLakeDomainLayerSchema.md/#cicd_pipelines)                 |     | ✅   |              |                  | ✅     | ✅     | ✅      |      |         |      |   ✅   |
+| [cicd_scopes](../DataModels/DevLakeDomainLayerSchema.md/#cicd_scopes)                       |     | ✅   |              |                  | ✅     | ✅     | ✅      |      |         |      |   ✅   |
+| [cicd_tasks](../DataModels/DevLakeDomainLayerSchema.md/#cicd_tasks)                         |     | ✅   |              | 💪               | ✅     | ✅     | ✅      |      |         |      |   ✅   |
+| [commit_file_components](../DataModels/DevLakeDomainLayerSchema.md/#commit_file_components) |     |      | ✅           |                  |        |        |         |      |         |      |        |
+| [commit_files](../DataModels/DevLakeDomainLayerSchema.md/#commit_files)                     |     |      | ✅           |                  |        |        |         |      |         |      |        |
+| [commit_line_change](../DataModels/DevLakeDomainLayerSchema.md/#commit_line_change)         |     |      | ✅           |                  |        |        |         |      |         |      |        |
+| [commit_parents](../DataModels/DevLakeDomainLayerSchema.md/#commit_parents)                 |     |      | ✅           |                  |        |        |         |      |         |      |        |
+| [commits](../DataModels/DevLakeDomainLayerSchema.md/#commits)                               | ✅  |      | ✅           |                  | 💪     | 💪     |         |      |         |      |        |
+| [commits_diffs](../DataModels/DevLakeDomainLayerSchema.md/#commits_diffs)                   |     |      |              |                  |        |        |         |      | ✅      |      |        |
+| [components](../DataModels/DevLakeDomainLayerSchema.md/#components)                         |     |      |              |                  |        |        |         |      |         |      |        |
+| [finished_commits_diffs](../DataModels/DevLakeDomainLayerSchema.md/#finished_commits_diffs) |     |      |              |                  |        |        |         |      |         |      |        |
+| [issue_changelogs](../DataModels/DevLakeDomainLayerSchema.md/#issue_changelogs)             |     |      |              |                  |        |        |         | ✅   |         | ✅   |        |
+| [issue_comments](../DataModels/DevLakeDomainLayerSchema.md/#issue_commentswip)              |     |      |              |                  | ✅     |        |         |      |         | ✅   |        |
+| [issue_commits](../DataModels/DevLakeDomainLayerSchema.md/#issue_commits)                   |     |      |              |                  |        |        |         | ✅   |         | ✅   |        |
+| [issue_labels](../DataModels/DevLakeDomainLayerSchema.md/#issue_labels)                     |     |      |              |                  | ✅     | ✅     |         |      |         | ✅   |        |
+| [issue_repo_commits](../DataModels/DevLakeDomainLayerSchema.md/#issue_repo_commits)         |     |      |              |                  |        |        |         | ✅   |         |      |        |
+| [issue_worklogs](../DataModels/DevLakeDomainLayerSchema.md/#issue_worklogs)                 |     |      |              |                  |        |        |         | ✅   |         | ✅   |        |
+| [issues](../DataModels/DevLakeDomainLayerSchema.md/#issues)                                 |     |      |              |                  | ✅     |        |         | ✅   |         | ✅   |        |
+| [project_issue_metrics](../DataModels/DevLakeDomainLayerSchema.md/#project_issue_metrics)   |     | ✅   |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |        |
+| [project_mapping](../DataModels/DevLakeDomainLayerSchema.md/#project_mapping)               |     | ✅   |              |                  | ✅     | ✅     | ✅      | ✅   |         | ✅   |        |
+| [project_metrics](../DataModels/DevLakeDomainLayerSchema.md/#project_metrics)               |     | ✅   |              |                  | ✅     | ✅     | ✅      | ✅   |         | ✅   |        |
+| [project_pr_metrics](../DataModels/DevLakeDomainLayerSchema.md/#project_pr_metrics)         |     | ✅   |              |                  | ✅     | ✅     |         |      |         | ✅   |        |
+| [projects](../DataModels/DevLakeDomainLayerSchema.md/#project)                              |     | ✅   |              |                  | ✅     | ✅     | ✅      | ✅   |         | ✅   |        |
+| [pull_request_comments](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_comments)   |     |      |              |                  | ✅     | ✅     |         |      |         |      |        |
+| [pull_request_commits](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_commits)     |     |      |              |                  | ✅     | ✅     |         |      |         |      |        |
+| [pull_request_issues](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_issues)       |     |      |              |                  | ✅     |        |         |      |         |      |        |
+| [pull_request_labels](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_labels)       |     |      |              |                  | ✅     | ✅     |         |      |         |      |        |
+| [pull_requests](../DataModels/DevLakeDomainLayerSchema.md/#pull_requests)                   |     |      |              |                  | ✅     | ✅     |         |      |         |      |        |
+| [ref_commits](../DataModels/DevLakeDomainLayerSchema.md/#ref_commits)                       |     |      |              |                  |        |        |         |      | ✅      |      |        |
+| [refs](../DataModels/DevLakeDomainLayerSchema.md/#refs)                                     |     |      | ✅           |                  |        |        |         |      | ✅      |      |        |
+| [refs_issues_diffs](../DataModels/DevLakeDomainLayerSchema.md/#refs_issues_diffs)           |     |      |              |                  |        |        |         |      | ✅      |      |        |
+| [ref_pr_cherry_picks](../DataModels/DevLakeDomainLayerSchema.md/#ref_pr_cherry_picks)       |     |      |              |                  |        |        |         |      | ✅      |      |        |
+| [repo_commits](../DataModels/DevLakeDomainLayerSchema.md/#repo_commits)                     |     |      | ✅           |                  | 💪     | 💪     |         |      |         |      |        |
+| [repo_snapshot](../DataModels/DevLakeDomainLayerSchema.md/#repo_snapshot)                   |     |      | ✅           |                  |        |        |         |      |         |      |        |
+| [repos](../DataModels/DevLakeDomainLayerSchema.md/#repos)                                   |     |      |              |                  | ✅     | ✅     |         |      |         |      |        |
+| [sprint_issues](../DataModels/DevLakeDomainLayerSchema.md/#sprint_issues)                   |     |      |              |                  | ✅     |        |         | ✅   |         | ✅   |        |
+| [sprints](../DataModels/DevLakeDomainLayerSchema.md/#sprints)                               |     |      |              |                  | ✅     |        |         | ✅   |         | ✅   |        |
+| [team_users](../DataModels/DevLakeDomainLayerSchema.md/#team_users)                         |     |      |              |                  |        |        |         |      |         |      |        |
+| [teams](../DataModels/DevLakeDomainLayerSchema.md/#teams)                                   |     |      |              |                  |        |        |         |      |         |      |        |
+| [user_account](../DataModels/DevLakeDomainLayerSchema.md/#user_accounts)                    |     |      |              |                  |        |        |         |      |         |      |        |
+| [users](../DataModels/DevLakeDomainLayerSchema.md/#users)                                   |     |      |              |                  |        |        |         | ✅   |         | ✅   |        |
 
 ## Data Sync Policy
 
@@ -177,3 +177,13 @@ This table shows the entities collected by each plugin. Domain layer entities in
 | **CollectApiPullRequestCommitsMeta** | ≈10^5                           | ❌                                      | ❌                           |
 | **CollectApiPullRequestReviewsMeta** | ≈10^5                           | ❌                                      | ❌                           |
 | **\*CollectApiCommitStatsMeta\***    | ≈10^6 (Not enable)              | ❌                                      | ❌                           |
+
+### Bamboo
+
+| Subtask Name         | Estimated Max Number of Request | Does It support Incremental Collection? | Does It Support Time Filter? |
+| -------------------- | ------------------------------- | --------------------------------------- | ---------------------------- |
+| CollectPlanMeta      | <10^4                           | ❌                                      | ❌                           |
+| CollectJobMeta       | <10^5                           | ❌                                      | ❌                           |
+| CollectPlanBuildMeta | <10^6                           | ❌                                      | ❌                           |
+| CollectJobBuildMeta  | <10^6                           | ❌                                      | ❌                           |
+| CollectDeployMeta    | 1                               | ❌                                      | ❌                           |
