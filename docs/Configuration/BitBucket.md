@@ -35,7 +35,7 @@ The following permissions are required to collect data from BitBucket repositori
 - Pipelines:Read
 - Runners:Read
 
-![BitBucket-app-password-permissions](/img/ConfigUI/BitBucket-app-password-permissions.jpeg)
+![bitbucket-app-password-permissions](/img/ConfigUI/bitbucket-app-password-permissions.jpeg)
 
 
 #### Proxy URL (Optional)
