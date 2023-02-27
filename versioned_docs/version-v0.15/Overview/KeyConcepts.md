@@ -105,6 +105,6 @@ Notice: **You can manually orchestrate the pipeline in Configuration UI Advanced
 ### Subtasks
 **A subtask is the minimal work unit in a pipeline that performs in any of the four roles: `Collectors`, `Extractors`, `Converters` and `Enrichers`.** Subtasks are executed in sequential orders.
 - `Collectors`: Collect raw data from data sources, normally via DevLake API and stored into `raw data table`
-- `Extractors`: Extract data from `raw data table` to `tool layer tables`
+- `Extractors`: Extract data from `raw data tables` to `tool layer tables`
 - `Converters`: Convert data from `tool layer tables` into `domain layer tables`
 - `Enrichers`: Enrich data from one domain to other domains. For instance, the Fourier Transformation can examine `issue_changelog` to show time distribution of an issue on every assignee.
