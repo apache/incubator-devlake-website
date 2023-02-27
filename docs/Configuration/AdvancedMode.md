@@ -1,6 +1,6 @@
 ---
 title: "Blueprint Advanced Mode"
-sidebar_position: 8
+sidebar_position: 9
 description: >
   Using the advanced mode of Config-UI
 ---
