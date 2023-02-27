@@ -40,8 +40,8 @@ kubectl port-forward service/devlake-grafana  30091:3000
 ```
 
 Then you can visit:
-config-ui by url `http://YOUR-NODE-IP:30090`
-grafana by url `http://YOUR-NODE-IP:30091`
+Config UI URL `http://YOUR-NODE-IP:30090`
+Grafana URL `http://YOUR-NODE-IP:30091`
 
 ### Update
 
@@ -71,7 +71,7 @@ Conditions:
 helm install devlake devlake/devlake --set service.uiPort=30000
 ```
 
-After deployed, visit devlake: http://192.168.0.6:30000
+After the deployment, visit devlake at: http://192.168.0.6:30000
 
 ### Deploy with Ingress
 
@@ -83,7 +83,7 @@ Conditions:
 helm install devlake devlake/devlake --set "ingress.enabled=true,ingress.hostname=devlake.example.com"
 ```
 
-After deployed, visit devlake: http://devlake.example.com, and grafana at http://devlake.example.com/grafana
+After the deployment, visit devlake at: http://devlake.example.com, and Grafana at http://devlake.example.com/grafana
 
 ### Deploy with Ingress (Https)
 
@@ -105,7 +105,7 @@ helm install devlake devlake/devlake \
     --set "ingress.tlsSecretName=ssl-certificate"
 ```
 
-After deployed, visit devlake: https://devlake-0.example.com:8443, and grafana at https://devlake-0.example.com:8443/grafana
+After the deployment, visit devlake at: https://devlake-0.example.com:8443, and Grafana at https://devlake-0.example.com:8443/grafana
 
 
 ## Parameters
