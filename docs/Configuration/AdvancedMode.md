@@ -304,6 +304,7 @@ You must choose at least one of `productId`, `projectId` and `executionId`.
 2. Then the number in the red square above is `ExecutionId`
 
 ### 9. BitBucket
+
 Below is an example for collecting a bitbucket repo.
 
 ```json
@@ -324,6 +325,27 @@ Below is an example for collecting a bitbucket repo.
 - `connectionId`: The ID of your bitbucket connection at page http://localhost:4000/connections/bitbucket.
 - `owner`: the owner of the repository.
 - `repo`: the bitbucket repository name.
+
+### 10. Sonarqube
+
+Below is an example for collecting a sonarqube project.
+
+```json
+[
+  [
+    {
+      "plugin": "sonarqube",
+      "options": {
+        "connectionId": 1,
+        "projectKey": "testDevLake"
+      }
+    }
+  ]
+]
+```
+
+- `connectionId`: The ID of your sonarqube connection at page http://localhost:4000/connections/sonarqube.
+- `projectKey`: the project name of the sonarqube.
 
 ## Editing a Blueprint (Advanced Mode)
 
