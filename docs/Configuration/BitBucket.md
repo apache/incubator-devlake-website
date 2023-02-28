@@ -16,13 +16,13 @@ Name your connection.
 
 #### Endpoint URL
 
-This should be a valid REST API endpoint for BitBucket Cloud: `https://api.BitBucket.org/2.0/`. The endpoint URL should end with `/`.
+This should be a valid REST API endpoint for BitBucket Cloud: `https://api.bitbucket.org/2.0/`. The endpoint URL should end with `/`.
 
 DevLake will support BitBucket Server in the future.
 
 #### Authentication
 
-BitBucket `username` and `app password` are required to add a connection. Learn about [how to create a BitBucket app password](https://support.atlassian.com/BitBucket-cloud/docs/create-an-app-password/).
+BitBucket `username` and `app password` are required to add a connection. Learn about [how to create a BitBucket app password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/).
 
 The following permissions are required to collect data from BitBucket repositories:
 
@@ -80,14 +80,13 @@ Please go to the `Blueprints` page and switch to advanced mode. See how to use a
 
 ![image](https://user-images.githubusercontent.com/3294100/220338276-a67cd8cc-ea76-4cb2-bb7b-bba581d21d70.png)
 
-Without changing default transformation rules, you can still view the Metrics dashboard. However, if you want to view pre-built dashboards, the following transformation rules, especially "Type/Bug", should be added.<br/>
+Without changing default transformation rules, you can still view the Metrics dashboard. However, if you want to view pre-built dashboards, the following transformation rules, especially "Issue Tracking" should be added.<br/>
 
 Each BitBucket repo has at most ONE set of transformation rules.
 
 #### Issue Tracking
 
 - TODO: the issues with selected states can be recognized not start issues. 
-
 - IN-PROGRESS: The issues statuses that indicate an issue is work in progress.
 - DONE: The issue statuses that indicate an issue is completed.
 - OTHER: Other issues statuses that can not be mapped to the above three statuses.
@@ -101,9 +100,19 @@ BitBucket has several key CI entities: `pipelines`, `pipeline steps`, and `deplo
 Each Bitbucket pipeline is converted to a cicd_pipeline in DevLake's domain layer schema and each Bitbucket pipeline step is converted to a cicd_task in DevLake's domain layer.
 ![image](https://user-images.githubusercontent.com/3294100/220288225-71bee07d-c319-45bd-98e5-f4d01359840e.png)
 
-![image](https://user-images.githubusercontent.com/3294100/220289726-3909d368-1414-456c-a527-12a693745611.png)
 
-If you are using BitBucket Deployments and Environments, DevLake will consider the pipeline steps with deployment as a deployment and use the environment type of deployment in cicd_task.
+
+If a pipeline step defines `deployment` with a value (usually means envrionment), this pipeline step is also a BitBucket deployment. 
+
+![img_v2_89602d14-a733-4679-9d4b-d9635c03bc5g](https://user-images.githubusercontent.com/3294100/221528908-4943b1e6-1398-49e9-8ce9-aa264995f9bc.jpg)
+
+![image](https://user-images.githubusercontent.com/3294100/221887426-4cae1c46-31ce-4fcd-b773-a54c28af0264.png)
+
+
+
+How does DevLake tell if a BitBucket pipeline step is a deployment? The pipeline steps (defined in the .yaml) with the `deployment` key are considered as `DevLake deployments`. The value of the `deployment` key will be considered as the environment of DevLake deployments.
+
+These DevLake deployments will be recorded in table.cicd_tasks in DevLake's domain layer, with `type` = 'deployment' and `environment` = '{BitBucket-pipeline-step.deployment.value}', differentiating from other CI tasks.
 
 Or if you're using BitBucket pipelines to conduct `deployments`, please select "Detect Deployments from Pipeline steps in BitBucket", and input the RegEx in the following fields:
 
