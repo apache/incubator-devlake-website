@@ -1,7 +1,7 @@
 ---
-title: "Sonarqube"
+title: "SonarQube"
 sidebar_position: 7
-description: Config UI instruction for Sonarqube
+description: Config UI instruction for SonarQube
 ---
 
 Visit config-ui: `http://localhost:4000`.
@@ -24,7 +24,7 @@ The endpoint url should end with `/`.
 
 #### Auth Token(s)
 
-Sonarqube personal access tokens are required to add a connection. Learn about [how to create a Sonarqube personal access token](https://sonarqube.inria.fr/sonarqube/documentation/user-guide/user-token/).
+SonarQube personal access tokens are required to add a connection. Learn about [how to create a SonarQube personal access token](https://sonarqube.inria.fr/sonarqube/documentation/user-guide/user-token/).
 
 #### Proxy URL (Optional)
 
@@ -32,7 +32,7 @@ If you are behind a corporate firewall or VPN you may need to utilize a proxy se
 
 #### Fixed Rate Limit (Optional)
 
-DevLake uses a dynamic rate limit at around 18,000 requests/hour to collect Sonarqube data. You can adjust the rate limit if you want to increase or lower the speed.
+DevLake uses a dynamic rate limit at around 18,000 requests/hour to collect SonarQube data. You can adjust the rate limit if you want to increase or lower the speed.
 
 #### Test and Save Connection
 
@@ -44,14 +44,14 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 
 #### Projects
 
-Choose the Sonarqube projects to collect.
+Choose the SonarQube projects to collect.
 
 #### Data Entities
 
-Usually, you don't have to modify this part. However, if you don't want to collect certain Sonarqube entities, you can unselect some entities to accerlerate the collection speed.
+Usually, you don't have to modify this part. However, if you don't want to collect certain SonarQube entities, you can unselect some entities to accerlerate the collection speed.
 
-- Code Quality Domain: Sonarqube issues, issue code blocks, file metrics, hotspots, etc.
-- Cross Domain: Sonarqube accounts, etc.
+- Code Quality Domain: SonarQube issues, issue code blocks, file metrics, hotspots, etc.
+- Cross Domain: SonarQube accounts, etc.
 
 ### Step 3 - Setting Sync Frequency
 

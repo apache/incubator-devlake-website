@@ -498,6 +498,8 @@ A cicd_task is a single job of ci/cd.
 
 ### Domain 5 - Code Quality
 
+The names of tables in the 'Code Quality' domain will start with a prefix cq\_
+
 #### cq_projects
 
 | **field**            | **type** | **length** | **description**                                                                     | **key** |
@@ -507,7 +509,7 @@ A cicd_task is a single job of ci/cd.
 | `qualifier`          | varchar  | 255        | The type of project. Examples include "TRK" for regular projects and "VW" for views |         |
 | `visibility`         | varchar  | 64         | The visibility of the project. Examples include "public" and "private"              |         |
 | `last_analysis_date` | datatime | 3          | The date and time of the most recent analysis of the project                        |         |
-| `commit_sha`         | varchar  | 128        | The SHA1 hash of the latest commit associated with the project                      |         |
+| `commit_sha`         | varchar  | 128        | It represents the version number or code version identifier of a project            |         |
 
 #### cq_issues
 
@@ -547,34 +549,40 @@ A cicd_task is a single job of ci/cd.
 | `component`    | varchar  | 255        | A string that stores the name of the component that the code block is associated with |         |
 | `start_line`   | bigint   | 255        | An integer that stores the line number where the code block starts                    |         |
 | `end_line`     | bigint   | 255        | An integer that stores the line number where the code block ends                      |         |
-| `start_offset` | bigint   | 255        | An integer that stores the line number where the code block ends                      |         |
+| `start_offset` | bigint   | 255        | An integer that stores the offset where the code block starts                         |         |
 | `end_offset`   | bigint   | 255        | An integer that stores the offset where the code block ends                           |         |
 | `msg`          | longtext |            | A long text field that stores the message associated with the code block              |         |
 
 #### cq_file_metrics
 
-| **field**                    | **type** | **length** | **description**                                                  | **key** |
-| :--------------------------- | :------- | :--------- | :--------------------------------------------------------------- | :------ |
-| `id`                         | varchar  | 255        | This key is generated based on details from the original plugin  | PK      |
-| `project_key`                | varchar  | 255        | The key of the project that the issue belongs to                 | PK      |
-| `file_name`                  | longtext |            | longtext fields that store the name of the file                  |         |
-| `file_path`                  | longtext |            | longtext fields that store the path of the file                  |         |
-| `file_language`              | longtext |            | longtext fields that store the language of the file              |         |
-| `code_smells`                | bigint   |            | numeric fields that store various metrics of the file            |         |
-| `sqale_index`                | bigint   |            | numeric fields that store various metrics of the file            |         |
-| `sqale_rating`               | double   |            | numeric fields that store various metrics of the file            |         |
-| `bugs`                       | bigint   |            | numeric fields that store various metrics of the file            |         |
-| `reliability_rating`         | longtext |            | numeric fields that store various metrics of the file            |         |
-| `vulnerabilities`            | bigint   |            | numeric fields that store various metrics of the file            |         |
-| `security_rating`            | longtext |            | numeric fields that store various metrics of the file            |         |
-| `security_hotspots`          | bigint   |            | numeric fields that store various metrics of the file            |         |
-| `security_hotspots_reviewed` | double   |            | numeric fields that store various metrics of the file            |         |
-| `security_review_rating`     | longtext |            | numeric fields that store various metrics of the file            |         |
-| `ncloc`                      | bigint   |            | numeric fields that store various metrics of the file            |         |
-| `coverage`                   | double   |            | numeric fields that store various metrics of the file            |         |
-| `lines_to_cover`             | bigint   |            | additional numeric fields that store more metrics of the file    |         |
-| `duplicated_lines_density`   | double   |            | additional numeric fields that store various metrics of the file |         |
-| `duplicated_blocks`          | bigint   |            | additional numeric fields that store more metrics of the file    |         |
+| **field**                                  | **type** | **length** | **description**                                                 | **key** |
+| :----------------------------------------- | :------- | :--------- | :-------------------------------------------------------------- | :------ |
+| `id`                                       | varchar  | 255        | This key is generated based on details from the original plugin | PK      |
+| `project_key`                              | varchar  | 255        | The key of the project that the issue belongs to                | PK      |
+| `file_name`                                | longtext |            | longtext fields that store the name of the file                 |         |
+| `file_path`                                | longtext |            | longtext fields that store the path of the file                 |         |
+| `file_language`                            | longtext |            | longtext fields that store the language of the file             |         |
+| `code_smells`                              | bigint   |            | Code smells of this file                                        |         |
+| `sqale_index`                              | bigint   |            | Sqale index of the file                                         |         |
+| `sqale_rating`                             | double   |            | Sqale rating of the file                                        |         |
+| `bugs`                                     | bigint   |            | Bugs rating of the file                                         |         |
+| `reliability_rating`                       | longtext |            | Reliability rating of the file                                  |         |
+| `vulnerabilities`                          | bigint   |            | Vulnerabilities of the file                                     |         |
+| `security_rating`                          | longtext |            | Security rating of the file                                     |         |
+| `security_hotspots`                        | bigint   |            | Security hotspots of the file                                   |         |
+| `security_hotspots_reviewed`               | double   |            | Security hotspots reviewed of the file                          |         |
+| `security_review_rating`                   | longtext |            | Security review rating of the file                              |         |
+| `ncloc`                                    | bigint   |            | Ncloc of the file                                               |         |
+| `coverage`                                 | double   |            | Ncoverage of the file                                           |         |
+| `lines_to_cover`                           | bigint   |            | Lines to cover of the file                                      |         |
+| `duplicated_lines_density`                 | double   |            | Duplicated lines density of the file                            |         |
+| `duplicated_blocks`                        | bigint   |            | Duplicated blocks of the file                                   |         |
+| `duplicated_files`                         | bigint   |            | Duplicated files of the file                                    |         |
+| `duplicated_lines`                         | bigint   |            | Duplicated lines of the file                                    |         |
+| `effort_to_reach_maintainability_rating_a` | bigint   |            | Effort to reach maintainability rating a of the file            |         |
+| `complexity`                               | bigint   |            | Complexity of the file                                          |         |
+| `cognitive_complexity`                     | bigint   |            | Cognitive complexity of the file                                |         |
+| `num_of_lines`                             | bigint   |            | Num of lines of the file                                        |         |
 
 ### Project Metric Entities
 

@@ -22,7 +22,7 @@ Apache DevLake(incubating) supports the following data sources. The data from ea
 | PagerDuty (WIP)  | Issue Tracking                                                              | Cloud                                | Not Available           | `pagerduty`                 | Full Refresh                                                   |
 | Feishu (WIP)     | Calendar                                                                    | Cloud                                | Not Available           | `feishu`                    | Full Refresh                                                   |
 | AE               | Source Code Management                                                      | On-prem                              | Not Available           | `ae`                        | Full Refresh                                                   |
-| Sonarqube        | CODE QUALITY                                                                | Community Edition v8.2+              | Available               | `sonarqube`                 | Full Refresh                                                   |
+| Sonarqube        | CODE QUALITY                                                                | SonarQube(Server)                    | Available               | `sonarqube`                 | Full Refresh                                                   |
 
 ## Data Collection Scope By Each Plugin
 
@@ -181,7 +181,7 @@ This table shows the entities collected by each plugin. Domain layer entities in
 | **CollectApiPullRequestReviewsMeta** | ≈10^5                           | ❌                                      | ❌                           |
 | **\*CollectApiCommitStatsMeta\***    | ≈10^6 (Not enable)              | ❌                                      | ❌                           |
 
-### Sonarqube
+### SonarQube
 
 | Subtask Name                 | Estimated Max Number of Request | Does It support Incremental Collection? | Does It Support Time Filter? |
 | ---------------------------- | ------------------------------- | --------------------------------------- | ---------------------------- |

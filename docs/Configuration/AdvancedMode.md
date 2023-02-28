@@ -326,9 +326,9 @@ Below is an example for collecting a bitbucket repo.
 - `owner`: the owner of the repository.
 - `repo`: the bitbucket repository name.
 
-### 10. Sonarqube
+### 10. SonarQube
 
-Below is an example for collecting a sonarqube project.
+Below is an example for collecting a SonarQube project.
 
 ```json
 [
@@ -344,8 +344,13 @@ Below is an example for collecting a sonarqube project.
 ]
 ```
 
-- `connectionId`: The ID of your sonarqube connection at page http://localhost:4000/connections/sonarqube.
-- `projectKey`: the project name of the sonarqube.
+- `connectionId`: The ID of your SonarQube connection at page http://localhost:4000/connections/sonarqube.
+- `projectKey`: the project name of the SonarQube. To find the project key in SonarQube, you can follow these steps:
+  - 1. Log in to the SonarQube management page.
+  - 2. Find the project for which you want to find the project key.
+  - 3. Click on the project name to enter the project homepage.
+  - 4. In the top menu bar of the project homepage, select "Project Information".
+  - 5. On the "Project Information" page, you will see the project key.
 
 ## Editing a Blueprint (Advanced Mode)
 
