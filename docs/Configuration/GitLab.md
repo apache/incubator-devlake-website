@@ -62,7 +62,7 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 
 #### Projects
 
-Choose the Gitlab projects to collect. Limited by GitLab API, You need to type more than 2 characters to search.
+Choose the GitLab projects to collect. Limited by GitLab API, You need to type more than 2 characters to search.
 
 - If you want to collect public repositories in GitLab, please uncheck "Only search my repositories" to search all repositories.
 
