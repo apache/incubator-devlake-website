@@ -537,8 +537,8 @@ The names of tables in the 'Code Quality' domain will start with a prefix cq\_
 | `end_offset`                | bigint   | 255        | The ending offset of the issue                                          |         |
 | `vulnerability_probability` | varchar  | 100        | The probability of the issue being a vulnerability                      |         |
 | `security_category`         | varchar  | 100        | The security category of the issue                                      |         |
-| `creation_date`             | datetime | 3          | The date and time when the issue was created                            |         |
-| `update_date`               | datetime | 3          | The date and time when the issue was last updated                       |         |
+| `created_date`              | datetime | 3          | The time when the issue was created                                     |         |
+| `updated_date`              | datetime | 3          | The time when the issue was last updated                                |         |
 
 #### cq_issue_code_blocks
 
