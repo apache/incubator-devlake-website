@@ -53,7 +53,7 @@ a. Download the template `teams.csv` file
         curl --location --request GET 'http://127.0.0.1:4000/api/plugins/org/teams.csv?fake_data=true'
     
 
-b. Fill out `teams.csv` file and upload it to DevLake
+b. Fill out `teams.csv` file and upload it to DevLake (If you are using Excel to modify the CSV file, please save it with UTF-8 encoding. See [how](https://answers.microsoft.com/en-us/msoffice/forum/all/how-can-i-save-a-csv-with-utf-8-encoding-using/12801501-c1e4-4a64-80d9-96b680b64cfe))
 
     i. Fill out `teams.csv` with your org data. Please don't modify the column headers or the file suffix.
 
@@ -79,7 +79,7 @@ a. Download the template `users.csv` file
     curl --location --request GET 'http://127.0.0.1:4000/api/plugins/org/users.csv?fake_data=true'
 
 
-b. Fill out `users.csv` and upload to DevLake
+b. Fill out `users.csv` and upload to DevLake (If you are using Excel to modify the CSV file, please save it with UTF-8 encoding. See [how](https://answers.microsoft.com/en-us/msoffice/forum/all/how-can-i-save-a-csv-with-utf-8-encoding-using/12801501-c1e4-4a64-80d9-96b680b64cfe))
 
     i.  Fill out `users.csv` with your org data. Please don't modify the column headers or the file suffix
 
@@ -157,13 +157,14 @@ curl --location --request GET 'http://127.0.0.1:4000/api/plugins/org/user_accoun
 
 b. If you find the mapping inaccurate or incomplete, you can modify the `user_account_mapping.csv` file and then upload it to DevLake.
 For example, here we change the `UserId` of row 'Id=github:GithubAccount:1:1234' in the `user_account_mapping.csv` file to 2.
-Then we upload the updated `user_account_mapping.csv` file with the following curl command:
+
+c. Save and upload the updated `user_account_mapping.csv` file with the following curl command (If you are using Excel to modify the CSV file, please save it with UTF-8 encoding. See [how](https://answers.microsoft.com/en-us/msoffice/forum/all/how-can-i-save-a-csv-with-utf-8-encoding-using/12801501-c1e4-4a64-80d9-96b680b64cfe)):
 
 ```
 curl --location --request PUT 'http://127.0.0.1:4000/api/plugins/org/user_account_mapping.csv' --form 'file=@"/path/to/user_account_mapping.csv"'
 ```
 
-c. You can verify the data in the `user_accounts` table has been updated.
+d. You can verify the data in the `user_accounts` table has been updated.
 
 ![image](/img/Team/teamflow7.png)
 
