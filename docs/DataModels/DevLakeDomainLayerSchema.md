@@ -526,7 +526,7 @@ The names of tables in the 'Code Quality' domain will start with a prefix cq\_
 | `debt`                      | bigint   |            | The estimated time required to fix the issue                            |         |
 | `effort`                    | bigint   |            | The effort required to fix the issue                                    |         |
 | `commit_author_email`       | varchar  | 255        | The email address of the author of the commit that introduced the issue |         |
-| `assigne`                   | varchar  | 255        | The person assigned to fix the issue                                    |         |
+| `assignee`                  | varchar  | 255        | The person assigned to fix the issue                                    |         |
 | `hash`                      | varchar  | 255        | A hash code for the issue                                               |         |
 | `tags`                      | varchar  | 255        | Any tags associated with the issue                                      |         |
 | `type`                      | varchar  | 255        | The type of the issue                                                   |         |

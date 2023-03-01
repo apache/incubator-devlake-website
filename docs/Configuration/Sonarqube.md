@@ -16,7 +16,7 @@ Name your connection.
 
 #### Endpoint URL
 
-This should be a valid REST API endpoint:
+This should be a valid REST API endpoint
 
 - `https://YOUR_DOMAIN:YOUR_PORT/api/`
 

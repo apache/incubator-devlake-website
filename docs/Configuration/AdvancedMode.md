@@ -345,7 +345,7 @@ Below is an example for collecting a SonarQube project.
 ```
 
 - `connectionId`: The ID of your SonarQube connection at page http://localhost:4000/connections/sonarqube.
-- `projectKey`: the project name of the SonarQube. To find the project key in SonarQube, you can follow these steps:
+- `projectKey`: The project key of the SonarQube. To find the project key in SonarQube, please follow the steps:
   - 1. Log in to the SonarQube management page.
   - 2. Find the project for which you want to find the project key.
   - 3. Click on the project name to enter the project homepage.
