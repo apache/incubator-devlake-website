@@ -14,7 +14,7 @@ The columns created with this plugin must be start with the prefix `x_`
 **NOTE:** All columns created by this plugin are of the datatype `VARCHAR(255)`
 
 ## Sample Request
-To extract data, switch to `Advanced Mode` on the the first step of creating a Blueprint and paste a JSON config as the following:
+To extract data, switch to `Advanced Mode` on the first step of creating a Blueprint and paste a JSON config as the following:
 
 The example below demonstrates how to extract status name from the table `_raw_jira_api_issues` and assign it to the `x_test` column of the table `issues`.
 We leverage the package `https://github.com/tidwall/gjson` to extract value from the JSON. For the extraction syntax, please refer to this [docs](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)
@@ -95,5 +95,7 @@ Create extension column `x_test` for the table `issues`
     "name": "x_test"
 }
 ```
+
 Drop the column `x_text` for the table `issues`
+
 > DELETE /plugins/customize/issues/fields/x_test
