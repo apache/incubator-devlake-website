@@ -585,7 +585,7 @@ The names of tables in the 'Code Quality' domain will start with a prefix cq\_
 | `cognitive_complexity`                     | bigint   |            | Cognitive complexity of the file                                |         |
 | `num_of_lines`                             | bigint   |            | Num of lines of the file                                        |         |
 
-### Domain 5 - Cross-Domain Entities
+### Domain 6 - Cross-Domain Entities
 
 These entities are used to map entities between different domains. They are the key players to break data isolation.
 
