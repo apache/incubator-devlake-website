@@ -30,7 +30,8 @@ This is the up-to-date domain layer schema for DevLake v0.10.x. Tables (entities
 2. Source code management domain entities: Git/GitHub/Gitlab commits and refs(tags and branches), etc.
 3. Code review domain entities: GitHub PRs, Gitlab MRs, etc.
 4. CI/CD domain entities: Jenkins jobs & builds, etc.
-5. Cross-domain entities: entities that map entities from different domains to break data isolation.
+5. Code Quality entities: SonarQube issues, hotspots, file metrics, etc.
+6. Cross-domain entities: entities that map entities from different domains to break data isolation.
 
 ### Schema Diagram
 
@@ -584,32 +585,7 @@ The names of tables in the 'Code Quality' domain will start with a prefix cq\_
 | `cognitive_complexity`                     | bigint   |            | Cognitive complexity of the file                                |         |
 | `num_of_lines`                             | bigint   |            | Num of lines of the file                                        |         |
 
-### Project Metric Entities
-
-#### project_pr_metrics
-
-| **field**          | **type** | **length** | **description**                                                                        | **key** |
-| :----------------- | :------- | :--------- | :------------------------------------------------------------------------------------- | :------ |
-| `id`               | varchar  | 255        | Id of PR                                                                               | PK      |
-| `project_name`     | varchar  | 100        | The project that this PR belongs to                                                    | PK      |
-| `first_review_id`  | longtext |            | The id of the first review on this pr                                                  |         |
-| `first_commit_sha` | longtext |            | The sha of the first commit                                                            |         |
-| `pr_coding_time`   | bigint   |            | The time it takes from the first commit until a PR is issued                           |         |
-| `pr_pickup_time`   | bigint   |            | The time it takes from when a PR is issued until the first comment is added to that PR |         |
-| `pr_review_time`   | bigint   |            | The time it takes to complete a code review of a PR before it gets merged              |         |
-| `deployment_id`    | longtext |            | The id of cicd_task which deploy the commits of this PR                                |         |
-| `pr_deploy_time`   | bigint   |            | The time it takes from when a PR is merged to when it is deployed                      |         |
-| `pr_cycle_time`    | bigint   |            | The total time from the first commit to when the PR is deployed                        |         |
-
-#### project_issue_metrics
-
-| **field**       | **type** | **length** | **description**                             | **key** |
-| :-------------- | :------- | :--------- | :------------------------------------------ | :------ |
-| `id`            | varchar  | 255        | Id of Issue                                 | PK      |
-| `project_name`  | varchar  | 100        | The project that this Issue belongs to      | PK      |
-| `deployment_id` | longtext |            | The id of cicd_task which cause an incident |         |
-
-### Cross-Domain Entities
+### Domain 5 - Cross-Domain Entities
 
 These entities are used to map entities between different domains. They are the key players to break data isolation.
 
@@ -723,6 +699,29 @@ metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contr
 | `project_name` | varchar  | 255        | name for project                                                       | PK      |
 | `table`        | varchar  | 255        | the table name of [Scope](../Overview/KeyConcepts.md#data-scope)       | PK      |
 | `row_id`       | varchar  | 255        | the row_id in the [Scope](../Overview/KeyConcepts.md#data-scope) table | PK      |
+
+#### project_pr_metrics
+
+| **field**          | **type** | **length** | **description**                                                                        | **key** |
+| :----------------- | :------- | :--------- | :------------------------------------------------------------------------------------- | :------ |
+| `id`               | varchar  | 255        | Id of PR                                                                               | PK      |
+| `project_name`     | varchar  | 100        | The project that this PR belongs to                                                    | PK      |
+| `first_review_id`  | longtext |            | The id of the first review on this pr                                                  |         |
+| `first_commit_sha` | longtext |            | The sha of the first commit                                                            |         |
+| `pr_coding_time`   | bigint   |            | The time it takes from the first commit until a PR is issued                           |         |
+| `pr_pickup_time`   | bigint   |            | The time it takes from when a PR is issued until the first comment is added to that PR |         |
+| `pr_review_time`   | bigint   |            | The time it takes to complete a code review of a PR before it gets merged              |         |
+| `deployment_id`    | longtext |            | The id of cicd_task which deploy the commits of this PR                                |         |
+| `pr_deploy_time`   | bigint   |            | The time it takes from when a PR is merged to when it is deployed                      |         |
+| `pr_cycle_time`    | bigint   |            | The total time from the first commit to when the PR is deployed                        |         |
+
+#### project_issue_metrics
+
+| **field**       | **type** | **length** | **description**                             | **key** |
+| :-------------- | :------- | :--------- | :------------------------------------------ | :------ |
+| `id`            | varchar  | 255        | Id of Issue                                 | PK      |
+| `project_name`  | varchar  | 100        | The project that this Issue belongs to      | PK      |
+| `deployment_id` | longtext |            | The id of cicd_task which cause an incident |         |
 
 <br/>
 
