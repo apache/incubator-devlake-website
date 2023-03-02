@@ -18,13 +18,13 @@ Name your connection.
 
 This should be a valid REST API endpoint
 
-- `https://YOUR_DOMAIN:YOUR_PORT/api/`
+- `http://<host>:<port>/api/`
 
 The endpoint url should end with `/`.
 
 #### Auth Token(s)
 
-SonarQube personal access tokens are required to add a connection. Learn about [how to create a SonarQube personal access token](https://sonarqube.inria.fr/sonarqube/documentation/user-guide/user-token/).
+SonarQube token is required to add a connection. Learn about [how to create a SonarQube token](https://sonarqube.inria.fr/sonarqube/documentation/user-guide/user-token/).
 
 #### Proxy URL (Optional)
 
