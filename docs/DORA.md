@@ -68,7 +68,7 @@ In the next section, we'll demonstrate how to configure DevLake to implement DOR
 ### Collect GitHub & Jira data via `blueprint`
 
 1. Visit the config-ui at `http://localhost:4000`
-2. Create a project: project1. Go to project1 and create a blueprint. let's name it "Blueprint for DORA", add a Jira and a GitHub connection. Click `Next Step`
+2. Create a project: 'project1'. Go to 'project1' and create a blueprint. Let's name it "Blueprint for DORA", add a Jira and a GitHub connection. Click `Next Step`
    ![project1](/img/ConfigUI/project1.png)
    ![](https://i.imgur.com/lpPRZ6v.png)
 
