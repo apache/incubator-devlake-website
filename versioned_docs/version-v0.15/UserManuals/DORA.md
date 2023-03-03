@@ -17,13 +17,13 @@ There are two key clusters of data inside DORA: Velocity and Stability. The DORA
 
 Within velocity are two core metrics:
 
-- [Deployment Frequency](https://devlake.apache.org/docs/Metrics/DeploymentFrequency): Number of successful deployments to production, how rapidly is your team releasing to users?
-- [Lead Time for Changes](https://devlake.apache.org/docs/Metrics/LeadTimeForChanges): How long does it take from commit to the code running in production? This is important, as it reflects how quickly your team can respond to user requirements.
+- [Deployment Frequency](../Metrics/DeploymentFrequency): Number of successful deployments to production, how rapidly is your team releasing to users?
+- [Lead Time for Changes](../Metrics/LeadTimeForChanges): How long does it take from commit to the code running in production? This is important, as it reflects how quickly your team can respond to user requirements.
 
 Stability is composed of two core metrics:
 
-- [Median Time to Restore Service](https://devlake.apache.org/docs/Metrics/MTTR): How long does it take the team to properly recover from a failure once it is identified?
-- [Change Failure Rate](https://devlake.apache.org/docs/Metrics/CFR): How often are your deployments causing a failure?
+- [Median Time to Restore Service](../Metrics/MTTR): How long does it take the team to properly recover from a failure once it is identified?
+- [Change Failure Rate](../Metrics/CFR): How often are your deployments causing a failure?
 
 ![](https://i.imgur.com/71EUflb.png)
 
@@ -37,7 +37,7 @@ DORA metrics help teams and projects measure and improve software development pr
 
 You can set up DORA metrics in DevLake in a few steps:
 
-- **Install**: [Getting Started](https://devlake.apache.org/docs/GettingStarted)
+- **Install**: [Getting Started](../GettingStarted)
 - **Collect**: Collect data via blueprint
   - In the blueprint, select the data you wish to collect, and make sure you have selected the data required for DORA metrics
   - Configure DORA-related transformation rules to define `deployments` and `incidents`
@@ -47,7 +47,7 @@ You can set up DORA metrics in DevLake in a few steps:
 
 DevLake now supports Jenkins, GitHub Action and GitLabCI as data sources for `deployments` data; Jira, GitHub issues, and TAPD as the sources for `incidents` data; Github PRs, GitLab MRs as the sources for `changes` data.
 
-If your CI/CD tools are not listed on the [Supported Data Sources](https://devlake.apache.org/docs/next/Overview/SupportedDataSources) page, have no fear! DevLake provides incoming webhooks to push your `deployments` data to DevLake. The webhook configuration doc can be found [here](https://devlake.apache.org/docs/UserManuals/ConfigUI/webhook/).
+If your CI/CD tools are not listed on the [Supported Data Sources](../Overview/SupportedDataSources) page, have no fear! DevLake provides incoming webhooks to push your `deployments` data to DevLake. The webhook configuration doc can be found [here](../UserManuals/ConfigUI/webhook/).
 
 ## A real-world example
 
@@ -68,7 +68,7 @@ In the next section, we'll demonstrate how to configure DevLake to implement DOR
 ### Collect GitHub & Jira data via `blueprint`
 
 1. Visit the config-ui at `http://localhost:4000`
-2. Create a project: `project1`. And then create a `blueprint`, let's name it "Blueprint for DORA", add a Jira and a GitHub connection. Click `Next Step`
+2. Create a project: project1. Go to project1 and create a blueprint, let's name it "Blueprint for DORA", add a Jira and a GitHub connection. Click `Next Step`
    ![project1](/img/ConfigUI/project1.png)
    ![](https://i.imgur.com/lpPRZ6v.png)
 
@@ -90,7 +90,7 @@ In the next section, we'll demonstrate how to configure DevLake to implement DOR
 6. Choose sync frequency, click 'Save and Run Now' to start data collection. The time to completion varies by data source and depends on the volume of data.
    ![](https://i.imgur.com/zPkfzGr.png)
 
-For more details, please refer to our [blueprint manuals](https://devlake.apache.org/docs/UserManuals/ConfigUI/Tutorial).
+For more details, please refer to our [blueprint manuals](../UserManuals/ConfigUI/Tutorial).
 
 ### Collect CircleCI data via `webhook`
 
@@ -110,7 +110,7 @@ We recommend that you give your webhook connection a unique name so that you can
 9. Now head to your CircleCI's pipelines page in a new tab. Find your deployment pipeline and click `Configuration File`
    ![](https://i.imgur.com/XwPzmyk.png)
 
-10. Paste the curl command copied in step 8 to the `config.yml`, change the key-values in the payload. See full payload schema [here](https://devlake.apache.org/docs/Plugins/webhook/##register-a-deployment).
+10. Paste the curl command copied in step 8 to the `config.yml`, change the key-values in the payload. See full payload schema [here](../Plugins/webhook/##register-a-deployment).
 
 ```
 version: 2.1
@@ -155,7 +155,7 @@ workflows:
       - deploy
 ```
 
-If you have set a [username/password](https://devlake.apache.org/docs/UserManuals/Authentication) for Config UI, you need to add them to the curl to register a deployment:
+If you have set a [username/password](../GettingStarted/Authentication) for Config UI, you need to add them to the curl to register a deployment:
 
 ```
 curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
@@ -179,10 +179,10 @@ You can customize the DORA dashboard by editing the underlying SQL query of each
 
 For a breakdown of each metric's SQL query, please refer to the corresponding metric docs:
 
-- [Deployment Frequency](https://devlake.apache.org/docs/Metrics/DeploymentFrequency)
-- [Lead Time for Changes](https://devlake.apache.org/docs/Metrics/LeadTimeForChanges)
-- [Median Time to Restore Service](https://devlake.apache.org/docs/Metrics/MTTR)
-- [Change Failure Rate](https://devlake.apache.org/docs/Metrics/CFR)
+- [Deployment Frequency](../Metrics/DeploymentFrequency)
+- [Lead Time for Changes](../Metrics/LeadTimeForChanges)
+- [Median Time to Restore Service](../Metrics/MTTR)
+- [Change Failure Rate](../Metrics/CFR)
 
 If you aren't familiar with Grafana, please refer to our [Grafana doc](./Dashboards/GrafanaUserGuide.md), or jump into Slack for help.
 
