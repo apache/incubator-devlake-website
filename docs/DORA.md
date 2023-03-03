@@ -47,7 +47,7 @@ You can set up DORA metrics in DevLake in a few steps:
 
 DevLake now supports Jenkins, GitHub Action and GitLabCI as data sources for `deployments` data; Jira, GitHub issues, and TAPD as the sources for `incidents` data; Github PRs, GitLab MRs as the sources for `changes` data.
 
-If your CI/CD tools are not listed on the [Supported Data Sources](https://devlake.apache.org/docs/SupportedDataSources) page, have no fear! DevLake provides incoming webhooks to push your `deployments` data to DevLake. The webhook configuration doc can be found [here](https://devlake.apache.org/docs/Configuration/webhook/).
+If your CI/CD tools are not listed on the [Supported Data Sources](https://devlake.apache.org/docs/next/Overview/SupportedDataSources) page, have no fear! DevLake provides incoming webhooks to push your `deployments` data to DevLake. The webhook configuration doc can be found [here](https://devlake.apache.org/docs/Configuration/webhook/).
 
 ## A real-world example
 

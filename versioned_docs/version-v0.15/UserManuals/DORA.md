@@ -47,7 +47,7 @@ You can set up DORA metrics in DevLake in a few steps:
 
 DevLake now supports Jenkins, GitHub Action and GitLabCI as data sources for `deployments` data; Jira, GitHub issues, and TAPD as the sources for `incidents` data; Github PRs, GitLab MRs as the sources for `changes` data.
 
-If your CI/CD tools are not listed on the [Supported Data Sources](https://devlake.apache.org/docs/SupportedDataSources) page, have no fear! DevLake provides incoming webhooks to push your `deployments` data to DevLake. The webhook configuration doc can be found [here](https://devlake.apache.org/docs/Configuration/webhook/).
+If your CI/CD tools are not listed on the [Supported Data Sources](https://devlake.apache.org/docs/next/Overview/SupportedDataSources) page, have no fear! DevLake provides incoming webhooks to push your `deployments` data to DevLake. The webhook configuration doc can be found [here](https://devlake.apache.org/docs/UserManuals/ConfigUI/webhook/).
 
 ## A real-world example
 
@@ -90,7 +90,7 @@ In the next section, we'll demonstrate how to configure DevLake to implement DOR
 6. Choose sync frequency, click 'Save and Run Now' to start data collection. The time to completion varies by data source and depends on the volume of data.
    ![](https://i.imgur.com/zPkfzGr.png)
 
-For more details, please refer to our [blueprint manuals](https://devlake.apache.org/docs/Configuration/Tutorial).
+For more details, please refer to our [blueprint manuals](https://devlake.apache.org/docs/UserManuals/ConfigUI/Tutorial).
 
 ### Collect CircleCI data via `webhook`
 
@@ -155,7 +155,7 @@ workflows:
       - deploy
 ```
 
-If you have set a [username/password](GettingStarted/Authentication.md) for Config UI, you need to add them to the curl to register a deployment:
+If you have set a [username/password](https://devlake.apache.org/docs/UserManuals/Authentication) for Config UI, you need to add them to the curl to register a deployment:
 
 ```
 curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
@@ -184,7 +184,7 @@ For a breakdown of each metric's SQL query, please refer to the corresponding me
 - [Median Time to Restore Service](https://devlake.apache.org/docs/Metrics/MTTR)
 - [Change Failure Rate](https://devlake.apache.org/docs/Metrics/CFR)
 
-If you aren't familiar with Grafana, please refer to our [Grafana doc](Configuration/Dashboards/GrafanaUserGuide.md), or jump into Slack for help.
+If you aren't familiar with Grafana, please refer to our [Grafana doc](./Dashboards/GrafanaUserGuide.md), or jump into Slack for help.
 
 <br/>
 
@@ -194,7 +194,7 @@ If you aren't familiar with Grafana, please refer to our [Grafana doc](Configura
 
 ## Try it Out
 
-To create the DORA dashboard with your own toolchain, please look at the [configuration tutorial](Configuration/Tutorial.md) for more details.
+To create the DORA dashboard with your own toolchain, please look at the [configuration tutorial](ConfigUI/Tutorial.md) for more details.
 
 <br/>
 
