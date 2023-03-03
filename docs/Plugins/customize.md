@@ -142,7 +142,8 @@ response
 
 ### Create a Customized Column
 Create a new column `x_abc` with datatype `varchar(255)` for the table `issues`.
-The value of `columnName` must start with `x_` and consist of no more than 50 alphanumerics and underscores
+
+The value of `columnName` must start with `x_` and consist of no more than 50 alphanumerics and underscores.
 The value of field `dataType` must be one of the following 5 types:
 - varchar(255)
 - text
@@ -161,7 +162,7 @@ The value of field `dataType` must be one of the following 5 types:
 ```
 
 ### Drop A Column
-Drop the column `x_text` for the table `issues`
+Drop the column `x_text` of the table `issues`
 
 > DELETE /plugins/customize/issues/fields/x_test
 
@@ -169,14 +170,13 @@ Drop the column `x_text` for the table `issues`
 
 > POST /plugins/customize/csvfiles/issues.csv
 
-The HTTP `Content-Type` must be  `multipart/form-data`, and the form should have three fields:
+The HTTP `Content-Type` must be `multipart/form-data`, and the form should have three fields:
 
-- `file`: the CSV file
+- `file`: The CSV file
 - `boardId`: It will be written to the `id` field of the `boards` table, the `board_id` field of `board_issues`, and the `_raw_data_params` field of `issues`
 - `boardName`: It will be written to the `name` field of the `boards` table
 
-Upload a CSV file and import it to the `issues` table via this API. There should be no extra fields in the file except the `labels` field, 
-and if the field value is `NULL`, it should be `NULL` in the CSV instead of the empty string.
+Upload a CSV file and import it to the `issues` table via this API. There should be no extra fields in the file except the `labels` field, and if the field value is `NULL`, it should be `NULL` in the CSV instead of the empty string.
 DevLake will parse the CSV file and store it in the `issues` table, where the `labels` are stored in the `issue_labels` table. 
 If the `boardId` does not appear, a new record will be created in the boards table. The `board_issues` table will be updated at the same time as the import.
 The following is an issues.CSV file sample:
