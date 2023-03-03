@@ -138,7 +138,6 @@ needs to be called when an issue or incident is created. The body should be a JS
 
 |          Keyname          | Required | Notes                                                         |
 | :-----------------------: | :------: | ------------------------------------------------------------- |
-|         board_key         |  ✔️ Yes  | issue belongs to which board/project                          |
 |            url            |  ✖️ No   | issue's URL                                                   |
 |         issue_key         |  ✔️ Yes  | issue's key, needs to be unique in a connection               |
 |           title           |  ✔️ Yes  |                                                               |
@@ -168,22 +167,22 @@ More information about these columns at [DomainLayerIssueTracking](https://devla
 
 #### Register Issues - Close Issues (Optional)
 
-`POST https://sample-url.com/api/plugins/webhook/1/issue/:boardKey/:issueId/close`
+`POST https://sample-url.com/api/plugins/webhook/1/issue/:issueId/close`
 
-needs to be called when an issue or incident is closed. Replace `:boardKey` and `:issueId` with specific strings and keep the body empty.
+needs to be called when an issue or incident is closed. Replace `:issueId` with specific strings and keep the body empty.
 
 #### Register Issues - Sample API Calls
 
 Sample CURL for Issue Creating :
 
 ```
-curl https://sample-url.com/api/plugins/webhook/1/issues -X 'POST' -d '{"board_key":"DLK","url":"","issue_key":"DLK-1234","title":"a feature from DLK","description":"","epic_key":"","type":"BUG","status":"TODO","original_status":"created","story_point":0,"resolution_date":null,"created_date":"2020-01-01T12:00:00+00:00","updated_date":null,"lead_time_minutes":0,"parent_issue_key":"DLK-1200","priority":"","original_estimate_minutes":0,"time_spent_minutes":0,"time_remaining_minutes":0,"creator_id":"user1131","creator_name":"Nick name 1","assignee_id":"user1132","assignee_name":"Nick name 2","severity":"","component":""}'
+curl https://sample-url.com/api/plugins/webhook/1/issues -X 'POST' -d '{"url":"","issue_key":"DLK-1234","title":"a feature from DLK","description":"","epic_key":"","type":"BUG","status":"TODO","original_status":"created","story_point":0,"resolution_date":null,"created_date":"2020-01-01T12:00:00+00:00","updated_date":null,"lead_time_minutes":0,"parent_issue_key":"DLK-1200","priority":"","original_estimate_minutes":0,"time_spent_minutes":0,"time_remaining_minutes":0,"creator_id":"user1131","creator_name":"Nick name 1","assignee_id":"user1132","assignee_name":"Nick name 2","severity":"","component":""}'
 ```
 
 Sample CURL for Issue Closing:
 
 ```
-curl http://127.0.0.1:4000/api/plugins/webhook/1/issue/DLK/DLK-1234/close -X 'POST'
+curl http://127.0.0.1:4000/api/plugins/webhook/1/issue/DLK-1234/close -X 'POST'
 ```
 
 ## References
