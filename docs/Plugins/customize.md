@@ -8,10 +8,13 @@ description: >
 
 ## Summary
 
-This plugin provides users the ability to create/delete columns and extract data from certain raw layer tables.
-The columns created with this plugin must be start with the prefix `x_`
+This plugin provides users the ability to:
+- Add/delete columns in domain layer tables
+- Insert values to certain columns with data extracted from some raw layer tables
 
-**NOTE:** For now, only the following 5 types were supported:
+**NOTE:** The names of columns added via this plugin must start with the prefix `x_`
+
+For now, only the following five types were supported:
 - varchar(255)
 - text
 - bigint
@@ -137,7 +140,7 @@ response
 
 ```
 
-### Create A Customized Column
+### Create a Customized Column
 Create a new column `x_abc` with datatype `varchar(255)` for the table `issues`.
 The value of `columnName` must start with `x_` and consist of no more than 50 alphanumerics and underscores
 The value of field `dataType` must be one of the following 5 types:
@@ -186,13 +189,13 @@ The following is an issues.CSV file sample:
 |bitbucket:BitbucketIssue:1:14|2022-09-15 15:27:56.395|2022-09-15 15:27:56.395|board789             |_raw_bitbucket_api_issues|49          |                |https://api.bitbucket.org/2.0/repositories/thenicetgp/lake/issues/14|        |14       |issue test011|issue test011                    |        |issue|TODO  |new            |0          |NULL           |2022-08-12 13:45:12.810+00:00|2022-08-12 13:45:12.810+00:00|               |blocker |0                        |0                 |0                     |bitbucket:BitbucketAccount:1:62abf394192edb006fa0e8cf|tgp         |bitbucket:BitbucketAccount:1:62abf394192edb006fa0e8cf|tgp          |        |         |NULL             |NULL            |NULL         |41534568464351|2022-09-15 15:27:56|NULL     |NULL   |label1,label2,label3|
 
 
-### Upload `issue_commitss.csv` file
+### Upload `issue_commits.csv` file
 
 > POST /plugins/customize/csvfiles/issue_commits.csv
 
-The `Content-Type` should be  `multipart/form-data`, and the form should have three fields:
+The `Content-Type` should be  `multipart/form-data`, and the form should have two fields:
 
-- `file` the CSV file
+- `file` The CSV file
 - `boardId` It will be written to the `_raw_data_params` field of `issue_commits`
 
 The following is an issue_commits.CSV file sample:
