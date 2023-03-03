@@ -14,11 +14,17 @@ Go to the 'Data Connections' page. Create a webhook.
 
 We recommend that you give your webhook connection a unique name so that you can identify and manage where you have used it later.
 
-### Step 2 - Use Webhooks
+### Step 2 - Create webhooks connection
 
 Click on Generate POST URL, and you will find four webhook URLs. Copy the ones that suit your usage into your CI or issue-tracking systems. You can always come back to the webhook page to copy the URLs later on.
 
-![webhook-use](/img/ConfigUI/webhook-use.png)
+![webhook-connection](/img/ConfigUI/webhook-connection.png)
+
+### Step 3 - Use webhook in a project
+
+Create a Project first, choose Incoming Webhooks, then you can `Add a Webhook` or `Select Existing Webhooks`.
+
+![project-webhook-use](/img/ConfigUI/project-webhook-use.png)
 
 #### Put webhook on the internet
 
