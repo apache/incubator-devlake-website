@@ -97,15 +97,13 @@ For more details, please refer to our [blueprint manuals](../UserManuals/ConfigU
 Using CircleCI as an example, we demonstrate how to actively push data to DevLake using the Webhook approach, in cases where DevLake doesn't have a plugin specific to that tool to pull data from your data source.
 
 7. Go to the 'Data Connections' page. Create a webhook.
-
-![webhook-add-data-connections](/img/ConfigUI/webhook-add-data-connections.png)
+   ![webhook-add-data-connections](/img/ConfigUI/webhook-add-data-connections.png)
 
 We recommend that you give your webhook connection a unique name so that you can identify and manage where you have used it later.
 
 8. Create a Project first, choose Incoming Webhooks, then you can `Add a Webhook` or `Select Existing Webhooks`. And click "Generate POST URL". DevLake will generate URLs that you can send JSON payloads to push `deployments` and `incidents` to Devlake. Copy the `Deployment` curl command.
-
-![project-webhook-use](/img/ConfigUI/project-webhook-use.png)
-![webhook-connection](/img/ConfigUI/webhook-connection.png)
+   ![project-webhook-use](/img/ConfigUI/project-webhook-use.png)
+   ![webhook-connection](/img/ConfigUI/webhook-connection.png)
 
 9. Now head to your CircleCI's pipelines page in a new tab. Find your deployment pipeline and click `Configuration File`
    ![](https://i.imgur.com/XwPzmyk.png)
