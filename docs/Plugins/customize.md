@@ -11,6 +11,7 @@ description: >
 This plugin provides users the ability to:
 - Add/delete columns in domain layer tables
 - Insert values to certain columns with data extracted from some raw layer tables
+- Import data from CSV files(only `issues` and `issue_commits` two tables are supported) 
 
 **NOTE:** The names of columns added via this plugin must start with the prefix `x_`
 
