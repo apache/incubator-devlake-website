@@ -15,7 +15,7 @@ Security Reviewed is an indicator in SonarQube that tracks security-related code
 
 ## Which dashboard(s) does it exist in?
 
-- [SonarQube](https://devlake.apache.org/livedemo/DataSources/SonarQube)
+- [SonarQube](/livedemo/DataSources/SonarQube)
 
 ## How is it calculated?
 

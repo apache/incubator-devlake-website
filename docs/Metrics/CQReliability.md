@@ -15,7 +15,7 @@ By analyzing these metrics, you can better understand the reliability and qualit
 
 ## Which dashboard(s) does it exist in?
 
-- [SonarQube](https://devlake.apache.org/livedemo/DataSources/SonarQube)
+- [SonarQube](/livedemo/DataSources/SonarQube)
 
 ## How is it calculated?
 

@@ -15,7 +15,7 @@ Duplicated Blocks is a code metric that measures the amount of duplicated code i
 
 ## Which dashboard(s) does it exist in?
 
-- [SonarQube](https://devlake.apache.org/livedemo/DataSources/SonarQube)
+- [SonarQube](/livedemo/DataSources/SonarQube)
 
 ## How is it calculated?
 

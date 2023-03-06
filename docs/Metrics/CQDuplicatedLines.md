@@ -15,7 +15,7 @@ Duplicated lines are individual lines of code that are identical or nearly ident
 
 ## Which dashboard(s) does it exist in?
 
-- [SonarQube](https://devlake.apache.org/livedemo/DataSources/SonarQube)
+- [SonarQube](/livedemo/DataSources/SonarQube)
 
 ## How is it calculated?
 

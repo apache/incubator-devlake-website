@@ -15,7 +15,7 @@ CODE_SMELL is a type of issue that represents a potential problem in the code th
 
 ## Which dashboard(s) does it exist in?
 
-- [SonarQube](https://devlake.apache.org/livedemo/DataSources/SonarQube)
+- [SonarQube](/livedemo/DataSources/SonarQube)
 
 ## How is it calculated?
 
