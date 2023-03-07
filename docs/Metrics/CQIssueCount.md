@@ -33,7 +33,7 @@ N/A
 
 The following SQL shows how to find issues in specific projects, eg. 'project1' and 'project2'.
 
-1. To get the issue count of 'Hotspots', please add the condition `type = BUG`
+1. To get the issue count of 'BUG', please add the condition `type = BUG`
 
 ```
 SELECT
@@ -46,7 +46,7 @@ WHERE
 ORDER BY created_date
 ```
 
-2. To get the issue count of 'Hotspots', please add the condition `type = VULNERABILITY`
+2. To get the issue count of 'VULNERABILITY', please add the condition `type = VULNERABILITY`
 
 ```
 SELECT
@@ -59,7 +59,7 @@ WHERE
 ORDER BY created_date
 ```
 
-3. To get the issue count of 'Hotspots', please add the condition `type = HOTSPOTS`
+3. To get the issue count of 'HOTSPOTS', please add the condition `type = HOTSPOTS`
 
 ```
 SELECT
@@ -83,7 +83,7 @@ WHERE
 ORDER BY created_date
 ```
 
-4. To get the issue count of 'Hotspots', please add the condition `type = CODE_SMELL`
+4. To get the issue count of 'CODE_SMELL', please add the condition `type = CODE_SMELL`
 
 ```
 SELECT
