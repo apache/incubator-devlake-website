@@ -19,7 +19,7 @@ Issue provides information about potential problems or issues in the code. Issue
 
 ## How is it calculated?
 
-This metric is calculated by counting the total number of cq_issues under the `type=VULNERABILITY` condition.
+This metric is calculated by counting the total number of cq_issues.
 
 <b>Data Sources Required</b>
 
@@ -28,3 +28,68 @@ This metric relies on issues collected from SonarQube.
 <b>Data Transformation Required</b>
 
 N/A
+
+<b>SQL Queries</b>
+
+The following SQL shows how to find issues in specific projects, eg. 'project1' and 'project2'.
+
+1. To get the issue count of 'Hotspots', please add the condition `type = BUG`
+
+```
+SELECT
+  count(*) as 'Bugs'
+FROM cq_issues
+WHERE
+  $__timeFilter(created_date)
+  and  project_key in ('project1', 'project2')
+  and `type` = 'BUG'
+ORDER BY created_date
+```
+
+2. To get the issue count of 'Hotspots', please add the condition `type = VULNERABILITY`
+
+```
+SELECT
+  count(*) as 'Vulnerabilities'
+FROM cq_issues
+WHERE
+  $__timeFilter(created_date)
+  and project_key in ('project1', 'project2')
+  and `type` = 'VULNERABILITY'
+ORDER BY created_date
+```
+
+3. To get the issue count of 'Hotspots', please add the condition `type = HOTSPOTS`
+
+```
+SELECT
+  COUNT(IF(status = 'TO_REVIEW', 1, NULL)) AS 'Security Hotspots'
+FROM cq_issues
+WHERE
+  $__timeFilter(created_date)
+  and project_key in ('project1', 'project2')
+  and `type` = 'HOTSPOTS'
+ORDER BY created_date
+```
+
+```
+SELECT
+  CONCAT(ROUND(COUNT(IF(status != 'TO_REVIEW', 1, NULL)) / COUNT(*) * 100, 2), '%') AS 'Reviewed'
+FROM cq_issues
+WHERE
+  $__timeFilter(created_date)
+  and project_key in ('project1', 'project2')
+  and `type` = 'HOTSPOTS'
+ORDER BY created_date
+```
+
+4. To get the issue count of 'Hotspots', please add the condition `type = CODE_SMELL`
+
+```
+SELECT
+	COUNT(if(type = 'CODE_SMELL', 1, null)) as 'Code Smells'
+FROM cq_issues
+WHERE
+  $__timeFilter(created_date)
+  and project_key in ('project1', 'project2')
+```

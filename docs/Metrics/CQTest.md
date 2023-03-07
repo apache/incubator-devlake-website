@@ -28,3 +28,15 @@ This metric relies on file_metrics collected from SonarQube.
 <b>Data Transformation Required</b>
 
 N/A
+
+<b>SQL Queries</b>
+
+The following SQL shows how to find unit tests that have been executed against the code in specific projects, eg. 'project1' and 'project2'.
+
+```
+SELECT
+  CONCAT(ROUND((sum(lines_to_cover) - sum(uncovered_lines)) / sum(lines_to_cover) * 100, 1), '% ', 'Coverage on ', ROUND(sum(lines_to_cover) / 1000, 0),'k Lines to cover')
+FROM cq_file_metrics
+WHERE
+  project_key in ('project1', 'project2')
+```

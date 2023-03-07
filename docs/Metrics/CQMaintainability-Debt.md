@@ -19,7 +19,7 @@ It helps developers and project managers understand the costs and risks associat
 
 ## How is it calculated?
 
-This SQL query calculates the total technical debt in days for all issues in the SonarQube instance. Technical debt represents the amount of additional effort that is required to fix all the issues in a project. It is measured in terms of time (days, hours, etc.) that it would take to fix all the issues. The query uses the "debt" field in the "cq_issues" table to sum up the total debt for all issues, and then converts it into days by dividing the total debt by 8 hours (8 \* 60 minutes). The result is a string that shows the total debt in days.
+This SQL query calculates the total technical debt in days for all issues in the SonarQube instance. check [this doc](https://docs.sonarqube.org/latest/user-guide/metric-definitions/#maintainability) for detailed info.
 
 <b>Data Sources Required</b>
 
@@ -28,3 +28,16 @@ This metric relies on issues collected from SonarQube.
 <b>Data Transformation Required</b>
 
 N/A
+
+<b>SQL Queries</b>
+
+The following SQL shows how to find effort to fix all code smells in specific projects, eg. 'project1' and 'project2'.
+
+```
+SELECT
+  CONCAT(ROUND(SUM(debt) / (8 * 60), 0), ' days') AS 'Debt'
+FROM cq_issues
+WHERE
+  $__timeFilter(created_date)
+  project_key in ('project1', 'project2')
+```

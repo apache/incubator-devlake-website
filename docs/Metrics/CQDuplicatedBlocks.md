@@ -28,3 +28,15 @@ This metric relies on file metrics collected from SonarQube.
 <b>Data Transformation Required</b>
 
 N/A
+
+<b>SQL Queries</b>
+
+The following SQL shows how to find duplicated blocks of lines in specific projects, eg. 'project1' and 'project2'.
+
+```
+SELECT
+  sum(duplicated_blocks)
+FROM cq_file_metrics
+WHERE
+  project_key in ('project1', 'project2')
+```

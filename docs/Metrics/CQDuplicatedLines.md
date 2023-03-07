@@ -29,3 +29,15 @@ This metric relies on file metrics collected from SonarQube.
 <b>Data Transformation Required</b>
 
 N/A
+
+<b>SQL Queries</b>
+
+The following SQL shows how to find the number of files involved in duplications in specific projects, eg. 'project1' and 'project2'.
+
+```
+SELECT
+  CONCAT(ROUND(sum(duplicated_lines) / sum(num_of_lines) * 100, 1), '% ', 'Duplications on ', ROUND(sum(ncloc) / 1000, 0),'k Lines')
+FROM cq_file_metrics
+WHERE
+  project_key in ('project1', 'project2')
+```
