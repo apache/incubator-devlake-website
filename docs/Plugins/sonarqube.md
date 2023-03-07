@@ -7,6 +7,7 @@ description: >
 ## Summary
 
 This plugin collects SonarQube data through its REST APIs. SonarQube is a tool for static code analysis and code quality management. It can help you discover potential problems and defects in your code, and provide suggestions and solutions.
+(Please note that this version of SonarQube cannot collect issues with more than 10k+)
 
 ## Entities
 
@@ -19,6 +20,12 @@ Check out the [data refresh policy](/Overview/SupportedDataSources.md#sonarqube)
 ## Metrics
 
 Most of SonarQube metrics are collected and can be found in DevLake's SonarQube dashboard.
+
+- [Code Quality Issue Count](/Metrics/CQIssueCount.md)
+- [Code Quality Test](/Metrics/CQTest.md)
+- [Code Quality Maintainability-Debt](/Metrics/CQMaintainability-Debt.md)
+- [Code Quality Duplicated Blocks](/Metrics/CQDuplicatedBlocks.md)
+- [Code Quality Duplicated Lines](/Metrics/CQDuplicatedLines.md)
 
 ## Configuration
 

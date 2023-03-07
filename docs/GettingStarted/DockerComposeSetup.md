@@ -5,7 +5,6 @@ description: >
 sidebar_position: 1
 ---
 
-
 ## Prerequisites
 
 - [Docker v19.03.10+](https://docs.docker.com/get-docker)
@@ -17,24 +16,22 @@ sidebar_position: 1
 
 1. Download `docker-compose.yml` and `env.example` from [latest release page](https://github.com/apache/incubator-devlake/releases/latest) into a folder.
 2. Rename `env.example` to `.env`. For Mac/Linux users, please run `mv env.example .env` in the terminal. This file contains the environment variables that the Devlake server will use. Additional ones can be found in the compose file(s).
-3. If [Docker v2.13.0+](https://docs.docker.com/get-docker) Run `docker compose up -d` to launch DevLake or else Run `docker-compose up -d`.
+3. If the docker desktop version installed by the user is too low to use `docker compose up -d`, please use `docker-compose up -d`.
 
 ## Collect data and view dashboards
 
 1. Visit `config-ui` at `http://localhost:4000` in your browser to configure DevLake and collect data.
    - Please follow the [tutorial](Configuration/Tutorial.md)
    - `devlake` container takes a while to fully boot up. If `config-ui` complains about API being unreachable, please wait a few seconds and refresh the page.
-2. To view dashboards, click *View Dashboards* button in the top left corner, or visit `localhost:3002` (username: `admin`, password: `admin`).
+2. To view dashboards, click _View Dashboards_ button in the top left corner, or visit `localhost:3002` (username: `admin`, password: `admin`).
    - We use [Grafana](https://grafana.com/) to visualize the DevOps [data](/Overview/SupportedDataSources.md) and build dashboards.
    - For how to customize and provision dashboards, please see our [Grafana doc](../Configuration/Dashboards/GrafanaUserGuide.md).
-
 
 ## Upgrade to a newer version
 
 Support for database schema migration was introduced to DevLake in v0.10.0. From v0.10.0 onwards, users can upgrade their instance smoothly to a newer version. However, versions prior to v0.10.0 do not support upgrading to a newer version with a different database schema.
 
 <br/>
-
 
 ## Troubleshooting
 
