@@ -2,12 +2,12 @@
 title: "Code Quality Duplicated Blocks"
 description: >
   Code Quality Duplicated Blocks
-sidebar_position: 37
+sidebar_position: 33
 ---
 
 ## What is this metric?
 
-Duplicated Blocks is a code metric that measures the amount of duplicated code in a project.
+This metric is the number of duplicated blocks of lines. This metric is collected from SonarQube, check [this doc](https://docs.sonarqube.org/latest/user-guide/metric-definitions/#duplications) for detailed definition.
 
 ## Why is it important?
 

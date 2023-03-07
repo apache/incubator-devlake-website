@@ -2,12 +2,12 @@
 title: "Code Quality Duplicated Lines"
 description: >
   Code Quality Duplicated Lines
-sidebar_position: 38
+sidebar_position: 34
 ---
 
 ## What is this metric?
 
-Duplicated Lines is a code metric that measures the amount of duplicated code in a project.
+This metric is the number of files involved in duplications. This metric is collected from SonarQube, check [this doc](https://docs.sonarqube.org/latest/user-guide/metric-definitions/#duplications) for detailed definition.
 
 ## Why is it important?
 

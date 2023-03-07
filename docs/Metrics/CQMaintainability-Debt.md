@@ -2,16 +2,16 @@
 title: "Code Quality Maintainability-Debt"
 description: >
   Code Quality Maintainability-Debt
-sidebar_position: 35
+sidebar_position: 32
 ---
 
 ## What is this metric?
 
-Statistics on the number of debt type Issues.
+This metric is a measure of effort to fix all code smells. This metric is collected from SonarQube, check [this doc](https://docs.sonarqube.org/latest/user-guide/metric-definitions/#maintainability) for detailed definition.
 
 ## Why is it important?
 
-Debt represents the total amount of technical debt found by developers in the project, which is calculated through a series of code analysis indicators (such as code duplication, code complexity, code coverage, code comment rate, etc.).
+It helps developers and project managers understand the costs and risks associated with maintaining the codebase. High levels of technical debt can lead to more bugs, slower development cycles, and higher maintenance costs over time. By monitoring technical debt and working to reduce it, developers can ensure that their code is easier to maintain, more reliable, and more scalable.
 
 ## Which dashboard(s) does it exist in?
 

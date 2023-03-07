@@ -2,12 +2,12 @@
 title: "Code Quality Test"
 description: >
   Code Quality Test
-sidebar_position: 34
+sidebar_position: 31
 ---
 
 ## What is this metric?
 
-Statistics on test coverage of code file.
+This metric is the number of unit tests that have been executed against the code. This metric is collected from SonarQube, check [this doc](https://docs.sonarqube.org/latest/user-guide/metric-definitions/#tests) for detailed definition.
 
 ## Why is it important?
 
