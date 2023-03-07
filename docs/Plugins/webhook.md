@@ -45,13 +45,13 @@ If you want to collect deployment data from your system, you can use the incomin
 
 You can copy the generated deployment curl commands to your CI/CD script to post deployments to Apache DevLake. Below is the detailed payload schema:
 
-|     Key     | Required | Notes                                                                                                                                        |
-| :---------: | :------: | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| commit_sha  |  ✔️ Yes  | the sha of the deployment commit                                                                                                             |
-|  repo_url   |  ✔️ Yes  | the repo URL of the deployment commit                                                                                                        |
-| environment |  ✖️ No   | the environment this deployment happens. For example, `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br/>The default value is `PRODUCTION` |
-| start_time  |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                   |
-|  end_time   |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/>The default value is the time when DevLake receives the POST request.                                |
+|     Key     | Required | Notes                                                        |
+| :---------: | :------: | ------------------------------------------------------------ |
+| commit_sha  |  ✔️ Yes   | the sha of the deployment commit                             |
+|  repo_url   |  ✔️ Yes   | the repo URL of the deployment commit<br />If there is a row in the domain layer  table `repos` where `repos.url` equals `repo_url`, the `repoId` will be filled with `repos.id`. |
+| environment |   ✖️ No   | the environment this deployment happens. For example, `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br/>The default value is `PRODUCTION` |
+| start_time  |   ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.   |
+|  end_time   |   ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/>The default value is the time when DevLake receives the POST request. |
 
 #### Register a Deployment - Sample API Calls
 
