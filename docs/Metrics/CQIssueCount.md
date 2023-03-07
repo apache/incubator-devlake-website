@@ -93,3 +93,5 @@ WHERE
   $__timeFilter(created_date)
   and project_key in ('project1', 'project2')
 ```
+
+![](/img/Metrics/issue-type-count.png)
