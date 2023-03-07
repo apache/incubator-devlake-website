@@ -21,16 +21,11 @@ Check out the [data refresh policy](/Overview/SupportedDataSources.md#sonarqube)
 
 Most of SonarQube metrics are collected and can be found in DevLake's SonarQube dashboard.
 
-- [Code Quality Reliability](/Metrics/CQReliability.md)
-- [Code Quality Security](/Metrics/CQSecurity.md)
-- [Code Quality Hotspots](/Metrics/CQHotspots.md)
-- [Code Quality Security Reviewed](/Metrics/CQSecurityReviewed.md)
+- [Code Quality Issue Count](/Metrics/CQIssueCount.md)
 - [Code Quality Test](/Metrics/CQTest.md)
 - [Code Quality Maintainability-Debt](/Metrics/CQMaintainability-Debt.md)
-- [Code Quality Maintainability-CodeSmell](/Metrics/CQMaintainability-CodeSmell.md)
 - [Code Quality Duplicated Blocks](/Metrics/CQDuplicatedBlocks.md)
 - [Code Quality Duplicated Lines](/Metrics/CQDuplicatedLines.md)
-- [Code Quality Code](/Metrics/CQCode.md)
 
 ## Configuration
 
