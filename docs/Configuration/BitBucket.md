@@ -12,17 +12,17 @@ Visit config-ui: `http://localhost:4000` and go to `Connections` page.
 
 #### Connection Name
 
-Name your connection.
+Give your connection a unique name to help you identify it in the future.
 
 #### Endpoint URL
 
-This should be a valid REST API endpoint for BitBucket Cloud: `https://api.bitbucket.org/2.0/`. The endpoint URL should end with `/`.
+For BitBucket Cloud, you do not need to enter the REST API endpoint URL, which is always `https://api.bitbucket.org/2.0/`.
 
 DevLake will support BitBucket Server in the future.
 
-#### Authentication
+#### Username and App Password
 
-BitBucket `username` and `app password` are required to add a connection. Learn about [how to create a BitBucket app password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/).
+Learn about [how to create a BitBucket app password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/).
 
 The following permissions are required to collect data from BitBucket repositories:
 
@@ -47,7 +47,7 @@ If you are behind a corporate firewall or VPN you may need to utilize a proxy se
 
 DevLake uses a dynamic rate limit to collect BitBucket data. You can adjust the rate limit if you want to increase or lower the speed.
 
-The maximum rate limit for different entities in BitBucket(Cloud) is [1,000 requests/hour](https://support.atlassian.com/BitBucket-cloud/docs/api-request-limits/). But we find it can run when we try a rate limit of more than 1000/h. So you can try the bigger maximum if your repo is big enough.
+The maximum rate limit for different entities in BitBucket(Cloud) [varies from 1,000 - 60,000 requests/hour](https://support.atlassian.com/bitbucket-cloud/docs/api-request-limits/). The rate limit to access repository data is 1,000 requests/hour, but we find it can still run when we input a value that exceeds 1,000. You can try using a larger rate limit if you have large repositories.
 
 <!-- ![image](https://user-images.githubusercontent.com/3294100/220094172-9e8e9e8b-75ea-4c3e-8e5b-716320dabb64.png) -->
 
@@ -62,7 +62,7 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 
 #### Repositories
 
-Select the BitBucket repos to collect.
+Select the BitBucket repositories to collect.
 
 #### Data Entities
 
@@ -74,26 +74,23 @@ Usually, you don't have to modify this part. However, if you don't want to colle
 - CI/CD: BitBucket Pipelines, BitBucket Deployments, etc.
 - Cross Domain: BitBucket accounts, etc.
 
-Please go to the `Blueprints` page and switch to advanced mode. See how to use advanced mode and JSON [examples](AdvancedMode.md).
 
 ### Step 3 - Adding Transformation Rules (Optional)
 
 ![image](https://user-images.githubusercontent.com/3294100/220338276-a67cd8cc-ea76-4cb2-bb7b-bba581d21d70.png)
 
-Without changing default transformation rules, you can still view the Metrics dashboard. However, if you want to view pre-built dashboards, the following transformation rules, especially "Issue Tracking" should be added.<br/>
-
-Each BitBucket repo has at most ONE set of transformation rules.
+Transforamtion for BitBucket is needed if you want to view metrics such as `Requirement Delivery Rate` in the pre-built dashboards. 
 
 #### Issue Tracking
 
-- TODO: the issues with selected states can be recognized not start issues. 
-- IN-PROGRESS: The issues statuses that indicate an issue is work in progress.
-- DONE: The issue statuses that indicate an issue is completed.
-- OTHER: Other issues statuses that can not be mapped to the above three statuses.
+- TODO: The issues that are planned but have not been worked on yet 
+- IN-PROGRESS: The issues that are work-in-progress
+- DONE: The issue have have been completed
+- OTHER: Other issues statuses that do not belong to the three statuses above
 
 #### CI/CD
 
-This set of configurations is used for calculating [DORA metrics](../DORA.md).
+The CI/CD configuration for BitBucket is used for calculating [DORA metrics](../DORA.md).
 
 BitBucket has several key CI entities: `pipelines`, `pipeline steps`, and `deployments`. A Bitbucket pipeline contains several pipeline steps. Each pipeline step defined with a deployment key can be mapped to a BitBucket deployment.
 
@@ -101,34 +98,32 @@ Each Bitbucket pipeline is converted to a cicd_pipeline in DevLake's domain laye
 ![image](https://user-images.githubusercontent.com/3294100/220288225-71bee07d-c319-45bd-98e5-f4d01359840e.png)
 
 
-
-If a pipeline step defines `deployment` with a value (usually means envrionment), this pipeline step is also a BitBucket deployment. 
+If a pipeline step defines `deployment` with a value (usually indicating the envrionment), this pipeline step is also a BitBucket deployment. 
 
 ![img_v2_89602d14-a733-4679-9d4b-d9635c03bc5g](https://user-images.githubusercontent.com/3294100/221528908-4943b1e6-1398-49e9-8ce9-aa264995f9bc.jpg)
 
 ![image](https://user-images.githubusercontent.com/3294100/221887426-4cae1c46-31ce-4fcd-b773-a54c28af0264.png)
 
 
-
 How does DevLake tell if a BitBucket pipeline step is a deployment? The pipeline steps (defined in the .yaml) with the `deployment` key are considered as `DevLake deployments`. The value of the `deployment` key will be considered as the environment of DevLake deployments.
 
 These DevLake deployments will be recorded in table.cicd_tasks in DevLake's domain layer, with `type` = 'deployment' and `environment` = '{BitBucket-pipeline-step.deployment.value}', differentiating from other CI tasks.
 
-Or if you're using BitBucket pipelines to conduct `deployments`, please select "Detect Deployments from Pipeline steps in BitBucket", and input the RegEx in the following fields:
+Or if you are using BitBucket pipelines to conduct `deployments`, please select "Detect Deployments from Pipeline steps in BitBucket", and input the RegEx in the following fields:
 
-- Deployment: A BitBucket pipeline steps with a name that matches the given regEx will be considered as a deployment.
-- Production: A BitBucket pipeline steps with a name that matches the given regEx will be considered a job in the production environment.
+- Deployment: A BitBucket pipeline steps with a name that matches the given RegEx will be considered as a deployment.
+- Production: A BitBucket pipeline steps with a name that matches the given RegEx will be considered a job in the production environment.
 
-The deployment and production regex are only applied to the records in the cicd_tasks table when BitBucket Deployments not exists.
+The deployment and production RegExes are only applied to the records in the cicd_tasks table when BitBucket Deployments do not exist.
 
 #### Additional Settings (Optional)
 
-- Tags Limit: It'll compare the last N pairs of tags to get the "commit diff', "issue diff" between tags. N defaults to 10.
+- Tags Limit: DevLake compares the last N pairs of tags to get the "commit diff', "issue diff" between tags. N defaults to 10.
 
     - commit diff: new commits for a tag relative to the previous one
     - issue diff: issues solved by the new commits for a tag relative to the previous one
 
-- Tags Pattern: Only tags that meet the given regular expression will be counted.
+- Tags Pattern: Only tags that meet the given Regular Expression will be counted.
 
 - Tags Order: Only "reverse semver" order is supported for now.
 
@@ -136,8 +131,8 @@ Please click `Save` to save the transformation rules for the repo. In the data s
 
 ### Step 4 - Setting Sync Frequency
 
-You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your prefered schedule.
+You can choose how often you would like to sync your data in this step by selecting a sync frequency option or entering a cron code to specify your prefered schedule.
 
 ### Troubleshooting
 
-If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)
+If you run into any problems, please check the [Troubleshooting](/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues).
