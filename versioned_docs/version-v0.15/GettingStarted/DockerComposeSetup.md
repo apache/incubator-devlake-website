@@ -35,6 +35,93 @@ Support for database schema migration was introduced to DevLake in v0.10.0. From
 
 <br/>
 
+## FAQ
+### Can I use an external Database service instead of running Database in Docker?
+
+    Yes, you can simply comment out the 'mysql' part in 'docker-compose.yml' and update some configurations in '.env' before you run docker compose up -d, here are the steps:
+
+1. Comment out mysql part:
+```yaml
+  mysql:
+    image: mysql:8
+    volumes:
+      - mysql-storage:/var/lib/mysql
+    restart: always
+    ports:
+      - "127.0.0.1:3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: lake
+      MYSQL_USER: merico
+      MYSQL_PASSWORD: merico
+    command:
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_bin
+```
+
+2. Comment out the 'mysql' volume:
+
+```yaml
+volumes:
+   mysql-storage:
+```
+
+3. Comment out the 'depends_on mysql' part:
+
+```yaml
+    depends_on:
+      - mysql
+```
+
+4. Set DB_URL to your own DB_URL in .env
+
+```bash
+DB_URL="mysql://YOUR_USER:YOUR_PASSWORD@YOUR_IP:YOUR_PORT/lake?charset=utf8mb4&parseTime=True"
+# Don't forget to create db named `lake` in your own db, and set character-set-server=utf8mb4, collation-server=utf8mb4_bin as below
+#      character-set-server=utf8mb4
+#      collation-server=utf8mb4_bin
+```
+
+
+5. Final step: `docker compose up -d`
+
+### Can I use an external Grafana instead of running Grafana in Docker?
+
+    Yes, you can simply comment out grafana part in docker-compose.yml and update some configurations in .env before you run `docker compose up -d`, here are the steps:
+
+1. Comment out the 'grafana' part:
+
+```yaml
+  grafana:
+    image: mericodev/devlake-dashboard:latest
+    build:
+      context: grafana/
+    ports:
+      - "3002:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    environment:
+      GF_SERVER_ROOT_URL: "http://localhost:4000/grafana"
+      GF_USERS_DEFAULT_THEME: "light"
+      MYSQL_URL: mysql:3306
+      MYSQL_DATABASE: lake
+      MYSQL_USER: merico
+      MYSQL_PASSWORD: merico
+    restart: always
+    depends_on:
+      - mysql
+```
+
+2. Comment out grafana volume:
+
+```yaml
+volumes:
+   grafana-storage:
+```
+
+3. Set config-ui.environment.GRAFANA_ENDPOINT to your own grafana url in docker-compose.yml
+
+4. Final step: `docker compose up -d`
 
 ## Troubleshooting
 

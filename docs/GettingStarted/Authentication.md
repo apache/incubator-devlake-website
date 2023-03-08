@@ -8,7 +8,7 @@ The document explains how you can set up Apache DevLake securely.
 
 First of all, there are 4 services included in the deployment:
 
-- database: `postgress` and `mysql` are supported, you may choose one of them or any other compatible DBS like cloud-based systems. You should follow the document from the database to make it secure.
+- database: `mysql` is supported, you may use it or any other compatible DBS like cloud-based systems. You should follow the document from the database to make it secure.
 - grafana: You are likely to use it most of the time, browsing built-in dashboards, and creating your own customized metric. grafana supports [User Management](https://grafana.com/docs/grafana/latest/administration/user-management/), please follow the official document to set it up based on your need.
 - devlake: This is the core service for Data Collection and Metric Calculation, all collected/calculated data would be stored to the database, and accessed by the `grafana` service. `devlake` itself doesn't support User Management of any kind, so we don't recommend that you expose its port to the outside world.
 - config-ui: A web interface to set up `devlake` to do the work. You may set up an automated `blueprint` to collect data. `config-ui` supports `Basic Authentication`, by simply set up the Environment Variable `ADMIN_USER` and `ADMIN_PASS` for the container. There are commented lines in `config-ui.environment` section in our `docker-compose.yml` file for your convenience.
