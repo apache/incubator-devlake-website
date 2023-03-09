@@ -50,7 +50,7 @@ This table shows the entities collected by each plugin. Domain layer entities in
 | [components](../DataModels/DevLakeDomainLayerSchema.md/#components)                         |     |      |              |                  |        |        |         |      |         |      |           |
 | [finished_commits_diffs](../DataModels/DevLakeDomainLayerSchema.md/#finished_commits_diffs) |     |      |              |                  |        |        |         |      |         |      |           |
 | [issue_changelogs](../DataModels/DevLakeDomainLayerSchema.md/#issue_changelogs)             |     |      |              |                  |        |        |         | ✅   |         | ✅   |           |
-| [issue_comments](../DataModels/DevLakeDomainLayerSchema.md/#issue_commentswip)              |     |      |              |                  | ✅     |        |         |      |         | ✅   |           |
+| [issue_comments](../DataModels/DevLakeDomainLayerSchema.md/#issue_comments)              |     |      |              |                  | ✅     |        |         |      |         | ✅   |           |
 | [issue_commits](../DataModels/DevLakeDomainLayerSchema.md/#issue_commits)                   |     |      |              |                  |        |        |         | ✅   |         | ✅   |           |
 | [issue_labels](../DataModels/DevLakeDomainLayerSchema.md/#issue_labels)                     |     |      |              |                  | ✅     | ✅     |         |      |         | ✅   |           |
 | [issue_repo_commits](../DataModels/DevLakeDomainLayerSchema.md/#issue_repo_commits)         |     |      |              |                  |        |        |         | ✅   |         |      |           |
