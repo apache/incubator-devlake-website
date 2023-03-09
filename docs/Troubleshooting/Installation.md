@@ -8,7 +8,7 @@ description: >
 ### `panic: invalid encKey` error
 
 The cause is the `devlake` trying to decrypt data in the database with the wrong key.
-Please check the [Upgrade](../GettingStarted/Upgrade.md) for more detail.
+Please check the [GettingStarted/Upgrade](../GettingStarted/Upgrade.md) doc for more detail.
 
 ## None of them solve your problem?
 
