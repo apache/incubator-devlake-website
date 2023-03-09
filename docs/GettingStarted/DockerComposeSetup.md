@@ -34,11 +34,11 @@ Support for database schema migration was introduced to DevLake in v0.10.0. From
 <br/>
 
 ## FAQ
-### Can I use an external Database service instead of running Database in Docker?
+### Can I use a managed Cloud database service instead of running database in Docker??
 
-    Yes, you can simply comment out the 'mysql' part in 'docker-compose.yml' and update some configurations in '.env' before you run docker compose up -d, here are the steps:
+Yes, you can simply comment out the 'mysql' part in 'docker-compose.yml' and update some configurations in '.env' before you run docker compose up -d, here are the steps:
 
-1. Comment out mysql part:
+1. Comment out 'mysql' part in `docker-compose.yml`:
 ```yaml
   mysql:
     image: mysql:8
@@ -57,21 +57,30 @@ Support for database schema migration was introduced to DevLake in v0.10.0. From
       --collation-server=utf8mb4_bin
 ```
 
-2. Comment out the 'mysql' volume:
+2. Comment out the 'mysql' volume in `docker-compose.yml`:
 
 ```yaml
 volumes:
    mysql-storage:
 ```
 
-3. Comment out the 'depends_on mysql' part:
+3. Comment out the 'depends_on mysql' part in `docker-compose.yml`:
 
 ```yaml
     depends_on:
       - mysql
 ```
 
-4. Set DB_URL to your own DB_URL in .env
+4. Edit `MYSQL_*` inside 'grafana.environment' part in `docker-compose.yml`:
+
+```yaml
+      MYSQL_URL: DB_URL:DB_PORT
+      MYSQL_DATABASE: DB_NAME
+      MYSQL_USER: DB_USER
+      MYSQL_PASSWORD: DB_PASSWORD
+```
+
+5. Set DB_URL to your own DB_URL in `.env`:
 
 ```bash
 DB_URL="mysql://YOUR_USER:YOUR_PASSWORD@YOUR_IP:YOUR_PORT/lake?charset=utf8mb4&parseTime=True"
@@ -80,12 +89,11 @@ DB_URL="mysql://YOUR_USER:YOUR_PASSWORD@YOUR_IP:YOUR_PORT/lake?charset=utf8mb4&p
 #      collation-server=utf8mb4_bin
 ```
 
-
-5. Final step: `docker compose up -d`
+6. Final step: `docker compose up -d`
 
 ### Can I use an external Grafana instead of running Grafana in Docker?
 
-    Yes, you can simply comment out grafana part in docker-compose.yml and update some configurations in .env before you run `docker compose up -d`, here are the steps:
+Yes, you can simply comment out grafana part in docker-compose.yml and update some configurations in .env before you run `docker compose up -d`, here are the steps:
 
 1. Comment out the 'grafana' part:
 
@@ -114,7 +122,7 @@ DB_URL="mysql://YOUR_USER:YOUR_PASSWORD@YOUR_IP:YOUR_PORT/lake?charset=utf8mb4&p
 
 ```yaml
 volumes:
-   grafana-storage:
+  grafana-storage:
 ```
 
 3. Set config-ui.environment.GRAFANA_ENDPOINT to your own grafana url in docker-compose.yml
