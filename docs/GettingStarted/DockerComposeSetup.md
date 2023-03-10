@@ -34,7 +34,7 @@ Support for database schema migration was introduced to DevLake in v0.10.0. From
 <br/>
 
 ## FAQ
-### Can I use a managed Cloud database service instead of running database in Docker?
+### Can I use a managed cloud database service instead of running database in Docker?
 
 Yes, please follow the steps below:
 
@@ -133,11 +133,13 @@ volumes:
 
 3. Set config-ui.environment.GRAFANA_ENDPOINT to your own grafana url in docker-compose.yml
 
-4. If you want to import dashboards, please check https://grafana.com/docs/grafana/latest/dashboards/export-import/.
+4. Please connect your Grafana to DevLake's database by following https://grafana.com/docs/grafana/latest/administration/data-source-management/
+
+5. If you want to import dashboards, please check https://grafana.com/docs/grafana/latest/dashboards/export-import/.
 
 * You can find DevLake's self-built Grafana dashboards here (https://github.com/apache/incubator-devlake/tree/main/grafana/dashboards).
 
-5. Final step: `docker compose up -d`
+6. Final step: `docker compose up -d`
 
 ## Troubleshooting
 
