@@ -1,5 +1,5 @@
 ---
-title: "BitBucket(Cloud)"
+title: "BitBucket Cloud"
 sidebar_position: 2
 description: Config UI instruction for BitBucket(Cloud)
 ---
@@ -58,7 +58,7 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 
 ### Step 2 - Configure Blueprint
 
-![image](https://user-images.githubusercontent.com/3294100/220236338-772b30b7-974f-4bc2-89ce-f2abe5e92a5e.png)
+![image](https://user-images.githubusercontent.com/14050754/224308925-449a4d3e-ed52-45e9-bb72-0d2892df374f.png)
 
 #### Repositories
 
@@ -75,46 +75,56 @@ Usually, you don't have to modify this part. However, if you don't want to colle
 - Cross Domain: BitBucket accounts, etc.
 
 
-### Step 3 - Adding Transformation Rules (Optional)
-
-![image](https://user-images.githubusercontent.com/3294100/220338276-a67cd8cc-ea76-4cb2-bb7b-bba581d21d70.png)
-
-Transforamtion for BitBucket is needed if you want to view metrics such as `Requirement Delivery Rate` in the pre-built dashboards. 
+### Step 3 - Add Transformation (Optional)
+You can add a `transformation` to standardize the data. A `transformation` acts on the BitBucket data in the [tool layer](/docs/DataModels/ToolLayerSchema.md), transforming it to the [domain layer](/docs/DataModels/DevLakeDomainLayerSchema.md).
 
 #### Issue Tracking
 
+**Issue Status Mapping**<br/>
+![image](https://user-images.githubusercontent.com/14050754/224309704-b096c256-b2cf-4107-b78c-044d06b5f23c.png)
+
+The given settings transformed the BitBucket issue statuses to the issue statuses used by DevLake, enabling you to measure metrics like the Issue Delivery Rate on the pre-built dashboards, as DevLake understands your definition of when an issue is considered as completed (status = 'DONE').
+
 - TODO: The issues that are planned but have not been worked on yet 
 - IN-PROGRESS: The issues that are work-in-progress
-- DONE: The issue have have been completed
+- DONE: The issues that are completed
 - OTHER: Other issues statuses that do not belong to the three statuses above
 
-#### CI/CD
+The original status will be saved in the column `original_status` of the table 'issues', and the new status will be saved in the column `status` of the same table.
 
+**Issue Type Mapping**<br/>
+DevLake will convert the issue types of 'enhancement', 'proposal', and 'task' from BitBucket into the new issue type 'REQUIREMENT' for DevLake. In contrast, any issues classified as 'bug' in BitBucket will be converted into the new issue type 'BUG' for DevLake. The original type will be saved in the column `original_type` of the table 'issues', and the new type will be saved in the column `type` of the same table.
+
+#### CI/CD
 The CI/CD configuration for BitBucket is used for calculating [DORA metrics](../DORA.md).
 
+By default, DevLake will identify the deployment and environment settings that are defined in the BitBucket CI .yml file. 
+
+![image](https://user-images.githubusercontent.com/14050754/224311429-31304867-8cdd-476b-8675-e4acbc17f552.png)
+
+However, to ensure this works properly, you must specify the deployment settings in the .yml file.
+![img_v2_89602d14-a733-4679-9d4b-d9635c03bc5g](https://user-images.githubusercontent.com/3294100/221528908-4943b1e6-1398-49e9-8ce9-aa264995f9bc.jpg)
+
+The pipeline steps with the `deployment` key will be recognized as DevLake deployments. The value of the `deployment` key will be recognized as the environment of DevLake deployments.
+
+All BitBucket pipeline steps will be saved in table 'cicd_tasks', but DevLake deployments will be set as `type` = 'deployment' and `environment` = '{BitBucket-pipeline-step.deployment.value}'.
+
+If you have not defined these settings in the .yml file, please select 'Detect Deployments from Pipeline steps in BitBucket', and input the RegEx in the following fields:
+
+![image](https://user-images.githubusercontent.com/14050754/224310350-cc9a4901-476d-4583-ad73-4d3b394bc343.png)
+
+- Deployment: A pipeline step with a name that matches the given RegEx will be recognized as a DevLake deployment.
+- Production: A pipeline step with a name that matches the given RegEx will be recognized as a DevLake cicd_task in the production environment.
+
+**Introduction to BitBucket CI entities**<br/>
 BitBucket has several key CI entities: `pipelines`, `pipeline steps`, and `deployments`. A Bitbucket pipeline contains several pipeline steps. Each pipeline step defined with a deployment key can be mapped to a BitBucket deployment.
 
 Each Bitbucket pipeline is converted to a cicd_pipeline in DevLake's domain layer schema and each Bitbucket pipeline step is converted to a cicd_task in DevLake's domain layer.
 ![image](https://user-images.githubusercontent.com/3294100/220288225-71bee07d-c319-45bd-98e5-f4d01359840e.png)
 
-
-If a pipeline step defines `deployment` with a value (usually indicating the envrionment), this pipeline step is also a BitBucket deployment. 
-
-![img_v2_89602d14-a733-4679-9d4b-d9635c03bc5g](https://user-images.githubusercontent.com/3294100/221528908-4943b1e6-1398-49e9-8ce9-aa264995f9bc.jpg)
+If a pipeline step defines `deployment` with a value (usually indicating the environment), this pipeline step is also a BitBucket deployment.
 
 ![image](https://user-images.githubusercontent.com/3294100/221887426-4cae1c46-31ce-4fcd-b773-a54c28af0264.png)
-
-
-How does DevLake tell if a BitBucket pipeline step is a deployment? The pipeline steps (defined in the .yaml) with the `deployment` key are considered as `DevLake deployments`. The value of the `deployment` key will be considered as the environment of DevLake deployments.
-
-These DevLake deployments will be recorded in table.cicd_tasks in DevLake's domain layer, with `type` = 'deployment' and `environment` = '{BitBucket-pipeline-step.deployment.value}', differentiating from other CI tasks.
-
-Or if you are using BitBucket pipelines to conduct `deployments`, please select "Detect Deployments from Pipeline steps in BitBucket", and input the RegEx in the following fields:
-
-- Deployment: A BitBucket pipeline steps with a name that matches the given RegEx will be considered as a deployment.
-- Production: A BitBucket pipeline steps with a name that matches the given RegEx will be considered a job in the production environment.
-
-The deployment and production RegExes are only applied to the records in the cicd_tasks table when BitBucket Deployments do not exist.
 
 #### Additional Settings (Optional)
 
