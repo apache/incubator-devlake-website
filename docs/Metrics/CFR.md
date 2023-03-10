@@ -16,7 +16,9 @@ DORA dashboard. See [live demo](https://grafana-lake.demo.devlake.io/grafana/d/q
 
 
 ## How is it calculated?
-The number of failures per the number of deployments. For example, if there are five deployments in a day and one causes a failure, that is a 20% change failure rate.
+The number of deployments affected by incidents/total number of deployments. For example, if there are five deployments and two deployments cause one or more incidents, that is a 40% change failure rate.
+
+![](/img/Metrics/cfr-definition.png)
 
 Below are the benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's change failure rate is `18%` or `40%`. Therefore, DevLake provides its own benchmarks to address this problem:
 
@@ -43,39 +45,43 @@ This metric relies on:
 <b>Transformation Rules Required</b>
 
 This metric relies on:
-- Deployment configuration in Jenkins, GitLab or GitHub transformation rules to let DevLake know what CI builds/jobs can be regarded as `Deployments`.
-- Incident configuration in Jira, GitHub or TAPD transformation rules to let DevLake know what CI builds/jobs can be regarded as `Incidents`.
+- Deployment configuration in Jenkins, GitLab, GitHub or BitBucket transformation rules to let DevLake know which CI builds/jobs can be regarded as `Deployments`.
+- Incident configuration in Jira, GitHub or TAPD transformation rules to let DevLake know which issues can be regarded as `Incidents`.
 
 <b>SQL Queries</b>
 
-If you want to measure the monthly trend of change failure rate as the picture shown below, run the following SQL in Grafana.
+If you want to measure the monthly trend of change failure rate, run the following SQL in Grafana.
 
 ![](/img/Metrics/cfr-monthly.jpeg)
 
 ```
 with _deployments as (
--- get the deployment count each month
+-- get the deployments in each month
 	SELECT
-		date_format(finished_date,'%y/%m') as month,
-		COUNT(distinct id) AS deployment_count
+	  date_format(ct.finished_date,'%y/%m') as month,
+		ct.id AS deployment_id
 	FROM
-		cicd_tasks
+		cicd_tasks ct
+		join project_mapping pm on ct.cicd_scope_id = pm.row_id
 	WHERE
-		type = 'DEPLOYMENT'
+	  pm.project_name in ($project)
+		and type = 'DEPLOYMENT'
 		and result = 'SUCCESS'
-	GROUP BY 1
+		and environment = 'PRODUCTION'
 ),
 
 _incidents as (
--- get the incident count each month
+-- get the incidents (caused by deployments) that are created within the selected time period in the top-right corner
 	SELECT
-		date_format(created_date,'%y/%m') as month,
-		COUNT(distinct id) AS incident_count
+		date_format(i.created_date,'%y/%m') as month,
+		i.id AS incident_id,
+		pim.deployment_id
 	FROM
-		issues
+		issues  i
+	  join project_issue_metrics pim on i.id = pim.id
 	WHERE
-		type = 'INCIDENT'
-	GROUP BY 1
+	  pim.project_name in ($project) and
+		i.type = 'INCIDENT'
 ),
 
 _calendar_months as(
@@ -88,58 +94,97 @@ _calendar_months as(
 			UNION ALL SELECT   10 UNION ALL SELECT  11
 		) month_index
 	WHERE (SYSDATE()-INTERVAL (month_index) MONTH) > SYSDATE()-INTERVAL 6 MONTH	
+),
+
+_deployment_failures as (
+-- calculate the number of incidents caused by each deployment
+  SELECT 
+		distinct
+			cm.month,
+			d.deployment_id,
+			count(distinct i.incident_id) as incident_count
+  FROM 
+  	_calendar_months cm
+  	left join _deployments d on cm.month = d.month
+  	left join _incidents i on d.deployment_id = i.deployment_id
+	GROUP BY 1,2
 )
 
-SELECT 
-	cm.month,
-	case 
-		when d.deployment_count is null or i.incident_count is null then 0 
-		else i.incident_count/d.deployment_count end as change_failure_rate
-FROM 
-	_calendar_months cm
-	left join _incidents i on cm.month = i.month
-	left join _deployments d on cm.month = d.month
+SELECT
+  month,
+	case when 
+		count(deployment_id) is null then null
+		else count(case when incident_count = 0 then null else incident_count end)/count(deployment_id) end as change_failure_rate
+FROM _deployment_failures
+GROUP BY 1
 ORDER BY 1
 ```
 
-If you want to measure in which category your team falls into as the picture shown below, run the following SQL in Grafana.
+If you want to measure in which category your team falls into, run the following SQL in Grafana.
 
 ![](/img/Metrics/cfr-text.jpeg)
 
 ```
-with _deployment_count as (
+with _deployments as (
 -- get the deployment deployed within the selected time period in the top-right corner
 	SELECT
-		COUNT(distinct id) AS deployment_count
+		ct.id AS deployment_id,
+		ct.finished_date as deployment_finished_date
 	FROM
-		cicd_tasks
+		cicd_tasks ct
+		join project_mapping pm on ct.cicd_scope_id = pm.row_id
 	WHERE
-		type = 'DEPLOYMENT'
+	  pm.project_name in ($project)
+		and type = 'DEPLOYMENT'
 		and result = 'SUCCESS'
+		and environment = 'PRODUCTION'
     and $__timeFilter(finished_date)
 ),
 
-_incident_count as (
--- get the incident created within the selected time period in the top-right corner
+_incident_caused_by_deployments as (
+-- get the incidents (caused by deployments) that are created within the selected time period in the top-right corner
 	SELECT
-		COUNT(distinct id) AS incident_count
+		i.id AS incident_id,
+		pim.deployment_id
 	FROM
-		issues
+		issues  i
+	  join project_issue_metrics pim on i.id = pim.id
 	WHERE
-		type = 'INCIDENT'
-		and $__timeFilter(created_date)
+	  pim.project_name in ($project) and
+		i.type = 'INCIDENT'
+		and $__timeFilter(i.created_date)
+),
+
+_deployment_failures as (
+-- calculate the number of incidents caused by each deployment
+  SELECT 
+		distinct
+			d.deployment_id,
+			d.deployment_finished_date,
+			count(distinct i.incident_id) as incident_count
+  FROM 
+  	_deployments d
+  	left join _incident_caused_by_deployments i on d.deployment_id = i.deployment_id
+	GROUP BY 1,2
+),
+
+_change_failure_rate as (
+	SELECT 
+		case when count(deployment_id) is null then null
+		else count(case when incident_count = 0 then null else 1 end)/count(deployment_id) end as change_failure_rate
+	FROM
+		_deployment_failures
 )
 
-SELECT 
-	case 
-		when deployment_count is null or incident_count is null or deployment_count = 0 then NULL 
-		when incident_count/deployment_count <= .15 then "0-15%"
-		when incident_count/deployment_count <= .20 then "16%-20%"
-		when incident_count/deployment_count <= .30 then "21%-30%"
-		else "> 30%"
-		end as change_failure_rate
+SELECT
+	case  
+		when change_failure_rate <= .15 then "0-15%"
+		when change_failure_rate <= .20 then "16%-20%"
+		when change_failure_rate <= .30 then "21%-30%"
+		else "> 30%" 
+	end as change_failure_rate
 FROM 
-	_deployment_count, _incident_count
+	_change_failure_rate
 ```
 
 ## How to improve?
