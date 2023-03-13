@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwww=self.webpackChunkwww||[]).push([[31379],{81924:e=>{e.exports=JSON.parse('{"title":"Plugins","slug":"Plugins","permalink":"/docs/v0.13/Plugins","navigation":{"previous":{"title":"Devlake release guide","permalink":"/docs/v0.13/DeveloperManuals/Release-SOP"},"next":{"title":"DBT","permalink":"/docs/v0.13/Plugins/dbt"}}}')}}]);

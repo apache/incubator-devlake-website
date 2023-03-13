@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwww=self.webpackChunkwww||[]).push([[68643],{88755:e=>{e.exports=JSON.parse('{"title":"Metrics","slug":"Metrics","permalink":"/docs/v0.13/Metrics","navigation":{"previous":{"title":"Supported Data Sources","permalink":"/docs/v0.13/SupportedDataSources"},"next":{"title":"PR Coding Time","permalink":"/docs/v0.13/Metrics/CodingTime"}}}')}}]);
