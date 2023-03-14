@@ -7,7 +7,24 @@ description: >
 
 Thank you for contributing to DevLake blog! We can't wait to hear your voice! 
 
-Because DevLake only accepts blog posts submitted through PRs, we want to make this process as painless as poissble by putting together this instruction.
+Because DevLake only accepts blog posts submitted through PRs, we want to make this process as painless as possible by putting together this instruction.
+
+## Guidelines
+
+The objective of creating blogs is to educate the community, we advise you to read the following guidelines:
+
+1. Before writing the blog, we recommend that you install DevLake and build a practical use-case.
+2. **Recommended Topics** are listed in the table below.
+
+ _[Updated on 14th March 2023]_
+ 
+| No.| Objective | Type | Example Blogs / Topics | 
+|---| ------ | --------------| ------------ |
+| 1.| Walkthrough of Setup in your own toolchains | Installation | N.A. |
+| 2.| Critical troubleshooting blogs while installing DevLake | Troubleshooting | Check out the examples from [Troubleshooting guide](https://devlake.apache.org/docs/Troubleshooting/) |
+| 3.| Your own experience of using specific feature(s) and/ or plugin(s). | Use-cases | E.g. "How to use PagerDuty, GitLab and CircleCI to measure DORA metrics", "How to use team feature in Apache DevLake". | 
+
+
 
 ## Overview
 
@@ -15,7 +32,7 @@ The DevLake website maintains blog posts in two languages, English and Chinese(s
 
 **English blog directory:** blog/your-blog-post
 
-**Chinnese blog directory:** i18n/zh/docusaurus-plugin-content-blog/your-blog-post
+**Chinese blog directory:** i18n/zh/docusaurus-plugin-content-blog/your-blog-post
 
 Notice: No matter if you are submitting blog posts in one or two languages, please follow both the English and Chinese instructions as follows:
 
