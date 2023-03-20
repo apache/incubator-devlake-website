@@ -16,13 +16,13 @@ The objective of creating blogs is to educate the community, we advise you to re
 1. Before writing the blog, we recommend that you install DevLake and build a practical use-case.
 2. **Recommended Topics** are listed in the table below.
 
- _[Updated on 14th March 2023]_
+ _[Updated on 20th March 2023]_
  
 | No.| Objective | Type | Example Blogs / Topics | 
 |---| ------ | --------------| ------------ |
-| 1.| Walkthrough of Setup in your own toolchains | Installation | N.A. |
+| 1.| Walkthrough of setup in your own toolchains | Installation | Eg: "Setting Up DevLake with GitLab and Jenkins", "Getting started with DevLake using GitHub, Argo, etc." |
 | 2.| Critical troubleshooting blogs while installing DevLake | Troubleshooting | Check out the examples from [Troubleshooting guide](https://devlake.apache.org/docs/Troubleshooting/) |
-| 3.| Your own experience of using specific feature(s) and/ or plugin(s). | Use-cases | E.g. "How to use PagerDuty, GitLab and CircleCI to measure DORA metrics", "How to use team feature in Apache DevLake". | 
+| 3.| Your own experience of using specific feature(s) and/ or plugin(s). | Use-cases | E.g. "How to use PagerDuty", "GitLab and CircleCI to measure DORA metrics", "How to use team feature in Apache DevLake", "Creating your own dev-metrics with DevLake". | 
 
 
 
