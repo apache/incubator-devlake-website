@@ -43,7 +43,7 @@ export function UserFlow() {
           icon={<UF2 width={40} height={40} />}
           text="Collect Data"
         >
-          Select, transform and set up a schedule for the data you wish to sync from your prefered data sources in the <InlineLink link="https://devlake.apache.org/docs/UserManuals/ConfigUI/Tutorial">Config UI</InlineLink>.
+          Select, transform and set up a schedule for the data you wish to sync from your prefered data sources in the <InlineLink link="https://devlake.apache.org/docs/Configuration/Tutorial">Config UI</InlineLink>.
         </Card>
         <Arrow />
         <Card
@@ -57,7 +57,7 @@ export function UserFlow() {
           icon={<UF4 width={40} height={40} />}
           text="Customize Metrics"
         >
-          <InlineLink link="https://devlake.apache.org/docs/UserManuals/Dashboards/GrafanaUserGuide#customizing-a-dashboard">Customize</InlineLink> your own metrics or dashboards with SQL to extend your usage of DevLake.
+          <InlineLink link="https://devlake.apache.org/docs/Configuration/Dashboards/GrafanaUserGuide#customizing-a-dashboard">Customize</InlineLink> your own metrics or dashboards with SQL to extend your usage of DevLake.
         </Card>
       </div>
     </div>
