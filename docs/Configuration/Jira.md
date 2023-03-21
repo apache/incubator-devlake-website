@@ -15,7 +15,7 @@ Name your connection.
 #### Endpoint URL
 This should be a valid REST API endpoint
    - If you are using Jira Cloud, the endpoint will be `https://<mydomain>.atlassian.net/rest/`
-   - If you are self-hosting Jira v8+, the endpoint will look like `https://jira.<mydomain>.com/rest/`
+   - If you are self-hosting Jira v7+ or v8+, the endpoint may look like `https://jira.<mydomain>.com/rest/`
 The endpoint url should end with `/`.
 
 #### Username / Email
@@ -23,7 +23,7 @@ Input the username or email of your Jira account.
 
 #### Password
 - If you are using Jira Cloud, please input the [Jira personal access token](https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html).
-- If you are using Jira Server v8+, please input the password of your Jira account.
+- If you are using Jira Server v7+ or v8+, please input the password of your Jira account.
 
 #### Proxy URL (Optional)
 If you are behind a corporate firewall or VPN you may need to utilize a proxy server. Enter a valid proxy server address on your network, e.g. `http://your-proxy-server.com:1080`
