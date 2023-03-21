@@ -48,52 +48,52 @@ function Supports() {
         sm:gap-x-1"
       >
         <C.Sup title="Jira">
-          <a href="https://www.atlassian.com/software/jira">
+          <a href="https://devlake.apache.org/docs/Plugins/jira">
             <C.SupImg src={Sup1} />
           </a>
         </C.Sup>
         <C.Sup title="TAPD">
-          <a href="https://tapd.cn/official/index">
+          <a href="https://devlake.apache.org/docs/Plugins/tapd">
             <Sup2 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="GitHub">
-          <a href="https://github.com/">
+          <a href="https://devlake.apache.org/docs/Plugins/github">
             <Sup3 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="GitLab">
-          <a href="https://about.gitlab.com/">
+          <a href="https://devlake.apache.org/docs/Plugins/gitlab">
             <Sup4 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="BitBucket">
-          <a href="https://bitbucket.org/product/">
+          <a href="https://devlake.apache.org/docs/Plugins/bitbucket">
             <Sup5 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="Gitee">
-          <a href="https://gitee.com/">
+          <a href="https://devlake.apache.org/docs/Plugins/gitee">
             <Sup6 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="Jenkins">
-          <a href="https://www.jenkins.io/">
+          <a href="https://devlake.apache.org/docs/Plugins/jenkins">
             <Sup7 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="GitHub Action">
-          <a href="https://github.com/features/actions">
+          <a href="https://devlake.apache.org/docs/Plugins/github">
             <Sup8 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="GitLab CI">
-          <a href="https://docs.gitlab.com/ee/ci/">
+          <a href="https://devlake.apache.org/docs/Plugins/gitlab">
             <Sup9 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="Feishu">
-          <a href="https://open.feishu.cn/">
+          <a href="https://devlake.apache.org/docs/Plugins/feishu">
             <C.SupImg src={SupA} />
           </a>
         </C.Sup>
@@ -139,7 +139,7 @@ export function WhyDevlake() {
               all together to give you a complete view of your Software
               Development Life Cycle (SDLC).
               <br />
-              <C.TextLink link="https://devlake.apache.org/docs/SupportedDataSources">
+              <C.TextLink link="https://devlake.apache.org/docs/Overview/SupportedDataSources">
                 Explore supported data sources
               </C.TextLink>
             </C.TextDescription>
