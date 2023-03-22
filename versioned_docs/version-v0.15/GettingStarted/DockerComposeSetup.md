@@ -36,11 +36,11 @@ Support for database schema migration was introduced to DevLake in v0.10.0. From
 <br/>
 
 ## FAQ
-### Can I use an external Database service instead of running Database in Docker?
+### Can I use a managed cloud database service instead of running database in Docker?
 
-    Yes, you can simply comment out the 'mysql' part in 'docker-compose.yml' and update some configurations in '.env' before you run docker compose up -d, here are the steps:
+Yes, please follow the steps below:
 
-1. Comment out mysql part:
+1. Comment out the 'mysql' part in `docker-compose.yml`:
 ```yaml
   mysql:
     image: mysql:8
@@ -59,21 +59,36 @@ Support for database schema migration was introduced to DevLake in v0.10.0. From
       --collation-server=utf8mb4_bin
 ```
 
-2. Comment out the 'mysql' volume:
+2. Comment out the 'mysql' volume in `docker-compose.yml`:
 
 ```yaml
 volumes:
    mysql-storage:
 ```
 
-3. Comment out the 'depends_on mysql' part:
+3. Comment out the 'depends_on mysql' part in `docker-compose.yml`:
 
 ```yaml
     depends_on:
       - mysql
 ```
 
-4. Set DB_URL to your own DB_URL in .env
+4. Provide your managed cloud database connection info in the 'grafana' section in `docker-compose.yml`:
+
+* MYSQL_URL: This parameter specifies the URL of your database instance. For example, if your database is hosted on a server with IP address 123.45.67.89 and port number 3306, the URL would be "123.45.67.89:3306".
+* MYSQL_DATABASE: This parameter specifies the name of your database. For example, if your database is named "mydatabase", you would set this parameter to "mydatabase".
+* MYSQL_USER: This parameter specifies the username that you will use to connect to your database. For example, if your username is "myuser", you would set this parameter to "myuser".
+* MYSQL_PASSWORD: This parameter specifies the password that you will use to connect to your database. For example, if your password is "mypassword", you would set this parameter to "mypassword".
+
+
+```yaml
+      MYSQL_URL: 123.45.67.89:3306
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+```
+
+5. Set DB_URL to your own DB_URL in `.env`:
 
 ```bash
 DB_URL="mysql://YOUR_USER:YOUR_PASSWORD@YOUR_IP:YOUR_PORT/lake?charset=utf8mb4&parseTime=True"
@@ -82,12 +97,11 @@ DB_URL="mysql://YOUR_USER:YOUR_PASSWORD@YOUR_IP:YOUR_PORT/lake?charset=utf8mb4&p
 #      collation-server=utf8mb4_bin
 ```
 
-
-5. Final step: `docker compose up -d`
+6. Final step: `docker compose up -d`
 
 ### Can I use an external Grafana instead of running Grafana in Docker?
 
-    Yes, you can simply comment out grafana part in docker-compose.yml and update some configurations in .env before you run `docker compose up -d`, here are the steps:
+Yes, please follow the steps below:
 
 1. Comment out the 'grafana' part:
 
@@ -116,12 +130,18 @@ DB_URL="mysql://YOUR_USER:YOUR_PASSWORD@YOUR_IP:YOUR_PORT/lake?charset=utf8mb4&p
 
 ```yaml
 volumes:
-   grafana-storage:
+  grafana-storage:
 ```
 
 3. Set config-ui.environment.GRAFANA_ENDPOINT to your own grafana url in docker-compose.yml
 
-4. Final step: `docker compose up -d`
+4. Please connect your Grafana to DevLake's database by following https://grafana.com/docs/grafana/latest/administration/data-source-management/
+
+5. If you want to import dashboards, please check https://grafana.com/docs/grafana/latest/dashboards/export-import/.
+
+* You can find DevLake's self-built Grafana dashboards here (https://github.com/apache/incubator-devlake/tree/main/grafana/dashboards).
+
+6. Final step: `docker compose up -d`
 
 ## Troubleshooting
 

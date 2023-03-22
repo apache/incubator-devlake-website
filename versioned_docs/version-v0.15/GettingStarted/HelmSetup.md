@@ -156,7 +156,7 @@ Some useful parameters for the chart, you could also check them in values.yaml
 | option.database               | The database type, valids: mysql                    | mysql                      |
 
 ## FAQ
-1. Can I use a managed Cloud database service instead of running database in Docker?
+1. Can I use a managed cloud database service instead of running database in Docker?
 
   Yes, you can just set useExternal value to true while deploying devlake with helm chart. Below we will use MySQL on AWS RDS as an example.
   1. (Optional) Create a MySQL instance on AWS RDS following this [doc](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html). Skip this step if you would like to use an existing instance.
