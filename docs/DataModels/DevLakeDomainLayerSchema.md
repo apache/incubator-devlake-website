@@ -35,7 +35,7 @@ This is the up-to-date domain layer schema for DevLake v0.10.x. Tables (entities
 
 ### Schema Diagram
 
-[![Domain Layer Schema](/img/DomainLayerSchema/schema-diagram.svg)](/img/DomainLayerSchema/schema-diagram.svg)
+[![Domain Layer Schema](/img/DomainLayerSchema/schema-diagram-v0.16.svg)](/img/DomainLayerSchema/schema-diagram-v0.16.svg)
 
 When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. Github/Gitlab) and allow them to co-exist in a single table.
 
@@ -219,7 +219,7 @@ GitHub, Gitlab or BitBucket repositories.
 | `owner_id`     | varchar  | 255        | The id of the owner of repo                                                                                                                                                                                            | FK_accounts.id |
 | `language`     | varchar  | 255        | The major language of repo. E.g. The language for apache/incubator-devlake is 'Go'                                                                                                                                      |                |
 | `forked_from`  | longtext  |         | Empty unless the repo is a fork in which case it contains the `id` of the repo the repo is forked from.                                                                                                                |                |
-| `deleted`      | tinyint  | 255        | 0: repo is active 1: repo has been deleted                                                                                                                                                                             |                |
+| `deleted`      | tinyint  | 1        | 0: repo is active 1: repo has been deleted                                                                                                                                                                             |                |
 | `created_date` | datetime | 3          | Repo creation date                                                                                                                                                                                                     |                |
 | `updated_date` | datetime | 3          | Last full update was done for this repo                                                                                                                                                                                |                |
 
@@ -257,15 +257,6 @@ The records of this table are computed by [RefDiff](https://github.com/apache/in
 | `old_commit_sha` | char     | 40         | The commit old ref/deployment points to at the time of collection          | PK      |
 | `commit_sha`     | char     | 40         | One of the added commits in the new ref compared to the old ref/deployment | PK      |
 | `sorting_index`  | bigint   |            | An index for debugging, please skip it                                     |         |
-
-#### finished_commits_diffs
-
-This table shows the commits_diffs `new_commit_sha` and `old_commit_sha` pairs which are calculated successfully.
-
-| **field**        | **type** | **length** | **description**                                                       | **key** |
-| :--------------- | :------- | :--------- | :-------------------------------------------------------------------- | :------ |
-| `new_commit_sha` | char     | 40         | The new commit new ref/deployment points to at the time of collection | PK      |
-| `old_commit_sha` | char     | 40         | The commit old ref/deployment points to at the time of collection     | PK      |
 
 #### ref_commits
 
