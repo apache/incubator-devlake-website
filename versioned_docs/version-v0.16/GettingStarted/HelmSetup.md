@@ -47,7 +47,7 @@ Grafana URL `http://YOUR-NODE-IP:30091`
 
 ```shell
 helm repo update
-helm upgrade --install devlake devlake/devlake --version=0.15.1-beta5
+helm upgrade --install devlake devlake/devlake --version=0.16.0-beta10
 ```
 
 ### Uninstall
