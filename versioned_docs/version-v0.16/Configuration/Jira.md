@@ -33,15 +33,21 @@ Input the username or email of your Jira account.
 
 #### Auth Token
 
-When users access Jira API using Jira Auth Token, they may encounter access restrictions if their token does not have sufficient permissions. This is typically caused by insufficient scope or role settings for the Jira Auth Token.
+When accessing Jira API using a Jira Auth Token, users may encounter access restrictions if their token does not have sufficient permissions. This is typically caused by insufficient scope or role settings for the Jira Auth Token.
 
-To solve this issue, you can try the following:
+To solve this issue, users can take the following steps:
 
-- First, check if your Jira Auth Token has sufficient permissions, including the required scope and role. You can set these when creating the token, and incorrect settings will result in restricted access.
-- If your Jira Auth Token has sufficient permissions but you still cannot access the required API, consider using other authentication methods, such as authenticating with your username and password.
-- If you still cannot solve the problem, please contact your Jira administrator for more help.
+- Checking User Permissions
 
-In summary, to avoid Jira Auth Token access restrictions, ensure that you set the correct scope and role settings when creating the token and regularly check the token's permissions to ensure it is functioning properly.
+Users can confirm whether they have sufficient permissions by checking their permissions in Jira. For cloud users, they can view their global and project permissions through the "Permissions" tab on the "Profile" page. For server users, they can log in to Jira as an administrator and view user permissions on the "User Management" page.
+
+- Ensuring Sufficient Permissions
+
+Before using Jira API, users need to ensure that their account has at least the necessary project or global permissions. Global permissions include various Jira system settings and management operations, while project permissions control specific operations and configurations for each Jira project. Users can assign roles such as Project Administrator, Project Lead, Developer, etc. for the corresponding projects, or assign global permissions such as Jira Administrators, Jira Software Administrators, etc. It is recommended to minimize the permissions granted to the API to ensure system security.
+
+- Solving Access Restrictions
+
+To solve access restrictions caused by insufficient Jira Auth Token permissions, users should check the token's permission settings to ensure the correct scope and role are set. If the permission settings are correct but the required API is still inaccessible, consider using other authentication methods, such as authenticating with a username and password. If the issue persists, contact the Jira administrator for further assistance.
 
 #### Proxy URL (Optional)
 
