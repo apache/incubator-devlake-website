@@ -43,7 +43,7 @@ Users can confirm whether they have sufficient permissions by checking their per
 
 - Ensuring Sufficient Permissions
 
-Before using Jira API, users need to ensure that their account has at least the necessary project or global permissions. Global permissions include various Jira system settings and management operations, while project permissions control specific operations and configurations for each Jira project. Users can assign roles such as Project Administrator, Project Lead, Developer, etc. for the corresponding projects, or assign global permissions such as Jira Administrators, Jira Software Administrators, etc. It is recommended to minimize the permissions granted to the API to ensure system security.
+Before using Jira API, users need to ensure that their account has at least the necessary project or global permissions. Global permissions include various Jira system settings and management operations, while project permissions control specific operations and configurations for each Jira project. Users can assign roles such as `Project Administrator`, `Project Lead`, `Developer`, etc. for the corresponding projects, or assign global permissions such as `Jira Administrators`, `Jira Software Administrators`, etc. It is recommended to minimize the permissions granted to the API to ensure system security.
 
 - Solving Access Restrictions
 
