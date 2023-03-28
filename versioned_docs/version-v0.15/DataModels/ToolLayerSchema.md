@@ -19,7 +19,7 @@ As a user, you can check tool data tables to verify data quality if you have con
 
 ## Data Models
 
-Tool layer tables start with a prefix `_tool_`. Each plugin contains multiple tool data tables, the naming convension of these tables is `_raw_{plugin}_{entity}`. For instance,
+Tool layer tables start with a prefix `_tool_`. Each plugin contains multiple tool data tables, the naming convension of these tables is `_tool_{plugin}_{entity}`. For instance,
 - _tool_jira_issues
 - _tool_jira_boards
 - _tool_jira_board_issues`

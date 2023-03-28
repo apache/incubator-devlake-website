@@ -46,6 +46,8 @@ where
   $__timeFilter(created_date)
   -- please replace the repo ids with your own, or create a '$repo_id' variable in Grafana
 	and base_repo_id in ('repo_1', 'repo_2')
+  -- remove PRs submitted by bots, comment it out if you don't need it
+  and author_name not rlike  '^robot-|-robot$|\\[bot\\]|-bot$|-ci$|-testing$'
 ```
 
 If you want to measure the monthly trend of `PR count` in the screenshot below, please run the following SQL in Grafana.
@@ -64,6 +66,8 @@ WITH _prs as(
     and $__timeFilter(created_date)
     -- the following condition will remove the month with incomplete data
     and created_date >= DATE_ADD(DATE_ADD($__timeFrom(), INTERVAL -DAY($__timeFrom())+1 DAY), INTERVAL +1 MONTH)
+    -- remove PRs submitted by bots, comment it out if you don't need it
+    and author_name not rlike  '^robot-|-robot$|\\[bot\\]|-bot$|-ci$|-testing$'
   GROUP BY 1
 )
 

@@ -31,6 +31,14 @@ Learn about [how to create a GitHub personal access token](https://docs.github.c
 - `read:user`
 - `read:org`
 
+However, if you want to collect data from private repositories, the following permissions are required:
+
+- `repo`
+- `read:user`
+- `read:org`
+
+The difference is that you have to give full permission for `repos`, not just `repo:status` and `repo_deployment`.
+
 The data collection speed is restricted by the **rate limit of [5,000 requests](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) per hour per token** (15,000 requests/hour if you pay for GitHub enterprise). You can accelerate data collection by configuring _multiple_ personal access tokens. Please note that multiple tokens should be created by different GitHub accounts. Tokens belonging to the same GitHub account share the rate limit.
 
 ###### Fine-grained personal access tokens
@@ -120,7 +128,11 @@ If you're using GitHub Action to conduct `deployments`, please select "Detect De
 - Deployment: A GitHub Action job with a name that matches the given regEx will be considered as a deployment.
 - Production: A GitHub Action job with a name that matches the given regEx will be considered a job in the production environment.
 
-By the above two fields, DevLake can identify a production deployment among massive CI jobs.
+A GitHub workflow run has many jobs. Each GitHub workflow run is converted to a cicd_pipeline in the domain layer and each GitHub Action job is converted to a cicd_task in the domain layer.
+![github-action-run](/img/ConfigUI/github-action-run.png)
+![github-action-job](/img/ConfigUI/github-action-job.png)
+
+The deployment and production regex is always applied to the records in the cicd_tasks table.
 
 You can also select "Not using Jobs in GitHub Action as Deployments" if you're not using GitHub action to conduct deployments.
 

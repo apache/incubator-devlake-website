@@ -17,15 +17,15 @@ This should be a valid REST API endpoint
    - `https://api.tapd.cn/`
 The endpoint url should end with `/`.
 
-#### Username / Password
-Input the username and password of your Tapd account, you can follow the steps as below.
+#### API Account / API Token
+Input the API Account and API Token of your Tapd account, you can follow the steps as below.
 ![tapd-account](/img/ConfigUI/tapd-account.png)
 
 #### Proxy URL (Optional)
 If you are behind a corporate firewall or VPN you may need to utilize a proxy server. Enter a valid proxy server address on your network, e.g. `http://your-proxy-server.com:1080`
 
-#### Ralte Limit (Optional)
-For TAPD, we suggest you setting the rate limit to 3500
+#### Rate Limit (Optional)
+For TAPD, we suggest you setting the rate limit to 3000
 
 #### Test and Save Connection
 Click `Test Connection`, if the connection is successful, click `Save Connection` to add the connection.

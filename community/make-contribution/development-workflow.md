@@ -21,7 +21,7 @@ This document shows the workflow of how to develop DevLake.
 ```sh
 mkdir -p ${WORKING_PATH}
 cd ${WORKING_PATH}
-# You can also use the url: git@github.com:merico-dev/lake.git
+# You can also use the url: github.com/apache/incubator-devlake
 # if your ssh configuration is proper
 git clone https://github.com/{user}/{repo}.git
 
@@ -37,8 +37,8 @@ git remote set-url --push upstream no_push
 Execute `git remote -v` and you'll see output like below:
 
 ```sh
-origin  git@github.com:merico-dev/lake.git (fetch)
-origin  git@github.com:merico-dev/lake.git (push)
+origin  github.com/apache/incubator-devlake.git (fetch)
+origin  github.com/apache/incubator-devlake.git (push)
 upstream        https://github.com/apache/incubator-devlake.git (fetch)
 upstream        no_push (push)
 ```
