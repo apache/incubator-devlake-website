@@ -1,15 +1,15 @@
 ---
-title: "Bamboo"
+title: "Bamboo(WIP)"
 description: >
   Bamboo Plugin
 ---
 
 ## Summary
 
-This plugin collects Bamboo data through [API](https://developer.atlassian.com/server/bamboo/rest/). It then computes and visualizes various DevOps metrics from the Bamboo data, which helps tech leads, QA and DevOps engineers, and project managers to answer questions such as:
+This plugin collects Bamboo's CI data through [API](https://developer.atlassian.com/server/bamboo/rest/). It then computes and visualizes various DevOps metrics from the Bamboo data, which helps tech leads, QA and DevOps engineers, and project managers to answer questions such as:
 
-- How long does it take for your codes to get merged?
-- How much time is spent on code review?
+- What is the deployment frequency of your team?
+- How long does it take for your codes to get deployed?
 
 ## Entities
 
