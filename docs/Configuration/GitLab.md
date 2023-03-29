@@ -28,12 +28,10 @@ GitLab personal access tokens are required to add a connection. Learn about [how
 
 ###### GitLab personal access tokens
 
-The following permissions are required to collect data from repositories:
+At least one of the following permissions is required to collect data from repositories:
 
 - `api`
 - `read_api`
-- `read_user`
-- `read_repository`
 
 You also have to double-check your GitLab user permission settings.
 
