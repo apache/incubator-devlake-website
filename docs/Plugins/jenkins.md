@@ -12,6 +12,10 @@ This plugin collects Jenkins data through [Remote Access API](https://www.jenkin
 - What is the build success rate?
 - How long does it take for a code change to be deployed into production?
 
+### Note
+
+Please note that it is important to avoid rerunning Jenkins builds in place, and instead ensure that each rerun has a unique build number. This is because rerunning builds with the same build number can lead to inconsistencies in the data collected by the Jenkins plugin. To ensure accurate and reliable DevOps metrics, it is recommended to follow this best practice.
+
 ## Entities
 
 Check out the [Jenkins entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.
