@@ -17,7 +17,7 @@ after each data collection cycle.
 
 Because we want to ensure that the latest data is 
 always available. If we don't delete the existing data, some old data which has been deleted 
-from the source system will still be available in the DevLake database.
+from the previous step will still be available in the DevLake database.
 
 
 ### How to purge old binary logs?
