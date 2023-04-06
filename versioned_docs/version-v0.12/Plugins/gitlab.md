@@ -32,7 +32,7 @@ curl 'http://localhost:8080/pipelines' \
 --data-raw '
 {
     "name": "gitlab 20211126",
-    "tasks": [[{
+    "plan": [[{
         "plugin": "gitlab",
         "options": {
             "connectionId": 1,

@@ -74,7 +74,7 @@ curl 'http://localhost:8080/pipelines' \
 --data-raw '
 {
     "name": "gitee 20211126",
-    "tasks": [[{
+    "plan": [[{
         "plugin": "gitee",
         "options": {
             "connectionId": 1,
@@ -92,7 +92,7 @@ curl 'http://localhost:8080/pipelines' \
 --data-raw '
 {
     "name": "gitee 20211126",
-    "tasks": [[{
+    "plan": [[{
         "plugin": "gitee",
         "subtasks": ["collectXXX", "extractXXX", "convertXXX"],
         "options": {
