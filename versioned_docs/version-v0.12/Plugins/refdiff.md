@@ -41,7 +41,7 @@ github:GithubRepo:384111310:refs/tags/v0.6.1  TAG
 curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
 {
     "name": "test-refdiff",
-    "tasks": [
+    "plan": [
         [
             {
                 "plugin": "refdiff",
@@ -68,7 +68,7 @@ Or if you prefered calculating latest releases
 curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
 {
     "name": "test-refdiff",
-    "tasks": [
+    "plan": [
         [
             {
                 "plugin": "refdiff",

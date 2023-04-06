@@ -47,7 +47,7 @@ curl 'http://localhost:8080/pipelines' \
 --data-raw '
 {
     "name": "test-refdiff",
-    "tasks": [
+    "plan": [
         [
             {
                 "plugin": "refdiff",
@@ -77,7 +77,7 @@ curl 'http://localhost:8080/pipelines' \
 --data-raw '
 {
     "name": "test-refdiff",
-    "tasks": [
+    "plan": [
         [
             {
                 "plugin": "refdiff",
@@ -108,7 +108,7 @@ curl 'http://localhost:8080/pipelines' \
 --data-raw '
 {
     "name": "test-refdiff-dora",
-    "tasks": [
+    "plan": [
         [
             {
                 "plugin": "refdiff",

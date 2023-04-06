@@ -40,7 +40,7 @@ In order to trigger the enrichment, you need to insert a new task into your pipe
 curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
 {
     "name": "test-refdiff",
-    "tasks": [
+    "plan": [
         [
             {
                 "plugin": "refdiff",
@@ -67,7 +67,7 @@ Or if you preferred calculating latest releases
 curl -v -XPOST http://localhost:8080/pipelines --data @- <<'JSON'
 {
     "name": "test-refdiff",
-    "tasks": [
+    "plan": [
         [
             {
                 "plugin": "refdiff",

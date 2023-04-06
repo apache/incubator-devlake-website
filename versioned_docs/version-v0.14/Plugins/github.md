@@ -54,7 +54,7 @@ curl 'http://localhost:8080/pipelines' \
 --data-raw '
 {
     "name": "github 20211126",
-    "tasks": [[{
+    "plan": [[{
         "plugin": "github",
         "options": {
             "connectionId": 1,

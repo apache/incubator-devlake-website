@@ -22,7 +22,7 @@ curl --location --request POST 'localhost:8080/pipelines' \
 --data-raw '
 {
     "name": "git repo extractor",
-    "tasks": [
+    "plan": [
         [
             {
                 "Plugin": "gitextractor",

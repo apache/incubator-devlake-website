@@ -59,7 +59,7 @@ curl 'http://localhost:8080/pipelines' \
 --data-raw '
 {
     "name": "feishu 20211126",
-    "tasks": [[{
+    "plan": [[{
       "plugin": "feishu",
       "options": {
         "connectionId": 1,
