@@ -9,21 +9,21 @@ sidebar_position: 5
 
 Apache DevLake(incubating) supports the following data sources. The data from each data source is collected with one or more plugins. Detailed plugin docs can be found [here](/docs/Plugins).
 
-| Data Source      | Domain(s)                                                                   | Supported Versions                   | Config UI Availability  | Triggered Plugins           | Collection Mode                                                |
-| ---------------- | --------------------------------------------------------------------------- | ------------------------------------ | ----------------------- | --------------------------- | -------------------------------------------------------------- |
-| GitHub           | Source Code Management, Code Review, Issue Tracking, CI/CD (GitHub Actions) | Cloud                                | Available               | `github`, `gitextractor`    | Incremental Sync                                                   |
-| GitLab           | Source Code Management, Code Review, Issue Tracking, CI/CD (GitLab CI)      | Cloud, Community Edition 11+       | Available               | `gitlab`, `gitextractor`    | Full Refresh, Incremental Sync(for `issues`,`MRs`)             |
-| Jira             | Issue Tracking                                                              | Cloud, Server/Data Center 7.x, 8.x | Available               | `jira`                      | Full Refresh, Incremental Sync(for `issues` and related)       |
-| Jenkins          | CI/CD                                                                       | 2.263.x+                             | Available               | `jenkins`                   | Incremental Sync                                                   |
-| BitBucket (Beta) | Source Code Management, Code Review                                         | Cloud                                | Advanced Mode Available | `bitbucket`, `gitextractor` | Full Refresh                                                   |
-| TAPD (Beta)      | Issue Tracking                                                              | Cloud                                | Advanced Mode Available | `tapd`                      | Full Refresh, Incremental Sync(for `stories`, `bugs`, `tasks`) |
-| Zentao (Beta)    | Issue Tracking                                                              | v17.x, v18.x                                | Advanced Mode Available | `zentao`                    | Full Refresh                                                   |
-| Gitee (WIP)      | Source Code Management, Code Review, Issue Tracking                         | Cloud                                | Not Available           | `gitee`, `gitextractor`     | Full Refresh, Incremental Sync(for `issues`,`MRs`)             |
-| PagerDuty (WIP)  | Issue Tracking                                                              | Cloud                                | Not Available           | `pagerduty`                 | Full Refresh                                                   |
-| Feishu (WIP)     | Calendar                                                                    | Cloud                                | Not Available           | `feishu`                    | Full Refresh                                                   |
-| AE               | Source Code Management                                                      | On-prem                              | Not Available           | `ae`                        | Full Refresh                                                   |
-| Sonarqube        | CODE QUALITY                                                                | SonarQube v8.x, v9.x                    | Available               | `sonarqube`                 | Full Refresh                                                   |
-| Bamboo CI(WIP)   | CI/CD                                                                       | v6.8.1                                | Not Available           | `bamboo`                    | Full Refresh                                                   |
+| Data Source      | Domain(s)                                                    | Supported Versions                 | Config UI Availability  | Triggered Plugins           | Collection Mode                                              |
+| ---------------- | ------------------------------------------------------------ | ---------------------------------- | ----------------------- | --------------------------- | ------------------------------------------------------------ |
+| GitHub           | Source Code Management, Code Review, Issue Tracking, CI/CD (GitHub Actions) | Cloud                              | Available               | `github`, `gitextractor`    | Incremental Sync                                             |
+| GitLab           | Source Code Management, Code Review, Issue Tracking, CI/CD (GitLab CI) | Cloud, Community Edition 11+       | Available               | `gitlab`, `gitextractor`    | Full Refresh, Incremental Sync(for `issues`,`MRs`)           |
+| Jira             | Issue Tracking                                               | Cloud, Server/Data Center 7.x, 8.x | Available               | `jira`                      | Full Refresh, Incremental Sync(for `issues` and related)     |
+| Jenkins          | CI/CD                                                        | 2.263.x+                           | Available               | `jenkins`                   | Incremental Sync                                             |
+| BitBucket (Beta) | Source Code Management, Code Review                          | Cloud                              | Advanced Mode Available | `bitbucket`, `gitextractor` | Full Refresh                                                 |
+| TAPD (Beta)      | Issue Tracking                                               | Cloud                              | Advanced Mode Available | `tapd`                      | Full Refresh, Incremental Sync(for `stories`, `bugs`, `tasks`) |
+| Zentao (Beta)    | Issue Tracking                                               | v17.x, v18.x                       | Advanced Mode Available | `zentao`                    | Full Refresh                                                 |
+| Gitee (WIP)      | Source Code Management, Code Review, Issue Tracking          | Cloud                              | Not Available           | `gitee`, `gitextractor`     | Full Refresh, Incremental Sync(for `issues`,`MRs`)           |
+| PagerDuty (WIP)  | Issue Tracking                                               | Cloud                              | Not Available           | `pagerduty`                 | Full Refresh                                                 |
+| Feishu (WIP)     | Calendar                                                     | Cloud                              | Not Available           | `feishu`                    | Full Refresh                                                 |
+| AE               | Source Code Management                                       | On-prem                            | Not Available           | `ae`                        | Full Refresh                                                 |
+| Sonarqube        | CODE QUALITY                                                 | SonarQube v8.x, v9.x               | Available               | `sonarqube`                 | Full Refresh                                                 |
+| Bamboo CI(WIP)   | CI/CD                                                        | v6.8.1                             | Not Available           | `bamboo`                    | Full Refresh                                                 |
 
 ## Data Collection Scope By Each Plugin
 
@@ -200,3 +200,42 @@ This table shows the entities collected by each plugin. Domain layer entities in
 | CollectPlanBuildMeta | <10^6                           | ❌                                      | ❌                           |
 | CollectJobBuildMeta  | <10^6                           | ❌                                      | ❌                           |
 | CollectDeployMeta    | 1                               | ❌                                      | ❌                           |
+
+### Zentao
+
+| Subtask Name          | Estimated Max Number of Request | Does It support Incremental Collection? | Does It Support Time Filter? |
+| --------------------- | ------------------------------- | --------------------------------------- | ---------------------------- |
+| CollectExecutionMeta  | <10^3                           | ❌                                       | ❌                            |
+| CollectStoryMeta      | <10^4                           | ❌                                       | ❌                            |
+| CollectBugMeta        | <10^4                           | ❌                                       | ❌                            |
+| CollectTaskMeta       | <10^4                           | ❌                                       | ❌                            |
+| CollectAccountMeta    | ≈10^2                           | ❌                                       | ❌                            |
+| CollectDepartmentMeta | ≈10^2                           | ❌                                       | ❌                            |
+
+### Tapd
+
+
+| Subtask Name                   | Estimated Max Number of Request | Does It support Incremental Collection? | Does It Support Time Filter? |
+| ------------------------------ | ------------------------------- | --------------------------------------- | ---------------------------- |
+| CollectWorkitemTypesMeta       | ≈10                             | -                                       | -                            |
+| CollectStoryCustomFieldsMeta   | ≈10                             | -                                       | -                            |
+| CollectTaskCustomFieldsMeta    | ≈10                             | -                                       | -                            |
+| CollectBugCustomFieldsMeta     | ≈10                             | -                                       | -                            |
+| CollectStoryCategoriesMeta     | ≈10                             | -                                       | -                            |
+| CollectStoryStatusMeta         | ≈10                             | -                                       | -                            |
+| CollectStoryStatusLastStepMeta | ≈10                             | -                                       | -                            |
+| CollectBugStatusMeta           | ≈10                             | -                                       | -                            |
+| CollectBugStatusLastStepMeta   | ≈10                             | -                                       | -                            |
+| CollectAccountsMeta            | ≈10^3                           | ❌                                       | ❌                            |
+| CollectIterationMeta           | ≈10^4                           | ✅                                       | ✅                            |
+| CollectStoryMeta               | ≈10^4                           | ✅                                       | ✅                            |
+| CollectBugMeta                 | ≈10^4                           | ✅                                       | ✅                            |
+| CollectTaskMeta                | ≈10^4                           | ✅                                       | ✅                            |
+| CollectBugChangelogMeta        | ≈10^6                           | ✅                                       | ✅                            |
+| CollectStoryChangelogMeta      | ≈10^6                           | ✅                                       | ✅                            |
+| CollectTaskChangelogMeta       | ≈10^6                           | ✅                                       | ✅                            |
+| CollectWorklogMeta             | ≈10^6                           | ✅                                       | ✅                            |
+| CollectBugCommitMeta           | ≈10^6                           | ✅                                       | ✅                            |
+| CollectStoryCommitMeta         | ≈10^6                           | ✅                                       | ✅                            |
+| CollectTaskCommitMeta          | ≈10^6                           | ✅                                       | ✅                            |
+| CollectStoryBugMeta            | ≈10^6                           | ✅                                       | ✅                            |
