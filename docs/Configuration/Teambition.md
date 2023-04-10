@@ -1,7 +1,7 @@
 ---
 title: "Teambition(Beta)"
 sidebar_position: 6
-description: Config UI instruction for Tapd
+description: Config UI instruction for Teambition
 ---
 
 Visit config-ui: `http://localhost:4000` and go to `Connections` page.
