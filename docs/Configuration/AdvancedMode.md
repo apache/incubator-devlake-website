@@ -352,6 +352,29 @@ Below is an example for collecting a SonarQube project.
   - 4. In the top menu bar of the project homepage, select "Project Information".
   - 5. On the "Project Information" page, you will see the project key.
 
+
+### 11. Teambition
+
+Below is an example for collecting a Teambition project. Since users can configure multiple Teambition connection, it's required to pass in a `connectionId` for Teambition task to specify which connection to use.
+
+```json
+[
+    [
+        {
+            "plugin": "teambition",
+            "options": {
+                "createdDateAfter": "2006-01-02T15:04:05Z",
+                "projectId": "5e5****376",
+                "connectionId": 1
+            }
+        }
+    ]
+]
+```
+
+- `connectionId`: The ID of your TAPD connection at page http://localhost:4000/connections/tapd.
+- `projectId`: Teambition project id, you can get it from url: ![image](https://user-images.githubusercontent.com/3294100/229808849-66dac8c0-5ff6-459b-850c-62bc60a3a519.png)
+
 ## Editing a Blueprint (Advanced Mode)
 
 This section is for editing a Blueprint in the Advanced Mode. To edit in the Normal mode, please refer to [this guide](Tutorial.md#editing-a-blueprint-normal-mode).
