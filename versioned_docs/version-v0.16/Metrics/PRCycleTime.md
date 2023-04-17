@@ -29,13 +29,13 @@ N/A
 
 <b>SQL Queries</b>
 
-The following SQL shows how to find the `cycle time` of a specific PR. DevLake pre-calculates the metric and stores it in table.pull_requests.
+The following SQL shows how to find the `cycle time` of a specific PR. DevLake pre-calculates the metric and stores it in table.project_pr_metrics.
 
 ```
 SELECT
-  change_timespan/60 as 'PR Cycle Time(h)'
+  pr_cycle_time/60 as 'PR Cycle Time(h)'
 FROM
-  pull_requests
+  project_pr_metrics
 ```
 
 
@@ -45,9 +45,11 @@ If you want to measure the monthly trend of `PR cycle time` in the screenshot be
 
 ```
 SELECT 
-  DATE_ADD(date(created_date), INTERVAL -DAY(date(created_date))+1 DAY) as time,
-  avg(change_timespan)/60 as 'PR Cycle Time(h)'
-FROM pull_requests
+  DATE_ADD(date(pr.created_date), INTERVAL -DAY(date(pr.created_date))+1 DAY) as time,
+  avg(ppm.pr_cycle_time)/60 as 'PR Cycle Time(h)'
+FROM 
+  pull_requests pr
+  JOIN project_pr_metrics ppm ON pr.id = ppm.id
 GROUP BY 1
 ORDER BY 1
 ```
