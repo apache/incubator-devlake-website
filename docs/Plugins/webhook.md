@@ -47,11 +47,16 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 
 |     Key     | Required | Notes                                                        |
 | :---------: | :------: | ------------------------------------------------------------ |
-| commit_sha  |  ✔️ Yes   | the sha of the deployment commit                             |
-|  repo_url   |  ✔️ Yes   | the repo URL of the deployment commit<br />If there is a row in the domain layer  table `repos` where `repos.url` equals `repo_url`, the `repoId` will be filled with `repos.id`. |
+| pipeline_id |   ✖️ No   | related Domain Layer `cicd_pipelines.id` |
 | environment |   ✖️ No   | the environment this deployment happens. For example, `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br/>The default value is `PRODUCTION` |
-| start_time  |   ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.   |
-|  end_time   |   ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/>The default value is the time when DevLake receives the POST request. |
+|  repo_url   |  ✔️ Yes   | the repo URL of the deployment commit<br />If there is a row in the domain layer  table `repos` where `repos.url` equals `repo_url`, the `repoId` will be filled with `repos.id`. |
+| repo_id  |  ✖️ No   | related Domain Layer `repos.id` <br/> No default value. |
+| ref_name  |  ✖️ No   | related branch/tag<br/> No default value. |
+| commit_sha  |  ✔️ Yes   | the sha of the deployment commit                             |
+| create_time  |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.   |
+| start_time  |  ✔️ Yes   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.   |
+|  end_time   |  ✔️ Yes   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> The default value is the time when DevLake receives the POST request. |
+| result  |  ✖️ No   | deployment result, one of the values : `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`, <br/> The default value is `SUCCESS`. |
 
 #### Register a Deployment - Sample API Calls
 
@@ -59,11 +64,16 @@ Sample CURL to post deployments to DevLake. The following command should be repl
 
 ```
 curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -d '{
-    "commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d",
-    "repo_url":"https://github.com/apache/incubator-devlake/",
+    "pipeline_id": "optional-pipeline-id",
     "environment":"PRODUCTION",
+    "repo_url":"https://github.com/apache/incubator-devlake/",
+    "repo_id": "optional-repo-id",
+    "ref_name": "optional-release-v0.17",
+    "commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d",
+    "create_time":"2020-01-01T11:00:00+00:00",
     "start_time":"2020-01-01T12:00:00+00:00",
-    "end_time":"2020-01-02T12:00:00+00:00"
+    "end_time":"2020-01-02T13:00:00+00:00"
+    "result": "FAILURE",
   }'
 ```
 
@@ -73,7 +83,6 @@ If you have set a [username/password](GettingStarted/Authentication.md) for Conf
 curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
     "commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d",
     "repo_url":"https://github.com/apache/incubator-devlake/",
-    "environment":"PRODUCTION",
     "start_time":"2020-01-01T12:00:00+00:00",
     "end_time":"2020-01-02T12:00:00+00:00"
   }'
