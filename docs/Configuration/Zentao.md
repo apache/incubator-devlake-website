@@ -1,7 +1,7 @@
 ---
 title: "Zentao"
 sidebar_position: 6
-description: Config UI instruction for Zentao
+description: Config UI instruction for Zentao(禅道)
 ---
 
 Visit config-ui: `http://localhost:4000` and go to `Connections` page.
@@ -16,11 +16,9 @@ Name your connection.
 
 #### Endpoint URL
 
-This should be a valid REST API endpoint
+Please ensure that the REST API endpoint URL is valid. It should be in the format of either `http://<host>:<port>/api.php/v1/` or `http://<host>:<port>/zentao/api.php/v1/`.
 
-- `http://<host>:<port>/api.php/v1/`
-- or `http://<host>:<port>/zentao/api.php/v1/`
-  It depends on the path where you deploy zentao. The endpoint url should end with `/`.
+If the initial test fails, please try another endpoint URL as the URL depends on where Zentao is deployed. Additionally, please ensure that the endpoint URL ends with a forward slash `/`.
 
 #### Username/Password
 

@@ -1,7 +1,7 @@
 ---
 title: "TAPD"
 sidebar_position: 6
-description: Config UI instructionFor Teambition
+description: Config UI instruction for TAPD
 ---
 
 Visit config-ui: `http://localhost:4000` and go to `Connections` page.
