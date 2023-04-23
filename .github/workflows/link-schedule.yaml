@@ -1,9 +1,15 @@
-name: Build workflow
+name: Check links daily
 
 on:
   workflow_dispatch:
   schedule:
     - cron: "0 0 * * *"
+
+permissions:
+  issues: write # to create an issue when link check fails
+
+env:
+  OUTPUT_FILE: lychee/out.md
 
 jobs:
   build-and-check-links:
@@ -21,28 +27,55 @@ jobs:
         run: |
           npm install
           npm run build
-      - name: Link Checker
-        uses: lycheeverse/lychee-action@v1.5.0
-        with:
-          fail: true
-            # For parameter description, see https://github.com/lycheeverse/lychee#commandline-parameters
-            # -E, --exclude-all-private    Exclude all private IPs from checking.
-            # -i, --insecure               Proceed for server connections considered insecure (invalid TLS)
-            # -n, --no-progress            Do not show progress bar.
-            # -t, --timeout <timeout>      Website timeout in seconds from connect to response finished [default:20]
-            # --max-concurrency <max-concurrency>    Maximum number of concurrent network requests [default: 128]
-            # -a --accept <accept>                      Comma-separated list of accepted status codes for valid links
-            # -m, --max-redirects <MAX_REDIRECTS>
-
-            # 'build': the site directory to check
-            # './*.md': all markdown files in the root directory
-          args: -E -i -n -t 45 --max-concurrency 64 -a 429,401,403 -m 10 -- 'build' '*.md'
-          output: out.md
+      - name: Install lychee
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          LYCHEEVERSION: 0.12.0
+        # due to the limitation of Apache, we can't use lycheeverse/lychee-action directly,
+        # so we re-use some core code from it
+        run: |
+          curl -sLO "https://github.com/lycheeverse/lychee/releases/download/v${{ env.LYCHEEVERSION }}/lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
+          tar -xvzf "lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
+          rm "lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
+          install -t "$HOME/.local/bin" -D lychee 
+          rm lychee
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Link Checker
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}          
+          # For parameter description, see https://github.com/lycheeverse/lychee#commandline-parameters
+          # -E, --exclude-all-private    Exclude all private IPs from checking.
+          # -i, --insecure               Proceed for server connections considered insecure (invalid TLS)
+          # -n, --no-progress            Do not show progress bar.
+          # -t, --timeout <timeout>      Website timeout in seconds from connect to response finished [default:20]
+          # --max-concurrency <max-concurrency>    Maximum number of concurrent network requests [default: 128]
+          # -a --accept <accept>                      Comma-separated list of accepted status codes for valid links
+          # -m, --max-redirects <MAX_REDIRECTS>
+
+          # 'build': the site directory to check
+          # './*.md': all markdown files in the root directory
+        run: |
+          set +e
+          # run lychee
+          LYCHEE_TMP="$(mktemp)"
+          GITHUB_WORKFLOW_URL="https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}?check_suite_focus=true"
+
+          lychee --output ${LYCHEE_TMP} -E -i -n -t 45 --max-concurrency 64 -a 429,401,403 -m 10 -- 'build' '*.md'
+          exit_code=$?
+          if [ $exit_code -ne 0 ]; then
+            mkdir -p "$(dirname -- "${OUTPUT_FILE}")"
+            cat "${LYCHEE_TMP}" > "${OUTPUT_FILE}"
+            echo "" >> "${OUTPUT_FILE}" # add a new line
+            echo "[Full Github Actions output](${GITHUB_WORKFLOW_URL})" >> "${OUTPUT_FILE}"
+          fi
+        # if lychee run failed, create an issue
       - name: Create Issue From File
-        uses: peter-evans/create-issue-from-file@v3
-        with:
-          title: Broken Link Detected
-          content-filepath: out.md
-#          assignees: xxx(GitHub ID)
+        # it is better to use peter-evans/create-issue-from-file
+        # but it is not available due to the limitation of Apache
+        run: |
+          if [ ! -f "${OUTPUT_FILE}" ]; then
+            echo "No broken links found. Exiting."
+            exit 0
+          fi
+
+          gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+          gh issue create --title "Broken links found in the website" --body-file "${OUTPUT_FILE}" --repo "${GITHUB_REPOSITORY}" --assignee "${GITHUB_ACTOR}" --label "bug"

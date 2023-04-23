@@ -1,4 +1,4 @@
-name: Build workflow
+name: Build and check links in PRs
 
 on:
   pull_request:
@@ -19,21 +19,32 @@ jobs:
         run: |
           npm install
           npm run build
+      - name: Install lychee
+        env:
+          LYCHEEVERSION: 0.12.0
+        # due to the limitation of Apache, we can't use lycheeverse/lychee-action directly,
+        # so we re-use some core code from it(install)
+        run: |
+          curl -sLO "https://github.com/lycheeverse/lychee/releases/download/v${{ env.LYCHEEVERSION }}/lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
+          tar -xvzf "lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
+          rm "lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
+          install -t "$HOME/.local/bin" -D lychee 
+          rm lychee
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v1.5.0
-        with:
-          fail: true
-            # For parameter description, see https://github.com/lycheeverse/lychee#commandline-parameters
-            # -E, --exclude-all-private    Exclude all private IPs from checking.
-            # -i, --insecure               Proceed for server connections considered insecure (invalid TLS)
-            # -n, --no-progress            Do not show progress bar.
-            # -t, --timeout <timeout>      Website timeout in seconds from connect to response finished [default:20]
-            # --max-concurrency <max-concurrency>    Maximum number of concurrent network requests [default: 128]
-            # -a --accept <accept>                      Comma-separated list of accepted status codes for valid links
-            # -m, --max-redirects <MAX_REDIRECTS>
-
-            # 'build': the site directory to check
-            # './*.md': all markdown files in the root directory
-          args: -E -i -n -t 45 --max-concurrency 64 -a 429,401,403 -m 10 -- 'build' '*.md'
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          # For parameter description, see https://github.com/lycheeverse/lychee#commandline-parameters
+          # -E, --exclude-all-private    Exclude all private IPs from checking.
+          # -i, --insecure               Proceed for server connections considered insecure (invalid TLS)
+          # -n, --no-progress            Do not show progress bar.
+          # -t, --timeout <timeout>      Website timeout in seconds from connect to response finished [default:20]
+          # --max-concurrency <max-concurrency>    Maximum number of concurrent network requests [default: 128]
+          # -a --accept <accept>                      Comma-separated list of accepted status codes for valid links
+          # -m, --max-redirects <MAX_REDIRECTS>
+
+          # 'build': the site directory to check
+          # './*.md': all markdown files in the root directory
+
+          lychee -E -i -n -t 45 --max-concurrency 64 -a 429,401,403 -m 10 -- 'build' '*.md'
