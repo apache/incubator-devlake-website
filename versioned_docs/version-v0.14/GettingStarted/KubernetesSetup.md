@@ -11,13 +11,13 @@ We highly recommend the [helm approach](./HelmSetup.md), this page is for Advanc
 
 :::
 
-We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/deployment/k8s/k8s-deploy.yaml) to help deploy DevLake to Kubernetes
+We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/devops/deployment/k8s/k8s-deploy.yaml) to help deploy DevLake to Kubernetes
 
-[k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/deployment/k8s/k8s-deploy.yaml) will create a namespace `devlake` on your k8s cluster, and use `nodePort 30004` for `config-ui`,  `nodePort 30002` for `grafana` dashboards. If you would like to use a specific version of Apache DevLake, please update the image tag of `grafana`, `devlake` and `config-ui` deployments.
+[k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/devops/deployment/k8s/k8s-deploy.yaml) will create a namespace `devlake` on your k8s cluster, and use `nodePort 30004` for `config-ui`,  `nodePort 30002` for `grafana` dashboards. If you would like to use a specific version of Apache DevLake, please update the image tag of `grafana`, `devlake` and `config-ui` deployments.
 
 ## Step-by-step guide
 
-1. Download [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/deployment/k8s/k8s-deploy.yaml)
+1. Download [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/devops/deployment/k8s/k8s-deploy.yaml)
 2. Customize the settings (`devlake-config` config map):
    - Settings shared between `grafana` and `mysql`
      * `MYSQL_ROOT_PASSWORD`: set root password for `mysql`

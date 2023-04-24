@@ -134,7 +134,7 @@ Before we start, it is helpful to know how a collection task is executed:
 > ```go
 > type SubTaskEntryPoint func(c SubTaskContext) error
 > ```
-> More info at: https://devlake.apache.org/blog/how-apache-devlake-runs/
+> More info at: https://devlake.apache.org/blog/how-DevLake-is-up-and-running/
 
 #### Step 2.1: Create a sub-task(Collector) for data collection
 
@@ -143,7 +143,7 @@ Let's run `go run generator/main.go create-collector icla committer` and confirm
 ![](https://i.imgur.com/tkDuofi.png)
 
 > - Collector will collect data from HTTP or other data sources, and save the data into the raw layer. 
-> - Inside the func `SubTaskEntryPoint` of `Collector`, we use `helper.NewApiCollector` to create an object of [ApiCollector](https://github.com/apache/incubator-devlake/blob/main/generator/template/plugin/tasks/api_collector.go-template), then call `execute()` to do the job. 
+> - Inside the func `SubTaskEntryPoint` of `Collector`, we use `helper.NewApiCollector` to create an object of [ApiCollector](https://github.com/apache/incubator-devlake/blob/main/backend/generator/template/plugin/tasks/api_collector.go-template), then call `execute()` to do the job. 
 
 Now you can notice `data.ApiClient` is initiated in `plugin_main.go/PrepareTaskData.ApiClient`. `PrepareTaskData` creates a new `ApiClient`, which is a tool Apache DevLake suggests to request data from HTTP Apis. This tool support some valuable features for HttpApi, like rateLimit, proxy and retry. Of course, if you like, you may use the lib `http` instead, but it will be more tedious.
 

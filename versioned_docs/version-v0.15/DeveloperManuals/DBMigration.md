@@ -67,11 +67,11 @@ With these steps, the `defer` functions would be executed in reverse order if an
 
 However, you don't neccessary deal with all the mess. We had summarized some of the most useful code examples for you to follow:
 
-- [Create new tables](https://github.com/apache/incubator-devlake/blob/main/models/migrationscripts/20220406_add_frame_tables.go)
-[Rename column](https://github.com/apache/incubator-devlake/blob/main/models/migrationscripts/20220505_rename_pipeline_step_to_stage.go)
-- [Add columns with default value](https://github.com/apache/incubator-devlake/blob/main/models/migrationscripts/20220616_add_blueprint_mode.go)
-- [Change the values(or type) of Primary Key](https://github.com/apache/incubator-devlake/blob/main/models/migrationscripts/20220913_fix_commitfile_id_toolong.go)
-- [Change the values(or type) of Column](https://github.com/apache/incubator-devlake/blob/main/models/migrationscripts/20220903_encrypt_blueprint.go)
+- [Create new tables]https://github.com/apache/incubator-devlake/blob/main/backend/core/models/migrationscripts/20220406_add_frame_tables.go)
+[Rename column](https://github.com/apache/incubator-devlake/blob/main/backend/core/models/migrationscripts/20220505_rename_pipeline_step_to_stage.go)
+- [Add columns with default value](https://github.com/apache/incubator-devlake/blob/main/backend/core/models/migrationscripts/20220616_add_blueprint_mode.go)
+- [Change the values(or type) of Primary Key](https://github.com/apache/incubator-devlake/blob/main/backend/core/models/migrationscripts/20220913_fix_commitfile_id_toolong.go)
+- [Change the values(or type) of Column](https://github.com/apache/incubator-devlake/blob/main/backend/core/models/migrationscripts/20220903_encrypt_blueprint.go)
 
 The above examples should cover most of the scenarios you may encounter. If you come across other scenarios, feel free to create issues in our GitHub Issue Tracker for discussions. 
 

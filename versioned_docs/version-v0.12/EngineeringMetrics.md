@@ -20,7 +20,7 @@ description: >
         <td rowspan="10">Delivery Velocity</td>
         <td>Requirement Count</td>
         <td>Number of issues in type "Requirement"</td>
-        <td>Issue/Task Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
+        <td>Issue/Task Management entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
         <td rowspan="2">
 1. Analyze the number of requirements and delivery rate of different time cycles to find the stability and trend of the development process.
 <br/>2. Analyze and compare the number of requirements delivered and delivery rate of each project/team, and compare the scale of requirements of different projects.
@@ -32,12 +32,12 @@ description: >
     <tr>
         <td>Requirement Delivery Rate</td>
         <td>Ratio of delivered requirements to all requirements</td>
-        <td>Issue/Task Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
+        <td>Issue/Task Management entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
     </tr>
     <tr>
         <td>Requirement Lead Time</td>
         <td>Lead time of issues with type "Requirement"</td>
-        <td>Issue/Task Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
+        <td>Issue/Task Management entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
         <td>
 1. Analyze the trend of requirement lead time to observe if it has improved over time.
 <br/>2. Analyze and compare the requirement lead time of each project/team to identify key projects with abnormal lead time.
@@ -48,7 +48,7 @@ description: >
     <tr>
         <td>Requirement Granularity</td>
         <td>Number of story points associated with an issue</td>
-        <td>Issue/Task Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
+        <td>Issue/Task Management entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
         <td>
 1. Analyze the story points/requirement lead time of requirements to evaluate whether the ticket size, ie. requirement complexity is optimal.
 <br/>2. Compare the estimated requirement granularity with the actual situation and evaluate whether the difference is reasonable by combining more microscopic workload metrics (e.g. lines of code/code equivalents)</td>
@@ -58,7 +58,7 @@ description: >
     <tr>
         <td>Commit Count</td>
         <td>Number of Commits</td>
-        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitextractor/README.md">Git</a>/<a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a>/<a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLab</a> commits</td>
+        <td>Source Code Management entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitextractor/README.md">Git</a>/<a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a>/<a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLab</a> commits</td>
         <td>
 1. Identify the main reasons for the unusual number of commits and the possible impact on the number of commits through comparison
 <br/>2. Evaluate whether the number of commits is reasonable in conjunction with more microscopic workload metrics (e.g. lines of code/code equivalents)</td>
@@ -68,7 +68,7 @@ description: >
     <tr>
         <td>Added Lines of Code</td>
         <td>Accumulated number of added lines of code</td>
-        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitextractor/README.md">Git</a>/<a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a>/<a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLab</a> commits</td>
+        <td>Source Code Management entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitextractor/README.md">Git</a>/<a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a>/<a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLab</a> commits</td>
         <td rowspan="2">
 1. From the project/team dimension, observe the accumulated change in Added lines to assess the team activity and code growth rate
 <br/>2. From version cycle dimension, observe the active time distribution of code changes, and evaluate the effectiveness of project development model.
@@ -79,12 +79,12 @@ description: >
     <tr>
         <td>Deleted Lines of Code</td>
         <td>Accumulated number of deleted lines of code</td>
-        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitextractor/README.md">Git</a>/<a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a>/<a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLab</a> commits</td>
+        <td>Source Code Management entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitextractor/README.md">Git</a>/<a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a>/<a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLab</a> commits</td>
     </tr>
     <tr>
         <td>Pull Request Review Time</td>
         <td>Time from Pull/Merge created time until merged</td>
-        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
+        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
         <td>
 1. Observe the mean and distribution of code review time from the project/team/individual dimension to assess the rationality of the review time</td>
         <td>1. Take inventory of project/team code review resources to avoid lack of resources and backlog of review sessions, resulting in long waiting time
@@ -93,7 +93,7 @@ description: >
     <tr>
         <td>Bug Age</td>
         <td>Lead time of issues in type "Bug"</td>
-        <td>Issue/Task Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
+        <td>Issue/Task Management entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
         <td rowspan="2">
 1. Observe the trend of bug age and locate the key reasons.<br/>
 2. According to the severity level, type (business, functional classification), affected module, source of bugs, count and observe the length of bug and incident age.</td>
@@ -103,13 +103,13 @@ description: >
     <tr>
         <td>Incident Age</td>
         <td>Lead time of issues in type "Incident"</td>
-        <td>Issue/Task Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
+        <td>Issue/Task Management entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
     </tr>
     <tr>
         <td rowspan="8">Delivery Quality</td>
         <td>Pull Request Count</td>
         <td>Number of Pull/Merge Requests</td>
-        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
+        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
         <td rowspan="3">
 1. From the developer dimension, we evaluate the code quality of developers by combining the task complexity with the metrics related to the number of review passes and review rounds.<br/>
 2. From the reviewer dimension, we observe the reviewer's review style by taking into account the task complexity, the number of passes and the number of review rounds.<br/>
@@ -121,24 +121,24 @@ description: >
     <tr>
         <td>Pull Request Pass Rate</td>
         <td>Ratio of Pull/Merge Review requests to merged</td>
-        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
+        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
     </tr>
     <tr>
         <td>Pull Request Review Rounds</td>
         <td>Number of cycles of commits followed by comments/final merge</td>
-        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
+        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
     </tr>
     <tr>
         <td>Pull Request Review Count</td>
         <td>Number of Pull/Merge Reviewers</td>
-        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
+        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
         <td>1. As a secondary indicator, assess the cost of labor invested in the code review process</td>
         <td>1. Take inventory of project/team code review resources to avoid long waits for review sessions due to insufficient resource input</td>
     </tr>
     <tr>
         <td>Bug Count</td>
         <td>Number of bugs found during testing</td>
-        <td>Issue/Task Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
+        <td>Issue/Task Management entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/jira/README.md">Jira issues</a>, <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub issues</a>, etc</td>
         <td rowspan="4">
 1. From the project or team dimension, observe the statistics on the total number of defects, the distribution of the number of defects in each severity level/type/owner, the cumulative trend of defects, and the change trend of the defect rate in thousands of lines, etc.<br/>
 2. From version cycle dimension, observe the statistics on the cumulative trend of the number of defects/defect rate, which can be used to determine whether the growth rate of defects is slowing down, showing a flat convergence trend, and is an important reference for judging the stability of software version quality<br/>
@@ -151,23 +151,23 @@ description: >
     <tr>
         <td>Incident Count</td>
         <td>Number of Incidents found after shipping</td>
-        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
+        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
     </tr>
     <tr>
         <td>Bugs Count per 1k Lines of Code</td>
         <td>Amount of bugs per 1,000 lines of code</td>
-        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
+        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
     </tr>
     <tr>
         <td>Incidents Count per 1k Lines of Code</td>
         <td>Amount of incidents per 1,000 lines of code</td>
-        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
+        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a> PRs, <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLab</a> MRs, etc</td>
     </tr>
     <tr>
         <td>Delivery Cost</td>
         <td>Commit Author Count</td>
         <td>Number of Contributors who have committed code</td>
-        <td>Source Code Management entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitextractor/README.md">Git</a>/<a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a>/<a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLab</a> commits</td>
+        <td>Source Code Management entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitextractor/README.md">Git</a>/<a href="https://github.com/merico-dev/lake/blob/main/plugins/github/README.md">GitHub</a>/<a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLab</a> commits</td>
         <td>1. As a secondary indicator, this helps assess the labor cost of participating in coding</td>
         <td>1. Take inventory of project/team R&D resource inputs, assess input-output ratio, and rationalize resource deployment</td>
     </tr>
@@ -175,7 +175,7 @@ description: >
         <td rowspan="3">Delivery Capability</td>
         <td>Build Count</td>
         <td>The number of builds started</td>
-        <td>CI/CD entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/jenkins/README.md">Jenkins</a> PRs, <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLabCI</a> MRs, etc</td>
+        <td>CI/CD entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/jenkins/README.md">Jenkins</a> PRs, <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLabCI</a> MRs, etc</td>
         <td rowspan="3">1. From the project dimension, compare the number of builds and success rate by combining the project phase and the complexity of tasks<br/>
 2. From the time dimension, analyze the trend of the number of builds and success rate to see if it has improved over time</td>
         <td rowspan="3">1. As a process indicator, it reflects the value flow efficiency of upstream production and research links<br/>
@@ -184,12 +184,12 @@ description: >
     <tr>
         <td>Build Duration</td>
         <td>The duration of successful builds</td>
-        <td>CI/CD entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/jenkins/README.md">Jenkins</a> PRs, <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLabCI</a> MRs, etc</td>
+        <td>CI/CD entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/jenkins/README.md">Jenkins</a> PRs, <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLabCI</a> MRs, etc</td>
     </tr>
     <tr>
         <td>Build Success Rate</td>
         <td>The percentage of successful builds</td>
-        <td>CI/CD entities: <a href="https://github.com/merico-dev/lake/blob/main/plugins/jenkins/README.md">Jenkins</a> PRs, <a href="https://github.com/merico-dev/lake/blob/main/plugins/gitlab/README.md">GitLabCI</a> MRs, etc</td>
+        <td>CI/CD entities: <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/jenkins/README.md">Jenkins</a> PRs, <a href="https://github.com/apache/incubator-devlake/blob/main/backend/plugins/gitlab/README.md">GitLabCI</a> MRs, etc</td>
     </tr>
 </table>
 <br/><br/><br/>
