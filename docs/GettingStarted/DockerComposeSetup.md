@@ -12,11 +12,11 @@ sidebar_position: 1
 
 ## Launch DevLake
 
-- Commands written `like this` are to be run in your terminal.
+Commands written `like this` are to be run in your terminal.
 
-1. Download `docker-compose.yml` and `env.example` from [latest release page](https://github.com/apache/incubator-devlake/releases/latest) into a folder.
+1. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.16.0-beta17) into a folder.
 2. Rename `env.example` to `.env`. For Mac/Linux users, please run `mv env.example .env` in the terminal. This file contains the environment variables that the Devlake server will use. Additional ones can be found in the compose file(s).
-3. If the docker desktop version installed by the user is too low to use `docker compose up -d`, please use `docker-compose up -d`.
+3. Run `docker-compose up -d` if the version of Docker Desktop is too low to use `docker compose up -d`.
 
 ## Collect data and view dashboards
 
