@@ -9,7 +9,7 @@ description: >
 RefDiff is a plugin that performs calculation tasks and has 2 main purposes.
 
 - Calculate the difference in commits between releases/tags to [analyze the amount of code in each release](https://github.com/apache/incubator-devlake/blob/main/plugins/refdiff/tasks/commit_diff_calculator.go)
-- Calculate the difference in commits between deployments to [calculate DORA metrics](https://github.com/apache/incubator-devlake/blob/main/plugins/refdiff/tasks/project_deployment_commit_diff_calculator.go)
+- Calculate the difference in commits between deployments to [calculate DORA metrics](https://github.com/apache/incubator-devlake/blob/main/backend/plugins/refdiff/tasks/deployment_commit_diff_calculator.go)
 
 And the output of RefDiff is stored in the table commits_diffs, finished_commits_diffs, ref_commits.
 
@@ -100,7 +100,7 @@ curl 'http://localhost:8080/pipelines' \
 
 ## How to use refdiff in DORA
 
-RefDiff can be called by the [DORA plugin](https://github.com/apache/incubator-devlake/tree/main/plugins/dora) to support the calculation of [DORA metrics](https://devlake.apache.org/docs/DORA). RefDiff has a subtask called 'calculateProjectDeploymentCommitsDiff'. This subtask takes the `project_name` from task options to calculate the commits diff between two consecutive deployments in this project. That is to say, refdiff will generate the relationship between `deployed commit(s)` and the `deployment` in which these commits get deployed.
+RefDiff can be called by the [DORA plugin](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/dora) to support the calculation of [DORA metrics](https://devlake.apache.org/docs/DORA). RefDiff has a subtask called 'calculateProjectDeploymentCommitsDiff'. This subtask takes the `project_name` from task options to calculate the commits diff between two consecutive deployments in this project. That is to say, refdiff will generate the relationship between `deployed commit(s)` and the `deployment` in which these commits get deployed.
 
 ```shell
 curl 'http://localhost:8080/pipelines' \

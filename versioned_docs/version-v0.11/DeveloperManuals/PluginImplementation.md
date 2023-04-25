@@ -24,13 +24,13 @@ A plugin may extend DevLake's capability in three ways:
 
 A plugin mainly consists of a collection of subtasks that can be executed by DevLake core. For data source plugins, a subtask may be collecting a single entity from the data source (e.g., issues from Jira). Besides the subtasks, there're hooks that a plugin can implement to customize its initialization, migration, and more. See below for a list of the most important interfaces:
 
-1. [PluginMeta](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_meta.go) contains the minimal interface that a plugin should implement, with only two functions
+1. [PluginMeta](https://github.com/apache/incubator-devlake/blob/main/backend/core/plugin/plugin_meta.go) contains the minimal interface that a plugin should implement, with only two functions
     - Description() returns the description of a plugin
     - RootPkgPath() returns the root package path of a plugin
-2. [PluginInit](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_init.go) allows a plugin to customize its initialization
-3. [PluginTask](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_task.go) enables a plugin to prepare data prior to subtask execution
-4. [PluginApi](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_api.go) lets a plugin exposes some self-defined APIs
-5. [Migratable](https://github.com/apache/incubator-devlake/blob/main/plugins/core/plugin_db_migration.go) is where a plugin manages its database migrations
+2. [PluginInit](https://github.com/apache/incubator-devlake/blob/main/backend/core/plugin/plugin_init.go) allows a plugin to customize its initialization
+3. [PluginTask](https://github.com/apache/incubator-devlake/blob/main/backend/core/plugin/plugin_task.go) enables a plugin to prepare data prior to subtask execution
+4. [PluginApi](https://github.com/apache/incubator-devlake/blob/main/backend/core/plugin/plugin_api.go) lets a plugin exposes some self-defined APIs
+5. [PluginMigration](https://github.com/apache/incubator-devlake/blob/main/backend/core/plugin/plugin_migration.go) is where a plugin manages its database migrations
 
 The diagram below shows the control flow of executing a plugin:
 
@@ -124,7 +124,7 @@ Before we start, it is helpful to know how collection task is executed:
 > ```go
 > type SubTaskEntryPoint func(c SubTaskContext) error
 > ```
-> More info at: https://devlake.apache.org/blog/how-apache-devlake-runs/
+> More info at: https://devlake.apache.org/blog/how-DevLake-is-up-and-running/
 
 #### Step 2.1 Create a sub-task(Collector) for data collection
 
@@ -133,7 +133,7 @@ Let's run `go run generator/main.go create-collector icla committer` and confirm
 ![](https://i.imgur.com/tkDuofi.png)
 
 > - Collector will collect data from HTTP or other data sources, and save the data into the raw layer.
-> - Inside the func `SubTaskEntryPoint` of `Collector`, we use `helper.NewApiCollector` to create an object of [ApiCollector](https://github.com/apache/incubator-devlake/blob/main/generator/template/plugin/tasks/api_collector.go-template), then call `execute()` to do the job.
+> - Inside the func `SubTaskEntryPoint` of `Collector`, we use `helper.NewApiCollector` to create an object of [ApiCollector](https://github.com/apache/incubator-devlake/blob/main/backend/generator/template/plugin/tasks/api_collector.go-template), then call `execute()` to do the job.
 
 Now you can notice `data.ApiClient` is inited in `plugin_main.go/PrepareTaskData.ApiClient`. `PrepareTaskData` create a new `ApiClient`, and it's a tool Apache DevLake suggests to request data from HTTP Apis. This tool support some valuable features for HttpApi, like rateLimit, proxy and retry. Of course, if you like, you may use the lib `http` instead, but it will be more tedious.
 

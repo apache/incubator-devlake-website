@@ -6,13 +6,13 @@ sidebar_position: 2
 ---
 
 
-We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/k8s-deploy.yaml) for users interested in deploying Apache DevLake on a k8s cluster.
+We provide a sample [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/devops/deployment/k8s/k8s-deploy.yaml) for users interested in deploying Apache DevLake on a k8s cluster.
 
-[k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/k8s-deploy.yaml) will create a namespace `devlake` on your k8s cluster, and use `nodePort 30004` for `config-ui`,  `nodePort 30002` for `grafana` dashboards. If you would like to use certain version of Apache DevLake, please update the image tag of `grafana`, `devlake` and `config-ui` services to specify versions like `v0.10.1`.
+[k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/devops/deployment/k8s/k8s-deploy.yaml) will create a namespace `devlake` on your k8s cluster, and use `nodePort 30004` for `config-ui`,  `nodePort 30002` for `grafana` dashboards. If you would like to use certain version of Apache DevLake, please update the image tag of `grafana`, `devlake` and `config-ui` services to specify versions like `v0.10.1`.
 
 ## Step-by-step guide
 
-1. Download [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/k8s-deploy.yaml) to local machine
+1. Download [k8s-deploy.yaml](https://github.com/apache/incubator-devlake/blob/main/devops/deployment/k8s/k8s-deploy.yaml) to local machine
 2. Some key points:
    - `config-ui` deployment:
      * `GRAFANA_ENDPOINT`: FQDN of grafana service which can be reached from user's browser

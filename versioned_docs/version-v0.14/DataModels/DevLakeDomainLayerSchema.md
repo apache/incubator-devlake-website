@@ -265,7 +265,7 @@ A ref is the abstraction of a branch or tag.
 
 This table shows the commits added in a new ref compared to an old ref. This table can be used to support tag-based analysis, for instance, '_No. of commits of a tag_', '_No. of merged pull request of a tag_', etc.
 
-The records of this table are computed by [RefDiff](https://github.com/apache/incubator-devlake/tree/main/plugins/refdiff) plugin. The computation should be manually triggered after using [GitRepoExtractor](https://github.com/apache/incubator-devlake/tree/main/plugins/gitextractor) to collect commits and refs. The algorithm behind is similar to [this](https://github.com/apache/incubator-devlake/compare/v0.8.0%E2%80%A6v0.9.0).
+The records of this table are computed by [RefDiff](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/refdiff) plugin. The computation should be manually triggered after using [GitRepoExtractor](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/gitextractor) to collect commits and refs. The algorithm behind is similar to [this](https://github.com/apache/incubator-devlake/compare/v0.8.0%E2%80%A6v0.9.0).
 
 | **field**            | **type** | **length** | **description**                                                 | **key**        |
 | :------------------- | :------- | :--------- | :-------------------------------------------------------------- | :------------- |
@@ -292,7 +292,7 @@ The records of this table are computed by [RefDiff](https://github.com/apache/in
 | `committer_id`    | varchar  | 255        | The id of committer                                                                                                                                              | FK_accounts.id    |
 | `additions`       | int      |            | Added lines of code                                                                                                                                              |                |
 | `deletions`       | int      |            | Deleted lines of code                                                                                                                                            |                |
-| `dev_eq`          | int      |            | A metric that quantifies the amount of code contribution. The data can be retrieved from [AE plugin](https://github.com/apache/incubator-devlake/tree/main/plugins/ae). |                |
+| `dev_eq`          | int      |            | A metric that quantifies the amount of code contribution. The data can be retrieved from [AE plugin](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/ae). |                |
 
 #### commit_files
 
@@ -489,7 +489,7 @@ A low-level mapping between "issue tracking" and "source code management" domain
 
 The original connection between these two entities lies in either issue tracking tools like Jira or source code management tools like GitLab. You have to use tools to accomplish this.
 
-For example, a common method to connect Jira issue and GitLab commit is a GitLab plugin [Jira Integration](https://docs.gitlab.com/ee/integration/jira/). With this plugin, the Jira issue key in the commit message written by the committers will be parsed. Then, the plugin will add the commit urls under this jira issue. Hence, DevLake's [Jira plugin](https://github.com/apache/incubator-devlake/tree/main/plugins/jira) can get the related commits (including repo, commit_id, url) of an issue.
+For example, a common method to connect Jira issue and GitLab commit is a GitLab plugin [Jira Integration](https://docs.gitlab.com/ee/integration/jira/). With this plugin, the Jira issue key in the commit message written by the committers will be parsed. Then, the plugin will add the commit urls under this jira issue. Hence, DevLake's [Jira plugin](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/jira) can get the related commits (including repo, commit_id, url) of an issue.
 
 | **field**    | **type** | **length** | **description** | **key**        |
 | :----------- | :------- | :--------- | :-------------- | :------------- |

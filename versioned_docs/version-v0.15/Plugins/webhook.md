@@ -67,7 +67,7 @@ curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -d '{
   }'
 ```
 
-If you have set a [username/password](https://devlake.apache.org/docs/UserManuals/Authentication) for Config UI, you'll need to add them to the curl command to register a `deployment`:
+If you have set a [username/password](https://devlake.apache.org/docs/next/GettingStarted/Authentication) for Config UI, you'll need to add them to the curl command to register a `deployment`:
 
 ```
 curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
