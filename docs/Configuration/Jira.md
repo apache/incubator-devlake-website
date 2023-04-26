@@ -4,50 +4,60 @@ sidebar_position: 4
 description: Config UI instruction for Jira
 ---
 
-Visit config-ui: `http://localhost:4000`.
+Visit Config UI at: `http://localhost:4000`.
 
 ### Step 1 - Add Data Connections
 
-![jira-add-data-connections](/img/ConfigUI/jira-add-data-connections.png)
+![jira-add-data-connections](images/jira-create-a-connection.png)
 
 #### Connection Name
 
-Name your connection.
+Give your connection a unique name to help you identify it in the future.
+
+#### Jira Version
+Select if you use Jira Cloud or Jira Server. Jira Cloud has only one authentication method by using the API token, while Jira Server supports two ways of authentication: using basic authentication or Personal Access Token.
 
 #### Endpoint URL
+This should be a valid REST API endpoint.
 
-This should be a valid REST API endpoint
+- Jira Cloud: the endpoint will be `https://<mydomain>.atlassian.net/rest/`
+- Jira Server: the endpoint will be `https://jira.<mydomain>.com/rest/`
+  
+Please note: the endpoint url should end with `/`.
 
-- If you are using Jira Cloud, the endpoint will be `https://<mydomain>.atlassian.net/rest/`
-- If you are self-hosting Jira v7+ or v8+, the endpoint may look like `https://jira.<mydomain>.com/rest/`
-  The endpoint url should end with `/`.
+#### E-mail
+For Jira Cloud only: please enter the e-mail of your Jira account.
 
-#### Username / Email
-
-Input the username or email of your Jira account.
+#### Username
+For Jira Server only: please enter the username of your Jira account.
 
 #### Password
+For Jira Server only: please enter the password of your Jira account.
 
-- If you are using Jira Cloud, please input the [Jira personal access token](https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html).
-- If you are using Jira Server v7+ or v8+, please input the password of your Jira account.
+#### API Token
+For Jira Cloud only: learn about [how to create an API token](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/).
 
-#### Auth Token
+Please note: Jira API token and Personal Access Token are two different tokens.
 
-When accessing Jira API using a Jira Auth Token, users may encounter access restrictions if their token does not have sufficient permissions. This is typically caused by insufficient scope or role settings for the Jira Auth Token.
+#### Personal Access Token
+For Jira Server only:  learn about [how to create a Personal Access Token](https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html).
+
+#### Token Permissions
+For both Jira Cloud and Jira Server, when accessing Jira API, users may encounter access restrictions if their token does not have sufficient permissions. This is typically caused by insufficient scope or role settings for the Jira token.
 
 To solve this issue, users can take the following steps:
 
 - Checking User Permissions
 
-Users can confirm whether they have sufficient permissions by checking their permissions in Jira. For cloud users, they can view their global and project permissions through the "Permissions" tab on the "Profile" page. For server users, they can log in to Jira as an administrator and view user permissions on the "User Management" page.
+Users can confirm whether they have sufficient permissions by checking their permissions in Jira. For Cloud users, they can view their global and project permissions through the "Permissions" tab on the "Profile" page. For Server users, they can log in to Jira as an administrator and view user permissions on the "User Management" page.
 
 - Ensuring Sufficient Permissions
 
-Before using Jira API, users need to ensure that their account has at least the necessary project or global permissions. Global permissions include various Jira system settings and management operations, while project permissions control specific operations and configurations for each Jira project. Users can assign roles such as `Project Administrator`, `Project Lead`, `Developer`, etc. for the corresponding projects, or assign global permissions such as `Jira Administrators`, `Jira Software Administrators`, etc. It is recommended to minimize the permissions granted to the API to ensure system security.
+Before using the Jira API, users need to ensure that their account has at least the necessary project or global permissions. Global permissions include various Jira system settings and management operations, while project permissions control specific operations and configurations for each Jira project. Users can assign roles such as `Project Administrator`, `Project Lead`, `Developer`, etc. for the corresponding projects, or assign global permissions such as `Jira Administrators`, `Jira Software Administrators`, etc. It is recommended to minimize the permissions granted to the API to ensure system security.
 
 - Solving Access Restrictions
 
-To solve access restrictions caused by insufficient Jira Auth Token permissions, users should check the token's permission settings to ensure the correct scope and role are set. If the permission settings are correct but the required API is still inaccessible, consider using other authentication methods, such as authenticating with a username and password. If the issue persists, contact the Jira administrator for further assistance.
+To solve access restrictions caused by insufficient Jira token permissions, users should check the token's permission settings to ensure the correct scope and role are set. If the permission settings are correct but the required API is still inaccessible, consider using other authentication methods, such as authenticating with a username and password. If the issue persists, contact the Jira administrator for further assistance.
 
 #### Proxy URL (Optional)
 
@@ -65,9 +75,9 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 
 ### Step 2 - Setting Data Scope
 
-![jira-set-data-scope](/img/ConfigUI/jira-set-data-scope.png)
+![jira-set-data-scope](images/jira-set-data-scope.png)
 
-#### Projects
+#### Boards
 
 Choose the Jira boards to collect.
 
@@ -79,14 +89,17 @@ Usually, you don't have to modify this part. However, if you don't want to colle
 - Cross Domain: Jira accounts, etc.
 
 ### Step 3 - Adding Transformation Rules (Optional)
+Adding transforamtion to the Jira data you wish to collect can help standardize the data to view more metrics, such as [Requirement Lead Time](https://devlake.apache.org/docs/Metrics/RequirementLeadTime), [Bug Age](https://devlake.apache.org/docs/Metrics/BugAge) and DORA - [Median Time to Restore Service](https://devlake.apache.org/docs/Metrics/MTTR).
 
-![jira-add-transformation-rules-list](/img/ConfigUI/jira-add-transformation-rules-list.png)
+![jira-add-transformation-1](images/jira-set-transformation1.png)
+![jira-add-transformation-2](images/jira-set-transformation2.png)
+![jira-add-transformation-3](images/jira-set-transformation3.png)
+
 
 Without adding transformation rules, you can not view all charts in "Jira" or "Engineering Throughput and Cycle Time" dashboards.<br/>
 
 Each Jira board has at most ONE set of transformation rules.
 
-![jira-add-transformation-rules](/img/ConfigUI/jira-add-transformation-rules.png)
 
 #### Issue Tracking
 
