@@ -47,4 +47,4 @@ jobs:
           # 'build': the site directory to check
           # './*.md': all markdown files in the root directory
 
-          lychee -E -i -n -t 45 --max-concurrency 64 -a 429,401,403 -m 10 -- 'build' '*.md'
+          lychee -E -i -n -t 45 --max-concurrency 64 -a 401,403 -m 10 -- 'build' '*.md'
