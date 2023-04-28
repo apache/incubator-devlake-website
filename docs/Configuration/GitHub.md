@@ -4,25 +4,25 @@ sidebar_position: 2
 description: Config UI instruction for GitHub
 ---
 
-Visit config-ui: `http://localhost:4000`.
+Visit Config UI at: `http://localhost:4000`.
 
-### Step 1 - Add Data Connections
+## Step 1 - Add Data Connections
 
-![github-add-data-connections](/img/ConfigUI/github-add-data-connections.png)
+![github-add-data-connections](images/github-create-a-connection.png)
 
-#### Connection Name
+### Connection Name
 
-Name your connection.
+Give your connection a unique name to help you identify it in the future.
 
-#### Endpoint URL
+### Endpoint URL
 
 This should be a valid REST API endpoint, eg. `https://api.github.com/`. The URL should end with `/`.
 
-#### Auth Token(s)
+### Personal Access Token(s)
 
 You can use one of the following GitHub tokens: personal access tokens(PATs) or fine-grained personal access tokens.
 
-###### GitHub personal access tokens(Recommended)
+#### GitHub Personal Access Tokens(Recommended)
 
 Learn about [how to create a GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). The following permissions are required to collect data from repositories:
 
@@ -41,7 +41,7 @@ The difference is that you have to give full permission for `repos`, not just `r
 
 The data collection speed is restricted by the **rate limit of [5,000 requests](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) per hour per token** (15,000 requests/hour if you pay for GitHub enterprise). You can accelerate data collection by configuring _multiple_ personal access tokens. Please note that multiple tokens should be created by different GitHub accounts. Tokens belonging to the same GitHub account share the rate limit.
 
-###### Fine-grained personal access tokens
+#### Fine-grained Personal Access Tokens
 
 Note: this token doesn't support GraphQL APIs. You have to disable `Use GraphQL APIs` on the connection page if you want to use it. However, this will significantly increase the data collection time.
 
@@ -54,36 +54,36 @@ The token should be granted read-only permission for the following entities.
   - `Metadata`
   - `Pull requests`
 
-#### Use Graphql APIs
+### Use Graphql APIs
 
 If you are using `github.com` or your on-premise GitHub version supports GraphQL APIs, toggle on this setting to collect data quicker.
 
 - GraphQL APIs are 10+ times faster than REST APIs, but they may not be supported in GitHub on-premise versions.
 - Instead of using multiple tokens to collect data, you can use ONLY ONE token because GraphQL APIs are quick enough.
 
-#### Proxy URL (Optional)
+### Proxy URL (Optional)
 
 If you are behind a corporate firewall or VPN you may need to utilize a proxy server. Enter a valid proxy server address on your network, e.g. `http://your-proxy-server.com:1080`
 
-#### Fixed Rate Limit (Optional)
+### Fixed Rate Limit (Optional)
 
 DevLake uses a dynamic rate limit to collect GitHub data. You can adjust the rate limit if you want to increase or lower the speed.
 
 The maximum rate limit for GitHub is ** [5,000 requests/hour](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting)** (15,000 requests/hour if you pay for GitHub enterprise). Please do not use a rate that exceeds this number.
 
-#### Test and Save Connection
+### Test and Save Connection
 
 Click `Test Connection`, if the connection is successful, click `Save Connection` to add the connection.
 
-### Step 2 - Setting Data Scope
+## Step 2 - Setting Data Scope
 
 ![github-set-data-scope](/img/ConfigUI/github-set-data-scope.png)
 
-#### Projects
+### Repositories
 
-Enter the GitHub repos to collect. If you want to collect more than 1 repo, please separate repos with comma. For example, "apache/incubator-devlake,apache/incubator-devlake-website".
+Enter the GitHub repositories to collect. If you want to collect more than 1 repo, please separate repos with comma. For example, "apache/incubator-devlake,apache/incubator-devlake-website".
 
-#### Data Entities
+### Data Entities
 
 Usually, you don't have to modify this part. However, if you don't want to collect certain GitHub entities, you can unselect some entities to accelerate the collection speed.
 
@@ -93,16 +93,16 @@ Usually, you don't have to modify this part. However, if you don't want to colle
 - CI/CD: GitHub Workflow runs, GitHub Workflow jobs, etc.
 - Cross Domain: GitHub accounts, etc.
 
-### Step 3 - Adding Transformation Rules (Optional)
+## Step 3 - Adding Transformation Rules (Optional)
 
-![github-add-transformation-rules-list](/img/ConfigUI/github-add-transformation-rules-list.png)
-![github-add-transformation-rules](/img/ConfigUI/github-add-transformation-rules.png)
+![github-add-transformation-rules-list](images/github-set-transformation1.png)
+![github-add-transformation-rules](images/github-set-transformation2.png)
 
 Without adding transformation rules, you can still view the "[GitHub Metrics](/livedemo/DataSources/GitHub)" dashboard. However, if you want to view "[Weekly Bug Retro](/livedemo/QAEngineers/WeeklyBugRetro)", "[Weekly Community Retro](/livedemo/OSSMaintainers/WeeklyCommunityRetro)" or other pre-built dashboards, the following transformation rules, especially "Type/Bug", should be added.<br/>
 
 Each GitHub repo has at most ONE set of transformation rules.
 
-#### Issue Tracking
+### Issue Tracking
 
 - Severity: Parse the value of `severity` from issue labels.
 
@@ -119,7 +119,7 @@ Each GitHub repo has at most ONE set of transformation rules.
 
 - Type/Incident: Same as "Type/Requirement", with `type` setting to "INCIDENT".
 
-#### CI/CD
+### CI/CD
 
 This set of configurations is used for calculating [DORA metrics](../DORA.md).
 
@@ -137,7 +137,7 @@ The deployment and production regex is always applied to the records in the cicd
 
 You can also select "Not using Jobs in GitHub Action as Deployments" if you're not using GitHub action to conduct deployments.
 
-#### Code Review
+### Code Review
 
 - Type: The `type` of pull requests will be parsed from PR labels by given regular expression. For example:
 
@@ -146,7 +146,7 @@ You can also select "Not using Jobs in GitHub Action as Deployments" if you're n
 
 - Component: The `component` of pull requests will be parsed from PR labels by given regular expression.
 
-#### Additional Settings (Optional)
+### Additional Settings (Optional)
 
 - Tags Limit: It'll compare the last N pairs of tags to get the "commit diff', "issue diff" between tags. N defaults to 10.
 
@@ -159,7 +159,7 @@ You can also select "Not using Jobs in GitHub Action as Deployments" if you're n
 
 Please click `Save` to save the transformation rules for the repo. In the data scope list, click `Next Step` to continue configuring.
 
-### Step 4 - Setting Sync Frequency
+## Step 4 - Setting Sync Policy
 
 You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your prefered schedule.
 

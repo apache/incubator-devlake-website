@@ -4,53 +4,56 @@ sidebar_position: 5
 description: Config UI instruction for Jenkins
 ---
 
-Visit config-ui: `http://localhost:4000`.
+Visit Config UI at: `http://localhost:4000`.
 
-### Step 1 - Add Data Connections
+## Step 1 - Add Data Connections
 
-![jenkins-add-data-connections](/img/ConfigUI/jenkins-add-data-connections.png)
+![jenkins-create-a-connection](images/jenkins-create-a-connection.png)
 
-#### Connection Name
+### Connection Name
 
-Name your connection.
+Give your connection a unique name to help you identify it in the future.
 
-#### Endpoint URL
+### Endpoint URL
 
 This should be a valid REST API endpoint. Eg. `https://ci.jenkins.io/`. The endpoint url should end with `/`.
 
-#### Username (E-mail)
+### Username (E-mail)
 
 Your User ID for the Jenkins Instance.
 
-#### Password
+### Password
 
 For help on Username and Password, please see Jenkins docs on [using credentials](https://www.jenkins.io/doc/book/using/using-credentials/). You can also use "API Access Token" for this field, which can be generated at `User` -> `Configure` -> `API Token` section on Jenkins.
 
-#### Fixed Rate Limit (Optional)
+### Fixed Rate Limit (Optional)
 
 DevLake uses a dynamic rate limit to collect Jenkins data. You can adjust the rate limit if you want to increase or lower the speed.
 
-There is not any doc about Jenkins rate limiting. Please put up an issue if you find one.
+There is no doc about Jenkins rate limiting. Please create an issue if you find related information.
 
-#### Test and Save Connection
+### Test and Save Connection
 
 Click `Test Connection`, if the connection is successful, click `Save Connection` to add the connection.
 
-### Step 2 - Setting Data Scope
+## Step 2 - Setting Data Scope
 
 ![jenkins-set-data-scope](/img/ConfigUI/jenkins-set-data-scope.png)
 
-#### Jobs
+### Jobs
 
 Choose the Jenkins jobs. All `Jenkins builds` under these jobs will be collected.
 
-#### Data Entities
+### Data Entities
 
 Jenkins only supports `CI/CD` domain entities, transformed from Jenkins builds and stages.
 
 - CI/CD: Jenkins builds, stages, etc.
 
-### Step 3 - Adding Transformation Rules (Optional)
+## Step 3 - Adding Transformation Rules (Optional)
+
+![jenkins-set-transformation1](images/jenkins-set-transformation1.png)
+![jenkins-set-transformation2](images/jenkins-set-transformation2.png)
 
 This set of configurations is used for calculating [DORA metrics](../DORA.md).
 
@@ -69,7 +72,7 @@ After the conversion, the two regexes are applied to the records in the cicd_tas
 
 You can also select "Not using Jenkins builds as Deployments" if you're not using Jenkins to conduct deployments.
 
-### Step 4 - Setting Sync Frequency
+## Step 4 - Setting Sync Policy
 
 You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your prefered schedule.
 
