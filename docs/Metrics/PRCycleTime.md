@@ -6,7 +6,9 @@ sidebar_position: 14
 ---
 
 ## What is this metric? 
-PR Cycle Time is the sum of PR Coding Time, Pickup TIme, Review Time and Deploy Time. It is the total time from the first commit to when the PR is deployed.
+PR Cycle Time is the sum of PR Coding Time, PR Time-to-Merge and PR Deploy Time. It is the total time from the first commit to when the PR is deployed.
+
+The reason why we use PR Time-to-Merge rather than PR Pickup Time + PR Review Time is that a merged PR may not have any review. In this case, PR Pickup Time and PR Review Time will be NULL, while PR Time-to-Merge is not.
 
 ## Why is it important?
 PR Cycle Time indicates the overall velocity of the delivery progress in terms of PR. 

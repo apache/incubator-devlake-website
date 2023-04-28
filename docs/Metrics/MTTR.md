@@ -50,45 +50,38 @@ This metric relies on:
 
 <b>SQL Queries</b>
 
-If you want to measure the monthly trend of median time to restore service as the picture shown below, run the following SQL in Grafana.
+If you want to measure the monthly trend of the Median Time to Restore Service as the picture shown below, run the following SQL in Grafana.
 
 ![](/img/Metrics/mttr-monthly.jpeg)
 
 ```
 with _incidents as (
--- get the incident count each month
+-- get the number of incidents created each month
 	SELECT
-		date_format(created_date,'%y/%m') as month,
+	  distinct i.id,
+		date_format(i.created_date,'%y/%m') as month,
 		cast(lead_time_minutes as signed) as lead_time_minutes
 	FROM
-		issues
+		issues i
+	  join board_issues bi on i.id = bi.issue_id
+	  join boards b on bi.board_id = b.id
+	  join project_mapping pm on b.id = pm.row_id
 	WHERE
-		type = 'INCIDENT'
+	  pm.project_name in ($project)
+		and i.type = 'INCIDENT'
+		and i.lead_time_minutes is not null
 ),
 
-_find_median_mttr_each_month as (
-	SELECT 
-		x.*
-	from _incidents x join _incidents y on x.month = y.month
-	WHERE x.lead_time_minutes is not null and y.lead_time_minutes is not null
-	GROUP BY x.month, x.lead_time_minutes
-	HAVING SUM(SIGN(1-SIGN(y.lead_time_minutes-x.lead_time_minutes)))/COUNT(*) > 0.5
+_find_median_mttr_each_month_ranks as(
+	SELECT *, percent_rank() over(PARTITION BY month order by lead_time_minutes) as ranks
+	FROM _incidents
 ),
 
-_find_mttr_rank_each_month as (
-	SELECT
-		*,
-		rank() over(PARTITION BY month ORDER BY lead_time_minutes) as _rank 
-	FROM
-		_find_median_mttr_each_month
-),
-
-_mttr as (
-	SELECT
-		month,
-		lead_time_minutes as med_time_to_resolve
-	from _find_mttr_rank_each_month
-	WHERE _rank = 1
+_mttr as(
+	SELECT month, max(lead_time_minutes) as median_time_to_resolve
+	FROM _find_median_mttr_each_month_ranks
+	WHERE ranks <= 0.5
+	GROUP BY month
 ),
 
 _calendar_months as(
@@ -106,15 +99,15 @@ _calendar_months as(
 SELECT 
 	cm.month,
 	case 
-		when m.med_time_to_resolve is null then 0 
-		else m.med_time_to_resolve/60 end as med_time_to_resolve_in_hour
+		when m.median_time_to_resolve is null then 0 
+		else m.median_time_to_resolve/60 end as median_time_to_resolve_in_hour
 FROM 
 	_calendar_months cm
 	left join _mttr m on cm.month = m.month
 ORDER BY 1
 ```
 
-If you want to measure in which category your team falls into as the picture shown below, run the following SQL in Grafana.
+If you want to measure in which category your team falls into as in the picture shown below, run the following SQL in Grafana.
 
 ![](/img/Metrics/mttr-text.jpeg)
 
@@ -122,31 +115,38 @@ If you want to measure in which category your team falls into as the picture sho
 with _incidents as (
 -- get the incidents created within the selected time period in the top-right corner
 	SELECT
+	  distinct i.id,
 		cast(lead_time_minutes as signed) as lead_time_minutes
 	FROM
-		issues
+		issues i
+	  join board_issues bi on i.id = bi.issue_id
+	  join boards b on bi.board_id = b.id
+	  join project_mapping pm on b.id = pm.row_id
 	WHERE
-		type = 'INCIDENT'
-		and $__timeFilter(created_date)
+	  pm.project_name in ($project)
+		and i.type = 'INCIDENT'
+		and $__timeFilter(i.created_date)
 ),
 
-_median_mttr as (
-	SELECT 
-		x.lead_time_minutes as med_time_to_resolve
-	from _incidents x, _incidents y
-	WHERE x.lead_time_minutes is not null and y.lead_time_minutes is not null
-	GROUP BY x.lead_time_minutes
-	HAVING SUM(SIGN(1-SIGN(y.lead_time_minutes-x.lead_time_minutes)))/COUNT(*) > 0.5
-	LIMIT 1
+_median_mttr_ranks as(
+	SELECT *, percent_rank() over(order by lead_time_minutes) as ranks
+	FROM _incidents
+),
+
+_median_mttr as(
+	SELECT max(lead_time_minutes) as median_time_to_resolve
+	FROM _median_mttr_ranks
+	WHERE ranks <= 0.5
 )
 
 SELECT 
 	case
-		WHEN med_time_to_resolve < 60  then "Less than one hour"
-    WHEN med_time_to_resolve < 24 * 60 then "Less than one Day"
-    WHEN med_time_to_resolve < 7 * 24 * 60  then "Between one day and one week"
-    ELSE "More than one week"
-    END as med_time_to_resolve
+		WHEN median_time_to_resolve < 60  then "Less than one hour"
+    WHEN median_time_to_resolve < 24 * 60 then "Less than one Day"
+    WHEN median_time_to_resolve < 7 * 24 * 60  then "Between one day and one week"
+    WHEN median_time_to_resolve >= 7 * 24 * 60 then "More than one week"
+    ELSE "N/A.Please check if you have collected deployments/incidents."
+    END as median_time_to_resolve
 FROM 
 	_median_mttr
 ```

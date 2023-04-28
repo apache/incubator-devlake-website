@@ -16,7 +16,9 @@ DORA dashboard. See [live demo](https://grafana-lake.demo.devlake.io/grafana/d/q
 
 
 ## How is it calculated?
-Deployment frequency is calculated based on the number of deployment days, not the number of deployments, e.g.,daily, weekly, monthly, yearly.
+Deployment frequency is calculated based on the number of deployment days, not the number of deployments, e.g., daily, weekly, monthly, yearly.
+
+When there are multiple deployments triggered by one pipeline, tools like GitLab and BitBucket will generate more than one deployment. In these cases, DevLake will consider these deployments as ONE deployment and use the last deployment's finished date as the deployment finished date.
 
 Below are the benchmarks for different development teams from Google's report. DevLake uses the same benchmarks.
 
@@ -48,21 +50,28 @@ If you want to measure the monthly trend of deployment count as the picture show
 ![](/img/Metrics/deployment-frequency-monthly.jpeg)
 
 ```
-with _deployments as (
--- get the deployment count each month
-	SELECT
-		date_format(finished_date,'%y/%m') as month,
-		COUNT(distinct id) AS deployment_count
-	FROM
-		cicd_tasks
-	WHERE
-		type = 'DEPLOYMENT'
-		and result = 'SUCCESS'
+with _deployments as(
+	SELECT 
+		date_format(deployment_finished_date,'%y/%m') as month,
+		count(cicd_deployment_id) as deployment_count
+	FROM (
+		SELECT
+			cdc.cicd_deployment_id,
+			max(cdc.finished_date) as deployment_finished_date
+		FROM cicd_deployment_commits cdc
+		JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id
+		WHERE
+			pm.project_name in ($project)
+			and cdc.result = 'SUCCESS'
+			and cdc.environment = 'PRODUCTION'
+		GROUP BY 1
+		HAVING $__timeFilter(max(cdc.finished_date))
+	) _production_deployments
 	GROUP BY 1
 ),
 
 _calendar_months as(
--- deal with the month with no deployments
+-- construct the calendar months of last 6 months
 	SELECT date_format(CAST((SYSDATE()-INTERVAL (month_index) MONTH) AS date), '%y/%m') as month
 	FROM ( SELECT 0 month_index
 			UNION ALL SELECT   1  UNION ALL SELECT   2 UNION ALL SELECT   3
@@ -82,13 +91,13 @@ FROM
 ORDER BY 1
 ```
 
-If you want to measure in which category your team falls into as the picture shown below, run the following SQL in Grafana.
+If you want to measure in which category your team falls as in the picture shown below, run the following SQL in Grafana.
 
 ![](/img/Metrics/deployment-frequency-text.jpeg)
 
 ```
 with last_few_calendar_months as(
--- get the last few months within the selected time period in the top-right corner
+-- construct the last few calendar months within the selected time period in the top-right corner
 	SELECT CAST((SYSDATE()-INTERVAL (H+T+U) DAY) AS date) day
 	FROM ( SELECT 0 H
 			UNION ALL SELECT 100 UNION ALL SELECT 200 UNION ALL SELECT 300
@@ -105,53 +114,63 @@ with last_few_calendar_months as(
 		(SYSDATE()-INTERVAL (H+T+U) DAY) > $__timeFrom()
 ),
 
+_production_deployment_days as(
+-- When deploying multiple commits in one pipeline, GitLab and BitBucket may generate more than one deployment. However, DevLake consider these deployments as ONE production deployment and use the last one's finished_date as the finished date.
+	SELECT
+		cdc.cicd_deployment_id as deployment_id,
+		max(DATE(cdc.finished_date)) as day
+	FROM cicd_deployment_commits cdc
+	JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id
+	WHERE
+		pm.project_name in ($project)
+		and cdc.result = 'SUCCESS'
+		and cdc.environment = 'PRODUCTION'
+	GROUP BY 1
+),
+
 _days_weeks_deploy as(
+-- calculate the number of deployment days every week
 	SELECT
 			date(DATE_ADD(last_few_calendar_months.day, INTERVAL -WEEKDAY(last_few_calendar_months.day) DAY)) as week,
-			MAX(if(deployments.day is not null, 1, 0)) as week_deployed,
-			COUNT(distinct deployments.day) as days_deployed
+			MAX(if(_production_deployment_days.day is not null, 1, 0)) as weeks_deployed,
+			COUNT(distinct _production_deployment_days.day) as days_deployed
 	FROM 
 		last_few_calendar_months
-		LEFT JOIN(
-			SELECT
-				DATE(finished_date) AS day,
-				id
-			FROM cicd_tasks
-			WHERE
-				type = 'DEPLOYMENT'
-				and result = 'SUCCESS') deployments ON deployments.day = last_few_calendar_months.day
+		LEFT JOIN _production_deployment_days ON _production_deployment_days.day = last_few_calendar_months.day
 	GROUP BY week
 	),
 
 _monthly_deploy as(
+-- calculate the number of deployment days every month
 	SELECT
 			date(DATE_ADD(last_few_calendar_months.day, INTERVAL -DAY(last_few_calendar_months.day)+1 DAY)) as month,
-			MAX(if(deployments.day is not null, 1, 0)) as months_deployed
+			MAX(if(_production_deployment_days.day is not null, 1, 0)) as months_deployed
 	FROM 
 		last_few_calendar_months
-		LEFT JOIN(
-			SELECT
-				DATE(finished_date) AS day,
-				id
-			FROM cicd_tasks
-			WHERE
-				type = 'DEPLOYMENT'
-				and result = 'SUCCESS') deployments ON deployments.day = last_few_calendar_months.day
+		LEFT JOIN _production_deployment_days ON _production_deployment_days.day = last_few_calendar_months.day
 	GROUP BY month
 	),
 
-_median_number_of_deployment_days_per_week as (
-	SELECT x.days_deployed as median_number_of_deployment_days_per_week from _days_weeks_deploy x, _days_weeks_deploy y
-	GROUP BY x.days_deployed
-	HAVING SUM(SIGN(1-SIGN(y.days_deployed-x.days_deployed)))/COUNT(*) > 0.5
-	LIMIT 1
+_median_number_of_deployment_days_per_week_ranks as(
+	SELECT *, percent_rank() over(order by days_deployed) as ranks
+	FROM _days_weeks_deploy
 ),
 
-_median_number_of_deployment_days_per_month as (
-	SELECT x.months_deployed as median_number_of_deployment_days_per_month from _monthly_deploy x, _monthly_deploy y
-	GROUP BY x.months_deployed
-	HAVING SUM(SIGN(1-SIGN(y.months_deployed-x.months_deployed)))/COUNT(*) > 0.5
-	LIMIT 1
+_median_number_of_deployment_days_per_week as(
+	SELECT max(days_deployed) as median_number_of_deployment_days_per_week
+	FROM _median_number_of_deployment_days_per_week_ranks
+	WHERE ranks <= 0.5
+),
+
+_median_number_of_deployment_days_per_month_ranks as(
+	SELECT *, percent_rank() over(order by months_deployed) as ranks
+	FROM _monthly_deploy
+),
+
+_median_number_of_deployment_days_per_month as(
+	SELECT max(months_deployed) as median_number_of_deployment_days_per_month
+	FROM _median_number_of_deployment_days_per_month_ranks
+	WHERE ranks <= 0.5
 )
 
 SELECT 
