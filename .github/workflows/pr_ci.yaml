@@ -15,10 +15,22 @@ jobs:
         uses: actions/setup-node@main
         with:
           node-version: 17.8.x
+      - name: Replace base url
+        run: |
+          # replace base url to localhost to support change of doc structure
+          sed -i 's#https://devlake.apache.org#http://local.devlake.apache.org#g' docusaurus.config.js
+      - name: Edit hosts
+        run: |
+          # why we need this:
+          # lychee will ignore links to localhost, so we need to add a new domain to avoid this
+          echo "127.0.0.1 local.devlake.apache.org" | sudo tee -a /etc/hosts
       - name: Build Docusaurus website
         run: |
           npm install
           npm run build
+      - name: Install http-server
+        run: |
+          sudo npm install -g http-server
       - name: Install lychee
         env:
           LYCHEEVERSION: 0.12.0
@@ -35,6 +47,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
+          # to run a local server, so that lychee can check links on it rather than on devlake.apache.org
+          sudo http-server ./build -s -p 80 -a 0.0.0.0 &
+          # wait for http-server to start
+          npm install wait-on
+          npx wait-on http://local.devlake.apache.org -t 60000
+          
           # For parameter description, see https://github.com/lycheeverse/lychee#commandline-parameters
           # -E, --exclude-all-private    Exclude all private IPs from checking.
           # -i, --insecure               Proceed for server connections considered insecure (invalid TLS)
