@@ -53,56 +53,67 @@ If your CI/CD tools are not listed on the [Supported Data Sources](./Overview/Su
 
 Let's walk through the DORA implementation process for a team with the following toolchain
 
-- Code Hosting: GitHub
+- Source Code Management and Code Review: GitHub
 - CI/CD: GitHub Actions + CircleCI
 - Issue Tracking: Jira
 
-Calculating DORA metrics requires three key entities: **changes**, **deployments**, and **incidents**. Their exact definitions of course depend on a team's DevOps practice and varies team by team. For the team in this example, let's assume the following definition:
+Calculating DORA metrics requires three key entities: **Code changes**, **deployments**, and **incidents**. Their exact definitions of course depend on a team's DevOps practice and varies team by team. For the team in this example, let's assume the following definition:
 
-- Changes: All pull requests in GitHub.
-- Deployments: GitHub action jobs that have "deploy" in their names and CircleCI's deployment jobs.
-- Incidents: Jira issues whose types are `Crash` or `Incident`
+- Code Changes: All commits and pull requests in GitHub.
+- Deployments: GitHub workflow run whose jobs contain "deploy" in their names and all CircleCI deployments.
+- Incidents: Jira issues whose type is "DORA Incident"
 
 In the next section, we'll demonstrate how to configure DevLake to implement DORA metrics for the aforementioned example team.
 
-### Collect GitHub & Jira data via `blueprint`
+### Collect GitHub & Jira data via `Project`
 
 1. Visit the config-ui at `http://localhost:4000`
-2. Create a project: 'project1'. Go to 'project1' and create a blueprint. Let's name it "Blueprint for DORA", add a Jira and a GitHub connection. Click `Next Step`
+2. Create a project: 'project1'. Go to 'project1' and create a blueprint. 
+
    ![project1](/img/ConfigUI/project1.png)
-   ![](https://i.imgur.com/lpPRZ6v.png)
 
-3. Select Jira boards and GitHub repos to collect, click `Next Step`
-   ![](https://i.imgur.com/Ko38n6J.png)
+   ![](/img/ConfigUI/dora-create-a-blueprint.png)
 
-4. Click `Add Transformation` to configure for DORA metrics
-   ![](https://i.imgur.com/Lhcu2DE.png)
+3. Add a Jira and a GitHub connection. Click `Next Step`
 
-5. To make it simple, fields with a ![](https://i.imgur.com/rrLopFx.png) label are DORA-related configurations for every data source. Via these fields, you can define what are "incidents" and "deployments" for each data source. After all data connections have been configured, click `Next Step`
+   ![](/img/ConfigUI/dora-add-connections.png)
 
-   - This team uses Jira issue types `Crash` and `Incident` as "incident", so choose the two types in field "incident". Jira issues in these two types will be transformed to "incidents" in DevLake.
-   - This team uses the GitHub action jobs named `deploy` and `build-and-deploy` to deploy, so type in `(?i)deploy` to match these jobs. These jobs will be transformed to "deployments" in DevLake.
-     ![](https://i.imgur.com/1JZA2xn.png)
+4. Select Jira boards and GitHub repos to collect, click `Next Step`
 
-   Note: The following example shows where to find GitHub action jobs. It's easy to mix them up with GitHub workflows.
-   ![](https://i.imgur.com/Y2hchEh.png)
+   ![](/img/ConfigUI/dora-add-data-scope.png)
 
-6. Choose sync frequency, click 'Save and Run Now' to start data collection. The time to completion varies by data source and depends on the volume of data.
-   ![](https://i.imgur.com/zPkfzGr.png)
+5. Click the `Associate Transformation` icon to configure the transformation rules to measure DORA metrics
 
-For more details, please refer to our [blueprint manuals](./Configuration/Tutorial).
+   ![](/img/ConfigUI/dora-add-transformations.png)
+
+  To make it simple, fields with a ![](https://i.imgur.com/rrLopFx.png) label are DORA-related configurations for every data source. Via these fields, you can define what are "incidents" and "deployments" for each data source.
+
+   - This team uses Jira issue types `DORA Incident` as "incident", so choose the field `DORA Incident`. Jira issues in this type will be transformed to "incidents" in DevLake.
+     ![](/img/ConfigUI/dora-set-transformations-jira.png)
+   - This team uses the GitHub action jobs named `deploy` and `build-and-push-image` to deploy, so type in `(?i)(deploy|push-image)` to match these jobs. The workflow runs that these jobs belong to will be transformed to "deployments" in DevLake.
+     ![](/img/ConfigUI/dora-set-transformations-github.png)
+
+   Note: DevLake converts GitHub workflow runs as DevLake deployments in v0.17 and later versions. A workflow run is a DevLake deployment if the name of a workflow run or one of its jobs that match the regex.
+
+6. Choose sync frequency, click 'Save and Run Now' to start data collection. The time to completion varies by the API rate limits of data sources and the volume of data.
+
+   ![](/img/ConfigUI/dora-set-sync-policy.png)
+
+For more details, please refer to our [blueprint manuals](Configuration/Tutorial.md).
 
 ### Collect CircleCI data via `webhook`
 
 Using CircleCI as an example, we demonstrate how to actively push data to DevLake using the Webhook approach, in cases where DevLake doesn't have a plugin specific to that tool to pull data from your data source.
 
-7. Go to the 'Data Connections' page. Create a webhook.
-   ![webhook-add-data-connections](/img/ConfigUI/webhook-add-data-connections.png)
+7. In Project1's detailed page, switch to tab 'Incoming Webhooks'. Add a webhook called 'CircleCI'
 
-We recommend that you give your webhook connection a unique name so that you can identify and manage where you have used it later.
+   ![webhook-add-webhook](/img/ConfigUI/webhook-add-to-project.png)
 
-8. Create a Project first, choose Incoming Webhooks, then you can `Add a Webhook` or `Select Existing Webhooks`. And click "Generate POST URL". DevLake will generate URLs that you can send JSON payloads to push `deployments` and `incidents` to Devlake. Copy the `Deployment` curl command.
-   ![project-webhook-use](/img/ConfigUI/project-webhook-use.png)
+   ![webhook-add-webhook](/img/ConfigUI/webhook-add-data-connections.png)
+
+
+8.  Click "Generate POST URL". DevLake will generate URLs that you can send JSON payloads to push `deployments` and `incidents` to Devlake. Copy the `Deployment` curl command.
+
    ![webhook-connection](/img/ConfigUI/webhook-connection.png)
 
 9. Now head to your CircleCI's pipelines page in a new tab. Find your deployment pipeline and click `Configuration File`
@@ -140,7 +151,7 @@ jobs:
 
             # Send the request to DevLake after deploy
             # The values start with a '$CIRCLE_' are CircleCI's built-in variables
-            curl http://127.0.0.1:4000/api/plugins/webhook/1/deployments -X 'POST' -d "{
+            curl http://127.0.0.1:4000/api/plugins/webhook/2/deployments -X 'POST' -d "{
               \"commit_sha\":\"$CIRCLE_SHA1\",
               \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
               \"start_time\":\"$start_time\"
@@ -156,18 +167,20 @@ workflows:
 If you have set a [username/password](GettingStarted/Authentication.md) for Config UI, you need to add them to the curl to register a deployment:
 
 ```
-curl https://sample-url.com/api/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
+curl https://sample-url.com/api/plugins/webhook/2/deployments -X 'POST' -u 'username:password' -d '{
     \"commit_sha\":\"$CIRCLE_SHA1\",
     \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
     \"start_time\":\"$start_time\"
   }'
 ```
 
-11. Run the modified CircleCI pipeline. Check to verify that the request has been successfully sent.
+11. Run the modified CircleCI pipeline. Check that the request has been successfully sent.
+
     ![](https://i.imgur.com/IyneAMn.png)
 
-12. You will find the corresponding `deployments` in table.cicd_tasks in DevLake's database.
-    ![](https://i.imgur.com/6hguCYK.png)
+12. You will find the `deployments` pushed from CircleCI in table [cicd_deployment_commits](DataModels/DevLakeDomainLayerSchema.md#domain-4---cicd) in DevLake's database.
+
+    ![webhook-query](/img/ConfigUI/webhook-query-deployments.png)
 
 ### View and customize DevLake's DORA dashboard
 
