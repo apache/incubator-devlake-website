@@ -22,7 +22,7 @@ To install the chart with release name `devlake`:
 ```shell
 helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
 helm repo update
-helm install devlake devlake/devlake --version=0.16.0-beta17
+helm install devlake devlake/devlake --version=0.16.1-beta1
 ```
 
 And visit your devlake from the node port (32001 by default).
@@ -30,7 +30,7 @@ And visit your devlake from the node port (32001 by default).
 http://YOUR-NODE-IP:32001
 
 #### Tips: 
-If you are using minikube inside your mac, please use the following command to forward the port:
+If you are using Minikube inside your Mac, please use the following command to forward the port:
 ```shell
 kubectl port-forward service/devlake-ui  30090:4000
 ```
@@ -47,7 +47,7 @@ Grafana URL `http://YOUR-NODE-IP:30091`
 
 ```shell
 helm repo update
-helm upgrade --install devlake devlake/devlake --version=0.16.0-beta17
+helm upgrade --install devlake devlake/devlake --version=0.16.1-beta1
 ```
 
 Please check the [upgrade doc](Upgrade.md) for more information.

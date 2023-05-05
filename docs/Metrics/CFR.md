@@ -20,6 +20,8 @@ The number of deployments affected by incidents/total number of deployments. For
 
 ![](/img/Metrics/cfr-definition.png)
 
+When there are multiple deployments triggered by one pipeline, tools like GitLab and BitBucket will generate more than one deployment. In these cases, DevLake will consider these deployments as ONE deployment and use the last deployment's finished date as the deployment finished date.
+
 Below are the benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's change failure rate is `18%` or `40%`. Therefore, DevLake provides its own benchmarks to address this problem:
 
 | Groups           | Benchmarks      | DevLake Benchmarks |
@@ -50,38 +52,48 @@ This metric relies on:
 
 <b>SQL Queries</b>
 
-If you want to measure the monthly trend of change failure rate, run the following SQL in Grafana.
+If you want to measure the monthly trend of Change Failure Rate, run the following SQL in Grafana.
 
 ![](/img/Metrics/cfr-monthly.jpeg)
 
 ```
 with _deployments as (
--- get the deployments in each month
 	SELECT
-	  date_format(ct.finished_date,'%y/%m') as month,
-		ct.id AS deployment_id
-	FROM
-		cicd_tasks ct
-		join project_mapping pm on ct.cicd_scope_id = pm.row_id
+		cdc.cicd_deployment_id as deployment_id,
+		max(cdc.finished_date) as deployment_finished_date
+	FROM 
+		cicd_deployment_commits cdc
+		JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id
 	WHERE
-	  pm.project_name in ($project)
-		and type = 'DEPLOYMENT'
-		and result = 'SUCCESS'
-		and environment = 'PRODUCTION'
+		pm.project_name in ($project)
+		and cdc.result = 'SUCCESS'
+		and cdc.environment = 'PRODUCTION'
+	GROUP BY 1
+	HAVING $__timeFilter(max(cdc.finished_date))
 ),
 
-_incidents as (
--- get the incidents (caused by deployments) that are created within the selected time period in the top-right corner
+_failure_caused_by_deployments as (
+-- calculate the number of incidents caused by each deployment
 	SELECT
-		date_format(i.created_date,'%y/%m') as month,
-		i.id AS incident_id,
-		pim.deployment_id
+		d.deployment_id,
+		d.deployment_finished_date,
+		count(distinct case when i.type = 'INCIDENT' then d.deployment_id else null end) as has_incident
 	FROM
-		issues  i
-	  join project_issue_metrics pim on i.id = pim.id
-	WHERE
-	  pim.project_name in ($project) and
-		i.type = 'INCIDENT'
+		_deployments d
+		left join project_issue_metrics pim on d.deployment_id = pim.deployment_id
+		left join issues i on pim.id = i.id
+	GROUP BY 1,2
+),
+
+_change_failure_rate_for_each_month as (
+	SELECT 
+		date_format(deployment_finished_date,'%y/%m') as month,
+		case 
+			when count(deployment_id) is null then null
+			else sum(has_incident)/count(deployment_id) end as change_failure_rate
+	FROM
+		_failure_caused_by_deployments
+	GROUP BY 1
 ),
 
 _calendar_months as(
@@ -94,86 +106,59 @@ _calendar_months as(
 			UNION ALL SELECT   10 UNION ALL SELECT  11
 		) month_index
 	WHERE (SYSDATE()-INTERVAL (month_index) MONTH) > SYSDATE()-INTERVAL 6 MONTH	
-),
-
-_deployment_failures as (
--- calculate the number of incidents caused by each deployment
-  SELECT 
-		distinct
-			cm.month,
-			d.deployment_id,
-			count(distinct i.incident_id) as incident_count
-  FROM 
-  	_calendar_months cm
-  	left join _deployments d on cm.month = d.month
-  	left join _incidents i on d.deployment_id = i.deployment_id
-	GROUP BY 1,2
 )
 
-SELECT
-  month,
-	case when 
-		count(deployment_id) is null then null
-		else count(case when incident_count = 0 then null else incident_count end)/count(deployment_id) end as change_failure_rate
-FROM _deployment_failures
-GROUP BY 1
-ORDER BY 1
+SELECT 
+	cm.month,
+	cfr.change_failure_rate
+FROM 
+	_calendar_months cm
+	left join _change_failure_rate_for_each_month cfr on cm.month = cfr.month
+GROUP BY 1,2
+ORDER BY 1 
 ```
 
-If you want to measure in which category your team falls into, run the following SQL in Grafana.
+If you want to measure in which category your team falls, run the following SQL in Grafana.
 
 ![](/img/Metrics/cfr-text.jpeg)
 
 ```
 with _deployments as (
--- get the deployment deployed within the selected time period in the top-right corner
+-- When deploying multiple commits in one pipeline, GitLab and BitBucket may generate more than one deployment. However, DevLake consider these deployments as ONE production deployment and use the last one's finished_date as the finished date.
 	SELECT
-		ct.id AS deployment_id,
-		ct.finished_date as deployment_finished_date
-	FROM
-		cicd_tasks ct
-		join project_mapping pm on ct.cicd_scope_id = pm.row_id
+		cdc.cicd_deployment_id as deployment_id,
+		max(cdc.finished_date) as deployment_finished_date
+	FROM 
+		cicd_deployment_commits cdc
+		JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id
 	WHERE
-	  pm.project_name in ($project)
-		and type = 'DEPLOYMENT'
-		and result = 'SUCCESS'
-		and environment = 'PRODUCTION'
-    and $__timeFilter(finished_date)
+		pm.project_name in ($project)
+		and cdc.result = 'SUCCESS'
+		and cdc.environment = 'PRODUCTION'
+	GROUP BY 1
+	HAVING $__timeFilter(max(cdc.finished_date))
 ),
 
-_incident_caused_by_deployments as (
--- get the incidents (caused by deployments) that are created within the selected time period in the top-right corner
-	SELECT
-		i.id AS incident_id,
-		pim.deployment_id
-	FROM
-		issues  i
-	  join project_issue_metrics pim on i.id = pim.id
-	WHERE
-	  pim.project_name in ($project) and
-		i.type = 'INCIDENT'
-		and $__timeFilter(i.created_date)
-),
-
-_deployment_failures as (
+_failure_caused_by_deployments as (
 -- calculate the number of incidents caused by each deployment
-  SELECT 
-		distinct
-			d.deployment_id,
-			d.deployment_finished_date,
-			count(distinct i.incident_id) as incident_count
-  FROM 
-  	_deployments d
-  	left join _incident_caused_by_deployments i on d.deployment_id = i.deployment_id
+	SELECT
+		d.deployment_id,
+		d.deployment_finished_date,
+		count(distinct case when i.type = 'INCIDENT' then d.deployment_id else null end) as has_incident
+	FROM
+		_deployments d
+		left join project_issue_metrics pim on d.deployment_id = pim.deployment_id
+		left join issues i on pim.id = i.id
 	GROUP BY 1,2
 ),
 
 _change_failure_rate as (
 	SELECT 
-		case when count(deployment_id) is null then null
-		else count(case when incident_count = 0 then null else 1 end)/count(deployment_id) end as change_failure_rate
+		case 
+			when count(deployment_id) is null then null
+			else sum(has_incident)/count(deployment_id) end as change_failure_rate
 	FROM
-		_deployment_failures
+		_failure_caused_by_deployments
 )
 
 SELECT

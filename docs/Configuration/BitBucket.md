@@ -4,23 +4,23 @@ sidebar_position: 2
 description: Config UI instruction for BitBucket(Cloud)
 ---
 
-Visit config-ui: `http://localhost:4000` and go to `Connections` page.
+Visit Config UI at : `http://localhost:4000` and go to `Connections` page.
 
-### Step 1 - Add Data Connections
+## Step 1 - Add Data Connections
 
 ![image](https://user-images.githubusercontent.com/3294100/220118398-2d08070f-0edb-4de6-8696-9ee58b80719b.png)
 
-#### Connection Name
+### Connection Name
 
 Give your connection a unique name to help you identify it in the future.
 
-#### Endpoint URL
+### Endpoint URL
 
 For BitBucket Cloud, you do not need to enter the REST API endpoint URL, which is always `https://api.bitbucket.org/2.0/`.
 
 DevLake will support BitBucket Server in the future.
 
-#### Username and App Password
+### Username and App Password
 
 Learn about [how to create a BitBucket app password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/).
 
@@ -38,12 +38,12 @@ The following permissions are required to collect data from BitBucket repositori
 ![bitbucket-app-password-permissions](/img/ConfigUI/bitbucket-app-password-permissions.jpeg)
 
 
-#### Proxy URL (Optional)
+### Proxy URL (Optional)
 
 If you are behind a corporate firewall or VPN you may need to utilize a proxy server. Enter a valid proxy server address on your network, e.g. `http://your-proxy-server.com:1080`
 
 
-#### Fixed Rate Limit (Optional)
+### Fixed Rate Limit (Optional)
 
 DevLake uses a dynamic rate limit to collect BitBucket data. You can adjust the rate limit if you want to increase or lower the speed.
 
@@ -52,19 +52,19 @@ The maximum rate limit for different entities in BitBucket(Cloud) [varies from 1
 <!-- ![image](https://user-images.githubusercontent.com/3294100/220094172-9e8e9e8b-75ea-4c3e-8e5b-716320dabb64.png) -->
 
 
-#### Test and Save Connection
+### Test and Save Connection
 
 Click `Test Connection`, if the connection is successful, click `Save Connection` to add the connection.
 
-### Step 2 - Configure Blueprint
+## Step 2 - Configure Blueprint
 
 ![image](https://user-images.githubusercontent.com/14050754/224308925-449a4d3e-ed52-45e9-bb72-0d2892df374f.png)
 
-#### Repositories
+### Repositories
 
 Select the BitBucket repositories to collect.
 
-#### Data Entities
+### Data Entities
 
 Usually, you don't have to modify this part. However, if you don't want to collect certain BitBucket entities, you can unselect some entities to accelerate the collection speed.
 
@@ -75,10 +75,10 @@ Usually, you don't have to modify this part. However, if you don't want to colle
 - Cross Domain: BitBucket accounts, etc.
 
 
-### Step 3 - Add Transformation (Optional)
+## Step 3 - Add Transformation (Optional)
 You can add a `transformation` to standardize the data. A `transformation` acts on the BitBucket data in the [tool layer](/docs/DataModels/ToolLayerSchema.md), transforming it to the [domain layer](/docs/DataModels/DevLakeDomainLayerSchema.md).
 
-#### Issue Tracking
+### Issue Tracking
 
 **Issue Status Mapping**<br/>
 ![image](https://user-images.githubusercontent.com/14050754/224309704-b096c256-b2cf-4107-b78c-044d06b5f23c.png)
@@ -95,7 +95,7 @@ The original status will be saved in the column `original_status` of the table '
 **Issue Type Mapping**<br/>
 DevLake will convert the issue types of 'enhancement', 'proposal', and 'task' from BitBucket into the new issue type 'REQUIREMENT' for DevLake. In contrast, any issues classified as 'bug' in BitBucket will be converted into the new issue type 'BUG' for DevLake. The original type will be saved in the column `original_type` of the table 'issues', and the new type will be saved in the column `type` of the same table.
 
-#### CI/CD
+### CI/CD
 The CI/CD configuration for BitBucket is used for calculating [DORA metrics](../DORA.md).
 
 By default, DevLake will identify the deployment and environment settings that are defined in the BitBucket CI .yml file. 
@@ -126,7 +126,7 @@ If a pipeline step defines `deployment` with a value (usually indicating the env
 
 ![image](https://user-images.githubusercontent.com/3294100/221887426-4cae1c46-31ce-4fcd-b773-a54c28af0264.png)
 
-#### Additional Settings (Optional)
+### Additional Settings (Optional)
 
 - Tags Limit: DevLake compares the last N pairs of tags to get the "commit diff', "issue diff" between tags. N defaults to 10.
 
@@ -139,10 +139,10 @@ If a pipeline step defines `deployment` with a value (usually indicating the env
 
 Please click `Save` to save the transformation rules for the repo. In the data scope list, click `Next Step` to continue configuring.
 
-### Step 4 - Setting Sync Frequency
+## Step 4 - Setting Sync Policy
 
 You can choose how often you would like to sync your data in this step by selecting a sync frequency option or entering a cron code to specify your prefered schedule.
 
-### Troubleshooting
+## Troubleshooting
 
 If you run into any problems, please check the [Troubleshooting](/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues).
