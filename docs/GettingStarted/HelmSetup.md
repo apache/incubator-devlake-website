@@ -17,7 +17,7 @@ sidebar_position: 2
 
 ### Install
 
-To install the chart with release name `devlake`:
+To install the chart with the release name `devlake``:
 
 ```shell
 helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
@@ -47,7 +47,7 @@ Grafana URL `http://YOUR-NODE-IP:30091`
 
 ```shell
 helm repo update
-helm upgrade --install devlake devlake/devlake --version=0.16.1-beta1
+helm upgrade --install devlake devlake/devlake --version=0.17.0-beta3
 ```
 
 ### Uninstall
@@ -76,7 +76,7 @@ After the deployment, visit devlake at: http://192.168.0.6:30000
 ### Deploy with Ingress
 
 Conditions:
- - I have already configured default ingress for the Kubernetes cluster
+ - I have already configured the default ingress for the Kubernetes cluster
  - I want to use http://devlake.example.com for visiting devlake
 
 ```
