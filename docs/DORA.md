@@ -86,7 +86,7 @@ In the next section, we'll demonstrate how to configure DevLake to implement DOR
 
    ![](/img/ConfigUI/dora-add-transformations.png)
 
-  To make it simple, fields with a ![](https://i.imgur.com/rrLopFx.png) label are DORA-related configurations for every data source. Via these fields, you can define what are "incidents" and "deployments" for each data source.
+  To make it simple, fields with a ![](https://i.imgur.com/rrLopFx.png) label are DORA-related configurations for every data source. Via these fields, you can define what "incidents" and "deployments" are for each data source.
 
    - This team uses Jira issue types `DORA Incident` as "incident", so choose the field `DORA Incident`. Jira issues in this type will be transformed to "incidents" in DevLake.
      ![](/img/ConfigUI/dora-set-transformations-jira.png)
@@ -95,7 +95,7 @@ In the next section, we'll demonstrate how to configure DevLake to implement DOR
 
    Note: DevLake converts GitHub workflow runs as DevLake deployments in v0.17 and later versions. A workflow run is a DevLake deployment if the name of a workflow run or one of its jobs that match the regex.
 
-6. Choose sync frequency, click 'Save and Run Now' to start data collection. The time to completion varies by the API rate limits of data sources and the volume of data.
+6. Configure the sync policy and click 'Save and Run Now' to start data collection. The time to completion varies by the API rate limits of different data sources and the volume of data.
 
    ![](/img/ConfigUI/dora-set-sync-policy.png)
 
