@@ -29,7 +29,11 @@ Commands written `like this` are to be run in your terminal or pasted in the web
 
 ## Upgrade to a newer version
 
-Please follow the [upgrade doc](Upgrade.md).
+1. Run `docker-compose down` to stop services and remove the volumes;
+2. Open file "docker-compose.yml". Change the image tags of "grafana", "devlake" and "config-ui" to the new version, and save;
+3. Run `docker-compose up -d` start DevLake services.
+
+Please check the [upgrade doc](Upgrade.md) for more information.
 
 ## FAQ
 ### Can I use an external Database service instead of running Database in Docker?
