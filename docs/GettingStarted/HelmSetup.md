@@ -50,6 +50,8 @@ helm repo update
 helm upgrade --install devlake devlake/devlake --version=0.16.1-beta1
 ```
 
+Please check the [upgrade doc](Upgrade.md) for more information.
+
 ### Uninstall
 
 To uninstall/delete the `devlake` release:
