@@ -35,7 +35,7 @@ This is the up-to-date domain layer schema for DevLake v0.10.x. Tables (entities
 
 ### Schema Diagram
 
-[![Domain Layer Schema](/img/DomainLayerSchema/schema-diagram-v0.16.svg)](/img/DomainLayerSchema/schema-diagram-v0.16.svg)
+![Domain Layer Schema](/img/DomainLayerSchema/schema-diagram-v0.17-beta3.svg)
 
 When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. Github/Gitlab) and allow them to co-exist in a single table.
 
@@ -416,10 +416,7 @@ The entity to filter or group 'cicd_pipelines' or 'cicd_tasks'.
 
 #### cicd_pipelines
 
-A cicd_pipeline is a series of cicd_tasks, e.g. GitLab jobs, GitHub jobs, Jenkins builds, etc.
-- For GitHub: a GitHub workflow run
-- For GitLab: a GitLab pipeline
-- For Jenkins: a build that have triggered builds or a single build without any upstream job
+A cicd_pipeline is a series of cicd_tasks, e.g. a GitHub workflow run, a GitLab pipeline, a BitBucket pipeline, a Jenkins build, etc.
 
 | **field**       | **type**        | **length** | **description**                                                                               | **key** |
 | :-------------- | :-------------- | :--------- | :-------------------------------------------------------------------------------------------- | :------ |
@@ -459,12 +456,44 @@ A cicd_task is the abstraction of the smallest unit of CICD tasks.
 | `pipeline_id`   | varchar         | 255        | The id of pipeline                                              |         |
 | `result`        | varchar         | 100        | The result of this task, e.g. SUCCESS, FAILURE                                         |         |
 | `status`        | varchar         | 100        | The status of this task, e.g. IN_PROGRESS, DONE                                         |         |
-| `type`          | varchar         | 100        | To indicate if this is a DEPLOYMENT                             |         |
+| `type`          | varchar         | 100        | To indicate if this is a deployment-type task                   |         |
 | `duration_sec`  | bigint unsigned |            | how long does this task take                                    |         |
 | `started_date`  | datetime        | 3          | when did this task start                                        |         |
 | `finished_date` | datetime        | 3          | when did this task finish                                       |         |
 | `environment`   | varchar         | 255        | To indicate the environment in which the task is running, e.g. production, staging, test.        |         |
 | `cicd_scope_id` | longtext        |            | The id of cicd_scope this pipeline belongs to                                       |FK_cicd_scopes.id   |
+
+#### cicd_deployment_commits
+
+A cicd_deployment_commit is a deployment in a specific repo. A deployment may come from several sources:
+- Domain layer [cicd_pipelines](#cicd_pipelines), such as GitHub workflow run, GitLab pipelines, Jenkins builds and BitBucket pipelines, etc. Deployments from cicd_pipelines will be transformed according to the regex configuration set in the Blueprint transformation before adding to this table.
+- Tool layer deployments: in v0.17, only the BitBucket plugin collects the independent deployment entity which you can find in table._tool_bitbucket_deployments, but there will be more in the future. 
+- Deployments pushed directly from webhooks
+
+You can query deployments from this table by `SELECT DISTINCT cicd_deployment_id FROM cicd_deployments_commits`.
+
+Normally, one deployment only deploy to one repo. But in some cases, one deployment may deploy in multiple repos with different commits. In these cases, there will be multiple pairs of deployment-commit-repo, appeared in multiple entries in this table.
+
+
+| **field**            | **type**        | **length** | **description**                                                 | **key** |
+| :------------------- | :-------------- | :--------- | :-------------------------------------------------------------- | :------ |
+| `id`                 | varchar         | 255        | This key is the combination of the deployment's id and repo_url, e.g. <br/>- from a GitHub workflow run: github:GithubRun:1:384111310:3521097091:https://github.com/apache/incubator-devlake <br/>- from a Jenkins build, jenkins:JenkinsBuild:1:deploy#7:https://github.com/apache/incubator-devlake <br/>- from a webhook, webhook:1:90489d3951711d72:e6bde456807818c5c78d7b265964d6d48b653af6     | PK      |
+| `cicd_scope_id`      | varchar         | 255        | The id of cicd_scope this deployment_commit belongs to          | FK_cicd_scopes.id  |
+| `cicd_deployment_id` | varchar         | 255        | The deployment_id of this deployment_commit. The value will be set with `id` when it comes from webhooks.         |              |
+| `name`               | varchar         | 255        | The name of the deployment                                      |         |
+| `result`             | varchar         | 100        | The result of the deployment, e.g. SUCCESS, FAILURE             |         |
+| `status`             | varchar         | 100        | The status of this deployment, e.g. IN_PROGRESS, DONE           |         |
+| `environment`        | varchar         | 255        | The environment to deploy, only 'PRODUCTION' deployment will appear in v0.17  |         |
+| `created_date`       | datetime        | 3          | The created time of the deployment                              |         |
+| `started_date`       | datetime        | 3          | The started time of the deployment                              |         |
+| `finished_date`      | datetime        | 3          | The finished time of the deployment                             |         |
+| `duration_sec`       | bigint          |            | The time this deployment takes                                  |         |
+| `commit_sha`         | char            | 40         | The commit sha that triggers the deployment                     |         |
+| `ref_name`           | varchar         | 255        | The ref (branch/tag) name of the commit                         |         |
+| `repo_id`            | varchar         | 255        | -                                                               |         |
+| `repo_url`           | varchar         | 191        | The url of the repo                                             |         |
+| `prev_success_deployment_commit_id` | varchar | 255     | The last successful deployment_commit_id before this one, which is used to calculate how many new commits have been deployed by this deployment_commit  |         |
+
 
 ### Domain 5 - Code Quality
 
