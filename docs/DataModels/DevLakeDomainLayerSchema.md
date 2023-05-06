@@ -477,7 +477,7 @@ Normally, one deployment only deploy to one repo. But in some cases, one deploym
 
 | **field**            | **type**        | **length** | **description**                                                 | **key** |
 | :------------------- | :-------------- | :--------- | :-------------------------------------------------------------- | :------ |
-| `id`                 | varchar         | 255        | This key is the combination of the deployment's id and repo_url, e.g. <br/>- from a GitHub workflow run: "github:GithubRun:1:384111310:3521097091:https://github.com/apache/incubator-devlake" <br/>- from a Jenkins build: "jenkins:JenkinsBuild:1:deploy#7:https://gitee.com/apache/incubator-devlake.git" <br/>- from a webhook: "webhook:1:90489d3951711d72:e6bde456807818c5c78d7b265964d6d48b653af6"| PK      |
+| `id`                 | varchar         | 255        | This key is the combination of the deployment's id and repo_url, e.g. <br/>- from a GitHub workflow run: github:GithubRun:1:384111310:3521097091:https://github.com/apache/incubator-devlake <br/>- from a Jenkins build, jenkins:JenkinsBuild:1:deploy#7:https://github.com/apache/incubator-devlake <br/>- from a webhook, webhook:1:90489d3951711d72:e6bde456807818c5c78d7b265964d6d48b653af6     | PK      |
 | `cicd_scope_id`      | varchar         | 255        | The id of cicd_scope this deployment_commit belongs to          | FK_cicd_scopes.id  |
 | `cicd_deployment_id` | varchar         | 255        | The deployment_id of this deployment_commit. The value will be set with `id` when it comes from webhooks.         |              |
 | `name`               | varchar         | 255        | The name of the deployment                                      |         |
