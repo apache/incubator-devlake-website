@@ -12,26 +12,26 @@ sidebar_position: 1
 
 ## Launch DevLake
 
-Commands written `like this` are to be run in your terminal.
-
 1. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.17.0-beta3) into a folder.
 2. Rename `env.example` to `.env`. For Mac/Linux users, please run `mv env.example .env` in the terminal. This file contains the environment variables that the Devlake server will use. Additional ones can be found in the compose file(s).
 3. Run `docker-compose up -d` if the version of Docker Desktop is too low to use `docker compose up -d`.
 
 ## Collect data and view dashboards
 
-1. Visit `config-ui` at `http://localhost:4000` in your browser to configure DevLake and collect data.
+1. Visit "config-ui" at `http://localhost:4000` in your browser to configure DevLake and collect data.
    - Please follow the [tutorial](Configuration/Tutorial.md)
-   - `devlake` container takes a while to fully boot up. If `config-ui` complains about API being unreachable, please wait a few seconds and refresh the page.
-2. To view dashboards, click _View Dashboards_ button in the top left corner, or visit `localhost:3002` (username: `admin`, password: `admin`).
+   - "devlake" container takes a while to fully boot up. If "config-ui" complains about API being unreachable, please wait a few seconds and refresh the page.
+2. To view dashboards, click _View Dashboards_ button in the top left corner, or visit `localhost:3002` (username: "admin", password: "admin").
    - We use [Grafana](https://grafana.com/) to visualize the DevOps [data](/Overview/SupportedDataSources.md) and build dashboards.
    - For how to customize and provision dashboards, please see our [Grafana doc](../Configuration/Dashboards/GrafanaUserGuide.md).
 
 ## Upgrade to a newer version
 
-Support for database schema migration was introduced to DevLake in v0.10.0. From v0.10.0 onwards, users can upgrade their instance smoothly to a newer version. However, versions prior to v0.10.0 do not support upgrading to a newer version with a different database schema.
+1. Run `docker-compose down` to stop services;
+2. Open file "docker-compose.yml". Change the image tags of "grafana", "devlake" and "config-ui" to the new version, and save;
+3. Run `docker-compose up -d` start DevLake services.
 
-<br/>
+Please check the [upgrade doc](Upgrade.md) for more information.
 
 ## FAQ
 ### Can I use a managed cloud database service instead of running database in Docker?
