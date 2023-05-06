@@ -14,22 +14,22 @@ sidebar_position: 1
 
 Commands written `like this` are to be run in your terminal or pasted in the web browser.
 
-1. Download "docker-compose.yml" and "env.example" from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.16.1-beta1) into a folder.
-2. Rename "env.example" to ".env". For Mac/Linux users, please run `mv env.example .env` in the terminal. This file contains the environment variables that the Devlake server will use. Additional ones can be found in the compose file(s).
+1. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.16.1-beta1) into a folder.
+2. Rename `env.example` to `.env`. For Mac/Linux users, please run `mv env.example .env` in the terminal. This file contains the environment variables that the Devlake server will use. Additional ones can be found in the compose file(s).
 3. Run `docker-compose up -d` if the version of Docker Desktop is too low to use `docker compose up -d`.
 
 ## Collect data and view dashboards
 
-1. Visit "config-ui" at "http://localhost:4000" in your browser to configure DevLake and collect data.
+1. Visit "config-ui" at `http://localhost:4000` in your browser to configure DevLake and collect data.
    - Please follow the [tutorial](Configuration/Tutorial.md)
-   - "devlake" container takes a while to fully boot up. If `config-ui` complains about API being unreachable, please wait a few seconds and refresh the page.
+   - "devlake" container takes a while to fully boot up. If "config-ui" complains about API being unreachable, please wait a few seconds and refresh the page.
 2. To view dashboards, click _View Dashboards_ button in the top left corner, or visit `localhost:3002` (username: "admin", password: "admin").
    - We use [Grafana](https://grafana.com/) to visualize the DevOps [data](/Overview/SupportedDataSources.md) and build dashboards.
    - For how to customize and provision dashboards, please see our [Grafana doc](../Configuration/Dashboards/GrafanaUserGuide.md).
 
 ## Upgrade to a newer version
 
-1. Run `docker-compose down` to stop services and remove the volumes;
+1. Run `docker-compose down` to stop services;
 2. Open file "docker-compose.yml". Change the image tags of "grafana", "devlake" and "config-ui" to the new version, and save;
 3. Run `docker-compose up -d` start DevLake services.
 
