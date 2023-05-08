@@ -372,7 +372,7 @@ Below is an example for collecting a Teambition project. Since users can configu
 ]
 ```
 
-- `connectionId`: The ID of your TAPD connection at page http://localhost:4000/connections/tapd.
+- `connectionId`: The ID of your Teambition connection at page http://localhost:4000/connections/teambition.
 - `projectId`: Teambition project id, you can get it from url: ![image](https://user-images.githubusercontent.com/3294100/229808849-66dac8c0-5ff6-459b-850c-62bc60a3a519.png)
 
 ## Editing a Blueprint (Advanced Mode)
