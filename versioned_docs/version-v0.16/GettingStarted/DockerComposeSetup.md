@@ -12,8 +12,6 @@ sidebar_position: 1
 
 ## Launch DevLake
 
-Commands written `like this` are to be run in your terminal or pasted in the web browser.
-
 1. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.16.1-beta1) into a folder.
 2. Rename `env.example` to `.env`. For Mac/Linux users, please run `mv env.example .env` in the terminal. This file contains the environment variables that the Devlake server will use. Additional ones can be found in the compose file(s).
 3. Run `docker-compose up -d` if the version of Docker Desktop is too low to use `docker compose up -d`.
@@ -29,9 +27,11 @@ Commands written `like this` are to be run in your terminal or pasted in the web
 
 ## Upgrade to a newer version
 
+Please note: **Back up your Grafana dashboards** before upgrade if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
+
 1. Run `docker-compose down` to stop services;
 2. Open file "docker-compose.yml". Change the image tags of "grafana", "devlake" and "config-ui" to the new version, and save;
-3. Run `docker-compose up -d` start DevLake services.
+3. Run `docker-compose up -d` to start DevLake services.
 
 Please check the [upgrade doc](Upgrade.md) for more information.
 

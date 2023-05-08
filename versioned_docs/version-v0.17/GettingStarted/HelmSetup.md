@@ -43,11 +43,13 @@ Then you can visit:
 Config UI URL `http://YOUR-NODE-IP:30090`
 Grafana URL `http://YOUR-NODE-IP:30091`
 
-### Update
+### Upgrade
+
+Please note: **Back up your Grafana dashboards** before upgrade if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
 
 ```shell
 helm repo update
-helm upgrade --install devlake devlake/devlake --version=0.17.0-beta3
+helm upgrade --install devlake devlake/devlake --version=0.17.0-beta4
 ```
 
 Please check the [upgrade doc](Upgrade.md) for more information.

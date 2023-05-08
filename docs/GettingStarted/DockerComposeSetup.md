@@ -27,9 +27,11 @@ sidebar_position: 1
 
 ## Upgrade to a newer version
 
+Please note: **Back up your Grafana dashboards** before upgrade if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
+
 1. Run `docker-compose down` to stop services;
 2. Open file "docker-compose.yml". Change the image tags of "grafana", "devlake" and "config-ui" to the new version, and save;
-3. Run `docker-compose up -d` start DevLake services.
+3. Run `docker-compose up -d` to start DevLake services.
 
 Please check the [upgrade doc](Upgrade.md) for more information.
 
