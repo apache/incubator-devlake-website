@@ -49,7 +49,7 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 
 Similar to other beta plugins, Teambition does not support `project`, which means, you can only collect Teambition data via blueprint's advanced mode.
 
-Please go to the `Blueprints` page and switch to advanced mode. See how to use advanced mode and JSON [examples](AdvancedMode.md#11-Teambition).
+Please go to the `Blueprints` page and switch to advanced mode. See how to use advanced mode and JSON [examples](AdvancedMode.md#11-teambition).
 
 ## Troubleshooting
 

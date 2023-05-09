@@ -11,7 +11,7 @@ This plugin collects Teambition data through its REST APIs. Teambition is an iss
 
 ## Metrics
 
-Metrics that can be calculated based on the data collected from Tapd:
+Metrics that can be calculated based on the data collected from Teambition:
 
 - [Requirement Count](/Metrics/RequirementCount.md)
 - [Requirement Lead Time](/Metrics/RequirementLeadTime.md)
@@ -22,4 +22,4 @@ Metrics that can be calculated based on the data collected from Tapd:
 ## Configuration
 
 - Configuring Teambition via [config-ui](/Configuration/Teambition.md).
-- Configuring Teambition via Config UI's [advanced mode](/Configuration/AdvancedMode.md#11-Teambition).
+- Configuring Teambition via Config UI's [advanced mode](/Configuration/AdvancedMode.md#11-teambition).
