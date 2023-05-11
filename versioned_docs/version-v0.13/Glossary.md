@@ -67,7 +67,7 @@ However, the name Historical Runs is only used in the Configuration UI. In DevLa
 
 ## In Configuration UI (Advanced Mode) and API
 
-The following terms have not appeared in the Regular Mode of Configuration UI for simplification, but can be very useful if you want to learn about the underlying framework of Devalke or use Advanced Mode and the DevLake API.
+The following terms have not appeared in the Regular Mode of Configuration UI for simplification, but can be very useful if you want to learn about the underlying framework of DevLake or use Advanced Mode and the DevLake API.
 
 ### Data Plugins
 **A data plugin is a specific module that syncs or transforms data.** There are two types of data plugins: Data Collection Plugins and Data Transformation Plugins.
