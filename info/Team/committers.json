@@ -55,6 +55,27 @@
       "email": "matrixji@live.com",
       "avatar": "https://avatars.githubusercontent.com/u/183388?v=4",
       "githubLink": "https://github.com/matrixji"
-    }
+    },
+    {
+      "realName": "Junren Yu",
+      "githubId": "mintsweet",
+      "email": "junren.yu@merico.dev",
+      "avatar": "https://avatars.githubusercontent.com/u/37237996?v=4",
+      "githubLink": "https://github.com/mintsweet"
+    },
+    {
+      "realName": "Keon Amini",
+      "githubId": "keon94",
+      "email": "keon.amini@merico.dev",
+      "avatar": "https://avatars.githubusercontent.com/u/25063936?v=4",
+      "githubLink": "https://avatars.githubusercontent.com/u/25063936?v=4"
+    },
+    {
+      "realName": "Camille Teruel",
+      "githubId": "CamilleTeruel",
+      "email": "camille@merico.dev",
+      "avatar": "https://avatars.githubusercontent.com/u/251060?v=4",
+      "githubLink": "https://github.com/CamilleTeruel"
+    }    
   ]
 }
