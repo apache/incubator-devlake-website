@@ -50,7 +50,9 @@ If you want to measure the monthly trend of deployment count as the picture show
 ![](/img/Metrics/deployment-frequency-monthly.jpeg)
 
 ```
+-- Metric 1: Number of deployments per month
 with _deployments as(
+-- When deploying multiple commits in one pipeline, GitLab and BitBucket may generate more than one deployment. However, DevLake consider these deployments as ONE production deployment and use the last one's finished_date as the finished date.
 	SELECT 
 		date_format(deployment_finished_date,'%y/%m') as month,
 		count(cicd_deployment_id) as deployment_count
@@ -59,7 +61,7 @@ with _deployments as(
 			cdc.cicd_deployment_id,
 			max(cdc.finished_date) as deployment_finished_date
 		FROM cicd_deployment_commits cdc
-		JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id
+		JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id and pm.`table` = 'cicd_scopes'
 		WHERE
 			pm.project_name in ($project)
 			and cdc.result = 'SUCCESS'
@@ -68,27 +70,15 @@ with _deployments as(
 		HAVING $__timeFilter(max(cdc.finished_date))
 	) _production_deployments
 	GROUP BY 1
-),
-
-_calendar_months as(
--- construct the calendar months of last 6 months
-	SELECT date_format(CAST((SYSDATE()-INTERVAL (month_index) MONTH) AS date), '%y/%m') as month
-	FROM ( SELECT 0 month_index
-			UNION ALL SELECT   1  UNION ALL SELECT   2 UNION ALL SELECT   3
-			UNION ALL SELECT   4  UNION ALL SELECT   5 UNION ALL SELECT   6
-			UNION ALL SELECT   7  UNION ALL SELECT   8 UNION ALL SELECT   9
-			UNION ALL SELECT   10 UNION ALL SELECT  11
-		) month_index
-	WHERE (SYSDATE()-INTERVAL (month_index) MONTH) > SYSDATE()-INTERVAL 6 MONTH	
 )
 
 SELECT 
 	cm.month, 
 	case when d.deployment_count is null then 0 else d.deployment_count end as deployment_count
 FROM 
-	_calendar_months cm
-	left join _deployments d on cm.month = d.month
-ORDER BY 1
+	calendar_months cm
+	LEFT JOIN _deployments d on cm.month = d.month
+	WHERE $__timeFilter(month_timestamp)
 ```
 
 If you want to measure in which category your team falls as in the picture shown below, run the following SQL in Grafana.

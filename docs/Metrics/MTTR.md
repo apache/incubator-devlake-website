@@ -55,6 +55,7 @@ If you want to measure the monthly trend of the Median Time to Restore Service a
 ![](/img/Metrics/mttr-monthly.jpeg)
 
 ```
+-- Metric 3: median time to restore service - MTTR
 with _incidents as (
 -- get the number of incidents created each month
 	SELECT
@@ -65,7 +66,7 @@ with _incidents as (
 		issues i
 	  join board_issues bi on i.id = bi.issue_id
 	  join boards b on bi.board_id = b.id
-	  join project_mapping pm on b.id = pm.row_id
+	  join project_mapping pm on b.id = pm.row_id and pm.`table` = 'boards'
 	WHERE
 	  pm.project_name in ($project)
 		and i.type = 'INCIDENT'
@@ -82,18 +83,6 @@ _mttr as(
 	FROM _find_median_mttr_each_month_ranks
 	WHERE ranks <= 0.5
 	GROUP BY month
-),
-
-_calendar_months as(
--- deal with the month with no incidents
-	SELECT date_format(CAST((SYSDATE()-INTERVAL (month_index) MONTH) AS date), '%y/%m') as month
-	FROM ( SELECT 0 month_index
-			UNION ALL SELECT   1  UNION ALL SELECT   2 UNION ALL SELECT   3
-			UNION ALL SELECT   4  UNION ALL SELECT   5 UNION ALL SELECT   6
-			UNION ALL SELECT   7  UNION ALL SELECT   8 UNION ALL SELECT   9
-			UNION ALL SELECT   10 UNION ALL SELECT  11
-		) month_index
-	WHERE (SYSDATE()-INTERVAL (month_index) MONTH) > SYSDATE()-INTERVAL 6 MONTH	
 )
 
 SELECT 
@@ -102,9 +91,9 @@ SELECT
 		when m.median_time_to_resolve is null then 0 
 		else m.median_time_to_resolve/60 end as median_time_to_resolve_in_hour
 FROM 
-	_calendar_months cm
-	left join _mttr m on cm.month = m.month
-ORDER BY 1
+	calendar_months cm
+	LEFT JOIN _mttr m on cm.month = m.month
+  WHERE $__timeFilter(month_timestamp)
 ```
 
 If you want to measure in which category your team falls into as in the picture shown below, run the following SQL in Grafana.
