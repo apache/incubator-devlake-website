@@ -67,7 +67,7 @@ After exporting, move the .csv file to `plugins/feishu/e2e/raw_tables/_raw_feish
 
 ### MySQL Select Into Outfile
 
-This is MySQL's solution for exporting query results to a file. The MySQL currently started in docker-compose.yml comes with the --security parameter, so it does not allow `select ... into outfile`. The first step is to turn off the security parameter, which is done roughly as follows.
+This is MySQL's solution for exporting query results to a file. The MySQL currently started in docker-compose-dev.yml comes with the --security parameter, so it does not allow `select ... into outfile`. The first step is to turn off the security parameter, which is done roughly as follows.
 ![origin_img_v2_c809c901-01bc-4ec9-b52a-ab4df24c376g](https://user-images.githubusercontent.com/3294100/175070770-9b7d5b75-574b-49ed-9bca-e9f611f60795.jpg)
 After closing it, use `select ... into outfile` to export the csv file. The export result is rough as follows.
 ![origin_img_v2_ccfdb260-668f-42b4-b249-6c2dd45816ag](https://user-images.githubusercontent.com/3294100/175070866-2204ae13-c058-4a16-bc20-93ab7c95f832.jpg)
