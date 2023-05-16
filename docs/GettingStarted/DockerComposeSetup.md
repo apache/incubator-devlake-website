@@ -133,7 +133,16 @@ volumes:
   grafana-storage:
 ```
 
-3. Set config-ui.environment.GRAFANA_ENDPOINT to your own grafana url in docker-compose.yml
+3. Set up the `config-ui` container to adopt the external Grafana in the `docker-compose.yml`
+
+  ```yaml
+  config-ui:
+    ...
+    environment:
+      USE_EXTERNAL_GRAFANA: "true"
+      GRAFANA_ENDPOINT: "http://grafana.example.com"
+    ...
+  ```
 
 4. Please connect your Grafana to DevLake's database by following https://grafana.com/docs/grafana/latest/administration/data-source-management/
 
