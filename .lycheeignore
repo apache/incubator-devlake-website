@@ -10,3 +10,9 @@ https://merico.feishu.cn.*
 .*sample-url.*
 
 https://github.com/dailidong
+
+https://i.imgur.com/*
+https://example.org/*
+https://*.example.org/*
+http://example.org/*
+http://*.example.org/*
