@@ -18,14 +18,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@main
-
-      - name: Use Node.js 17.8.x
-        uses: actions/setup-node@main
-        with:
-          node-version: 17.8.x
       - name: Install lychee
         env:
-          LYCHEEVERSION: 0.12.0
+          LYCHEEVERSION: 0.13.0
         # due to the limitation of Apache, we can't use lycheeverse/lychee-action directly,
         # so we re-use some core code from it
         run: |
@@ -50,30 +45,21 @@ jobs:
           # 'build': the site directory to check
           # './*.md': all markdown files in the root directory
         run: |
-          set +e
           # run lychee
-          LYCHEE_TMP="$(mktemp)"
           GITHUB_WORKFLOW_URL="https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}?check_suite_focus=true"
 
           if ! lychee --output ${OUTPUT_FILE} \
             -E -i -n -t 5 --max-concurrency 64 -a 429,401,403 -m 10 -f markdown -s http -s https -X HEAD \
-          '**/*.md'
+            '**/*.md'
           then
             echo "" >> "${OUTPUT_FILE}" # add a new line
             echo "[Full Github Actions output](${GITHUB_WORKFLOW_URL})" >> "${OUTPUT_FILE}"
+            gh issue list -S "is:open Broken links found in the website"
+            if ! gh issue list -S "is:open Broken links found in the website" | grep -F "Broken links found in the website"; then
+              gh issue create --title "Broken links found in the website" --body-file "${OUTPUT_FILE}" --repo "${GITHUB_REPOSITORY}" --assignee "${GITHUB_ACTOR}" --label "type/bug"
+            else
+              echo "Broken links found in the website, but an issue already exists."
+            fi
             exit 1
-          else
-            rm -f "${OUTPUT_FILE}"
-          fi
-        # if lychee run failed, create an issue
-      - name: Create Issue From File
-        # it is better to use peter-evans/create-issue-from-file
-        # but it is not available due to the limitation of Apache
-        run: |
-          if [ ! -f "${OUTPUT_FILE}" ]; then
-            echo "No broken links found. Exiting."
-            exit 0
           fi
 
-          gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
-          gh issue create --title "Broken links found in the website" --body-file "${OUTPUT_FILE}" --repo "${GITHUB_REPOSITORY}" --assignee "${GITHUB_ACTOR}" --label "bug"
