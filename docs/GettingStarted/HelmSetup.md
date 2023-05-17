@@ -22,7 +22,7 @@ To install the chart with the release name `devlake``:
 ```shell
 helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
 helm repo update
-helm install devlake devlake/devlake --version=0.17.0-beta4
+helm install devlake devlake/devlake --version=0.17.0-beta5
 ```
 
 And visit your devlake from the node port (32001 by default).
@@ -49,7 +49,7 @@ Please note: **Back up your Grafana dashboards** before upgrade if you have modi
 
 ```shell
 helm repo update
-helm upgrade --install devlake devlake/devlake --version=0.17.0-beta4
+helm upgrade --install devlake devlake/devlake --version=0.17.0-beta5
 ```
 
 Please check the [upgrade doc](Upgrade.md) for more information.
