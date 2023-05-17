@@ -8,9 +8,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@main
-
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install lychee
+        env:
+          LYCHEEVERSION: 0.13.0
+        # due to the limitation of Apache, we can't use lycheeverse/lychee-action directly,
+        # so we re-use some core code from it(install)
+        run: |
+          curl -sLO "https://github.com/lycheeverse/lychee/releases/download/v${{ env.LYCHEEVERSION }}/lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
+          tar -xvzf "lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
+          rm "lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
+          install -t "$HOME/.local/bin" -D lychee 
+          rm lychee
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Link Checker
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          # For parameter description, see https://github.com/lycheeverse/lychee#commandline-parameters
+          # test external link for modified files only, the rest are tested by the docusaurus already
+          git diff --name-only ${{ github.event.pull_request.base.sha }}... | grep -P '\.md$' > modified_files  || true
+          if [ -s modified_files ]; then
+            # run lychee
+            cat modified_files | xargs -d '\n' -- lychee -E -i -n -t 45 --max-concurrency 64 -a 409,401,403 -m 10 -s http -s https -X HEAD -- 
+          fi
       - name: Use Node.js 17.8.x
         uses: actions/setup-node@main
         with:
@@ -28,41 +51,3 @@ jobs:
         run: |
           npm install
           npm run build
-      - name: Install http-server
-        run: |
-          sudo npm install -g http-server
-      - name: Install lychee
-        env:
-          LYCHEEVERSION: 0.12.0
-        # due to the limitation of Apache, we can't use lycheeverse/lychee-action directly,
-        # so we re-use some core code from it(install)
-        run: |
-          curl -sLO "https://github.com/lycheeverse/lychee/releases/download/v${{ env.LYCHEEVERSION }}/lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
-          tar -xvzf "lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
-          rm "lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
-          install -t "$HOME/.local/bin" -D lychee 
-          rm lychee
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-      - name: Link Checker
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: |
-          # to run a local server, so that lychee can check links on it rather than on devlake.apache.org
-          sudo http-server ./build -s -p 80 -a 0.0.0.0 &
-          # wait for http-server to start
-          npm install wait-on
-          npx wait-on http://local.devlake.apache.org -t 60000
-          
-          # For parameter description, see https://github.com/lycheeverse/lychee#commandline-parameters
-          # -E, --exclude-all-private    Exclude all private IPs from checking.
-          # -i, --insecure               Proceed for server connections considered insecure (invalid TLS)
-          # -n, --no-progress            Do not show progress bar.
-          # -t, --timeout <timeout>      Website timeout in seconds from connect to response finished [default:20]
-          # --max-concurrency <max-concurrency>    Maximum number of concurrent network requests [default: 128]
-          # -a --accept <accept>                      Comma-separated list of accepted status codes for valid links
-          # -m, --max-redirects <MAX_REDIRECTS>
-
-          # 'build': the site directory to check
-          # './*.md': all markdown files in the root directory
-
-          lychee -E -i -n -t 45 --max-concurrency 64 -a 401,403 -m 10 -- 'build' '*.md'
