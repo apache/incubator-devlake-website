@@ -115,6 +115,7 @@ This table shows the comments of issues. Only GitHub and TAPD issue comments are
 | `account_id`   | varchar  | 255        | The id of the account who made the comment | FK_accounts.id |
 | `body`         | longtext |            | The body/detail of the comment             |                |
 | `created_date` | datetime | 3          | The creation date of the comment           |                |
+| `updated_date` | datetime | 3          | The updation date of the comment           |                |
 
 #### issue_changelogs
 
@@ -612,7 +613,7 @@ The data is extracted from the body of pull requests conforming to certain regul
 
 | **field**             | **type** | **length** | **description**  | **key**             |
 | :-------------------- | :------- | :--------- | :--------------- | :------------------ |
-| `pull_request_id`     | char     | 40         | Pull request id  | FK_pull_requests.id |
+| `pull_request_id`     | varchar  | 255        | Pull request id  | FK_pull_requests.id |
 | `issue_id`            | varchar  | 255        | Issue id         | FK_issues.id        |
 | `pull_request_number` | varchar  | 255        | Pull request key |                     |
 | `issue_number`        | varchar  | 255        | Issue key        |                     |
@@ -731,7 +732,7 @@ DWM entities are the slight aggregation and operation of DWD to store more organ
 
 #### refs_issues_diffs
 
-This table shows the issues fixed by commits added in a new ref compared to an old one. The data is computed from [table.commits_diffs](#commits_diffs), [table.finished_commits_diffs](#finished_commits_diffs), [table.pull_requests](#pull_requests), [table.pull_request_commits](#pull_request_commits), and [table.pull_request_issues](#pull_request_issues).
+This table shows the issues fixed by commits added in a new ref compared to an old one. The data is computed from [table.commits_diffs](#commits_diffs), [table.pull_requests](#pull_requests), [table.pull_request_commits](#pull_request_commits), and [table.pull_request_issues](#pull_request_issues).
 
 This table can support tag-based analysis, for instance, '_No. of bugs closed in a tag_'.
 
