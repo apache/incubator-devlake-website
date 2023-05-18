@@ -54,7 +54,7 @@ The following guide will walk through how to run DevLake's frontend (`config-ui`
     > Make sure the Docker daemon is running before this step.
 
     ```sh
-    docker-compose up -d mysql grafana
+    docker-compose -f docker-compose-dev.yml up -d mysql grafana
     ```
 
 7. Run `devlake` and `config-ui` in dev mode in two separate terminals:
