@@ -24,6 +24,8 @@ For either usage of the Blueprint, creating it consists of four steps:
 3. Adding Transformations (Optional): Add transformation rules for the data scope you have selected in order to view corresponding metrics
 4. Setting the Sync Policies: Set the sync frequency, time range and the skip-on-fail option for your data
 
+For detailed instructions of each data source, please go to their individual configuration docs from the sidebar.
+
 ### Step 1 - Add Data Connections
 There are two ways to add data connections to your Blueprint: adding them during the creation of a Blueprint and adding them separately on the Data Integrations page. There is no difference between these two ways.
 
@@ -40,8 +42,8 @@ After adding data connections, click on "Next Step" and you will be prompted to 
 ### Step 3 - Add Transformations (Optional)
 This step is required for viewing certain metrics (e.g. Bug Age, Bug Count per 1k Lines of Code and DORA)in the pre-built dashboards that require data transformation. We highly recommend adding Transformations for your data for the best display of the metrics. but you can still view the basic metrics if you skip this step. 
 
-![img](/img/ConfigUI/BlueprintCreation-v0.15/step3-1.png)
-![img](/img/ConfigUI/BlueprintCreation-v0.15/step3-2.png)
+![github-add-transformation-rules-list](images/github-set-transformation1.png)
+![github-add-transformation-rules](images/github-set-transformation2.png)
 
 ### Step 4 - Set the Sync Policies
 Time Filter: You can select the time range of the data you wish to sync to speed up the collection process.
