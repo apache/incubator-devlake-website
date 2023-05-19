@@ -7,7 +7,9 @@ sidebar_position: 26
 
 ## What is this metric?
 
-How often an organization deploys code to production or release it to end users.
+How often an organization deploys code to production or release it to end users. Below is a picture showing the definition of DevLake `deployments`.
+
+![](../Configuration/images/deployment_definition.png)
 
 ## Why is it important?
 
@@ -36,19 +38,15 @@ Below are the benchmarks for different development teams from Google's report. D
 
 <b>Data Sources Required</b>
 
-This metric relies on deployments collected in multiple ways:
-
-- Open APIs of Jenkins, GitLab, GitHub, etc.
-- Webhook for general CI tools.
-- Releases and PR/MRs from GitHub, GitLab APIs, etc.
+`Deployments` from Jenkins, GitLab CI, GitHub Action, BitBucket Pipelines, Webhook, etc. 
 
 <b>Transformation Rules Required</b>
 
-This metric relies on the deployment configuration in Jenkins, GitLab or GitHub transformation rules to let DevLake know what CI builds/jobs can be regarded as deployments.
+Define `deployment` in [data transformations](https://devlake.apache.org/docs/Configuration/Tutorial#step-3---add-transformations-optional) while configuring the blueprint of a project to let DevLake know what CI records can be regarded as deployments.
 
 <b>SQL Queries</b>
 
-If you want to measure the monthly trend of deployment count as the picture shown below, run the following SQL in Grafana.
+DevLake deployments can be found in table [cicd_deployment_commits](/docs/DataModels/DevLakeDomainLayerSchema.md#cicd_deployment_commits). If you want to measure the monthly trend of deployment count as the picture shown below, run the following SQL in Grafana.
 
 ![](/img/Metrics/deployment-frequency-monthly.jpeg)
 
