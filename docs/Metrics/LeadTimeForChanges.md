@@ -1,7 +1,7 @@
 ---
-title: "DORA - Lead Time for Changes"
+title: "DORA - Median Lead Time for Changes"
 description: >
-  DORA - Lead Time for Changes
+  DORA - Median Lead Time for Changes
 sidebar_position: 27
 ---
 
@@ -18,13 +18,13 @@ This metric measures the time it takes to a code change to the production enviro
 DORA dashboard. See [live demo](https://grafana-lake.demo.devlake.io/grafana/d/qNo8_0M4z/dora?orgId=1).
 
 ## How is it calculated?
-
 This metric is quite similar to [PR Cycle Time](PRCycleTime.md). The difference is that 'Lead Time for Changes' uses a different method to filter PRs.
 
-1. Find the PRs' associated deployments whose finished_date falls into the time range that users select
-2. Calculate the PRs' median cycle time. This will be the Median Lead Time for Changes.
+1. Find the PRs' associated deployment commits whose finished_date falls into the time range that users select.
+2. Find the associated pull requests of the commits diff between two consecutive successful `deployment commits` in the production environment.
+3. Calculate the PRs' median cycle time. This will be the Median Lead Time for Changes.
 
-![](/img/Metrics/pr-commit-deploy.jpeg)
+![](../Configuration/images/lead_time_for_changes_definition.png)
 
 PR cycle time is pre-calculated by the `dora` plugin during every data collection. You can find it in `pr_cycle_time` in [table.project_pr_metrics](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema/#project_pr_metrics) of DevLake's database.
 
@@ -41,15 +41,12 @@ Below are the benchmarks for different development teams from Google's report. H
 
 <b>Data Sources Required</b>
 
-This metric relies on deployments collected in multiple ways:
-
-- Open APIs of Jenkins, GitLab, GitHub, etc.
-- Webhook for general CI tools.
-- Releases and PR/MRs from GitHub, GitLab APIs, etc.
+- `Deployments` from Jenkins, GitLab CI, GitHub Action, BitBucket Pipelines, Webhook, etc. 
+- `Pull Requests` from GitHub PRs, GitLab MRs, BitBucket PRs, Azure DevOps PRs, etc.
 
 <b>Transformation Rules Required</b>
 
-This metric relies on the deployment configuration in Jenkins, GitLab or GitHub transformation rules to let DevLake know what CI builds/jobs can be regarded as deployments.
+Define `deployment` in [data transformations](https://devlake.apache.org/docs/Configuration/Tutorial#step-3---add-transformations-optional) while configuring the blueprint of a project to let DevLake know what CI records can be regarded as deployments.
 
 <b>SQL Queries</b>
 
