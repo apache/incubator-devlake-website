@@ -35,20 +35,12 @@ Below are the benchmarks for different development teams from Google's report. H
 
 <b>Data Sources Required</b>
 
-This metric relies on:
-- `Deployments` collected in one of the following ways:
-  - Open APIs of Jenkins, GitLab, GitHub, etc.
-  - Webhook for general CI tools.
-  - Releases and PR/MRs from GitHub, GitLab APIs, etc.
-- `Incidents` collected in one of the following ways:
-  - Issue tracking tools such as Jira, TAPD, GitHub, etc.
-  - Incident or Service Monitoring tools such as PagerDuty, ServiceNow, etc.
+- `Deployments` from Jenkins, GitLab CI, GitHub Action, BitBucket Pipelines, or Webhook, etc. 
+- `Incidents` from Jira issues, GitHub issues, TAPD issues, PagerDuty Incidents, etc.
 
 <b>Transformation Rules Required</b>
 
-This metric relies on:
-- Deployment configuration in Jenkins, GitLab, GitHub or BitBucket transformation rules to let DevLake know which CI builds/jobs can be regarded as `Deployments`.
-- Incident configuration in Jira, GitHub or TAPD transformation rules to let DevLake know which issues can be regarded as `Incidents`.
+Define `deployment` and `incident` in [data transformations](https://devlake.apache.org/docs/Configuration/Tutorial#step-3---add-transformations-optional) while configuring the blueprint of a project to let DevLake know what CI/issue records can be regarded as deployments or incidents.
 
 <b>SQL Queries</b>
 
