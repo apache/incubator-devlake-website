@@ -1,5 +1,5 @@
 ---
-title: "PagerDuty"
+title: "PagerDuty(Beta)"
 description: >
   PagerDuty Plugin
 ---
