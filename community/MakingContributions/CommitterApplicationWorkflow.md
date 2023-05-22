@@ -10,7 +10,7 @@ This doc is for new committers who have just passed the committer vote but have 
 
 Once you have passed the committer vote, you're supposed to receive an invitation email from @Hezheng Yin or other [PPMC members](https://devlake.apache.org/team).
 
-![](/img/community/screenshots/committer_invitation.png)
+![](/img/Community/screenshots/committer_invitation.png)
 
 
 ## Step 1 - Register for ICLA
@@ -24,19 +24,19 @@ Reply All to the above email saying that you accept to be a committer, waiting f
 
 If you have been waiting for a long time without receiving this email, please contact any PPMC members and they will contact an Apache Member to help complete the account application.
 
-![](/img/community/screenshots/apache_account_created.png)
+![](/img/Community/screenshots/apache_account_created.png)
 
 
 ## Step 3 - Bind the ASF Account to Git to get Git Permission
 
 Go to https://gitbox.apache.org/ to bind your Git account to your Apache account. Use the username and new password in step 2 to log in.
 
-![](/img/community/screenshots/bind-git.png)
+![](/img/Community/screenshots/bind-git.png)
 <br/>
 
 Follow the procedure to finish binding. This is a screenshot of the success page.
 
-![](/img/community/screenshots/bind-git-success.png)
+![](/img/Community/screenshots/bind-git-success.png)
 
 
 ## Step 4 - Add Committer information to Roster
