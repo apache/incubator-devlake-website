@@ -1,7 +1,7 @@
 ---
-title: Guide for Signing the Apache ICLA
+title: "Guide for Signing the Apache ICLA"
 sidebar_position: 05
-description: Guide for Signing ICLA
+description: "Guide for Signing ICLA"
 ---
 
 ## Guide for Signing the Apache ICLA

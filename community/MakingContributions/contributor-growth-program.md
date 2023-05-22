@@ -13,4 +13,4 @@ First of all, we would like to see a substantial amount of work from you, such a
 
 Besides code contribution, you also need to participate in the discussion via the [dev mailing list](../subscribe.md), edit the documentation, work on the issue tracker, help answering questions in the community, attend community events, etc.
 
-Once your contribution becomes influential in the community, you may be invited to become a committer (after the voting from current PPMC members) and will be provided with further guidance on the following process.
+Once your contribution becomes influential in the community, you may be invited to become a committer (after the voting from current PPMC members) and will be provided with further guidance on the [following process](CommitterApplicationWorkflow.md).
