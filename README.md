@@ -39,8 +39,8 @@ Make sure you have the `node` version `>=16.14`. If you have a lower version of 
   * blog.js or docs.js or site.js
 3. Send a PR to **main** branch.
 
-For detailed steps to create a PR, please refer: [Development Workflow page](https://devlake.apache.org/community/make-contribution/development-workflow/)
+For detailed steps to create a PR, please refer: [Development Workflow page](https://devlake.apache.org/community/MakingContributions/development-workflow/)
 
 ## Blog Submission
 
-We'd love to hear your thoughts both in creating and using DevLake! To submit a blog post to DevLake Blog, please follow the instructions [here](https://devlake.apache.org/community/make-contribution/BlogSubmission/).
+We'd love to hear your thoughts both in creating and using DevLake! To submit a blog post to DevLake Blog, please follow the instructions [here](https://devlake.apache.org/community/MakingContributions/BlogSubmission/).
