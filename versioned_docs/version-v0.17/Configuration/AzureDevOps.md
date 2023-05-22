@@ -1,5 +1,5 @@
 ---
-title: "Azure DevOps"
+title: "Azure DevOps(Beta)"
 sidebar_position: 5
 description: Config UI instruction for Azure DevOps
 ---

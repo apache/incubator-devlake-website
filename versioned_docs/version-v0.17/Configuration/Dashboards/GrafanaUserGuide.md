@@ -40,6 +40,16 @@ Or, use the sidebar and click on **Manage**:
 
 ![Screen Shot 2021-08-06 at 11 27 08 AM](https://user-images.githubusercontent.com/3789273/128534617-1992c080-9385-49d5-b30f-be5c96d5142a.png)
 
+## Importing a Dashboard<a id="importing-a-dashboard"></a>
+If you want to import a dashboard to Grafana which you have backed up earlier, please follow the steps below:
+
+1. Click the `Import` icon
+2. Click the `Upload JSON file` button
+3. If the dashboard conflicts with an existing one, please change the `Name` and `uid`
+4. Click `Import`
+
+![grafana-sections](../images/upload-dashboard.png)
+
 
 ## Customizing a Dashboard<a id="customizing-a-dashboard"></a>
 

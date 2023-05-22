@@ -1,5 +1,5 @@
 ---
-title: "PagerDuty"
+title: "PagerDuty(Beta)"
 sidebar_position: 4
 description: Config UI instruction for PagerDuty
 ---
