@@ -14,7 +14,6 @@ Referring to DevLake's [architecture](../Overview/Architecture.md), the data in 
 <p align="center"><img src="/img/Architecture/arch-dataflow.svg" /></p>
 <p align="center">DevLake Dataflow</p>
 
-Domain layer schema itself includes 2 logical layers: a `DWD` layer and a `DWM` layer. The DWD layer stores the detailed data points, while the DWM is the slight aggregation and operation of DWD to store more organized details or middle-level metrics.
 
 ## Use Cases
 
@@ -24,18 +23,18 @@ Domain layer schema itself includes 2 logical layers: a `DWD` layer and a `DWM` 
 
 ## Data Models
 
-This is the up-to-date domain layer schema for DevLake v0.10.x. Tables (entities) are categorized into 5 domains.
+This is the up-to-date domain layer schema for DevLake. Tables (entities) are categorized into 5 domains.
 
-1. Issue tracking domain entities: Jira issues, GitHub issues, GitLab issues, etc.
-2. Source code management domain entities: Git/GitHub/Gitlab commits and refs(tags and branches), etc.
-3. Code review domain entities: GitHub PRs, Gitlab MRs, etc.
-4. CI/CD domain entities: Jenkins jobs & builds, etc.
-5. Code Quality entities: SonarQube issues, hotspots, file metrics, etc.
-6. Cross-domain entities: entities that map entities from different domains to break data isolation.
+1. Issue tracking: Jira issues, GitHub issues, GitLab issues, etc.
+2. Source code management: Git/GitHub/Gitlab commits and refs(tags and branches), etc.
+3. Code review: GitHub PRs, Gitlab MRs, etc.
+4. CI/CD: Jenkins jobs & builds, etc.
+5. Code Quality: SonarQube issues, hotspots, file metrics, etc.
+6. Cross-domain: entities that map entities from different domains to break data isolation.
 
 ### Schema Diagram
 
-![Domain Layer Schema](/img/DomainLayerSchema/schema-diagram.svg)
+![Domain Layer Schema](../Configuration/images/schema-diagram.svg)
 
 When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. Github/Gitlab) and allow them to co-exist in a single table.
 
@@ -724,12 +723,6 @@ metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contr
 | `project_name`  | varchar  | 100        | The project that this Issue belongs to      | PK      |
 | `deployment_id` | longtext |            | The id of cicd_task which cause an incident |         |
 
-<br/>
-
-## DWM Entities - (Data Warehouse Middle)
-
-DWM entities are the slight aggregation and operation of DWD to store more organized details or middle-level metrics.
-
 #### refs_issues_diffs
 
 This table shows the issues fixed by commits added in a new ref compared to an old one. The data is computed from [table.commits_diffs](#commits_diffs), [table.pull_requests](#pull_requests), [table.pull_request_commits](#pull_request_commits), and [table.pull_request_issues](#pull_request_issues).
@@ -744,6 +737,8 @@ This table can support tag-based analysis, for instance, '_No. of bugs closed in
 | `old_ref_commit_sha` | char     | 40         | The commit old ref points to at the time of collection |              |
 | `issue_number`       | varchar  | 255        | Issue number                                           |              |
 | `issue_id`           | varchar  | 255        | Issue id                                               | FK_issues.id |
+
+<br/>
 
 ## Get Domain Layer Models in Developer Mode
 
