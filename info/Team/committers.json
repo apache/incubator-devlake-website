@@ -69,6 +69,13 @@
       "email": "camille@merico.dev",
       "avatar": "https://avatars.githubusercontent.com/u/251060?v=4",
       "githubLink": "https://github.com/CamilleTeruel"
-    }    
+    },
+    {
+      "realName": "Jorge Garcia",
+      "githubId": "JorgeGar",
+      "email": "jorgegarag@gmail.com",
+      "avatar": "https://avatars.githubusercontent.com/u/5280729?v=4",
+      "githubLink": "https://github.com/JorgeGar"
+    }      
   ]
 }
