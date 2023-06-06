@@ -20,8 +20,8 @@ sidebar_position: 1
    ```
    Copy the generated string. Set the value of the ENCRYPTION_SECRET environment variable:
 
-- Method 1: In a terminal session, run the following command: export ENCRYPTION_SECRET=<copied string>
-- Method 2: Alternatively, you can set the ENCRYPTION_SECRET environment variable in the .env file: ENCRYPTION_SECRET=<copied string>
+- Method 1: In a terminal session, run the following command: export ENCRYPTION_SECRET="copied string"
+- Method 2: Alternatively, you can set the ENCRYPTION_SECRET environment variable in the .env file: ENCRYPTION_SECRET="copied string"
 
   If you set the ENCRYPTION_SECRET environment variable in both the terminal session and the .env file, the value set in the terminal session takes precedence.
 
