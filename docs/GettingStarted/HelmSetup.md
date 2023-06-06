@@ -16,13 +16,29 @@ sidebar_position: 2
 
 ### Install
 
-To install the chart with release name `devlake`:
+To install the chart with release name `devlake`,follow these steps:
 
-```shell
-helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
-helm repo update
-helm install devlake devlake/devlake --version=0.17.0-beta10
-```
+1.  Generate a secure encryption key using a method such as OpenSSL. For example, run the following command to generate a 128-character string consisting of uppercase letters:
+
+    ```
+    openssl rand -base64 2000 | tr -dc 'A-Z' | fold -w 128 | head -n 1
+    ```
+
+2.  Copy the generated string, set the value of the ENCRYPTION_SECRET environment variable by running the following command:
+
+    ```
+    export ENCRYPTION_SECRET=<copied string>
+    ```
+
+    This command will set the `ENCRYPTION_SECRET` environment variable to the value of the copied string.
+
+3.  Install the chart by running the following commands:
+
+    ```shell
+    helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
+    helm repo update
+    helm install devlake devlake/devlake --version=0.17.0-beta10
+    ```
 
 And visit your devlake from the node port (32001 by default).
 

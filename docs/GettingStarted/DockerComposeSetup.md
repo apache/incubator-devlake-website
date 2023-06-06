@@ -14,7 +14,18 @@ sidebar_position: 1
 
 1. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.17.0-beta10) into a folder.
 2. Rename `env.example` to `.env`. For Mac/Linux users, please run `mv env.example .env` in the terminal. This file contains the environment variables that the Devlake server will use. Additional ones can be found in the compose file(s).
-3. Run `docker-compose up -d` if the version of Docker Desktop is too low to use `docker compose up -d`.
+3. Generate a secure encryption key using a method such as OpenSSL. For example, run the following command to generate a 128-character string consisting of uppercase letters:
+   ```
+   openssl rand -base64 2000 | tr -dc 'A-Z' | fold -w 128 | head -n 1
+   ```
+   Copy the generated string. Set the value of the ENCRYPTION_SECRET environment variable:
+
+- Method 1: In a terminal session, run the following command: export ENCRYPTION_SECRET=<copied string>
+- Method 2: Alternatively, you can set the ENCRYPTION_SECRET environment variable in the .env file: ENCRYPTION_SECRET=<copied string>
+
+  If you set the ENCRYPTION_SECRET environment variable in both the terminal session and the .env file, the value set in the terminal session takes precedence.
+
+4. Run `docker-compose up -d` if the version of Docker Desktop is too low to use `docker compose up -d`.
 
 ## Collect data and view dashboards
 
