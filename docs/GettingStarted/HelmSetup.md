@@ -26,11 +26,13 @@ To install the chart with release name `devlake`,follow these steps:
 
 2.  Copy the generated string, set the value of the ENCRYPTION_SECRET environment variable by running the following command:
 
-    ```
-    export ENCRYPTION_SECRET="copied string"
-    ```
+        ```
+        export ENCRYPTION_SECRET="copied string"
+        ```
 
-    This command will set the `ENCRYPTION_SECRET` environment variable to the value of the copied string.
+        This command will set the `ENCRYPTION_SECRET` environment variable to the value of the copied string.
+
+    **Please make sure to keep the ENCRYPTION_SECRET safe as it is used to encrypt sensitive information in the database, such as personal access tokens and passwords. If ENCRYPTION_SECRET is lost, it may not be possible to decrypt this sensitive information.**
 
 3.  Install the chart by running the following commands:
 

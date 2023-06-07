@@ -25,6 +25,8 @@ sidebar_position: 1
 
   If you set the ENCRYPTION_SECRET environment variable in both the terminal session and the .env file, the value set in the terminal session takes precedence.
 
+  **Please make sure to keep the ENCRYPTION_SECRET safe as it is used to encrypt sensitive information in the database, such as personal access tokens and passwords. If ENCRYPTION_SECRET is lost, it may not be possible to decrypt this sensitive information.**
+
 4. Run `docker-compose up -d` if the version of Docker Desktop is too low to use `docker compose up -d`.
 
 ## Collect data and view dashboards
