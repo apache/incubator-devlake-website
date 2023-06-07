@@ -32,7 +32,7 @@ To install the chart with release name `devlake`,follow these steps:
 
         This command will set the `ENCRYPTION_SECRET` environment variable to the value of the copied string.
 
-    **Please make sure to keep the ENCRYPTION_SECRET safe as it is used to encrypt sensitive information in the database, such as personal access tokens and passwords. If ENCRYPTION_SECRET is lost, it may not be possible to decrypt this sensitive information.**
+    **Please make sure to keep the ENCRYPTION_SECRET safe as it is used to encrypt sensitive information in the database, such as personal access tokens and passwords. If ENCRYPTION_SECRET is lost, it may not be possible to decrypt this sensitive information.If you are upgrading to version v0.18.0 from a previous version, please note that the environment variable used for encryption was previously called ENCODE_KEY. If you have previously set ENCODE_KEY in your environment or .env file, please assign its value to the ENCRYPTION_SECRET environment variable after upgrading to v0.18.0. This will ensure that the encryption process continues to work as expected.**
 
 3.  Install the chart by running the following commands:
 
