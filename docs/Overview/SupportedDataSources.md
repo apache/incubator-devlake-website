@@ -37,7 +37,7 @@ This table shows the entities collected by each plugin. Domain layer entities in
 | ------------------------------------------------------------------------------------------- | --- | ---- | ------------ | ---------------- | ------ | ------ | ------- | ---- | ------- | ---- | --------- | ------ | ----------- |
 | [accounts](../DataModels/DevLakeDomainLayerSchema.md/#accounts)                             |     |      |              |                  | ✅     | ✅     |         | ✅   |         | ✅   | ✅        |        |             |
 | [board_issues](../DataModels/DevLakeDomainLayerSchema.md/#board_issues)                     |     |      |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |           |        |             |
-| [board_repos](../DataModels/DevLakeDomainLayerSchema.md/#board_repos)                       |     |      |              |                  | ✅     | ✅     |         | ✅   |         |      |           |        |             |
+| [board_repos](../DataModels/DevLakeDomainLayerSchema.md/#board_repos)                       |     |      |              |                  | ✅     | ✅     |         |      |         |      |           |        |             |
 | [board_sprints](../DataModels/DevLakeDomainLayerSchema.md/#board_sprints)                   |     |      |              |                  | ✅     |        |         | ✅   |         | ✅   |           |        |             |
 | [boards](../DataModels/DevLakeDomainLayerSchema.md/#boards)                                 |     |      |              |                  | ✅     | ✅     |         | ✅   |         | ✅   |           |        |             |
 | [cicd_pipeline_commits](../DataModels/DevLakeDomainLayerSchema.md/#cicd_pipeline_commits)   |     | ✅   |              |                  | ✅     | ✅     | ✅      |      |         |      |           |   ✅   |      ✅     |
@@ -63,7 +63,7 @@ This table shows the entities collected by each plugin. Domain layer entities in
 | [project_mapping](../DataModels/DevLakeDomainLayerSchema.md/#project_mapping)               |     | ✅   |              |                  | ✅     | ✅     | ✅      | ✅   |         | ✅   |           |        |             |
 | [project_metrics](../DataModels/DevLakeDomainLayerSchema.md/#project_metrics)               |     | ✅   |              |                  | ✅     | ✅     | ✅      | ✅   |         | ✅   |           |        |             |
 | [project_pr_metrics](../DataModels/DevLakeDomainLayerSchema.md/#project_pr_metrics)         |     | ✅   |              |                  | ✅     | ✅     |         |      |         | ✅   |           |        |             |
-| [projects](../DataModels/DevLakeDomainLayerSchema.md/#project)                              |     | ✅   |              |                  | ✅     | ✅     | ✅      | ✅   |         | ✅   |           |        |             |
+| [project](../DataModels/DevLakeDomainLayerSchema.md/#project)                               |     | ✅   |              |                  | ✅     | ✅     | ✅      | ✅   |         | ✅   |           |        |             |
 | [pull_request_comments](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_comments)   |     |      |              |                  | ✅     | ✅     |         |      |         |      |           |        |             |
 | [pull_request_commits](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_commits)     |     |      |              |                  | ✅     | ✅     |         |      |         |      |           |        |      ✅     |
 | [pull_request_issues](../DataModels/DevLakeDomainLayerSchema.md/#pull_request_issues)       |     |      |              |                  | ✅     |        |         |      |         |      |           |        |             |
@@ -82,10 +82,10 @@ This table shows the entities collected by each plugin. Domain layer entities in
 | [teams](../DataModels/DevLakeDomainLayerSchema.md/#teams)                                   |     |      |              |                  |        |        |         |      |         |      |           |        |             |
 | [user_account](../DataModels/DevLakeDomainLayerSchema.md/#user_accounts)                    |     |      |              |                  |        |        |         |      |         |      |           |        |             |
 | [users](../DataModels/DevLakeDomainLayerSchema.md/#users)                                   |     |      |              |                  |        |        |         | ✅   |         | ✅   |           |        |             |
-| [cq_projects](../DataModels/DevLakeDomainLayerSchema.md/#cq_projects)                       |     |      |              |                  |        |        |         | ✅   |         | ✅   | ✅        |        |             |
-| [cq_issues](../DataModels/DevLakeDomainLayerSchema.md/#cq_issues)                           |     |      |              |                  |        |        |         | ✅   |         | ✅   | ✅        |        |             |
-| [cq_issue_code_blocks](../DataModels/DevLakeDomainLayerSchema.md/#cq_issue_code_blocks)     |     |      |              |                  |        |        |         | ✅   |         | ✅   | ✅        |        |             |
-| [cq_file_metrics](../DataModels/DevLakeDomainLayerSchema.md/#cq_file_metrics)               |     |      |              |                  |        |        |         | ✅   |         | ✅   | ✅        |        |             |
+| [cq_projects](../DataModels/DevLakeDomainLayerSchema.md/#cq_projects)                       |     |      |              |                  |        |        |         |      |         |      | ✅        |        |             |
+| [cq_issues](../DataModels/DevLakeDomainLayerSchema.md/#cq_issues)                           |     |      |              |                  |        |        |         |      |         |      | ✅        |        |             |
+| [cq_issue_code_blocks](../DataModels/DevLakeDomainLayerSchema.md/#cq_issue_code_blocks)     |     |      |              |                  |        |        |         |      |         |      | ✅        |        |             |
+| [cq_file_metrics](../DataModels/DevLakeDomainLayerSchema.md/#cq_file_metrics)               |     |      |              |                  |        |        |         |      |         |      | ✅        |        |             |
 
 ## Data Sync Policy
 
