@@ -50,8 +50,6 @@ Please note: **Back up your Grafana dashboards** before upgrade if you have modi
 2. Open file "docker-compose.yml". Change the image tags of "grafana", "devlake" and "config-ui" to the new version, and save;
 3. Run `docker-compose up -d` to start DevLake services.
 
-Please check the [upgrade doc](Upgrade.md) for more information.
-
 ## FAQ
 
 ### Can I use a managed cloud database service instead of running database in Docker?
