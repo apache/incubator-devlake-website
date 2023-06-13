@@ -17,7 +17,6 @@ sidebar_position: 2
 ### Install
 
 To install the chart with release name `devlake`,follow these steps:
-
 1.  Generate a secure encryption key using a method such as OpenSSL. For example, run the following command to generate a 128-character string consisting of uppercase letters:
 
     ```
@@ -72,7 +71,7 @@ grafana by url `http://YOUR-NODE-IP:30091`
 
 ```shell
 helm repo update
-helm upgrade --install devlake devlake/devlake --version=0.17.0-beta10
+helm upgrade --install devlake devlake/devlake --version=0.17.0-beta11
 ```
 
 ### Uninstall
