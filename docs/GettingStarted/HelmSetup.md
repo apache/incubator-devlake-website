@@ -17,6 +17,7 @@ sidebar_position: 2
 ### Install
 
 To install the chart with release name `devlake`,follow these steps:
+
 1.  Generate a secure encryption key using a method such as OpenSSL. For example, run the following command to generate a 128-character string consisting of uppercase letters:
 
     ```
@@ -32,10 +33,6 @@ To install the chart with release name `devlake`,follow these steps:
         This command will set the `ENCRYPTION_SECRET` environment variable to the value of the copied string.
 
     **Please make sure to keep the ENCRYPTION_SECRET safe as it is used to encrypt sensitive information in the database, such as personal access tokens and passwords. If ENCRYPTION_SECRET is lost, it may not be possible to decrypt this sensitive information.**
-
-    **The .env file is now optional, and you can place the variables in the environment instead, such as ENCRYPTION_SECRET and DB_URL. If both environment variables and .env file exist, the values in the environment variables take priority, but you need to ensure that these variables are set in one of them, or devlake will fail.**
-
-    **If you are upgrading to version v0.18.0 from a previous version, please note that the environment variable used for encryption was previously called ENCODE_KEY. If you have previously set ENCODE_KEY in your environment or .env file, please assign its value to the ENCRYPTION_SECRET environment variable after upgrading to v0.18.0. This will ensure that the encryption process continues to work as expected.**
 
 3.  Install the chart by running the following commands:
 
