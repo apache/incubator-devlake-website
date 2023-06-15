@@ -48,6 +48,14 @@ The recommended way to set up a new data connection is via the Data Connections 
 ### Data Scope(s)
 **A data scope is the top-level "container" in a data source**. For example, a data scope for Jira is a Jira board, for TAPD is a TAPD workspace, for GitHub/GitLab/BitBucket is a repo, for Jenkins is a Jenkins job, etc. You can add multiple data scopes to a data connection to determine which data to collect. Data scopes vary for different data sources.
 
+
+### Scope Configs
+**A scope config is a shared configuration among multiple data scopes under the same connection.** The fields of the Scope Config vary depending on the data sources.
+
+Most often, when we collect multiple data scopes from a data source, such as gathering multiple repositories from GitHub, some of them (repositories) might share the same configuration because they are maintained by the same group of people or follow company policy. In any case, storing the configuration in a separate entity is helpful to avoid repeatedly entering the same set of settings. However, it is important to note that changing the Scope Config would affect every single data scope that uses it.
+
+Scope Config consists of [Data Entities](#data-entities) and [Transformation Rule](#transformation-rules)
+
 ### Data Entities
 **Data entities refer to the data fields from one of the five data domains: Issue Tracking, Source Code Management, Code Review, CI/CD and Cross-Domain.**
 
