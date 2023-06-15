@@ -52,9 +52,9 @@ The recommended way to set up a new data connection is via the Data Connections 
 ### Scope Configs
 **A scope config is a shared configuration among multiple data scopes under the same connection.** The fields of the Scope Config vary depending on the data sources.
 
-Most often, when we collect multiple data scopes from a data source, such as gathering multiple repositories from GitHub, some of them (repositories) might share the same configuration because they are maintained by the same group of people or follow company policy. In any case, storing the configuration in a separate entity is helpful to avoid repeatedly entering the same set of settings. However, it is important to note that changing the Scope Config would affect every single data scope that uses it.
+Most often, when we collect multiple data scopes from a data source, such as gathering multiple repositories from GitHub, some of them (repositories) might share the same configuration because they are maintained by the same group of people or follow company policy. In cases like this, storing the configuration in a separate entity is helpful to avoid repeatedly entering the same set of settings. However, it is important to note that changing the Scope Config would affect every single data scope that uses it.
 
-Scope Config consists of [Data Entities](#data-entities) and [Transformation Rule](#transformation-rules)
+Scope Config consists of [Data Entities](#data-entities) and [Transformations](#transformations)
 
 ### Data Entities
 **Data entities refer to the data fields from one of the five data domains: Issue Tracking, Source Code Management, Code Review, CI/CD and Cross-Domain.**
@@ -63,8 +63,8 @@ For instance, if you wish to pull Source Code Management data from GitHub and Is
 
 To learn more details, please refer to [Domain Layer Schema](/DataModels/DevLakeDomainLayerSchema.md).
 
-### Transformation Rules
-**Transformation rules are a collection of methods that allow you to customize how DevLake normalizes raw data for query and metric computation.** Each set of data scope is strictly accompanied with one set of transformation rules. However, for your convenience, transformation rules can also be duplicated across different sets of data scope.
+### Transformations
+**Transformations are a collection of methods that allow you to customize how DevLake normalizes raw data for query and metric computation.** Each set of data scope is strictly accompanied with one set of transformations. However, for your convenience, transformations can also be duplicated across different sets of data scope.
 
 DevLake uses these normalized values in the transformation to design more advanced dashboards, such as the Weekly Bug Retro dashboard. Although configuring transformation rules is not mandatory, if you leave the rules blank or have not configured correctly, only the basic dashboards (e.g. GitHub Basic Metrics) will be displayed as expected, while the advanced dashboards will not.
 
