@@ -46,7 +46,7 @@ DevLake normally uses one [data plugin](#data-plugins) to pull data for a single
 The recommended way to set up a new data connection is via the Data Connections page. You can then add the data connection to a DevLake project to measure metrics later. A data connection can be used in multiple projects.
 
 ### Data Scope(s)
-You can add multiple data scopes to a data connection. **A data scope determines which data to collect**. Data scopes vary for different data sources. For example, a data scope for Jira is a Jira board, for TAPD is a TAPD workspace, for GitHub/GitLab/BitBucket is a repo, for Jenkins is a Jenkins job, etc.
+**A data scope is the top-level "container" in a data source**. For example, a data scope for Jira is a Jira board, for TAPD is a TAPD workspace, for GitHub/GitLab/BitBucket is a repo, for Jenkins is a Jenkins job, etc. You can add multiple data scopes to a data connection to determine which data to collect. Data scopes vary for different data sources.
 
 ### Data Entities
 **Data entities refer to the data fields from one of the five data domains: Issue Tracking, Source Code Management, Code Review, CI/CD and Cross-Domain.**
