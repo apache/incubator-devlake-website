@@ -1,12 +1,12 @@
 ---
 sidebar_position: 4
 title: "Key Concepts"
-linkTitle: "KeyConepts"
+linkTitle: "KeyConcepts"
 description: >
   DevLake Key Concepts
 ---
 
-*Last updated: May 16 2022*
+*Last updated: June 13, 2023*
 
 
 ## In Configuration UI (Regular Mode)
@@ -27,30 +27,26 @@ For example, when a user associates 'Jenkins Job A' and  'Jira board B' with pro
 3. **Adding [Transformation Rules](#transformation-rules) (optional)**: You can optionally apply transformation for the data scope you have just selected, in order to view more advanced metrics.
 3. **Setting the Sync Frequency**: You can specify the sync frequency for your blueprint to achieve recurring data syncs and transformation. Alternatively, you can set the frequency to manual if you wish to run the tasks in the blueprint manually.
 
-The relationship among Blueprint, Data Connections, Data Scope and Transformation Rules is explained as follows:
+The relationship between Blueprint, Data Connections, Data Scope and Transformation Rules is explained as follows:
 
 ![Blueprint ERD](/img/Glossary/blueprint-erd.svg)
 - Each blueprint can have multiple data connections.
-- Each data connection can have multiple sets of data scope.
+- Each data connection can have multiple data scopes.
 - Each set of data scope only consists of one GitHub/GitLab project or Jira board, along with their corresponding data entities.
 - Each set of data scope can only have one set of transformation rules.
 
 ### Data Sources
 **A data source is a specific DevOps tool from which you wish to sync your data, such as GitHub, GitLab, Jira and Jenkins.**
 
-DevLake normally uses one [data plugin](#data-plugins) to pull data for a single data source. However, in some cases, DevLake uses multiple data plugins for one data source for the purpose of improved sync speed, among many other advantages. For instance, when you pull data from GitHub or GitLab, aside from the GitHub or GitLab plugin, Git Extractor is also used to pull data from the repositories. In this case, DevLake still refers GitHub or GitLab as a single data source.
+DevLake normally uses one [data plugin](#data-plugins) to pull data for a single data source. However, in some cases, DevLake uses multiple data plugins for one data source for a better sync speed, among many other advantages. For instance, when you pull data from GitHub or GitLab, aside from the GitHub or GitLab plugin, Git Extractor is also used to pull data from the repositories. In this case, DevLake still recognizes GitHub or GitLab as a single data source.
 
 ### Data Connections
 **A data connection is a specific instance of a data source that stores information such as `endpoint` and `auth`.** A single data source can have one or more data connections (e.g. two Jira instances). Currently, DevLake supports one data connection for GitHub, GitLab and Jenkins, and multiple connections for Jira.
 
-You can set up a new data connection either during the first step of creating a blueprint, or in the Connections page that can be accessed from the navigation bar. Because one single data connection can be reused in multiple blueprints, you can update the information of a particular data connection in Connections, to ensure all its associated blueprints will run properly. For example, you may want to update your GitHub token in a data connection if it goes expired.
+The recommended way to set up a new data connection is via the Data Connections page. You can then add the data connection to a DevLake project to measure metrics later. A data connection can be used in multiple projects.
 
-### Data Scope
-**In a blueprint, each data connection can have multiple sets of data scope configurations, including GitHub or GitLab projects, Jira boards and their corresponding [data entities](#data-entities).** The fields for data scope configuration vary according to different data sources.
-
-Each set of data scope refers to one GitHub or GitLab project, or one Jira board and the data entities you would like to sync for them, for the convenience of applying transformation in the next step. For instance, if you wish to sync 5 GitHub projects, you will have 5 sets of data scope for GitHub.
-
-To learn more about the default data scope of all data sources and data plugins, please refer to [Supported Data Sources](./SupportedDataSources.md).
+### Data Scope(s)
+**A data scope is the top-level "container" in a data source**. For example, a data scope for Jira is a Jira board, for TAPD is a TAPD workspace, for GitHub/GitLab/BitBucket is a repo, for Jenkins is a Jenkins job, etc. You can add multiple data scopes to a data connection to determine which data to collect. Data scopes vary for different data sources.
 
 ### Data Entities
 **Data entities refer to the data fields from one of the five data domains: Issue Tracking, Source Code Management, Code Review, CI/CD and Cross-Domain.**
