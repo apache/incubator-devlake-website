@@ -1,0 +1,18 @@
+# links ignore in ci check
+data:image/png;base64*
+https://www.googletagmanager.com
+https://www.google-analytics.com
+.*your-.*
+.*xxx.*
+https://twitter.com/ApacheDevLake
+https://merico.feishu.cn.*
+.*edit/main.*
+.*sample-url.*
+
+https://github.com/dailidong
+
+https://i.imgur.com/*
+https://example.org/*
+https://*.example.org/*
+http://example.org/*
+http://*.example.org/*

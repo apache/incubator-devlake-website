@@ -1,0 +1,80 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+
+/**
+ * Enable tailwindcss, preflight styles from tailwind are removed to avoid conflicts.
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ifm-color-primary: #7497f7;
+  --ifm-color-primary-dark: #5d7cd2;
+  --ifm-color-primary-darker: #4c66ad;
+  --ifm-color-primary-darkest: #3c5088;
+  --ifm-color-primary-light: #99b3f9;
+  --ifm-color-primary-lighter: #bdcefb;
+  --ifm-color-primary-lightest: #dbe4fd;
+  --ifm-code-font-size: 95%;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+html[data-theme="dark"] .docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.rightArrow .moveArrow {
+  display: inline-block;
+  transition: 0.1s ease-in;
+}
+.rightArrow:hover .moveArrow {
+  transform: translate(50%);
+}
+
+@media screen and (min-width: 576px) {
+  .info {
+    display: none;
+  }
+}
+
+@layer components {
+  .primary-button {
+    @apply bg-primary-500 hover:bg-primary-light;
+    @apply flex items-center justify-center w-[160px] h-[48px];
+    @apply hover:no-underline hover:text-neutral-invert;
+    @apply text-neutral-invert text-[16px] leading-[20px] font-semibold;
+    @apply rounded-[10px] sm:text-[14px];
+    @apply shadow-sm shadow-primary/20;
+  }
+
+  .section-title {
+    @apply text-heading1 mb-[64px];
+    @apply text-primary-800 font-semibold;
+    @apply sm:text-heading3;
+    @apply mobile:mb-4 sm:mt-3 sm:mb-[36px];
+  }
+
+  .floating-link-icon {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .floating-link:hover .floating-link-icon {
+    @apply transform translate-x-1;
+  }
+
+  .use-case-card {
+    background: linear-gradient(105.48deg, #dbe4fd 16.79%, #f0f4fe 93.34%);
+  }
+}

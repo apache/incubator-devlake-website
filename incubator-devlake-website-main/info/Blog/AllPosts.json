@@ -1,0 +1,34 @@
+{
+    "data": [
+        {
+            "title": "Compatibility of Apache DevLake with PostgreSQL",
+            "readTime": "3 min",
+            "authorName": "ZhangLiang",
+            "authorImgUrl": "https://avatars.githubusercontent.com/u/8455907?s=400&v=4",
+            "publishTime": "2022/06/23",
+            "detailLink": "/blog/compatibility-of-apache-devLake-with-postgreSQL",
+            "coverTitle": "compatibility-of-apache-devLake-with-postgreSQL",
+            "summary": "Apache DevLake is a dev data platform that can collect and integrate data from different dev tools including Jira, Github, Gitlab and Jenkins.This blog will not aim at a comprehensive summary of the compatibility of database but a record of issues for future reference."
+        },
+        {
+            "title": "How DevLake is Up and Running",
+            "readTime": "4 min",
+            "authorName": "Warren Chen",
+            "authorImgUrl": "https://avatars.githubusercontent.com/u/39366025?v=4",
+            "publishTime": "2022/06/17",
+            "detailLink": "/blog/how-DevLake-is-up-and-running",
+            "coverTitle": "How DevLake is up and running",
+            "summary": "Apache DevLake is an integration tool with the DevOps data collection functionality, which presents a different stage of data to development teams via Grafana. which also can leverage teams to improve the development process with a data-driven model."
+        },
+        {
+            "title": "Apache Incubator Welcomes DevLake, A Dev-Data Platform Serving Developers",
+            "readTime": "2 min",
+            "authorName": "Maxim Wheatley",
+            "authorImgUrl": "https://avatars.githubusercontent.com/u/84928455?v=4",
+            "publishTime": "2022/05/18",
+            "detailLink": "/blog/apache-welcomes-devlake",
+            "coverTitle": "apache-welcomes-devLake",
+            "summary": "We are excited to share today that the Apache Software Foundation (ASF) voted to make DevLake an officially supported project of the Apache Incubator."
+        }
+    ]
+}

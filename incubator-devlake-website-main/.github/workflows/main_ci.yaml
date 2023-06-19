@@ -1,0 +1,33 @@
+name: Production workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      - name: Use Node.js 17.8.x
+        uses: actions/setup-node@main
+        with:
+          node-version: 17.8.x
+      - name: Build Docusaurus website
+        run: |
+          npm install 
+          npm run build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          publish_branch: asf-site
+          publish_dir: ./build
+

@@ -1,0 +1,26 @@
+tasks:
+  - name: Initialize DevLake Docs 
+    init: |
+      yarn install
+    command: |
+      nvm use v16.14.0 && sh gitpod-scripts/startCloudDevEnv.sh
+
+ports:
+  - port: 3000
+    onOpen: open-preview
+    visibility: public
+    name: devlake-website
+    description: DevLake Docs
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: true
+    addCheck: true
+    addComment: true
+    addBadge: true
+
+image:
+  file: .gitpod.Dockerfile

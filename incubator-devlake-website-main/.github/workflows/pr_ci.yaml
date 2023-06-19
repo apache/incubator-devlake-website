@@ -1,0 +1,53 @@
+name: Build and check links in PRs
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install lychee
+        env:
+          LYCHEEVERSION: 0.13.0
+        # due to the limitation of Apache, we can't use lycheeverse/lychee-action directly,
+        # so we re-use some core code from it(install)
+        run: |
+          curl -sLO "https://github.com/lycheeverse/lychee/releases/download/v${{ env.LYCHEEVERSION }}/lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
+          tar -xvzf "lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
+          rm "lychee-v${{ env.LYCHEEVERSION }}-x86_64-unknown-linux-gnu.tar.gz"
+          install -t "$HOME/.local/bin" -D lychee 
+          rm lychee
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Link Checker
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          # For parameter description, see https://github.com/lycheeverse/lychee#commandline-parameters
+          # test external link for modified files only, the rest are tested by the docusaurus already
+          git diff --name-only ${{ github.event.pull_request.base.sha }}... | grep -P '\.md$' > modified_files  || true
+          if [ -s modified_files ]; then
+            # run lychee
+            cat modified_files | xargs -d '\n' -- lychee -E -i -n -t 45 --max-concurrency 64 -a 409,401,403 -m 10 -s http -s https -X HEAD -- 
+          fi
+      - name: Use Node.js 17.8.x
+        uses: actions/setup-node@main
+        with:
+          node-version: 17.8.x
+      - name: Replace base url
+        run: |
+          # replace base url to localhost to support change of doc structure
+          sed -i 's#https://devlake.apache.org#http://local.devlake.apache.org#g' docusaurus.config.js
+      - name: Edit hosts
+        run: |
+          # why we need this:
+          # lychee will ignore links to localhost, so we need to add a new domain to avoid this
+          echo "127.0.0.1 local.devlake.apache.org" | sudo tee -a /etc/hosts
+      - name: Build Docusaurus website
+        run: |
+          npm install
+          npm run build
