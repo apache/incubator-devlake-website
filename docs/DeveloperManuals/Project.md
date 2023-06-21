@@ -203,7 +203,7 @@ And the `plugins/gitlab/api/blueprint_v200.go` contains implementation details.
 
 The following files contain the models that the relevant implementations depend on for reference:
 - `plugins/gitlab/models/project.go`
-- `plugins/gitlab/models/transformation_rule.go`
+- `plugins/gitlab/models/scope_config.go`
 
 ## Metric Plugins
 

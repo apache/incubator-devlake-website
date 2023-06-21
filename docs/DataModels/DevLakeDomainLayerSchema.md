@@ -14,7 +14,6 @@ Referring to DevLake's [architecture](../Overview/Architecture.md), the data in 
 <p align="center"><img src="/img/Architecture/arch-dataflow.svg" /></p>
 <p align="center">DevLake Dataflow</p>
 
-
 ## Use Cases
 
 1. [All metrics](../Metrics) from pre-built dashboards are based on this data schema.
@@ -147,6 +146,19 @@ This table shows the work logged under issues. Only Jira issue worklogs are coll
 | `logged_date`        | datetime | 3          | The time of this logging action                                                          |                |
 | `started_date`       | datetime | 3          | Start time of the worklog                                                                |                |
 | `issue_id`           | varchar  | 255        | Issue ID                                                                                 | FK_issues.id   |
+
+#### issue_repo_commits
+
+This table shows the metadata of commits made to a code repository associated with specific issues.
+
+| **field**    | **type** | **length** | **description**                      | **key** |
+| :----------- | :------- | :--------- | :----------------------------------- | :------ |
+| `issue_id`   | varchar  | 255        | Issue ID                             | PK      |
+| `repo_url`   | varchar  | 255        | The URL of the code repository       | PK      |
+| `commit_sha` | varchar  | 255        | The SHA of the commit.               | PK      |
+| `host`       | varchar  | 255        | The hostname                         |         |
+| `namespace`  | varchar  | 255        | The namespace of the code repository |         |
+| `repo_name`  | varchar  | 255        | The name of the code repository.     |         |
 
 #### boards
 

@@ -19,18 +19,18 @@ DORA dashboard. See [live demo](https://grafana-lake.demo.devlake.io/grafana/d/q
 
 
 ## How is it calculated?
-Deployment frequency is calculated based on the number of deployment days, not the number of deployments, e.g., daily, weekly, monthly, yearly.
+Deployment frequency is calculated based on the number of `deployment days`, not the number of deployments, e.g., daily, weekly, monthly, yearly.
 
 When there are multiple deployments triggered by one pipeline, tools like GitLab and BitBucket will generate more than one deployment. In these cases, DevLake will consider these deployments as ONE deployment and use the last deployment's finished date as the deployment finished date.
 
 Below are the benchmarks for different development teams from Google's report. DevLake uses the same benchmarks.
 
-| Groups           | Benchmarks                                    | DevLake Benchmarks                             |
-| -----------------| --------------------------------------------- | ---------------------------------------------- |
-| Elite performers | On-demand (multiple deploys per day)          | On-demand                                      |
-| High performers  | Between once per week and once per month      | Between once per week and once per month       |
-| Medium performers| Between once per month and once every 6 months| Between once per month and once every 6 months |
-| Low performers   | Fewer than once per six months                | Fewer than once per six months                 |
+| Groups            | Benchmarks                                     | DevLake Benchmarks                             | The Criteria of DevLake Benchmarks                |
+| ----------------- | ---------------------------------------------- | ---------------------------------------------- | --------------------------------------------------|
+| Elite performers  | On-demand (multiple deploys per day)           | On-demand                                      | Median Number of `Deployment Days` per Week >= 3  |
+| High performers   | Between once per week and once per month       | Between once per week and once per month       | Median Number of `Deployment Days` per Week >= 1  |
+| Medium performers | Between once per month and once every 6 months | Between once per month and once every 6 months | Median Number of `Deployment Days` per Month >= 1 |
+| Low performers    | Fewer than once per six months                 | Fewer than once per six months                 | Median Number of `Deployment Days` per Month < 1  |
 
 <p><i>Source: 2021 Accelerate State of DevOps, Google</i></p>
 
@@ -91,7 +91,7 @@ FROM
 ORDER BY 1
 ```
 
-If you want to measure in which category your team falls as in the picture shown below, run the following SQL in Grafana.
+If you want to measure in which category your team falls as in the picture shown below, run the following SQL in Grafana. Unlike monthly deployments which are based on the number of deployments, the metric below is based on `deployment days`.
 
 ![](/img/Metrics/deployment-frequency-text.jpeg)
 
