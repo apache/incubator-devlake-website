@@ -24,7 +24,7 @@ The endpoint url should end with `/`.
 
 ### Token
 
-SonarQube token is required to add a connection. Learn about [how to create a SonarQube token](https://sonarqube.inria.fr/sonarqube/documentation/user-guide/user-token/).
+Please use an admin account to create the SonarQube token. Learn about [how to create a SonarQube token](https://sonarqube.inria.fr/sonarqube/documentation/user-guide/user-token/).
 
 ### Proxy URL (Optional)
 
