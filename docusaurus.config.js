@@ -10,8 +10,8 @@ const versions = require('./versions.json');
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (module.exports = {
-  title: 'Apache DevLake (Incubating)',
-  tagline: 'Apache DevLake is an open-source dev data platform that ingests, analyzes, and visualizes the fragmented data from DevOps tools to distill insights for engineering productivity.',
+  title: 'Apache DevLake - Open-Source Dev Data Platform for Productivity',
+  tagline: 'Apache DevLake is an open-source platform that integrates and analyzes data from DevOps tools to provide insights for engineering productivity, DORA metrics, and more.',
   url: 'https://devlake.apache.org',
   
   baseUrl: '/',
@@ -115,7 +115,9 @@ const versions = require('./versions.json');
   },
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+    (
+      {
+      metadata: [{name: 'keywords', content: 'Engineering Productivity, Open-Source Engineering, Open-Source Integration Tools, Data Integrates Platform, Open-Source Dev Platform, Open-Source Data Integrates, DevOps Tools Integrates, Open-Source DevOps Tools'}],
       navbar: {
         title: 'Apache DevLake',
         logo: {

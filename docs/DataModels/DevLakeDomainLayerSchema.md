@@ -5,7 +5,14 @@ description: >
 sidebar_position: 1
 ---
 
+
 ## Summary
+
+<head>
+  <meta name='title' content='Structuring Your Engineering Productivity Data - Apache DevLake' />
+  <meta name='description' content='Understand the data models used in Apache DevLake. Structure your engineering productivity data effectively to measure DORA metrics and track performance.' />
+  <meta name='keywords' content='Metrics for engineering performance, Measuring cycle time effectively, Understanding performance metrics in Apache DevLake' />
+</head>
 
 This document describes Apache DevLake's domain layer schema.
 
