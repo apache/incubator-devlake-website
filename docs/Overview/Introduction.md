@@ -4,7 +4,14 @@ description: General introduction of Apache DevLake
 sidebar_position: 1
 ---
 
+<head>
+    <title>Introduction to Apache DevLake and Implementing DORA Metrics</title>
+    <meta name='description' content={'Discover how to implement DORA metrics for your software development process. Improve your engineering performance with our open-source platform.'}/>
+    <meta name='keywords' content={'DORA Metrics, Open-Source DORA, DORA Metrics DevOps, Implement DORA Metrics, DevOps DORA Metrics'}/>
+</head>
+
 ## What is Apache DevLake?
+
 Apache DevLake (Incubating) is an open-source dev data platform that ingests, analyzes, and visualizes the fragmented data from DevOps tools to extract insights for engineering excellence, developer experience, and community growth.
 
 Apache DevLake is designed for developer teams looking to make better sense of their development process and to bring a more data-driven approach to their own practices. You can ask Apache DevLake many questions regarding your development process. Just connect and query.
