@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-        <title>Apache DevLake (Incubating) Blog</title>
+        <title>Apache DevLake - Open-Source Dev Data Platform for Productivity Blog</title>
         <link>https://devlake.apache.org/blog</link>
-        <description>Apache DevLake (Incubating) Blog</description>
+        <description>Apache DevLake - Open-Source Dev Data Platform for Productivity Blog</description>
         <lastBuildDate>Thu, 23 Jun 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
