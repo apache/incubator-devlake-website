@@ -72,8 +72,8 @@ curl http://localhost:8080/plugins/webhook/1/deployments -X 'POST' -d '{
     "commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d",
     "create_time":"2020-01-01T11:00:00+00:00",
     "start_time":"2020-01-01T12:00:00+00:00",
-    "end_time":"2020-01-02T13:00:00+00:00"
-    "result": "FAILURE",
+    "end_time":"2020-01-02T13:00:00+00:00",
+    "result": "FAILURE"
   }'
 ```
 
