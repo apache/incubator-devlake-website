@@ -66,9 +66,17 @@ Then you can visit:
 config-ui by url `http://YOUR-NODE-IP:30090`
 grafana by url `http://YOUR-NODE-IP:30091`
 
-### Update
+### Upgrade
 
-if you upgrade from 0.17* to 0.18*, please copy the ENCODE_KEY value from /app/config/.env of the pod devlake-lake-0, and replace <ENCRYPTION_SECRET> of below upgrade cmd
+Note:
+If you're upgrading from DevLake v0.17.x or earlier versions to v0.18.x or later versions:
+
+1. Copy the ENCODE_KEY value from /app/config/.env of the lake pod (e.g. devlake-lake-0), and replace the <ENCRYPTION_SECRET> in the upgrade command below.
+
+2. You may encounter the below error when upgrading because the built-in grafana has been replaced by the official grafana dependency. So you may need to delete the grafana deployment first.
+
+> Error: UPGRADE FAILED: cannot patch "devlake-grafana" with kind Deployment: Deployment.apps "devlake-grafana" is invalid: spec.selector: Invalid value: v1.LabelSelector{MatchLabels:map[string]string{"app.kubernetes.io/instance":"devlake", "app.kubernetes.io/name":"grafana"}, MatchExpressions:[]v1.LabelSelectorRequirement(nil)}: field is immutable
+
 ```shell
 helm repo update
 helm upgrade devlake devlake/devlake --version=0.18.0-beta1 --set lake.encryptionSecret.secret=<ENCRYPTION_SECRET>
