@@ -2,7 +2,7 @@
 title: "DB Migration"
 description: >
   DB Migration
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 ## Summary
@@ -54,7 +54,7 @@ for the framework-only migrations defined under the `models` package.
 
 ## Best Practices
 
-When you write a new migration script, please pay attention to the fault tolerance and the side effect. It would be better if the failed script could be safely retried, in case if something goes wrong during the migration. For this purpose, the migration scripts should be well-designed. For example, if you have created a temporary table in the Up method, it should be dropped before exiting, regardless of success or failure. 
+When you write a new migration script, please pay attention to the fault tolerance and the side effect. It would be better if the failed script could be safely retried, in case if something goes wrong during the migration. For this purpose, the migration scripts should be well-designed. For example, if you have created a temporary table in the Up method, it should be dropped before exiting, regardless of success or failure.
 
 Suppose we want to change the type of the Primary Key `name` of table `users` from `int` to `varchar(255)`
 
@@ -73,7 +73,7 @@ However, you don't neccessary deal with all the mess. We had summarized some of 
 - [Change the values(or type) of Primary Key](https://github.com/apache/incubator-devlake/blob/main/backend/core/models/migrationscripts/20220913_fix_commitfile_id_toolong.go)
 - [Change the values(or type) of Column](https://github.com/apache/incubator-devlake/blob/main/backend/core/models/migrationscripts/20220903_encrypt_blueprint.go)
 
-The above examples should cover most of the scenarios you may encounter. If you come across other scenarios, feel free to create issues in our GitHub Issue Tracker for discussions. 
+The above examples should cover most of the scenarios you may encounter. If you come across other scenarios, feel free to create issues in our GitHub Issue Tracker for discussions.
 
 
 In order to help others understand the script you have written, there are a couple of rules we suggest to follow:

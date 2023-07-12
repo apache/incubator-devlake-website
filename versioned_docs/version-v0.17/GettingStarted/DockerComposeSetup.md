@@ -12,7 +12,7 @@ sidebar_position: 1
 
 ## Launch DevLake
 
-1. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.17.0-beta12) into a folder.
+1. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.17.0-beta13) into a folder.
 2. Rename `env.example` to `.env`. For Mac/Linux users, please run `mv env.example .env` in the terminal. This file contains the environment variables that the Devlake server will use. Additional ones can be found in the compose file(s).
 3. Run `docker-compose up -d` if the version of Docker Desktop is too low to use `docker compose up -d`.
 
