@@ -9,6 +9,11 @@ description: >
   The steps and specs to contribute to DevLake.
 ---
 
+<head>
+  <title>Collaborate and Improve Engineering Productivity & Performance - Apache DevLake</title>
+  <meta name='description' content='Be part of the Apache community and collaborate with likeminded leaders and teams to improve engineering productivity and effectively implement DORA metrics.'/>
+</head>
+
 👍🎉 First off, thanks for taking the time to contribute! 🎉👍
 
 The following is a set of guidelines for contributing to DevLake. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
