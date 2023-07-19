@@ -8,6 +8,9 @@ description: >
 
 This plugin collects TAPD data through its REST APIs. TAPD is an issue-tracking tool similar to Jira.
 
+## Supported Versions
+Available for all versions
+
 ## Metrics
 
 Metrics that can be calculated based on the data collected from Tapd:

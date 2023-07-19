@@ -9,6 +9,9 @@ description: >
 This plugin collects SonarQube data through its REST APIs. SonarQube is a tool for static code analysis and code quality management. It can help you discover potential problems and defects in your code, and provide suggestions and solutions.
 (Please note that this version of SonarQube cannot collect issues with more than 10k+)
 
+## Supported Versions
+Available for v8.x, v9.x
+
 ## Entities
 
 Check out the [SonarQube entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.

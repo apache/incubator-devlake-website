@@ -8,6 +8,9 @@ description: >
 
 This plugin collects Feishu meeting data through [Feishu Openapi](https://open.feishu.cn/document/home/user-identity-introduction/introduction).
 
+## Supported Versions
+Available for all versions
+
 ## Configuration
 
 In order to fully use this plugin, you will need to get `app_id` and `app_secret` from a Feishu administrator (for help on App info, please see [official Feishu Docs](https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/tenant_access_token_internal)),

@@ -102,10 +102,10 @@ function Supports() {
         className="text-label18 font-inter text-neutral-500 mt-6
         sm:text-label16 sm:mt-4"
       >
+        Check out all {" "}
         <C.InlineLink link="https://devlake.apache.org/docs/Overview/Roadmap">
-          More data sources
-        </C.InlineLink>{" "}
-        coming soon...
+        supported data sources
+        </C.InlineLink>
       </div>
     </div>
   );

@@ -8,6 +8,9 @@ description: >
 
 This plugin collects Jira data through Jira REST API. It then computes and visualizes various engineering metrics from the Jira data.
 
+## Supported Versions
+Available for all versions
+
 ## Entities
 
 Check out the [Jira entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.
