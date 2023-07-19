@@ -12,10 +12,11 @@ Visit Config UI at: `http://localhost:4000`.
 
 ### Connection Name
 
-Give your connection a unique name to help you identify it in the future.
+Give your connection a unique name to help you identify it in the future. 
 
-### Jira Version
-Select if you use Jira Cloud or Jira Server. 
+--------
+
+The configuration for the endpoint and authentication for your Jira connection depends on your Jira version, Jira Cloud or Server/Data Center.
 
 ### Jira Cloud
 #### Endpoint URL
@@ -31,7 +32,7 @@ Learn about [how to create an API token](https://support.atlassian.com/atlassian
 
 Please note: Jira API token and Personal Access Token are two different tokens.
 
-### Jira Server
+### Jira Server/Data Center
 #### Endpoint URL
 This should be a valid REST API endpoint: `https://jira.<mydomain>.com/rest/`
 
