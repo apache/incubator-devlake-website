@@ -37,7 +37,7 @@ However, if you want to collect data from private repositories, the following pe
 - `read:user`
 - `read:org`
 
-The difference is that you have to give full permission for `repos`, not just `repo:status` and `repo_deployment`.
+The difference is that you have to give full permission for `repos`, not just `repo:status` and `repo_deployment`. Starting from v0.18.0, DevLake provides the auto-check for the permissions of your token(s).
 
 The data collection speed is restricted by the **rate limit of [5,000 requests](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) per hour per token** (15,000 requests/hour if you pay for GitHub enterprise). You can accelerate data collection by configuring _multiple_ personal access tokens. Please note that multiple tokens should be created by different GitHub accounts. Tokens belonging to the same GitHub account share the rate limit.
 
