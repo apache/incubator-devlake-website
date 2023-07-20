@@ -12,10 +12,11 @@ Visit Config UI at: `http://localhost:4000`.
 
 ### Connection Name
 
-Give your connection a unique name to help you identify it in the future.
+Give your connection a unique name to help you identify it in the future. 
 
-### Jira Version
-Select if you use Jira Cloud or Jira Server. 
+--------
+
+The configuration for the endpoint and authentication for your Jira connection depends on your Jira version, Jira Cloud or Server/Data Center.
 
 ### Jira Cloud
 #### Endpoint URL
@@ -31,7 +32,7 @@ Learn about [how to create an API token](https://support.atlassian.com/atlassian
 
 Please note: Jira API token and Personal Access Token are two different tokens.
 
-### Jira Server
+### Jira Server/Data Center
 #### Endpoint URL
 This should be a valid REST API endpoint: `https://jira.<mydomain>.com/rest/`
 
@@ -95,8 +96,15 @@ Usually, you don't have to modify this part. However, if you don't want to colle
 - Issue Tracking: Jira issues, issue comments, issue labels, etc.
 - Cross Domain: Jira accounts, etc.
 
-## Step 3 - Adding Transformation Rules (Optional)
-Adding transforamtion to the Jira data you wish to collect can help standardize the data to view more metrics, such as [Requirement Lead Time](https://devlake.apache.org/docs/Metrics/RequirementLeadTime), [Bug Age](https://devlake.apache.org/docs/Metrics/BugAge) and DORA - [Median Time to Restore Service](https://devlake.apache.org/docs/Metrics/MTTR).
+## Step 3 - Adding Scope Config (Optional)
+Scope config contains two parts: 
+- The entities of which domain you wish to collect
+- The transformations on the Jira data you are going to collect
+   - Issue Type: Standardize the issue types to DevLake's pre-defined three issue types: REQUIREMENT, BUG, and INCIDENT.
+   - Story Points: Map the custom field that represents story_point in your Jira to DevLake's issue story point.
+   - Cross-domain: Get the commit(s) associated with Jira issues from Jira issues' remote links or development panels.
+
+Although this configuration is an optional, some of above transformations are required to measure metrics such as [Requirement Lead Time](https://devlake.apache.org/docs/Metrics/RequirementLeadTime), [Bug Age](https://devlake.apache.org/docs/Metrics/BugAge) or [DORA - Median Time to Restore Service](https://devlake.apache.org/docs/Metrics/MTTR) in the built-in Grafana dashboards.
 
 ![jira-add-transformation-1](images/jira-set-transformation1.png)
 ![jira-add-transformation-2](images/jira-set-transformation2.png)
