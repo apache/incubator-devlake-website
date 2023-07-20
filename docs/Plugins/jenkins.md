@@ -13,7 +13,8 @@ This plugin collects Jenkins data through [Remote Access API](https://www.jenkin
 - How long does it take for a code change to be deployed into production?
 
 ## Supported Versions
-Versions 2.263.x+
+
+Available for Jenkins v2.263.x+. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#jenkins) for more details.
 
 ### Note
 

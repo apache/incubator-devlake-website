@@ -14,7 +14,8 @@ This plugin collects GitLab data through [API](https://docs.gitlab.com/ee/api/).
 - How much time is spent on code review?
 
 ## Supported Versions
-Available for GitLab Cloud, Community Edition 11+
+
+Available for GitLab Cloud, Community Edition 11+. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#gitlab) for more details.
 
 ## Entities
 
