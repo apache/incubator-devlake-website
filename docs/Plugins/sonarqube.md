@@ -10,7 +10,8 @@ This plugin collects SonarQube data through its REST APIs. SonarQube is a tool f
 (Please note that this version of SonarQube cannot collect issues with more than 10k+)
 
 ## Supported Versions
-Available for v8.x, v9.x
+
+Available for SonarQube Server v8.x, v9.x. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#sonarqube) for more details.
 
 ## Entities
 

@@ -13,7 +13,9 @@ This plugin collects various entities from Bitbucket, including pull requests, i
 As of v0.14.2, `bitbucket` plugin can only be invoked through DevLake API. Its support in Config-UI is WIP.
 
 ## Supported Versions
-Available for BitBucket Cloud
+
+Available for BitBucket Cloud. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources/#bitbucket) for more details.
+
 
 ## Entities
 

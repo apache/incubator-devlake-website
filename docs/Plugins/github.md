@@ -13,7 +13,8 @@ This plugin collects GitHub data through [REST API](https://docs.github.com/en/r
 - Was our quality improved or not?
 
 ## Supported Versions
-Available for all versions
+
+Available for GitHub Cloud.
 
 ## Entities
 
