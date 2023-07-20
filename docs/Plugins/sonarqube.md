@@ -11,7 +11,7 @@ This plugin collects SonarQube data through its REST APIs. SonarQube is a tool f
 
 ## Supported Versions
 
-Available for SonarQube Server v8.x, v9.x. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#sonarqube) for more details.
+Available for SonarQube Server v8.x, v9.x. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
 
 ## Entities
 

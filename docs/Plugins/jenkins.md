@@ -14,7 +14,7 @@ This plugin collects Jenkins data through [Remote Access API](https://www.jenkin
 
 ## Supported Versions
 
-Available for Jenkins v2.263.x+. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#jenkins) for more details.
+Available for Jenkins v2.263.x+. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
 
 ### Note
 

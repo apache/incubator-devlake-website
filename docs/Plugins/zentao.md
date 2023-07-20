@@ -10,7 +10,7 @@ This plugin collects Zentao data through its REST APIs. [Zentao](https://github.
 
 ## Supported Versions
 
-Available for Zentao OSS v18.3, Enterprise v8.2, Flagship v4.3. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#zentao) for more details.
+Available for Zentao OSS v18.3, Enterprise v8.2, Flagship v4.3. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
 
 ## Metrics
 

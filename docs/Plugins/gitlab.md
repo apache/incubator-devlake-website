@@ -15,7 +15,7 @@ This plugin collects GitLab data through [API](https://docs.gitlab.com/ee/api/).
 
 ## Supported Versions
 
-Available for GitLab Cloud, Community Edition 11+. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#gitlab) for more details.
+Available for GitLab Cloud, Community Edition 11+. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
 
 ## Entities
 

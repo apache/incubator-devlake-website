@@ -14,7 +14,7 @@ As of v0.14.2, `bitbucket` plugin can only be invoked through DevLake API. Its s
 
 ## Supported Versions
 
-Available for BitBucket Cloud. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources/#bitbucket) for more details.
+Available for BitBucket Cloud. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
 
 
 ## Entities
