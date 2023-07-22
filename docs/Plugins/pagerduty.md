@@ -13,7 +13,7 @@ This plugin collects all incidents from PagerDuty, and uses them to compute inci
 * [Incident Count Per 1k Lines of Code](/Metrics/IncidentCountPer1kLinesOfCode.md)
 
 ## Supported Versions
-Available for PagerDuty Cloud. 
+Available for PagerDuty Cloud. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
 
 
 ## Configuration

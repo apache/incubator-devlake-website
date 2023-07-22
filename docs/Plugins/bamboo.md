@@ -11,6 +11,10 @@ This plugin collects Bamboo's CI data through [API](https://developer.atlassian.
 - What is the deployment frequency of your team?
 - How long does it take for your codes to get deployed?
 
+## Supported Versions
+
+Will be available for Bamboo v6.8.1+. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
+
 ## Entities
 
 Check out the [Bamboo entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.

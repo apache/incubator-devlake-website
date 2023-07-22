@@ -9,7 +9,7 @@ description: >
 This plugin collects Feishu meeting data through [Feishu Openapi](https://open.feishu.cn/document/home/user-identity-introduction/introduction).
 
 ## Supported Versions
-Available for all versions
+Will be available for all versions. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
 
 ## Configuration
 

@@ -14,7 +14,7 @@ This plugin collects GitHub data through [REST API](https://docs.github.com/en/r
 
 ## Supported Versions
 
-Available for GitHub Cloud.
+Available for GitHub Cloud. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
 
 ## Entities
 

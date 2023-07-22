@@ -8,6 +8,10 @@ description: >
 
 This plugin collects Azure DevOps data through Azure DevOps REST API.
 
+## Supported Versions
+
+Available for Azure DevOps Cloud. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
+
 ## Entities
 
 Check out the [Azure DevOps entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.
