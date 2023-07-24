@@ -49,7 +49,7 @@ jobs:
           GITHUB_WORKFLOW_URL="https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}?check_suite_focus=true"
 
           if ! lychee --output ${OUTPUT_FILE} \
-            -E -i -n -t 5 --max-concurrency 64 -a 429,401,403 -m 10 -f markdown -s http -s https -X HEAD \
+            -E -i -n -t 5 --max-concurrency 64 -a 429,401,403 -m 10 -f markdown -s http -s https \
             '**/*.md'
           then
             echo "" >> "${OUTPUT_FILE}" # add a new line
