@@ -103,7 +103,7 @@ function Supports() {
         sm:text-label16 sm:mt-4"
       >
         Check out all {" "}
-        <C.InlineLink link="https://devlake.apache.org/docs/next/Overview/SupportedDataSources">
+        <C.InlineLink link="https://devlake.apache.org/docs/Overview/SupportedDataSources">
         supported data sources
         </C.InlineLink>
       </div>
