@@ -29,7 +29,7 @@ jobs:
         run: |
           # For parameter description, see https://github.com/lycheeverse/lychee#commandline-parameters
           # test external link for modified files only, the rest are tested by the docusaurus already
-          git diff --name-only ${{ github.event.pull_request.base.sha }}... | grep -P '\.md$' > modified_files  || true
+          git diff --diff-filte=AMR --name-only ${{ github.event.pull_request.base.sha }}... | grep -P '\.md$' > modified_files  || true
           if [ -s modified_files ]; then
             # run lychee
             cat modified_files | xargs -d '\n' -- lychee -E -i -n -t 45 --max-concurrency 64 -a 409,401,403 -m 10 -s http -s https -- 
