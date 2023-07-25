@@ -2,7 +2,7 @@
 title: "DB Migration"
 description: >
   DB Migration
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 ## Summary
