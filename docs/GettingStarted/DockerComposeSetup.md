@@ -45,6 +45,7 @@ sidebar_position: 1
 Please notes:
 
 Note 1: **Back up your Grafana dashboards** before upgrade if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
+
 Note 2: **If you're upgrading from DevLake v0.17.x or earlier versions to v0.18.x or later versions**, you need to find the ENCODE_KEY value in the .env file of devlake container, and assign the value to ENCRYPTION_SECRET via .env file or environment variable in docker-compose.yml
 
 1. Run `docker-compose down` to stop services;
