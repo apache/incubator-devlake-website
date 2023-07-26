@@ -8,6 +8,10 @@ description: >
 
 This plugin collects `Gitee` data through [Gitee Openapi](https://gitee.com/api/v5/swagger).
 
+## Supported  Versions
+
+Will be available for Gitee Cloud. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
+
 ## Configuration
 
 In order to fully use this plugin, you will need to get `token` on the Gitee website.

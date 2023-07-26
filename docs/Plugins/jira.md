@@ -8,6 +8,9 @@ description: >
 
 This plugin collects Jira data through Jira REST API. It then computes and visualizes various engineering metrics from the Jira data.
 
+## Supported Versions
+Available for Jira Cloud, Sever/Data Center 7.x, 8.x. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
+
 ## Entities
 
 Check out the [Jira entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.

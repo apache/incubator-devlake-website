@@ -12,6 +12,10 @@ This plugin collects Jenkins data through [Remote Access API](https://www.jenkin
 - What is the build success rate?
 - How long does it take for a code change to be deployed into production?
 
+## Supported Versions
+
+Available for Jenkins v2.263.x+. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
+
 ### Note
 
 Please note that it is important to avoid [rerunning Jenkins builds in place](https://www.jenkins.io/doc/pipeline/tour/running-multiple-steps/#timeouts-retries-and-more), and instead ensure that each rerun has a unique build number. This is because rerunning builds with the same build number can lead to inconsistencies in the data collected by the Jenkins plugin.

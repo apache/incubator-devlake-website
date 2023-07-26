@@ -13,6 +13,10 @@ This plugin collects GitLab data through [API](https://docs.gitlab.com/ee/api/).
 - How long does it take for your codes to get merged?
 - How much time is spent on code review?
 
+## Supported Versions
+
+Available for GitLab Cloud, Community Edition 11+. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
+
 ## Entities
 
 Check out the [GitLab entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.

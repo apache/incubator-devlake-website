@@ -9,6 +9,10 @@ description: >
 
 This plugin collects Teambition data through its REST APIs. Teambition is an issue-tracking tool similar to Trello.
 
+## Supported Versions
+
+Available for Teambition Cloud. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
+
 ## Metrics
 
 Metrics that can be calculated based on the data collected from Teambition:

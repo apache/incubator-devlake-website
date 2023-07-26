@@ -17,30 +17,35 @@ Apache DevLake (Incubating) is an open-source dev data platform that ingests, an
 Apache DevLake is designed for developer teams looking to make better sense of their development process and to bring a more data-driven approach to their own practices. You can ask Apache DevLake many questions regarding your development process. Just connect and query.
 
 ## What can be accomplished with DevLake?
-1. Collect DevOps data across the entire Software Development Life Cycle (SDLC) and connect the siloed data with a standard [data model](../DataModels/DevLakeDomainLayerSchema.md).
-2. Visualize out-of-the-box [engineering metrics](../Metrics) in a series of use-case driven dashboards
-3. Easily extend DevLake to support your data sources, metrics, and dashboards with a flexible [framework](Architecture.md) for data collection and ETL (Extract, Transform, Load).
+- Unified data integration: Bring together DevOps data from across the Software Development Life Cycle (SDLC) with our [standard data model](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema/).
+- Out-of-the-box insights: Access key engineering metrics through intuitive, use-case driven dashboards.
+- Customizable: Extend DevLake to align with your unique needs, adding [data sources](https://devlake.apache.org/docs/next/Overview/SupportedDataSources/), [metrics](https://devlake.apache.org/docs/next/Metrics/), and [dashboards](https://devlake.apache.org/livedemo/EngineeringLeads/DORA/) as required.
+- Industry standards implementation: Use DevLake to apply recognized [DORA metrics](https://devlake.apache.org/docs/DORA/) to optimize DevOps performance.
+- Create a thriving culture: DevLake is centred on healthy practises that may help teams adopt and build a practical data-driven culture.
 
 ## How do I use DevLake?
-### 1. Set up DevLake
-You can easily set up Apache DevLake by following our step-by step instructions for [Docker Compose setup](../GettingStarted/DockerComposeSetup.md) or [Helm setup](../GettingStarted/HelmSetup.md).
+### 1. Setting-up DevLake
+- Create the proof of concept of Apache DevLake for your use-case by installing in your local machines via Docker Compose: [Docker Compose setup](../GettingStarted/DockerComposeSetup.md)
+- Alternatively, if you're powered by Kuberenetes, then check out the [Helm setup](../GettingStarted/HelmSetup.md).
 
-### 2. Create a Blueprint
-The DevLake Configuration UI will guide you through the process (a Blueprint) to define the data connections, data scope, transformation and sync frequency of the data you wish to collect.
+### 2. Configuring Data Source
+- Once Installed, you can start configuring DevLake with supported [data sources](https://devlake.apache.org/docs/next/Overview/SupportedDataSources) like GitHub, GitLab, Jira, Jenkins, BitBucket, Azure DevOps, SonarQube, PagerDuty, TAPD, ZenTao, Teambition, and we're extending our support to many other tools, feel free to check out the official roadmap.
+- If your CI / CD tool is not supported yet, then you may use the [Webhooks](https://devlake.apache.org/docs/Plugins/webhook/) feature.
 
-![img](/img/Introduction/userflow1.svg)
+![img](../Configuration/images/introduction-userflow1.png)
 
-### 3. Track the Blueprint's progress
-You can track the progress of the Blueprint you have just set up.
+![img](../Configuration/images/introduction-userflow2.png)
 
-![img](/img/Introduction/userflow2.svg)
+### 3. Creating your Project
+- After connecting the data-source, a "Project" makes sure that you're all set for execution. A four-step process allows you to play DevLake and visualize pre-built dashboards
 
-### 4. View the pre-built dashboards
-Once the first run of the Blueprint is completed, you can view the corresponding dashboards.
+![img](../Configuration/images/introduction-userflow3.png)
+
+### 4. Checking the results (Validation & Customization)
+- After configuring the project, you can take a look at our pre-built dashboards in Grafana.
 
 ![img](/img/Introduction/userflow3.png)
 
-### 5. Customize the dashboards with SQL
-If the pre-built dashboards are limited for your use cases, you can always customize or create your own metrics or dashboards with SQL.
+- Dashboards can be tweaked according to the goal and intent of [metrics](https://devlake.apache.org/docs/Metrics/) or create your own using SQL. You can also check out [Domain Layer Schema](https://devlake.apache.org/docs/Metrics/) - DevLake's standard data model.
 
-![img](/img/Introduction/userflow4.png)
+![img](../Configuration/images/introduction-userflow5.png)

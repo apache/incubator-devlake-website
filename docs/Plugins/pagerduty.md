@@ -4,8 +4,6 @@ description: >
   PagerDuty Plugin
 ---
 
-
-
 ## Summary
 
 This plugin collects all incidents from PagerDuty, and uses them to compute incident-type DORA metrics. Namely,
@@ -13,6 +11,9 @@ This plugin collects all incidents from PagerDuty, and uses them to compute inci
 * [Change failure rate](/Metrics/CFR.md).
 * [Incident Age](/Metrics/IncidentAge.md)
 * [Incident Count Per 1k Lines of Code](/Metrics/IncidentCountPer1kLinesOfCode.md)
+
+## Supported Versions
+Available for PagerDuty Cloud. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
 
 
 ## Configuration

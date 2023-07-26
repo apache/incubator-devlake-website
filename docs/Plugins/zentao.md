@@ -8,6 +8,10 @@ description: >
 
 This plugin collects Zentao data through its REST APIs. [Zentao](https://github.com/easysoft/zentaopms) is an issue-tracking tool similar to Jira.
 
+## Supported Versions
+
+Advanced mode vailable for Zentao OSS v18.3, Enterprise v8.2, Flagship v4.3. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
+
 ## Metrics
 
 Metrics that can be calculated based on the data collected from Zentao:

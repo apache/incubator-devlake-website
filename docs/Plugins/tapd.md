@@ -8,6 +8,9 @@ description: >
 
 This plugin collects TAPD data through its REST APIs. TAPD is an issue-tracking tool similar to Jira.
 
+## Supported Versions
+Advanced mode available for Tapd Cloud. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
+
 ## Metrics
 
 Metrics that can be calculated based on the data collected from Tapd:
