@@ -104,14 +104,15 @@ Scope config contains two parts:
 
 Although this configuration is optional, some of the above transformations are required to measure metrics such as [Requirement Lead Time](https://devlake.apache.org/docs/Metrics/RequirementLeadTime), [Bug Age](https://devlake.apache.org/docs/Metrics/BugAge) or [DORA - Median Time to Restore Service](https://devlake.apache.org/docs/Metrics/MTTR) in the built-in Grafana dashboards.
 
+Without adding transformation rules, you can not view all charts in "Jira" or "Engineering Throughput and Cycle Time" dashboards.<br/>
+
+Each Jira board has at most ONE set of transformations.
+
+
 ![jira-add-transformation-1](images/jira-set-transformation1.png)
 ![jira-add-transformation-2](images/jira-set-transformation2.png)
 ![jira-add-transformation-3](images/jira-set-transformation3.png)
 
-
-Without adding transformation rules, you can not view all charts in "Jira" or "Engineering Throughput and Cycle Time" dashboards.<br/>
-
-Each Jira board has at most ONE set of transformation rules.
 
 
 #### Issue Tracking
