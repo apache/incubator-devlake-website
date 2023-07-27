@@ -94,7 +94,7 @@ Choose the Jira boards to collect.
 
 ### Step 1.3 - Add Scope Config (Optional)
 Scope config contains two parts: 
-- The entities of which domain you wish to collect: Usually, you don't have to modify this part. However, if you don't want to collect certain Jira entities, you can unselect some entities to accerlerate the collection speed.
+- The entities of which domain you wish to collect: Usually, you don't have to modify this part. However, if you don't want to collect certain Jira entities, you can unselect some entities to accelerate the collection speed.
    - Issue Tracking: Jira issues, issue comments, issue labels, etc.
    - Cross Domain: Jira accounts, etc.
 - The transformations on the Jira data you are going to collect
