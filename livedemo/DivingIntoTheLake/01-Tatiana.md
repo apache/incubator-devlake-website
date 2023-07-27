@@ -43,6 +43,6 @@ I like the Westrum survey to measure it: organizational culture is a perceptual 
 ### Question #4: "If you were starting out in your engineering career again, what advice would you share with yourself?"
 > I'd tell myself "you are a great painter! go with that" just kidding. Start using note taking apps earlier! and remember to approach each task with a healthy amount of curiosity.
 
-Thanks for taking your time and reading through this. Do share your thoughts and comments in our [slack community](https://join.slack.com/t/devlake-io/shared_invite/zt-17b6vuvps-x98pqseoUagM7EAmKC82xQ). You can also nominate your favorite leader from the community for the upcoming editions of "Diving Into The Lake".
+Thanks for taking your time and reading through this. Do share your thoughts and comments in our [slack community](https://join.slack.com/t/devlake-io/shared_invite/zt-20envwfbk-JUTZ4z9jSeRnrvNhBFLg9w). You can also nominate your favorite leader from the community for the upcoming editions of "Diving Into The Lake".
 
 Happy DevLaking!
