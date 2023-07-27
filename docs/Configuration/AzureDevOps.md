@@ -52,11 +52,18 @@ Scope config contains two parts:
   - Code Review: Azure PRs, PR comments and reviews, etc.
   - CI/CD: Azure pipelines, jobs, etc.
   - Cross Domain: Azure accounts, etc.
-- The transformations on the Azure Pipelines you are going to collect. The transformations are used for calculating [DORA metrics](../DORA.md), so DevLake needs to know what are `deployments` in your Azure Pipelines. You can configure:
+- The transformations on the Azure DevOps data you are going to collect. 
+
+
+The transformations are mainly used for calculating [DORA metrics](../DORA.md), so DevLake needs to know what are `deployments` in your Azure Pipelines. You can configure:
     - Regex for `Deployments`: Azure DevOps pipeline or one of its jobs whose names match this regex will be registered as deployments in DevLake
     - Regex for `Production` environment: Azure DevOps pipeline or one of its jobs whose names match this regex will be considered as a PRODUCTION deployment.
 
 ![azuredevops-set-transformation](images/azuredevops-set-transformation.png)
+
+The additional settings for transformations are RefDiff options:
+- Tags Limit: the number of tags to compare.
+- Tags Pattern: Only tags that match the given regex are taken into account.
 
 ## Step 2 - Collect Data in a Project
 ### Step 2.1 - Create a Project
@@ -82,12 +89,6 @@ There are three settings for Sync Policy:
 Click on "Collect Data" to start collecting data for the whole project. You can check the status in the Status tab on the same page.
 ![collect-data](images/collect-data.png)
 
-
-### Additional Settings (Optional)
-
-The additional settings are RefDiff options:
-- Tags Limit: the number of tags to compare.
-- Tags Pattern: Only tags that match the given regex are taken into account.
 
 ## Troubleshooting
 
