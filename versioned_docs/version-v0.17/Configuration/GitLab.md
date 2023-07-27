@@ -89,12 +89,10 @@ This set of configurations is used for calculating [DORA metrics](../DORA.md).
 
 If you're using GitLab CI to conduct `deployments`, please select "Detect Deployment from Jobs in GitLab CI", and input the RegEx in the following fields:
 
-- Deployment: A GitLab CI job with a name that matches the given regEx will be considered as a deployment.
-- Production: A GitLab CI job with a name that matches the given regEx will be considered a job in the production environment.
+- Deployment: The name of the GitLab pipeline or one of its jobs matches the given regEx will be considered as a deployment.
+- Production: If the name also matches the PRODUCTION regEx, the deployment will be considered a PRODUCTION deployment.
 
-By the above two fields, DevLake can identify a production deployment among massive CI jobs.
-
-You can also select "Not using Jobs in GitLab CI as Deployments" if you're not using GitLab CI to conduct deployments.
+By the above two fields, DevLake can identify a production deployment among massive GitLab CI pipelines.
 
 ## Step 4 - Setting Sync Policy
 
