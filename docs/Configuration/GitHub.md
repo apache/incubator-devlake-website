@@ -10,7 +10,7 @@ Visit Config UI at: `http://localhost:4000`.
 
 On the Connections page, you can select GitHub and create a new connection or it.
 
-### Stept 1.1 - Authentication
+### Step 1.1 - Authentication
 ![github-add-data-connections](images/github-create-a-connection.png)
 
 #### Connection Name
