@@ -75,7 +75,7 @@ Usually, you don't have to modify this part. However, if you don't want to colle
 - Cross Domain: BitBucket accounts, etc.
 
 
-## Step 3 - Add Transformation (Optional)
+## Step 3 - Adding Transformation Rules (Optional)
 You can add a `transformation` to standardize the data. A `transformation` acts on the BitBucket data in the [tool layer](/docs/DataModels/ToolLayerSchema.md), transforming it to the [domain layer](/docs/DataModels/DevLakeDomainLayerSchema.md).
 
 ### Issue Tracking
