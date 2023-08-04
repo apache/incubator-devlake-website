@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwww=self.webpackChunkwww||[]).push([[17949],{40085:e=>{e.exports=JSON.parse('{"title":"Plugins","slug":"Plugins","permalink":"/docs/v0.17/Plugins","navigation":{"previous":{"title":"UnitTest Test Guide","permalink":"/docs/v0.17/DeveloperManuals/UnitTest"},"next":{"title":"Azure DevOps(Beta)","permalink":"/docs/v0.17/Plugins/azuredevops"}}}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwww=self.webpackChunkwww||[]).push([[73157],{82732:e=>{e.exports=JSON.parse('{"title":"Metrics","slug":"Metrics","permalink":"/zh/docs/v0.17/Metrics","navigation":{"previous":{"title":"DORA","permalink":"/zh/docs/v0.17/DORA"},"next":{"title":"Requirement Count","permalink":"/zh/docs/v0.17/Metrics/RequirementCount"}}}')}}]);
