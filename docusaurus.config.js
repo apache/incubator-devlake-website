@@ -35,6 +35,7 @@ const versions = require('./versions.json');
             theme: { light: 'neutral', dark: 'forest' }
           }]],
           rehypePlugins: [katex],
+          lastVersion: 'v0.17',
           versions: {
             current: {
               label: 'Next',
@@ -137,7 +138,7 @@ const versions = require('./versions.json');
               },
               {
                 label: versions[0] + ' (Beta)',
-                to: "/docs/Overview/Introduction"
+                to: "/docs/"+versions[0]+"/Overview/Introduction"
               },
               {
                 label: versions[1] + ' (Stable)',
