@@ -163,6 +163,17 @@ This table shows the work logged under issues. Only Jira issue worklogs are coll
 | `started_date`       | datetime | 3          | Start time of the worklog                                                                |                |
 | `issue_id`           | varchar  | 255        | Issue ID                                                                                 | FK_issues.id   |
 
+#### issue_relationships
+
+This table shows the metadata of information about relationships between issues. 
+
+| **field**          | **type** | **length** | **description**                                            | **key** |
+| :----------------- | :------- | :--------- | :--------------------------------------------------------- | :------ |
+| `id`               | varchar  | 255        | Issue ID                                                   | PK      |
+| `source_issue_id`  | int      |            | ID of the source issue in the relationship                 |         |
+| `target_issue_id`  | int      |            | ID of the target issue in the relationship                 |         |
+| `original_type`    | varchar  | 255        | Type of relationship between the source and target issues  |         |
+
 #### issue_repo_commits
 
 This table shows the metadata of commits made to a code repository associated with specific issues.
