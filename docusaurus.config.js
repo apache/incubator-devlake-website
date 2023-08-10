@@ -284,4 +284,16 @@ const versions = require('./versions.json');
         darkTheme: darkCodeTheme,
       },
     }),
+
+    themes: [
+      [
+        require.resolve('@easyops-cn/docusaurus-search-local'),
+        /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+        ({
+          docsRouteBasePath: ['docs','livedemo', 'community', 'blog'],
+          hashed: true,
+          explicitSearchResultPath: true,
+        }),
+      ],
+    ],
 });
