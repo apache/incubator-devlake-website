@@ -35,12 +35,36 @@ const versions = require('./versions.json');
             theme: { light: 'neutral', dark: 'forest' }
           }]],
           rehypePlugins: [katex],
-          lastVersion: 'v0.17',
+          lastVersion: 'current',
           versions: {
             current: {
               label: 'Next',
-              path: 'next',
-              banner: 'unreleased',
+              path: '',
+              banner: 'none',
+            },
+            "v0.18":{
+              banner: 'none',
+            },
+            "v0.17":{
+              banner: 'none',
+            },
+            "v0.16":{
+              banner: 'none',
+            },
+            "v0.15":{
+              banner: 'none',
+            },
+            "v0.14":{
+              banner: 'none',
+            },
+            "v0.13":{
+              banner: 'none',
+            },
+            "v0.12":{
+              banner: 'none',
+            },
+            "v0.11":{
+              banner: 'none',
             }
           }
         },
@@ -134,7 +158,7 @@ const versions = require('./versions.json');
             items: [
               {
                 label: "Next",
-                to: "/docs/next/Overview/Introduction"
+                to: "/docs/Overview/Introduction"
               },
               {
                 label: versions[0] + ' (Beta)',
@@ -142,7 +166,7 @@ const versions = require('./versions.json');
               },
               {
                 label: versions[1] + ' (Stable)',
-                to: "/docs/Overview/Introduction"
+                to: "/docs/"+versions[1]+"/Overview/Introduction"
               },
               ...versions.slice(2, versions.length).map((version) => ({
                 label: version,
