@@ -60,7 +60,7 @@ export function UseCases() {
             desc="Implement DORA metrics in minutes to enable and manage delivery processes your developers and users will love."
             demoURL="https://devlake.apache.org/livedemo/EngineeringLeads/DORA"
           >
-          <UCIcon src={UC3} />
+          <UCIcon src={UC3} alt='apache devlake' />
           </UCCard>
           <UCCard
             lead="Open Source Maintainers"

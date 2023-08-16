@@ -146,7 +146,7 @@ const versions = require('./versions.json');
       navbar: {
         title: 'Apache DevLake',
         logo: {
-          alt: 'apache-devlake',
+          alt: 'logo',
           src: 'img/logo.svg',
         },
         items: [

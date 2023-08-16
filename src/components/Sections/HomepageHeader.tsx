@@ -65,7 +65,7 @@ export function HomepageHeader() {
             font-inter
         "
           >
-            Apache DevLake (Incubating) ingests, analyzes, and visualizes the
+            Apache DevLake&trade; (Incubating) ingests, analyzes, and visualizes the
             fragmented data from DevOps tools to distill insights for
             engineering excellence.
           </div>
