@@ -24,6 +24,8 @@ You can use one of the following GitHub tokens: personal access tokens(PATs) or 
 
 #### GitHub Personal Access Tokens(Recommended)
 
+> Prerequisites: please make sure your organization has enabled Personal Access Token before configuration. See the [detailed doc](https://docs.github.com/en/organizations/managing-programmatic-access-to-your-organization/setting-a-personal-access-token-policy-for-your-organization).
+
 Learn about [how to create a GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). The following permissions are required to collect data from repositories:
 
 - `repo:status`
