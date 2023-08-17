@@ -42,7 +42,7 @@ The following guide will walk through how to run DevLake's frontend (`config-ui`
 4. Copy the sample config file to new local file:
 
     ```sh
-    cp .env.example .env
+    cp env.example .env
     ```
 
 5. Update the following variables in the file `.env`:
