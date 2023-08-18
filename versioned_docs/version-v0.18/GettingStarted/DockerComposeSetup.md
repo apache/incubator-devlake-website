@@ -12,7 +12,7 @@ sidebar_position: 1
 
 ## Launch DevLake
 
-1. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.18.0-beta5) into a folder.
+1. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.18.0-beta6) into a folder.
 2. Rename `env.example` to `.env`. For Mac/Linux users, please run `mv env.example .env` in the terminal. This file contains the environment variables that the Devlake server will use. Additional ones can be found in the compose file(s).
 3. Generate a secure encryption key using a method such as OpenSSL. For example, run the following command to generate a 128-character string consisting of uppercase letters:
 
@@ -29,7 +29,9 @@ sidebar_position: 1
 
    **Please make sure to keep the ENCRYPTION_SECRET safe as it is used to encrypt sensitive information in the database, such as personal access tokens and passwords. If ENCRYPTION_SECRET is lost, it may not be possible to decrypt this sensitive information.**
 
-4. Run `docker-compose up -d` if the version of Docker Desktop is too low to use `docker compose up -d`.
+4. By default, the timezone is UTC. You can change it by adjusting the env variable TZ in docker-compose.yml
+
+5. Run `docker-compose up -d` if the version of Docker Desktop is too low to use `docker compose up -d`.
 
 ## Collect data and view dashboards
 
