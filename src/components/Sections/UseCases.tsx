@@ -35,7 +35,7 @@ function UCCard({ lead, title, desc, demoURL, children }: {
   </div>)
 }
 
-const UCIcon = ({ src }: { src: string }) => <img src={src} alt='' className="
+const UCIcon = ({ src }: { src: string }) => <img src={src} alt='dora devlake' className="
   w-[240px] h-[180px]
   mobile:w-[212px] mobile:h-[160px]
   " />
@@ -60,7 +60,7 @@ export function UseCases() {
             desc="Implement DORA metrics in minutes to enable and manage delivery processes your developers and users will love."
             demoURL="https://devlake.apache.org/livedemo/EngineeringLeads/DORA"
           >
-          <UCIcon src={UC3} alt='apache devlake' />
+          <UCIcon src={UC3} />
           </UCCard>
           <UCCard
             lead="Open Source Maintainers"
