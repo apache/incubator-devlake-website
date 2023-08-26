@@ -42,6 +42,12 @@ To do so, it must be filtered using either `table = 'cicd_scopes'`, `table = 're
 
 ![](/img/Troubleshooting/Dashboard/cfr.png)
 
+### If you use webhooks
+
+DevLake knows to which project an issue or a deployment belongs only by segregation between the webhooks. 
+I.e. **each project should have its own webhook**. A webhook used by multiple projects means that all the
+issues or deployments published by that webhook **will be replicated among those projects**, as they belong to both of them.
+
 WIP
 
 
