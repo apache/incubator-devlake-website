@@ -33,14 +33,13 @@ Legend:
 The `project_mapping` is responsible for mapping **deployments**, **pull requests** from the source code, or **issues**.
 To do so, it must be filtered using either `table = 'cicd_scopes'`, `table = 'repos'`, or `table = 'boards'` when connecting to another table.
 
+![](../Configuration/images/Troubleshooting/Dashboard/cfr.png)
 
-![](/img/Troubleshooting/Dashboard/deployments.png)
+![](../Configuration/images/Troubleshooting/Dashboard/deployments.png)
 
-![](/img/Troubleshooting/Dashboard/lead_time.png)
+![](../Configuration/images/Troubleshooting/Dashboard/lead_time.png)
 
-![](/img/Troubleshooting/Dashboard/mttr.png)
-
-![](/img/Troubleshooting/Dashboard/cfr.png)
+![](../Configuration/images/Troubleshooting/Dashboard/mttr.png)
 
 ### If you use webhooks
 
