@@ -5,7 +5,6 @@ description: >
 sidebar_position: 1
 ---
 
-
 ## Summary
 
 <head>
@@ -104,11 +103,11 @@ An `issue` is the abstraction of Github/GitLab/BitBucket/Jira/TAPD/Zentao... iss
 
 This table shows the assignee(s) of issues. Multiple entries can exist per issue, as a GitHub/TAPD issue may have multiple assignees at the same time. This table can be used to get the detailed information of all issue assignees.
 
-| **field**         | **type** | **length** | **description**       | **key**        |
-| :---------------- | :------- | :--------- | :-------------------- | :------------- |
-| `issue_id`        | varchar  | 255        | Issue ID              | FK_issues.id   |
-| `assignee_id`     | varchar  | 255        | Assignee ID           | FK_accounts.id |
-| `assignee_name`   | varchar  | 255        | Assignee Name         |                |
+| **field**       | **type** | **length** | **description** | **key**        |
+| :-------------- | :------- | :--------- | :-------------- | :------------- |
+| `issue_id`      | varchar  | 255        | Issue ID        | FK_issues.id   |
+| `assignee_id`   | varchar  | 255        | Assignee ID     | FK_accounts.id |
+| `assignee_name` | varchar  | 255        | Assignee Name   |                |
 
 #### issue_labels
 
@@ -163,6 +162,17 @@ This table shows the work logged under issues. Only Jira issue worklogs are coll
 | `logged_date`        | datetime | 3          | The time of this logging action                                                          |                |
 | `started_date`       | datetime | 3          | Start time of the worklog                                                                |                |
 | `issue_id`           | varchar  | 255        | Issue ID                                                                                 | FK_issues.id   |
+
+#### issue_relationships
+
+This table shows the metadata of information about relationships between issues. 
+
+| **field**          | **type** | **length** | **description**                                            | **key** |
+| :----------------- | :------- | :--------- | :--------------------------------------------------------- | :------ |
+| `id`               | varchar  | 255        | Issue ID                                                   | PK      |
+| `source_issue_id`  | int      |            | ID of the source issue in the relationship                 |         |
+| `target_issue_id`  | int      |            | ID of the target issue in the relationship                 |         |
+| `original_type`    | varchar  | 255        | Type of relationship between the source and target issues  |         |
 
 #### issue_repo_commits
 
@@ -363,13 +373,13 @@ Pull requests are the abstraction of GitHub pull requests, GitLab merge requests
 
 | **field**          | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                | **key**        |
 | :----------------- | :------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- |
-| `id`               | varchar  | 255        | A pull request's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..." E.g. For 'github:GithubPullRequests:1347'                                                                                                                                                                                                                                                                        |  |
+| `id`               | varchar  | 255        | A pull request's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..." E.g. For 'github:GithubPullRequests:1347'                                                                                                                                                                                                                                                                        |                |
 | `title`            | longtext |            | The title of pull request                                                                                                                                                                                                                                                                                                                                                                      |                |
 | `description`      | longtext |            | The body/description of pull request                                                                                                                                                                                                                                                                                                                                                           |                |
-| `status`           | varchar  | 100        | The PR/MR statuses are standardized to 'OPEN', 'MERGED' and 'CLOSED'. [Learn how each plugin's PR statuses are standardized](https://github.com/apache/incubator-devlake/issues/4745).                                                                                                                                                                                                    |                |
+| `status`           | varchar  | 100        | The PR/MR statuses are standardized to 'OPEN', 'MERGED' and 'CLOSED'. [Learn how each plugin's PR statuses are standardized](https://github.com/apache/incubator-devlake/issues/4745).                                                                                                                                                                                                         |                |
 | `original_status`  | varchar  | 100        | The original status of pull requests.                                                                                                                                                                                                                                                                                                                                                          |                |
 | `parent_pr_id`     | varchar  | 255        | The id of the parent PR                                                                                                                                                                                                                                                                                                                                                                        |                |
-| `pull_request_key` | varchar  | 255        | The key of PR. E.g. 1536 is the key of this [PR](https://github.com/apache/incubator-devlake/pull/1563)                                                                                                                                                                                                                                                                                         |                |
+| `pull_request_key` | varchar  | 255        | The key of PR. E.g. 1536 is the key of this [PR](https://github.com/apache/incubator-devlake/pull/1563)                                                                                                                                                                                                                                                                                        |                |
 | `base_repo_id`     | varchar  | 255        | The repo that will be updated.                                                                                                                                                                                                                                                                                                                                                                 |                |
 | `head_repo_id`     | varchar  | 255        | The repo containing the changes that will be added to the base. If the head repository is NULL, this means that the corresponding project had been deleted when DevLake processed the pull request.                                                                                                                                                                                            |                |
 | `author_name`      | varchar  | 100        | The author's name of the pull request                                                                                                                                                                                                                                                                                                                                                          |                |
@@ -380,7 +390,7 @@ Pull requests are the abstraction of GitHub pull requests, GitLab merge requests
 | `created_date`     | datetime | 3          | The time PR created.                                                                                                                                                                                                                                                                                                                                                                           |                |
 | `merged_date`      | datetime | 3          | The time PR gets merged. Null when the PR is not merged.                                                                                                                                                                                                                                                                                                                                       |                |
 | `closed_date`      | datetime | 3          | The time PR closed. Null when the PR is not closed.                                                                                                                                                                                                                                                                                                                                            |                |
-| `merge_commit_sha` | char     | 40         | the merge commit of this PR. By the definition of [Github](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch), when you click the default Merge pull request option on a pull request on Github, all commits from the feature branch are added to the base branch in a merge commit. |       FK_commits.sha         |
+| `merge_commit_sha` | char     | 40         | the merge commit of this PR. By the definition of [Github](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch), when you click the default Merge pull request option on a pull request on Github, all commits from the feature branch are added to the base branch in a merge commit. | FK_commits.sha |
 | `base_ref`         | varchar  | 255        | The branch name in the base repo that will be updated                                                                                                                                                                                                                                                                                                                                          |                |
 | `head_ref`         | varchar  | 255        | The branch name in the head repo that contains the changes that will be added to the base                                                                                                                                                                                                                                                                                                      |                |
 | `base_commit_sha`  | char     | 40         | The base commit of this PR.                                                                                                                                                                                                                                                                                                                                                                    |                |

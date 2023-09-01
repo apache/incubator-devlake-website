@@ -35,7 +35,7 @@ function UCCard({ lead, title, desc, demoURL, children }: {
   </div>)
 }
 
-const UCIcon = ({ src }: { src: string }) => <img src={src} alt='' className="
+const UCIcon = ({ src }: { src: string }) => <img src={src} alt='dora devlake' className="
   w-[240px] h-[180px]
   mobile:w-[212px] mobile:h-[160px]
   " />

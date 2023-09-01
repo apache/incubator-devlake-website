@@ -10,7 +10,7 @@ Visit Config UI: `http://localhost:4000`.
 
 On the Connections page, you can select GitHub and create a new connection or it.
 
-### Stept 1.1 - Authentication
+### Step 1.1 - Authentication
 
 ![gitlab-add-data-connections](images/gitlab-create-a-connection.png)
 
@@ -69,19 +69,19 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 ![gitlab-set-data-scope](/img/ConfigUI/gitlab-set-data-scope.png)
 
 
-Choose the GitLab repositories you wish to collect either by finding them in the miller column, or searching. Limited by the GitLab API, You need to type more than 2 characters to search. The repositories only with guest permissions are not shown in the list.
+Select the GitLab repositories you want to collect from the miller column. **Please note that repositories with guest permissions or those that are archived have already been excluded.** You can also use the search function to find them. Limited by the GitLab API, You need to type more than 2 characters to search. The repositories only with guest permissions are not shown in the list.
 
 
 ### Step 1.3 - Add Scope Config (Optional)
 Scope config contains two parts: 
-- The entities of which domain you wish to collect: Usually, you don't have to modify this part. However, if you don't want to collect certain GitHub entities, you can unselect some entities to accerlerate the collection speed.
+- The entities of which domain you wish to collect: Usually, you don't have to modify this part. However, if you don't want to collect certain GitLab entities, you can unselect some entities to accelerate the collection speed.
   - Issue Tracking: GitLab issues, issue comments, issue labels, etc.
   - Source Code Management: GitLab repos, refs, commits, etc.
   - Code Review: GitLab MRs, MR comments and reviews, etc.
   - CI/CD: GitLab pipelines, jobs, etc.
   - Cross Domain: GitLab accounts, etc.
 - The transformations on the GitLab data you are going to collect.
-  - The details of the transformations will be exlained below.
+  - The details of the transformations will be explained below.
   - Without adding transformation rules, you can still view some of the dashboards.
   - Each GitLab repo has at most ONE set of transformations.
 
@@ -94,16 +94,15 @@ This set of configurations is used for calculating [DORA metrics](../DORA.md).
 
 If you're using GitLab CI to conduct `deployments`, please select "Detect Deployment from Jobs in GitLab CI", and input the RegEx in the following fields:
 
-- Deployment: A GitLab CI job with a name that matches the given regEx will be considered as a deployment.
-- Production: A GitLab CI job with a name that matches the given regEx will be considered a job in the production environment.
+- Deployment: The name of the GitLab pipeline or one of its jobs matches the given regEx will be considered as a deployment.
+- Production: If the name also matches the PRODUCTION regEx, the deployment will be considered a PRODUCTION deployment.
 
-By the above two fields, DevLake can identify a production deployment among massive CI jobs.
+By the above two fields, DevLake can identify a production deployment among massive GitLab CI pipelines.
 
-You can also select "Not using Jobs in GitLab CI as Deployments" if you're not using GitLab CI to conduct deployments.
 
 ## Step 2 - Collect Data in a Project
 ### Step 2.1 - Create a Project
-Collecing GitLab data reuiqres creating a project first. You can visit the Project page from the side menu and create a new project by following the instructions on the user interface.
+Collecting GitLab data requires creating a project first. You can visit the Project page from the side menu and create a new project by following the instructions on the user interface.
 
 ![create-a-project](images/create-a-project.png)
 
@@ -116,7 +115,7 @@ Please note: if you don't see the repositories you are looking for, please check
 ### Step 2.3 - Set the Sync Policy
 There are three settings for Sync Policy:
 - Data Time Range: You can select the time range of the data you wish to collect. The default is set to the past six months.
-- Sync Frequency: You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your prefered schedule.
+- Sync Frequency: You can choose how often you would like to sync your data in this step by selecting a sync frequency option or entering a cron code to specify your prefered schedule.
 - Skip Failed Tasks: sometime a few tasks may fail in a long pipeline; you can choose to skip them to avoid spending more time in running the pipeline all over again.
 
 ![sync-policy](images/sync-policy.png)

@@ -35,11 +35,36 @@ const versions = require('./versions.json');
             theme: { light: 'neutral', dark: 'forest' }
           }]],
           rehypePlugins: [katex],
+          lastVersion: 'current',
           versions: {
             current: {
               label: 'Next',
-              path: 'next',
-              banner: 'unreleased',
+              path: '',
+              banner: 'none',
+            },
+            "v0.18":{
+              banner: 'none',
+            },
+            "v0.17":{
+              banner: 'none',
+            },
+            "v0.16":{
+              banner: 'none',
+            },
+            "v0.15":{
+              banner: 'none',
+            },
+            "v0.14":{
+              banner: 'none',
+            },
+            "v0.13":{
+              banner: 'none',
+            },
+            "v0.12":{
+              banner: 'none',
+            },
+            "v0.11":{
+              banner: 'none',
             }
           }
         },
@@ -121,7 +146,7 @@ const versions = require('./versions.json');
       navbar: {
         title: 'Apache DevLake',
         logo: {
-          alt: 'apache-devlake',
+          alt: 'apache devlake',
           src: 'img/logo.svg',
         },
         items: [
@@ -133,13 +158,17 @@ const versions = require('./versions.json');
             items: [
               {
                 label: "Next",
-                to: "/docs/next/Overview/Introduction"
-              },
-              {
-                label: versions[0] + ' (Stable)',
                 to: "/docs/Overview/Introduction"
               },
-              ...versions.slice(1, versions.length).map((version) => ({
+              {
+                label: versions[0] + ' (Beta)',
+                to: "/docs/"+versions[0]+"/Overview/Introduction"
+              },
+              {
+                label: versions[1] + ' (Stable)',
+                to: "/docs/"+versions[1]+"/Overview/Introduction"
+              },
+              ...versions.slice(2, versions.length).map((version) => ({
                 label: version,
                 to: `docs/${version}/Overview/Introduction`,
               }))
@@ -241,7 +270,7 @@ const versions = require('./versions.json');
             items: [
               {
                 label: 'Slack',
-                to: 'https://join.slack.com/t/devlake-io/shared_invite/zt-17b6vuvps-x98pqseoUagM7EAmKC82xQ',
+                to: 'https://join.slack.com/t/devlake-io/shared_invite/zt-20envwfbk-JUTZ4z9jSeRnrvNhBFLg9w',
               },
               {
                 label: 'GitHub Issue Tracker',
@@ -284,4 +313,16 @@ const versions = require('./versions.json');
         darkTheme: darkCodeTheme,
       },
     }),
+
+    themes: [
+      [
+        require.resolve('@easyops-cn/docusaurus-search-local'),
+        /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+        ({
+          docsRouteBasePath: ['docs','livedemo', 'community', 'blog'],
+          hashed: true,
+          explicitSearchResultPath: true,
+        }),
+      ],
+    ],
 });
