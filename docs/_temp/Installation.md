@@ -63,19 +63,47 @@ TODO:
 
 ### 3.2. Use case 2: Multiple `boards`, shared `repos`
 
-We have:
+#### Conditions
 - 2 teams developing a main app
 - Each team uses `X boards` for requirements, but also shares `Y boards` for bugs and incidents.
 - Each team maintains `X repos` for main app, but also shares some `Y repos` for libraries
 - Each team has their own `deployments` for main app
 
-Let's start by translating this to the main concepts, the `pull requests`, `deployments`, 
-and `incidents`. Looking at them separately, one by one, we find out that for our teams there are:
+#### Interpreting
+
+Let's start with translating to the `pull requests`, `deployments`, and `incidents`.
+Looking at them one by one, we find out that we have:
 - Shared `boards` for `incidents`
 - Individual and shared `repos`
 - Individual `deployments`
 
-Then the structure would look like the following:
+#### Structuring
+Since we have only one project but two teams, we should create a DevLake `project` 
+for each team, to keep the DevLake `projects` atomic. 
+- Note: every time we split a team or a project, an existing DevLake `project` that reflects
+that team should also be split
+
+For `boards` and `incidents` we need a way to split them between teams. DevLake also allows looking at them combined,
+on Grafana, so that won't be a problem. To do so, we must create 2 connections (1 for each team)
+and specify their scope.
+
+For `repos` we should have 1 connection for individual `repos` per team, 
+and 1 for a shared set of `repos`, in the total of 3 connections.
+
+All `deployments`, are individual, so getting a connection per team should suffice. 
+
+#### General advice
+
+There are 3 red lines when it comes to structuring your DevLake `projects`:
+- We must look at `repos`, `board incidents` and `deployments` separately, one by one. 
+They are **independent** entities first, and only then related to each other.
+- Have a DevLake `project` for each `team`, project, or application that you want to study individually
+- Every time we have a set of either `repos`, `board incidents` or `deployments`, we should have
+a separate connection just for that set so combining them is not a problem
+
+
+#### Result
+The structure should look like the following:
 ![](project_use_case_2.png)
 
 Extending the case:
