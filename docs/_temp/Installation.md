@@ -6,7 +6,7 @@ description: >
 ---
 
 ## 1. Introduction
-A typical team of developers works with `pull requests`, `deployments`, and `incidents` (a.k.a. Bugs for deployment).
+A typical team of developers works with `pull requests`, `deployments`, and `incidents` inside boards.
 
 Based on such, we want to measure their productivity and stability. This is how [DORA](docs/DORA.md) does that:
 - Productivity:
@@ -18,10 +18,14 @@ Based on such, we want to measure their productivity and stability. This is how 
 
 All these questions/metrics are based on either `pull requests`, `deployments`, or `incidents`.
 
-But when we scale this up, few problems arise:
-- A team usually works with multiple repositories
+But when we scale this up, a few problems arise:
+- A team usually works with multiple `repositories`
 - A team also might work on different projects, and we want to measure these projects separately (e.g. it is not the same to work on a big old legacy than on a greenfield)
 - There may be multiple teams
+- A `board` contains incidents of multiple teams or projects
+- A `repository` is managed by multiple teams or projects, e.g. a monorepo
+- A `pipeline` can trigger deployments in multiple repositories
+- Some organizations want to measure DORA based on projects, and some want to measure it by teams
 
 This is where the `project` concept comes to play.
 
@@ -36,17 +40,46 @@ In software development, a project is just a grouping of something. In DevLake, 
 Because of its simplicity, the concept is flexible: you decide how to arrange `pull requests`, `deployments`, and `incidents`
 either by your specific projects, by teams, technology, or any other way.
 
-Let's consider an example:
-- There is 1 team working on 2 projects
-- The first project consists of 3 repositories with one of them worked most of the time
-- The second project only has 2 repos worked equal time among them
+The examples below show the patterns of how to organize your projects.  
 
-![](projects_scaled.png)
+### 3.1. Use case 1: One `board` and multiple `repos` per team
+
+Imagine a team that develops 2 `projects` with one `board` and multiple `repositories`.
+The first `project` consists of 3 `repositories` with one of them worked most of the time
+The second `project` only has 2 `repositories` worked equal time among them. 
+The structure will look like the following:
+
+![](project_use_case_1.png)
 
 Note that:
-- If instead there were 2 separate teams, the structure would remain the same. The only thing to consider changing is the name of the project
-- The same applies to any other way of arranging the projects
-- It does not matter if a particular repository it touched more than the others. Why? The answer is in the section below
+- The same pattern applies for more teams and projects
+- If instead there were 2 teams working on 1 project, the structure remains the same (besides renaming the DevLake project)
+- It does not matter if a particular repository it touched more than the others. Here is why: [Debugging DORA Issue Metrics](docs/Troubleshooting/Dashboard.md#debugging-dora-issue-metrics)
+
+TODO:
+- connections
+- transformations
+- screenshots on how that should look on DevLake
+
+### 3.2. Use case 2: Multiple `boards`, shared `repos`
+
+We have:
+- 2 teams developing a main app
+- Each team uses `X boards` for requirements, but also shares `Y boards` for bugs and incidents.
+- Each team maintains `X repos` for main app, but also shares some `Y repos` for libraries
+- Each team has their own `deployments` for main app
+
+Let's start by translating this to the main concepts, the `pull requests`, `deployments`, 
+and `incidents`. Looking at them separately, one by one, we find out that for our teams there are:
+- Shared `boards` for `incidents`
+- Individual and shared `repos`
+- Individual `deployments`
+
+Then the structure would look like the following:
+![](project_use_case_2.png)
+
+Extending the case:
+- TODO: assume we have a third team
 
 ### 3.1. What am I looking for with DORA?
 TODO: explain right and wrong ways to use DORA
