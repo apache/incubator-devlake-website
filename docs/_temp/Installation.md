@@ -56,10 +56,16 @@ Note that:
 - If instead there were 2 teams working on 1 project, the structure remains the same (besides renaming the DevLake project)
 - It does not matter if a particular repository it touched more than the others. Here is why: [Debugging DORA Issue Metrics](docs/Troubleshooting/Dashboard.md#debugging-dora-issue-metrics)
 
-TODO:
-- connections
-- transformations
-- screenshots on how that should look on DevLake
+#### Zooming in data collection
+There are a few steps we must define before finally having our metrics.
+- First, we create a `connection`
+- Then we use that `connection` for out project, defining its `scope`. 
+In this step we also specify its `transformation` to tell DevLake the format of our data
+
+With this in mind, here is how this example looks like now:
+![](use_case_1_alternative.png)
+
+TODO: - screenshots on how that should look on DevLake
 
 ### 3.2. Use case 2: Multiple `boards`, shared `repos`
 
@@ -104,7 +110,7 @@ a separate connection just for that set so combining them is not a problem
 
 #### Result
 The structure should look like the following:
-![](project_use_case_2.png)
+![](use_case_2_alternative.png)
 
 Extending the case:
 - TODO: assume we have a third team
