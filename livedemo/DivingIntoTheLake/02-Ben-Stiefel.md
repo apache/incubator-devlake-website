@@ -26,13 +26,9 @@ Feel free to give it a read, as this has been specially handpicked for you! This
 
 ### Question #3: "If you had to pick one metric to assess the health or strength of an engineering process or organization, what would you pick, and why?"
 
-> That's a tough one! per Question #2, I don't know that any one metric could be the best indicator, but if I HAD to pick, I'd say Cycle Time is a good leading indicator.
+> That's a tough one! per Question #2, I don't know that any one metric could be the best indicator, but if I HAD to pick, I'd say Cycle Time is a good leading indicator. We use developer metrics like DORA and SPACE to give us an idea of the general health of the engineering teams, and to find places where there might be efficiencies or room for improvement.
 
-### Question #4: "How do you use DevLake for tracking DORA dashboard?"
-
-> We use developer metrics like DORA and SPACE to give us an idea of the general health of the engineering teams, and to find places where there might be efficiencies or room for improvement.
-
-### Question #5: "If you were starting out in your engineering career again, what advice would you share with yourself?"
+### Question #4: "If you were starting out in your engineering career again, what advice would you share with yourself?"
 > Wow... great question... I would probably tell myself to be far more aware and avoidant of toxic workplaces and work cultures. You will grow much more quickly at a healthy company. How we can measure that would be a great question to answer!
 
 Thanks for taking your time and reading through this. Do share your thoughts and comments in our [slack community](https://join.slack.com/t/devlake-io/shared_invite/zt-20envwfbk-JUTZ4z9jSeRnrvNhBFLg9w). You can also nominate your favorite leader from the community for the upcoming editions of "Diving Into The Lake".
