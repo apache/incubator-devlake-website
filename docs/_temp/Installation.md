@@ -17,6 +17,11 @@ Based on such, we want to measure their productivity and stability. This is how 
   - How fast are these `incidents` solved? (a.k.a. [Median Time to Restore](docs/Metrics/MTTR.md))
 
 All these questions/metrics are based on either `pull requests`, `deployments`, or `incidents`.
+Note: all three are completely separate entities and associated only to their project.
+
+#### General advice
+
+There are 3 red lines when it comes to structuring your DevLake `projects`:
 
 But when we scale this up, a few problems arise:
 - A team usually works with multiple `repositories`
@@ -31,105 +36,100 @@ This is where the `project` concept comes to play.
 
 ## 2. What is a DevLake project?
 In the real world, a project is something being built and/or researched to solve some problem or to open new grounds.
-In software development, a project is just a grouping of something. In DevLake, a `project` is a grouping of `pull requests`, `deployments`, or `incidents`.
+A DevLake project is a grouping of `pull requests`, `deployments`, or `incidents`. It can be seen as a real-world project or product line. DevLake measures DORA metrics for each project.
 
-![](project_simple.png)
+![](project_pipeline.png)
+
+_Note: It does not matter if a team works on a particular repository more than another.
+The metrics are calculated over the entire set of repos, and the values are accumulated.
+More on that: [Debugging DORA Issue Metrics](docs/Troubleshooting/Dashboard.md#debugging-dora-issue-metrics)_
 
 ## 3. As a team lead, how many DevLake projects do I need?
 
 Because of its simplicity, the concept is flexible: you decide how to arrange `pull requests`, `deployments`, and `incidents`
 either by your specific projects, by teams, technology, or any other way.
 
-The examples below show the patterns of how to organize your projects.  
+The examples below show the patterns of how to organize your projects.
+To keep things simple we assume that we work with **GitHub** repos, **Jira** boards, 
+and **Jenkins CI/CD** deploys in each GitHub repo.
 
-### 3.1. Use case 1: One `board` and multiple `repos` per team
+The same would apply to other repos (e.g. GitLab or BitBucket), boards (e.g. TAPD), 
+or CI/CD (e.g. GitLab CI, Azure DevOps).
+[Webhooks](Installation.md#41-webhooks) are mentioned in their own section.
 
-Imagine a team that develops 2 `projects` with one `board` and multiple `repositories`.
-The first `project` consists of 3 `repositories` with one of them worked most of the time
-The second `project` only has 2 `repositories` worked equal time among them. 
-The structure will look like the following:
+## 4. Building use case 1
+
+There are `2 teams` with `2 boards`, 3 `repos`, and 3 `cicd pipelines`. 
+One of the repos is shared between both teams.
 
 ![](project_use_case_1.png)
 
-Note that:
-- The same pattern applies for more teams and projects
-- If instead there were 2 teams working on 1 project, the structure remains the same (besides renaming the DevLake project)
-- It does not matter if a particular repository it touched more than the others. Here is why: [Debugging DORA Issue Metrics](docs/Troubleshooting/Dashboard.md#debugging-dora-issue-metrics)
+Let's build this example.
 
-#### Zooming in data collection
-There are a few steps we must define before finally having our metrics.
-- First, we create a `connection`
-- Then we use that `connection` for out project, defining its `scope`. 
-In this step we also specify its `transformation` to tell DevLake the format of our data
+### 4.1. Organizing projects
+DORA is good for testing effects of the new changes in team's methodology. 
+So, naturally, we will create 2 `projects`, one for each team in this case.
 
-With this in mind, here is how this example looks like now:
-![](use_case_1_alternative.png)
+![](create_project_1.png)
+![](create_project_2.png)
 
-TODO: - screenshots on how that should look on DevLake
+### 4.2. Creating connections
 
-### 3.2. Use case 2: Multiple `boards`, shared `repos`
+For GitHub `repos` we will create:
+- 1 connection for Team A
+- 1 connection for Team B
+- 1 connection for shared repository
 
-#### Conditions
-- 2 teams developing a main app
-- Each team uses `X boards` for requirements, but also shares `Y boards` for bugs and incidents.
-- Each team maintains `X repos` for main app, but also shares some `Y repos` for libraries
-- Each team has their own `deployments` for main app
+TODO: or just 1 connection per team with all necessary repos?
 
-#### Interpreting
+So we can simply combine work in the `shared repo` with each of the teams.
+The connections to retrieve the `deployments` of Jenkins will be arranged the same way.
 
-Let's start with translating to the `pull requests`, `deployments`, and `incidents`.
-Looking at them one by one, we find out that we have:
-- Shared `boards` for `incidents`
-- Individual and shared `repos`
-- Individual `deployments`
+For JIRA `incident boards` we will create 1 connection per each board.
 
-#### Structuring
-Since we have only one project but two teams, we should create a DevLake `project` 
-for each team, to keep the DevLake `projects` atomic. 
-- Note: every time we split a team or a project, an existing DevLake `project` that reflects
-that team should also be split
+#### 4.2.1 GitHub connection
+1. Create a GitHub access token specified in the [official GitHub Guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
+2. Navigate to the "Connections" view
+![](configure_connection_github_1.png)
+3. Click "Create New Connection" and fill the form similar as specified in the following screenshots.
+![](configure_connection_github_2.png)
+![](configure_connection_github_3.png)
+4. ⚠️ Warning: Make sure the token has the fields repo:status, repo_deployment, read:user, read:org. 
+   - If collecting private repositories, also include the repo field.
+5. Click "Test Connection". If no error appears, click "Save Connection".
 
-For `boards` and `incidents` we need a way to split them between teams. DevLake also allows looking at them combined,
-on Grafana, so that won't be a problem. To do so, we must create 2 connections (1 for each team)
-and specify their scope.
-
-For `repos` we should have 1 connection for individual `repos` per team, 
-and 1 for a shared set of `repos`, in the total of 3 connections.
-
-All `deployments`, are individual, so getting a connection per team should suffice. 
-
-#### General advice
-
-There are 3 red lines when it comes to structuring your DevLake `projects`:
-- We must look at `repos`, `board incidents` and `deployments` separately, one by one. 
-They are **independent** entities first, and only then related to each other.
-- Have a DevLake `project` for each `team`, project, or application that you want to study individually
-- Every time we have a set of either `repos`, `board incidents` or `deployments`, we should have
-a separate connection just for that set so combining them is not a problem
-
-
-#### Diagram
-To put some names, we will have `Team A` and `Team B`.
-All the `repos`, `incidents`, and `deployments` will be named with `A` or `B` in the beginning to show to which team they belong.
-Shared entities will be named with `AB` in the beginning.
-
-The structure should look like the following:
-![](use_case_2_alternative.png)
-
-Extending the case:
-- TODO: assume we have a third team
-
-### 3.1. What am I looking for with DORA?
-TODO: explain right and wrong ways to use DORA
-
-## 4. How do we organize projects when there is data from multiple connection(s)?
+#### 4.2.2 GitHub connection scope
 TODO
 
-### 4.1. Webhooks
-TODO
+#### JIRA
+TODO: screenshots
 
-## 5. How do I know if the data of a project is successfully collected?
-TODO
+#### Jenkins
+TODO: screenshots
 
-## 6. How can I observe metrics by project?
+### 4.3. Using connections
+
+TODO: How we use the `connections` for projects, defining their `cicd_scopes`
+
+### 4.4. Building the project
+TODO: final screenshots for collecting data
+
+TODO: simple schema that shows connections and projects, mirroring teams and what they work with.
+Current one is way too detailed.
+
+### 5. Building use case 2
+
+Some teams may have shared `JIRA boards`. Assume the Use Case 1 but with this difference:
+
+![](project_use_case_2.png)
+
+## 6. How do I know if the data of a project is successfully collected?
+If everything goes well, you should see all the 4 charts in DORA dashboard.
+If something is wrong and you are puzzled why, check out the 
+[Debugging Dora Issue Metrics](docs/Troubleshooting/Dashboard.md#debugging-dora-issue-metrics) page
+
+## 7. How can I observe metrics by project?
+TODO: screenshots
+
+## 8. Webhooks
 TODO
