@@ -55,7 +55,6 @@ and **Jenkins CI/CD** deploys in each GitHub repo.
 
 The same would apply to other repos (e.g. GitLab or BitBucket), boards (e.g. TAPD), 
 or CI/CD (e.g. GitLab CI, Azure DevOps).
-[Webhooks](Installation.md#41-webhooks) are mentioned in their own section.
 
 ## 4. Building use case 1
 
@@ -109,13 +108,15 @@ TODO: screenshots
 
 ### 4.3. Using connections
 
-TODO: How we use the `connections` for projects, defining their `cicd_scopes`
+TODO: How we use the `connections` for projects, defining their `cicd_scopes`. More screenshots
 
 ### 4.4. Building the project
+
 TODO: final screenshots for collecting data
 
-TODO: simple schema that shows connections and projects, mirroring teams and what they work with.
-Current one is way too detailed.
+The resulting project's structure mirrors what we started with:
+![](project_use_case_1_devlake.png)
+
 
 ### 5. Building use case 2
 
@@ -124,12 +125,22 @@ Some teams may have shared `JIRA boards`. Assume the Use Case 1 but with this di
 ![](project_use_case_2.png)
 
 ## 6. How do I know if the data of a project is successfully collected?
-If everything goes well, you should see all the 4 charts in DORA dashboard.
-If something is wrong and you are puzzled why, check out the 
-[Debugging Dora Issue Metrics](docs/Troubleshooting/Dashboard.md#debugging-dora-issue-metrics) page
+
+Navigate to your DORA Dashboard:
+
+![](navigate_to_dora_1.png)
+![](navigate_to_dora_2.png)
+
+If everything goes well, you should see all the 4 charts.
+If something is wrong, and you are puzzled why, check out the 
+[Debugging Dora Issue Metrics](docs/Troubleshooting/Dashboard.md#debugging-dora-issue-metrics) page.
 
 ## 7. How can I observe metrics by project?
-TODO: screenshots
+In the same DORA dashboard check out this menu point:
+![](observe_metrics_by_project_panel.png)
+
+The metrics should change when you select or deselect projects.
+
 
 ## 8. Webhooks
 TODO
