@@ -12,7 +12,7 @@ sidebar_position: 1
 
 ## Launch DevLake
 
-1. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.18.0-beta1) into a folder.
+1. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.19.0-beta1) into a folder.
 2. Rename `env.example` to `.env`. For Mac/Linux users, please run `mv env.example .env` in the terminal. This file contains the environment variables that the Devlake server will use. Additional ones can be found in the compose file(s).
 3. Generate a secure encryption key using a method such as OpenSSL. For example, run the following command to generate a 128-character string consisting of uppercase letters:
 
@@ -22,14 +22,16 @@ sidebar_position: 1
 
    Copy the generated string. Set the value of the ENCRYPTION_SECRET environment variable:
 
-   - Method 1: In a terminal session, run the following command: export ENCRYPTION_SECRET="copied string"
+   - Method 1: In the docker-compose.yml, set an environment variable ENCRYPTION_SECRET: "copied string"
    - Method 2: Alternatively, you can set the ENCRYPTION_SECRET environment variable in the .env file: ENCRYPTION_SECRET="copied string"
 
      If you set the ENCRYPTION_SECRET environment variable in both the terminal session and the .env file, the value set in the terminal session takes precedence.
 
    **Please make sure to keep the ENCRYPTION_SECRET safe as it is used to encrypt sensitive information in the database, such as personal access tokens and passwords. If ENCRYPTION_SECRET is lost, it may not be possible to decrypt this sensitive information.**
 
-4. Run `docker-compose up -d` if the version of Docker Desktop is too low to use `docker compose up -d`.
+4. By default, the timezone is UTC. You can change it by adjusting the env variable TZ in docker-compose.yml
+
+5. Run `docker-compose up -d` if the version of Docker Desktop is too low to use `docker compose up -d`.
 
 ## Collect data and view dashboards
 
@@ -42,11 +44,16 @@ sidebar_position: 1
 
 ## Upgrade to a newer version
 
-Please note: **Back up your Grafana dashboards** before upgrade if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
+Please notes:
+
+Note 1: **Back up your Grafana dashboards** before upgrade if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
+
+Note 2: **If you're upgrading from DevLake v0.17.x or earlier versions to v0.18.x or later versions**, you need to find the ENCODE_KEY value in the .env file of devlake container, and assign the value to ENCRYPTION_SECRET via .env file or environment variable in docker-compose.yml
 
 1. Run `docker-compose down` to stop services;
-2. Open file "docker-compose.yml". Change the image tags of "grafana", "devlake" and "config-ui" to the new version, and save;
-3. Run `docker-compose up -d` to start DevLake services.
+2. Open file "docker-compose.yml". Change the image tags of "grafana", "devlake" and "config-ui" to the new version, and save; 
+3. If upgrading from earlier versions to v0.18.0+, set ENCRYPTION_SECRET environment variable in docker-compose.yml or .env file, refer to above Note 2.
+4. Run `docker-compose up -d` to start DevLake services.
 
 ## FAQ
 

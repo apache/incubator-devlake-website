@@ -7,13 +7,13 @@ description: >
 
 # "Diving Into The Lake" with Tatiana Gil Lopez from Whitepages
 
-<img src="https://github.com/apache/incubator-devlake-website/assets/31725457/2c47f1fc-7bfd-4fb3-b978-0b4e02ce4bc2" alt="Diving Into the Lake with Tatiana Gil Lopez" width="100%" />
-
-## About "Diving into the Lake"
-
 "Diving into the Lake" by DevLake features the stories and experiences ofengineering leaders and experts. <b>Tatiana Gil Lopez, Senior QA & DevOps Engineer at Whitepages</b>, is our first featured community member in this edition. In this interview, Tatiana was asked four questions based on data-driven techniques, decision making, metrics, processes, team health, and other aspects of engineering.
 
 Feel free to give a read, which has been specially handpicked for you! This would undoubtedly enlighten on practicality and provide deeper insights into Engineering.
+
+
+<img src="https://github.com/apache/incubator-devlake-website/assets/31725457/2c47f1fc-7bfd-4fb3-b978-0b4e02ce4bc2" alt="Diving Into the Lake with Tatiana Gil Lopez" width="100%" />
+
 
 ### Question #1: "In your opinion, what is the value of taking a data driven approach to engineering?"
 
@@ -43,6 +43,6 @@ I like the Westrum survey to measure it: organizational culture is a perceptual 
 ### Question #4: "If you were starting out in your engineering career again, what advice would you share with yourself?"
 > I'd tell myself "you are a great painter! go with that" just kidding. Start using note taking apps earlier! and remember to approach each task with a healthy amount of curiosity.
 
-Thanks for taking your time and reading through this. Do share your thoughts and comments in our [slack community](https://join.slack.com/t/devlake-io/shared_invite/zt-17b6vuvps-x98pqseoUagM7EAmKC82xQ). You can also nominate your favorite leader from the community for the upcoming editions of "Diving Into The Lake".
+Thanks for taking your time and reading through this. Do share your thoughts and comments in our [slack community](https://join.slack.com/t/devlake-io/shared_invite/zt-20envwfbk-JUTZ4z9jSeRnrvNhBFLg9w). You can also nominate your favorite leader from the community for the upcoming editions of "Diving Into The Lake".
 
 Happy DevLaking!

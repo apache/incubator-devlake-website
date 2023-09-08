@@ -12,7 +12,7 @@ DevLake has joined the Apache Incubator and is aiming to become a top-level proj
 1. As a dev data analysis application, discover and implement 3 (or even more!) usage scenarios:
    - A collection of metrics to track the contribution, quality and growth of open-source projects
    - DORA metrics for DevOps engineers
-   - To be decided ([let us know](https://join.slack.com/t/devlake-io/shared_invite/zt-17b6vuvps-x98pqseoUagM7EAmKC82xQ) if you have any suggestions!)
+   - To be decided ([let us know](https://devlake-io.slack.com/join/shared_invite/zt-20envwfbk-JUTZ4z9jSeRnrvNhBFLg9w) if you have any suggestions!)
 2. As dev data infrastructure, provide robust data collection modules, customizable data models, and data extensibility.
 3. Design better user experience for end-users and contributors.
 
