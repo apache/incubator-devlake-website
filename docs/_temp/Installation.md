@@ -59,16 +59,70 @@ or CI/CD (e.g. GitLab CI, Azure DevOps).
 ## 4. Use Cases
 This section demonstrates real-life situations and how they get reflected in DevLake.
 
-### 4.1. Use Case 1
+### 4.1. Use Case 1: Projects DevLake and DevStream
+DevLake and [DevStream](https://github.com/devstream-io/devstream) are both Apache `projects`.
+DevLake manages 3 `repos`: [incubator-devlake](https://github.com/apache/incubator-devlake), 
+[incubator-devlake-website](https://github.com/apache/incubator-devlake-website), 
+and [incubator-devlake-helm-chart](https://github.com/apache/incubator-devlake-helm-chart).
+DevStream also manages 3 `repos`: [devstream](https://github.com/devstream-io/devstream),
+[website](https://github.com/devstream-io/website), and [blog](https://github.com/devstream-io/blog).
+
+![](project_use_case_1.png)
+
+Both projects use GitHub for storing code (including `pull requests`), `deployments` on GitHub Actions, and `incidents`.
+
+_Note: to avoid confusion between DevLake as a `project` in this use case and DevLake as a platform,
+we will use complete names i.e. `project DevLake` and `platform DevLake` respectively._
+
+#### 4.2.1. Organizing Projects
+First, we create 2 `projects` on DevLake platform, representing both project DevLake and DevStream.
+These steps will suffice for now:
+
+![](create_project_1.png)
+![](create_project_2.png)
+
+Later, we will bind connections that we create in the following steps. We just need to create them first.
+
+#### 4.2.2. Creating Connections
+
+Since all is on GitHub in this case, we can use just 1 connection with following properties:
+- it includes all the `project's repositories`
+- its scope includes everything we work with (i.e. `pull requests`, `deployments`, and `incidents`)
+
+If you store `incidents` on Jira, for example, you will need to create a separate connection just for them.
+Same applies to `deployments`, a separate connection is needed in case they are stored in Jenkins (or any other host for `deployments`).
+
+#### 4.2.3. Configuring Connections
+Check the [Configuration Guide](/docs/Configuration) section to configure the connection of your interest.
+
+### 4.2.4 Using connections
+
+TODO: How we use the `connections` for projects, defining their `cicd_scopes`. More screenshots
+
+### 4.2.5. Results
+
+This is how the projects should look like after performing all the steps
+
+TODO: Screenshot: project list view
+TODO: Screenshot: project 1 detail view
+TODO: Screenshot: project 2 detail view
+
+
+
+
+
+
+
+### 4.2. Use Case 2: Repository Intersection
 
 There are `2 projects` with `2 boards`, 3 `repos`, and 3 `cicd pipelines`. 
 One of the repos is shared between both projects.
 
-![](project_use_case_1.png)
+![](project_use_case_2.png)
 
 Let's build this example.
 
-#### 4.1.1. Organizing Projects
+#### 4.2.1. Organizing Projects
 DORA is good for seeing the effects of the new changes in team's methodology.
 However, for DORA itself **there are no teams**, only projects. 
 The `team` concept is redundant and only introduces noise and complexity, for no benefit.
@@ -77,54 +131,39 @@ So we will create 2 `projects` on DevLake to reflect those we are working with.
 ![](create_project_1.png)
 ![](create_project_2.png)
 
-#### 4.1.2. Creating Connections
+#### 4.2.2. Creating Connections
 
 For GitHub `repos` we will create:
-- 1 connection for Team A
-- 1 connection for Team B
+- 1 connection for Project A
+- 1 connection for Project B
 - 1 connection for shared repository
 
-TODO: or just 1 connection per team with all necessary repos?
-
-So we can simply combine work in the `shared repo` with each of the teams.
+So we can simply combine work in the `shared repo` with each of the `projects`.
 The connections to retrieve the `deployments` of Jenkins will be arranged the same way.
 
-For JIRA `incident boards` we will create 1 connection per each board.
+For JIRA `incident boards` we will just create 1 connection per each board.
 
-#### 4.1.3. Configuring GitHub Connection
-1. Create a GitHub access token specified in the [official GitHub Guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
-2. Navigate to the "Connections" view
-![](configure_connection_github_1.png)
-3. Click "Create New Connection" and fill the form similar as specified in the following screenshots.
-![](configure_connection_github_2.png)
-![](configure_connection_github_3.png)
-4. ⚠️ Warning: Make sure the token has the fields repo:status, repo_deployment, read:user, read:org. 
-   - If collecting private repositories, also include the repo field.
-5. Click "Test Connection". If no error appears, click "Save Connection".
+#### 4.2.3. Configuring Connections
+Check the [Configuration Guide](/docs/Configuration) section to configure the connection of your interest.
 
-#### 4.1.4. Configuring GitHub Connection Scope
-TODO
-
-#### 4.1.5. JIRA
-TODO: screenshots
-
-#### 4.1.6. Jenkins
-TODO: screenshots
-
-### 4.1.7 Using connections
+### 4.2.4 Using connections
 
 TODO: How we use the `connections` for projects, defining their `cicd_scopes`. More screenshots
 
-### 4.1.8. Building the project
+### 4.2.5. Results
 
-TODO: final screenshots for collecting data
+This is how the projects should look like after performing all the steps
+
+TODO: Screenshot: project list view
+TODO: Screenshot: project 1 detail view
+TODO: Screenshot: project 2 detail view
 
 
-### 4.2. Building use case 2
+### 4.3. Use Case 3: Also Board Intersection...
 
-Some teams may have shared `JIRA boards`. Assume the Use Case 1 but with this difference:
+Some `projects` may have shared `JIRA boards`. Assume the Use Case 2 but with this difference:
 
-![](project_use_case_2.png)
+![](project_use_case_3.png)
 
 ## 5. How do I know if the data of a project is successfully collected?
 
