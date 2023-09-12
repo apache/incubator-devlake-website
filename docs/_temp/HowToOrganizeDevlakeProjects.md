@@ -127,7 +127,6 @@ However, for DORA itself **there are no teams**, only projects.
 The `team` concept is redundant and only introduces noise and complexity, for no benefit.
 So we will create 2 `projects` on platform DevLake to reflect those we are working with.
 
-
 #### 4.2.2. Creating Connections
 
 For GitHub `repos` we will create:
@@ -155,12 +154,13 @@ TODO: Screenshot: project list view
 TODO: Screenshot: project 1 detail view
 TODO: Screenshot: project 2 detail view
 
-
-### 4.3. Use Case 3: Also Board Intersection...
+### 4.3. Use Case 3: Board Intersection
 
 Some `projects` may have shared `JIRA boards`. Assume the Use Case 2 but with this difference:
 
 ![](project_use_case_3.png)
+
+TODO
 
 ## 5. How do I know if the data of a project is successfully collected?
 
@@ -179,6 +179,7 @@ In the same DORA dashboard check out this menu point:
 
 The metrics should change when you select or deselect projects.
 
-
-## 7. Webhooks
-TODO
+## 7. Note About Webhooks
+Use a separate webhook for each project! This is how platform DevLake then knows to which project belong the data passed
+via the webhook. If you use the same webhook across multiple projects, the data sent by it **will be replicated per each
+project that uses that webhook**. More information available on the [Webhook](/docs/Plugins/webhook.md) page
