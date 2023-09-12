@@ -56,23 +56,28 @@ and **Jenkins CI/CD** deploys in each GitHub repo.
 The same would apply to other repos (e.g. GitLab or BitBucket), boards (e.g. TAPD), 
 or CI/CD (e.g. GitLab CI, Azure DevOps).
 
-## 4. Building use case 1
+## 4. Use Cases
+This section demonstrates real-life situations and how they get reflected in DevLake.
 
-There are `2 teams` with `2 boards`, 3 `repos`, and 3 `cicd pipelines`. 
-One of the repos is shared between both teams.
+### 4.1. Use Case 1
+
+There are `2 projects` with `2 boards`, 3 `repos`, and 3 `cicd pipelines`. 
+One of the repos is shared between both projects.
 
 ![](project_use_case_1.png)
 
 Let's build this example.
 
-### 4.1. Organizing projects
-DORA is good for testing effects of the new changes in team's methodology. 
-So, naturally, we will create 2 `projects`, one for each team in this case.
+#### 4.1.1. Organizing Projects
+DORA is good for seeing the effects of the new changes in team's methodology.
+However, for DORA itself **there are no teams**, only projects. 
+The `team` concept is redundant and only introduces noise and complexity, for no benefit.
+So we will create 2 `projects` on DevLake to reflect those we are working with.
 
 ![](create_project_1.png)
 ![](create_project_2.png)
 
-### 4.2. Creating connections
+#### 4.1.2. Creating Connections
 
 For GitHub `repos` we will create:
 - 1 connection for Team A
@@ -86,7 +91,7 @@ The connections to retrieve the `deployments` of Jenkins will be arranged the sa
 
 For JIRA `incident boards` we will create 1 connection per each board.
 
-#### 4.2.1 GitHub connection
+#### 4.1.3. Configuring GitHub Connection
 1. Create a GitHub access token specified in the [official GitHub Guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
 2. Navigate to the "Connections" view
 ![](configure_connection_github_1.png)
@@ -97,34 +102,31 @@ For JIRA `incident boards` we will create 1 connection per each board.
    - If collecting private repositories, also include the repo field.
 5. Click "Test Connection". If no error appears, click "Save Connection".
 
-#### 4.2.2 GitHub connection scope
+#### 4.1.4. Configuring GitHub Connection Scope
 TODO
 
-#### JIRA
+#### 4.1.5. JIRA
 TODO: screenshots
 
-#### Jenkins
+#### 4.1.6. Jenkins
 TODO: screenshots
 
-### 4.3. Using connections
+### 4.1.7 Using connections
 
 TODO: How we use the `connections` for projects, defining their `cicd_scopes`. More screenshots
 
-### 4.4. Building the project
+### 4.1.8. Building the project
 
 TODO: final screenshots for collecting data
 
-The resulting project's structure mirrors what we started with:
-![](project_use_case_1_devlake.png)
 
-
-### 5. Building use case 2
+### 4.2. Building use case 2
 
 Some teams may have shared `JIRA boards`. Assume the Use Case 1 but with this difference:
 
 ![](project_use_case_2.png)
 
-## 6. How do I know if the data of a project is successfully collected?
+## 5. How do I know if the data of a project is successfully collected?
 
 Navigate to your DORA Dashboard:
 
@@ -135,12 +137,12 @@ If everything goes well, you should see all the 4 charts.
 If something is wrong, and you are puzzled why, check out the 
 [Debugging Dora Issue Metrics](docs/Troubleshooting/Dashboard.md#debugging-dora-issue-metrics) page.
 
-## 7. How can I observe metrics by project?
+## 6. How can I observe metrics by project?
 In the same DORA dashboard check out this menu point:
 ![](observe_metrics_by_project_panel.png)
 
 The metrics should change when you select or deselect projects.
 
 
-## 8. Webhooks
+## 7. Webhooks
 TODO
