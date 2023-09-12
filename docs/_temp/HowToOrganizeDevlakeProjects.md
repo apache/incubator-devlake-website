@@ -74,7 +74,7 @@ Both projects use GitHub for storing code (including `pull requests`), `deployme
 _Note: to avoid confusion between DevLake as a `project` in this use case and DevLake as a platform,
 we will use complete names i.e. `project DevLake` and `platform DevLake` respectively._
 
-#### 4.2.1. Organizing Projects
+#### 4.1.1. Organizing Projects
 First, we create 2 `projects` on DevLake platform, representing both project DevLake and DevStream.
 These steps will suffice for now:
 
@@ -83,7 +83,7 @@ These steps will suffice for now:
 
 Later, we will bind connections that we create in the following steps. We just need to create them first.
 
-#### 4.2.2. Creating Connections
+#### 4.1.2. Creating Connections
 
 Since all is on GitHub in this case, we can use just 1 connection with following properties:
 - it includes all the `project's repositories`
@@ -92,26 +92,25 @@ Since all is on GitHub in this case, we can use just 1 connection with following
 If you store `incidents` on Jira, for example, you will need to create a separate connection just for them.
 Same applies to `deployments`, a separate connection is needed in case they are stored in Jenkins (or any other host for `deployments`).
 
-#### 4.2.3. Configuring Connections
-Check the [Configuration Guide](/docs/Configuration) section to configure the connection of your interest.
+#### 4.1.3. Configuring Connections
+This part is described in [GitHub](/docs/Configuration/GitHub.md) connection configuration.
+For other platforms check the [Configuration Guide](/docs/Configuration)
 
-### 4.2.4 Using connections
+### 4.1.4 Using connections
+
+At this point, we have projects and connections created on platform DevLake. 
+It is time to bind those connections to the projects. To do so, follow the steps
+described in the [Tutorial](/docs/Configuration/Tutorial.md).
 
 TODO: How we use the `connections` for projects, defining their `cicd_scopes`. More screenshots
 
-### 4.2.5. Results
+### 4.1.5. Results
 
 This is how the projects should look like after performing all the steps
 
 TODO: Screenshot: project list view
 TODO: Screenshot: project 1 detail view
 TODO: Screenshot: project 2 detail view
-
-
-
-
-
-
 
 ### 4.2. Use Case 2: Repository Intersection
 
@@ -126,10 +125,8 @@ Let's build this example.
 DORA is good for seeing the effects of the new changes in team's methodology.
 However, for DORA itself **there are no teams**, only projects. 
 The `team` concept is redundant and only introduces noise and complexity, for no benefit.
-So we will create 2 `projects` on DevLake to reflect those we are working with.
+So we will create 2 `projects` on platform DevLake to reflect those we are working with.
 
-![](create_project_1.png)
-![](create_project_2.png)
 
 #### 4.2.2. Creating Connections
 
