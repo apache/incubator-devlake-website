@@ -41,7 +41,7 @@ To install the chart with release name `devlake`,follow these steps:
     ```shell
     helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
     helm repo update
-    helm install devlake devlake/devlake --version=0.18.0-beta9 --set lake.encryptionSecret.secret=$ENCRYPTION_SECRET
+    helm install devlake devlake/devlake --version=0.18.0 --set lake.encryptionSecret.secret=$ENCRYPTION_SECRET
     ```
 
 And visit your devlake from the node port (32001 by default).
@@ -80,14 +80,14 @@ grafana by url `http://YOUR-NODE-IP:30091`
 
 ```shell
 helm repo update
-helm upgrade devlake devlake/devlake --version=0.18.0-beta9 --set lake.encryptionSecret.secret=<ENCRYPTION_SECRET>
+helm upgrade devlake devlake/devlake --version=0.18.0 --set lake.encryptionSecret.secret=<ENCRYPTION_SECRET>
 ```
 
 **If you're upgrading from DevLake v0.18.x or later versions:**
 
 ```shell
 helm repo update
-helm upgrade devlake devlake/devlake --version=0.18.0-beta9
+helm upgrade devlake devlake/devlake --version=0.18.0
 ```
 
 ### Uninstall
