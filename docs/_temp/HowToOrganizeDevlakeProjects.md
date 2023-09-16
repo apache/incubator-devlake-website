@@ -173,10 +173,15 @@ For it-new `project`:
 - reuse the previously created connection for the _core_ `deployments`
 - 1 webhook connection for `incidents` exclusively for it-new `project`
 
+
+##### QA
 _Q: Could I use one connection for incidents both projects?_
-No, that will create problems. [Here is why](HowToOrganizeDevlakeProjects.md#5-note-about-webhooks).
+
+A: No, that will create problems. [Here is why](HowToOrganizeDevlakeProjects.md#5-note-about-webhooks).
+
 _Q: And if I used a direct integration instead of a webhook?_
-TODO
+
+A: Yes, there is no problem in that case
 
 ## 5. Note About Webhooks
 Use a separate webhook for each project! This is how platform DevLake then knows to which project belong the data passed
