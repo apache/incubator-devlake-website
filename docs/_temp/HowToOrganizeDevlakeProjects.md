@@ -59,6 +59,11 @@ or CI/CD (e.g. GitLab CI, Azure DevOps).
 ## 4. Use Cases
 This section demonstrates real-life situations and how they get reflected in DevLake.
 
+Quick note: to keep this guide shorter and more concise, some technical details are only mentioned in the use case 1,
+so if you read this page for the first time, make sure to go through them in order.
+
+Quick note 2: if you use webhooks, check the [quick note](HowToOrganizeDevlakeProjects.md#7-note-about-webhooks) about them below.
+
 ### 4.1. Use Case 1: Projects DevLake and DevStream
 DevLake and [DevStream](https://github.com/devstream-io/devstream) are both Apache `projects`.
 DevLake manages 3 `repos`: [incubator-devlake](https://github.com/apache/incubator-devlake), 
@@ -102,19 +107,32 @@ At this point, we have projects and connections created on platform DevLake.
 It is time to bind those connections to the projects. To do so, follow the steps
 described in the [Tutorial](/docs/Configuration/Tutorial.md).
 
-TODO: How we use the `connections` for projects, defining their `cicd_scopes`. More screenshots
+### 4.1.5 Resulting Metrics
 
-### 4.1.5. Results
+To know if the data of a project is successfully collected go to your DORA Dashboard:
 
-This is how the projects should look like after performing all the steps
+![](navigate_to_dora_1.png)
+![](navigate_to_dora_2.png)
 
-TODO: Screenshot: project list view
-TODO: Screenshot: project 1 detail view
-TODO: Screenshot: project 2 detail view
+If everything goes well, you should see all the 4 charts.
+If something is wrong, and you are puzzled why, check out the
+[Debugging Dora Issue Metrics](docs/Troubleshooting/Dashboard.md#debugging-dora-issue-metrics) page.
 
-### 4.2. Use Case 2: Repository Intersection
+#### 4.1.6. How can I observe metrics by project?
+In the same DORA dashboard check out this menu point:
+![](observe_metrics_by_project_panel.png)
 
-There are `2 projects` with `2 boards`, 3 `repos`, and 3 `cicd pipelines`. 
+The metrics should change when you select or deselect projects, representing the projects you selected.
+
+### 4.2. Use Case 2
+
+Each community or company have their own flavor on how they work. In this example let's assume a company that has
+multiple teams, each working on one or more projects.
+
+To keep it succinct, let's have a look at 2 teams: one works with one `project`, while another deals with 2.
+Each `project` consists of 2 `repos`, and 2 `cicd pipelines`.
+Also, there are `2 boards`, one for each team. 
+ 
 One of the repos is shared between both projects.
 
 ![](project_use_case_2.png)
@@ -142,10 +160,6 @@ For JIRA `incident boards` we will just create 1 connection per each board.
 #### 4.2.3. Configuring Connections
 Check the [Configuration Guide](/docs/Configuration) section to configure the connection of your interest.
 
-### 4.2.4 Using connections
-
-TODO: How we use the `connections` for projects, defining their `cicd_scopes`. More screenshots
-
 ### 4.2.5. Results
 
 This is how the projects should look like after performing all the steps
@@ -161,23 +175,6 @@ Some `projects` may have shared `JIRA boards`. Assume the Use Case 2 but with th
 ![](project_use_case_3.png)
 
 TODO
-
-## 5. How do I know if the data of a project is successfully collected?
-
-Navigate to your DORA Dashboard:
-
-![](navigate_to_dora_1.png)
-![](navigate_to_dora_2.png)
-
-If everything goes well, you should see all the 4 charts.
-If something is wrong, and you are puzzled why, check out the 
-[Debugging Dora Issue Metrics](docs/Troubleshooting/Dashboard.md#debugging-dora-issue-metrics) page.
-
-## 6. How can I observe metrics by project?
-In the same DORA dashboard check out this menu point:
-![](observe_metrics_by_project_panel.png)
-
-The metrics should change when you select or deselect projects.
 
 ## 7. Note About Webhooks
 Use a separate webhook for each project! This is how platform DevLake then knows to which project belong the data passed
