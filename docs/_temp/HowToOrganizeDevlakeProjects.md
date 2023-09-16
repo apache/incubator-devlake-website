@@ -1,8 +1,8 @@
 ---
-title: "How to Organize Devlake Projects"
+title: "How to Organize DevLake Projects"
 sidebar_position: 1
 description: >
-  How to Organize Devlake Projects
+  How to Organize DevLake Projects
 ---
 
 ## 1. Introduction
@@ -62,7 +62,7 @@ This section demonstrates real-life situations and how they get reflected in Dev
 Quick note: to keep this guide shorter and more concise, some technical details are only mentioned in the use case 1,
 so if you read this page for the first time, make sure to go through them in order.
 
-Quick note 2: if you use webhooks, check the [quick note](HowToOrganizeDevlakeProjects.md#7-note-about-webhooks) about them below.
+Quick note 2: if you use webhooks, check the [quick note](HowToOrganizeDevlakeProjects.md#5-note-about-webhooks) about them below.
 
 ### 4.1. Use Case 1: Projects DevLake and DevStream
 DevLake and [DevStream](https://github.com/devstream-io/devstream) are both Apache `projects`.
@@ -129,54 +129,56 @@ The metrics should change when you select or deselect projects, representing the
 Each community or company have their own flavor on how they work. In this example let's assume a company that has
 multiple teams, each working on one or more projects.
 
-To keep it succinct, let's have a look at 2 teams: one works with one `project`, while another deals with 2.
-Each `project` consists of 2 `repos`, and 2 `cicd pipelines`.
-Also, there are `2 boards`, one for each team. 
- 
-One of the repos is shared between both projects.
+To keep it succinct, let's have a look at 2 teams that are called _Payments_ and _Internal Tools_.
+Payments team works with only one `project` also called "payments", while Internal Tools deals with 2 `projects`
+called "it-legacy" and "it-new" (such naming is to keep it simple).
+Each `project` consists of various `repos`, and `cicd pipelines`.
+Also, each team uses their own `board` making the total of 2.
+Some Internal Tools `repos` are shared between projects.
+
+Note: Assume that both teams work with GitHub and Jenkins. Also assume that payments team works with Jira boards,
+while internal tools team needs to use a **webhook** to publish their incidents.
+
+Following diagram describes the situation.
 
 ![](project_use_case_2.png)
-
-Let's build this example.
 
 #### 4.2.1. Organizing Projects
 DORA is good for seeing the effects of the new changes in team's methodology.
 However, for DORA itself **there are no teams**, only projects. 
 The `team` concept is redundant and only introduces noise and complexity, for no benefit.
-So we will create 2 `projects` on platform DevLake to reflect those we are working with.
 
-#### 4.2.2. Creating Connections
+That said, we have 3 `projects` to create in DevLake: payments, it-legacy, and it-new
 
-For GitHub `repos` we will create:
-- 1 connection for Project A
-- 1 connection for Project B
-- 1 connection for shared repository
+Note: DevLake charts let you combine data between projects, so to have most flexibility it is always better to keep
+the `projects` **atomic**.
 
-So we can simply combine work in the `shared repo` with each of the `projects`.
-The connections to retrieve the `deployments` of Jenkins will be arranged the same way.
+#### 4.2.2. Adding Connections
 
-For JIRA `incident boards` we will just create 1 connection per each board.
+For payments `project` this is straightforward, just create: 
+- 1 connection for all `repos` to gather `pull requests`,
+- 1 connection for all `deployments`
+- 1 connection to Jira to gather `incidents`
 
-#### 4.2.3. Configuring Connections
-Check the [Configuration Guide](/docs/Configuration) section to configure the connection of your interest.
+For it-legacy `project`:
+- 1 connection for `repos` _it-legacy-1_ and _it-legacy-1_
+- 1 more connection for `repos`, this time for _it-core-1_ and _it-core-1_
+- 2 connections for `deployments` organized the same fashion as those for `repos`
+- 1 webhook connection for `incidents` exclusively for it-legacy `project`
 
-### 4.2.5. Results
+For it-new `project`:
+- 1 connection for `repos` _it-new-1_ and _it-new-1_
+- reuse the previously created connection for the _core_ `repos`
+- 1 connections for `deployments` _it-new-1_ and _it-new-1_
+- reuse the previously created connection for the _core_ `deployments`
+- 1 webhook connection for `incidents` exclusively for it-new `project`
 
-This is how the projects should look like after performing all the steps
-
-TODO: Screenshot: project list view
-TODO: Screenshot: project 1 detail view
-TODO: Screenshot: project 2 detail view
-
-### 4.3. Use Case 3: Board Intersection
-
-Some `projects` may have shared `JIRA boards`. Assume the Use Case 2 but with this difference:
-
-![](project_use_case_3.png)
-
+_Q: Could I use one connection for incidents both projects?_
+No, that will create problems. [Here is why](HowToOrganizeDevlakeProjects.md#5-note-about-webhooks).
+_Q: And if I used a direct integration instead of a webhook?_
 TODO
 
-## 7. Note About Webhooks
+## 5. Note About Webhooks
 Use a separate webhook for each project! This is how platform DevLake then knows to which project belong the data passed
 via the webhook. If you use the same webhook across multiple projects, the data sent by it **will be replicated per each
 project that uses that webhook**. More information available on the [Webhook](/docs/Plugins/webhook.md) page
