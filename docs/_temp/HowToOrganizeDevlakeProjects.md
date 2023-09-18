@@ -64,13 +64,20 @@ so if you read this page for the first time, make sure to go through them in ord
 
 Quick note 2: if you use webhooks, check the [quick note](HowToOrganizeDevlakeProjects.md#5-note-about-webhooks) about them below.
 
-### 4.1. Use Case 1: Projects DevLake and DevStream
-DevLake and [DevStream](https://github.com/devstream-io/devstream) are both Apache `projects`.
+### 4.1. Use Case 1: Apache Projects
+Apache Software Foundation (ASF) has and is developing many
+[projects](https://en.wikipedia.org/wiki/List_of_Apache_Software_Foundation_projects).
+
+To take an example we will analyze 2 `projects`: DevLake and [Spark](https://spark.apache.org/).
+Both are independent to each other. Assume that ASF wants to check the health of the development
+and maintenance of these projects with DORA.
+
 DevLake manages 3 `repos`: [incubator-devlake](https://github.com/apache/incubator-devlake), 
 [incubator-devlake-website](https://github.com/apache/incubator-devlake-website), 
 and [incubator-devlake-helm-chart](https://github.com/apache/incubator-devlake-helm-chart).
-DevStream also manages 3 `repos`: [devstream](https://github.com/devstream-io/devstream),
-[website](https://github.com/devstream-io/website), and [blog](https://github.com/devstream-io/blog).
+There are many repositories related to _Spark_ one way or another. To keep it simple, 
+we will also pick 3 `repos`: [spark](https://github.com/apache/spark),
+[spark-website](https://github.com/apache/spark-website), and [incubator-livy](https://github.com/apache/incubator-livy).
 
 ![](project_use_case_1.png)
 
@@ -80,7 +87,7 @@ _Note: to avoid confusion between DevLake as a `project` in this use case and De
 we will use complete names i.e. `project DevLake` and `platform DevLake` respectively._
 
 #### 4.1.1. Organizing Projects
-First, we create 2 `projects` on DevLake platform, representing both project DevLake and DevStream.
+First, we create 2 `projects` on DevLake platform, representing both projects DevLake and Spark.
 These steps will suffice for now:
 
 ![](create_project_1.png)
@@ -101,13 +108,13 @@ Same applies to `deployments`, a separate connection is needed in case they are 
 This part is described in [GitHub](/docs/Configuration/GitHub.md) connection configuration.
 For other platforms check the [Configuration Guide](/docs/Configuration)
 
-### 4.1.4 Using connections
+#### 4.1.4 Using connections
 
 At this point, we have projects and connections created on platform DevLake. 
 It is time to bind those connections to the projects. To do so, follow the steps
 described in the [Tutorial](/docs/Configuration/Tutorial.md).
 
-### 4.1.5 Resulting Metrics
+#### 4.1.5 Resulting Metrics
 
 To know if the data of a project is successfully collected go to your DORA Dashboard:
 
