@@ -467,10 +467,10 @@ A cicd_pipeline is the abstraction of a top-level CI/CD execution, e.g. a GitHub
 | `name`          | varchar         | 255        | For gitlab, as there is no name for pipeline, so we use projectId, others have their own name |                   |
 | `result`        | varchar         | 100        | The result of the pipeline. It will be standardized to 'SUCCESS', 'FAILURE' in DevLake based on each plugin's possible results.                                                |                   |
 | `status`        | varchar         | 100        | The status of the pipeline. It will be standardized to 'DONE', 'IN_PROGRESS' in DevLake based on each plugin's possible statues.      |
-| `type`          | varchar         | 100        | The value will be set to 'DEPLOYMENT' if it matched the ReGex configured in the Scope Config, otherwise it is an empty string.                                                            |                   |
-| `environment`   | varchar         | 255        | The value will be set to 'PRODUCTION' if it matched the ReGex configured in the Scope Config, otherwise it is an empty string.                                      |                   |
+| `type`          | varchar         | 100        | The value will be set to 'DEPLOYMENT' if it matched the regex configured in the Scope Config, otherwise it is an empty string.                                                            |                   |
+| `environment`   | varchar         | 255        | The value will be set to 'PRODUCTION' if it matched the regex configured in the Scope Config, otherwise it is an empty string.                                      |                   |
 | `duration_sec`  | bigint unsigned |            | how long does this pipeline take                                                                  |                   |
-| `created_date`  | datetime        | 3          | When this pipeline started                                                                      |                   |
+| `created_date`  | datetime        | 3          | When this pipeline created/started                                                                      |                   |
 | `finished_date` | datetime        | 3          | When this pipeline finished                                                                     |                   |
 | `cicd_scope_id` | longtext        |            | The id of cicd_scope this pipeline belongs to                                                 | FK_cicd_scopes.id |
 
@@ -501,8 +501,8 @@ A cicd_task is the abstraction of the bottom-level CI/CD excecution.
 | `pipeline_id`   | varchar         | 255        | The id of the cicd_pipeline it belongs to                                                                       |                   |
 | `result`        | varchar         | 100        | The result of the task. It will be standardized to 'SUCCESS', 'FAILURE' in DevLake based on each plugin's possible.                                            |                   |
 | `status`        | varchar         | 100        | The status of the task. It will be standardized to 'DONE', 'IN_PROGRESS' in DevLake based on each plugin's possible statues.                                           |                   |
-| `type`          | varchar         | 100        | The value will be set to 'DEPLOYMENT' if it matched the ReGex configured in the Scope Config, otherwise it is an empty string.                                             |                   |
-| `environment`   | varchar         | 255        | The value will be set to 'PRODUCTION' if it matched the ReGex configured in the Scope Config, otherwise it is an empty string.            |
+| `type`          | varchar         | 100        | The value will be set to 'DEPLOYMENT' if it matched the regex configured in the Scope Config, otherwise it is an empty string.                                             |                   |
+| `environment`   | varchar         | 255        | The value will be set to 'PRODUCTION' if it matched the regex configured in the Scope Config, otherwise it is an empty string.            |
 | `duration_sec`  | bigint unsigned |            | How long does this task take                                                              |                   |
 | `started_date`  | datetime        | 3          | When this task started                                                                  |                   |
 | `finished_date` | datetime        | 3          | When this task finished                                                                 |                   |                  |
