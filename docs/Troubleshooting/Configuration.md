@@ -68,7 +68,7 @@ Here is an example of the `docker-compose` installation, the idea applies to oth
     command: --innodb-buffer-pool-size=200M
 ```
 
-### Repositories don't show up for selection as data scopes in GitHub connections
+### GitHub repositories keep loading when adding data scopes to a GitHub connection
 
 See issue [#6038](https://github.com/apache/incubator-devlake/issues/6038)
 
