@@ -12,6 +12,12 @@ When you create an Incoming Webhook within DevLake, DevLake generates a unique U
 
 In v0.14+, users can push "incidents" and "deployments" required by DORA metrics to DevLake via Incoming Webhooks.
 
+Webhooks are meant to be used at the lowest level that you want to relate incidents with deployments. For example, if you want to relate incidents at the individual service level, you will need a webhook per service. If you wish to relate incidents at the product level, you will need a webhook for the product. This is because incidents that are reported to the webhook will be related to the last deployment that was reported to the webhook with a timestamp that is before the incident's timestamp.
+
+Diagram of the relationship between incidents and deployments:
+
+![Change Failure Reporting](/img/Plugins/change-failure.png)
+
 ## Entities
 
 Check out the [Incoming Webhooks entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.
