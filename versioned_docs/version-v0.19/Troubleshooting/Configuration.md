@@ -68,13 +68,13 @@ Here is an example of the `docker-compose` installation, the idea applies to oth
     command: --innodb-buffer-pool-size=200M
 ```
 
-### Repositories don't show up to select for data scopes in GitHub connections
+### Repositories don't show up for selection as data scopes in GitHub connections
+
 See issue [#6038](https://github.com/apache/incubator-devlake/issues/6038)
 
-First you should check whether you access token has necessary permissions, if permissions are correct. Please make sure that after creating the token you have authorized it using SSO if your account are protected by organization SAML enforcement.
+First, check if your access token has the necessary permissions. If the permissions are correct, make sure that you have authorized the token using SSO if your account is protected by organization SAML enforcement.
 
-More details about authenticating with SAML single sign-on can be seen [here](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on).
-
+For more details about authenticating with SAML single sign-on, see here: https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on.
 
 
 ## None of them solve your problem?
