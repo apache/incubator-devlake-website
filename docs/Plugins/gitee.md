@@ -14,9 +14,9 @@ Will be available for Gitee Cloud. Check [this doc](https://devlake.apache.org/d
 
 ## Configuration
 
-In order to fully use this plugin, you will need to get `token` on the Gitee website.
+In order to fully use this plugin, you need to get the `token` on the Gitee website.
 
-A connection should be created before you can collection any data. Currently, this plugin supports creating connection by requesting `connections` API:
+A connection should be created before you can collect any data. Currently, this plugin supports creating connection by requesting the `connections` API:
 
 ```
 curl 'http://localhost:8080/plugins/gitee/connections' \
