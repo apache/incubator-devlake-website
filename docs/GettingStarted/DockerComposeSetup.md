@@ -25,7 +25,7 @@ sidebar_position: 1
    - Method 1: In the docker-compose.yml, set an environment variable ENCRYPTION_SECRET: "copied string"
    - Method 2: Alternatively, you can set the ENCRYPTION_SECRET environment variable in the .env file: ENCRYPTION_SECRET="copied string"
 
-     If you set the ENCRYPTION_SECRET environment variable in both the terminal session and the .env file, the value set in the terminal session takes precedence.
+     If you set the ENCRYPTION_SECRET environment variable in both docker-compose.yml and the .env file, the value set in docker-compose.yml takes precedence.
 
    **Please make sure to keep the ENCRYPTION_SECRET safe as it is used to encrypt sensitive information in the database, such as personal access tokens and passwords. If ENCRYPTION_SECRET is lost, it may not be possible to decrypt this sensitive information.**
 
@@ -44,16 +44,17 @@ sidebar_position: 1
 
 ## Upgrade to a newer version
 
-Please notes:
+Please note:
 
 Note 1: **Back up your Grafana dashboards** before upgrade if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
 
 Note 2: **If you're upgrading from DevLake v0.17.x or earlier versions to v0.18.x or later versions**, you need to find the ENCODE_KEY value in the .env file of devlake container, and assign the value to ENCRYPTION_SECRET via .env file or environment variable in docker-compose.yml
 
 1. Run `docker-compose down` to stop services;
-2. Open file "docker-compose.yml". Change the image tags of "grafana", "devlake" and "config-ui" to the new version, and save; 
-3. If upgrading from earlier versions to v0.18.0+, set ENCRYPTION_SECRET environment variable in docker-compose.yml or .env file, refer to above Note 2.
-4. Run `docker-compose up -d` to start DevLake services.
+2. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.19.0-beta1).
+3. Use the new `docker-compose.yml` and `env.example` to replace old `docker-compose.yml` and `.env`; Or if you have modified/customized values in the old files, compare the new files with the old ones, adjust the old files according to the new ones.
+4. If upgrading from earlier versions to v0.18.0+, set ENCRYPTION_SECRET environment variable in docker-compose.yml or .env file, refer to above Note 2.
+5. Run `docker-compose up -d` to start DevLake services.
 
 ## FAQ
 
