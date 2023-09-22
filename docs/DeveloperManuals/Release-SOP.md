@@ -119,19 +119,6 @@ You can check [Incubator Release Checklist](https://cwiki.apache.org/confluence/
    - Announce the vote result:
      [[RESULT][VOTE] Release Apache DevLake (Incubating) v0.16.0-rc2](https://lists.apache.org/thread/40ktrw42c7hpok7vj33ql6wgdq2mpg92)
 
-**Please note that you need to add this disclaimer to the end of the announce email:**
-
-Disclaimer: Apache DevLake(incubating) is an effort undergoing incubation at the Apache
-Software Foundation (ASF), sponsored by the Apache Incubator PMC.
-
-Incubation is required of all newly accepted projects until a further review
-indicates that the infrastructure, communications, and decision making process
-have stabilized in a manner consistent with other successful ASF projects.
-
-While incubation status is not necessarily a reflection of the completeness
-or stability of the code, it does indicate that the project has yet to be
-fully endorsed by the ASF.
-
 
 ## Release
 
@@ -148,6 +135,19 @@ fully endorsed by the ASF.
   ```
 - Announce release by sending an email to general@incubator.apache.org
   [[ANNOUNCE] Release Apache Devlake(incubating) 0.16.0-incubating](https://lists.apache.org/thread/czf6p3xtlkq6t8g4q35blkbf2xclsl3p)
+
+  **Please note that you need to add this disclaimer to the end of the announce email:**
+
+  Disclaimer: Apache DevLake(incubating) is an effort undergoing incubation at the Apache
+  Software Foundation (ASF), sponsored by the Apache Incubator PMC.
+
+  Incubation is required of all newly accepted projects until a further review
+  indicates that the infrastructure, communications, and decision making process
+  have stabilized in a manner consistent with other successful ASF projects.
+
+  While incubation status is not necessarily a reflection of the completeness
+  or stability of the code, it does indicate that the project has yet to be
+  fully endorsed by the ASF.
 
 ### GitHub
 
