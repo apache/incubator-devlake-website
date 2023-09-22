@@ -16,7 +16,7 @@ Webhooks are meant to be used at the lowest level that you want to relate incide
 
 Diagram of the relationship between incidents and deployments:
 
-![Change Failure Reporting](/img/Plugins/change-failure.png)
+![Change Failure Reporting](/img/Metrics/cfr-definition.png)
 
 ## Entities
 
