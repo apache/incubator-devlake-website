@@ -108,13 +108,13 @@ Same applies to `deployments`, a separate connection is needed in case they are 
 This part is described in [GitHub](/docs/Configuration/GitHub.md) connection configuration.
 For other platforms check the [Configuration Guide](/docs/Configuration)
 
-#### 4.1.4 Using connections
+#### 4.1.4. Using connections
 
 At this point, we have projects and connections created on platform DevLake. 
 It is time to bind those connections to the projects. To do so, follow the steps
 described in the [Tutorial](/docs/Configuration/Tutorial.md).
 
-#### 4.1.5 Resulting Metrics
+#### 4.1.5. Resulting Metrics
 
 To know if the data of a project is successfully collected go to your DORA Dashboard:
 
@@ -162,30 +162,41 @@ the `projects` **atomic**.
 
 #### 4.2.2. Adding Connections
 
-For payments `project` this is straightforward, just create: 
-- 1 connection for all `repos` to gather `pull requests`,
-- 1 connection for all `deployments`
+It is better to create just one connection and then reuse it across projects 
+by adding data scopes. It is NOT recommended creating multiple connections for instance, GitHub repos, as it  
+will increase the time to collect the data because the shared repos will be stored in multiple copies in the database.
+
+The only exception are the webhooks: **we must have 1 connection per project**, as this is the only way how
+DevLake knows to which `project` which `incident` goes.
+
+So, in total we will have only these connections:
+- 1 connection for all GitHub `repos` to gather `pull requests`
+- 1 connection to Jenkins to gather all `deployments`
 - 1 connection to Jira to gather `incidents`
+- 2 webhook connections to gather `incidents`: 1 per each `project` that uses webhooks (_it-legacy_ and _it-new_)
+
+#### 4.2.3. Setting Scopes
+Now we may add the connections to our projects and set the scope to them. 
+Here is how to do that: [Configuration Guide](/docs/Configuration).
+This is the scope specification we need to add to our projects:
+
+For payments `project`: 
+- add 1 scope to GitHub connection for _p1...p10_ `repos` to gather their `pull requests`
+- add 1 scope to Jenkins for `deployments` of _p1...p10_ `repos`
+- add 1 scope to Jira to gather `incidents`
 
 For it-legacy `project`:
-- 1 connection for `repos` _it-legacy-1_ and _it-legacy-1_
-- 1 more connection for `repos`, this time for _it-core-1_ and _it-core-1_
-- 2 connections for `deployments` organized the same fashion as those for `repos`
-- 1 webhook connection for `incidents` exclusively for it-legacy `project`
+- add 1 scope to GitHub for `repos` _it-legacy-1_, _it-legacy-2_, _it-core-1_ and _it-core-2_ to gather their `pull requests`
+- add 1 scope to Jenkins for `deployments` of _it-legacy-1_, _it-legacy-2_, _it-core-1_ and _it-core-2_ `repos`
+- include the _it-legacy_ webhook for gathering `incidents`
 
 For it-new `project`:
-- 1 connection for `repos` _it-new-1_ and _it-new-1_
-- reuse the previously created connection for the _core_ `repos`
-- 1 connections for `deployments` _it-new-1_ and _it-new-1_
-- reuse the previously created connection for the _core_ `deployments`
-- 1 webhook connection for `incidents` exclusively for it-new `project`
+- add 1 scope to GitHub for `repos` _it-new-1_, _it-new-2_, _it-core-1_ and _it-core-2_ to gather their `pull requests`
+- add 1 scope to Jenkins for `deployments` of _it-new-1_, _it-new-2_, _it-core-1_ and _it-core-2_ `repos`
+- include the _it-new_ webhook for gathering `incidents`
 
-##### Q&A
-Q1: _Could I use one connection for incidents both projects?_
-   - A: No, that will create problems. [Here is why](HowToOrganizeDevlakeProjects.md#5-note-about-webhooks).
-
-_Q2: And if I used a direct integration instead of a webhook?_
-   - A: Yes, there is no problem in that case
+#### 4.2.4. Resulting Metrics
+See [4.1.5 Resulting Metrics](HowToOrganizeDevlakeProjects.md#415-resulting-metrics)
 
 ## 5. Note About Webhooks
 Use a separate webhook for each project! This is how platform DevLake then knows to which project belong the data passed
