@@ -12,13 +12,13 @@ Herein, we will explore various use cases to demonstrate the practical applicati
 
 Development teams typically manage `pull requests`, `deployments`, and `incidents` using various boards.
 
-Based on such, we want to measure their productivity and stability. This is how [DORA](docs/DORA.md) does that:
+Based on such, we want to measure their productivity and stability. This is how [DORA](../DORA.md) does that:
 - Productivity:
-  - How many times does the team `deploy`? (a.k.a. [Deployment Frequency](docs/Metrics/DeploymentFrequency.md))
-  - How fast are the `pull requests` resolved? (a.k.a. [Lead Time](docs/Metrics/LeadTimeForChanges.md))
+  - How many times does the team `deploy`? (a.k.a. [Deployment Frequency](../Metrics/DeploymentFrequency.md))
+  - How fast are the `pull requests` resolved? (a.k.a. [Lead Time](../Metrics/LeadTimeForChanges.md))
 - Stability:
-  - How many `incidents` per `deploys` does the team have? (a.k.a. [Change Failure Rate](docs/Metrics/CFR.md))
-  - How fast are these `incidents` solved? (a.k.a. [Median Time to Restore](docs/Metrics/MTTR.md))
+  - How many `incidents` per `deploys` does the team have? (a.k.a. [Change Failure Rate](../Metrics/CFR.md))
+  - How fast are these `incidents` solved? (a.k.a. [Median Time to Restore](../Metrics/MTTR.md))
 
 All these questions/metrics are based on either `pull requests`, `deployments`, or `incidents`.
 
@@ -44,11 +44,11 @@ In practical terms, a project usually involves building or researching solutions
 or explore new opportunities. A DevLake project is a grouping of `pull requests`, `deployments`, or `incidents`. 
 It can be seen as a real-world project or product line. DevLake measures DORA metrics for each project.
 
-![](project_pipeline.png)
+![](../Configuration/images/HowToOrganizeDevlakeProjects/project_pipeline.png)
 
 Note: _It does not matter if a team works on a particular repository more than another.
 The metrics are calculated over the entire set of repos, and the values are accumulated.
-More on that: [Debugging DORA Issue Metrics](docs/Troubleshooting/Dashboard.md#debugging-dora-issue-metrics)._
+More on that: [Debugging DORA Issue Metrics](../Troubleshooting/Dashboard.md#debugging-dora-issue-metrics)._
 
 ## 3. As a team lead, how many DevLake projects do I need?
 
@@ -86,7 +86,7 @@ There are many repos related to _Spark_ in one way or another. To keep it simple
 we will also pick 3 `repos`: [spark](https://github.com/apache/spark),
 [spark-website](https://github.com/apache/spark-website), and [incubator-livy](https://github.com/apache/incubator-livy).
 
-![](project_use_case_1.png)
+![](../Configuration/images/HowToOrganizeDevlakeProjects/project_use_case_1.png)
 
 Both projects use GitHub for storing code (including `pull requests`), `deployments` on GitHub Actions, and `incidents`.
 
@@ -97,8 +97,8 @@ we will use complete names i.e. `project DevLake` and `platform DevLake` respect
 First, create two projects on the DevLake platform, one for DevLake and one for Spark. 
 These will represent real-world projects.
 
-![](create_project_1.png)
-![](create_project_2.png)
+![](../Configuration/images/HowToOrganizeDevlakeProjects/create_project_1.png)
+![](../Configuration/images/HowToOrganizeDevlakeProjects/create_project_2.png)
 
 Once these are created, the connections created in the following steps will be bound to them.
 
@@ -125,16 +125,16 @@ described in the [Tutorial](/docs/Configuration/Tutorial.md).
 
 To know if the data of a project is successfully collected go to your DORA Dashboard:
 
-![](navigate_to_dora_1.png)
-![](navigate_to_dora_2.png)
+![](../Configuration/images/HowToOrganizeDevlakeProjects/navigate_to_dora_1.png)
+![](../Configuration/images/HowToOrganizeDevlakeProjects/navigate_to_dora_2.png)
 
 If everything goes well, you should see all the 4 charts.
 If something is wrong, and you are puzzled as to why, check out the
-[Debugging Dora Issue Metrics](docs/Troubleshooting/Dashboard.md#debugging-dora-issue-metrics) page.
+[Debugging Dora Issue Metrics](../Troubleshooting/Dashboard.md#debugging-dora-issue-metrics) page.
 
 #### 4.1.6. How can I observe metrics by project?
 In the same DORA dashboard check out this menu point:
-![](observe_metrics_by_project_panel.png)
+![](../Configuration/images/HowToOrganizeDevlakeProjects/observe_metrics_by_project_panel.png)
 
 The metrics should change when you select or deselect projects, representing the projects you selected.
 
@@ -149,7 +149,7 @@ Here's a simplified representation of this scenario:
 - The Internal Tools team manages two projects: “it-legacy” and “it-new”.
 - Both teams use different sets of tools and boards.
 
-![](project_use_case_2.png)
+![](../Configuration/images/HowToOrganizeDevlakeProjects/project_use_case_2.png)
 
 #### Step-by-Step Simplification:
 1. **Define the Teams and Projects:**
