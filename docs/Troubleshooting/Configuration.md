@@ -68,6 +68,15 @@ Here is an example of the `docker-compose` installation, the idea applies to oth
     command: --innodb-buffer-pool-size=200M
 ```
 
+### GitHub repositories keep loading when adding data scopes
+
+See issue [#6038](https://github.com/apache/incubator-devlake/issues/6038)
+
+If you're having trouble adding data scopes to a GitHub connection because the repositories keep loading, there are a few things you can check:
+1. Make sure your access token has the necessary permissions.
+2. If your account is protected by organization SAML enforcement, make sure you've authorized the token using SSO.
+
+For more details about authenticating with SAML single sign-on, see here: https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on.
 
 ## None of them solve your problem?
 

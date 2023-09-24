@@ -13,9 +13,9 @@ Will be available for all versions. Check [this doc](https://devlake.apache.org/
 
 ## Configuration
 
-In order to fully use this plugin, you will need to get `app_id` and `app_secret` from a Feishu administrator (for help on App info, please see [official Feishu Docs](https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/tenant_access_token_internal)),
+In order to fully use this plugin, you need to get `app_id` and `app_secret` from a Feishu administrator (for help on App info, please see [official Feishu Docs](https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/tenant_access_token_internal)).
 
-A connection should be created before you can collection any data. Currently, this plugin supports creating connection by requesting `connections` API:
+A connection should be created before you can collect any data. Currently, this plugin supports creating connection by requesting the `connections` API:
 
 ```
 curl 'http://localhost:8080/plugins/feishu/connections' \

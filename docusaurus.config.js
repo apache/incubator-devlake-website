@@ -42,6 +42,9 @@ const versions = require('./versions.json');
               path: '',
               banner: 'none',
             },
+            "v0.19": {
+              banner: 'none',
+            },
             "v0.18":{
               banner: 'none',
             },

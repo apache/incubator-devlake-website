@@ -39,7 +39,7 @@ Make sure you have the `node` version `>=16.14`. If you have a lower version of 
   * blog.js or docs.js or site.js
 3. Send a PR to **main** branch.
 
-For detailed steps to create a PR, please refer: [Development Workflow page](/community/MakingContributions/development-workflow/)
+For detailed steps to create a PR, please refer: [Development Workflow page](/community/MakingContributions/development-workflow.md)
 
 ## Blog Submission
 
