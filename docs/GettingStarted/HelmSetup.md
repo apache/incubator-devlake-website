@@ -70,6 +70,8 @@ grafana by url `http://YOUR-NODE-IP:30091`
 
 **Note:**
 
+**Back up your Grafana dashboards** before upgrading if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
+
 **If you're upgrading from DevLake v0.17.x or earlier versions to v0.18.x or later versions:**
 
 1. Copy the ENCODE_KEY value from /app/config/.env of the lake pod (e.g. devlake-lake-0), and replace the <ENCRYPTION_SECRET> in the upgrade command below.
