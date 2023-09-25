@@ -46,14 +46,14 @@ sidebar_position: 1
 
 Please note:
 
-Note 1: **Back up your Grafana dashboards** before upgrade if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
+Note 1: **Back up your Grafana dashboards** before upgrading if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
 
 Note 2: **If you're upgrading from DevLake v0.17.x or earlier versions to v0.18.x or later versions**, you need to find the ENCODE_KEY value in the .env file of devlake container, and assign the value to ENCRYPTION_SECRET via .env file or environment variable in docker-compose.yml
 
 1. Run `docker-compose down` to stop services;
 2. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases/tag/v0.18.0).
-3. Use the new `docker-compose.yml` and `env.example` to replace old `docker-compose.yml` and `.env`; Or if you have modified/customized values in the old files, compare the new files with the old ones, adjust the old files according to the new ones.
-4. If upgrading from earlier versions to v0.18.0+, set ENCRYPTION_SECRET environment variable in docker-compose.yml or .env file, refer to above Note 2.
+3. Use the new `docker-compose.yml` and `env.example` to replace the old `docker-compose.yml` and `.env`; Or if you have modified/customized values in the old files, compare the new files with the old ones, adjust the old files according to the new ones.
+4. If upgrading from earlier versions to v0.18.0+, set the ENCRYPTION_SECRET environment variable in docker-compose.yml or .env file, refer to above Note 2.
 5. Run `docker-compose up -d` to start DevLake services.
 
 ## FAQ
