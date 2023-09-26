@@ -1,8 +1,8 @@
 ---
-title: "Maintenance Troubleshooting"
+title: "Mysql Troubleshooting"
 sidebar_position: 4
 description: >
-  Maintenance Troubleshooting
+  Mysql Troubleshooting
 ---
 
 ## How to manage the quickly increasing MySQL disk consumption?
@@ -89,3 +89,14 @@ services:
 ```bash
   docker-compose restart mysql
 ```
+
+
+### How to connect mysql server which requires SSL?
+1. Skip-verifying the SSL certificate: you can add &tls=skip-verify to DB_URL variable, for example:
+   ```
+   DB_URL=mysql://merico:merico@localhost:3306/lake?charset=utf8mb4&parseTime=True&loc=UTC&tls=skip-verify
+   ```
+2. Verify the SSL certificate: you can add &ca-cert=/path/to/your/ca-certificate.crt to DB_URL variable, for example:
+   ```
+   DB_URL=mysql://merico:merico@lake.mysql.database.azure.com:3306/lake?charset=utf8mb4&parseTime=True&ca-cert=/path/to/your/DigiCertGlobalRootCA.crt.pem
+   ```
