@@ -162,7 +162,7 @@ You can check [Incubator Release Checklist](https://cwiki.apache.org/confluence/
      ```
 
 2. Apache incubator community vote:
-   - Start the [vote]((https://lists.apache.org/thread/5dbqc3t2bq7kfqccobrh7j9vqopj030k)) by sending an email to general@incubator.apache.org
+   - Start the [vote](https://lists.apache.org/thread/5dbqc3t2bq7kfqccobrh7j9vqopj030k) by sending an email to general@incubator.apache.org
     Title: [VOTE] Release Apache DevLake (Incubating) v{{.Version}}-rc{{.RC}}
 
     Content:
