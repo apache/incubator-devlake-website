@@ -100,3 +100,4 @@ services:
    ```
    DB_URL=mysql://merico:merico@lake.mysql.database.azure.com:3306/lake?charset=utf8mb4&parseTime=True&ca-cert=/path/to/your/DigiCertGlobalRootCA.crt.pem
    ```
+   Note: It is not supported in python plugin.
