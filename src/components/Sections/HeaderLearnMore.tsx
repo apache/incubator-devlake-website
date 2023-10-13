@@ -19,7 +19,7 @@ export function HeaderLearnMore() {
         items-center
         justify-center
         mobile:flex-wrap sm:flex-wrap 
-        mobile:w-[342px] sm:w-[696px]
+        mobile:w-[342px] sm:w-full
         mx-auto
         w-[100%]
     "
