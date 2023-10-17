@@ -19,7 +19,7 @@ Apache DevLake is designed for developer teams looking to make better sense of t
 ## What can be accomplished with DevLake?
 - Unified data integration: Bring together DevOps data from across the Software Development Life Cycle (SDLC) with our [standard data model](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema/).
 - Out-of-the-box insights: Access key engineering metrics through intuitive, use-case driven dashboards.
-- Customizable: Extend DevLake to align with your unique needs, adding [data sources](https://devlake.apache.org/docs/next/Overview/SupportedDataSources/), [metrics](https://devlake.apache.org/docs/next/Metrics/), and [dashboards](https://devlake.apache.org/livedemo/EngineeringLeads/DORA/) as required.
+- Customizable: Extend DevLake to align with your unique needs, adding [data sources](https://devlake.apache.org/docs/Overview/SupportedDataSources/), [metrics](https://devlake.apache.org/docs/Metrics/), and [dashboards](https://devlake.apache.org/livedemo/EngineeringLeads/DORA/) as required.
 - Industry standards implementation: Use DevLake to apply recognized [DORA metrics](https://devlake.apache.org/docs/DORA/) to optimize DevOps performance.
 - Create a thriving culture: DevLake is centred on healthy practises that may help teams adopt and build a practical data-driven culture.
 
@@ -29,7 +29,7 @@ Apache DevLake is designed for developer teams looking to make better sense of t
 - Alternatively, if you're powered by Kuberenetes, then check out the [Helm setup](../GettingStarted/HelmSetup.md).
 
 ### 2. Configuring Data Source
-- Once Installed, you can start configuring DevLake with supported [data sources](https://devlake.apache.org/docs/next/Overview/SupportedDataSources) like GitHub, GitLab, Jira, Jenkins, BitBucket, Azure DevOps, SonarQube, PagerDuty, TAPD, ZenTao, Teambition, and we're extending our support to many other tools, feel free to check out the official roadmap.
+- Once Installed, you can start configuring DevLake with supported [data sources](https://devlake.apache.org/docs/Overview/SupportedDataSources) like GitHub, GitLab, Jira, Jenkins, BitBucket, Azure DevOps, SonarQube, PagerDuty, TAPD, ZenTao, Teambition, and we're extending our support to many other tools, feel free to check out the official roadmap.
 - If your CI / CD tool is not supported yet, then you may use the [Webhooks](https://devlake.apache.org/docs/Plugins/webhook/) feature.
 
 ![img](../Configuration/images/introduction-userflow1.png)
