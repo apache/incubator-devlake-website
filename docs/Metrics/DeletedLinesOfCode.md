@@ -32,7 +32,7 @@ The following SQL shows how to find the `deleted lines of code` in specific repo
 
 ```
 SELECT
-  sum(c.deletions) as added_lines_of_code
+  sum(c.deletions) as deleted_lines_of_code
 FROM 
   commits c
   LEFT JOIN repo_commits rc ON c.sha = rc.commit_sha
