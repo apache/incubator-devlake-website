@@ -112,17 +112,6 @@ export function HomepageHeader() {
                 flex
                 whitespace-nowrap
                 rounded-[8px] sm:rounded-[5px] mobile:rounded-[5px]
-    
-        
-            
-              
-        
-    
-            
-            Expand All
-        
-        @@ -121,14 +125,15 @@ export function HomepageHeader() {
-      
                 bg-neutral-invert
                 text-primary-500
                 border-2 border-primary-500 border-solid
