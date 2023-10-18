@@ -49,7 +49,7 @@ This bug happens occasionally in v0.14.x and previous versions. It is fixed by c
 We have had a couple of reports suggesting MySQL InnoDB would fail with the message.
 
 - [Error 1206: The total number of locks exceeds the lock table size · Issue #3849 · apache/incubator-devlake](https://github.com/apache/incubator-devlake/issues/3849)
-- [[Bug][Gitlab] gitlab collectApiJobs task failed for mysql locks error · Issue #3653 · apache/incubator-devlake](https://github.com/apache/incubator-devlake/issues/3653)
+- [[Bug][GitLab] gitlab collectApiJobs task failed for mysql locks error · Issue #3653 · apache/incubator-devlake](https://github.com/apache/incubator-devlake/issues/3653)
 
 The cause of the problem is:
 
