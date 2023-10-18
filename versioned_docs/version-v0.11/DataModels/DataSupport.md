@@ -15,7 +15,7 @@ DevLake supports the following data sources. The data from each data source is c
 | AE          |                                      | `ae`    |
 | Feishu      | Cloud                                |`feishu` |
 | GitHub      | Cloud                                |`github`, `gitextractor`, `refdiff` |
-| Gitlab      | Cloud, Community Edition 13.x+       |`gitlab`, `gitextractor`, `refdiff` |
+| GitLab      | Cloud, Community Edition 13.x+       |`gitlab`, `gitextractor`, `refdiff` |
 | Jenkins     | 2.263.x+                             |`jenkins` |
 | Jira        | Cloud, Server 8.x+, Data Center 8.x+ |`jira` |
 | TAPD        | Cloud                                | `tapd` |
