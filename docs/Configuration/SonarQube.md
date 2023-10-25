@@ -24,7 +24,7 @@ The endpoint url should end with `/`.
 
 ### Token
 
-Please use a system admin account to create the SonarQube token, because some SonarQube APIs require this permission to list all projects. Learn about [how to create a SonarQube token](https://sonarqube.inria.fr/sonarqube/documentation/user-guide/user-token/).
+Please use a system admin account to create the SonarQube token, because some SonarQube APIs require this permission to list all projects. Learn about [how to create a SonarQube token](https://docs.sonarsource.com/sonarqube/8.9/user-guide/user-account/generating-and-using-tokens/#generating-a-token).
 
 ### Proxy URL (Optional)
 
