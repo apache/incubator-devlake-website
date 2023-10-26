@@ -63,7 +63,7 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 Sample CURL to post deployments to DevLake. The following command should be replaced with the actual curl command copied from your Config UI:
 
 ```
-curl http://localhost:8080/plugins/webhook/1/deployments -X 'POST' -d '{
+curl http://localhost:8080/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
     "pipeline_id": "optional-pipeline-id",
     "environment":"PRODUCTION",
     "repo_url":"https://github.com/apache/incubator-devlake/",
@@ -80,7 +80,7 @@ curl http://localhost:8080/plugins/webhook/1/deployments -X 'POST' -d '{
 If you have set a [username/password](GettingStarted/Authentication.md) for Config UI, you'll need to add them to the curl command to register a `deployment`:
 
 ```
-curl http://localhost:8080/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
+curl http://localhost:8080/api/rest/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
     "commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d",
     "repo_url":"https://github.com/apache/incubator-devlake/",
     "start_time":"2020-01-01T12:00:00+00:00",
@@ -122,7 +122,7 @@ jobs:
 
             # Send the request to DevLake after deploy
             # The values start with a '$CIRCLE_' are CircleCI's built-in variables
-            curl http://localhost:8080/plugins/webhook/1/deployments -X 'POST' -d "{
+            curl http://localhost:8080/api/rest/plugins/webhook/1/deployments -X 'POST' -d "{
               \"commit_sha\":\"$CIRCLE_SHA1\",
               \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
               \"start_time\":\"$start_time\"
@@ -141,7 +141,7 @@ If you want to collect issue or incident data from your system, you can use the 
 
 #### Register Issues - Update or Create Issues
 
-`POST http://localhost:8080/plugins/webhook/1/issues`
+`POST http://localhost:8080/api/rest/plugins/webhook/1/issues`
 
 needs to be called when an issue or incident is created. The body should be a JSON and include columns as follows:
 
@@ -176,22 +176,37 @@ More information about these columns at [DomainLayerIssueTracking](https://devla
 
 #### Register Issues - Close Issues (Optional)
 
-`POST http://localhost:8080/plugins/webhook/1/issue/:issueId/close`
+`POST http://localhost:8080/api/rest/plugins/webhook/1/issue/:issueId/close`
 
 needs to be called when an issue or incident is closed. Replace `:issueId` with specific strings and keep the body empty.
 
 #### Register Issues - Sample API Calls
 
-Sample CURL for Issue Creating :
+Sample CURL for creating an incident:
 
 ```
-curl http://localhost:8080/plugins/webhook/1/issues -X 'POST' -d '{"url":"","issue_key":"DLK-1234","title":"a feature from DLK","description":"","epic_key":"","type":"BUG","status":"TODO","original_status":"created","story_point":0,"resolution_date":null,"created_date":"2020-01-01T12:00:00+00:00","updated_date":null,"lead_time_minutes":0,"parent_issue_key":"DLK-1200","priority":"","original_estimate_minutes":0,"time_spent_minutes":0,"time_remaining_minutes":0,"creator_id":"user1131","creator_name":"Nick name 1","assignee_id":"user1132","assignee_name":"Nick name 2","severity":"","component":""}'
+curl http://localhost:8080/api/rest/plugins/webhook/1/issues -X 'POST' -d '{
+  "issue_key":"DLK-1234",
+  "title":"a feature from DLK",
+  "description":"",
+  "url":"",
+  "type":"INCIDENT",
+  "status":"TODO",
+  "created_date":"2020-01-01T12:00:00+00:00",
+  "updated_date":"2020-01-01T12:00:00+00:00",
+  "priority":"",
+  "severity":"",
+  "creator_id":"user1131",
+  "creator_name":"Nick name 1",
+  "assignee_id":"user1132",
+  "assignee_name":"Nick name 2"
+}'
 ```
 
 Sample CURL for Issue Closing:
 
 ```
-curl http://localhost:8080/plugins/webhook/1/issue/DLK-1234/close -X 'POST'
+curl http://localhost:8080/api/rest/plugins/webhook/1/issue/DLK-1234/close -X 'POST'
 ```
 
 ## References
