@@ -508,6 +508,27 @@ A cicd_task is the abstraction of the bottom-level CI/CD excecution.
 | `finished_date` | datetime        | 3          | When this task finished                                                                 |                   |                  |
 | `cicd_scope_id` | longtext        |            | The id of cicd_scope this task belongs to                                             | FK_cicd_scopes.id |
 
+#### cicd_deployments
+A cicd_deployment is a deployment in a specific repo. It may come from several sources:
+
+- Domain layer [cicd_pipelines](#cicd_pipelines), such as GitHub workflow runs, GitLab pipelines, Jenkins builds and BitBucket pipelines, etc. Deployments from cicd_pipelines will be transformed according to the regex configuration set in the Blueprint transformation before adding to this table.
+- Tool layer deployments: in v0.20, only the BitBucket\Bamboo\GitLab and GitHub(Use GraphQL APIs) plugins collect the independent deployment entity which you can find in table.\_tool_bitbucket_deployments and \_tool_bamboo_deploy_builds, there will be more in the future.
+- Deployments pushed directly from webhooks
+
+| **field**       | **type** | **length** | **description**                                                                                    | **key**           |
+|:----------------|:---------|:-----------|:---------------------------------------------------------------------------------------------------|:------------------|
+| `id`            | varchar  | 255        | The deployment_id of this deployment. The value will be set with `id` when it comes from webhooks. | PK                |
+| `cicd_scope_id` | varchar  | 255        | The id of cicd_scope this deployment belongs to                                                    | FK_cicd_scopes.id |
+| `name`          | varchar  | 255        | The name of the deployment                                                                         |                   |
+| `result`        | varchar  | 100        | The result of the deployment, e.g. SUCCESS, FAILURE                                                |                   |
+| `status`        | varchar  | 100        | The status of this deployment, e.g. IN_PROGRESS, DONE                                              |                   |
+| `environment`   | varchar  | 255        | The environment to deploy, only 'PRODUCTION' deployment will appear in v0.17                       |                   |
+| `created_date`  | datetime | 3          | The created time of the deployment. Deprecated.                                                    |                   |
+| `started_date`  | datetime | 3          | The started time of the deployment.                                                                |                   |
+| `finished_date` | datetime | 3          | The finished time of the deployment                                                                |                   |
+| `duration_sec`  | bigint   |            | The time this deployment takes                                                                     |                   |
+
+
 #### cicd_deployment_commits
 
 A cicd_deployment_commit is a deployment in a specific repo. A deployment may come from several sources:
