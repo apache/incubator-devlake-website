@@ -15,7 +15,7 @@ This plugin extracts commits and references from a remote or local git repositor
    NOTE: you can run only one issue collection stage as described in the Github Plugin README.
 3. Use the [RefDiff](./refdiff.md) plugin to calculate version diff, which will be stored in `refs_commits` table.
 
-Note: If you do not want to collect commit files, you can bypass this step by setting the SKIP_COMMIT_FILES=true in environment variable or .env file. This will prevent the plugin from collecting commit file data.
+Note: If you do not want to collect commit files, you can bypass this step by setting the SKIP_COMMIT_FILES=true in the .env file. This will prevent the plugin from collecting commit file data.
 
 ## Sample Request
 

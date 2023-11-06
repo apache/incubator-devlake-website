@@ -108,4 +108,4 @@ When users have large repositories with a substantial number of commit files to 
     1. The time to collect Git data is too long
     2. Errors occurred while writing data to the DevLake database
    
-To address this, you can bypass this step by setting the SKIP_COMMIT_FILES=true in environment variable or .env file.
+To address this, you can bypass this step by setting the SKIP_COMMIT_FILES=true in the .env file.
