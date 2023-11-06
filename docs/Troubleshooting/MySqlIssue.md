@@ -101,3 +101,11 @@ services:
    DB_URL=mysql://merico:merico@lake.mysql.database.azure.com:3306/lake?charset=utf8mb4&parseTime=True&tls=custom&ca-cert=/path/to/your/DigiCertGlobalRootCA.crt.pem
    ```
    Note: in Python plugins, it will fallback to the `skip-verify` policy.
+
+### How to skip "subtask collectGitCommits ended unexpectedly, deadlock found when trying to get lock"? 
+When users have large repositories with a substantial number of commit files to collect, it can lead to the following issues:
+
+    1. The time to collect Git data is too long
+    2. Errors occurred while writing data to the DevLake database
+   
+To address this, you can bypass this step by setting the SKIP_COMMIT_FILES=true in the .env file.
