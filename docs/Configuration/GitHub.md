@@ -19,7 +19,7 @@ Give your connection a unique name to help you identify it in the future.
 
 #### Endpoint URL
 
-This should be a valid REST API endpoint, eg. `https://api.github.com/`. The URL should end with `/`.
+This should be a valid REST API endpoint, e.g. `https://api.github.com/`. The URL should end with `/`.
 
 #### Personal Access Token(s)
 
@@ -92,14 +92,14 @@ Choose the GitHub repositories you wish to collect either by finding them in the
 
 ### Step 1.3 - Add Scope Config (Optional)
 Scope config contains two parts: 
-- The entities of which domain you wish to collect: Usually, you don't have to modify this part. However, if you don't want to collect certain GitHub entities, you can unselect some entities to accerlerate the collection speed.
+- The entities of which domain you wish to collect: Usually, you don't have to modify this part. However, if you don't want to collect certain GitHub entities, you can unselect some entities to accelerate the collection speed.
   - Issue Tracking: GitHub issues, issue comments, issue labels, etc.
   - Source Code Management: GitHub repos, refs, commits, etc.
   - Code Review: GitHub PRs, PR comments and reviews, etc.
   - CI/CD: GitHub Workflow runs, GitHub Workflow jobs, etc.
   - Cross Domain: GitHub accounts, etc.
 - The transformations on the GitHub data you are going to collect.
-  - The details of the transformations will be exlained below.
+  - The details of the transformations will be explained below.
   - Without adding transformation rules, you can still view the "[GitHub Metrics](/livedemo/DataSources/GitHub)" dashboard. However, if you want to view "[Weekly Bug Retro](/livedemo/QAEngineers/WeeklyBugRetro)", "[Weekly Community Retro](/livedemo/OSSMaintainers/WeeklyCommunityRetro)" or other pre-built dashboards, the following transformation rules, especially "Type/Bug", should be added.
   - Each GitHub repo has at most ONE set of transformations.
 
@@ -152,7 +152,7 @@ You can also select "Not using Jobs in GitHub Action as Deployments" if you're n
 
 #### Additional Settings (Optional)
 
-- Tags Limit: It'll compare the last N pairs of tags to get the "commit diff', "issue diff" between tags. N defaults to 10.
+- Tags Limit: It'll compare the last N pairs of tags to get the "commit diff", "issue diff" between tags. N defaults to 10.
 
   - commit diff: new commits for a tag relative to the previous one
   - issue diff: issues solved by the new commits for a tag relative to the previous one
@@ -166,7 +166,7 @@ Please click `Save` to save the transformation rules for the repo. In the data s
 
 ## Step 2 - Collect Data in a Project
 ### Step 2.1 - Create a Project
-Collecing GitHub data reuiqres creating a project first. You can visit the Project page from the side menu and create a new project by following the instructions on the user interface.
+Collecting GitHub data requires creating a project first. You can visit the Project page from the side menu and create a new project by following the instructions on the user interface.
 
 ![create-a-project](images/create-a-project.png)
 
@@ -179,7 +179,7 @@ Please note: if you don't see the repositories you are looking for, please check
 ### Step 2.3 - Set the Sync Policy
 There are three settings for Sync Policy:
 - Data Time Range: You can select the time range of the data you wish to collect. The default is set to the past six months.
-- Sync Frequency: You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your prefered schedule.
+- Sync Frequency: You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your preferred schedule.
 - Skip Failed Tasks: sometime a few tasks may fail in a long pipeline; you can choose to skip them to avoid spending more time in running the pipeline all over again.
 
 ![sync-policy](images/sync-policy.png)
