@@ -34,9 +34,11 @@ To install the chart with release name `devlake`,follow these steps:
 
     **Please make sure to keep the ENCRYPTION_SECRET safe as it is used to encrypt sensitive information in the database, such as personal access tokens and passwords. If ENCRYPTION_SECRET is lost, it may not be possible to decrypt this sensitive information.**
 
-3.  By default, the timezone is UTC. You can set your timezone via --set envs.TZ="your timezone",grafana.env.TZ="your timezone"
+3.  By default, the timezone is UTC. You can set your timezone via ```--set envs.TZ="your timezone",grafana.env.TZ="your timezone"```.
 
-4.  Install the chart by running the following commands:
+4.  By default, a random password is generated and stored in a Kubernetes Secret for the Grafana admin user. Alternatively, you can explicitly set the password via ```--set grafana.adminPassword=<your password>```.
+
+5.  Install the chart by running the following commands:
 
     ```shell
     helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
