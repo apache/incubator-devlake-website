@@ -21,13 +21,16 @@ For now, only the following five types were supported:
 - bigint
 - float
 - timestamp
+- array
 
 ## Sample Request
 
 ### Trigger Data Extraction
 To extract data, switch to `Advanced Mode` on the first step of creating a Blueprint and paste a JSON config as the following:
 
-The example below demonstrates how to extract status name from the table `_raw_jira_api_issues` and assign it to the `x_test` column of the table `issues`.
+The example below demonstrates how to extract status name from the table `_raw_jira_api_issues`:
+  1. For non-array types: Extract the status name from the `_raw_jira_api_issues` table and assign it to the `x_test` column in the `issues` table.
+  2. For array types: Extract the status name from the `_raw_jira_api_issues` table, and create a new `issue_custom_array_fields` table containing `issue_id`, `field_id`, and `value` columns. This table has a one-to-many relationship with the `issues` table. `issue_id` is the id corresponding to the issue, `x_test` corresponds to the `field_id` column, and the value of `x_test` corresponds to the `value` column.
 We leverage the package `https://github.com/tidwall/gjson` to extract value from the JSON. For the extraction syntax, please refer to this [docs](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)
 
 - `table`: domain layer table name
