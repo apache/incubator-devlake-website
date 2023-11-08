@@ -66,7 +66,7 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 
 #### Repositories
 
-![gitlab-set-data-scope](/img/ConfigUI/gitlab-set-data-scope.png)
+![gitlab-set-data-scope](images/gitlab-set-data-scope.png)
 
 
 Select the GitLab repositories you want to collect from the miller column. **Please note that repositories with guest permissions or those that are archived have already been excluded.** You can also use the search function to find them. Limited by the GitLab API, You need to type more than 2 characters to search. The repositories only with guest permissions are not shown in the list.
