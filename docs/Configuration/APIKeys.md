@@ -24,7 +24,7 @@ It is typically not necessary to manually create an API key from the 'API keys' 
 1. Navigate to the 'Data Connection' page.
 2. Create a new webhook, and an API key will be automatically generated for you.
 3. You can copy the provided curl commands, which include the API key, and save them in your local environment for future use.
-4. If you happen to forget to save the API key, don't worry. You can view the webhook details and regenerate a new API key if needed. The 'API keys' page in DevLake displays a list of API keys, including the automatically generated ones associated with webhooks.
+4. If you happen to forget to save the API key, do not worry. You can view the webhook details and regenerate a new API key if needed. It is important to note that the API keys automatically generated for webhooks will not be displayed on the 'API keys' page.
 
 ![api-key-list](images/auto-generated-api-key.png)
 
