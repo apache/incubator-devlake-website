@@ -98,6 +98,7 @@ An `issue` is the abstraction of GitHub/GitLab/BitBucket/Jira/TAPD/Zentao... iss
 | `lead_time_minutes`         | int      |            | Describes the cycle time from issue creation to issue resolution.<ul><li>For issues whose type = 'REQUIREMENT' and status = 'DONE', lead_time_minutes = resolution_date - created_date. The unit is minute.</li><li>For issues whose type != 'REQUIREMENT' or status != 'DONE', lead_time_minutes is null</li></ul>                                                                                                                                                                                                                                                                                       |         |
 | `original_project`          | varchar  | 255        | The name of the original project this issue belongs to. Transformed from a Jira project's name, a TAPD workspace's name, etc.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
 | `icon_url`                  | varchar  | 255        | The url of the issue icon.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |         |
+| `x_custom_field_1`         | It depends on the type of the converted field | -        | The value of the custom field. This field is available when utilizing the [customize](/docs/Plugins/customize.md) plugin to convert Jira's raw layer fields to the domain layer fields.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
 
 #### issue_assignees
 
@@ -186,6 +187,28 @@ This table shows the metadata of commits made to a code repository associated wi
 | `host`       | varchar  | 255        | The hostname                         |         |
 | `namespace`  | varchar  | 255        | The namespace of the code repository |         |
 | `repo_name`  | varchar  | 255        | The name of the code repository.     |         |
+
+#### issue_custom_array_fields
+
+The table below presents the custom fields of issues in an 'array' type. This table is available when utilizing the [customize](/docs/Plugins/customize.md) plugin to convert Jira's raw layer fields to the domain layer fields. It is important to note that custom fields of other types will be displayed as 'x_custom_field_1' in the [issues](#issues) table.
+
+| **field**    | **type** | **length** | **description**                                                                    | **key** |
+| :----------- | :------- | :--------- | :--------------------------------------------------------------------------------- | :------ |
+| `issue_id`   | varchar  | 255        | Issue ID                                                                           | PK      |
+| `field_id`   | varchar  | 255        | The ID of the array field of the issue. It starts with 'x_', e.g. x_product_lines. |         |
+| `field_value`| varchar  | 255        | The value of the array field. E.g. DevLake, DevSea, DevPond.                       |         |
+
+
+You can refer to the following SQL to use this table.
+```
+-- query issue count by product lines
+select 
+  count(*) as issue_count, field_value 
+from issues 
+  join issue_custom_array_fields on issues.id = issue_custom_array_fields.issue_id
+where field_id = 'x_product_lines'
+group by field_value;
+```
 
 #### boards
 
