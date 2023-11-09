@@ -112,18 +112,16 @@ If you store `incidents` on Jira, for example, you will need to create a separat
 The same applies to `deployments`, a separate connection is needed in case they are stored in Jenkins (or any other host for `deployments`).
 
 #### 4.1.3. Configuring Connections
-This part is described in [GitHub](/docs/Configuration/GitHub.md) connection configuration.
-For other platforms check the [Configuration Guide](/docs/Configuration)
+This part is described in [GitHub](../Configuration/GitHub.md) connection configuration. Please check the [configuration guide](../Configuration/Tutorial.md) for configuring other data sources.
 
-#### 4.1.4. Using connections
+#### 4.1.4. Using Connections
 
 At this point, we have projects and connections created on the platform DevLake. 
-It is time to bind those connections to the projects. To do so, follow the steps
-described in the [Tutorial](/docs/Configuration/Tutorial.md).
+It is time to bind those connections to the projects. To do so, follow the steps described in the [Tutorial](../Configuration/Tutorial.md).
 
 #### 4.1.5. Resulting Metrics
 
-To know if the data of a project is successfully collected go to your DORA Dashboard:
+To know if the data of a project is successfully collected to your DORA Dashboard:
 
 ![](../Configuration/images/HowToOrganizeDevlakeProjects/navigate_to_dora_1.png)
 ![](../Configuration/images/HowToOrganizeDevlakeProjects/navigate_to_dora_2.png)
@@ -191,8 +189,7 @@ So, in total we will have only these connections:
 - 1 connection to Jira to collect `incidents`
 - 2 webhook connections to collect `incidents`: 1 per each `project` that uses webhooks (_it-legacy_ and _it-new_)
 
-The step-by-step [Configuration Guide](/docs/Configuration) shows how to both add connections 
-and set scopes as described in the next chapter.
+The step-by-step [Configuration Guide](../Configuration/Tutorial.md) shows how to both add connections and set scopes as described in the next chapter.
 
 #### 4.2.3. Setting Scopes
 Now, add the connections to our projects and set the scope to them:
