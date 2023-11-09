@@ -18,7 +18,11 @@ This document describes Apache DevLake's domain layer schema.
 
 Referring to DevLake's [architecture](../Overview/Architecture.md), the data in the domain layer is transformed from the data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, GitLab, Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
 
-<p align="center"><img src="/img/Architecture/arch-dataflow.svg" /></p>
+<p align="center">
+
+  ![](../Configuration/images/arch-dataflow-domain.svg)
+
+</p>
 <p align="center">DevLake Dataflow</p>
 
 ## Use Cases
