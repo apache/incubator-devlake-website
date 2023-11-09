@@ -1,8 +1,8 @@
 {
-  "label": "Configuration",
+  "label": "Config UI",
   "position": 3,
   "link":{
     "type": "generated-index",
-    "slug": "Configuration"
+    "slug": "Config UI"
   }
 }
