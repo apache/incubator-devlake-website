@@ -1,69 +1,68 @@
 ---
 title: "How to Organize DevLake Projects"
-sidebar_position: 1
+sidebar_position: 5
 description: >
   How to Organize DevLake Projects
 ---
 
-## 1. Introduction
-This guide provides step-by-step instructions for organizing projects in DevLake. 
-It is intended for team leads and developers who want to optimize their workflow. 
-Herein, we will explore various use cases to demonstrate the practical application of these instructions.
+This guide provides a step-by-step approach to organizing projects in DevLake, enabling you to measure DORA metrics according to your specific use cases.
 
-Development teams typically manage `pull requests`, `deployments`, and `incidents` using various boards.
+## 1. What is a DevLake project?
+On a high level, a DevLake project can be viewed as a real-world project or product line. It represents a specific initiative or endeavor within the software development domain.
 
-Based on such, we want to measure their productivity and stability. This is how [DORA](../DORA.md) does that:
-- Productivity:
-  - How many times does the team `deploy`? (a.k.a. [Deployment Frequency](../Metrics/DeploymentFrequency.md))
-  - How fast are the `pull requests` resolved? (a.k.a. [Lead Time](../Metrics/LeadTimeForChanges.md))
-- Stability:
-  - How many `incidents` per `deploys` does the team have? (a.k.a. [Change Failure Rate](../Metrics/CFR.md))
-  - How fast are these `incidents` solved? (a.k.a. [Median Time to Restore](../Metrics/MTTR.md))
+On a lower level, a DevLake project is a way of organizing and grouping data from different domains. DevLake uses various [data scopes](/docs/Overview/KeyConcepts.md#data-scope), such as repos, boards, cicd_scopes, and cq_projects as the 'container' to associate different types of data to a specific project. See more on this [doc](/docs/Overview/KeyConcepts.md#project).
 
-All these questions/metrics are based on either `pull requests`, `deployments`, or `incidents`.
+## 2. Why is it important to organize projects?
 
-Note: _All three are completely separate entities and are associated only with their project._
-
-#### General advice
-
-There are 3 red lines when it comes to structuring your DevLake `projects`:
-
-But when we scale this up, a few problems arise:
-- A team usually works with multiple `repos`
-- A team also might work on different projects, and we want to measure these projects separately (e.g. it is not the same to work on a big old legacy as on a greenfield)
-- There may be multiple teams
-- A `board` contains incidents of multiple teams or projects
-- A `repository` is managed by multiple teams or projects, e.g. a monorepo
-- A `pipeline` can trigger deployments in multiple repos
-- Some organizations want to measure DORA based on projects, and some want to measure it by teams
-
-This is where the `project` concept comes into play.
-
-## 2. What is a DevLake project?
-In practical terms, a project usually involves building or researching solutions to address specific problems 
-or explore new opportunities. A DevLake project is a grouping of `pull requests`, `deployments`, or `incidents`. 
-It can be seen as a real-world project or product line. DevLake measures DORA metrics for each project.
+This is crucial due to the fact that DevLake measures DORA metrics at the project level. Each project is associated with specific key entities, such as 'pull requests', 'deployments', and 'incidents', which are used to calculate the corresponding DORA metrics. Therefore, proper project organization ensures accurate and meaningful DORA metric calculations for effective analysis and evaluation.
 
 ![](../Configuration/images/HowToOrganizeDevlakeProjects/project_pipeline.png)
 
-Note: _It does not matter if a team works on a particular repository more than another.
-The metrics are calculated over the entire set of repos, and the values are accumulated.
-More on that: [Debugging DORA Issue Metrics](../Troubleshooting/Dashboard.md#debugging-dora-issue-metrics)._
+> How are four [DORA](../DORA.md) metrics calculated from 'pull requests', 'deployments', and 'incidents'?
+>
+> - [Deployment Frequency](../Metrics/DeploymentFrequency.md): How often does a project `deploys`?
+> - [Lead Time for Changes](../Metrics/LeadTimeForChanges.md): How fast are the `pull requests` delivered?
+> - [Change Failure Rate](../Metrics/CFR.md): How many `deployments` lead to `incidents`?
+> - [Median Time to Restore](../Metrics/MTTR.md): How fast are `incidents` solved?
 
-## 3. As a team lead, how many DevLake projects do I need?
 
-DevLake's flexible structure enables you to organize `pull requests`, `deployments`, and `incidents` 
-in a manner tailored to your specific projects, teams, or technologies.
+## 3. Challenges in project organization
+There are several challenges associated with organizing projects in DevLake due to different development practices within teams. Some of these challenges include:
 
-The examples below show the patterns of how to organize your projects.
-To keep things simple we assume that we work with **GitHub** repos, **Jira** boards, 
-and **Jenkins CI/CD** deploys in each GitHub repo.
+- Managing multiple Git repos, issue boards, and CI/CD pipelines within a project.
+- Having a Git repo, issue board, or CI/CD pipeline associated with multiple projects, such as in the case of mono-repos or boards used to track incidents from user feedback.
+- Managing multiple projects within a team and the need to measure DORA metrics at the team level.
+- Projects contributed by multiple teams, with each team requiring the ability to measure their own DORA metrics.
 
-The same would apply to other repos (e.g. GitLab or BitBucket), boards (e.g. TAPD), 
-or CI/CD (e.g. GitLab CI, Azure DevOps).
+This document serves as a guide to address these challenges and provide assistance in effectively dealing with these diverse development practices.
 
-## 4. Use Cases
-This section demonstrates real-life situations and how they get reflected in DevLake.
+## 4. General advice
+
+### 4.1. Determining the number of DevLake projects
+
+It is advisable to create DevLake projects that align with the number of real-life projects you have.
+
+For example, if you have a team (Team A) responsible for managing multiple projects, it is recommended to create separate DevLake projects for each individual project instead of creating a single project named 'Team A'. This approach allows for better organization and tracking of metrics specific to each project.
+
+
+### 4.2 Principles of organizing projects
+
+When organizing projects in DevLake, it is important to associate all relevant [data scopes](/docs/Overview/KeyConcepts.md#data-scope), such as repos, issue boards, and CI/CD scopes, with the corresponding DevLake project based on real-life practices.
+
+In situations where a repo or board is shared by multiple projects in real life, it is recommended to include them in all of these projects within DevLake. This is because DevLake cannot differentiate which commits or issues belong to specific projects. Rather than excluding shared resources from DORA measurements, it is advisable to consider them in all relevant projects.
+
+### 4.3 Measuring DORA at the team level
+
+To clarify the concepts, let's define three terms:
+
+- [Project](/docs/Overview/KeyConcepts.md#project): Refers to a real-world project or product line, such as Apache DevLake or Apache Spark. It focuses on the work to be done.
+- Team: Represents a department, such as the 'product team' or 'engineering team'. It focuses on the people and their roles. Note that people within the same team may not always work on the same projects.
+- Project Team: Comprises individuals working on a specific project.
+
+DevLake does support measuring DORA metrics at the project-team level, which is essentially the same as measuring at the project level. However, it is important to note that DevLake does not recommend measuring DORA metrics at the team level. Despite the existence of the 'DORA by team' dashboard contributed by the community. Doing so may introduce inaccuracies and dilute the significance of measuring DORA metrics from the outset.
+
+## 5. Use Cases
+This section demonstrates real-life practices and how they get reflected in DevLake.
 
 Disclaimer: _To keep this guide shorter, some technical details are only mentioned in
 [Use Case 1](HowToOrganizeDevlakeProjects.md#41-use-case-1-apache-projects),
@@ -71,7 +70,7 @@ so if you read this page for the first time, make sure to go through them in ord
 
 Note: _If you use webhooks, check the [quick note](HowToOrganizeDevlakeProjects.md#5-about-webhooks) about them below._
 
-### 4.1. Use Case 1: Apache Projects
+### 5.1. Use Case 1: Apache Projects
 Apache Software Foundation (ASF) has and is developing many
 [projects](https://en.wikipedia.org/wiki/List_of_Apache_Software_Foundation_projects).
 
@@ -93,7 +92,7 @@ Both projects use GitHub for storing code (including `pull requests`), `deployme
 Note: _To avoid confusion between DevLake as a `project` in this use case and DevLake as a platform,
 we will use complete names i.e. `project DevLake` and `platform DevLake` respectively._
 
-#### 4.1.1. Organizing Projects
+#### 5.1.1. Organizing Projects
 First, create two projects on the DevLake platform, one for DevLake and one for Spark. 
 These will represent real-world projects.
 
@@ -102,7 +101,7 @@ These will represent real-world projects.
 
 Once these are created, the connections created in the following steps will be bound to them.
 
-#### 4.1.2. Creating Connections
+#### 5.1.2. Creating Connections
 
 Since all is on GitHub in this case, we can use just 1 connection with the following properties:
 - it includes all the project's `repos`
@@ -111,15 +110,15 @@ Since all is on GitHub in this case, we can use just 1 connection with the follo
 If you store `incidents` on Jira, for example, you will need to create a separate connection just for them.
 The same applies to `deployments`, a separate connection is needed in case they are stored in Jenkins (or any other host for `deployments`).
 
-#### 4.1.3. Configuring Connections
+#### 5.1.3. Configuring Connections
 This part is described in [GitHub](../Configuration/GitHub.md) connection configuration. Please check the [configuration guide](../Configuration/Tutorial.md) for configuring other data sources.
 
-#### 4.1.4. Using Connections
+#### 5.1.4. Using Connections
 
 At this point, we have projects and connections created on the platform DevLake. 
 It is time to bind those connections to the projects. To do so, follow the steps described in the [Tutorial](../Configuration/Tutorial.md).
 
-#### 4.1.5. Resulting Metrics
+#### 5.1.5. Resulting Metrics
 
 To know if the data of a project is successfully collected to your DORA Dashboard:
 
@@ -130,13 +129,13 @@ If everything goes well, you should see all the 4 charts.
 If something is wrong, and you are puzzled as to why, check out the
 [Debugging Dora Issue Metrics](../Troubleshooting/Dashboard.md#debugging-dora-issue-metrics) page.
 
-#### 4.1.6. How can I observe metrics by project?
+#### 5.1.6. How can I observe metrics by project?
 In the same DORA dashboard check out this menu point:
 ![](../Configuration/images/HowToOrganizeDevlakeProjects/observe_metrics_by_project_panel.png)
 
 The metrics should change when you select or deselect projects, representing the projects you selected.
 
-### 4.2. Use Case 2: Multiple Teams with Distinct Projects
+### 5.2. Use Case 2: Multiple Teams with Distinct Projects
 
 Consider a scenario where a company operates with several teams, each managing one or more projects. 
 For illustration, we will explore two such teams: the Payments team and the Internal Tools team. 
@@ -160,7 +159,7 @@ Here's a simplified representation of this scenario:
    - The _Payments_ team uses Jira boards.
    - The _Internal Tools_ team uses webhooks for reporting incidents.
 
-#### 4.2.1. Organizing Projects
+#### 5.2.1. Organizing Projects
 
 DORA is effective for observing the impacts of methodology changes within a team.
 From DORA’s standpoint, the concept of distinct `teams` is not recognized; only `projects` exist. 
@@ -172,7 +171,7 @@ It is crucial to maintain **atomic** `projects`, representing the smallest, inde
 to prevent complexity and ensure precise data representation. **Atomic** `projects` allow for a more flexible 
 and accurate data comparison and combination between `projects`.
 
-#### 4.2.2. Adding Connections
+#### 5.2.2. Adding Connections
 
 Create just one connection and reuse it across projects by adding data scopes.
 This method optimizes data collection, minimizing redundancy and ensuring more efficient use of resources.
@@ -191,7 +190,7 @@ So, in total we will have only these connections:
 
 The step-by-step [Configuration Guide](../Configuration/Tutorial.md) shows how to both add connections and set scopes as described in the next chapter.
 
-#### 4.2.3. Setting Scopes
+#### 5.2.3. Setting Scopes
 Now, add the connections to our projects and set the scope to them:
 
 For payments `project`: 
@@ -209,16 +208,18 @@ For it-new `project`:
 - add 1 scope to Jenkins for `deployments` of _it-new-1_, _it-new-2_, _it-core-1_ and _it-core-2_ `repos`
 - include the _it-new_ webhook for collecting `incidents`
 
-#### 4.2.4. Resulting Metrics
-See [4.1.5 Resulting Metrics](HowToOrganizeDevlakeProjects.md#415-resulting-metrics)
+#### 5.2.4. Resulting Metrics
+See [5.1.5 Resulting Metrics](HowToOrganizeDevlakeProjects.md#515-resulting-metrics)
 
-## 5. About Webhooks
+## 6. About Webhooks
 **Assigning a UNIQUE webhook to each project is critical.** This ensures that the DevLake platform 
 correctly associates the incoming data with the corresponding project through the webhook.
 
 If you use the same webhook across multiple projects, the data sent by it **will be replicated per each
 project that uses that webhook**. More information available on the [Webhook](/docs/Plugins/webhook.md) page
 
-## 6. Troubleshooting
+## 7. Troubleshooting
 
-If you run into any problem, please check the [Troubleshooting](/docs/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)
+Please check out the [Debugging DORA Issue Metrics](../Troubleshooting/Dashboard.md#debugging-dora-issue-metrics) to debug DORA dashboard.
+
+If you still run into any problems, please check the [Troubleshooting](/docs/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)
