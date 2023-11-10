@@ -26,17 +26,19 @@ To install the chart with release name `devlake`,follow these steps:
 
 2.  Copy the generated string, set the value of the ENCRYPTION_SECRET environment variable by running the following command:
 
-        ```
-        export ENCRYPTION_SECRET="copied string"
-        ```
+    ```
+    export ENCRYPTION_SECRET="copied string"
+    ```
 
-        This command will set the `ENCRYPTION_SECRET` environment variable to the value of the copied string.
+    This command will set the `ENCRYPTION_SECRET` environment variable to the value of the copied string.
 
     **Please make sure to keep the ENCRYPTION_SECRET safe as it is used to encrypt sensitive information in the database, such as personal access tokens and passwords. If ENCRYPTION_SECRET is lost, it may not be possible to decrypt this sensitive information.**
 
-3.  By default, the timezone is UTC. You can set your timezone via --set envs.TZ="your timezone",grafana.env.TZ="your timezone"
+3.  By default, the timezone is UTC. To customize the timezone settings, apply the `--set envs.TZ="your timezone",grafana.env.TZ="your timezone"` command. For further guidance, please refer to [FAQ](#faq).
 
-4.  Install the chart by running the following commands:
+4.  By default, a random password is generated and stored in a Kubernetes Secret for the Grafana admin user. Alternatively, you can explicitly set the password via `--set grafana.adminPassword=<your password>`. For further guidance, please refer to [FAQ](#faq).
+
+5.  Install the chart by running the following commands:
 
     ```shell
     helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
@@ -286,7 +288,24 @@ helm install devlake devlake/devlake \
 
 ```
 
-4. How to set the Grafana admin password? If not explicitly set, a random password will be generated and saved in a Kubernetes Secret
+4. How to set the timezone? If not explicitly set, the default is UTC
+
+- `envs.TZ`: your timezone
+- `grafana.env.TZ`: your timezone
+
+Here is the example:
+
+```
+helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
+helm repo update
+ENCRYPTION_SECRET=$(openssl rand -base64 2000 | tr -dc 'A-Z' | fold -w 128 | head -n 1)
+helm install devlake devlake/devlake \
+  --set envs.TZ=<your timezone> \
+  --set grafana.env.TZ=<your timezone>
+
+```
+
+5. How to set the Grafana admin password? If not explicitly set, a random password will be generated and saved in a Kubernetes Secret
 
 - `grafana.adminPassword`: your password
 
