@@ -125,21 +125,19 @@ Scope config contains two parts:
 
 #### CI/CD
 
-This set of configurations is used for calculating [DORA metrics](../DORA.md).
+This set of configurations is used to define 'deployments'. Deployments are related to measure [DORA metrics](../DORA.md).
 
-If you're using GitHub Action to conduct `deployments`, please select "Detect Deployment from Jobs in GitHub Action", and input the RegEx in the following fields:
+For GitHub deployments, DevLake recognizes them as deployments by specifying a regular expression (regex) to identify the production environments among all 'GitHub environments'.
 
-- Deployment: A GitHub Action job with a name that matches the given regEx will be considered as a deployment.
-- Production: A GitHub Action job with a name that matches the given regEx will be considered a job in the production environment.
+If your deployments are not performed through GitHub deployments but rather specific workflow runs in GitHub, you have the option to convert a workflow run into a DevLake deployment. In this case, you need to configure two regular expressions (regex):
 
-A GitHub workflow run has many jobs. Each GitHub workflow run is converted to a 
-cicd_pipeline in the domain layer and each GitHub Action job is converted to a cicd_task in the domain layer.
+- Deployment: The given regex should match the name of the GitHub workflow run or one of its jobs to be considered as a deployment. For example, if the workflow run used for deployment is named 'build-and-push-image', you can input (push-image). To make the regex case insensitive, you can include (?i) before the regex.
+- Production: The given regex should match either the workflow run's name or its branch's name to be considered a deployment within the production environment. For instance:
+  - If the workflow run used for deployment is named 'build-to-prod', you can input (prod). To make the regex case insensitive, you can include (?i) before the regex.
+  - Also, many users in GitHub utilize the same workflow for both staging and prod deployments, executing it on the release branch would indicate a production deployment.
+
 ![github-action-run](/img/ConfigUI/github-action-run.png)
 ![github-action-job](/img/ConfigUI/github-action-job.png)
-
-The deployment and production regex is always applied to the records in the cicd_tasks table.
-
-You can also select "Not using Jobs in GitHub Action as Deployments" if you're not using GitHub action to conduct deployments.
 
 #### Code Review
 

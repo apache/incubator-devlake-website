@@ -90,15 +90,16 @@ Scope config contains two parts:
 
 #### CI/CD
 
-This set of configurations is used for calculating [DORA metrics](../DORA.md).
+This set of configurations is used to define 'deployments'. Deployments are related to measure [DORA metrics](../DORA.md).
 
-If you're using GitLab CI to conduct `deployments`, please select "Detect Deployment from Jobs in GitLab CI", and input the RegEx in the following fields:
+For GitLab deployments, DevLake recognizes them as deployments by specifying a regular expression (regex) to identify the production environments among all 'GitLab environments'.
 
-- Deployment: The name of the GitLab pipeline or one of its jobs matches the given regEx will be considered as a deployment.
-- Production: If the name also matches the PRODUCTION regEx, the deployment will be considered a PRODUCTION deployment.
+If your deployments are not performed through GitLab deployments but rather specific pipelines in GitLab, you have the option to convert a GitLab pipeline run into a DevLake deployment. In this case, you need to configure two regular expressions (regex):
 
-By the above two fields, DevLake can identify a production deployment among massive GitLab CI pipelines.
-
+- Deployment: The given regex should match the name of the GitLab pipeline's branch name or one of its job names to be considered as a deployment. For example, if the pipeline is executet on the 'build-and-push-image', you can input (push-image). To make the regex case insensitive, you can include (?i) before the regex.
+- Production: The given regex should match either the pipeline's branch name or one of its job names to be considered a deployment within the production environment. For instance:
+  - If the pipeline used for deployment is named 'build-to-prod', you can input (prod). To make the regex case insensitive, you can include (?i) before the regex.
+  - Also, many users in GitLab utilize the same pipeline for both staging and prod deployments, executing it on the release branch would indicate a production deployment.
 
 ## Step 2 - Collect Data in a Project
 ### Step 2.1 - Create a Project
