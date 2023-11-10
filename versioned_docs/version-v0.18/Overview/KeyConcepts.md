@@ -6,79 +6,78 @@ description: >
   DevLake Key Concepts
 ---
 
-*Last updated: June 13, 2023*
+*Last updated: Nov 9, 2023*
 
 
-## In Configuration UI (Regular Mode)
+## In Config UI
 
-The following terms are arranged in the order of their appearance in the actual user workflow.
+The following terms are arranged in the order of their appearance in the actual user workflow in the config UI.
 
-### Projects
-**A project is a method to group data**. Apache DevLake supports users to view metrics based on projects. A `project` is associated with multiple sets of [Data Scope](#data-scope), such as GitHub/GitLab repositories, Jira boards, Jenkins pipelines, etc. Metrics for a project are calculated based on the [Data Entities](#data-entities) under the project's data scope. 
+### Data Source
+**A data source is a specific DevOps tool from which you wish to sync your data, such as GitHub, GitLab, Jira and Jenkins.**
 
-A project has one [Blueprint](#Bluepirnts) for data collection and metric computation.
+Typically, DevLake uses one [data plugin](#data-plugins) to pull data for a single data source. For example, the [jira](/docs/Plugins/jira.md) plugin is used to fetch data from Jira.
 
-For example, when a user associates 'Jenkins Job A' and  'Jira board B' with project 1, then ONLY `deployments` in 'Jenkins Job A' and `incidents` in 'Jira board B' will be used to calculate **Change Failure Rate** for project 1.
+However, there are cases where DevLake may use multiple data plugins for a single data source. This approach is employed to enhance the synchronization speed and provide other advantages. For instance, when retrieving data from GitHub or GitLab, aside from the [github](/docs/Plugins/github.md) and [gitlab](/docs/Plugins/gitlab.md) plugins, the [gitextractor](/docs/Plugins/gitextractor.md) is also used to fetch data. In these cases, DevLake still recognizes GitHub or GitLab as a single data source.
 
-### Blueprints
-**A blueprint is the plan that covers all the work to get your raw data ready for query and metric computation in the dashboards.** Creating a blueprint consists of four steps:
-1. **Adding [Data Connections](#data-connections)**: For each [data source](#data-sources), one or more data connections can be added to a single blueprint, depending on the data you want to sync to DevLake.
-2. **Setting the [Data Scope](#data-scope)**: For each data connection, you need to configure the scope of data, such as GitHub projects, Jira boards, and their corresponding [data entities](#data-entities).
-3. **Adding [Transformation Rules](#transformation-rules) (optional)**: You can optionally apply transformation for the data scope you have just selected, in order to view more advanced metrics.
-3. **Setting the Sync Frequency**: You can specify the sync frequency for your blueprint to achieve recurring data syncs and transformation. Alternatively, you can set the frequency to manual if you wish to run the tasks in the blueprint manually.
+### Data Connection
+**A data connection is a specific instance of a [data source](#data-source).** It stores the necessary access information, such as the endpoint URL and authentication token, to establish a connection to that data source.
 
-The relationship between Blueprint, Data Connections, Data Scope and Transformation Rules is explained as follows:
+A single data source can have one or more data connections associated with it. This allows you to connect to and retrieve data from different instances or installations of the same data source.
 
-![Blueprint ERD](/img/Glossary/blueprint-erd.svg)
+To set up a new data connection, it is recommended to use the 'Data Connections' page in DevLake. This page provides a convenient interface for adding and configuring data connections. Once a data connection is set up, you can later associate it with a DevLake project.
+
+### Data Scope
+**A data scope is the top-level 'container' in a data source**. For example, a data scope for Jira is a Jira board, for TAPD is a TAPD workspace, for GitHub/GitLab/BitBucket is a repo, for Jenkins is a Jenkins job, etc.
+
+You can add multiple data scopes to a data connection to determine which data to collect. Data scopes vary for different data sources.
+
+### Scope Config
+**A scope config refers to the configuration of a data scope.** It defines the specific data entities to be collected and the transformations to be applied to that data. 
+
+Each data scope can have at most one scope config associated with it; while a scope config can be shared among multiple data scopes under the same data connection.
+
+A scope config consists of two parts: [Data Entities](#data-entities) and [Transformations](#transformations).
+
+#### Data Entities
+Data entities refer to the specific data fields that are collected from different data domains. Check the [supported data entities](/docs/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) of each data source.
+
+Data entities are categorized into [six data domains](/docs/DataModels/DevLakeDomainLayerSchema.md#data-models) in DevLake: Issue Tracking, Source Code Management, Code Review, CI/CD, Code Quality, and Cross-Domain.
+
+When setting up the scope config of a GitHub data connection, you have the flexibility to choose which specific data entities you want to collect. if you only want to collect 'repos', 'commits', and 'pull requests' while excluding 'issues' and 'workflow runs', you need to check the 'Source Code Management' and 'Code Review' domains, and uncheck 'Issue Tracking' or 'CI/CD' domains.
+
+#### Transformations
+Transformations are configurations for users to customize how DevLake transforms raw API responses to the domain layer data.
+
+Although configuring transformation rules is not mandatory, certain pre-built dashboards, such as [DORA](/livedemo/EngineeringLeads/DORA) and [Weekly Bug Retro](/livedemo/QAEngineers/WeeklyBugRetro) require the them to display the metrics accurately. If you leave the rules blank or have not configured them correctly, only a few [data source dashboards](/livedemo/DataSources/GitHub) will be displayed as expected. 
+
+You can find the required transformations in the 'Dashboard Introduction' panel in each pre-built dashboard.
+
+### Project
+**On a high level, a DevLake project can be viewed as a real-world project or product line.** It represents a specific initiative or endeavor within the software development domain.
+
+**On a lower level, a DevLake project is a way of organizing and grouping data from different domains.** DevLake uses various [data scopes](#data-scope), such as repos, boards, cicd_scopes, and cq_projects as the 'container' to associate different types of data to a specific project. 
+
+- A project has a [blueprint](#Bluepirnts) for data collection and metric computation. 
+- DevLake measures DORA metrics at the project level. Each project has a set of DORA metrics. For example, if a user associates 'Jenkins Job A' and 'Jira board B' with project M, only the 'deployments' from 'Jenkins Job A' and the 'incidents' from 'Jira board B' will be considered when calculating the Change Failure Rate metric for project M.
+
+### Blueprint
+**A blueprint serves as the plan to synchronize data from data sources into the DevLake platform.** Creating a blueprint consists of four steps:
+1. Adding [data connections](#data-connections): You can add one or more data connections to a blueprint, depending on the data sources you want to sync with DevLake. Each data connection represents a specific data source, such as GitHub or Jira. 
+2. Setting up the [data scope](#data-scope): When adding a data connection, you can choose to collect all or part of the configured data scopes of the data connection.
+3. Setting up the sync policy: You can specify the sync frequency and the time range for data collection.
+
+The relationship between 'Blueprint', 'Data Connection' and 'Scope COnfig' is explained as follows:
+
+![Blueprint ERD](../Configuration/images/blueprint-erd.svg)
 - Each blueprint can have multiple data connections.
 - Each data connection can have multiple data scopes.
 - Each set of data scope only consists of one GitHub/GitLab project or Jira board, along with their corresponding data entities.
 - Each set of data scope can only have one set of transformation rules.
 
-### Data Sources
-**A data source is a specific DevOps tool from which you wish to sync your data, such as GitHub, GitLab, Jira and Jenkins.**
+## APIs and Config UI Advanced Mode
 
-DevLake normally uses one [data plugin](#data-plugins) to pull data for a single data source. However, in some cases, DevLake uses multiple data plugins for one data source for a better sync speed, among many other advantages. For instance, when you pull data from GitHub or GitLab, aside from the GitHub or GitLab plugin, Git Extractor is also used to pull data from the repositories. In this case, DevLake still recognizes GitHub or GitLab as a single data source.
-
-### Data Connections
-**A data connection is a specific instance of a data source that stores information such as `endpoint` and `auth`.** A single data source can have one or more data connections (e.g. two Jira instances). Currently, DevLake supports one data connection for GitHub, GitLab and Jenkins, and multiple connections for Jira.
-
-The recommended way to set up a new data connection is via the Data Connections page. You can then add the data connection to a DevLake project to measure metrics later. A data connection can be used in multiple projects.
-
-### Data Scope(s)
-**A data scope is the top-level "container" in a data source**. For example, a data scope for Jira is a Jira board, for TAPD is a TAPD workspace, for GitHub/GitLab/BitBucket is a repo, for Jenkins is a Jenkins job, etc. You can add multiple data scopes to a data connection to determine which data to collect. Data scopes vary for different data sources.
-
-
-### Scope Configs
-**A scope config is a shared configuration among multiple data scopes under the same connection.** The fields of the Scope Config vary depending on the data sources.
-
-Most often, when we collect multiple data scopes from a data source, such as gathering multiple repositories from GitHub, some of them (repositories) might share the same configuration because they are maintained by the same group of people or follow company policy. In cases like this, storing the configuration in a separate entity is helpful to avoid repeatedly entering the same set of settings. However, it is important to note that changing the Scope Config would affect every single data scope that uses it.
-
-Scope Config consists of [Data Entities](#data-entities) and [Transformations](#transformations)
-
-### Data Entities
-**Data entities refer to the data fields from one of the five data domains: Issue Tracking, Source Code Management, Code Review, CI/CD and Cross-Domain.**
-
-For instance, if you wish to pull Source Code Management data from GitHub and Issue Tracking data from Jira, you can check the corresponding data entities during setting the data scope of these two data connections.
-
-To learn more details, please refer to [Domain Layer Schema](/DataModels/DevLakeDomainLayerSchema.md).
-
-### Transformations
-**Transformations are a collection of methods that allow you to customize how DevLake normalizes raw data for query and metric computation.** Each set of data scope is strictly accompanied with one set of transformations. However, for your convenience, transformations can also be duplicated across different sets of data scope.
-
-DevLake uses these normalized values in the transformation to design more advanced dashboards, such as the Weekly Bug Retro dashboard. Although configuring transformation rules is not mandatory, if you leave the rules blank or have not configured correctly, only the basic dashboards (e.g. GitHub Basic Metrics) will be displayed as expected, while the advanced dashboards will not.
-
-### Historical Runs
-**A historical run of a blueprint is an actual execution of the data collection and transformation [tasks](#tasks) defined in the blueprint at its creation.** A list of historical runs of a blueprint is the entire running history of that blueprint, whether executed automatically or manually. Historical runs can be triggered in three ways:
-- By the blueprint automatically according to its schedule in the Regular Mode of the Configuration UI
-- By running the JSON in the Advanced Mode of the Configuration UI
-- By calling the API `/pipelines` endpoint manually
-
-However, the name Historical Runs is only used in the Configuration UI. In DevLake API, they are called [pipelines](#pipelines).
-
-## In Configuration UI (Advanced Mode) and API
-
-The following terms have not appeared in the Regular Mode of Configuration UI for simplification, but can be very useful if you want to learn about the underlying framework of DevLake or use Advanced Mode and the DevLake API.
+Typically, the following terms do not appear in the regular mode of the Config UI, but can be very useful if you use [DevLake's APIs](References.md) or the advanced mode of Config UI.
 
 ### Data Plugins
 **A data plugin is a specific module that syncs or transforms data.** There are two types of data plugins: Data Collection Plugins and Data Transformation Plugins.
@@ -89,7 +88,7 @@ Data Transformation Plugins transform the data pulled by other Data Collection P
 
 Although the names of the data plugins are not displayed in the regular mode of DevLake Configuration UI, they can be used directly in JSON in the Advanced Mode.
 
-For detailed information about the relationship between data sources and data plugins, please refer to [Supported Data Sources](./SupportedDataSources.md).
+For detailed information about the relationship between data sources and data plugins, please refer to [Supported Data Sources](SupportedDataSources.md).
 
 
 ### Pipelines

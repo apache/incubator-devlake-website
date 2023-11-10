@@ -54,6 +54,14 @@ Running Policy: By default, the `Skip failed tasks` is checked to avoid losing a
 
 ![img](/img/ConfigUI/BlueprintCreation-v0.15/step4.png)
 
+### Step 5 - Collect Data
+Upon completing the blueprint configuration, you can proceed to the 'Status' tab to initiate data collection in DevLake. There are three available modes for data collection:
+
+- Collect Data (Default): This mode collects data within the configured time range. Tools and entities that support incremental refresh will utilize this method, while those that only support full refresh will perform a full refresh. This mode is the default for recurring pipelines.
+- Collect Data in Full Refresh Mode: In this mode, all existing data within the configured time range will be deleted and re-collected. It is useful for removing outdated or irrelevant data from DevLake that no longer exists in the original tools.
+- Re-transform Data: This mode does not collect new data but instead applies the latest transformation rules from the Scope Config to the existing data.
+
+
 ### View the Blueprint Status and Download Logs for Historical Runs
 After setting up the Blueprint, you will be prompted to the Blueprint's status page, where you can track the progress of the current run and wait for it to finish before the dashboards become available. You can also view all historical runs of previously created Blueprints from the list on the Blueprint page.
 
