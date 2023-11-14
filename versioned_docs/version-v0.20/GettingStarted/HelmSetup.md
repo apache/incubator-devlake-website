@@ -14,6 +14,8 @@ sidebar_position: 2
 
 #### You can also check https://github.com/apache/incubator-devlake-helm-chart to make contribution
 
+#### To install or upgrade to the latest version, please check [here](https://github.com/apache/incubator-devlake-helm-chart/releases)
+
 ### Install
 
 To install the chart with release name `devlake`,follow these steps:
