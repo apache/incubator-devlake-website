@@ -59,6 +59,23 @@ The token should be granted read-only permission for the following entities.
   - `Metadata`
   - `Pull requests`
 
+
+##### GitHub Apps 
+Learn about [how to create a GitHub Apps](https://docs.github.com/en/apps/maintaining-github-apps/modifying-a-github-app-registration#navigating-to-your-github-app-settings). The following permissions are required to collect data from repositories:
+- Repository
+    - Actions
+    - Administration
+    - Checks
+    - Commit statuses
+    - Contents
+    - Deployments
+    - Issues
+    - Metadata
+    - Pull requests
+- Organization
+    - Members
+
+
 #### Use Graphql APIs
 
 If you are using `github.com` or your on-premise GitHub version supports GraphQL APIs, toggle on this setting to collect data quicker.
