@@ -17,10 +17,10 @@ We recommend that you give your webhook connection a unique name so that you can
 ### Step 2 - Create webhooks connection
 
 Click on Generate POST URL, and you will find three webhook URLs. 
-![webhook-connection1](/img/ConfigUI/webhook-connection1.png)
+![webhook-connection1](/images/webhook-connection1.png)
 
-Revoke and generate a new key, and copy the ones that suit your usage into your CI or issue-tracking systems. Ensure to save the generated API Key, you can revisit the webhook page to synthesize the complete URL.
-![webhook-connection2](/img/ConfigUI/webhook-connection2.png)
+Revoke and generate a new key. Copy the ones that suit your usage into your CI/CD or issue-tracking systems. You can always come back to the webhook page to copy the URLs later on.
+![webhook-connection2](/images/webhook-connection2.png)
 
 ### Step 3 - Use webhook in a project
 
