@@ -19,13 +19,16 @@ To ensure the proper functioning of DevLake, follow these two key steps:
 - Step 1.3 - Add scope config (optional). Define the specific data entities within the data scope for collection or apply transformation rules to the raw API responses.
 
 ### Step 2 - Collect Data in a Project
-- Step 2.1 - Create a project. DevLake assesses DORA metrics at the project level. For more information on organizing DevLake projects, please refer to [how to organize DevLake projects](/docs/GettingStarted/HowToOrganizeDevlakeProjects.md) for more details.
+- Step 2.1 - Create a project. DevLake assesses DORA metrics at the project level. For more information on organizing DevLake projects, please refer to [how to organize DevLake projects](../GettingStarted/HowToOrganizeDevlakeProjects) for more details.
 
 - Step 2.2 - Associate connection(s) with the project. When associating a connection with a project, you can select specific data scopes. All connections linked to the same project will be considered part of the same project for calculating DORA metrics.
 
 - Step 2.3 - Set the synchronization policy. Specify the sync frequency, time range and the skip-on-fail option for your data.
 
 - Step 2.4 - Start data collection. Choose the desired [mode](#step-2---collect-data-in-a-project) for collecting data.
+
+### Step 3 - Check the Data in Grafana Dashboards
+To view the collected data, click on the "Dashboards" button located in the top-right corner of Config UI. For detailed instructions, please refer to the [Grafana manuals](Dashboards/GrafanaUserGuide.md).
 
 
 ## Examples
