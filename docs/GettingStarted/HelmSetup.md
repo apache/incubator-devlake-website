@@ -2,7 +2,7 @@
 title: "Install via Helm"
 description: >
   The steps to install Apache DevLake via Helm for Kubernetes
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 ## Prerequisites

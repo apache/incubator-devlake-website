@@ -4,8 +4,6 @@ sidebar_position: 3
 description: How to upgrade your Apache DevLake to a newer version
 ---
 
-## Upgrade Notes
-
 1. ENCRYPTION_SECRET: It is important to keep the ENCRYPTION_SECRET safe as it is used to encrypt sensitive information in the database, such as personal access tokens and passwords. Losing the ENCRYPTION_SECRET may result in the inability to decrypt this sensitive information.
 
 2. .env file: The .env file is now optional. You can choose to store your variables in the environment instead. Remember to consider important variables such as ENCRYPTION_SECRET and DB_URL. If both the environment variables and the .env file exist, the values in the environment variables will take precedence. However, make sure that these variables are defined in either one of them to avoid any issues with DevLake.

@@ -1,6 +1,6 @@
 ---
 title: "GitHub"
-sidebar_position: 2
+sidebar_position: 9
 description: Config UI instruction for GitHub
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "How to Organize DevLake Projects"
-sidebar_position: 5
+sidebar_position: 3
 description: >
   How to Organize DevLake Projects
 ---
@@ -65,10 +65,10 @@ DevLake does support measuring DORA metrics at the project-team level, which is 
 This section demonstrates real-life practices and how they get reflected in DevLake.
 
 Disclaimer: _To keep this guide shorter, some technical details are only mentioned in
-[Use Case 1](HowToOrganizeDevlakeProjects.md#41-use-case-1-apache-projects),
+[Use Case 1](HowToOrganizeDevlakeProjects#41-use-case-1-apache-projects),
 so if you read this page for the first time, make sure to go through them in order._
 
-Note: _If you use webhooks, check the [quick note](HowToOrganizeDevlakeProjects.md#5-about-webhooks) about them below._
+Note: _If you use webhooks, check the [quick note](HowToOrganizeDevlakeProjects#5-about-webhooks) about them below._
 
 ### 5.1. Use Case 1: Apache Projects
 Apache Software Foundation (ASF) has and is developing many
@@ -209,7 +209,7 @@ For it-new `project`:
 - include the _it-new_ webhook for collecting `incidents`
 
 #### 5.2.4. Resulting Metrics
-See [5.1.5 Resulting Metrics](HowToOrganizeDevlakeProjects.md#515-resulting-metrics)
+See [5.1.5 Resulting Metrics](HowToOrganizeDevlakeProjects#515-resulting-metrics)
 
 ## 6. About Webhooks
 **Assigning a UNIQUE webhook to each project is critical.** This ensures that the DevLake platform 

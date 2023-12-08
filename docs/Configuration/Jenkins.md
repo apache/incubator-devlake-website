@@ -1,6 +1,6 @@
 ---
 title: "Jenkins"
-sidebar_position: 5
+sidebar_position: 13
 description: Config UI instruction for Jenkins
 ---
 

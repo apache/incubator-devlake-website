@@ -1,6 +1,6 @@
 ---
-title: "Incoming Webhook"
-sidebar_position: 8
+title: "Webhooks"
+sidebar_position: 25
 description: Config UI instruction for Webhook
 ---
 
