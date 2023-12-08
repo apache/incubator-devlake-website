@@ -2,7 +2,7 @@
 title: "Install via Docker Compose"
 description: >
   The steps to install DevLake via Docker Compose
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 ## Prerequisites

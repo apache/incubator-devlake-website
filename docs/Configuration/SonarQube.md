@@ -1,6 +1,6 @@
 ---
-title: "SonarQube"
-sidebar_position: 7
+title: "SonarQube Server"
+sidebar_position: 19
 description: Config UI instruction for SonarQube
 ---
 

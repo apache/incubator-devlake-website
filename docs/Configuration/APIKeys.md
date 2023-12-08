@@ -1,6 +1,6 @@
 ---
 title: "API Keys"
-sidebar_position: 11
+sidebar_position: 31
 description: >
   API Keys
 ---
