@@ -1,5 +1,5 @@
 ---
-title: "BitBucket(Beta)"
+title: "BitBucket Cloud"
 description: >
   BitBucket Plugin
 ---

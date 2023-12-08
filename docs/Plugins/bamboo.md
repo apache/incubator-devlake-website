@@ -1,5 +1,5 @@
 ---
-title: "Bamboo(WIP)"
+title: "Bamboo"
 description: >
   Bamboo Plugin
 ---
@@ -13,7 +13,7 @@ This plugin collects Bamboo's CI data through [API](https://developer.atlassian.
 
 ## Supported Versions
 
-Will be available for Bamboo v6.8.1+. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
+Only Bamboo v6.8.1+ is supported as of v0.20. Check [this doc](https://devlake.apache.org/docs/Overview/SupportedDataSources#data-sources-and-data-plugins) for more details.
 
 ## Entities
 
