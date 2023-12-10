@@ -49,8 +49,8 @@ jobs:
           GITHUB_WORKFLOW_URL="https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}?check_suite_focus=true"
 
           if ! lychee --output ${OUTPUT_FILE} \
-            -E -i -n -t 5 --max-concurrency 64 -a 429,401,403 -m 10 -f markdown -s http -s https \
-            '**/*.md'
+            -E -i -n -t 5 --max-concurrency 64 -a 429,401,403 -m 10 -f markdown -s http --exclude-path versioned_docs -s --exclude-path versioned_docs https \
+            '**/*.md' 
           then
             echo "" >> "${OUTPUT_FILE}" # add a new line
             echo "[Full Github Actions output](${GITHUB_WORKFLOW_URL})" >> "${OUTPUT_FILE}"
