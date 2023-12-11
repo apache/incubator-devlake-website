@@ -15,9 +15,7 @@ sidebar_position: 1
 
 This document describes Apache DevLake's domain layer schema.
 
-Referring to DevLake's [architecture](../Overview/Architecture.md), the data in the domain layer is transformed from the
-data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, GitLab,
-Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
+Referring to DevLake's [architecture](../Overview/Architecture.md), the data in the domain layer is transformed from the data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, GitLab, Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
 
 <p align="center">
 
@@ -30,8 +28,7 @@ Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-
 
 1. [All metrics](../Metrics) from pre-built dashboards are based on this data schema.
 2. As a user, you can create your own customized dashboards based on this data schema.
-3. As a contributor, you can refer to this data schema while working on the ETL logic when adding/updating data source
-   plugins.
+3. As a contributor, you can refer to this data schema while working on the ETL logic when adding/updating data source plugins.
 
 ## Data Models
 
@@ -48,30 +45,22 @@ This is the up-to-date domain layer schema for DevLake. Tables (entities) are ca
 
 ![Domain Layer Schema](../Configuration/images/domain-layer-schema-diagram.svg)
 
-When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or
-UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different
-platforms (e.g. GitHub/GitLab) and allow them to co-exist in a single table.
+When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. GitHub/GitLab) and allow them to co-exist in a single table.
 
 Tables that end with WIP are still under development.
 
 ### Naming Conventions
 
 1. The name of a table is in plural form. E.g. boards, issues, etc.
-2. The name of a table which describe the relation between 2 entities is in the form
-   of [BigEntity in singular form]\_[SmallEntity in plural form]. E.g. board_issues, sprint_issues,
-   pull_request_comments, etc.
-3. Value of the field in enum type are in capital letters. E.g. [table.issues.type](#issues) has 3 values, REQUIREMENT,
-   BUG, INCIDENT. Values that are phrases, such as 'IN_PROGRESS' of [table.issues.status](#issues), are separated with
-   underscore '\_'.
+2. The name of a table which describe the relation between 2 entities is in the form of [BigEntity in singular form]\_[SmallEntity in plural form]. E.g. board_issues, sprint_issues, pull_request_comments, etc.
+3. Value of the field in enum type are in capital letters. E.g. [table.issues.type](#issues) has 3 values, REQUIREMENT, BUG, INCIDENT. Values that are phrases, such as 'IN_PROGRESS' of [table.issues.status](#issues), are separated with underscore '\_'.
 
 ## How to Customize Data Models
 
 Apache DevLake provides 2 plugins:
 
-- [customize](https://devlake.apache.org/docs/Plugins/customize): to create/delete columns in the domain layer schema
-  with the data extracted from [raw layer tables](https://devlake.apache.org/docs/Overview/Architecture/#dataflow)
-- [dbt](https://devlake.apache.org/docs/Plugins/customize): to transform data based on the domain layer schema and
-  generate new tables
+- [customize](https://devlake.apache.org/docs/Plugins/customize): to create/delete columns in the domain layer schema with the data extracted from [raw layer tables](https://devlake.apache.org/docs/Overview/Architecture/#dataflow)
+- [dbt](https://devlake.apache.org/docs/Plugins/customize): to transform data based on the domain layer schema and generate new tables
 
 <br/>
 
@@ -117,8 +106,7 @@ An `issue` is the abstraction of GitHub/GitLab/BitBucket/Jira/TAPD/Zentao... iss
 
 #### issue_assignees
 
-This table shows the assignee(s) of issues. Multiple entries can exist per issue, as a GitHub/TAPD issue may have
-multiple assignees at the same time. This table can be used to get the detailed information of all issue assignees.
+This table shows the assignee(s) of issues. Multiple entries can exist per issue, as a GitHub/TAPD issue may have multiple assignees at the same time. This table can be used to get the detailed information of all issue assignees.
 
 | **field**       | **type** | **length** | **description** | **key**        |
 |:----------------|:---------|:-----------|:----------------|:---------------|
@@ -128,8 +116,7 @@ multiple assignees at the same time. This table can be used to get the detailed 
 
 #### issue_labels
 
-This table shows the labels of issues. Multiple entries can exist per issue. This table can be used to filter issues by
-label name.
+This table shows the labels of issues. Multiple entries can exist per issue. This table can be used to filter issues by label name.
 
 | **field**  | **type** | **length** | **description**                                                   | **key**      |
 |:-----------|:---------|:-----------|:------------------------------------------------------------------|:-------------|
@@ -138,8 +125,7 @@ label name.
 
 #### issue_comments
 
-This table shows the comments of issues. Only GitHub and TAPD issue comments are collected. Issues with multiple
-comments are shown as multiple records. This table can be used to calculate _metric - issue response time_.
+This table shows the comments of issues. Only GitHub and TAPD issue comments are collected. Issues with multiple comments are shown as multiple records. This table can be used to calculate _metric - issue response time_.
 
 | **field**      | **type** | **length** | **description**                            | **key**        |
 |:---------------|:---------|:-----------|:-------------------------------------------|:---------------|
@@ -152,8 +138,7 @@ comments are shown as multiple records. This table can be used to calculate _met
 
 #### issue_changelogs
 
-This table shows the changelogs of issues. Only Jira issue changelogs are collected for now. Issues with multiple
-changelogs are shown as multiple records. This is transformed from Jira or TAPD changelogs.
+This table shows the changelogs of issues. Only Jira issue changelogs are collected for now. Issues with multiple changelogs are shown as multiple records. This is transformed from Jira or TAPD changelogs.
 
 | **field**             | **type** | **length** | **description**                                                  | **key**        |
 |:----------------------|:---------|:-----------|:-----------------------------------------------------------------|:---------------|
@@ -171,8 +156,7 @@ changelogs are shown as multiple records. This is transformed from Jira or TAPD 
 
 #### issue_worklogs
 
-This table shows the work logged under issues. Only Jira issue worklogs are collected for now. Usually, an issue has
-multiple worklogs logged by different developers.
+This table shows the work logged under issues. Only Jira issue worklogs are collected for now. Usually, an issue has multiple worklogs logged by different developers.
 
 | **field**            | **type** | **length** | **description**                                                                          | **key**        |
 |:---------------------|:---------|:-----------|:-----------------------------------------------------------------------------------------|:---------------|
@@ -210,10 +194,7 @@ This table shows the metadata of commits made to a code repository associated wi
 
 #### issue_custom_array_fields
 
-The table below presents the custom fields of issues in an 'array' type. This table is available when utilizing
-the [customize](/docs/Plugins/customize.md) plugin to convert Jira's raw layer fields to the domain layer fields. It is
-important to note that custom fields of other types will be displayed as 'x_custom_field_1' in the [issues](#issues)
-table.
+The table below presents the custom fields of issues in an 'array' type. This table is available when utilizing the [customize](/docs/Plugins/customize.md) plugin to convert Jira's raw layer fields to the domain layer fields. It is important to note that custom fields of other types will be displayed as 'x_custom_field_1' in the [issues](#issues) table.
 
 | **field**     | **type** | **length** | **description**                                                                    | **key** |
 |:--------------|:---------|:-----------|:-----------------------------------------------------------------------------------|:--------|
@@ -235,9 +216,7 @@ group by field_value;
 
 #### boards
 
-A `board` is an issue list or a collection of issues. It's the abstraction of a Jira board, a Jira or TAPD project,
-a [GitHub repo's issue list](https://github.com/apache/incubator-devlake/issues) or a GitLab repo's issue list. This
-table can be used to filter issues by the boards they belong to.
+A `board` is an issue list or a collection of issues. It's the abstraction of a Jira board, a Jira or TAPD project, a [GitHub repo's issue list](https://github.com/apache/incubator-devlake/issues) or a GitLab repo's issue list. This table can be used to filter issues by the boards they belong to.
 
 | **field**      | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                               | **key** |
 |:---------------|:---------|:-----------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------|
@@ -336,15 +315,9 @@ A ref is the abstraction of a branch or tag.
 
 #### commits_diffs
 
-This table shows the commits added in a new commit compared to an old commit. This table can be used to support
-tag-based and deploy-based metrics.
+This table shows the commits added in a new commit compared to an old commit. This table can be used to support tag-based and deploy-based metrics.
 
-The records of this table are computed
-by [RefDiff](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/refdiff) plugin. The computation
-should be manually triggered after
-using [GitRepoExtractor](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/gitextractor) to collect
-commits and refs. The algorithm behind is similar
-to [this](https://github.com/apache/incubator-devlake/compare/v0.8.0%E2%80%A6v0.9.0).
+The records of this table are computed by [RefDiff](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/refdiff) plugin. The computation should be manually triggered after using [GitRepoExtractor](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/gitextractor) to collect commits and refs. The algorithm behind is similar to [this](https://github.com/apache/incubator-devlake/compare/v0.8.0%E2%80%A6v0.9.0).
 
 | **field**        | **type** | **length** | **description**                                                            | **key** |
 |:-----------------|:---------|:-----------|:---------------------------------------------------------------------------|:--------|
@@ -467,8 +440,7 @@ filter pull requests by label name.
 
 A commit associated with a pull request.
 
-The list is additive. This means if a rebase with commit squashing takes place after the commits of a pull request have
-been processed, the old commits will not be deleted.
+The list is additive. This means if a rebase with commit squashing takes place after the commits of a pull request have been processed, the old commits will not be deleted.
 
 | **field**              | **type** | **length** | **description**                                          | **key**             |
 |:-----------------------|:---------|:-----------|:---------------------------------------------------------|:--------------------|
@@ -518,8 +490,7 @@ The entity to filter or group 'cicd_pipelines'.
 
 #### cicd_pipelines
 
-A cicd_pipeline is the abstraction of a top-level CI/CD execution, e.g. a GitHub workflow run, a GitLab pipeline, a
-BitBucket pipeline, a Jenkins build, a Bamboo plan build, etc. A cicd_pipeline contains one or more of cicd_tasks.
+A cicd_pipeline is the abstraction of a top-level CI/CD execution, e.g. a GitHub workflow run, a GitLab pipeline, a BitBucket pipeline, a Jenkins build, a Bamboo plan build, etc. A cicd_pipeline contains one or more of cicd_tasks.
 
 | **field**             | **type** | **length** | **description**                                                                                                                           | **key**           |
 |:----------------------|:---------|:-----------|:------------------------------------------------------------------------------------------------------------------------------------------|:------------------|
@@ -555,8 +526,7 @@ A cicd_task is the abstraction of the bottom-level CI/CD execution.
 
 - For GitHub: a cicd_task is a GitHub job run in a GitHub workflow run.
 - For GitLab: a cicd_task is a GitLab job run of a GitLab pipeline run.
-- For Jenkins: a cicd_task is a subtask of a Jenkins build. If a build does not have subtask(s), then the build will
-  also be saved as a cicd_task in this table.
+- For Jenkins: a cicd_task is a subtask of a Jenkins build. If a build does not have subtask(s), then the build will also be saved as a cicd_task in this table.
 - For Bamboo CI: a cicd_task is a Bamboo job build in a Bamboo plan build.
 
 | **field**             | **type** | **length** | **description**                                                                                                                      | **key**           |
@@ -580,17 +550,11 @@ A cicd_task is the abstraction of the bottom-level CI/CD execution.
 
 #### cicd_deployments
 
-A cicd_deployment refers to a deployment at the project level. In the case where a pipeline run or build deploys across
-three distinct repositories, it will be categorized as ONE cicd_deployment while being recorded as THREE separate
-cicd_deployment_commits.
+A cicd_deployment refers to a deployment at the project level. In the case where a pipeline run or build deploys across three distinct repositories, it will be categorized as ONE cicd_deployment while being recorded as THREE separate cicd_deployment_commits.
 It may come from several sources:
 
-- Domain layer [cicd_pipelines](#cicd_pipelines), such as GitHub workflow runs, GitLab pipelines, Jenkins builds and
-  BitBucket pipelines, etc. Deployments from cicd_pipelines will be transformed according to the regex configuration set
-  in the Blueprint transformation before adding to this table.
-- Tool layer deployments: in v0.20, only the BitBucket\Bamboo\GitLab and GitHub(Use GraphQL APIs) plugins collect the
-  independent deployment entity which you can find in table.\_tool_bitbucket_deployments and
-  \_tool_bamboo_deploy_builds, there will be more in the future.
+- Domain layer [cicd_pipelines](#cicd_pipelines), such as GitHub workflow runs, GitLab pipelines, Jenkins builds and BitBucket pipelines, etc. Deployments from cicd_pipelines will be transformed according to the regex configuration set in the Blueprint transformation before adding to this table.
+- Tool layer deployments: in v0.20, only the BitBucket\Bamboo\GitLab and GitHub(Use GraphQL APIs) plugins collect the independent deployment entity which you can find in table.\_tool_bitbucket_deployments and \_tool_bamboo_deploy_builds, there will be more in the future.
 - Deployments pushed directly from webhooks
 
 Additional Notes
@@ -619,19 +583,13 @@ Additional Notes
 
 A cicd_deployment_commit is a deployment in a specific repo. A deployment may come from several sources:
 
-- Domain layer [cicd_pipelines](#cicd_pipelines), such as GitHub workflow runs, GitLab pipelines, Jenkins builds and
-  BitBucket pipelines, etc. Deployments from cicd_pipelines will be transformed according to the regex configuration set
-  in the Blueprint transformation before adding to this table.
-- Tool layer deployments: in v0.18, only the BitBucket and Bamboo plugins collect the independent deployment entity
-  which you can find in table.\_tool_bitbucket_deployments and \_tool_bamboo_deploy_builds, but there will be more in
-  the future.
+- Domain layer [cicd_pipelines](#cicd_pipelines), such as GitHub workflow runs, GitLab pipelines, Jenkins builds and BitBucket pipelines, etc. Deployments from cicd_pipelines will be transformed according to the regex configuration set in the Blueprint transformation before adding to this table.
+- Tool layer deployments: in v0.18, only the BitBucket and Bamboo plugins collect the independent deployment entity which you can find in table.\_tool_bitbucket_deployments and \_tool_bamboo_deploy_builds, but there will be more in the future.
 - Deployments pushed directly from webhooks
 
 You can query deployments from this table by `SELECT DISTINCT cicd_deployment_id FROM cicd_deployments_commits`.
 
-Normally, one deployment only deploy to one repo. But in some cases, one deployment may deploy in multiple repos with
-different commits. In these cases, there will be multiple pairs of deployment-commit-repo, appeared in multiple entries
-in this table.
+Normally, one deployment only deploy to one repo. But in some cases, one deployment may deploy in multiple repos with different commits. In these cases, there will be multiple pairs of deployment-commit-repo, appeared in multiple entries in this table.
 
 | **field**                           | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                  | **key**           |
 |:------------------------------------|:---------|:-----------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------|
@@ -752,17 +710,11 @@ There are low-level entities such as issue_commits, users, and higher-level cros
 
 #### issue_commits
 
-A low-level mapping between "issue tracking" and "source code management" domain by mapping `issues` and `commits`.
-Issue(n): Commit(n).
+A low-level mapping between "issue tracking" and "source code management" domain by mapping `issues` and `commits`. Issue(n): Commit(n).
 
-The original connection between these two entities lies in either issue tracking tools like Jira or source code
-management tools like GitLab. You have to use tools to accomplish this.
+The original connection between these two entities lies in either issue tracking tools like Jira or source code management tools like GitLab. You have to use tools to accomplish this.
 
-For example, a common method to connect Jira issue and GitLab commit is a GitLab
-plugin [Jira Integration](https://docs.gitlab.com/ee/integration/jira/). With this plugin, the Jira issue key in the
-commit message written by the committers will be parsed. Then, the plugin will add the commit urls under this jira
-issue. Hence, DevLake's [Jira plugin](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/jira) can
-get the related commits (including repo, commit_id, url) of an issue.
+For example, a common method to connect Jira issue and GitLab commit is a GitLab plugin [Jira Integration](https://docs.gitlab.com/ee/integration/jira/). With this plugin, the Jira issue key in the commit message written by the committers will be parsed. Then, the plugin will add the commit urls under this jira issue. Hence, DevLake's [Jira plugin](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/jira) can get the related commits (including repo, commit_id, url) of an issue.
 
 | **field**    | **type** | **length** | **description** | **key**        |
 |:-------------|:---------|:-----------|:----------------|:---------------|
@@ -771,11 +723,9 @@ get the related commits (including repo, commit_id, url) of an issue.
 
 #### pull_request_issues
 
-This table shows the issues closed by pull requests. It's a medium-level mapping between "issue tracking" and "source
-code management" domain by mapping issues and commits. Issue(n): Commit(n).
+This table shows the issues closed by pull requests. It's a medium-level mapping between "issue tracking" and "source code management" domain by mapping issues and commits. Issue(n): Commit(n).
 
-The data is extracted from the body of pull requests conforming to certain regular expression. The regular expression
-can be defined in GITHUB_PR_BODY_CLOSE_PATTERN in the .env file
+The data is extracted from the body of pull requests conforming to certain regular expression. The regular expression can be defined in GITHUB_PR_BODY_CLOSE_PATTERN in the .env file
 
 | **field**             | **type** | **length** | **description**  | **key**             |
 |:----------------------|:---------|:-----------|:-----------------|:--------------------|
@@ -795,8 +745,7 @@ A way to link "issue tracking" and "source code management" domain by mapping `b
 
 #### accounts
 
-This table stores of user accounts across different tools such as GitHub, Jira, GitLab, etc. This table can be joined to
-get the metadata of all accounts.
+This table stores of user accounts across different tools such as GitHub, Jira, GitLab, etc. This table can be joined to get the metadata of all accounts.
 metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contributor',_
 
 | **field**      | **type** | **length** | **description**                                                                                                                                                                                                                                                               | **key** |
@@ -893,9 +842,7 @@ metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contr
 
 #### refs_issues_diffs
 
-This table shows the issues fixed by commits added in a new ref compared to an old one. The data is computed
-from [table.commits_diffs](#commits_diffs), [table.pull_requests](#pull_requests), [table.pull_request_commits](#pull_request_commits),
-and [table.pull_request_issues](#pull_request_issues).
+This table shows the issues fixed by commits added in a new ref compared to an old one. The data is computed from [table.commits_diffs](#commits_diffs), [table.pull_requests](#pull_requests), [table.pull_request_commits](#pull_request_commits), and [table.pull_request_issues](#pull_request_issues).
 
 This table can support tag-based analysis, for instance, '_No. of bugs closed in a tag_'.
 
@@ -912,9 +859,7 @@ This table can support tag-based analysis, for instance, '_No. of bugs closed in
 
 ## Get Domain Layer Models in Developer Mode
 
-When developing a new plugin, you need to refer to domain layer models, as all raw data should be transformed to domain
-layer data to provide standardized metrics across tools. Please use the following method to access the domain data
-models.
+When developing a new plugin, you need to refer to domain layer models, as all raw data should be transformed to domain layer data to provide standardized metrics across tools. Please use the following method to access the domain data models.
 
 ```golang
 import "github.com/apache/incubator-devlake/models/domainlayer/domaininfo"
@@ -925,5 +870,4 @@ for _, table := range domaininfo {
 }
 ```
 
-If you want to learn more about plugin models, please
-visit [PluginImplementation](https://devlake.apache.org/docs/DeveloperManuals/PluginImplementation)
+If you want to learn more about plugin models, please visit [PluginImplementation](https://devlake.apache.org/docs/DeveloperManuals/PluginImplementation)
