@@ -20,9 +20,11 @@ A DevLake installation typically consists of the following components:
 - Dashboards: Dashboards deliver data and insights to DevLake users. A dashboard is simply a collection of SQL queries along with corresponding visualization configurations. DevLake's official dashboard tool is Grafana and pre-built dashboards are shipped in Grafana's JSON format. Users are welcome to swap for their own choice of dashboard/BI tool if desired.
 
 ## Dataflow
+<p align="center">
 
-<p align="center"><img src="/img/Architecture/arch-dataflow.svg" /></p>
-<p align="center">DevLake Dataflow</p>
+  ![](../Configuration/images/arch-dataflow.svg)
+
+</p>
 
 A typical plugin's dataflow is illustrated below:
 

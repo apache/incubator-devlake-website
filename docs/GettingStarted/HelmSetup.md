@@ -2,7 +2,7 @@
 title: "Install via Helm"
 description: >
   The steps to install Apache DevLake via Helm for Kubernetes
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 ## Prerequisites
@@ -13,6 +13,8 @@ sidebar_position: 2
 ## Quick Start
 
 #### You can also check https://github.com/apache/incubator-devlake-helm-chart to make contribution
+
+#### To install or upgrade to the latest version, please check [here](https://github.com/apache/incubator-devlake-helm-chart/releases)
 
 ### Install
 
@@ -26,22 +28,24 @@ To install the chart with release name `devlake`,follow these steps:
 
 2.  Copy the generated string, set the value of the ENCRYPTION_SECRET environment variable by running the following command:
 
-        ```
-        export ENCRYPTION_SECRET="copied string"
-        ```
+    ```
+    export ENCRYPTION_SECRET="copied string"
+    ```
 
-        This command will set the `ENCRYPTION_SECRET` environment variable to the value of the copied string.
+    This command will set the `ENCRYPTION_SECRET` environment variable to the value of the copied string.
 
     **Please make sure to keep the ENCRYPTION_SECRET safe as it is used to encrypt sensitive information in the database, such as personal access tokens and passwords. If ENCRYPTION_SECRET is lost, it may not be possible to decrypt this sensitive information.**
 
-3.  By default, the timezone is UTC. You can set your timezone via --set envs.TZ="your timezone",grafana.env.TZ="your timezone"
+3.  By default, the timezone is UTC. To customize the timezone settings, apply the `--set commonEnvs.TZ="your timezone",grafana.env.TZ="your timezone"` command. For further guidance, please refer to [FAQ](#faq).
 
-4.  Install the chart by running the following commands:
+4.  By default, a random password is generated and stored in a Kubernetes Secret for the Grafana admin user. Alternatively, you can explicitly set the password via `--set grafana.adminPassword=<your password>`. For further guidance, please refer to [FAQ](#faq).
+
+5.  Install the chart by running the following commands:
 
     ```shell
     helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
     helm repo update
-    helm install devlake devlake/devlake --version=0.19.0-beta1 --set lake.encryptionSecret.secret=$ENCRYPTION_SECRET
+    helm install devlake devlake/devlake --version=0.19.0-beta6 --set lake.encryptionSecret.secret=$ENCRYPTION_SECRET
     ```
 
 And visit your devlake from the node port (32001 by default).
@@ -70,6 +74,8 @@ grafana by url `http://YOUR-NODE-IP:30091`
 
 **Note:**
 
+**Back up your Grafana dashboards** before upgrading if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
+
 **If you're upgrading from DevLake v0.17.x or earlier versions to v0.18.x or later versions:**
 
 1. Copy the ENCODE_KEY value from /app/config/.env of the lake pod (e.g. devlake-lake-0), and replace the <ENCRYPTION_SECRET> in the upgrade command below.
@@ -80,14 +86,14 @@ grafana by url `http://YOUR-NODE-IP:30091`
 
 ```shell
 helm repo update
-helm upgrade devlake devlake/devlake --version=0.19.0-beta1 --set lake.encryptionSecret.secret=<ENCRYPTION_SECRET>
+helm upgrade devlake devlake/devlake --version=0.19.0-beta6 --set lake.encryptionSecret.secret=<ENCRYPTION_SECRET>
 ```
 
 **If you're upgrading from DevLake v0.18.x or later versions:**
 
 ```shell
 helm repo update
-helm upgrade devlake devlake/devlake --version=0.19.0-beta1
+helm upgrade devlake devlake/devlake --version=0.19.0-beta6
 ```
 
 ### Uninstall
@@ -163,7 +169,7 @@ Some useful parameters for the chart, you could also check them in values.yaml
 | ----------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------ |
 | replicaCount                              | Replica Count for devlake, currently not used                                         | 1                        |
 | imageTag                                  | The version tag for all images                                                        | see Values.yaml          |
-| envs                                      | The common envs for all pods                                                          | {TZ: "UTC"}              |
+| commonEnvs                                | The common envs for all pods except grafana                                           | {TZ: "UTC"}              |
 | mysql.useExternal                         | If use external mysql server, set true                                                | false                    |
 | mysql.externalServer                      | External mysql server address                                                         | 127.0.0.1                |
 | mysql.externalPort                        | External mysql server port                                                            | 3306                     |
@@ -178,6 +184,7 @@ Some useful parameters for the chart, you could also check them in values.yaml
 | mysql.image.repository                    | repository for mysql's image                                                          | mysql                    |
 | mysql.image.tag                           | image tag for mysql's image                                                           | 8                        |
 | mysql.image.pullPolicy                    | pullPolicy for mysql's image                                                          | IfNotPresent             |
+| mysql.initContainers                      | init containers to run to complete before mysql                                       | []                       |
 | mysql.extraLabels                         | extra labels for mysql's statefulset                                                  | {}                       |
 | mysql.securityContext                     | pod security context values                                                           | {}                       |
 | mysql.containerSecurityContext            | container security context values                                                     | {}                       |
@@ -188,6 +195,7 @@ Some useful parameters for the chart, you could also check them in values.yaml
 | lake.image.pullPolicy                     | pullPolicy for lake's image                                                           | Always                   |
 | lake.port                                 | the port of devlake backend                                                           | 8080                     |
 | lake.envs                                 | initial envs for lake                                                                 | see Values.yaml          |
+| lake.extraEnvsFromSecret                  | existing secret name of extra envs                                                    | ""                       |
 | lake.encryptionSecret.secretName          | the k8s secret name for ENCRYPTION_SECRET                                             | ""                       |
 | lake.encryptionSecret.secret              | the secret for ENCRYPTION_SECRET                                                      | ""                       |
 | lake.encryptionSecret.autoCreateSecret    | whether let the helm chart create the secret                                          | true                     |
@@ -268,8 +276,8 @@ The secret name needs to be the same as the value `option.connectionSecretName`
 
 Yes, the devlake helm chart supports using an external Grafana. You can set the following values while installing from helm:
 
-- `grafana.useExternal`: this should be `true`
-- `grafana.externalUrl`: use your Grafana's URL, e.g. `https://grafana.example.com`
+- `grafana.enabled`: this should be `false`
+- `grafana.external.url`: use your Grafana's URL, e.g. `https://grafana.example.com`
 
 Here is the example:
 
@@ -278,8 +286,41 @@ helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
 helm repo update
 ENCRYPTION_SECRET=$(openssl rand -base64 2000 | tr -dc 'A-Z' | fold -w 128 | head -n 1)
 helm install devlake devlake/devlake \
-  --set grafana.useExternal=true \
-  --set grafana.externalUrl=https://grafana.example.com
+  --set grafana.enabled=false \
+  --set grafana.external.url=https://grafana.example.com
+  --set lake.encryptionSecret.secret=$ENCRYPTION_SECRET
+
+```
+
+4. How to set the timezone? If not explicitly set, the default is UTC
+
+- `commonEnvs.TZ`: your timezone
+- `grafana.env.TZ`: your timezone
+
+Here is the example:
+
+```
+helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
+helm repo update
+ENCRYPTION_SECRET=$(openssl rand -base64 2000 | tr -dc 'A-Z' | fold -w 128 | head -n 1)
+helm install devlake devlake/devlake \
+  --set commonEnvs.TZ=<your timezone> \
+  --set grafana.env.TZ=<your timezone>
+
+```
+
+5. How to set the Grafana admin password? If not explicitly set, a random password will be generated and saved in a Kubernetes Secret
+
+- `grafana.adminPassword`: your password
+
+Here is the example:
+
+```
+helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
+helm repo update
+ENCRYPTION_SECRET=$(openssl rand -base64 2000 | tr -dc 'A-Z' | fold -w 128 | head -n 1)
+helm install devlake devlake/devlake \
+  --set grafana.adminPassword=<your password> \
   --set lake.encryptionSecret.secret=$ENCRYPTION_SECRET
 
 ```

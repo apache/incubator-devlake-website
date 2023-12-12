@@ -49,7 +49,7 @@ This bug happens occasionally in v0.14.x and previous versions. It is fixed by c
 We have had a couple of reports suggesting MySQL InnoDB would fail with the message.
 
 - [Error 1206: The total number of locks exceeds the lock table size · Issue #3849 · apache/incubator-devlake](https://github.com/apache/incubator-devlake/issues/3849)
-- [[Bug][Gitlab] gitlab collectApiJobs task failed for mysql locks error · Issue #3653 · apache/incubator-devlake](https://github.com/apache/incubator-devlake/issues/3653)
+- [[Bug][GitLab] gitlab collectApiJobs task failed for mysql locks error · Issue #3653 · apache/incubator-devlake](https://github.com/apache/incubator-devlake/issues/3653)
 
 The cause of the problem is:
 
@@ -68,6 +68,15 @@ Here is an example of the `docker-compose` installation, the idea applies to oth
     command: --innodb-buffer-pool-size=200M
 ```
 
+### GitHub repositories keep loading when adding data scopes
+
+See issue [#6038](https://github.com/apache/incubator-devlake/issues/6038)
+
+If you're having trouble adding data scopes to a GitHub connection because the repositories keep loading, there are a few things you can check:
+1. Make sure your access token has the necessary permissions.
+2. If your account is protected by organization SAML enforcement, make sure you've authorized the token using SSO.
+   
+For more details about authenticating with SAML single sign-on, see here: https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on.
 
 ## None of them solve your problem?
 

@@ -56,18 +56,6 @@ const versions = require('./versions.json');
             },
             "v0.15":{
               banner: 'none',
-            },
-            "v0.14":{
-              banner: 'none',
-            },
-            "v0.13":{
-              banner: 'none',
-            },
-            "v0.12":{
-              banner: 'none',
-            },
-            "v0.11":{
-              banner: 'none',
             }
           }
         },

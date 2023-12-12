@@ -27,7 +27,7 @@ sidebar_position: 1
 
 ## Upgrade to a newer version
 
-Please note: **Back up your Grafana dashboards** before upgrade if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
+Please note: **Back up your Grafana dashboards** before upgrading if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
 
 1. Run `docker-compose down` to stop services;
 2. Open file "docker-compose.yml". Change the image tags of "grafana", "devlake" and "config-ui" to the new version, and save;

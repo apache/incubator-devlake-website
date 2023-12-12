@@ -59,6 +59,21 @@ The token should be granted read-only permission for the following entities.
   - `Metadata`
   - `Pull requests`
 
+##### GitHub Apps 
+Learn about [how to create a GitHub Apps](https://docs.github.com/en/apps/maintaining-github-apps/modifying-a-github-app-registration#navigating-to-your-github-app-settings). The following permissions are required to collect data from repositories:
+- Repository
+    - Actions
+    - Administration
+    - Checks
+    - Commit statuses
+    - Contents
+    - Deployments
+    - Issues
+    - Metadata
+    - Pull requests
+- Organization
+    - Members
+
 #### Use Graphql APIs
 
 If you are using `github.com` or your on-premise GitHub version supports GraphQL APIs, toggle on this setting to collect data quicker.
@@ -125,21 +140,15 @@ Scope config contains two parts:
 
 #### CI/CD
 
-This set of configurations is used for calculating [DORA metrics](../DORA.md).
+This set of configurations is used to define 'deployments'. Deployments are related to measure [DORA metrics](../DORA.md).
 
-If you're using GitHub Action to conduct `deployments`, please select "Detect Deployment from Jobs in GitHub Action", and input the RegEx in the following fields:
+DevLake will convert a workflow run into a DevLake deployment by specifying two regular expressions (regex):
 
-- Deployment: A GitHub Action job with a name that matches the given regEx will be considered as a deployment.
-- Production: A GitHub Action job with a name that matches the given regEx will be considered a job in the production environment.
+- Deployment: The given regex should match the name of the GitHub workflow run or one of its jobs to be considered as a deployment. For example, if the workflow run used for deployment is named 'build-and-push-image', you can input (push-image). To make the regex case insensitive, you can include (?i) before the regex.
+- Production: The given regex should match the workflow run's name to be considered a deployment within the production environment. For example, if the workflow run used for deployment is named 'build-to-prod', you can input (prod). To make the regex case insensitive, you can include (?i) before the regex.
 
-A GitHub workflow run has many jobs. Each GitHub workflow run is converted to a 
-cicd_pipeline in the domain layer and each GitHub Action job is converted to a cicd_task in the domain layer.
 ![github-action-run](/img/ConfigUI/github-action-run.png)
 ![github-action-job](/img/ConfigUI/github-action-job.png)
-
-The deployment and production regex is always applied to the records in the cicd_tasks table.
-
-You can also select "Not using Jobs in GitHub Action as Deployments" if you're not using GitHub action to conduct deployments.
 
 #### Code Review
 

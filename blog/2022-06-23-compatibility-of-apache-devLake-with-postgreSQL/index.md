@@ -5,7 +5,7 @@ authors: ZhangLiang
 tags: [devlake, database, postgresql]
 ---
 
-Apache DevLake is a dev data platform that can collect and integrate data from different dev tools including Jira, Github, Gitlab and Jenkins.
+Apache DevLake is a dev data platform that can collect and integrate data from different dev tools including Jira, Github, GitLab and Jenkins.
 
 This blog will not aim at a comprehensive summary of the compatibility of database but a record of issues for future reference.
 

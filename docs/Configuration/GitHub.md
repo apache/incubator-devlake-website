@@ -1,6 +1,6 @@
 ---
 title: "GitHub"
-sidebar_position: 2
+sidebar_position: 9
 description: Config UI instruction for GitHub
 ---
 
@@ -19,7 +19,7 @@ Give your connection a unique name to help you identify it in the future.
 
 #### Endpoint URL
 
-This should be a valid REST API endpoint, eg. `https://api.github.com/`. The URL should end with `/`.
+This should be a valid REST API endpoint, e.g. `https://api.github.com/`. The URL should end with `/`.
 
 #### Personal Access Token(s)
 
@@ -59,6 +59,23 @@ The token should be granted read-only permission for the following entities.
   - `Metadata`
   - `Pull requests`
 
+
+##### GitHub Apps 
+Learn about [how to create a GitHub Apps](https://docs.github.com/en/apps/maintaining-github-apps/modifying-a-github-app-registration#navigating-to-your-github-app-settings). The following permissions are required to collect data from repositories:
+- Repository
+    - Actions
+    - Administration
+    - Checks
+    - Commit statuses
+    - Contents
+    - Deployments
+    - Issues
+    - Metadata
+    - Pull requests
+- Organization
+    - Members
+
+
 #### Use Graphql APIs
 
 If you are using `github.com` or your on-premise GitHub version supports GraphQL APIs, toggle on this setting to collect data quicker.
@@ -92,14 +109,14 @@ Choose the GitHub repositories you wish to collect either by finding them in the
 
 ### Step 1.3 - Add Scope Config (Optional)
 Scope config contains two parts: 
-- The entities of which domain you wish to collect: Usually, you don't have to modify this part. However, if you don't want to collect certain GitHub entities, you can unselect some entities to accerlerate the collection speed.
+- The entities of which domain you wish to collect: Usually, you don't have to modify this part. However, if you don't want to collect certain GitHub entities, you can unselect some entities to accelerate the collection speed.
   - Issue Tracking: GitHub issues, issue comments, issue labels, etc.
   - Source Code Management: GitHub repos, refs, commits, etc.
   - Code Review: GitHub PRs, PR comments and reviews, etc.
   - CI/CD: GitHub Workflow runs, GitHub Workflow jobs, etc.
   - Cross Domain: GitHub accounts, etc.
 - The transformations on the GitHub data you are going to collect.
-  - The details of the transformations will be exlained below.
+  - The details of the transformations will be explained below.
   - Without adding transformation rules, you can still view the "[GitHub Metrics](/livedemo/DataSources/GitHub)" dashboard. However, if you want to view "[Weekly Bug Retro](/livedemo/QAEngineers/WeeklyBugRetro)", "[Weekly Community Retro](/livedemo/OSSMaintainers/WeeklyCommunityRetro)" or other pre-built dashboards, the following transformation rules, especially "Type/Bug", should be added.
   - Each GitHub repo has at most ONE set of transformations.
 
@@ -125,21 +142,19 @@ Scope config contains two parts:
 
 #### CI/CD
 
-This set of configurations is used for calculating [DORA metrics](../DORA.md).
+This set of configurations is used to define 'deployments'. Deployments are related to measure [DORA metrics](../DORA.md).
 
-If you're using GitHub Action to conduct `deployments`, please select "Detect Deployment from Jobs in GitHub Action", and input the RegEx in the following fields:
+For GitHub deployments, DevLake recognizes them as deployments by specifying a regular expression (regex) to identify the production environments among all 'GitHub environments'.
 
-- Deployment: A GitHub Action job with a name that matches the given regEx will be considered as a deployment.
-- Production: A GitHub Action job with a name that matches the given regEx will be considered a job in the production environment.
+If your deployments are not performed through GitHub deployments but rather specific workflow runs in GitHub, you have the option to convert a workflow run into a DevLake deployment. In this case, you need to configure two regular expressions (regex):
 
-A GitHub workflow run has many jobs. Each GitHub workflow run is converted to a 
-cicd_pipeline in the domain layer and each GitHub Action job is converted to a cicd_task in the domain layer.
+- Deployment: The given regex should match the name of the GitHub workflow run or one of its jobs to be considered as a deployment. For example, if the workflow run used for deployment is named 'build-and-push-image', you can input (push-image). To make the regex case insensitive, you can include (?i) before the regex.
+- Production: The given regex should match either the workflow run's name or its branch's name to be considered a deployment within the production environment. For instance:
+  - If the workflow run used for deployment is named 'build-to-prod', you can input (prod). To make the regex case insensitive, you can include (?i) before the regex.
+  - Also, many users in GitHub utilize the same workflow for both staging and prod deployments, executing it on the release branch would indicate a production deployment.
+
 ![github-action-run](/img/ConfigUI/github-action-run.png)
 ![github-action-job](/img/ConfigUI/github-action-job.png)
-
-The deployment and production regex is always applied to the records in the cicd_tasks table.
-
-You can also select "Not using Jobs in GitHub Action as Deployments" if you're not using GitHub action to conduct deployments.
 
 #### Code Review
 
@@ -152,7 +167,7 @@ You can also select "Not using Jobs in GitHub Action as Deployments" if you're n
 
 #### Additional Settings (Optional)
 
-- Tags Limit: It'll compare the last N pairs of tags to get the "commit diff', "issue diff" between tags. N defaults to 10.
+- Tags Limit: It'll compare the last N pairs of tags to get the "commit diff", "issue diff" between tags. N defaults to 10.
 
   - commit diff: new commits for a tag relative to the previous one
   - issue diff: issues solved by the new commits for a tag relative to the previous one
@@ -166,7 +181,7 @@ Please click `Save` to save the transformation rules for the repo. In the data s
 
 ## Step 2 - Collect Data in a Project
 ### Step 2.1 - Create a Project
-Collecing GitHub data reuiqres creating a project first. You can visit the Project page from the side menu and create a new project by following the instructions on the user interface.
+Collecting GitHub data requires creating a project first. You can visit the Project page from the side menu and create a new project by following the instructions on the user interface.
 
 ![create-a-project](images/create-a-project.png)
 
@@ -179,7 +194,7 @@ Please note: if you don't see the repositories you are looking for, please check
 ### Step 2.3 - Set the Sync Policy
 There are three settings for Sync Policy:
 - Data Time Range: You can select the time range of the data you wish to collect. The default is set to the past six months.
-- Sync Frequency: You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your prefered schedule.
+- Sync Frequency: You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your preferred schedule.
 - Skip Failed Tasks: sometime a few tasks may fail in a long pipeline; you can choose to skip them to avoid spending more time in running the pipeline all over again.
 
 ![sync-policy](images/sync-policy.png)

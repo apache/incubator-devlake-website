@@ -15,9 +15,13 @@ sidebar_position: 1
 
 This document describes Apache DevLake's domain layer schema.
 
-Referring to DevLake's [architecture](../Overview/Architecture.md), the data in the domain layer is transformed from the data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, Gitlab, Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
+Referring to DevLake's [architecture](../Overview/Architecture.md), the data in the domain layer is transformed from the data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, GitLab, Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
 
-<p align="center"><img src="/img/Architecture/arch-dataflow.svg" /></p>
+<p align="center">
+
+![](../Configuration/images/arch-dataflow-domain.svg)
+
+</p>
 <p align="center">DevLake Dataflow</p>
 
 ## Use Cases
@@ -31,8 +35,8 @@ Referring to DevLake's [architecture](../Overview/Architecture.md), the data in 
 This is the up-to-date domain layer schema for DevLake. Tables (entities) are categorized into 5 domains.
 
 1. Issue tracking: Jira issues, GitHub issues, GitLab issues, etc.
-2. Source code management: Git/GitHub/Gitlab commits and refs(tags and branches), etc.
-3. Code review: GitHub PRs, Gitlab MRs, etc.
+2. Source code management: Git/GitHub/GitLab commits and refs(tags and branches), etc.
+3. Code review: GitHub PRs, GitLab MRs, etc.
 4. CI/CD: Jenkins jobs & builds, etc.
 5. Code Quality: SonarQube issues, hotspots, file metrics, etc.
 6. Cross-domain: entities that map entities from different domains to break data isolation.
@@ -41,7 +45,7 @@ This is the up-to-date domain layer schema for DevLake. Tables (entities) are ca
 
 ![Domain Layer Schema](../Configuration/images/domain-layer-schema-diagram.svg)
 
-When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. Github/Gitlab) and allow them to co-exist in a single table.
+When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. GitHub/GitLab) and allow them to co-exist in a single table.
 
 Tables that end with WIP are still under development.
 
@@ -66,45 +70,46 @@ Apache DevLake provides 2 plugins:
 
 #### issues
 
-An `issue` is the abstraction of Github/GitLab/BitBucket/Jira/TAPD/Zentao... issues.
+An `issue` is the abstraction of GitHub/GitLab/BitBucket/Jira/TAPD/Zentao... issues.
 
-| **field**                   | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | **key** |
-| :-------------------------- | :------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
-| `id`                        | varchar  | 255        | An issue's `id` is composed of < plugin >:< Entity >:< PK0 >[:PK1]..." <ul><li>For Github issues, a Github issue's id is like "github:GithubIssues:< GithubIssueId >". E.g. 'github:GithubIssues:1049355647'</li> <li>For Jira issues, a Github repo's id is like "jira:JiraIssues:< JiraSourceId >:< JiraIssueId >". E.g. 'jira:JiraIssues:1:10063'. < JiraSourceId > is used to identify which jira source the issue came from, since DevLake users can import data from several different Jira instances at the same time.</li></ul>                                                                  | PK      |
-| `issue_key`                 | varchar  | 255        | The key of this issue. For example, the key of this Github [issue](https://github.com/apache/incubator-devlake/issues/1145) is 1145.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |         |
-| `url`                       | varchar  | 255        | The url of the issue. It's a web address in most cases.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
-| `title`                     | varchar  | 255        | The title of an issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |         |
-| `description`               | longtext |            | The detailed description/summary of an issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
-| `type`                      | varchar  | 100        | The standard type of this issue. There're 3 standard types: <ul><li>REQUIREMENT: this issue is a feature</li><li>BUG: this issue is a bug found during test</li><li>INCIDENT: this issue is a bug found after release</li></ul>The 3 standard types are transformed from the original types of an issue. The transformation rule is set in the '.env' file or 'config-ui' before data collection. For issues with an original type that has not mapped to a standard type, the value of `type` will be the issue's original type.                                                                        |         |
-| `original_type`             | varchar  | 100        | The original type of an issue.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |         |
-| `status`                    | varchar  | 100        | The standard statuses of this issue. There're 3 standard statuses: <ul><li> TODO: this issue is in backlog or to-do list</li><li>IN_PROGRESS: this issue is in progress</li><li>DONE: this issue is resolved or closed</li></ul>The 3 standard statuses are transformed from the original statuses of an issue. The transformation rule: <ul><li>For Jira issue status: transformed from the Jira issue's `statusCategory`. Jira issue has 3 default status categories: 'To Do', 'In Progress', 'Done'.</li><li>For Github issue status: <ul><li>open -> TODO</li><li>closed -> DONE</li></ul></li></ul> |         |
-| `original_status`           | varchar  | 100        | The original status of an issue.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |         |
-| `story_point`               | double   |            | The story point of this issue. Only certain types(e.g. story) of Jira or TAPD issues has story points                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |         |
-| `priority`                  | varchar  | 255        | The priority of the issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |         |
-| `component`                 | varchar  | 255        | The component a bug-issue affects. This field only supports Github plugin for now. The value is transformed from Github issue labels by the rules set according to the user's configuration of .env by end users during DevLake installation.                                                                                                                                                                                                                                                                                                                                                            |         |
-| `severity`                  | varchar  | 255        | The severity level of a bug-issue. This field only supports Github plugin for now. The value is transformed from Github issue labels by the rules set according to the user's configuration of .env by end users during DevLake installation.                                                                                                                                                                                                                                                                                                                                                            |         |
-| `parent_issue_id`           | varchar  | 255        | The id of its parent issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |         |
-| `epic_key`                  | varchar  | 255        | The key of the epic this issue belongs to. For tools with no epic-type issues such as Github and Gitlab, this field is default to an empty string                                                                                                                                                                                                                                                                                                                                                                                                                                                        |         |
-| `original_estimate_minutes` | int      |            | The original estimation of the time allocated for this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
-| `time_spent_minutes`        | int      |            | The original estimation of the time allocated for this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
-| `time_remaining_minutes`    | int      |            | The remaining time to resolve the issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
-| `creator_id`                | varchar  | 255        | The id of issue creator                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
-| `creator_name`              | varchar  | 255        | The name of the creator                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
-| `assignee_id`               | varchar  | 255        | The id of issue assignee.<ul><li>For Github issues: this is the last assignee of an issue if the issue has multiple assignees</li><li>For Jira issues: this is the assignee of the issue at the time of collection</li></ul>                                                                                                                                                                                                                                                                                                                                                                             |         |
-| `assignee_name`             | varchar  | 255        | The name of the assignee                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |         |
-| `created_date`              | datetime | 3          | The time issue created                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |         |
-| `updated_date`              | datetime | 3          | The last time issue gets updated                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |         |
-| `resolution_date`           | datetime | 3          | The time the issue changes to 'DONE'.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |         |
-| `lead_time_minutes`         | int      |            | Describes the cycle time from issue creation to issue resolution.<ul><li>For issues whose type = 'REQUIREMENT' and status = 'DONE', lead_time_minutes = resolution_date - created_date. The unit is minute.</li><li>For issues whose type != 'REQUIREMENT' or status != 'DONE', lead_time_minutes is null</li></ul>                                                                                                                                                                                                                                                                                      |         |
-| `original_project`          | varchar  | 255        | The name of the original project this issue belongs to. Transformed from a Jira project's name, a TAPD workspace's name, etc.                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |         |
-| `icon_url`                  | varchar  | 255        | The url of the issue icon.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |         |
+| **field**                   | **type**                                      | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | **key** |
+|:----------------------------|:----------------------------------------------|:-----------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------|
+| `id`                        | varchar                                       | 255        | An issue's `id` is composed of < plugin >:< Entity >:< PK0 >[:PK1]..." <ul><li>For Github issues, a Github issue's id is like "github:GithubIssues:< GithubIssueId >". E.g. 'github:GithubIssues:1049355647'</li> <li>For Jira issues, a Github repo's id is like "jira:JiraIssues:< JiraSourceId >:< JiraIssueId >". E.g. 'jira:JiraIssues:1:10063'. < JiraSourceId > is used to identify which jira source the issue came from, since DevLake users can import data from several different Jira instances at the same time.</li></ul>                                                                   | PK      |
+| `issue_key`                 | varchar                                       | 255        | The key of this issue. For example, the key of this Github [issue](https://github.com/apache/incubator-devlake/issues/1145) is 1145.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |         |
+| `url`                       | varchar                                       | 255        | The url of the issue. It's a web address in most cases.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |         |
+| `title`                     | varchar                                       | 255        | The title of an issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |         |
+| `description`               | longtext                                      |            | The detailed description/summary of an issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |         |
+| `type`                      | varchar                                       | 100        | The standard type of this issue. There are 3 standard types: <ul><li>REQUIREMENT: this issue is a feature</li><li>BUG: this issue is a bug found during test</li><li>INCIDENT: this issue is a bug found after release</li></ul>The 3 standard types are transformed from the original types of an issue. The transformation rule is set in the '.env' file or 'config-ui' before data collection. For issues with an original type that has not mapped to a standard type, the value of `type` will be the issue's original type.                                                                        |         |
+| `original_type`             | varchar                                       | 100        | The original type of an issue.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |         |
+| `status`                    | varchar                                       | 100        | The standard statuses of this issue. There are 3 standard statuses: <ul><li> TODO: this issue is in backlog or to-do list</li><li>IN_PROGRESS: this issue is in progress</li><li>DONE: this issue is resolved or closed</li></ul>The 3 standard statuses are transformed from the original statuses of an issue. The transformation rule: <ul><li>For Jira issue status: transformed from the Jira issue's `statusCategory`. Jira issue has 3 default status categories: 'To Do', 'In Progress', 'Done'.</li><li>For Github issue status: <ul><li>open -> TODO</li><li>closed -> DONE</li></ul></li></ul> |         |
+| `original_status`           | varchar                                       | 100        | The original status of an issue.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |         |
+| `story_point`               | double                                        |            | The story point of this issue. Only certain types(e.g. story) of Jira or TAPD issues has story points                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |         |
+| `priority`                  | varchar                                       | 255        | The priority of the issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |         |
+| `component`                 | varchar                                       | 255        | The component a bug-issue affects. This field only supports Github plugin for now. The value is transformed from Github issue labels by the rules set according to the user's configuration of .env by end users during DevLake installation.                                                                                                                                                                                                                                                                                                                                                             |         |
+| `severity`                  | varchar                                       | 255        | The severity level of a bug-issue. This field only supports Github plugin for now. The value is transformed from Github issue labels by the rules set according to the user's configuration of .env by end users during DevLake installation.                                                                                                                                                                                                                                                                                                                                                             |         |
+| `parent_issue_id`           | varchar                                       | 255        | The id of its parent issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |         |
+| `epic_key`                  | varchar                                       | 255        | The key of the epic this issue belongs to. For tools with no epic-type issues such as Github and GitLab, this field is default to an empty string                                                                                                                                                                                                                                                                                                                                                                                                                                                         |         |
+| `original_estimate_minutes` | int                                           |            | The original estimation of the time allocated for this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |         |
+| `time_spent_minutes`        | int                                           |            | The original estimation of the time allocated for this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |         |
+| `time_remaining_minutes`    | int                                           |            | The remaining time to resolve the issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |         |
+| `creator_id`                | varchar                                       | 255        | The id of issue creator                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |         |
+| `creator_name`              | varchar                                       | 255        | The name of the creator                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |         |
+| `assignee_id`               | varchar                                       | 255        | The id of issue assignee.<ul><li>For Github issues: this is the last assignee of an issue if the issue has multiple assignees</li><li>For Jira issues: this is the assignee of the issue at the time of collection</li></ul>                                                                                                                                                                                                                                                                                                                                                                              |         |
+| `assignee_name`             | varchar                                       | 255        | The name of the assignee                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
+| `created_date`              | datetime                                      | 3          | The time issue created                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |         |
+| `updated_date`              | datetime                                      | 3          | The last time issue gets updated                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |         |
+| `resolution_date`           | datetime                                      | 3          | The time the issue changes to 'DONE'.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |         |
+| `lead_time_minutes`         | int                                           |            | Describes the cycle time from issue creation to issue resolution.<ul><li>For issues whose type = 'REQUIREMENT' and status = 'DONE', lead_time_minutes = resolution_date - created_date. The unit is minute.</li><li>For issues whose type != 'REQUIREMENT' or status != 'DONE', lead_time_minutes is null</li></ul>                                                                                                                                                                                                                                                                                       |         |
+| `original_project`          | varchar                                       | 255        | The name of the original project this issue belongs to. Transformed from a Jira project's name, a TAPD workspace's name, etc.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
+| `icon_url`                  | varchar                                       | 255        | The url of the issue icon.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |         |
+| `x_custom_field_1`          | It depends on the type of the converted field | -          | The value of the custom field. This field is available when utilizing the [customize](/docs/Plugins/customize.md) plugin to convert Jira's raw layer fields to the domain layer fields.                                                                                                                                                                                                                                                                                                                                                                                                                   |         |
 
 #### issue_assignees
 
 This table shows the assignee(s) of issues. Multiple entries can exist per issue, as a GitHub/TAPD issue may have multiple assignees at the same time. This table can be used to get the detailed information of all issue assignees.
 
 | **field**       | **type** | **length** | **description** | **key**        |
-| :-------------- | :------- | :--------- | :-------------- | :------------- |
+|:----------------|:---------|:-----------|:----------------|:---------------|
 | `issue_id`      | varchar  | 255        | Issue ID        | FK_issues.id   |
 | `assignee_id`   | varchar  | 255        | Assignee ID     | FK_accounts.id |
 | `assignee_name` | varchar  | 255        | Assignee Name   |                |
@@ -114,7 +119,7 @@ This table shows the assignee(s) of issues. Multiple entries can exist per issue
 This table shows the labels of issues. Multiple entries can exist per issue. This table can be used to filter issues by label name.
 
 | **field**  | **type** | **length** | **description**                                                   | **key**      |
-| :--------- | :------- | :--------- | :---------------------------------------------------------------- | :----------- |
+|:-----------|:---------|:-----------|:------------------------------------------------------------------|:-------------|
 | `name`     | varchar  | 255        | Label name. Collect from GitHub issue labels or Jira issue labels |              |
 | `issue_id` | varchar  | 255        | Issue ID                                                          | FK_issues.id |
 
@@ -123,20 +128,20 @@ This table shows the labels of issues. Multiple entries can exist per issue. Thi
 This table shows the comments of issues. Only GitHub and TAPD issue comments are collected. Issues with multiple comments are shown as multiple records. This table can be used to calculate _metric - issue response time_.
 
 | **field**      | **type** | **length** | **description**                            | **key**        |
-| :------------- | :------- | :--------- | :----------------------------------------- | :------------- |
+|:---------------|:---------|:-----------|:-------------------------------------------|:---------------|
 | `id`           | varchar  | 255        | The unique id of a comment                 | PK             |
 | `issue_id`     | varchar  | 255        | Issue ID                                   | FK_issues.id   |
 | `account_id`   | varchar  | 255        | The id of the account who made the comment | FK_accounts.id |
 | `body`         | longtext |            | The body/detail of the comment             |                |
 | `created_date` | datetime | 3          | The creation date of the comment           |                |
-| `updated_date` | datetime | 3          | The updation date of the comment           |                |
+| `updated_date` | datetime | 3          | The update date of the comment             |                |
 
 #### issue_changelogs
 
 This table shows the changelogs of issues. Only Jira issue changelogs are collected for now. Issues with multiple changelogs are shown as multiple records. This is transformed from Jira or TAPD changelogs.
 
 | **field**             | **type** | **length** | **description**                                                  | **key**        |
-| :-------------------- | :------- | :--------- | :--------------------------------------------------------------- | :------------- |
+|:----------------------|:---------|:-----------|:-----------------------------------------------------------------|:---------------|
 | `id`                  | varchar  | 255        | The unique id of an issue changelog                              | PK             |
 | `issue_id`            | varchar  | 255        | Issue ID                                                         | FK_issues.id   |
 | `author_id`           | varchar  | 255        | The id of the user who made the change                           | FK_accounts.id |
@@ -154,7 +159,7 @@ This table shows the changelogs of issues. Only Jira issue changelogs are collec
 This table shows the work logged under issues. Only Jira issue worklogs are collected for now. Usually, an issue has multiple worklogs logged by different developers.
 
 | **field**            | **type** | **length** | **description**                                                                          | **key**        |
-| :------------------- | :------- | :--------- | :--------------------------------------------------------------------------------------- | :------------- |
+|:---------------------|:---------|:-----------|:-----------------------------------------------------------------------------------------|:---------------|
 | `id`                 | varchar  | 255        | The id of the worklog.                                                                   | PK             |
 | `author_id`          | varchar  | 255        | The id of the author who logged the work                                                 | FK_accounts.id |
 | `comment`            | longtext | 255        | The comment made while logging the work.                                                 |                |
@@ -165,21 +170,21 @@ This table shows the work logged under issues. Only Jira issue worklogs are coll
 
 #### issue_relationships
 
-This table shows the metadata of information about relationships between issues. 
+This table shows the metadata of information about relationships between issues.
 
-| **field**          | **type** | **length** | **description**                                            | **key** |
-| :----------------- | :------- | :--------- | :--------------------------------------------------------- | :------ |
-| `id`               | varchar  | 255        | Issue ID                                                   | PK      |
-| `source_issue_id`  | int      |            | ID of the source issue in the relationship                 |         |
-| `target_issue_id`  | int      |            | ID of the target issue in the relationship                 |         |
-| `original_type`    | varchar  | 255        | Type of relationship between the source and target issues  |         |
+| **field**         | **type** | **length** | **description**                                           | **key** |
+|:------------------|:---------|:-----------|:----------------------------------------------------------|:--------|
+| `id`              | varchar  | 255        | Issue ID                                                  | PK      |
+| `source_issue_id` | int      |            | ID of the source issue in the relationship                |         |
+| `target_issue_id` | int      |            | ID of the target issue in the relationship                |         |
+| `original_type`   | varchar  | 255        | Type of relationship between the source and target issues |         |
 
 #### issue_repo_commits
 
 This table shows the metadata of commits made to a code repository associated with specific issues.
 
 | **field**    | **type** | **length** | **description**                      | **key** |
-| :----------- | :------- | :--------- | :----------------------------------- | :------ |
+|:-------------|:---------|:-----------|:-------------------------------------|:--------|
 | `issue_id`   | varchar  | 255        | Issue ID                             | PK      |
 | `repo_url`   | varchar  | 255        | The URL of the code repository       | PK      |
 | `commit_sha` | varchar  | 255        | The SHA of the commit.               | PK      |
@@ -187,16 +192,38 @@ This table shows the metadata of commits made to a code repository associated wi
 | `namespace`  | varchar  | 255        | The namespace of the code repository |         |
 | `repo_name`  | varchar  | 255        | The name of the code repository.     |         |
 
+#### issue_custom_array_fields
+
+The table below presents the custom fields of issues in an 'array' type. This table is available when utilizing the [customize](/docs/Plugins/customize.md) plugin to convert Jira's raw layer fields to the domain layer fields. It is important to note that custom fields of other types will be displayed as 'x_custom_field_1' in the [issues](#issues) table.
+
+| **field**     | **type** | **length** | **description**                                                                    | **key** |
+|:--------------|:---------|:-----------|:-----------------------------------------------------------------------------------|:--------|
+| `issue_id`    | varchar  | 255        | Issue ID                                                                           | PK      |
+| `field_id`    | varchar  | 255        | The ID of the array field of the issue. It starts with 'x_', e.g. x_product_lines. |         |
+| `field_value` | varchar  | 255        | The value of the array field. E.g. DevLake, DevSea, DevPond.                       |         |
+
+You can refer to the following SQL to use this table.
+
+```
+-- query issue count by product lines
+select 
+  count(*) as issue_count, field_value 
+from issues 
+  join issue_custom_array_fields on issues.id = issue_custom_array_fields.issue_id
+where field_id = 'x_product_lines'
+group by field_value;
+```
+
 #### boards
 
 A `board` is an issue list or a collection of issues. It's the abstraction of a Jira board, a Jira or TAPD project, a [GitHub repo's issue list](https://github.com/apache/incubator-devlake/issues) or a GitLab repo's issue list. This table can be used to filter issues by the boards they belong to.
 
 | **field**      | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                               | **key** |
-| :------------- | :------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------ |
+|:---------------|:---------|:-----------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------|
 | `id`           | varchar  | 255        | A board's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..." <ul><li>For a Github repo's issue list, the board id is like "< github >:< GithubRepos >:< ConnectionId >:< GithubRepoId >".<br/>E.g. "github:GithubRepo:384111310"</li> <li>For a Jira Board, the id is like "< jira >:< JiraSourceId >< JiraBoards >:< ConnectionId >:< JiraBoardsId >".<br/>E.g. "jira:1:JiraBoards:1:12"</li></ul> | PK      |
 | `name`         | varchar  | 255        | The name of the board. Note: the board name of a Github repo 'apache/incubator-devlake' is 'apache/incubator-devlake', representing the [default issue list](https://github.com/apache/incubator-devlake/issues).                                                                                                                                                                                             |         |
 | `description`  | varchar  | 255        | The description of the board.                                                                                                                                                                                                                                                                                                                                                                                 |         |
-| `url`          | varchar  | 255        | The url of the board. E.g. https://github.com/apache/incubator-devlake                                                                                                                                                                                                                                                                                                                                        |         |
+| `url`          | varchar  | 255        | The url of the board. E.g. https://github.com/apache/incubator-devlake/issues                                                                                                                                                                                                                                                                                                                                 |         |
 | `created_date` | datetime | 3          | Board creation time                                                                                                                                                                                                                                                                                                                                                                                           |         |
 | `type`         | varchar  | 255        | Identify scrum and non-scrum board                                                                                                                                                                                                                                                                                                                                                                            |         |
 
@@ -205,20 +232,21 @@ A `board` is an issue list or a collection of issues. It's the abstraction of a 
 This table shows the relation between boards and issues. This table can be used to filter issues by board.
 
 | **field**  | **type** | **length** | **description** | **key**      |
-| :--------- | :------- | :--------- | :-------------- | :----------- |
+|:-----------|:---------|:-----------|:----------------|:-------------|
 | `board_id` | varchar  | 255        | Board id        | FK_boards.id |
 | `issue_id` | varchar  | 255        | Issue id        | FK_issues.id |
 
 #### sprints
 
-A `sprint` is the abstraction of Jira sprints, TAPD iterations and GitHub milestones. A sprint contains a list of issues.
+A `sprint` is the abstraction of Jira sprints, TAPD iterations and GitHub milestones. A sprint contains a list of
+issues.
 
 | **field**           | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | **key**      |
-| :------------------ | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------- |
+|:--------------------|:---------|:-----------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------|
 | `id`                | varchar  | 255        | A sprint's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<ul><li>A sprint in a Github repo is a milestone, the sprint id is like "< github >:< GithubRepos >:< GithubRepoId >:< milestoneNumber >".<br/>Eg. The id for this [sprint](https://github.com/apache/incubator-devlake/milestone/5) is "github:GithubRepo:384111310:5"</li><li>For a Jira Board, the id is like "< jira >:< JiraSourceId >< JiraBoards >:< JiraBoardsId >".<br/>Eg. "jira:1:JiraBoards:12"</li></ul>                                                                | PK           |
 | `name`              | varchar  | 255        | The name of sprint.<br/>For Github projects, the sprint name is the milestone name. For instance, 'v0.10.0 - Introduce Temporal to DevLake' is the name of this [sprint](https://github.com/apache/incubator-devlake/milestone/5).                                                                                                                                                                                                                                                                                                                          |              |
 | `url`               | varchar  | 255        | The url of sprint.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |              |
-| `status`            | varchar  | 255        | There're 3 statuses of a sprint:<ul><li>CLOSED: a completed sprint</li><li>ACTIVE: a sprint started but not completed</li><li>FUTURE: a sprint that has not started</li><li>SUSPENDED: a sprint that has been suspended</li></ul>                                                                                                                                                                                                                                                                                                                           |              |
+| `status`            | varchar  | 255        | There are 3 statuses of a sprint:<ul><li>CLOSED: a completed sprint</li><li>ACTIVE: a sprint started but not completed</li><li>FUTURE: a sprint that has not started</li><li>SUSPENDED: a sprint that has been suspended</li></ul>                                                                                                                                                                                                                                                                                                                          |              |
 | `started_date`      | datetime | 3          | The start time of a sprint                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |              |
 | `ended_date`        | datetime | 3          | The planned/estimated end time of a sprint. It's usually set when planning a sprint.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |              |
 | `completed_date`    | datetime | 3          | The actual time to complete a sprint.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |              |
@@ -226,17 +254,18 @@ A `sprint` is the abstraction of Jira sprints, TAPD iterations and GitHub milest
 
 #### sprint_issues
 
-This table shows the relation between sprints and issues that have been added to sprints. This table can be used to show metrics such as _'ratio of unplanned issues'_, _'completion rate of sprint issues'_, etc
+This table shows the relation between sprints and issues that have been added to sprints. This table can be used to show
+metrics such as _'ratio of unplanned issues'_, _'completion rate of sprint issues'_, etc
 
 | **field**   | **type** | **length** | **description** | **key**       |
-| :---------- | :------- | :--------- | :-------------- | :------------ |
+|:------------|:---------|:-----------|:----------------|:--------------|
 | `sprint_id` | varchar  | 255        | Sprint id       | FK_sprints.id |
 | `issue_id`  | varchar  | 255        | Issue id        | FK_issues.id  |
 
 #### board_sprints
 
 | **field**   | **type** | **length** | **description** | **key**       |
-| :---------- | :------- | :--------- | :-------------- | :------------ |
+|:------------|:---------|:-----------|:----------------|:--------------|
 | `board_id`  | varchar  | 255        | Board id        | FK_boards.id  |
 | `sprint_id` | varchar  | 255        | Sprint id       | FK_sprints.id |
 
@@ -246,10 +275,10 @@ This table shows the relation between sprints and issues that have been added to
 
 #### repos
 
-GitHub, Gitlab or BitBucket repositories.
+GitHub, GitLab or BitBucket repositories.
 
 | **field**      | **type** | **length** | **description**                                                                                                                                                                                                         | **key**        |
-| :------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- |
+|:---------------|:---------|:-----------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------|
 | `id`           | varchar  | 255        | A repo's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github repo's id is like "< github >:< GithubRepos >:< ConnectionId >:< GithubRepoId >". E.g. 'github:GithubRepos:1:384111310' | PK             |
 | `name`         | longtext |            | The name of repo. For DevLake, it's 'apache/incubator-devlake'                                                                                                                                                          |                |
 | `description`  | longtext |            | The description of repo.                                                                                                                                                                                                |                |
@@ -263,10 +292,11 @@ GitHub, Gitlab or BitBucket repositories.
 
 #### repo_commits
 
-The commits belong to the history of a repository. More than one repos can share the same commits if one is a fork of the other.
+The commits belong to the history of a repository. More than one repo can share the same commits if one is a fork of the
+other.
 
 | **field**    | **type** | **length** | **description** | **key**        |
-| :----------- | :------- | :--------- | :-------------- | :------------- |
+|:-------------|:---------|:-----------|:----------------|:---------------|
 | `repo_id`    | varchar  | 255        | Repo id         | FK_repos.id    |
 | `commit_sha` | char     | 40         | Commit sha      | FK_commits.sha |
 
@@ -275,7 +305,7 @@ The commits belong to the history of a repository. More than one repos can share
 A ref is the abstraction of a branch or tag.
 
 | **field**    | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                             | **key**     |
-| :----------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------- |
+|:-------------|:---------|:-----------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------|
 | `id`         | varchar  | 255        | A ref's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github ref is composed of "github:GithubRepos:< GithubRepoId >:< RefUrl >". E.g. The id of release v5.3.0 of PingCAP/TiDB project is 'github:GithubRepos:384111310:refs/tags/v5.3.0' A repo's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."          | PK          |
 | `name`       | varchar  | 255        | The name of the ref. E.g. '[refs/tags/v0.9.3](https://github.com/apache/incubator-devlake/tree/v0.9.3)' or 'origin/main'                                                                                                                                                                                                                                    |             |
 | `repo_id`    | varchar  | 255        | The id of repo this ref belongs to                                                                                                                                                                                                                                                                                                                          | FK_repos.id |
@@ -290,7 +320,7 @@ This table shows the commits added in a new commit compared to an old commit. Th
 The records of this table are computed by [RefDiff](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/refdiff) plugin. The computation should be manually triggered after using [GitRepoExtractor](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/gitextractor) to collect commits and refs. The algorithm behind is similar to [this](https://github.com/apache/incubator-devlake/compare/v0.8.0%E2%80%A6v0.9.0).
 
 | **field**        | **type** | **length** | **description**                                                            | **key** |
-| :--------------- | :------- | :--------- | :------------------------------------------------------------------------- | :------ |
+|:-----------------|:---------|:-----------|:---------------------------------------------------------------------------|:--------|
 | `new_commit_sha` | char     | 40         | The commit new ref/deployment points to at the time of collection          | PK      |
 | `old_commit_sha` | char     | 40         | The commit old ref/deployment points to at the time of collection          | PK      |
 | `commit_sha`     | char     | 40         | One of the added commits in the new ref compared to the old ref/deployment | PK      |
@@ -299,7 +329,7 @@ The records of this table are computed by [RefDiff](https://github.com/apache/in
 #### ref_commits
 
 | **field**        | **type** | **length** | **description**                                        | **key** |
-| :--------------- | :------- | :--------- | :----------------------------------------------------- | :------ |
+|:-----------------|:---------|:-----------|:-------------------------------------------------------|:--------|
 | `new_ref_id`     | varchar  | 255        | The new ref's id for comparison                        | PK      |
 | `old_ref_id`     | varchar  | 255        | The old ref's id for comparison                        | PK      |
 | `new_commit_sha` | char     | 40         | The commit new ref points to at the time of collection |         |
@@ -308,7 +338,7 @@ The records of this table are computed by [RefDiff](https://github.com/apache/in
 #### commits
 
 | **field**         | **type** | **length** | **description**                                                                                                                                                                 | **key**        |
-| :---------------- | :------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------- |
+|:------------------|:---------|:-----------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------|
 | `sha`             | char     | 40         | One of the added commits in the new ref compared to the old ref                                                                                                                 | FK_commits.sha |
 | `message`         | varchar  | 255        | Commit message                                                                                                                                                                  |                |
 | `author_name`     | varchar  | 255        | The value is set with command `git config user.name xxxxx` commit                                                                                                               |                |
@@ -328,7 +358,7 @@ The records of this table are computed by [RefDiff](https://github.com/apache/in
 The files that have been changed by commits.
 
 | **field**    | **type** | **length** | **description**                                        | **key**        |
-| :----------- | :------- | :--------- | :----------------------------------------------------- | :------------- |
+|:-------------|:---------|:-----------|:-------------------------------------------------------|:---------------|
 | `id`         | varchar  | 255        | The `id` is composed of "< Commit_sha >:< file_path >" | FK_commits.sha |
 | `commit_sha` | char     | 40         | Commit sha                                             | FK_commits.sha |
 | `file_path`  | varchar  | 255        | Path of a changed file in a commit                     |                |
@@ -340,7 +370,7 @@ The files that have been changed by commits.
 The components of files extracted from the file paths. This can be used to analyze Git metrics by component.
 
 | **field**    | **type** | **length** | **description**                                        | **key**     |
-| :----------- | :------- | :--------- | :----------------------------------------------------- | :---------- |
+|:-------------|:---------|:-----------|:-------------------------------------------------------|:------------|
 | `repo_id`    | varchar  | 255        | The repo id                                            | FK_repos.id |
 | `name`       | varchar  | 255        | The name of component                                  |             |
 | `path_regex` | varchar  | 255        | The regex to extract components from this repo's paths |             |
@@ -350,7 +380,7 @@ The components of files extracted from the file paths. This can be used to analy
 The relationship between commit_file and component_name.
 
 | **field**        | **type** | **length** | **description**              | **key**            |
-| :--------------- | :------- | :--------- | :--------------------------- | :----------------- |
+|:-----------------|:---------|:-----------|:-----------------------------|:-------------------|
 | `commit_file_id` | varchar  | 255        | The id of commit file        | FK_commit_files.id |
 | `component_name` | varchar  | 255        | The component name of a file |                    |
 
@@ -359,7 +389,7 @@ The relationship between commit_file and component_name.
 The parent commit(s) for each commit, as specified by Git.
 
 | **field**           | **type** | **length** | **description**   | **key**        |
-| :------------------ | :------- | :--------- | :---------------- | :------------- |
+|:--------------------|:---------|:-----------|:------------------|:---------------|
 | `commit_sha`        | char     | 40         | commit sha        | FK_commits.sha |
 | `parent_commit_sha` | char     | 40         | Parent commit sha | FK_commits.sha |
 
@@ -372,7 +402,7 @@ The parent commit(s) for each commit, as specified by Git.
 Pull requests are the abstraction of GitHub pull requests, GitLab merge requests, BitBucket pull requests, etc.
 
 | **field**          | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                | **key**        |
-| :----------------- | :------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- |
+|:-------------------|:---------|:-----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------|
 | `id`               | varchar  | 255        | A pull request's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..." E.g. For 'github:GithubPullRequests:1347'                                                                                                                                                                                                                                                                        |                |
 | `title`            | longtext |            | The title of pull request                                                                                                                                                                                                                                                                                                                                                                      |                |
 | `description`      | longtext |            | The body/description of pull request                                                                                                                                                                                                                                                                                                                                                           |                |
@@ -386,7 +416,7 @@ Pull requests are the abstraction of GitHub pull requests, GitLab merge requests
 | `author_id`        | varchar  | 100        | The author's id of the pull request                                                                                                                                                                                                                                                                                                                                                            |                |
 | `url`              | varchar  | 255        | the web link of the pull request                                                                                                                                                                                                                                                                                                                                                               |                |
 | `type`             | varchar  | 255        | The work-type of a pull request.For example: feature-development, bug-fix, docs,etc.                                                                                                                                                                                                                                                                                                           |                |
-| `component`        | varchar  | 255        | The component this PR affects.<br/>The value is transformed from Github/Gitlab pull request labels by configuring `GITHUB_PR_COMPONENT` in `.env` file during installation.                                                                                                                                                                                                                    |                |
+| `component`        | varchar  | 255        | The component this PR affects.<br/>The value is transformed from Github/GitLab pull request labels by configuring `GITHUB_PR_COMPONENT` in `.env` file during installation.                                                                                                                                                                                                                    |                |
 | `created_date`     | datetime | 3          | The time PR created.                                                                                                                                                                                                                                                                                                                                                                           |                |
 | `merged_date`      | datetime | 3          | The time PR gets merged. Null when the PR is not merged.                                                                                                                                                                                                                                                                                                                                       |                |
 | `closed_date`      | datetime | 3          | The time PR closed. Null when the PR is not closed.                                                                                                                                                                                                                                                                                                                                            |                |
@@ -398,10 +428,11 @@ Pull requests are the abstraction of GitHub pull requests, GitLab merge requests
 
 #### pull_request_labels
 
-This table shows the labels of pull request. Multiple entries can exist per pull request. This table can be used to filter pull requests by label name.
+This table shows the labels of pull request. Multiple entries can exist per pull request. This table can be used to
+filter pull requests by label name.
 
 | **field**         | **type** | **length** | **description** | **key**             |
-| :---------------- | :------- | :--------- | :-------------- | :------------------ |
+|:------------------|:---------|:-----------|:----------------|:--------------------|
 | `label_name`      | varchar  | 255        | Label name      |                     |
 | `pull_request_id` | varchar  | 255        | Pull request ID | FK_pull_requests.id |
 
@@ -412,7 +443,7 @@ A commit associated with a pull request.
 The list is additive. This means if a rebase with commit squashing takes place after the commits of a pull request have been processed, the old commits will not be deleted.
 
 | **field**              | **type** | **length** | **description**                                          | **key**             |
-| :--------------------- | :------- | :--------- | :------------------------------------------------------- | :------------------ |
+|:-----------------------|:---------|:-----------|:---------------------------------------------------------|:--------------------|
 | `pull_request_id`      | varchar  | 255        | Pull request id                                          | FK_pull_requests.id |
 | `commit_sha`           | char     | 40         | Commit sha                                               | FK_commits.sha      |
 | `commit_author_name`   | varchar  | 255        | The name of the person who authored the commit           |                     |
@@ -424,7 +455,7 @@ The list is additive. This means if a rebase with commit squashing takes place a
 Normal comments, review bodies, reviews' inline comments of GitHub's pull requests or GitLab's merge requests.
 
 | **field**         | **type** | **length** | **description**                                                                                                                                            | **key**             |
-| :---------------- | :------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------ |
+|:------------------|:---------|:-----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------|
 | `id`              | varchar  | 255        | Comment id                                                                                                                                                 | PK                  |
 | `pull_request_id` | varchar  | 255        | Pull request id                                                                                                                                            | FK_pull_requests.id |
 | `body`            | longtext |            | The body of the comments                                                                                                                                   |                     |
@@ -441,76 +472,119 @@ Normal comments, review bodies, reviews' inline comments of GitHub's pull reques
 
 #### cicd_scopes
 
-The entity to filter or group 'cicd_pipelines' or 'cicd_tasks'.
+The entity to filter or group 'cicd_pipelines'.
 
 - For GitHub: a GitHub repo is converted to a cicd_scope
 - For GitLab: a GitLab project is converted to a cicd_scope
 - For Jenkins: a Jenkins job is converted to a cicd_scope
+- For Bamboo CI: a Bamboo plan is converted to a cicd_scope
 
-| **field**      | **type** | **length** | **description**                                                                                                                                                                                                                     | **key** |
-| :------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
-| `id`           | varchar  | 255        | A cicd_scope's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github cicd_scope's id is like "< github >:< GithubRepos >:< ConnectionId >:< GithubRepoId >". E.g. 'github:GithubRepos:1:384111310' | PK      |
-| `name`         | varchar  | 255        | The name of cicd_scope.                                                                                                                                                                                                             |         |
-| `description`  | longtext |            | The description of cicd_scope.                                                                                                                                                                                                      |         |
-| `url`          | varchar  | 255        | The url of cicd_scope. E.g. https://github.com/apache/incubator-devlake or https://jenkins.xxx.cn/view/PROD/job/OPS_releasev2/                                                                                                      |         |
-| `created_date` | datetime | 3          | cicd_scope creation date                                                                                                                                                                                                            |         |
-| `updated_date` | datetime | 3          | Date of the last data collection for this cicd_scope                                                                                                                                                                                |         |
+| **field**      | **type** | **length** | **description**                                                                                                                                                                                                                                                                                | **key** |
+|:---------------|:---------|:-----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------|
+| `id`           | varchar  | 255        | A cicd_scope's `id` is composed of "< plugin >:< Entity >:< PluginConnectionId >[:PK1]..."<br/>For example, a GitHub cicd_scope's id is "github:GithubRepos:< GithubConnectionId >:< GithubRepoId >", a Bamboo cicd_scope's id is 'bamboo:BambooPlan:< BambooConnectionId >:< BambooPlanKey >' | PK      |
+| `name`         | varchar  | 255        | The name of cicd_scope.                                                                                                                                                                                                                                                                        |         |
+| `description`  | longtext |            | The description of cicd_scope.                                                                                                                                                                                                                                                                 |         |
+| `url`          | varchar  | 255        | The url of cicd_scope. E.g. https://github.com/apache/incubator-devlake or https://jenkins.xxx.cn/view/PROD/job/OPS_releasev2/                                                                                                                                                                 |         |
+| `created_date` | datetime | 3          | Creation date of the cicd_scope, nullable                                                                                                                                                                                                                                                      |         |
+| `updated_date` | datetime | 3          | Updation date of the cicd_scope, nullable                                                                                                                                                                                                                                                      |         |
 
 #### cicd_pipelines
 
-A cicd_pipeline is a series of cicd_tasks, e.g. a GitHub workflow run, a GitLab pipeline, a BitBucket pipeline, a Jenkins build, etc.
+A cicd_pipeline is the abstraction of a top-level CI/CD execution, e.g. a GitHub workflow run, a GitLab pipeline, a BitBucket pipeline, a Jenkins build, a Bamboo plan build, etc. A cicd_pipeline contains one or more of cicd_tasks.
 
-| **field**       | **type**        | **length** | **description**                                                                               | **key**           |
-| :-------------- | :-------------- | :--------- | :-------------------------------------------------------------------------------------------- | :---------------- |
-| `id`            | varchar         | 255        | This key is generated based on details from the original plugin                               | PK                |
-| `name`          | varchar         | 255        | For gitlab, as there is no name for pipeline, so we use projectId, others have their own name |                   |
-| `result`        | varchar         | 100        | The result of this task, e.g. SUCCESS, FAILURE                                                |                   |
-| `status`        | varchar         | 100        | The status of this task, e.g. IN_PROGRESS, DONE                                               |                   |
-| `type`          | varchar         | 100        | To indicate if this is a DEPLOYMENT                                                           |                   |
-| `duration_sec`  | bigint unsigned |            | how long does this task take                                                                  |                   |
-| `created_date`  | datetime        | 3          | when did this task start                                                                      |                   |
-| `finished_date` | datetime        | 3          | when did this task finish                                                                     |                   |
-| `environment`   | varchar         | 255        | To indicate the environment in which the task is running                                      |                   |
-| `cicd_scope_id` | longtext        |            | The id of cicd_scope this pipeline belongs to                                                 | FK_cicd_scopes.id |
+| **field**             | **type** | **length** | **description**                                                                                                                           | **key**           |
+|:----------------------|:---------|:-----------|:------------------------------------------------------------------------------------------------------------------------------------------|:------------------|
+| `id`                  | varchar  | 255        | This key is generated based on details from the original plugin                                                                           | PK                |
+| `name`                | varchar  | 255        | For gitlab, as there is no name for pipeline, so we use projectId, others have their own name                                             |                   |
+| `result`              | varchar  | 100        | The result of the pipeline. It will be standardized to 'SUCCESS', 'FAILURE', '' in DevLake based on each plugin's possible results.       |                   |
+| `original_result`     | varchar  | 100        | The original_result of the pipeline. Its value depends on the state of the corresponding entity in the different plugins.                 |                   |
+| `status`              | varchar  | 100        | The status of the pipeline. It will be standardized to 'DONE', 'IN_PROGRESS', 'OTHER' in DevLake based on each plugin's possible statues. |                   |
+| `original_status`     | varchar  | 100        | The original_status of the pipeline. Its value depends on the state of the corresponding entity in the different plugins.                 |                   |
+| `type`                | varchar  | 100        | The value will be set to 'DEPLOYMENT' if it matched the regex configured in the Scope Config, otherwise it is an empty string.            |                   |
+| `environment`         | varchar  | 255        | The value will be set to 'PRODUCTION' if it matched the regex configured in the Scope Config, otherwise it is an empty string.            |                   |
+| `duration_sec`        | double   |            | how long does this pipeline take                                                                                                          |                   |
+| `queued_duration_sec` | double   |            | how long does this pipeline take queuing                                                                                                  |                   |
+| `created_date`        | datetime | 3          | When this pipeline created.                                                                                                               |                   |
+| `queued_date`         | datetime | 3          | The queued time of the pipeline.                                                                                                          |                   |
+| `started_date`        | datetime | 3          | The started time of the pipeline.                                                                                                         |                   |
+| `finished_date`       | datetime | 3          | When this pipeline finished.                                                                                                              |                   |
+| `cicd_scope_id`       | longtext |            | The id of cicd_scope this pipeline belongs to                                                                                             | FK_cicd_scopes.id |
 
 #### cicd_pipeline_commits
 
 | **field**     | **type** | **length** | **description**                                                 | **key** |
-| :------------ | :------- | :--------- | :-------------------------------------------------------------- | :------ |
+|:--------------|:---------|:-----------|:----------------------------------------------------------------|:--------|
 | `pipeline_id` | varchar  | 255        | This key is generated based on details from the original plugin | PK      |
 | `commit_sha`  | varchar  | 255        | The commit that triggers this pipeline                          | PK      |
 | `branch`      | varchar  | 255        | The branch that triggers this pipeline                          |         |
-| `repo`        | varchar  | 255        |                                                                 |         |
+| `repo_url`    | varchar  | 255        |                                                                 |         |
 | `repo_id`     | varchar  | 255        | The repo that this pipeline belongs to                          |         |
 
 #### cicd_tasks
 
-A cicd_task is the abstraction of the smallest unit of CICD tasks.
+A cicd_task is the abstraction of the bottom-level CI/CD execution.
 
-- For GitHub: a cicd_task is a GitHub job
-- For GitLab: a cicd_task is a GitLab job
+- For GitHub: a cicd_task is a GitHub job run in a GitHub workflow run.
+- For GitLab: a cicd_task is a GitLab job run of a GitLab pipeline run.
 - For Jenkins: a cicd_task is a subtask of a Jenkins build. If a build does not have subtask(s), then the build will also be saved as a cicd_task in this table.
+- For Bamboo CI: a cicd_task is a Bamboo job build in a Bamboo plan build.
 
-| **field**       | **type**        | **length** | **description**                                                                           | **key**           |
-| :-------------- | :-------------- | :--------- | :---------------------------------------------------------------------------------------- | :---------------- |
-| `id`            | varchar         | 255        | This key is generated based on details from the original plugin                           | PK                |
-| `name`          | varchar         | 255        |                                                                                           |                   |
-| `pipeline_id`   | varchar         | 255        | The id of pipeline                                                                        |                   |
-| `result`        | varchar         | 100        | The result of this task, e.g. SUCCESS, FAILURE                                            |                   |
-| `status`        | varchar         | 100        | The status of this task, e.g. IN_PROGRESS, DONE                                           |                   |
-| `type`          | varchar         | 100        | To indicate if this is a deployment-type task                                             |                   |
-| `duration_sec`  | bigint unsigned |            | how long does this task take                                                              |                   |
-| `started_date`  | datetime        | 3          | when did this task start                                                                  |                   |
-| `finished_date` | datetime        | 3          | when did this task finish                                                                 |                   |
-| `environment`   | varchar         | 255        | To indicate the environment in which the task is running, e.g. production, staging, test. |                   |
-| `cicd_scope_id` | longtext        |            | The id of cicd_scope this pipeline belongs to                                             | FK_cicd_scopes.id |
+| **field**             | **type** | **length** | **description**                                                                                                                      | **key**           |
+|:----------------------|:---------|:-----------|:-------------------------------------------------------------------------------------------------------------------------------------|:------------------|
+| `id`                  | varchar  | 255        | This key is generated based on details from the original plugin                                                                      | PK                |
+| `name`                | varchar  | 255        |                                                                                                                                      |                   |
+| `pipeline_id`         | varchar  | 255        | The id of the cicd_pipeline it belongs to                                                                                            |                   |
+| `result`              | varchar  | 100        | The result of the task. It will be standardized to 'SUCCESS', 'FAILURE', '' in DevLake based on each plugin's possible.              |                   |
+| `original_result`     | varchar  | 100        | The original_result of the task. Its value depends on the state of the corresponding entity in the different plugins.                |                   |
+| `status`              | varchar  | 100        | The status of the task. It will be standardized to 'DONE', 'IN_PROGRESS', 'OTHER' in DevLake based on each plugin's possible states. |                   |
+| `original_status`     | varchar  | 100        | The original_status of the task. Its value depends on the state of the corresponding entity in the different plugins.                |                   |
+| `type`                | varchar  | 100        | The value will be set to 'DEPLOYMENT' if it matched the regex configured in the Scope Config, otherwise it is an empty string.       |                   |
+| `environment`         | varchar  | 255        | The value will be set to 'PRODUCTION' if it matched the regex configured in the Scope Config, otherwise it is an empty string.       |
+| `duration_sec`        | double   |            | How long does this task take                                                                                                         |                   |
+| `ququed_duration_sec` | double   |            | How long does this task take queuing                                                                                                 |                   |
+| `created_date`        | datetime | 3          | The created time of the task.                                                                                                        |                   |
+| `queued_date`         | datetime | 3          | The queued time of the task.                                                                                                         |                   |
+| `started_date`        | datetime | 3          | When this task started                                                                                                               |                   |
+| `finished_date`       | datetime | 3          | When this task finished                                                                                                              |                   |                  |
+| `cicd_scope_id`       | longtext |            | The id of cicd_scope this task belongs to                                                                                            | FK_cicd_scopes.id |
+
+#### cicd_deployments
+
+A cicd_deployment refers to a deployment at the project level. In the case where a pipeline run or build deploys across three distinct repositories, it will be categorized as ONE cicd_deployment while being recorded as THREE separate cicd_deployment_commits.
+It may come from several sources:
+
+- Domain layer [cicd_pipelines](#cicd_pipelines), such as GitHub workflow runs, GitLab pipelines, Jenkins builds and BitBucket pipelines, etc. Deployments from cicd_pipelines will be transformed according to the regex configuration set in the Blueprint transformation before adding to this table.
+- Tool layer deployments: in v0.20, only the BitBucket\Bamboo\GitLab and GitHub(Use GraphQL APIs) plugins collect the independent deployment entity which you can find in table.\_tool_bitbucket_deployments and \_tool_bamboo_deploy_builds, there will be more in the future.
+- Deployments pushed directly from webhooks
+
+Additional Notes
+
+- CICD deployments are recorded at the project level, not the repository level.
+- CICD deployment commits are individual commits that represent a single deployment across multiple repositories.
+
+| **field**             | **type** | **length** | **description**                                                                                                             | **key**           |
+|:----------------------|:---------|:-----------|:----------------------------------------------------------------------------------------------------------------------------|:------------------|
+| `id`                  | varchar  | 255        | The deployment_id of this deployment. The value will be set with `id` when it comes from webhooks.                          | PK                |
+| `cicd_scope_id`       | varchar  | 255        | The id of cicd_scope this deployment belongs to                                                                             | FK_cicd_scopes.id |
+| `name`                | varchar  | 255        | The name of the deployment                                                                                                  |                   |
+| `result`              | varchar  | 100        | The result of the deployment, enum. 'SUCCESS', 'FAILUR'E, ''                                                                |                   |
+| `original_result`     | varchar  | 100        | The original_result of the deployment. Its value depends on the state of the corresponding entity in the different plugins. |                   |
+| `status`              | varchar  | 100        | The status of this deployment, enum: 'IN_PROGRESS', 'DONE', 'OTHER'                                                         |                   |
+| `original_status`     | varchar  | 100        | The original_status of the deployment. Its value depends on the state of the corresponding entity in the different plugins. |                   |
+| `environment`         | varchar  | 255        | The environment to deploy, only 'PRODUCTION' deployment will appear in v0.17                                                |                   |
+| `created_date`        | datetime | 3          | The created time of the deployment.                                                                                         |                   |
+| `queued_date`         | datetime | 3          | The queued time of the deployment.                                                                                          |                   |
+| `started_date`        | datetime | 3          | The started time of the deployment.                                                                                         |                   |
+| `finished_date`       | datetime | 3          | The finished time of the deployment                                                                                         |                   |
+| `duration_sec`        | double   |            | The time this deployment takes                                                                                              |                   |
+| `ququed_duration_sec` | double   |            | The time this deployment takes queuing                                                                                      |                   |
 
 #### cicd_deployment_commits
 
 A cicd_deployment_commit is a deployment in a specific repo. A deployment may come from several sources:
 
-- Domain layer [cicd_pipelines](#cicd_pipelines), such as GitHub workflow run, GitLab pipelines, Jenkins builds and BitBucket pipelines, etc. Deployments from cicd_pipelines will be transformed according to the regex configuration set in the Blueprint transformation before adding to this table.
-- Tool layer deployments: in v0.17, only the BitBucket plugin collects the independent deployment entity which you can find in table.\_tool_bitbucket_deployments, but there will be more in the future.
+- Domain layer [cicd_pipelines](#cicd_pipelines), such as GitHub workflow runs, GitLab pipelines, Jenkins builds and BitBucket pipelines, etc. Deployments from cicd_pipelines will be transformed according to the regex configuration set in the Blueprint transformation before adding to this table.
+- Tool layer deployments: in v0.18, only the BitBucket and Bamboo plugins collect the independent deployment entity which you can find in table.\_tool_bitbucket_deployments and \_tool_bamboo_deploy_builds, but there will be more in the future.
 - Deployments pushed directly from webhooks
 
 You can query deployments from this table by `SELECT DISTINCT cicd_deployment_id FROM cicd_deployments_commits`.
@@ -518,23 +592,27 @@ You can query deployments from this table by `SELECT DISTINCT cicd_deployment_id
 Normally, one deployment only deploy to one repo. But in some cases, one deployment may deploy in multiple repos with different commits. In these cases, there will be multiple pairs of deployment-commit-repo, appeared in multiple entries in this table.
 
 | **field**                           | **type** | **length** | **description**                                                                                                                                                                                                                                                                                                                                                                                  | **key**           |
-| :---------------------------------- | :------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------- |
+|:------------------------------------|:---------|:-----------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------|
 | `id`                                | varchar  | 255        | This key is the combination of the deployment's id and repo_url, e.g. <br/>- from a GitHub workflow run: github:GithubRun:1:384111310:3521097091:https://github.com/apache/incubator-devlake <br/>- from a Jenkins build, jenkins:JenkinsBuild:1:deploy#7:https://github.com/apache/incubator-devlake <br/>- from a webhook, webhook:1:90489d3951711d72:e6bde456807818c5c78d7b265964d6d48b653af6 | PK                |
 | `cicd_scope_id`                     | varchar  | 255        | The id of cicd_scope this deployment_commit belongs to                                                                                                                                                                                                                                                                                                                                           | FK_cicd_scopes.id |
 | `cicd_deployment_id`                | varchar  | 255        | The deployment_id of this deployment_commit. The value will be set with `id` when it comes from webhooks.                                                                                                                                                                                                                                                                                        |                   |
 | `name`                              | varchar  | 255        | The name of the deployment                                                                                                                                                                                                                                                                                                                                                                       |                   |
-| `result`                            | varchar  | 100        | The result of the deployment, e.g. SUCCESS, FAILURE                                                                                                                                                                                                                                                                                                                                              |                   |
-| `status`                            | varchar  | 100        | The status of this deployment, e.g. IN_PROGRESS, DONE                                                                                                                                                                                                                                                                                                                                            |                   |
-| `environment`                       | varchar  | 255        | The environment to deploy, only 'PRODUCTION' deployment will appear in v0.17                                                                                                                                                                                                                                                                                                                     |                   |
-| `created_date`                      | datetime | 3          | The created time of the deployment                                                                                                                                                                                                                                                                                                                                                               |                   |
-| `started_date`                      | datetime | 3          | The started time of the deployment                                                                                                                                                                                                                                                                                                                                                               |                   |
+| `result`                            | varchar  | 100        | The result of the deployment, enum: 'SUCCESS', 'FAILURE', ''                                                                                                                                                                                                                                                                                                                                     |                   |
+| `original_result`                   | varchar  | 100        | The original_result of the deployment. Its value depends on the state of the corresponding entity in the different plugins.                                                                                                                                                                                                                                                                      |                   |
+| `status`                            | varchar  | 100        | The status of this deployment, enum: 'IN_PROGRESS', 'DONE', 'OTHER'                                                                                                                                                                                                                                                                                                                              |                   |
+| `original_status`                   | varchar  | 100        | The original_status of the deployment. Its value depends on the state of the corresponding entity in the different plugins.                                                                                                                                                                                                                                                                      |                   |
+| `environment`                       | varchar  | 255        | The environment to deploy                                                                                                                                                                                                                                                                                                                                                                        |                   |
+| `created_date`                      | datetime | 3          | The created time of the deployment.                                                                                                                                                                                                                                                                                                                                                              |                   |
+| `queued_date`                       | datetime | 3          | The queued time of the deployment.                                                                                                                                                                                                                                                                                                                                                               |                   |
+| `started_date`                      | datetime | 3          | The started time of the deployment.                                                                                                                                                                                                                                                                                                                                                              |                   |
 | `finished_date`                     | datetime | 3          | The finished time of the deployment                                                                                                                                                                                                                                                                                                                                                              |                   |
-| `duration_sec`                      | bigint   |            | The time this deployment takes                                                                                                                                                                                                                                                                                                                                                                   |                   |
+| `duration_sec`                      | double   |            | The time this deployment takes                                                                                                                                                                                                                                                                                                                                                                   |                   |
+| `queued_duration_sec`               | double   |            | The time this deployment takes queueing                                                                                                                                                                                                                                                                                                                                                          |                   |
 | `commit_sha`                        | char     | 40         | The commit sha that triggers the deployment                                                                                                                                                                                                                                                                                                                                                      |                   |
 | `ref_name`                          | varchar  | 255        | The ref (branch/tag) name of the commit                                                                                                                                                                                                                                                                                                                                                          |                   |
 | `repo_id`                           | varchar  | 255        | -                                                                                                                                                                                                                                                                                                                                                                                                |                   |
 | `repo_url`                          | varchar  | 191        | The url of the repo                                                                                                                                                                                                                                                                                                                                                                              |                   |
-| `prev_success_deployment_commit_id` | varchar  | 255        | The last successful deployment_commit_id before this one, which is used to calculate how many new commits have been deployed by this deployment_commit                                                                                                                                                                                                                                           |                   |
+| `prev_success_deployment_commit_id` | varchar  | 255        | The last successful deployment_commit_id before this one in the same `cicd_scope`, `repo` and `environment`, which is used to calculate the new commits deployed by this deployment, thereby measuring [DORA - change lead time](../Metrics/LeadTimeForChanges.md).                                                                                                                              |                   |
 
 ### Domain 5 - Code Quality
 
@@ -543,7 +621,7 @@ The names of tables in the 'Code Quality' domain will start with a prefix cq\_
 #### cq_projects
 
 | **field**            | **type** | **length** | **description**                                                                     | **key** |
-| :------------------- | :------- | :--------- | :---------------------------------------------------------------------------------- | :------ |
+|:---------------------|:---------|:-----------|:------------------------------------------------------------------------------------|:--------|
 | `id`                 | varchar  | 255        | This key is generated based on details from the original plugin                     | PK      |
 | `name`               | varchar  | 255        | The name of the project in SonarQube                                                |         |
 | `qualifier`          | varchar  | 255        | The type of project. Examples include "TRK" for regular projects and "VW" for views |         |
@@ -554,7 +632,7 @@ The names of tables in the 'Code Quality' domain will start with a prefix cq\_
 #### cq_issues
 
 | **field**                   | **type** | **length** | **description**                                                         | **key** |
-| :-------------------------- | :------- | :--------- | :---------------------------------------------------------------------- | :------ |
+|:----------------------------|:---------|:-----------|:------------------------------------------------------------------------|:--------|
 | `id`                        | varchar  | 255        | This key is generated based on details from the original plugin         | PK      |
 | `rule`                      | varchar  | 255        | The key of the rule that the issue is violating                         |         |
 | `severity`                  | varchar  | 255        | The severity level of the issue                                         |         |
@@ -583,7 +661,7 @@ The names of tables in the 'Code Quality' domain will start with a prefix cq\_
 #### cq_issue_code_blocks
 
 | **field**      | **type** | **length** | **description**                                                                       | **key** |
-| :------------- | :------- | :--------- | :------------------------------------------------------------------------------------ | :------ |
+|:---------------|:---------|:-----------|:--------------------------------------------------------------------------------------|:--------|
 | `id`           | varchar  | 255        | This key is generated based on details from the original plugin                       | PK      |
 | `issue_key`    | varchar  | 255        | A string that stores the key of the issue that the code block is associated with      |         |
 | `component`    | varchar  | 255        | A string that stores the name of the component that the code block is associated with |         |
@@ -596,7 +674,7 @@ The names of tables in the 'Code Quality' domain will start with a prefix cq\_
 #### cq_file_metrics
 
 | **field**                                  | **type** | **length** | **description**                                                 | **key** |
-| :----------------------------------------- | :------- | :--------- | :-------------------------------------------------------------- | :------ |
+|:-------------------------------------------|:---------|:-----------|:----------------------------------------------------------------|:--------|
 | `id`                                       | varchar  | 255        | This key is generated based on details from the original plugin | PK      |
 | `project_key`                              | varchar  | 255        | The key of the project that the issue belongs to                | PK      |
 | `file_name`                                | longtext |            | longtext fields that store the name of the file                 |         |
@@ -628,7 +706,7 @@ The names of tables in the 'Code Quality' domain will start with a prefix cq\_
 
 These entities are used to map entities between different domains. They are the key players to break data isolation.
 
-There're low-level entities such as issue_commits, users, and higher-level cross domain entities such as board_repos
+There are low-level entities such as issue_commits, users, and higher-level cross domain entities such as board_repos
 
 #### issue_commits
 
@@ -639,7 +717,7 @@ The original connection between these two entities lies in either issue tracking
 For example, a common method to connect Jira issue and GitLab commit is a GitLab plugin [Jira Integration](https://docs.gitlab.com/ee/integration/jira/). With this plugin, the Jira issue key in the commit message written by the committers will be parsed. Then, the plugin will add the commit urls under this jira issue. Hence, DevLake's [Jira plugin](https://github.com/apache/incubator-devlake/tree/main/backend/plugins/jira) can get the related commits (including repo, commit_id, url) of an issue.
 
 | **field**    | **type** | **length** | **description** | **key**        |
-| :----------- | :------- | :--------- | :-------------- | :------------- |
+|:-------------|:---------|:-----------|:----------------|:---------------|
 | `issue_id`   | varchar  | 255        | Issue id        | FK_issues.id   |
 | `commit_sha` | char     | 40         | Commit sha      | FK_commits.sha |
 
@@ -650,7 +728,7 @@ This table shows the issues closed by pull requests. It's a medium-level mapping
 The data is extracted from the body of pull requests conforming to certain regular expression. The regular expression can be defined in GITHUB_PR_BODY_CLOSE_PATTERN in the .env file
 
 | **field**             | **type** | **length** | **description**  | **key**             |
-| :-------------------- | :------- | :--------- | :--------------- | :------------------ |
+|:----------------------|:---------|:-----------|:-----------------|:--------------------|
 | `pull_request_id`     | varchar  | 255        | Pull request id  | FK_pull_requests.id |
 | `issue_id`            | varchar  | 255        | Issue id         | FK_issues.id        |
 | `pull_request_number` | varchar  | 255        | Pull request key |                     |
@@ -661,7 +739,7 @@ The data is extracted from the body of pull requests conforming to certain regul
 A way to link "issue tracking" and "source code management" domain by mapping `boards` and `repos`. Board(n): Repo(n).
 
 | **field**  | **type** | **length** | **description** | **key**      |
-| :--------- | :------- | :--------- | :-------------- | :----------- |
+|:-----------|:---------|:-----------|:----------------|:-------------|
 | `board_id` | varchar  | 255        | Board id        | FK_boards.id |
 | `repo_id`  | varchar  | 255        | Repo id         | FK_repos.id  |
 
@@ -671,7 +749,7 @@ This table stores of user accounts across different tools such as GitHub, Jira, 
 metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contributor',_
 
 | **field**      | **type** | **length** | **description**                                                                                                                                                                                                                                                               | **key** |
-| :------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+|:---------------|:---------|:-----------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------|
 | `id`           | varchar  | 255        | An account's `id` is the identifier of the account of a specific tool. It is composed of "< Plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github account's id is composed of "< github >:< GithubAccounts >:< GithubUserId >)". E.g. 'github:GithubUsers:14050754' | PK      |
 | `email`        | varchar  | 255        | Email of the account                                                                                                                                                                                                                                                          |         |
 | `full_name`    | varchar  | 255        | Full name                                                                                                                                                                                                                                                                     |         |
@@ -684,7 +762,7 @@ metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contr
 #### users
 
 | **field** | **type** | **length** | **description**               | **key** |
-| --------- | -------- | ---------- | ----------------------------- | ------- |
+|-----------|----------|------------|-------------------------------|---------|
 | `id`      | varchar  | 255        | id of a person                | PK      |
 | `email`   | varchar  | 255        | the primary email of a person |         |
 | `name`    | varchar  | 255        | name of a person              |         |
@@ -692,14 +770,14 @@ metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contr
 #### user_accounts
 
 | **field**    | **type** | **length** | **description** | **key**          |
-| ------------ | -------- | ---------- | --------------- | ---------------- |
+|--------------|----------|------------|-----------------|------------------|
 | `user_id`    | varchar  | 255        | users.id        | Composite PK, FK |
 | `account_id` | varchar  | 255        | accounts.id     | Composite PK, FK |
 
 #### teams
 
 | **field**       | **type** | **length** | **description**                                    | **key** |
-| --------------- | -------- | ---------- | -------------------------------------------------- | ------- |
+|-----------------|----------|------------|----------------------------------------------------|---------|
 | `id`            | varchar  | 255        | id from the data sources, decided by DevLake users | PK      |
 | `name`          | varchar  | 255        | name of the team. E.g. team A, team B, etc.        |         |
 | `alias`         | varchar  | 255        | alias or abbreviation of a team                    |         |
@@ -709,14 +787,14 @@ metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contr
 #### team_users
 
 | **field** | **type** | **length** | **description**                                  | **key**          |
-| --------- | -------- | ---------- | ------------------------------------------------ | ---------------- |
+|-----------|----------|------------|--------------------------------------------------|------------------|
 | `team_id` | varchar  | 255        | Full name of the team. E.g. team A, team B, etc. | Composite PK, FK |
 | `user_id` | varchar  | 255        | users.id                                         | Composite PK, FK |
 
 #### project
 
 | **field**     | **type** | **length** | **description**              | **key** |
-| ------------- | -------- | ---------- | ---------------------------- | ------- |
+|---------------|----------|------------|------------------------------|---------|
 | `name`        | varchar  | 255        | name for project             | PK      |
 | `description` | longtext |            | description of the project   |         |
 | `created_at`  | datetime | 3          | created time of project      |         |
@@ -725,7 +803,7 @@ metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contr
 #### project_metric_settings
 
 | **field**       | **type** | **length** | **description**                                          | **key** |
-| --------------- | -------- | ---------- | -------------------------------------------------------- | ------- |
+|-----------------|----------|------------|----------------------------------------------------------|---------|
 | `project_name`  | varchar  | 255        | name for project                                         | PK      |
 | `plugin_name`   | varchar  | 255        | name for plugin                                          | PK      |
 | `plugin_option` | longtext |            | check if metric plugins have been enabled by the project |         |
@@ -734,7 +812,7 @@ metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contr
 #### project_mapping
 
 | **field**      | **type** | **length** | **description**                                                        | **key** |
-| -------------- | -------- | ---------- | ---------------------------------------------------------------------- | ------- |
+|----------------|----------|------------|------------------------------------------------------------------------|---------|
 | `project_name` | varchar  | 255        | name for project                                                       | PK      |
 | `table`        | varchar  | 255        | the table name of [Scope](../Overview/KeyConcepts.md#data-scope)       | PK      |
 | `row_id`       | varchar  | 255        | the row_id in the [Scope](../Overview/KeyConcepts.md#data-scope) table | PK      |
@@ -742,7 +820,7 @@ metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contr
 #### project_pr_metrics
 
 | **field**          | **type** | **length** | **description**                                                                        | **key** |
-| :----------------- | :------- | :--------- | :------------------------------------------------------------------------------------- | :------ |
+|:-------------------|:---------|:-----------|:---------------------------------------------------------------------------------------|:--------|
 | `id`               | varchar  | 255        | Id of PR                                                                               | PK      |
 | `project_name`     | varchar  | 100        | The project that this PR belongs to                                                    | PK      |
 | `first_review_id`  | longtext |            | The id of the first review on this pr                                                  |         |
@@ -757,7 +835,7 @@ metrics, such as _'No. of Issue closed by contributor', 'No. of commits by contr
 #### project_issue_metrics
 
 | **field**       | **type** | **length** | **description**                             | **key** |
-| :-------------- | :------- | :--------- | :------------------------------------------ | :------ |
+|:----------------|:---------|:-----------|:--------------------------------------------|:--------|
 | `id`            | varchar  | 255        | Id of Issue                                 | PK      |
 | `project_name`  | varchar  | 100        | The project that this Issue belongs to      | PK      |
 | `deployment_id` | longtext |            | The id of cicd_task which cause an incident |         |
@@ -769,7 +847,7 @@ This table shows the issues fixed by commits added in a new ref compared to an o
 This table can support tag-based analysis, for instance, '_No. of bugs closed in a tag_'.
 
 | **field**            | **type** | **length** | **description**                                        | **key**      |
-| :------------------- | :------- | :--------- | :----------------------------------------------------- | :----------- |
+|:---------------------|:---------|:-----------|:-------------------------------------------------------|:-------------|
 | `new_ref_id`         | varchar  | 255        | The new ref's id for comparison                        | FK_refs.id   |
 | `old_ref_id`         | varchar  | 255        | The old ref's id for comparison                        | FK_refs.id   |
 | `new_ref_commit_sha` | char     | 40         | The commit new ref points to at the time of collection |              |

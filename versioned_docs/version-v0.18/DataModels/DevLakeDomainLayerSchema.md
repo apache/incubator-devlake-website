@@ -16,9 +16,13 @@ sidebar_position: 1
 
 This document describes Apache DevLake's domain layer schema.
 
-Referring to DevLake's [architecture](../Overview/Architecture.md), the data in the domain layer is transformed from the data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, Gitlab, Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
+Referring to DevLake's [architecture](../Overview/Architecture.md), the data in the domain layer is transformed from the data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, GitLab, Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
 
-<p align="center"><img src="/img/Architecture/arch-dataflow.svg" /></p>
+<p align="center">
+
+  ![](../Configuration/images/arch-dataflow-domain.svg)
+
+</p>
 <p align="center">DevLake Dataflow</p>
 
 ## Use Cases
@@ -32,8 +36,8 @@ Referring to DevLake's [architecture](../Overview/Architecture.md), the data in 
 This is the up-to-date domain layer schema for DevLake. Tables (entities) are categorized into 5 domains.
 
 1. Issue tracking: Jira issues, GitHub issues, GitLab issues, etc.
-2. Source code management: Git/GitHub/Gitlab commits and refs(tags and branches), etc.
-3. Code review: GitHub PRs, Gitlab MRs, etc.
+2. Source code management: Git/GitHub/GitLab commits and refs(tags and branches), etc.
+3. Code review: GitHub PRs, GitLab MRs, etc.
 4. CI/CD: Jenkins jobs & builds, etc.
 5. Code Quality: SonarQube issues, hotspots, file metrics, etc.
 6. Cross-domain: entities that map entities from different domains to break data isolation.
@@ -42,7 +46,7 @@ This is the up-to-date domain layer schema for DevLake. Tables (entities) are ca
 
 ![Domain Layer Schema](../Configuration/images/domain-layer-schema-diagram.svg)
 
-When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. Github/Gitlab) and allow them to co-exist in a single table.
+When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. Github/GitLab) and allow them to co-exist in a single table.
 
 Tables that end with WIP are still under development.
 
@@ -85,7 +89,7 @@ An `issue` is the abstraction of Github/GitLab/BitBucket/Jira/TAPD/Zentao... iss
 | `component`                 | varchar  | 255        | The component a bug-issue affects. This field only supports Github plugin for now. The value is transformed from Github issue labels by the rules set according to the user's configuration of .env by end users during DevLake installation.                                                                                                                                                                                                                                                                                                                                                            |         |
 | `severity`                  | varchar  | 255        | The severity level of a bug-issue. This field only supports Github plugin for now. The value is transformed from Github issue labels by the rules set according to the user's configuration of .env by end users during DevLake installation.                                                                                                                                                                                                                                                                                                                                                            |         |
 | `parent_issue_id`           | varchar  | 255        | The id of its parent issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |         |
-| `epic_key`                  | varchar  | 255        | The key of the epic this issue belongs to. For tools with no epic-type issues such as Github and Gitlab, this field is default to an empty string                                                                                                                                                                                                                                                                                                                                                                                                                                                        |         |
+| `epic_key`                  | varchar  | 255        | The key of the epic this issue belongs to. For tools with no epic-type issues such as Github and GitLab, this field is default to an empty string                                                                                                                                                                                                                                                                                                                                                                                                                                                        |         |
 | `original_estimate_minutes` | int      |            | The original estimation of the time allocated for this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
 | `time_spent_minutes`        | int      |            | The original estimation of the time allocated for this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
 | `time_remaining_minutes`    | int      |            | The remaining time to resolve the issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
@@ -236,7 +240,7 @@ This table shows the relation between sprints and issues that have been added to
 
 #### repos
 
-GitHub, Gitlab or BitBucket repositories.
+GitHub, GitLab or BitBucket repositories.
 
 | **field**      | **type** | **length** | **description**                                                                                                                                                                                                         | **key**        |
 | :------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- |
@@ -376,7 +380,7 @@ Pull requests are the abstraction of GitHub pull requests, GitLab merge requests
 | `author_id`        | varchar  | 100        | The author's id of the pull request                                                                                                                                                                                                                                                                                                                                                            |                |
 | `url`              | varchar  | 255        | the web link of the pull request                                                                                                                                                                                                                                                                                                                                                               |                |
 | `type`             | varchar  | 255        | The work-type of a pull request.For example: feature-development, bug-fix, docs,etc.                                                                                                                                                                                                                                                                                                           |                |
-| `component`        | varchar  | 255        | The component this PR affects.<br/>The value is transformed from Github/Gitlab pull request labels by configuring `GITHUB_PR_COMPONENT` in `.env` file during installation.                                                                                                                                                                                                                    |                |
+| `component`        | varchar  | 255        | The component this PR affects.<br/>The value is transformed from Github/GitLab pull request labels by configuring `GITHUB_PR_COMPONENT` in `.env` file during installation.                                                                                                                                                                                                                    |                |
 | `created_date`     | datetime | 3          | The time PR created.                                                                                                                                                                                                                                                                                                                                                                           |                |
 | `merged_date`      | datetime | 3          | The time PR gets merged. Null when the PR is not merged.                                                                                                                                                                                                                                                                                                                                       |                |
 | `closed_date`      | datetime | 3          | The time PR closed. Null when the PR is not closed.                                                                                                                                                                                                                                                                                                                                            |                |
@@ -431,36 +435,37 @@ Normal comments, review bodies, reviews' inline comments of GitHub's pull reques
 
 #### cicd_scopes
 
-The entity to filter or group 'cicd_pipelines' or 'cicd_tasks'.
+The entity to filter or group 'cicd_pipelines'.
 
 - For GitHub: a GitHub repo is converted to a cicd_scope
 - For GitLab: a GitLab project is converted to a cicd_scope
 - For Jenkins: a Jenkins job is converted to a cicd_scope
+- For Bamboo CI: a Bamboo plan is converted to a cicd_scope
 
 | **field**      | **type** | **length** | **description**                                                                                                                                                                                                                     | **key** |
 | :------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
-| `id`           | varchar  | 255        | A cicd_scope's `id` is composed of "< plugin >:< Entity >:< PK0 >[:PK1]..."<br/>For example, a Github cicd_scope's id is like "< github >:< GithubRepos >:< ConnectionId >:< GithubRepoId >". E.g. 'github:GithubRepos:1:384111310' | PK      |
+| `id`           | varchar  | 255        | A cicd_scope's `id` is composed of "< plugin >:< Entity >:< PluginConnectionId >[:PK1]..."<br/>For example, a GitHub cicd_scope's id is "github:GithubRepos:< GithubConnectionId >:< GithubRepoId >", a Bamboo cicd_scope's id is 'bamboo:BambooPlan:< BambooConnectionId >:< BambooPlanKey >' | PK      |
 | `name`         | varchar  | 255        | The name of cicd_scope.                                                                                                                                                                                                             |         |
 | `description`  | longtext |            | The description of cicd_scope.                                                                                                                                                                                                      |         |
 | `url`          | varchar  | 255        | The url of cicd_scope. E.g. https://github.com/apache/incubator-devlake or https://jenkins.xxx.cn/view/PROD/job/OPS_releasev2/                                                                                                      |         |
-| `created_date` | datetime | 3          | cicd_scope creation date                                                                                                                                                                                                            |         |
-| `updated_date` | datetime | 3          | Date of the last data collection for this cicd_scope                                                                                                                                                                                |         |
+| `created_date` | datetime | 3          | Creation date of the cicd_scope, nullable                                                                                                                                                                                                            |         |
+| `updated_date` | datetime | 3          | Updation date of the cicd_scope, nullable                                                                                                                                                                                |         |
 
 #### cicd_pipelines
 
-A cicd_pipeline is a series of cicd_tasks, e.g. a GitHub workflow run, a GitLab pipeline, a BitBucket pipeline, a Jenkins build, etc.
+A cicd_pipeline is the abstraction of a top-level CI/CD execution, e.g. a GitHub workflow run, a GitLab pipeline, a BitBucket pipeline, a Jenkins build, a Bamboo plan build, etc. A cicd_pipeline contains one or more of cicd_tasks.
 
 | **field**       | **type**        | **length** | **description**                                                                               | **key**           |
 | :-------------- | :-------------- | :--------- | :-------------------------------------------------------------------------------------------- | :---------------- |
 | `id`            | varchar         | 255        | This key is generated based on details from the original plugin                               | PK                |
 | `name`          | varchar         | 255        | For gitlab, as there is no name for pipeline, so we use projectId, others have their own name |                   |
-| `result`        | varchar         | 100        | The result of this task, e.g. SUCCESS, FAILURE                                                |                   |
-| `status`        | varchar         | 100        | The status of this task, e.g. IN_PROGRESS, DONE                                               |                   |
-| `type`          | varchar         | 100        | To indicate if this is a DEPLOYMENT                                                           |                   |
-| `duration_sec`  | bigint unsigned |            | how long does this task take                                                                  |                   |
-| `created_date`  | datetime        | 3          | when did this task start                                                                      |                   |
-| `finished_date` | datetime        | 3          | when did this task finish                                                                     |                   |
-| `environment`   | varchar         | 255        | To indicate the environment in which the task is running                                      |                   |
+| `result`        | varchar         | 100        | The result of the pipeline. It will be standardized to 'SUCCESS', 'FAILURE' in DevLake based on each plugin's possible results.                                                |                   |
+| `status`        | varchar         | 100        | The status of the pipeline. It will be standardized to 'DONE', 'IN_PROGRESS' in DevLake based on each plugin's possible statues.      |
+| `type`          | varchar         | 100        | The value will be set to 'DEPLOYMENT' if it matched the regex configured in the Scope Config, otherwise it is an empty string.                                                            |                   |
+| `environment`   | varchar         | 255        | The value will be set to 'PRODUCTION' if it matched the regex configured in the Scope Config, otherwise it is an empty string.                                      |                   |
+| `duration_sec`  | bigint unsigned |            | how long does this pipeline take                                                                  |                   |
+| `created_date`  | datetime        | 3          | When this pipeline created/started                                                                      |                   |
+| `finished_date` | datetime        | 3          | When this pipeline finished                                                                     |                   |
 | `cicd_scope_id` | longtext        |            | The id of cicd_scope this pipeline belongs to                                                 | FK_cicd_scopes.id |
 
 #### cicd_pipeline_commits
@@ -475,32 +480,34 @@ A cicd_pipeline is a series of cicd_tasks, e.g. a GitHub workflow run, a GitLab 
 
 #### cicd_tasks
 
-A cicd_task is the abstraction of the smallest unit of CICD tasks.
+A cicd_task is the abstraction of the bottom-level CI/CD excecution.
 
-- For GitHub: a cicd_task is a GitHub job
-- For GitLab: a cicd_task is a GitLab job
+- For GitHub: a cicd_task is a GitHub job run in a GitHub workflow run.
+- For GitLab: a cicd_task is a GitLab job run of a GitLab pipeline run.
 - For Jenkins: a cicd_task is a subtask of a Jenkins build. If a build does not have subtask(s), then the build will also be saved as a cicd_task in this table.
+- For Bamboo CI: a cicd_task is a Bamboo job build in a Bamboo plan build.
+
 
 | **field**       | **type**        | **length** | **description**                                                                           | **key**           |
 | :-------------- | :-------------- | :--------- | :---------------------------------------------------------------------------------------- | :---------------- |
 | `id`            | varchar         | 255        | This key is generated based on details from the original plugin                           | PK                |
 | `name`          | varchar         | 255        |                                                                                           |                   |
-| `pipeline_id`   | varchar         | 255        | The id of pipeline                                                                        |                   |
-| `result`        | varchar         | 100        | The result of this task, e.g. SUCCESS, FAILURE                                            |                   |
-| `status`        | varchar         | 100        | The status of this task, e.g. IN_PROGRESS, DONE                                           |                   |
-| `type`          | varchar         | 100        | To indicate if this is a deployment-type task                                             |                   |
-| `duration_sec`  | bigint unsigned |            | how long does this task take                                                              |                   |
-| `started_date`  | datetime        | 3          | when did this task start                                                                  |                   |
-| `finished_date` | datetime        | 3          | when did this task finish                                                                 |                   |
-| `environment`   | varchar         | 255        | To indicate the environment in which the task is running, e.g. production, staging, test. |                   |
-| `cicd_scope_id` | longtext        |            | The id of cicd_scope this pipeline belongs to                                             | FK_cicd_scopes.id |
+| `pipeline_id`   | varchar         | 255        | The id of the cicd_pipeline it belongs to                                                                       |                   |
+| `result`        | varchar         | 100        | The result of the task. It will be standardized to 'SUCCESS', 'FAILURE' in DevLake based on each plugin's possible.                                            |                   |
+| `status`        | varchar         | 100        | The status of the task. It will be standardized to 'DONE', 'IN_PROGRESS' in DevLake based on each plugin's possible statues.                                           |                   |
+| `type`          | varchar         | 100        | The value will be set to 'DEPLOYMENT' if it matched the regex configured in the Scope Config, otherwise it is an empty string.                                             |                   |
+| `environment`   | varchar         | 255        | The value will be set to 'PRODUCTION' if it matched the regex configured in the Scope Config, otherwise it is an empty string.            |
+| `duration_sec`  | bigint unsigned |            | How long does this task take                                                              |                   |
+| `started_date`  | datetime        | 3          | When this task started                                                                  |                   |
+| `finished_date` | datetime        | 3          | When this task finished                                                                 |                   |                  |
+| `cicd_scope_id` | longtext        |            | The id of cicd_scope this task belongs to                                             | FK_cicd_scopes.id |
 
 #### cicd_deployment_commits
 
 A cicd_deployment_commit is a deployment in a specific repo. A deployment may come from several sources:
 
-- Domain layer [cicd_pipelines](#cicd_pipelines), such as GitHub workflow run, GitLab pipelines, Jenkins builds and BitBucket pipelines, etc. Deployments from cicd_pipelines will be transformed according to the regex configuration set in the Blueprint transformation before adding to this table.
-- Tool layer deployments: in v0.17, only the BitBucket plugin collects the independent deployment entity which you can find in table.\_tool_bitbucket_deployments, but there will be more in the future.
+- Domain layer [cicd_pipelines](#cicd_pipelines), such as GitHub workflow runs, GitLab pipelines, Jenkins builds and BitBucket pipelines, etc. Deployments from cicd_pipelines will be transformed according to the regex configuration set in the Blueprint transformation before adding to this table.
+- Tool layer deployments: in v0.18, only the BitBucket and Bamboo plugins collect the independent deployment entity which you can find in table.\_tool_bitbucket_deployments and \_tool_bamboo_deploy_builds, but there will be more in the future.
 - Deployments pushed directly from webhooks
 
 You can query deployments from this table by `SELECT DISTINCT cicd_deployment_id FROM cicd_deployments_commits`.
@@ -516,15 +523,15 @@ Normally, one deployment only deploy to one repo. But in some cases, one deploym
 | `result`                            | varchar  | 100        | The result of the deployment, e.g. SUCCESS, FAILURE                                                                                                                                                                                                                                                                                                                                              |                   |
 | `status`                            | varchar  | 100        | The status of this deployment, e.g. IN_PROGRESS, DONE                                                                                                                                                                                                                                                                                                                                            |                   |
 | `environment`                       | varchar  | 255        | The environment to deploy, only 'PRODUCTION' deployment will appear in v0.17                                                                                                                                                                                                                                                                                                                     |                   |
-| `created_date`                      | datetime | 3          | The created time of the deployment                                                                                                                                                                                                                                                                                                                                                               |                   |
-| `started_date`                      | datetime | 3          | The started time of the deployment                                                                                                                                                                                                                                                                                                                                                               |                   |
+| `created_date`                      | datetime | 3          | The created time of the deployment. Deprecated.                                                                                                                                                                                                                                                                                                                                              |                   |
+| `started_date`                      | datetime | 3          | The started time of the deployment.                                                                                                                                                                                                                                                                                                                                             |                   |
 | `finished_date`                     | datetime | 3          | The finished time of the deployment                                                                                                                                                                                                                                                                                                                                                              |                   |
 | `duration_sec`                      | bigint   |            | The time this deployment takes                                                                                                                                                                                                                                                                                                                                                                   |                   |
 | `commit_sha`                        | char     | 40         | The commit sha that triggers the deployment                                                                                                                                                                                                                                                                                                                                                      |                   |
 | `ref_name`                          | varchar  | 255        | The ref (branch/tag) name of the commit                                                                                                                                                                                                                                                                                                                                                          |                   |
 | `repo_id`                           | varchar  | 255        | -                                                                                                                                                                                                                                                                                                                                                                                                |                   |
 | `repo_url`                          | varchar  | 191        | The url of the repo                                                                                                                                                                                                                                                                                                                                                                              |                   |
-| `prev_success_deployment_commit_id` | varchar  | 255        | The last successful deployment_commit_id before this one, which is used to calculate how many new commits have been deployed by this deployment_commit                                                                                                                                                                                                                                           |                   |
+| `prev_success_deployment_commit_id` | varchar  | 255        | The last successful deployment_commit_id before this one in the same `cicd_scope`, `repo` and `environment`, which is used to calculate the new commits deployed by this deployment, thereby measuring [DORA - change lead time](../Metrics/LeadTimeForChanges.md).                                                                                                                                                                                                                                           |                   |
 
 ### Domain 5 - Code Quality
 

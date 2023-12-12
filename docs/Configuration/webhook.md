@@ -1,6 +1,6 @@
 ---
-title: "Incoming Webhook"
-sidebar_position: 8
+title: "Webhooks"
+sidebar_position: 25
 description: Config UI instruction for Webhook
 ---
 
@@ -16,9 +16,11 @@ We recommend that you give your webhook connection a unique name so that you can
 
 ### Step 2 - Create webhooks connection
 
-Click on Generate POST URL, and you will find three webhook URLs. Copy the ones that suit your usage into your CI or issue-tracking systems. You can always come back to the webhook page to copy the URLs later on.
+Click on Generate POST URL, and you will find three webhook URLs. 
+![webhook-connection1](images/webhook-connection1.png)
 
-![webhook-connection](/img/ConfigUI/webhook-connection.png)
+Revoke and generate a new key. Copy the ones that suit your usage into your CI/CD or issue-tracking systems. You can always come back to the webhook page to copy the URLs later on.
+![webhook-connection2](images/webhook-connection2.png)
 
 ### Step 3 - Use webhook in a project
 

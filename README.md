@@ -43,4 +43,4 @@ For detailed steps to create a PR, please refer: [Development Workflow page](/co
 
 ## Blog Submission
 
-We'd love to hear your thoughts both in creating and using DevLake! To submit a blog post to DevLake Blog, please follow the instructions [here](/community/MakingContributions/BlogSubmission/).
+We'd love to hear your thoughts both in creating and using DevLake! To submit a blog post to DevLake Blog, please follow the instructions [here](/community/MakingContributions/BlogSubmission.md).

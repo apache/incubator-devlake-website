@@ -1,6 +1,6 @@
 ---
 title: "Jira"
-sidebar_position: 4
+sidebar_position: 15
 description: Config UI instruction for Jira
 ---
 

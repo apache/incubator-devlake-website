@@ -1,6 +1,6 @@
 ---
 title: "Zentao"
-sidebar_position: 6
+sidebar_position: 27
 description: Config UI instruction for Zentao(禅道)
 ---
 

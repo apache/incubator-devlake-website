@@ -45,31 +45,37 @@ If you want to collect deployment data from your system, you can use the incomin
 
 You can copy the generated deployment curl commands to your CI/CD script to post deployments to Apache DevLake. Below is the detailed payload schema:
 
-|     Key     | Required | Notes                                                                                                                                                                            |
-| :---------: | :------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     Key     | Required | Notes                                                                                                                                                                           |
+| :---------: | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | pipeline_id |  ✖️ No   | related Domain Layer `cicd_pipelines.id`                                                                                                                                         |
-| environment |  ✖️ No   | the environment this deployment happens. For example, `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br/>The default value is `PRODUCTION`                                     |
+| environment |  ✖️ No   | the environment this deployment happens. For example, `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br/>The default value is `PRODUCTION`                  |
 |  repo_url   |  ✔️ Yes  | the repo URL of the deployment commit<br />If there is a row in the domain layer table `repos` where `repos.url` equals `repo_url`, the `repoId` will be filled with `repos.id`. |
 |   repo_id   |  ✖️ No   | related Domain Layer `repos.id` <br/> No default value.                                                                                                                          |
-|  ref_name   |  ✖️ No   | related branch/tag<br/> No default value.                                                                                                                                        |
-| commit_sha  |  ✔️ Yes  | the sha of the deployment commit                                                                                                                                                 |
+|    name     |  ✖️ No   | deployment name. The default value is "deployment for `request.commit_sha`"                                                                                   |
+|  ref_name   |  ✖️ No   | related branch/tag<br/> No default value.                                                                                                                     |
+| commit_sha  |  ✔️ Yes  | the sha of the deployment commit                                                                                                                              |
+| commit_msg  |  ✖️ No   | the sha of the deployment commit message                                                                                                                      |
 | create_time |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                       |
-| start_time  |  ✔️ Yes  | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                       |
-|  end_time   |  ✔️ Yes  | Time. Eg. 2020-01-01T12:00:00+00:00<br/> The default value is the time when DevLake receives the POST request.                                                                   |
+| start_time  |  ✔️ Yes  | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                    |
+|  end_time   |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> The default value is the time when DevLake receives the POST request.                                                                   |
 |   result    |  ✖️ No   | deployment result, one of the values : `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`, <br/> The default value is `SUCCESS`.                                                            |
+| deploymentCommits[]    |  ✖️ yes  | Allow deployment webhook to push deployments to multiple repos in one request, includes repo_url,commit_sha,commit_msg,name,ref_name    |
+
+
 
 #### Register a Deployment - Sample API Calls
 
-Sample CURL to post deployments to DevLake. The following command should be replaced with the actual curl command copied from your Config UI:
-
+To deploy on a single repository, use the following command:
 ```
-curl http://localhost:8080/plugins/webhook/1/deployments -X 'POST' -d '{
+curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
     "pipeline_id": "optional-pipeline-id",
     "environment":"PRODUCTION",
     "repo_url":"https://github.com/apache/incubator-devlake/",
     "repo_id": "optional-repo-id",
+    "name": "optional-deployment-name. If you do not post a name, DevLake will generate one for you.",
     "ref_name": "optional-release-v0.17",
     "commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d",
+    "commit_msg":"optional-commit-message",
     "create_time":"2020-01-01T11:00:00+00:00",
     "start_time":"2020-01-01T12:00:00+00:00",
     "end_time":"2020-01-02T13:00:00+00:00",
@@ -77,12 +83,46 @@ curl http://localhost:8080/plugins/webhook/1/deployments -X 'POST' -d '{
   }'
 ```
 
+To deploy across multiple repositories (refer to the [discussion](https://github.com/apache/incubator-devlake/discussions/6162)), use the following command:
+```
+curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
+    "pipeline_id": "optional-pipeline-id",
+    "environment":"PRODUCTION",
+    "repo_id": "optional-repo-id",
+    "name": "optional-deployment-name. If you do not post a name, DevLake will generate one for you.",
+    "create_time":"2020-01-01T11:00:00+00:00",
+    "start_time":"2020-01-01T12:00:00+00:00",
+    "end_time":"2020-01-02T13:00:00+00:00",
+    "result": "FAILURE",
+    "deploymentCommits":[
+       {
+           "repo_url":"repo-1",
+           "name":"optional, if null, it will be deployment for {commit_sha}",
+           "ref_name": "optional-release-v0.17",
+           "commit_sha":"c1",
+           "commit_msg":"optional-msg-1"
+       },
+       {
+           "repo_url":"repo-2",
+           "name":"optional, if null, it will be deployment for {commit_sha}",
+           "ref_name": "optional-release-v0.17",
+           "commit_sha":"c2",
+           "commit_msg":"optional-msg-2"
+       }
+    ]
+  }'
+```
+
 If you have set a [username/password](GettingStarted/Authentication.md) for Config UI, you'll need to add them to the curl command to register a `deployment`:
 
 ```
-curl http://localhost:8080/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
-    "commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d",
-    "repo_url":"https://github.com/apache/incubator-devlake/",
+curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
+    "deploymentCommits":[
+        {
+        "commit_sha":"the sha of deployment commit1",
+        "repo_url":"the repo URL of the deployment commit"
+        }
+    ],
     "start_time":"2020-01-01T12:00:00+00:00",
     "end_time":"2020-01-02T12:00:00+00:00"
   }'
@@ -122,7 +162,7 @@ jobs:
 
             # Send the request to DevLake after deploy
             # The values start with a '$CIRCLE_' are CircleCI's built-in variables
-            curl http://localhost:8080/plugins/webhook/1/deployments -X 'POST' -d "{
+            curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d "{
               \"commit_sha\":\"$CIRCLE_SHA1\",
               \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
               \"start_time\":\"$start_time\"
@@ -141,7 +181,7 @@ If you want to collect issue or incident data from your system, you can use the 
 
 #### Register Issues - Update or Create Issues
 
-`POST http://localhost:8080/plugins/webhook/1/issues`
+`POST <devlake-host>/api/rest/plugins/webhook/1/issues`
 
 needs to be called when an issue or incident is created. The body should be a JSON and include columns as follows:
 
@@ -176,22 +216,37 @@ More information about these columns at [DomainLayerIssueTracking](https://devla
 
 #### Register Issues - Close Issues (Optional)
 
-`POST http://localhost:8080/plugins/webhook/1/issue/:issueId/close`
+`POST <devlake-host>/api/rest/plugins/webhook/1/issue/:issueId/close`
 
 needs to be called when an issue or incident is closed. Replace `:issueId` with specific strings and keep the body empty.
 
 #### Register Issues - Sample API Calls
 
-Sample CURL for Issue Creating :
+Sample CURL for creating an incident:
 
 ```
-curl http://localhost:8080/plugins/webhook/1/issues -X 'POST' -d '{"url":"","issue_key":"DLK-1234","title":"a feature from DLK","description":"","epic_key":"","type":"BUG","status":"TODO","original_status":"created","story_point":0,"resolution_date":null,"created_date":"2020-01-01T12:00:00+00:00","updated_date":null,"lead_time_minutes":0,"parent_issue_key":"DLK-1200","priority":"","original_estimate_minutes":0,"time_spent_minutes":0,"time_remaining_minutes":0,"creator_id":"user1131","creator_name":"Nick name 1","assignee_id":"user1132","assignee_name":"Nick name 2","severity":"","component":""}'
+curl <devlake-host>/api/rest/plugins/webhook/1/issues -X 'POST' -d '{
+  "issue_key":"DLK-1234",
+  "title":"a feature from DLK",
+  "description":"",
+  "url":"",
+  "type":"INCIDENT",
+  "status":"TODO",
+  "created_date":"2020-01-01T12:00:00+00:00",
+  "updated_date":"2020-01-01T12:00:00+00:00",
+  "priority":"",
+  "severity":"",
+  "creator_id":"user1131",
+  "creator_name":"Nick name 1",
+  "assignee_id":"user1132",
+  "assignee_name":"Nick name 2"
+}'
 ```
 
 Sample CURL for Issue Closing:
 
 ```
-curl http://localhost:8080/plugins/webhook/1/issue/DLK-1234/close -X 'POST'
+curl <devlake-host>/api/rest/plugins/webhook/1/issue/DLK-1234/close -X 'POST'
 ```
 
 ## References
