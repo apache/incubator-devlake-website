@@ -1,4 +1,77 @@
 {
+  "Oct-Dec-2023": [
+    {
+      "realName": "Rob Heckel",
+      "githubId": "billabongrob",
+      "avatar": "https://avatars.githubusercontent.com/u/8441943?v=4",
+      "githubLink": "https://github.com/billabongrob",
+      "date": "2023/10/08"
+    },
+    {
+      "realName": "Richard Fletcher",
+      "githubId": "richard-fletcher",
+      "email": "",
+      "avatar": "https://avatars.githubusercontent.com/u/32538344?v=4",
+      "githubLink": "https://github.com/richard-fletcher",
+      "date": "2023/10/08"
+    },
+    {
+      "realName": "Omer Farooq",
+      "githubId": "o-farooq",
+      "email": "",
+      "avatar": "https://avatars.githubusercontent.com/u/17722640?v=4",
+      "githubLink": "https://github.com/o-farooq",
+      "date": "2023/10/09"
+    },
+    {
+      "realName": "Hollman Enciso",
+      "githubId": "en-henciso",
+      "email": "",
+      "avatar": "https://avatars.githubusercontent.com/u/142229524?v=4",
+      "githubLink": "https://github.com/en-henciso",
+      "date": "2023/10/18"
+    },
+    {
+      "realName": "Koen de Laat",
+      "githubId": "koendelaat",
+      "email": "",
+      "avatar": "https://avatars.githubusercontent.com/u/7723283?v=4",
+      "githubLink": "https://github.com/en-henciso",
+      "date": "2023/10/18"
+    },
+    {
+      "realName": "Adam Wolfe",
+      "githubId": "adamwolfe-tc",
+      "email": "",
+      "avatar": "https://avatars.githubusercontent.com/u/37342270?v=4",
+      "githubLink": "https://github.com/adamwolfe-tc",
+      "date": "2023/11/13"
+    },
+    {
+      "realName": "Vitor Ferraz Sandes",
+      "githubId": "sandesvitor",
+      "email": "",
+      "avatar": "https://avatars.githubusercontent.com/u/62914690?v=4",
+      "githubLink": "https://github.com/sandesvitor",
+      "date": "2023/11/24"
+    },
+    {
+      "realName": "Antoine Caputo",
+      "githubId": "antoinecaputo",
+      "email": "",
+      "avatar": "https://avatars.githubusercontent.com/u/44469196?v=4",
+      "githubLink": "https://github.com/antoinecaputo",
+      "date": "2023/11/27"
+    },
+    {
+      "realName": "Henrique Moody",
+      "githubId": "henriquemoody",
+      "email": "",
+      "avatar": "https://avatars.githubusercontent.com/u/154023?v=4",
+      "githubLink": "https://github.com/henriquemoody",
+      "date": "2023/11/30"
+    }
+  ],
   "Jul-Sept-2023": [
     {
       "realName": "Arjun Devarajan",
@@ -71,6 +144,14 @@
       "avatar": "https://avatars.githubusercontent.com/u/4294069?v=4",
       "githubLink": "https://github.com/0o001",
       "date": "2023/08/21"
+    },
+    {
+      "realName": "Anjaneya Gupta",
+      "githubId": "anjy7",
+      "email": "",
+      "avatar": "https://avatars.githubusercontent.com/u/92802904?v=4",
+      "githubLink": "https://github.com/anjy7",
+      "date": "2023/09/19"
     }
   ],
   "Apr-Jun-2023": [
