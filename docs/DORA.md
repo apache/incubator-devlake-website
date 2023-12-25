@@ -17,13 +17,13 @@ There are two key clusters of data inside DORA: Velocity and Stability. The DORA
 
 Within velocity are two core metrics:
 
-- [Deployment Frequency](./Metrics/DeploymentFrequency): Number of successful deployments to production, how rapidly is your team releasing to users?
-- [Lead Time for Changes](./Metrics/LeadTimeForChanges): How long does it take from commit to the code running in production? This is important, as it reflects how quickly your team can respond to user requirements.
+- [Deployment Frequency](./Metrics/DeploymentFrequency.md): Number of successful deployments to production, how rapidly is your team releasing to users?
+- [Lead Time for Changes](./Metrics/LeadTimeForChanges.md): How long does it take from commit to the code running in production? This is important, as it reflects how quickly your team can respond to user requirements.
 
 Stability is composed of two core metrics:
 
-- [Median Time to Restore Service](./Metrics/MTTR): How long does it take the team to properly recover from a failure once it is identified?
-- [Change Failure Rate](./Metrics/CFR): How often are your deployments causing a failure?
+- [Median Time to Restore Service](./Metrics/MTTR.md): How long does it take the team to properly recover from a failure once it is identified?
+- [Change Failure Rate](./Metrics/CFR.md): How often are your deployments causing a failure?
 
 ![](https://i.imgur.com/71EUflb.png)
 
@@ -190,10 +190,10 @@ You can customize the DORA dashboard by editing the underlying SQL query of each
 
 For a breakdown of each metric's SQL query, please refer to the corresponding metric docs:
 
-- [Deployment Frequency](./Metrics/DeploymentFrequency)
-- [Lead Time for Changes](./Metrics/LeadTimeForChanges)
-- [Median Time to Restore Service](./Metrics/MTTR)
-- [Change Failure Rate](./Metrics/CFR)
+- [Deployment Frequency](./Metrics/DeploymentFrequency.md)
+- [Lead Time for Changes](./Metrics/LeadTimeForChanges.md)
+- [Median Time to Restore Service](./Metrics/MTTR.md)
+- [Change Failure Rate](./Metrics/CFR.md)
 
 If you aren't familiar with Grafana, please refer to our [Grafana doc](Configuration/Dashboards/GrafanaUserGuide.md), or jump into Slack for help.
 
