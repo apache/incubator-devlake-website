@@ -55,9 +55,9 @@ In situations where a repo or board is shared by multiple projects in real life,
 
 To clarify the concepts, let's define three terms:
 
-- [Project](/docs/Overview/KeyConcepts.md#project): Refers to a real-world project or product line, such as Apache DevLake or Apache Spark. It focuses on the work to be done.
-- Team: Represents a department, such as the 'product team' or 'engineering team'. It focuses on the people and their roles. Note that people within the same team may not always work on the same projects.
-- Project Team: Comprises individuals working on a specific project.
+- [`Project`](/docs/Overview/KeyConcepts.md#project): Refers to a real-world project or product line, such as Apache DevLake or Apache Spark. It focuses on the work to be done.
+- `Team`: Represents a department, such as the 'product team' or 'engineering team'. It focuses on the people and their roles. Note that people within the same team may not always work on the same projects.
+- `Project Team`: Comprises individuals working on a specific project.
 
 DevLake does support measuring DORA metrics at the project-team level, which is essentially the same as measuring at the project level. However, it is important to note that DevLake does not recommend measuring DORA metrics at the team level. Despite the existence of the 'DORA by team' dashboard contributed by the community. Doing so may introduce inaccuracies and dilute the significance of measuring DORA metrics from the outset.
 
