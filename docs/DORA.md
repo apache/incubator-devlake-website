@@ -25,7 +25,7 @@ Stability is composed of two core metrics:
 - [Median Time to Restore Service](./Metrics/MTTR.md): How long does it take the team to properly recover from a failure once it is identified?
 - [Change Failure Rate](./Metrics/CFR.md): How often are your deployments causing a failure?
 
-![](https://i.imgur.com/71EUflb.png)
+![](Configuration/images/dora-intro.png)
 
 To make DORA even more actionable, there are well-established benchmarks to determine if you are performing at "Elite", "High", "Medium", or "Low" levels. Inside DevLake, you will find the benchmarking table available to assess and compare your own projects.
 
@@ -44,7 +44,7 @@ DevLake measures DORA metrics at the [project level](Configuration/HowToOrganize
   - Create a DevLake project, and associate the data connections with the project. Collect data to see DORA metrics
 - **Report**: DevLake provides a built-in DORA dashboard and another dashboard to help you debug DORA. See an example screenshot below or check out our [live demo](https://grafana-lake.demo.devlake.io/grafana/d/qNo8_0M4z/dora?orgId=1). 
   
-  ![DORA Dashboard](https://i.imgur.com/y1pUIsk.png)
+  ![DORA Dashboard](Configuration/images/dora-dashboard.png)
 
 DevLake now supports Jenkins, GitHub Action, GitLab CI, BitBucket and Azure Pipelines as the data sources for `deployments`; Jira boards, GitHub issues, TAPD workspaces and Zentao issues as the sources for `incidents` data; Github/BitBucket/Azure/GitLab repos as the sources for `Pull Requests` and `Commits`.
 
@@ -76,7 +76,7 @@ In the next section, we will demonstrate how to configure DevLake to implement D
 
   ![](Configuration/images/dora-jira-connection-1.png)
 
-  To make it simple, fields with the ![](https://i.imgur.com/rrLopFx.png) label are DORA-related configurations for every data source. Via these fields, you can define what "incidents" and "deployments" are for each data source.
+  To make it simple, fields with the ![](Configuration/images/dora-config-label.png) label are DORA-related configurations for every data source. Via these fields, you can define what "incidents" and "deployments" are for each data source.
 
   This project uses Jira issue type `DORA Incident` as "incident". Please select the `DORA Incident` for the `Incident` field. Jira issues belonging to this type will be converted to 'INCIDENT' in DevLake.
     
@@ -103,7 +103,7 @@ Using CircleCI as an example, we demonstrate how to actively push data to DevLak
 
 2.3 Head to your CircleCI's pipelines page in a new tab. Find your deployment pipeline and click `Configuration File`.
   
-  ![](https://i.imgur.com/XwPzmyk.png)
+  ![](Configuration/images/dora-circleci-screenshot-1.png)
 
 2.4 Paste the curl command to the `config.yml`. Change the key-values in the payload. See the full payload schema [here](./Plugins/webhook.md/#deployment).
 
@@ -153,7 +153,7 @@ workflows:
 
 2.5 Run the CircleCI pipeline. Visit DevLake's DB to check if the deployments have been successfully pushed to DevLake. The deployments will appear in table [cicd_deployments](DataModels/DevLakeDomainLayerSchema.md#cicd_deployments) and [cicd_deployment_commits](DataModels/DevLakeDomainLayerSchema.md#cicd_deployment_commits) in DevLake's database.
 
-  ![CircleCI-screenshot](https://i.imgur.com/IyneAMn.png)
+  ![](Configuration/images/dora-circleci-screenshot-2.png)
 
   ![webhook-query](/img/ConfigUI/webhook-query-deployments.png)
 
