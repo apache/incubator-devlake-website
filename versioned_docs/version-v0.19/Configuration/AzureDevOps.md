@@ -20,7 +20,7 @@ Give your connection a unique name to help you identify it in the future.
 
 #### Token
 
-Paste your Azure DevOps personal access token (PAT) here. You can click on "Learn about how to create a PAT" to get instructions on how to create a PAT.
+Paste your Azure DevOps personal access token (PAT) here. Check [Azure's official doc](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat) on how to create a PAT.
 Make sure that the Organization field is set to "All accessible organizations" when creating the PAT.
 
 #### Test and Save Connection

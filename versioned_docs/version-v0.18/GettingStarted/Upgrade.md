@@ -12,7 +12,7 @@ description: How to upgrade your Apache DevLake to a newer version
 
 3. Back up your Grafana dashboards before upgrade if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
 
-4. Upgrade to v0.18.0+: When upgrading from a previous version of DevLake, you need to find the ENCODE_KEY value in the .env file of devlake container, and assign the value to ENCRYPTION_SECRET according to the upgrade steps, see [helm setup](https://devlake.apache.org/docs/next/GettingStarted/HelmSetup) or [docker compose setup](https://devlake.apache.org/docs/next/GettingStarted/DockerComposeSetup). This will ensure that the encryption process continues to work as expected.
+4. Upgrade to v0.18.0+: When upgrading from a previous version of DevLake, you need to find the ENCODE_KEY value in the .env file of devlake container, and assign the value to ENCRYPTION_SECRET according to the upgrade steps, see [helm setup](https://devlake.apache.org/docs/v0.18/GettingStarted/HelmSetup) or [docker compose setup](https://devlake.apache.org/docs/v0.18/GettingStarted/DockerComposeSetup). This will ensure that the encryption process continues to work as expected.
 
 5. Upgrade to v0.18.0+: When upgrading from a previous version of DevLake, You may encounter the below error when upgrading because the built-in grafana has been replaced by the official grafana dependency. So you may need to delete the grafana deployment first, please also take care of Note 3 before deleting.
 

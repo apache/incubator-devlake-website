@@ -1,6 +1,6 @@
 ---
 title: "PagerDuty"
-sidebar_position: 4
+sidebar_position: 17
 description: Config UI instruction for PagerDuty
 ---
 

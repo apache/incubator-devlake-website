@@ -9,7 +9,7 @@ tags: [devlake, apache]
 [Apache DevLake](https://github.com/apache/incubator-devlake) is an integration tool with the DevOps data collection functionality, which presents a different stage of data to development teams via Grafana. which also can leverage teams to improve the development process with a data-driven model.
 
 ### Apache DevLack Architecture Overview
-- The left side of the following screenshot is an [integrative DevOps data plugin](https://devlake.apache.org/docs/next/Overview/SupportedDataSources/), the existing plugins include Github, GitLab, JIRA, Jenkins, Tapd, Feishu, and the most featured analysis engine in the Simayi platform.
+- The left side of the following screenshot is an [integrative DevOps data plugin](https://devlake.apache.org/docs/Overview/SupportedDataSources/), the existing plugins include Github, GitLab, JIRA, Jenkins, Tapd, Feishu, and the most featured analysis engine in the Simayi platform.
 - The main framework in the middle of the following screenshot, completes data collection, expansion, and conversion to the domain layer by running subtasks in the plugins. The user can trigger the tasks by config-UI or all API.
 - RMDBS currently supports Mysql and PostgresSQL, more databases will be supported in the future.
 - Grafana can generate different types of needed data by using SQL.
@@ -73,7 +73,7 @@ The following is the pipeline running flow chart.
 
 ![Generated](Aspose.Words.093a76ac-457b-4498-a472-7dbea580bca9.003.png)
 
-A pipeline contains a two-dimensional array of tasks, mainly to ensure that a series of tasks are executed in a preset order. Like the following screenshot if the plugin of Stage 3 needs to rely on the other plugin to prepare the data(eg: the operation of refdiff needs to rely on gitextractor and Github, for more information on data sources and plugins, please refer to the [documentation](https://devlake.apache.org/docs/next/Overview/SupportedDataSources/), then when Stage 3 starts to execute, it needs to ensure that its dependencies have been executed in Stage 1 and Stage 2.
+A pipeline contains a two-dimensional array of tasks, mainly to ensure that a series of tasks are executed in a preset order. Like the following screenshot if the plugin of Stage 3 needs to rely on the other plugin to prepare the data(eg: the operation of refdiff needs to rely on gitextractor and Github, for more information on data sources and plugins, please refer to the [documentation](https://devlake.apache.org/docs/Overview/SupportedDataSources/), then when Stage 3 starts to execute, it needs to ensure that its dependencies have been executed in Stage 1 and Stage 2.
 
 ![Generated](Aspose.Words.093a76ac-457b-4498-a472-7dbea580bca9.004.png)
 

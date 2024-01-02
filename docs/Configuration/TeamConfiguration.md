@@ -1,6 +1,6 @@
 ---
 title: "Team Configuration"
-sidebar_position: 10
+sidebar_position: 35
 description: >
   Team Configuration
 ---

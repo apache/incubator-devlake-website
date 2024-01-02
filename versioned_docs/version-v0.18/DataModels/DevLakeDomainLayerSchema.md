@@ -16,9 +16,13 @@ sidebar_position: 1
 
 This document describes Apache DevLake's domain layer schema.
 
-Referring to DevLake's [architecture](../Overview/Architecture.md), the data in the domain layer is transformed from the data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, Gitlab, Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
+Referring to DevLake's [architecture](../Overview/Architecture.md), the data in the domain layer is transformed from the data in the tool layer. The tool layer schema is based on the data from specific tools such as Jira, GitHub, GitLab, Jenkins, etc. The domain layer schema can be regarded as an abstraction of tool-layer schemas.
 
-<p align="center"><img src="/img/Architecture/arch-dataflow.svg" /></p>
+<p align="center">
+
+  ![](../Configuration/images/arch-dataflow-domain.svg)
+
+</p>
 <p align="center">DevLake Dataflow</p>
 
 ## Use Cases
@@ -32,8 +36,8 @@ Referring to DevLake's [architecture](../Overview/Architecture.md), the data in 
 This is the up-to-date domain layer schema for DevLake. Tables (entities) are categorized into 5 domains.
 
 1. Issue tracking: Jira issues, GitHub issues, GitLab issues, etc.
-2. Source code management: Git/GitHub/Gitlab commits and refs(tags and branches), etc.
-3. Code review: GitHub PRs, Gitlab MRs, etc.
+2. Source code management: Git/GitHub/GitLab commits and refs(tags and branches), etc.
+3. Code review: GitHub PRs, GitLab MRs, etc.
 4. CI/CD: Jenkins jobs & builds, etc.
 5. Code Quality: SonarQube issues, hotspots, file metrics, etc.
 6. Cross-domain: entities that map entities from different domains to break data isolation.
@@ -42,7 +46,7 @@ This is the up-to-date domain layer schema for DevLake. Tables (entities) are ca
 
 ![Domain Layer Schema](../Configuration/images/domain-layer-schema-diagram.svg)
 
-When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. Github/Gitlab) and allow them to co-exist in a single table.
+When reading the schema, you'll notice that many tables' primary key is called `id`. Unlike auto-increment id or UUID, `id` is a string composed of several parts to uniquely identify similar entities (e.g. repo) from different platforms (e.g. Github/GitLab) and allow them to co-exist in a single table.
 
 Tables that end with WIP are still under development.
 
@@ -85,7 +89,7 @@ An `issue` is the abstraction of Github/GitLab/BitBucket/Jira/TAPD/Zentao... iss
 | `component`                 | varchar  | 255        | The component a bug-issue affects. This field only supports Github plugin for now. The value is transformed from Github issue labels by the rules set according to the user's configuration of .env by end users during DevLake installation.                                                                                                                                                                                                                                                                                                                                                            |         |
 | `severity`                  | varchar  | 255        | The severity level of a bug-issue. This field only supports Github plugin for now. The value is transformed from Github issue labels by the rules set according to the user's configuration of .env by end users during DevLake installation.                                                                                                                                                                                                                                                                                                                                                            |         |
 | `parent_issue_id`           | varchar  | 255        | The id of its parent issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |         |
-| `epic_key`                  | varchar  | 255        | The key of the epic this issue belongs to. For tools with no epic-type issues such as Github and Gitlab, this field is default to an empty string                                                                                                                                                                                                                                                                                                                                                                                                                                                        |         |
+| `epic_key`                  | varchar  | 255        | The key of the epic this issue belongs to. For tools with no epic-type issues such as Github and GitLab, this field is default to an empty string                                                                                                                                                                                                                                                                                                                                                                                                                                                        |         |
 | `original_estimate_minutes` | int      |            | The original estimation of the time allocated for this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
 | `time_spent_minutes`        | int      |            | The original estimation of the time allocated for this issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
 | `time_remaining_minutes`    | int      |            | The remaining time to resolve the issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         |
@@ -236,7 +240,7 @@ This table shows the relation between sprints and issues that have been added to
 
 #### repos
 
-GitHub, Gitlab or BitBucket repositories.
+GitHub, GitLab or BitBucket repositories.
 
 | **field**      | **type** | **length** | **description**                                                                                                                                                                                                         | **key**        |
 | :------------- | :------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- |
@@ -376,7 +380,7 @@ Pull requests are the abstraction of GitHub pull requests, GitLab merge requests
 | `author_id`        | varchar  | 100        | The author's id of the pull request                                                                                                                                                                                                                                                                                                                                                            |                |
 | `url`              | varchar  | 255        | the web link of the pull request                                                                                                                                                                                                                                                                                                                                                               |                |
 | `type`             | varchar  | 255        | The work-type of a pull request.For example: feature-development, bug-fix, docs,etc.                                                                                                                                                                                                                                                                                                           |                |
-| `component`        | varchar  | 255        | The component this PR affects.<br/>The value is transformed from Github/Gitlab pull request labels by configuring `GITHUB_PR_COMPONENT` in `.env` file during installation.                                                                                                                                                                                                                    |                |
+| `component`        | varchar  | 255        | The component this PR affects.<br/>The value is transformed from Github/GitLab pull request labels by configuring `GITHUB_PR_COMPONENT` in `.env` file during installation.                                                                                                                                                                                                                    |                |
 | `created_date`     | datetime | 3          | The time PR created.                                                                                                                                                                                                                                                                                                                                                                           |                |
 | `merged_date`      | datetime | 3          | The time PR gets merged. Null when the PR is not merged.                                                                                                                                                                                                                                                                                                                                       |                |
 | `closed_date`      | datetime | 3          | The time PR closed. Null when the PR is not closed.                                                                                                                                                                                                                                                                                                                                            |                |

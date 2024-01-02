@@ -1,6 +1,6 @@
 ---
 
-title: "Teambition(Beta)"
+title: "Teambition(WIP)"
 description: >
   Teambition Plugin
 ---

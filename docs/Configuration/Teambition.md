@@ -1,6 +1,6 @@
 ---
-title: "Teambition(Beta)"
-sidebar_position: 6
+title: "Teambition(WIP)"
+sidebar_position: 23
 description: Config UI instruction for Teambition
 ---
 

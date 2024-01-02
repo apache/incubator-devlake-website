@@ -116,7 +116,7 @@ This table shows the entities collected by each plugin. Domain layer entities in
 | CollectApiBuildsMeta | ≈100                            | ❌                                      | ❌                           |
 | CollectApiStagesMeta | ≈10^4                           | ❌                                      | ✅                           |
 
-### Gitlab
+### GitLab
 
 | Subtask Name                | Estimated Max Number of Request | Does It support Incremental Collection? | Does It Support Time Filter? |
 | --------------------------- | ------------------------------- | --------------------------------------- | ---------------------------- |
