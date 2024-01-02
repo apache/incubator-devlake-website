@@ -8,7 +8,7 @@ Visit Config UI at: `http://localhost:4000`.
 
 ## Step 1 - Add Data Connections
 
-On the Connections page, you can select Opsgenie and create a new connection or it.
+On the Connections page, you can select Opsgenie and create a new connection on it.
 
 ### Step 1.1 - Authentication
 ![opsgenie-add-data-connections](images/opsgenie-create-a-connection.png)
