@@ -60,6 +60,8 @@ The following guide will walk through how to run DevLake's frontend (`config-ui`
 7. Run `devlake` and `config-ui` in dev mode in two separate terminals:
 
     ```sh
+    # specify the plugins that you need for both backend and frontend
+    export DEVLAKE_PLUGINS=bamboo,bitbucket,circleci,customize,dora,gitextractor,github,github_graphql,gitlab,jenkins,jira,org,pagerduty,refdiff,slack,sonarqube,trello,webhook
     # run devlake
     make dev
     # run config-ui
