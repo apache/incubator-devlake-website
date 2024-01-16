@@ -383,6 +383,18 @@ To edit a Blueprint created in the Advanced mode, you can simply go the Configur
 
 ![img](/img/ConfigUI/BlueprintEditing/blueprint-edit2.png)
 
+## How to skip collectors in a Blueprint (Advanced Mode)?
+- 1. Create a Blueprint in the Advanced Mode.
+- 2. You can skip collectors in a Blueprint by setting `skipCollectors` to `true` in the request body of the trigger API. For example:
+```
+  curl --request POST \
+    --url http://localhost:8080/blueprints/:blueprintId/trigger \
+    --header 'content-type: application/json' \
+    --data '{
+      "skipCollectors": true
+  }'
+```
+
 ## Troubleshooting
 
 If you run into any problem, please check the [Troubleshooting](/Troubleshooting/Configuration.md) or [create an issue](https://github.com/apache/incubator-devlake/issues)
