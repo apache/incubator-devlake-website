@@ -194,6 +194,21 @@ const versions = require('./versions.json');
             to: 'https://github.com/apache/incubator-devlake',
             label: 'GitHub',
             position: 'right',
+          }, 
+          {
+            type: 'dropdown',
+            label: 'Download',
+            position: 'right',
+            items: [
+              {
+                label: 'Latest Release',
+                to: 'https://dist.apache.org/repos/dist/release/incubator/devlake',
+              },
+              {
+                label: 'Older Releases',
+                to: 'https://archive.apache.org/dist/incubator/devlake',
+              }
+            ],
           },
           {
             type: 'dropdown',
