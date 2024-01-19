@@ -118,10 +118,10 @@ This table shows the assignee(s) of issues. Multiple entries can exist per issue
 
 This table shows the labels of issues. Multiple entries can exist per issue. This table can be used to filter issues by label name.
 
-| **field**  | **type** | **length** | **description**                                                   | **key**      |
-| :--------- | :------- | :--------- | :---------------------------------------------------------------- | :----------- |
-| `name`     | varchar  | 255        | Label name. Collect from GitHub issue labels or Jira issue labels |              |
-| `issue_id` | varchar  | 255        | Issue ID                                                          | FK_issues.id |
+| **field**    | **type** | **length** | **description**                                                   | **key**      |
+|:-------------| :------- | :--------- | :---------------------------------------------------------------- | :----------- |
+| `label_name` | varchar  | 255        | Label name. Collect from GitHub issue labels or Jira issue labels |              |
+| `issue_id`   | varchar  | 255        | Issue ID                                                          | FK_issues.id |
 
 #### issue_comments
 
