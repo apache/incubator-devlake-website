@@ -7,7 +7,12 @@ description: >
 ## Summary
 
 This plugin collects SonarQube data through its REST APIs. SonarQube is a tool for static code analysis and code quality management. It can help you discover potential problems and defects in your code, and provide suggestions and solutions.
-(Please note that this version of SonarQube cannot collect issues with more than 10k+)
+We've implemented optimizations to address the limitation in SonarQube's issue collection, preventing it from handling more than 10k issues. If any step successfully satisfies the conditions (i.e., the number of issues is less than 10k), subsequent steps will not be executed.
+Issue Collection Rules:
+- 1. Firstly, classified according to severity, status, type.
+- 2. Secondly, classified according to time field: createdBefore, createdAfter.
+- 3. Lastly, classified according to per file.
+
 
 ## Supported Versions
 
