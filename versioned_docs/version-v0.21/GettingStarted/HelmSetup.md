@@ -2,7 +2,7 @@
 title: "Install via Helm"
 description: >
   The steps to install Apache DevLake via Helm for Kubernetes
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 ## Prerequisites
@@ -45,7 +45,7 @@ To install the chart with release name `devlake`,follow these steps:
     ```shell
     helm repo add devlake https://apache.github.io/incubator-devlake-helm-chart
     helm repo update
-    helm install devlake devlake/devlake --version=0.20.0-beta8 --set lake.encryptionSecret.secret=$ENCRYPTION_SECRET
+    helm install devlake devlake/devlake --version=0.21.0-beta1 --set lake.encryptionSecret.secret=$ENCRYPTION_SECRET
     ```
 
 And visit your devlake from the node port (32001 by default).
@@ -86,14 +86,14 @@ grafana by url `http://YOUR-NODE-IP:30091`
 
 ```shell
 helm repo update
-helm upgrade devlake devlake/devlake --version=0.20.0-beta8 --set lake.encryptionSecret.secret=<ENCRYPTION_SECRET>
+helm upgrade devlake devlake/devlake --version=0.21.0-beta1 --set lake.encryptionSecret.secret=<ENCRYPTION_SECRET>
 ```
 
 **If you're upgrading from DevLake v0.18.x or later versions:**
 
 ```shell
 helm repo update
-helm upgrade devlake devlake/devlake --version=0.20.0-beta8
+helm upgrade devlake devlake/devlake --version=0.21.0-beta1
 ```
 
 ### Uninstall
