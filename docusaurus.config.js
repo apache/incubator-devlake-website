@@ -146,19 +146,23 @@ const versions = require('./versions.json');
                     label: 'Docs',
                     items: [{
                             label: "Next",
-                            to: "/docs/Overview/Introduction"
+                            to: "/docs/Overview/Introduction",
+                            target: "_blank",
                         },
                         {
                             label: versions[0] + ' (Beta)',
-                            to: "/docs/" + versions[0] + "/Overview/Introduction"
+                            to: "/docs/" + versions[0] + "/Overview/Introduction",
+                            target: "_blank",
                         },
                         {
                             label: versions[1] + ' (Stable)',
-                            to: "/docs/" + versions[1] + "/Overview/Introduction"
+                            to: "/docs/" + versions[1] + "/Overview/Introduction",
+                            target: "_blank",
                         },
                         ...versions.slice(2, versions.length).map((version) => ({
                             label: version,
                             to: `docs/${version}/Overview/Introduction`,
+                            target: "_blank",
                         }))
                     ]
                 },
@@ -169,13 +173,15 @@ const versions = require('./versions.json');
                     to: 'livedemo',
                     docsPluginId: 'livedemo',
                     docId: 'EngineeringLeads/DORA',
+                    target: "_blank",
                 },
                 {
                     type: 'doc',
                     docId: 'index',
                     position: 'right',
                     label: 'Community',
-                    docsPluginId: 'community'
+                    docsPluginId: 'community',
+                    target: "_blank",
                 },
                 {
                     to: '/team',
