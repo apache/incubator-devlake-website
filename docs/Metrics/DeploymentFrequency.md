@@ -25,7 +25,20 @@ Deployment frequency is calculated based on the number of `deployment days`, not
 
 When there are multiple deployments triggered by one pipeline, tools like GitLab and BitBucket will generate more than one deployment. In these cases, DevLake will consider these deployments as ONE deployment and use the last deployment's finished date as the deployment finished date.
 
-Below are the benchmarks for different development teams from Google's report. DevLake uses the same benchmarks.
+Below are the 2023 DORA benchmarks for different development teams from Google's report. DevLake uses the same benchmarks.
+
+| Groups            | Benchmarks                                     | DevLake Benchmarks                             | The Criteria of DevLake Benchmarks                |
+| ----------------- | ---------------------------------------------- | ---------------------------------------------- | --------------------------------------------------|
+| Elite performers  | On-demand (multiple deploys per day)           | On-demand                                      | Median Number of `Deployment Days` per Week >= 7  |
+| High performers   | Between once per day and once per week         | Between once per day and once per week         | Median Number of `Deployment Days` per Week >= 1  |
+| Medium performers | Between once per week and once per month       | Between once per week and once per month       | Median Number of `Deployment Days` per Month >= 1 |
+| Low performers    | Between once per week and once per month       | Fewer than once per month                      | Median Number of `Deployment Days` per Month < 1  |
+
+<p><i>Source: 2023 Accelerate State of DevOps, Google</i></p>
+
+
+<details>
+<summary>Click to expand or collapse 2021 DORA benchmarks</summary>
 
 | Groups            | Benchmarks                                     | DevLake Benchmarks                             | The Criteria of DevLake Benchmarks                |
 | ----------------- | ---------------------------------------------- | ---------------------------------------------- | --------------------------------------------------|
@@ -35,6 +48,9 @@ Below are the benchmarks for different development teams from Google's report. D
 | Low performers    | Fewer than once per six months                 | Fewer than once per six months                 | Median Number of `Deployment Days` per Month < 1  |
 
 <p><i>Source: 2021 Accelerate State of DevOps, Google</i></p>
+</details>
+<br>
+
 
 <b>Data Sources Required</b>
 
@@ -54,7 +70,7 @@ DevLake deployments can be found in table [cicd_deployment_commits](/docs/DataMo
 -- Metric 1: Number of deployments per month
 with _deployments as(
 -- When deploying multiple commits in one pipeline, GitLab and BitBucket may generate more than one deployment. However, DevLake consider these deployments as ONE production deployment and use the last one's finished_date as the finished date.
-	SELECT
+	SELECT 
 		date_format(deployment_finished_date,'%y/%m') as month,
 		count(cicd_deployment_id) as deployment_count
 	FROM (
@@ -64,7 +80,7 @@ with _deployments as(
 		FROM cicd_deployment_commits cdc
 		JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id and pm.`table` = 'cicd_scopes'
 		WHERE
-			pm.project_name in ($project)
+			pm.project_name in (${project:sqlstring}+'')
 			and cdc.result = 'SUCCESS'
 			and cdc.environment = 'PRODUCTION'
 		GROUP BY 1
@@ -73,10 +89,10 @@ with _deployments as(
 	GROUP BY 1
 )
 
-SELECT
-	cm.month,
+SELECT 
+	cm.month, 
 	case when d.deployment_count is null then 0 else d.deployment_count end as deployment_count
-FROM
+FROM 
 	calendar_months cm
 	LEFT JOIN _deployments d on cm.month = d.month
 	WHERE $__timeFilter(cm.month_timestamp)
@@ -87,6 +103,7 @@ If you want to measure in which category your team falls as in the picture shown
 ![](/img/Metrics/deployment-frequency-text.jpeg)
 
 ```
+-- Metric 1: Deployment Frequency
 with last_few_calendar_months as(
 -- construct the last few calendar months within the selected time period in the top-right corner
 	SELECT CAST((SYSDATE()-INTERVAL (H+T+U) DAY) AS date) day
@@ -111,9 +128,9 @@ _production_deployment_days as(
 		cdc.cicd_deployment_id as deployment_id,
 		max(DATE(cdc.finished_date)) as day
 	FROM cicd_deployment_commits cdc
-	JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id
+	JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id and pm.`table` = 'cicd_scopes'
 	WHERE
-		pm.project_name in ($project)
+		pm.project_name in (${project:sqlstring}+'')
 		and cdc.result = 'SUCCESS'
 		and cdc.environment = 'PRODUCTION'
 	GROUP BY 1
@@ -125,7 +142,7 @@ _days_weeks_deploy as(
 			date(DATE_ADD(last_few_calendar_months.day, INTERVAL -WEEKDAY(last_few_calendar_months.day) DAY)) as week,
 			MAX(if(_production_deployment_days.day is not null, 1, 0)) as weeks_deployed,
 			COUNT(distinct _production_deployment_days.day) as days_deployed
-	FROM
+	FROM 
 		last_few_calendar_months
 		LEFT JOIN _production_deployment_days ON _production_deployment_days.day = last_few_calendar_months.day
 	GROUP BY week
@@ -135,8 +152,8 @@ _monthly_deploy as(
 -- calculate the number of deployment days every month
 	SELECT
 			date(DATE_ADD(last_few_calendar_months.day, INTERVAL -DAY(last_few_calendar_months.day)+1 DAY)) as month,
-			MAX(if(_production_deployment_days.day is not null, 1, 0)) as months_deployed
-	FROM
+			MAX(if(_production_deployment_days.day is not null, 1, null)) as months_deployed
+	FROM 
 		last_few_calendar_months
 		LEFT JOIN _production_deployment_days ON _production_deployment_days.day = last_few_calendar_months.day
 	GROUP BY month
@@ -164,12 +181,24 @@ _median_number_of_deployment_days_per_month as(
 	WHERE ranks <= 0.5
 )
 
-SELECT
-	CASE
-		WHEN median_number_of_deployment_days_per_week >= 3 THEN 'On-demand'
-		WHEN median_number_of_deployment_days_per_week >= 1 THEN 'Between once per week and once per month'
-		WHEN median_number_of_deployment_days_per_month >= 1 THEN 'Between once per month and once every 6 months'
-		ELSE 'Fewer than once per six months' END AS 'Deployment Frequency'
+SELECT 
+  CASE
+    WHEN ('$benchmarks') = '2023 report' THEN
+			CASE  
+				WHEN median_number_of_deployment_days_per_week >= 7 THEN 'On-demand(elite)'
+				WHEN median_number_of_deployment_days_per_week >= 1 THEN 'Between once per day and per week(high)'
+				WHEN median_number_of_deployment_days_per_month >= 1 THEN 'Between once per week and per month(medium)'
+				WHEN median_number_of_deployment_days_per_month < 1 THEN 'Fewer than once per month(low)'
+				ELSE "N/A. Please check if you have collected deployments." END
+	 	WHEN ('$benchmarks') = '2021 report' THEN
+			CASE  
+				WHEN median_number_of_deployment_days_per_week >= 3 THEN 'On-demand(elite)'
+				WHEN median_number_of_deployment_days_per_week >= 1 THEN 'Between once per week and once per month(high)'
+				WHEN median_number_of_deployment_days_per_month >= 1 THEN 'Between once per month and once every 6 months(medium)'
+				WHEN median_number_of_deployment_days_per_month < 1 THEN 'Fewer than once per six months(low)'
+				ELSE "N/A. Please check if you have collected deployments." END
+		ELSE 'Invalid Benchmarks'
+	END AS 'Deployment Frequency'
 FROM _median_number_of_deployment_days_per_week, _median_number_of_deployment_days_per_month
 ```
 
