@@ -47,6 +47,7 @@ Below are the 2023 DORA benchmarks for different development teams from Google's
 <p><i>Source: 2021 Accelerate State of DevOps, Google</i></p>
 </details>
 <br>
+</br>
 
 
 <b>Data Sources Required</b>
