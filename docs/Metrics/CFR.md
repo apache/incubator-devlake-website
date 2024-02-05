@@ -25,24 +25,24 @@ The number of deployments affected by incidents/total number of deployments. For
 
 When there are multiple deployments triggered by one pipeline, tools like GitLab and BitBucket will generate more than one deployment. In these cases, DevLake will consider these deployments as ONE deployment and use the last deployment's finished date as the deployment finished date.
 
-Below are the 2023 DORA benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's change failure rate is `13%` or `30%`. Therefore, DevLake provides its own benchmarks to address this problem:
+Below are the 2023 DORA benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's change failure rate is between 15% and 64%. Therefore, DevLake provides its own benchmarks to address this problem:
 
 | Groups            | Benchmarks | DevLake Benchmarks |
 | ----------------- | ---------- | ------------------ |
-| Elite performers  | 5%     	 | 0%-5%              |
-| High performers   | 10%        | 5%-10%             |
-| Medium performers | 15%        | 10%-15%            |
-| Low performers    | 64%        | > 15%              |
+| Elite performers  | 5%     	 | (0, 5%]            |
+| High performers   | 10%        | (5%, 10%]          |
+| Medium performers | 15%        | (10%, 15%]         |
+| Low performers    | 64%        | (15%, 100%]        |
 
 <details>
 <summary>Click to expand or collapse 2021 DORA benchmarks</summary>
 
 | Groups            | Benchmarks | DevLake Benchmarks |
 | ----------------- | ---------- | ------------------ |
-| Elite performers  | 0%-15%     | 0%-15%             |
-| High performers   | 16%-30%    | 16-20%             |
-| Medium performers | 16%-30%    | 21%-30%            |
-| Low performers    | 16%-30%    | > 30%              |
+| Elite performers  | 0%-15%     | (0, 15%]           |
+| High performers   | 16%-30%    | (16%, 20%]         |
+| Medium performers | 16%-30%    | (21%, 30%]         |
+| Low performers    | 16%-30%    | (30%, 100%]        |
 
 <p><i>Source: 2021 Accelerate State of DevOps, Google</i></p>
 </details>

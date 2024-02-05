@@ -28,7 +28,7 @@ Below are the 2023 DORA benchmarks for different development teams from Google's
 | Groups            | Benchmarks                   | DevLake Benchmarks           |
 | ----------------- | ---------------------------- | ---------------------------- |
 | Elite performers  | Less than one hour           | Less than one hour           |
-| High performers   | Less one day                 | Less than one day            |
+| High performers   | Less than one day            | Less than one day            |
 | Medium performers | Between one day and one week | Between one day and one week |
 | Low performers    | More than six months         | More than one week           |
 
@@ -38,7 +38,7 @@ Below are the 2023 DORA benchmarks for different development teams from Google's
 | Groups            | Benchmarks                   | DevLake Benchmarks           |
 | ----------------- | ---------------------------- | ---------------------------- |
 | Elite performers  | Less than one hour           | Less than one hour           |
-| High performers   | Less one day                 | Less than one day            |
+| High performers   | Less than one day            | Less than one day            |
 | Medium performers | Between one day and one week | Between one day and one week |
 | Low performers    | More than six months         | More than one week           |
 

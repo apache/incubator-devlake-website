@@ -25,7 +25,8 @@ Deployment frequency is calculated based on the number of `deployment days`, not
 
 When there are multiple deployments triggered by one pipeline, tools like GitLab and BitBucket will generate more than one deployment. In these cases, DevLake will consider these deployments as ONE deployment and use the last deployment's finished date as the deployment finished date.
 
-Below are the 2023 DORA benchmarks for different development teams from Google's report. DevLake uses the same benchmarks.
+Below are the 2023 DORA benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's deployment frequency is `between once per week and once per month`. Therefore, DevLake provides its own benchmarks to address this problem:
+
 
 | Groups            | Benchmarks                                     | DevLake Benchmarks                             | The Criteria of DevLake Benchmarks                |
 | ----------------- | ---------------------------------------------- | ---------------------------------------------- | --------------------------------------------------|
