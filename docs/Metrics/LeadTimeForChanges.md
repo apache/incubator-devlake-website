@@ -28,7 +28,19 @@ This metric is quite similar to [PR Cycle Time](PRCycleTime.md). The difference 
 
 PR cycle time is pre-calculated by the `dora` plugin during every data collection. You can find it in `pr_cycle_time` in [table.project_pr_metrics](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema/#project_pr_metrics) of DevLake's database.
 
-Below are the benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's median lead time for changes is `between one week and one month`. Therefore, DevLake provides its own benchmarks to address this problem:
+Below are the 2023 DORA benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's median lead time for changes is `between one week and one month`. Therefore, DevLake provides its own benchmarks to address this problem:
+
+| Groups            | Benchmarks                       | DevLake Benchmarks              |
+| ----------------- | -------------------------------- | ------------------------------- |
+| Elite performers  | Less than one day                | Less than one day               |
+| High performers   | Between one day and one week     | Between one day and one week    |
+| Medium performers | Between one week and one month   | Between one week and one month  |
+| Low performers    | Between one week and one month   | More than one month             |
+
+<p><i>Source: 2023 Accelerate State of DevOps, Google</i></p>
+
+<details>
+<summary>Click to expand or collapse 2021 DORA benchmarks</summary>
 
 | Groups            | Benchmarks                       | DevLake Benchmarks              |
 | ----------------- | -------------------------------- | ------------------------------- |
@@ -38,6 +50,9 @@ Below are the benchmarks for different development teams from Google's report. H
 | Low performers    | More than six months             | More than six months            |
 
 <p><i>Source: 2021 Accelerate State of DevOps, Google</i></p>
+</details>
+<br>
+</br>
 
 <b>Data Sources Required</b>
 
@@ -68,7 +83,7 @@ with _pr_stats as (
 		join project_mapping pm on pr.base_repo_id = pm.row_id and pm.`table` = 'repos'
 		join cicd_deployment_commits cdc on ppm.deployment_commit_id = cdc.id
 	WHERE
-		pm.project_name in ($project)
+		pm.project_name in (${project:sqlstring}+'') 
 		and pr.merged_date is not null
 		and ppm.pr_cycle_time is not null
 		and $__timeFilter(cdc.finished_date)
@@ -86,12 +101,12 @@ _clt as(
 	group by month
 )
 
-SELECT
+SELECT 
 	cm.month,
-	case
-		when _clt.median_change_lead_time is null then 0
+	case 
+		when _clt.median_change_lead_time is null then 0 
 		else _clt.median_change_lead_time/60 end as median_change_lead_time_in_hour
-FROM
+FROM 
 	calendar_months cm
 	LEFT JOIN _clt on cm.month = _clt.month
   WHERE $__timeFilter(cm.month_timestamp)
@@ -102,18 +117,19 @@ If you want to measure in which category your team falls as in the picture shown
 ![](/img/Metrics/lead-time-for-changes-text.jpeg)
 
 ```
+-- Metric 2: median lead time for changes
 with _pr_stats as (
 -- get the cycle time of PRs deployed by the deployments finished in the selected period
 	SELECT
 		distinct pr.id,
 		ppm.pr_cycle_time
 	FROM
-		pull_requests pr
+		pull_requests pr 
 		join project_pr_metrics ppm on ppm.id = pr.id
-		join project_mapping pm on pr.base_repo_id = pm.row_id
+		join project_mapping pm on pr.base_repo_id = pm.row_id and pm.`table` = 'repos'
 		join cicd_deployment_commits cdc on ppm.deployment_commit_id = cdc.id
 	WHERE
-	  pm.project_name in ($project)
+	  pm.project_name in (${project:sqlstring}+'') 
 		and pr.merged_date is not null
 		and ppm.pr_cycle_time is not null
 		and $__timeFilter(cdc.finished_date)
@@ -131,14 +147,26 @@ _median_change_lead_time as(
 	WHERE ranks <= 0.5
 )
 
-SELECT
+SELECT 
   CASE
-    WHEN median_change_lead_time < 60 then "Less than one hour"
-    WHEN median_change_lead_time < 7 * 24 * 60 then "Less than one week"
-    WHEN median_change_lead_time < 180 * 24 * 60 then "Between one week and six months"
-    WHEN median_change_lead_time >= 180 * 24 * 60 then "More than six months"
-    ELSE "N/A.Please check if you have collected deployments/incidents."
-    END as median_change_lead_time
+    WHEN ('$benchmarks') = '2023 report' THEN
+			CASE
+				WHEN median_change_lead_time < 24 * 60 THEN "Less than one day(elite)"
+				WHEN median_change_lead_time < 7 * 24 * 60 THEN "Between one day and one week(high)"
+				WHEN median_change_lead_time < 30 * 24 * 60 THEN "Between one week and one month(medium)"
+				WHEN median_change_lead_time >= 30 * 24 * 60 THEN "More than one month(low)"
+				ELSE "N/A. Please check if you have collected deployments/pull_requests."
+				END
+    WHEN ('$benchmarks') = '2021 report' THEN
+		  CASE
+				WHEN median_change_lead_time < 60 THEN "Less than one hour(elite)"
+				WHEN median_change_lead_time < 7 * 24 * 60 THEN "Less than one week(high)"
+				WHEN median_change_lead_time < 180 * 24 * 60 THEN "Between one week and six months(medium)"
+				WHEN median_change_lead_time >= 180 * 24 * 60 THEN "More than six months(low)"
+				ELSE "N/A. Please check if you have collected deployments/incidents."
+				END
+		ELSE 'Invalid Benchmarks'
+	END AS median_change_lead_time
 FROM _median_change_lead_time
 ```
 

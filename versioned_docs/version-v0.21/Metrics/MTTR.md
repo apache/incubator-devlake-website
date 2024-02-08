@@ -23,25 +23,37 @@ MTTR = Total [incident age](./IncidentAge.md) (in hours)/number of incidents.
 
 If you have three incidents that happened in the given data range, one lasting 1 hour, one lasting 2 hours and one lasting 3 hours. Your MTTR will be: (1 + 2 + 3) / 3 = 2 hours.
 
-Below are the benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's median time to restore service is `between one week and six months`. Therefore, DevLake provides its own benchmarks to address this problem:
+Below are the 2023 DORA benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's median time to restore service is `between one week and six months`. Therefore, DevLake provides its own benchmarks to address this problem:
 
 | Groups            | Benchmarks                   | DevLake Benchmarks           |
 | ----------------- | ---------------------------- | ---------------------------- |
 | Elite performers  | Less than one hour           | Less than one hour           |
-| High performers   | Less one day                 | Less than one day            |
+| High performers   | Less than one day            | Less than one day            |
+| Medium performers | Between one day and one week | Between one day and one week |
+| Low performers    | More than six months         | More than one week           |
+
+<details>
+<summary>Click to expand or collapse 2021 DORA benchmarks</summary>
+
+| Groups            | Benchmarks                   | DevLake Benchmarks           |
+| ----------------- | ---------------------------- | ---------------------------- |
+| Elite performers  | Less than one hour           | Less than one hour           |
+| High performers   | Less than one day            | Less than one day            |
 | Medium performers | Between one day and one week | Between one day and one week |
 | Low performers    | More than six months         | More than one week           |
 
 <p><i>Source: 2021 Accelerate State of DevOps, Google</i></p>
+</details>
+<br>
+</br>
 
 <b>Data Sources Required</b>
 
-- `Deployments` from Jenkins, GitLab CI, GitHub Action, BitBucket Pipelines, or Webhook, etc. 
 - `Incidents` from Jira issues, GitHub issues, TAPD issues, PagerDuty Incidents, etc.
 
 <b>Transformation Rules Required</b>
 
-Define `deployment` and `incident` in [data transformations](https://devlake.apache.org/docs/Configuration/Tutorial#step-3---add-transformations-optional) while configuring the blueprint of a project to let DevLake know what CI/issue records can be regarded as deployments or incidents.
+Define `incident` in [data transformations](https://devlake.apache.org/docs/Configuration/Tutorial#step-3---add-transformations-optional) while configuring the blueprint of a project to let DevLake know what CI/issue records can be regarded as deployments or incidents.
 
 <b>SQL Queries</b>
 
@@ -50,6 +62,7 @@ If you want to measure the monthly trend of the Median Time to Restore Service a
 ![](/img/Metrics/mttr-monthly.jpeg)
 
 ```
+-- Metric 3: median time to restore service - MTTR
 -- Metric 3: median time to restore service - MTTR
 with _incidents as (
 -- get the number of incidents created each month
@@ -63,7 +76,7 @@ with _incidents as (
 	  join boards b on bi.board_id = b.id
 	  join project_mapping pm on b.id = pm.row_id and pm.`table` = 'boards'
 	WHERE
-	  pm.project_name in ($project)
+	  pm.project_name in (${project:sqlstring}+'')
 		and i.type = 'INCIDENT'
 		and i.lead_time_minutes is not null
 ),
@@ -80,12 +93,12 @@ _mttr as(
 	GROUP BY month
 )
 
-SELECT
+SELECT 
 	cm.month,
-	case
-		when m.median_time_to_resolve is null then 0
+	case 
+		when m.median_time_to_resolve is null then 0 
 		else m.median_time_to_resolve/60 end as median_time_to_resolve_in_hour
-FROM
+FROM 
 	calendar_months cm
 	LEFT JOIN _mttr m on cm.month = m.month
   WHERE $__timeFilter(cm.month_timestamp)
@@ -96,6 +109,7 @@ If you want to measure in which category your team falls into as in the picture 
 ![](/img/Metrics/mttr-text.jpeg)
 
 ```
+-- Metric 3: Median time to restore service 
 with _incidents as (
 -- get the incidents created within the selected time period in the top-right corner
 	SELECT
@@ -105,9 +119,9 @@ with _incidents as (
 		issues i
 	  join board_issues bi on i.id = bi.issue_id
 	  join boards b on bi.board_id = b.id
-	  join project_mapping pm on b.id = pm.row_id
+	  join project_mapping pm on b.id = pm.row_id and pm.`table` = 'boards'
 	WHERE
-	  pm.project_name in ($project)
+	  pm.project_name in (${project:sqlstring}+'')
 		and i.type = 'INCIDENT'
 		and $__timeFilter(i.created_date)
 ),
@@ -123,15 +137,27 @@ _median_mttr as(
 	WHERE ranks <= 0.5
 )
 
-SELECT
-	case
-		WHEN median_time_to_resolve < 60  then "Less than one hour"
-    WHEN median_time_to_resolve < 24 * 60 then "Less than one Day"
-    WHEN median_time_to_resolve < 7 * 24 * 60  then "Between one day and one week"
-    WHEN median_time_to_resolve >= 7 * 24 * 60 then "More than one week"
-    ELSE "N/A.Please check if you have collected deployments/incidents."
-    END as median_time_to_resolve
-FROM
+SELECT 
+  CASE
+    WHEN ('$benchmarks') = '2023 report' THEN
+			CASE
+				WHEN median_time_to_resolve < 60 THEN "Less than one hour(elite)"
+				WHEN median_time_to_resolve < 24 * 60 THEN "Less than one day(high)"
+				WHEN median_time_to_resolve < 7 * 24 * 60 THEN "Between one day and one week(medium)"
+				WHEN median_time_to_resolve >= 7 * 24 * 60 THEN "More than one week(low)"
+				ELSE "N/A. Please check if you have collected incidents."
+				END 
+		WHEN ('$benchmarks') = '2021 report' THEN
+			CASE
+				WHEN median_time_to_resolve < 60 THEN "Less than one hour(elite)"
+				WHEN median_time_to_resolve < 24 * 60 THEN "Less than one day(high)"
+				WHEN median_time_to_resolve < 7 * 24 * 60 THEN "Between one day and one week(medium)"
+				WHEN median_time_to_resolve >= 7 * 24 * 60 THEN "More than one week(low)"
+				ELSE "N/A. Please check if you have collected incidents."
+    		END
+		ELSE 'Invalid Benchmarks'
+	END AS median_time_to_resolve
+FROM 
 	_median_mttr
 ```
 
