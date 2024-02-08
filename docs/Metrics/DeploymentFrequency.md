@@ -43,10 +43,10 @@ Below are the 2023 DORA benchmarks for different development teams from Google's
 
 | Groups            | Benchmarks                                     | DevLake Benchmarks                             | The Criteria of DevLake Benchmarks                |
 | ----------------- | ---------------------------------------------- | ---------------------------------------------- | --------------------------------------------------|
-| Elite performers  | On-demand (multiple deploys per day)           | On-demand                                      | Median Number of `Deployment Days` per Week >= 3  |
-| High performers   | Between once per week and once per month       | Between once per week and once per month       | Median Number of `Deployment Days` per Week >= 1  |
-| Medium performers | Between once per month and once every 6 months | Between once per month and once every 6 months | Median Number of `Deployment Days` per Month >= 1 |
-| Low performers    | Fewer than once per six months                 | Fewer than once per six months                 | Median Number of `Deployment Days` per Month < 1  |
+| Elite performers  | On-demand (multiple deploys per day)           | On-demand                                      | Median Number of `Deployment Days` per Week >= 7  |
+| High performers   | Between once per week and once per month       | Between once per day and once per month       | Median Number of `Deployment Days` per Month >= 1  |
+| Medium performers | Between once per month and once every 6 months | Between once per month and once every 6 months | Median Number of `Deployment Days` per six Months >= 1 |
+| Low performers    | Fewer than once per six months                 | Fewer than once per six months                 | Median Number of `Deployment Days` per six Months < 1  |
 
 <p><i>Source: 2021 Accelerate State of DevOps, Google</i></p>
 </details>
@@ -56,7 +56,8 @@ Below are the 2023 DORA benchmarks for different development teams from Google's
 
 <b>Data Sources Required</b>
 
-`Deployments` from Jenkins, GitLab CI, GitHub Action, BitBucket Pipelines, Webhook, etc. 
+- `Deployments` from Jenkins, GitLab CI, GitHub Action, BitBucket Pipelines, Webhook, etc. 
+
 
 <b>Transformation Rules Required</b>
 

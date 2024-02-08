@@ -168,7 +168,7 @@ SELECT
 				WHEN change_failure_rate <= .10 THEN "5%-10%(high)"
 				WHEN change_failure_rate <= .15 THEN "10%-15%(medium)"
 				WHEN change_failure_rate > .15 THEN "> 15%(low)"
-				ELSE "N/A. Please check if you have collected deployments/incidents in a DevLake project."
+				ELSE "N/A. Please check if you have collected deployments/incidents."
 				END
 		WHEN ('$benchmarks') = '2021 report' THEN
 			CASE  
@@ -176,7 +176,7 @@ SELECT
 				WHEN change_failure_rate <= .20 THEN "16%-20%(high)"
 				WHEN change_failure_rate <= .30 THEN "21%-30%(medium)"
 				WHEN change_failure_rate > .30 THEN "> 30%(low)" 
-				ELSE "N/A. Please check if you have collected deployments/incidents in a DevLake project."
+				ELSE "N/A. Please check if you have collected deployments/incidents."
 				END
 		ELSE 'Invalid Benchmarks'
 	END AS change_failure_rate

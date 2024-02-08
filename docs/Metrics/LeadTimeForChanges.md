@@ -155,7 +155,7 @@ SELECT
 				WHEN median_change_lead_time < 7 * 24 * 60 THEN "Between one day and one week(high)"
 				WHEN median_change_lead_time < 30 * 24 * 60 THEN "Between one week and one month(medium)"
 				WHEN median_change_lead_time >= 30 * 24 * 60 THEN "More than one month(low)"
-				ELSE "N/A. Please check if you have collected deployments/pull_requests in a DevLake project."
+				ELSE "N/A. Please check if you have collected deployments/pull_requests."
 				END
     WHEN ('$benchmarks') = '2021 report' THEN
 		  CASE
@@ -163,7 +163,7 @@ SELECT
 				WHEN median_change_lead_time < 7 * 24 * 60 THEN "Less than one week(high)"
 				WHEN median_change_lead_time < 180 * 24 * 60 THEN "Between one week and six months(medium)"
 				WHEN median_change_lead_time >= 180 * 24 * 60 THEN "More than six months(low)"
-				ELSE "N/A. Please check if you have collected deployments/incidents in a DevLake project."
+				ELSE "N/A. Please check if you have collected deployments/incidents."
 				END
 		ELSE 'Invalid Benchmarks'
 	END AS median_change_lead_time

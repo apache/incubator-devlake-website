@@ -49,12 +49,11 @@ Below are the 2023 DORA benchmarks for different development teams from Google's
 
 <b>Data Sources Required</b>
 
-- `Deployments` from Jenkins, GitLab CI, GitHub Action, BitBucket Pipelines, or Webhook, etc. 
 - `Incidents` from Jira issues, GitHub issues, TAPD issues, PagerDuty Incidents, etc.
 
 <b>Transformation Rules Required</b>
 
-Define `deployment` and `incident` in [data transformations](https://devlake.apache.org/docs/Configuration/Tutorial#step-3---add-transformations-optional) while configuring the blueprint of a project to let DevLake know what CI/issue records can be regarded as deployments or incidents.
+Define `incident` in [data transformations](https://devlake.apache.org/docs/Configuration/Tutorial#step-3---add-transformations-optional) while configuring the blueprint of a project to let DevLake know what CI/issue records can be regarded as deployments or incidents.
 
 <b>SQL Queries</b>
 
@@ -146,7 +145,7 @@ SELECT
 				WHEN median_time_to_resolve < 24 * 60 THEN "Less than one day(high)"
 				WHEN median_time_to_resolve < 7 * 24 * 60 THEN "Between one day and one week(medium)"
 				WHEN median_time_to_resolve >= 7 * 24 * 60 THEN "More than one week(low)"
-				ELSE "N/A. Please check if you have collected incidents in a DevLake project."
+				ELSE "N/A. Please check if you have collected incidents."
 				END 
 		WHEN ('$benchmarks') = '2021 report' THEN
 			CASE
@@ -154,7 +153,7 @@ SELECT
 				WHEN median_time_to_resolve < 24 * 60 THEN "Less than one day(high)"
 				WHEN median_time_to_resolve < 7 * 24 * 60 THEN "Between one day and one week(medium)"
 				WHEN median_time_to_resolve >= 7 * 24 * 60 THEN "More than one week(low)"
-				ELSE "N/A. Please check if you have collected incidents in a DevLake project."
+				ELSE "N/A. Please check if you have collected incidents."
     		END
 		ELSE 'Invalid Benchmarks'
 	END AS median_time_to_resolve
