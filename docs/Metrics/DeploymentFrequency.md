@@ -139,11 +139,11 @@ _production_deployment_days as(
 	GROUP BY 1
 ),
 
-_days_weeks_deploy as(
+_days_weekly_deploy as(
 -- calculate the number of deployment days every week
 	SELECT
 			date(DATE_ADD(last_few_calendar_months.day, INTERVAL -WEEKDAY(last_few_calendar_months.day) DAY)) as week,
-			MAX(if(_production_deployment_days.day is not null, 1, 0)) as weeks_deployed,
+			MAX(if(_production_deployment_days.day is not null, 1, null)) as weeks_deployed,
 			COUNT(distinct _production_deployment_days.day) as days_deployed
 	FROM 
 		last_few_calendar_months
@@ -151,20 +151,39 @@ _days_weeks_deploy as(
 	GROUP BY week
 	),
 
-_monthly_deploy as(
+_days_monthly_deploy as(
 -- calculate the number of deployment days every month
 	SELECT
 			date(DATE_ADD(last_few_calendar_months.day, INTERVAL -DAY(last_few_calendar_months.day)+1 DAY)) as month,
-			MAX(if(_production_deployment_days.day is not null, 1, null)) as months_deployed
+			MAX(if(_production_deployment_days.day is not null, 1, null)) as months_deployed,
+		  COUNT(distinct _production_deployment_days.day) as days_deployed
 	FROM 
 		last_few_calendar_months
 		LEFT JOIN _production_deployment_days ON _production_deployment_days.day = last_few_calendar_months.day
 	GROUP BY month
 	),
 
+_days_six_months_deploy AS (
+  SELECT
+    month,
+    SUM(days_deployed) OVER (
+      ORDER BY month
+      ROWS BETWEEN 5 PRECEDING AND CURRENT ROW
+    ) AS days_deployed_per_six_months,
+    COUNT(months_deployed) OVER (
+      ORDER BY month
+      ROWS BETWEEN 5 PRECEDING AND CURRENT ROW
+    ) AS months_deployed_count,
+    ROW_NUMBER() OVER (
+      PARTITION BY DATE_FORMAT(month, '%Y-%m') DIV 6
+      ORDER BY month DESC
+    ) AS rn
+  FROM _days_monthly_deploy
+),
+
 _median_number_of_deployment_days_per_week_ranks as(
 	SELECT *, percent_rank() over(order by days_deployed) as ranks
-	FROM _days_weeks_deploy
+	FROM _days_weekly_deploy
 ),
 
 _median_number_of_deployment_days_per_week as(
@@ -174,14 +193,35 @@ _median_number_of_deployment_days_per_week as(
 ),
 
 _median_number_of_deployment_days_per_month_ranks as(
-	SELECT *, percent_rank() over(order by months_deployed) as ranks
-	FROM _monthly_deploy
+	SELECT *, percent_rank() over(order by days_deployed) as ranks
+	FROM _days_monthly_deploy
 ),
 
 _median_number_of_deployment_days_per_month as(
-	SELECT max(months_deployed) as median_number_of_deployment_days_per_month
+	SELECT max(days_deployed) as median_number_of_deployment_days_per_month
 	FROM _median_number_of_deployment_days_per_month_ranks
 	WHERE ranks <= 0.5
+),
+
+_days_per_six_months_deploy_by_filter AS (
+SELECT
+  month,
+  days_deployed_per_six_months,
+  months_deployed_count
+FROM _days_six_months_deploy
+WHERE rn%6 = 1
+),
+
+
+_median_number_of_deployment_days_per_six_months_ranks as(
+	SELECT *, percent_rank() over(order by days_deployed_per_six_months) as ranks
+	FROM _days_per_six_months_deploy_by_filter
+),
+
+_median_number_of_deployment_days_per_six_months as(
+	SELECT min(days_deployed_per_six_months) as median_number_of_deployment_days_per_six_months, min(months_deployed_count) as is_collected
+	FROM _median_number_of_deployment_days_per_six_months_ranks
+	WHERE ranks >= 0.5
 )
 
 SELECT 
@@ -189,20 +229,20 @@ SELECT
     WHEN ('$benchmarks') = '2023 report' THEN
 			CASE  
 				WHEN median_number_of_deployment_days_per_week >= 7 THEN 'On-demand(elite)'
-				WHEN median_number_of_deployment_days_per_week >= 1 THEN 'Between once per day and per week(high)'
-				WHEN median_number_of_deployment_days_per_month >= 1 THEN 'Between once per week and per month(medium)'
-				WHEN median_number_of_deployment_days_per_month < 1 THEN 'Fewer than once per month(low)'
+				WHEN median_number_of_deployment_days_per_week >= 1 THEN 'Between once per day and once per week(high)'
+				WHEN median_number_of_deployment_days_per_month >= 1 THEN 'Between once per week and once per month(medium)'
+				WHEN median_number_of_deployment_days_per_month < 1 and is_collected != NULL THEN 'Fewer than once per month(low)'
 				ELSE "N/A. Please check if you have collected deployments." END
 	 	WHEN ('$benchmarks') = '2021 report' THEN
 			CASE  
-				WHEN median_number_of_deployment_days_per_week >= 3 THEN 'On-demand(elite)'
-				WHEN median_number_of_deployment_days_per_week >= 1 THEN 'Between once per week and once per month(high)'
-				WHEN median_number_of_deployment_days_per_month >= 1 THEN 'Between once per month and once every 6 months(medium)'
-				WHEN median_number_of_deployment_days_per_month < 1 THEN 'Fewer than once per six months(low)'
+				WHEN median_number_of_deployment_days_per_week >= 7 THEN 'On-demand(elite)'
+				WHEN median_number_of_deployment_days_per_month >= 1 THEN 'Between once per day and once per month(high)'
+				WHEN median_number_of_deployment_days_per_six_months >= 1 THEN 'Between once per month and once every 6 months(medium)'
+				WHEN median_number_of_deployment_days_per_six_months < 1 and is_collected != NULL THEN 'Fewer than once per six months(low)'
 				ELSE "N/A. Please check if you have collected deployments." END
 		ELSE 'Invalid Benchmarks'
 	END AS 'Deployment Frequency'
-FROM _median_number_of_deployment_days_per_week, _median_number_of_deployment_days_per_month
+FROM _median_number_of_deployment_days_per_week, _median_number_of_deployment_days_per_month, _median_number_of_deployment_days_per_six_months
 ```
 
 ## How to improve?
