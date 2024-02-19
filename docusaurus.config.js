@@ -21,6 +21,13 @@ const versions = require('./versions.json');
   organizationName: 'Apache',
   projectName: 'Apache DevLake',
 
+  // Other top-level config fields
+  customFields: {
+    head: [
+      ['meta', { httpEquiv: 'Content-Security-Policy', content: "frame-src 'self' https://grafana-lake.demo.devlake.io/;" }],
+    ],
+  },
+
   presets: [
     [
       '@docusaurus/preset-classic',
