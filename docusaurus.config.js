@@ -102,7 +102,6 @@ const versions = require('./versions.json');
         sidebarPath: require.resolve('./sidebarsLivedemo.js'),
       },
     ],
-    './livedemo/docusaurus-plugin-csp',
     function tailwindcss() {
       return {
         name: 'docusaurus-tailwindcss',
