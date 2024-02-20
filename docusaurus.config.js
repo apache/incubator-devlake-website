@@ -133,7 +133,16 @@ const versions = require('./versions.json');
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     (
       {
-      metadata: [{name: 'keywords', content: 'Engineering Productivity, Open-Source Engineering, Open-Source Integration Tools, Data Integrates Platform, Open-Source Dev Platform, Open-Source Data Integrates, DevOps Tools Integrates, Open-Source DevOps Tools'}],
+      metadata: [
+          {
+            name: 'keywords',
+            content: 'Engineering Productivity, Open-Source Engineering, Open-Source Integration Tools, Data Integrates Platform, Open-Source Dev Platform, Open-Source Data Integrates, DevOps Tools Integrates, Open-Source DevOps Tools'
+          },
+          {
+            name: 'content-security-policy',
+            content: "default-src 'self'; frame-src 'self' https://grafana-lake.demo.devlake.io;"
+          }
+      ],
       navbar: {
         title: 'Apache DevLake',
         logo: {
