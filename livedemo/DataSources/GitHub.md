@@ -6,10 +6,6 @@ description: >
 
 # GitHub
 
-<head>
-  <meta http-equiv="Content-Security-Policy" content="frame-src 'self'" />
-</head>
-
 <div className="info">
   <h5>
     <img
@@ -20,4 +16,8 @@ description: >
   </h5>
 </div>
 
-<iframe src="http://172.27.89.142:32001/grafana/d/KXWvOFQnz/github?orgId=1" width="135%" height="3000px"></iframe>
+** Preview metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/d/KXWvOFQnz/github?orgId=1&from=now-6M&to=now)**
+
+![GitHub](./GitHub.png)
+
+<!-- <iframe src="https://grafana-lake.demo.devlake.io/d/KXWvOFQnz/github?orgId=1&from=now-6M&to=now" width="135%" height="3000px"></iframe> -->
