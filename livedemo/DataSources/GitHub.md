@@ -6,10 +6,6 @@ description: >
 
 # GitHub
 
-<head>
-  <meta http-equiv="Content-Security-Policy" content="frame-src 'self'" />
-</head>
-
 <div className="info">
   <h5>
     <img
