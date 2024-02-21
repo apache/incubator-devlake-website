@@ -11,7 +11,7 @@ description: >
   <meta name='title' content='DORA Metrics to Accelerate Software Delivery - Apache DevLake' />
   <meta name='description' content='Understand and implement DORA metrics with Apache DevLake. Accelerate your software delivery and enhance engineering productivity with our comprehensive guide' />
   <meta name='keywords' content='DORA Metrics to Accelerate Software Delivery , DORA Metrics to Accelerate Software Delivery' />
-  <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://grafana-lake.demo.devlake.io/">
+  <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://grafana-lake.demo.devlake.io/" />
 </head>
 
 To set up your own DORA metrics dashboard, you can checkout our detailed [DORA user guide](https://devlake.apache.org/docs/DORA/).
