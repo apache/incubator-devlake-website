@@ -16,4 +16,8 @@ description: >
   </h5>
 </div>
 
-<iframe src="https://grafana-lake.demo.devlake.io/grafana/d/nJ1ijje7k/engineering-throughput-and-cycle-time-team-view?orgId=1" width="135%" height="1740px"></iframe>
+** Preview metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/grafana/d/nJ1ijje7k/engineering-throughput-and-cycle-time-team-view?orgId=1)**
+
+![EngineeringThroughputAndCycleTimeTeamView](./EngineeringThroughputAndCycleTimeTeamView.png)
+
+<!-- <iframe src="https://grafana-lake.demo.devlake.io/grafana/d/nJ1ijje7k/engineering-throughput-and-cycle-time-team-view?orgId=1" width="135%" height="1740px"></iframe> -->

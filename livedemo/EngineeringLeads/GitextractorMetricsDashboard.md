@@ -16,4 +16,8 @@ description: >
   </h5>
 </div>
 
-<iframe src="https://grafana-lake.demo.devlake.io/grafana/d/KxUh7IG4z/component-and-file-level-metrics?orgId=1" width="135%" height="1500px"></iframe>
+** Preview metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/grafana/d/KxUh7IG4z/component-and-file-level-metrics?orgId=1)**
+
+![GitextractorMetricsDashboard](./GitextractorMetricsDashboard.png)
+
+<!-- <iframe src="https://grafana-lake.demo.devlake.io/grafana/d/KxUh7IG4z/component-and-file-level-metrics?orgId=1" width="135%" height="1500px"></iframe> -->

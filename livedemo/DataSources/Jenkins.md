@@ -16,4 +16,8 @@ description: >
   </h5>
 </div>
 
-<iframe src="https://grafana-lake.demo.devlake.io/d/W8AiDFQnk/jenkins?orgId=1&from=now-6M&to=now" width="135%" height="1240px"></iframe>
+** Preview metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/d/W8AiDFQnk/jenkins?orgId=1&from=now-6M&to=now)**
+
+![Jenkins](./Jenkins.png)
+
+<!-- <iframe src="https://grafana-lake.demo.devlake.io/d/W8AiDFQnk/jenkins?orgId=1&from=now-6M&to=now" width="135%" height="1240px"></iframe> -->

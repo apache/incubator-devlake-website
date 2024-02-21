@@ -16,4 +16,8 @@ description: >
   </h5>
 </div>
 
-<iframe src="https://grafana-lake.demo.devlake.io/grafana/d/VTr6Y_q7z/weekly-community-retro?orgId=1&from=now-6M&to=now" width="135%" height="2300px"></iframe>
+** Preview metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/grafana/d/VTr6Y_q7z/weekly-community-retro?orgId=1&from=now-6M&to=now)**
+
+![WeeklyCommunityRetro](./WeeklyCommunityRetro.png)
+
+<!-- <iframe src="https://grafana-lake.demo.devlake.io/grafana/d/VTr6Y_q7z/weekly-community-retro?orgId=1&from=now-6M&to=now" width="135%" height="2300px"></iframe> -->
