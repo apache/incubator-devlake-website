@@ -25,7 +25,7 @@ To set up your own DORA metrics dashboard, you can checkout our detailed [DORA u
   </h5>
 </div>
 
-** Preview metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/grafana/d/qNo8_0M4z/dora?orgId=1&from=now-6M&to=now)**
+**View live metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/grafana/d/qNo8_0M4z/dora?orgId=1&from=now-6M&to=now)**
 
 ![DORA](./DORA.png)
 

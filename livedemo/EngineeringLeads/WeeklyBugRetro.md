@@ -16,7 +16,7 @@ description: >
   </h5>
 </div>
 
-** Preview metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/d/-5EKA5w7k/weekly-bug-retro?orgId=1&from=now-6M&to=now)**
+**View live metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/d/-5EKA5w7k/weekly-bug-retro?orgId=1&from=now-6M&to=now)**
 
 ![WeeklyBugRetro](./WeeklyBugRetro.png)
 

@@ -49,7 +49,7 @@ When setting up the scope config of a GitHub data connection, you have the flexi
 #### Transformations
 Transformations are configurations for users to customize how DevLake transforms raw API responses to the domain layer data.
 
-Although configuring transformation rules is not mandatory, certain pre-built dashboards, such as [DORA](/livedemo/EngineeringLeads/DORA) and [Weekly Bug Retro](/livedemo/QAEngineers/WeeklyBugRetro) require the them to display the metrics accurately. If you leave the rules blank or have not configured them correctly, only a few [data source dashboards](/livedemo/DataSources/GitHub) will be displayed as expected. 
+Although configuring transformation rules is not mandatory, certain pre-built dashboards, such as [DORA](/livedemo/EngineeringLeads/DORA) and [Weekly Bug Retro](/livedemo/EngineeringLeads/WeeklyBugRetro) require the them to display the metrics accurately. If you leave the rules blank or have not configured them correctly, only a few [data source dashboards](/livedemo/DataSources/GitHub) will be displayed as expected. 
 
 You can find the required transformations in the 'Dashboard Introduction' panel in each pre-built dashboard.
 

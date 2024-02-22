@@ -16,7 +16,7 @@ description: >
   </h5>
 </div>
 
-** Preview metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/grafana/d/F5vqBQl7z/jira?orgId=1&from=now-6M&to=now)**
+**View live metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/grafana/d/F5vqBQl7z/jira?orgId=1&from=now-6M&to=now)**
 
 ![Jira](./Jira.png)
 

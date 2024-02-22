@@ -16,7 +16,7 @@ description: >
   </h5>
 </div>
 
-** Preview metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/grafana/d/KxUh7IG4z/component-and-file-level-metrics?orgId=1)**
+**View live metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/grafana/d/KxUh7IG4z/component-and-file-level-metrics?orgId=1)**
 
 ![GitextractorMetricsDashboard](./GitextractorMetricsDashboard.png)
 
