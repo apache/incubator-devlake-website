@@ -117,7 +117,7 @@ Scope config contains two parts:
   - Cross Domain: GitHub accounts, etc.
 - The transformations on the GitHub data you are going to collect.
   - The details of the transformations will be explained below.
-  - Without adding transformation rules, you can still view the "[GitHub Metrics](/livedemo/DataSources/GitHub)" dashboard. However, if you want to view "[Weekly Bug Retro](/livedemo/QAEngineers/WeeklyBugRetro)", "[Weekly Community Retro](/livedemo/OSSMaintainers/WeeklyCommunityRetro)" or other pre-built dashboards, the following transformation rules, especially "Type/Bug", should be added.
+  - Without adding transformation rules, you can still view the "[GitHub Metrics](/livedemo/DataSources/GitHub)" dashboard. However, if you want to view "[Weekly Bug Retro](/livedemo/EngineeringLeads/WeeklyBugRetro)", "[Weekly Community Retro](/livedemo/OSSMaintainers/WeeklyCommunityRetro)" or other pre-built dashboards, the following transformation rules, especially "Type/Bug", should be added.
   - Each GitHub repo has at most ONE set of transformations.
 
 ![github-add-transformation-rules-list](images/github-scope-config.png)
