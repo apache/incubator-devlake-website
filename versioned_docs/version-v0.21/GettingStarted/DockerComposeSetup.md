@@ -42,13 +42,14 @@ sidebar_position: 2
    - We use [Grafana](https://grafana.com/) to visualize the DevOps [data](/Overview/SupportedDataSources.md) and build dashboards.
    - For how to customize and provision dashboards, please see our [Grafana doc](../Configuration/Dashboards/GrafanaUserGuide.md).
 
-## Upgrade to a newer version
+## Upgrade
 
-Please note:
+:::caution
 
-Note 1: **Back up your Grafana dashboards** before upgrading if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
+- **Back up your Grafana dashboards** before upgrading if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
+- **If you are upgrading from DevLake v0.17.x or earlier versions to v0.18.x or later versions**, you need to find the ENCODE_KEY value in the .env file of devlake container, and assign the value to ENCRYPTION_SECRET via .env file or environment variable in docker-compose.yml
 
-Note 2: **If you're upgrading from DevLake v0.17.x or earlier versions to v0.18.x or later versions**, you need to find the ENCODE_KEY value in the .env file of devlake container, and assign the value to ENCRYPTION_SECRET via .env file or environment variable in docker-compose.yml
+:::
 
 1. Run `docker-compose down` to stop services;
 2. Download `docker-compose.yml` and `env.example` from the [latest release](https://github.com/apache/incubator-devlake/releases).
