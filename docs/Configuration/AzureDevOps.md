@@ -54,12 +54,20 @@ Scope config contains two parts:
   - Cross Domain: Azure accounts, etc.
 - The transformations on the Azure DevOps data you are going to collect. 
 
-
-The transformations are mainly used for calculating [DORA metrics](../DORA.md), so DevLake needs to know what are `deployments` in your Azure Pipelines. You can configure:
-    - Regex for `Deployments`: Azure DevOps pipeline or one of its jobs whose names match this regex will be registered as deployments in DevLake
-    - Regex for `Production` environment: Azure DevOps pipeline or one of its jobs whose names match this regex will be considered as a PRODUCTION deployment.
-
 ![azuredevops-set-transformation](images/azuredevops-set-transformation.png)
+
+#### CI/CD
+
+To effectively measure [DORA metrics](../DORA.md) through Azure DevOps, it is necessary to define the concept of a 'deployment'. DevLake considers an Azure Pipeline Run (see the blue rectangle) as a DevLake deployment using specific conditions expressed through regular expressions (regex):
+
+- Deployment: The provided regex should match either the name of the Azure pipeline (see the red rectangle) that the pipeline run belongs to or any of the job display names (see the yellow rectangle) associated with the pipeline run. This will designate it as a deployment. For example, if the deployment pipeline is named 'build-and-push-image', you can input (push-image) as the regex. To ensure case insensitivity, include (?i) before the regex.
+- Production: The given regex should match either the pipeline run's name or any of its job display names to classify it as a deployment within the production environment. For instance, if the deployment pipeline is named 'build-to-prod', you can input (prod) as the regex. To ensure case insensitivity, include (?i) before the regex.
+
+![azure-pipeline](images/azuredevops-ui-pipeline.png)
+![azure-job](images/azuredevops-ui-job.png)
+
+
+#### Additional Settings
 
 The additional settings for transformations are RefDiff options:
 - Tags Limit: the number of tags to compare.
