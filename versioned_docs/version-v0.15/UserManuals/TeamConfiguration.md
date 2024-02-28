@@ -126,10 +126,7 @@ curl --location --request POST '127.0.0.1:4000/api/pipelines' \
         [
             {
                 "plugin": "org",
-                "subtasks":["connectUserAccountsExact"],
-                "options":{
-                    "connectionId":1
-                }
+                "subtasks":["connectUserAccountsExact"]
             }
         ]
     ]
