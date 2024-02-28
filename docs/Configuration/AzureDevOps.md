@@ -46,6 +46,8 @@ Azure DevOps supports the following data entities.
 
 ### Step 1.3 - Add Scope Config (Optional)
 
+![azuredevops-add-scope config](images/azuredevops-add-scope-config.png)
+
 Scope config contains two parts: 
 - The entities of which domain you wish to collect: Usually, you don't have to modify this part. However, if you don't want to collect certain Azure DevOps entities, you can unselect some entities to accelerate the collection speed.
   - Source Code Management: Azure repos, refs, commits, etc.
