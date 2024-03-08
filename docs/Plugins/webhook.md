@@ -14,6 +14,8 @@ In v0.14+, users can push "incidents" and "deployments" required by DORA metrics
 
 Webhooks are meant to be used at the lowest level that you want to relate incidents with deployments. For example, if you want to relate incidents at the individual service level, you will need a webhook per service. If you wish to relate incidents at the product level, you will need a webhook for the product. This is because incidents on a project will be related to the last deployment on the project with a timestamp that is before the incident's timestamp. This is true regardless of the source of incidents or deployments.
 
+Note: If you post incidents using webhook due to your tool not being supported but your deployments are collected via plugins automatically, you need to re-collect data for deployments for the posted incidents to get mapped to deployments based on timestamps. This is required for Change Failure Rate (DORA) metric to show up correctly for the project.
+
 Diagram of the relationship between incidents and deployments:
 
 ![Change Failure Reporting](/img/Metrics/cfr-definition.png)
