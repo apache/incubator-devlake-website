@@ -7,7 +7,7 @@ sidebar_position: 28
 
 ## What is this metric?
 
-The Time of changes that were made to a code that then resulted in incidents, rollbacks, or any type of production failure.
+The time of changes that were made to a code that then resulted in incidents, rollbacks, or any type of production failure.
 
 ## Why is it important?
 
@@ -19,7 +19,9 @@ DORA dashboard. See [live demo](https://grafana-lake.demo.devlake.io/grafana/d/q
 
 ## How is it calculated?
 
-The time from deployment to the incident corresponding to deployment is resolved. For example, if a deployment at 10:00 AM and incident caused by deployment is resolved at 11:00 AM, the failed deployment recovery time is one hour.
+The time from deployment to the incident corresponding to deployment is resolved. For example, if a deployment finishes at 10:00 AM and causes an incident at 10:20. Then, the incident gets resolved at 11:00 AM. The failed deployment recovery time is one hour.
+
+![](../Configuration/images/fdrt.png)
 
 Below are the 2023 DORA benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's failed deployment recovery time is `between one week and six months`. Therefore, DevLake provides its own benchmarks to address this problem:
 
@@ -30,15 +32,16 @@ Below are the 2023 DORA benchmarks for different development teams from Google's
 | Medium performers | Between one day and one week | Between one day and one week |
 | Low performers    | More than six months         | More than one week           |
 
+<p><i>Source: 2023 Accelerate State of DevOps, Google</i></p>
 
 <b>Data Sources Required</b>
 
-- `Deployments` from Jenkins, GitLab CI, GitHub Action, BitBucket Pipelines, or Webhook, etc. 
-- `Incidents` from Jira issues, GitHub issues, TAPD issues, PagerDuty Incidents, etc.
+- `Deployments` from Jenkins, GitLab CI, GitHub Action, BitBucket Pipelines, Webhook, etc. 
+- `Incidents` from Jira issues, GitHub issues, TAPD issues, PagerDuty Incidents, Webhook, etc.
 
 <b>Transformation Rules Required</b>
 
-Define `deployment` and `incident` in [data transformations](https://devlake.apache.org/docs/Configuration/Tutorial#step-3---add-transformations-optional) while configuring the blueprint of a project to let DevLake know what CI/issue records can be regarded as deployments or incidents.
+Define `deployment` and `incident` in [data transformations](../Configuration/Tutorial#step-3---add-transformations-optional) while configuring the blueprint of a project to let DevLake know what CI/issue records can be regarded as deployments or incidents.
 
 
 <b>SQL Queries</b>
@@ -198,4 +201,5 @@ WHERE
 
 - Add unit tests for all new feature
 - "Shift left", start QA early and introduce more automated tests
-- Enforce code review if it's not strictly executed
+- Enforce code review if it is not strictly executed
+- Improve your user support workflow to cope with incidents more efficiently

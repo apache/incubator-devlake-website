@@ -20,11 +20,12 @@ Within velocity are two core metrics:
 - [Deployment Frequency](./Metrics/DeploymentFrequency.md): Number of successful deployments to production, how rapidly is your team releasing to users?
 - [Lead Time for Changes](./Metrics/LeadTimeForChanges.md): How long does it take from commit to the code running in production? This is important, as it reflects how quickly your team can respond to user requirements.
 
-Stability is composed of some core metrics:
+Stability is composed of two core metrics:
 
 - [Change Failure Rate](./Metrics/CFR.md): How often are your deployments causing a failure?
-- [Median Time to Restore Service (2021 dora report)](./Metrics/MTTR.md): How long does it take the team to properly recover from a failure once it is identified?
-- [Failed Deployment Recovery Time (2023 dora report)](./Metrics/FailedDeploymentRecoveryTime.md): How long does it take from the time of deployment to the resolution of the incident associated with the deployment?
+- [Median Time to Restore Service (MTTR)](./Metrics/MTTR.md): How long does it take the team to properly recover from a failure once it is identified?
+
+However, MTTR is replaced by [Failed Deployment Recovery Time](./Metrics/FailedDeploymentRecoveryTime.md) from the 2023 DORA report. This metric measures the finish time of a deployment to the resolution of the incident caused by the deployment.
 
 ![](Configuration/images/dora-intro.png)
 
