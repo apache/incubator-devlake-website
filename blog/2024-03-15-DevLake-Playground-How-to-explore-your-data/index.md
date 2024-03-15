@@ -5,35 +5,48 @@ authors: [Jochum, Lennart]
 tags: [devlake, playground, python, process mining]
 ---
 
-DevLake comes with Grafana to create dashboards for your flow metrics, with the new exciting DevLake Playground, we unleash the power of Python on your data.
+DevLake is a compelling offering.
+It collects and normalizes data from many of our favorite development tools and visualizes it using Grafana dashboards.
+Like the sleuths we are, we feel the urge to look beyond the dashboard overviews and find the golden nuggets buried deep within the data.
+So, we'd like to introduce the DevLake Playground, a place where you can unleash the power of Python on your data.
 
-The DevLake Playground is a place for Jupyter Notebooks, with some predefined notebooks and the option to write your own. 
-A Jupyter notebook is a combination of python code and documentation, so with some tweaks, you can easily change it to your own needs.
-The benefits of these jupyter notebooks opposed to grafana are:
-- Some functionality wouldn't translate easily to Grafana
-- Python (code) vs SQL, for flexilibity on transforming the data, providing fast feedback
-- Python libraries support more visualization types
+In the DevLake Playground, we can explore the data using Jupyter Notebooks.
+There are some predefined notebooks and you can write your own. 
+A Jupyter notebook combines Python code and documentation, which you can easily customize to your needs with some tweaks.
+The benefits of these Jupyter notebooks as opposed to Grafana are:
+- Grafana is limited to SQL queries for gathering and transforming data, and visualizations for data tables.
+- Python (code) offers more flexibility in transforming the data and can easily provide feedback on intermediate steps.
+- The playground also supports more visualization types; for example (see the first use case below,) the data is structured as a graph, which we visualized with Graphviz.
+
 
 ## Use cases
 
-### Analyzing development process through JIRA statuses
-The [DevLake Domain model](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema#schema-diagram) exposes the changes of issues of our issue tracker, include changes in status.
-If we use that to visualize how issues really flow, we get a rudementary (automated) value stream map and can identify bottlenecks in our process or flaws in our process design.
+### Analyzing the development process through JIRA statuses
+
+The [DevLake Domain model](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema#schema-diagram) exposes the changes of issues of our issue tracker, including status changes.
+If we use that to visualize how issues really flow, we get a rudimentary (automated) value stream map. 
+We can use this to identify bottlenecks in our process or flaws in our process design.
 This is inspired by [this blog post](https://xebia.com/blog/insights-from-your-jira-data-to-help-improve-your-team/):
 
 ![process graph](./processgraph.png)
-For example, in the chart above, we see that it takes on average 15 days for Stories to go from "Ready" to "In Progress". And, it happened 476x within the selected time frame.
 
-And, now that we have this data in our playground, we can easily change how we represent it. If we focus on the most common status transitions, we can visualize the distribution of durations in a box plot, out of the same data:
+For example, in the chart above, we see that it takes on average 15 days for Stories to go from "Ready" to "In Progress". 
+And, it happened 476x within the selected time frame.
+
+And now that we have this data in our playground, we can easily change how we represent it. 
+If we focus on the most common status transitions, we can visualize the distribution of durations in a box plot out of the same data:
 
 ![box plot](./boxplot.png)
 
 This functionality is made available through a [predefined notebook](https://github.com/apache/incubator-devlake-playground/blob/main/notebooks/process_analysis.ipynb), so you can easily run it with your own data.
 
+
 ### Explore data across different domains
-Let's say we have an hypothesis: 'defect fixes are more quickly merged than new functionality'. Before building a dashboard, we want to see if the data quality is good enough and if we can test this hypothesis.
-With [pandas](https://pandas.pydata.org/), we can easily join different tables from the [data model](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema#schema-diagram). 
-With the following code, we found a quick way to get a preliminary view:
+
+Let's say we have a hypothesis: "Defect fixes are more quickly merged than new functionality." 
+Before building a dashboard, we want to determine whether the data quality is good enough and whether we can test this hypothesis.
+With [pandas](https://pandas.pydata.org/), we can quickly join different tables from the [data model](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema#schema-diagram). 
+With the following code, we were able to get a preliminary view:
 
 ```python
 import pandas as pd
@@ -83,5 +96,9 @@ If we run this example on the Devlake GitHub issues and pull requests (up to Mar
 
 
 ## Getting started
-We hope you are as excited as we are. We look forward for you to join our community to get your feedback and contributions.
-Want to get started? have a look at the [playground repository](https://github.com/apache/incubator-devlake-playground).
+
+We hope you are as excited as we are.
+We look forward to you joining our community to get your feedback and contributions.
+
+Want to get started? 
+Have a look at the [playground repository](https://github.com/apache/incubator-devlake-playground).
