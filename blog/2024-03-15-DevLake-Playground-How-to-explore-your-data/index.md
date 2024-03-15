@@ -53,23 +53,28 @@ import pandas as pd
 
 from playground.db_engine import create_db_engine
 
+# the default notebook
 DB_URL = "mysql://merico:merico@127.0.0.1:3306/lake"
-
 engine = create_db_engine(DB_URL)
 
+# read tables from database
 df_pr_issues = pd.read_sql("select * from pull_request_issues", engine)
 df_prs = pd.read_sql("select * from pull_requests", engine)
 df_issues = pd.read_sql("select * from issues", engine)
+
 # join pull requests and issues based on rows in pull_request_issues
 df = pd.merge(df_pr_issues, df_prs, left_on="pull_request_id", right_on="id", suffixes=('_pr_issues', '_prs'))
 df = pd.merge(df, df_issues, left_on="issue_id", right_on="id", suffixes=('_prs', '_issues'))
 
+# set data types correctly
 df['created_date_issues'] = pd.to_datetime(df['created_date_issues'])
 df['resolution_date'] = pd.to_datetime(df['resolution_date'])
 df['created_date_prs'] = pd.to_datetime(df['created_date_prs'])
 df['merged_date'] = pd.to_datetime(df['merged_date'])
+# calculate lead times
 df['issue_lead_time'] = df['resolution_date'] - df['created_date_issues']
 df['pr_lead_time'] = df['merged_date'] - df['created_date_prs']
+# drop unnecessary columns
 df = df[['type_issues', 'title_issues', 'issue_lead_time', 'title_prs', 'pr_lead_time']]
 
 # group lead times by issue_type, add count
@@ -78,8 +83,8 @@ df_grouped = df.groupby('type_issues').agg({
     'issue_lead_time': ['mean', 'median', 'std'], 
     'pr_lead_time': ['mean', 'median', 'std']
 })
-# rename title_issue_count to issue_count
 df.rename(columns={'title_issues': 'issue_count'}, inplace=True)
+
 display(df_grouped)
 ```
 
