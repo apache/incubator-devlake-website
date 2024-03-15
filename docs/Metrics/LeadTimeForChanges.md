@@ -114,7 +114,7 @@ FROM
 
 If you want to measure in which category your team falls as in the picture shown below, run the following SQL in Grafana.
 
-![](/img/Metrics/lead-time-for-changes-text.jpeg)
+![](/img/Metrics/lead-time-for-changes-text.png)
 
 ```
 -- Metric 2: median lead time for changes
@@ -129,7 +129,7 @@ with _pr_stats as (
 		join project_mapping pm on pr.base_repo_id = pm.row_id and pm.`table` = 'repos'
 		join cicd_deployment_commits cdc on ppm.deployment_commit_id = cdc.id
 	WHERE
-	  pm.project_name in (${project:sqlstring}+'') 
+	  pm.project_name in (${project}) 
 		and pr.merged_date is not null
 		and ppm.pr_cycle_time is not null
 		and $__timeFilter(cdc.finished_date)
@@ -149,23 +149,23 @@ _median_change_lead_time as(
 
 SELECT 
   CASE
-    WHEN ('$benchmarks') = '2023 report' THEN
+    WHEN ('$dora_report') = '2023' THEN
 			CASE
-				WHEN median_change_lead_time < 24 * 60 THEN "Less than one day(elite)"
-				WHEN median_change_lead_time < 7 * 24 * 60 THEN "Between one day and one week(high)"
-				WHEN median_change_lead_time < 30 * 24 * 60 THEN "Between one week and one month(medium)"
-				WHEN median_change_lead_time >= 30 * 24 * 60 THEN "More than one month(low)"
+				WHEN median_change_lead_time < 24 * 60 THEN CONCAT(round(median_change_lead_time/60,1), "(elite)")
+				WHEN median_change_lead_time < 7 * 24 * 60 THEN CONCAT(round(median_change_lead_time/60,1), "(high)")
+				WHEN median_change_lead_time < 30 * 24 * 60 THEN CONCAT(round(median_change_lead_time/60,1), "(medium)")
+				WHEN median_change_lead_time >= 30 * 24 * 60 THEN CONCAT(round(median_change_lead_time/60,1), "(low)")
 				ELSE "N/A. Please check if you have collected deployments/pull_requests."
 				END
-    WHEN ('$benchmarks') = '2021 report' THEN
+    WHEN ('$dora_report') = '2021' THEN
 		  CASE
-				WHEN median_change_lead_time < 60 THEN "Less than one hour(elite)"
-				WHEN median_change_lead_time < 7 * 24 * 60 THEN "Less than one week(high)"
-				WHEN median_change_lead_time < 180 * 24 * 60 THEN "Between one week and six months(medium)"
-				WHEN median_change_lead_time >= 180 * 24 * 60 THEN "More than six months(low)"
-				ELSE "N/A. Please check if you have collected deployments/incidents."
+				WHEN median_change_lead_time < 60 THEN CONCAT(round(median_change_lead_time/60,1), "(elite)")
+				WHEN median_change_lead_time < 7 * 24 * 60 THEN CONCAT(round(median_change_lead_time/60,1), "(high)")
+				WHEN median_change_lead_time < 180 * 24 * 60 THEN CONCAT(round(median_change_lead_time/60,1), "(medium)")
+				WHEN median_change_lead_time >= 180 * 24 * 60 THEN CONCAT(round(median_change_lead_time/60,1), "(low)")
+				ELSE "N/A. Please check if you have collected deployments/pull_requests."
 				END
-		ELSE 'Invalid Benchmarks'
+		ELSE 'Invalid dora report'
 	END AS median_change_lead_time
 FROM _median_change_lead_time
 ```

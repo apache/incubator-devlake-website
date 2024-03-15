@@ -106,10 +106,11 @@ FROM
 
 If you want to measure in which category your team falls into as in the picture shown below, run the following SQL in Grafana.
 
-![](/img/Metrics/mttr-text.jpeg)
+![](/img/Metrics/mttr-text.png)
 
 ```
--- Metric 3: Median time to restore service 
+--  ***** 2023 report ***** --
+--  Metric 4: Failed deployment recovery time
 with _incidents as (
 -- get the incidents created within the selected time period in the top-right corner
 	SELECT
@@ -121,7 +122,7 @@ with _incidents as (
 	  join boards b on bi.board_id = b.id
 	  join project_mapping pm on b.id = pm.row_id and pm.`table` = 'boards'
 	WHERE
-	  pm.project_name in (${project:sqlstring}+'')
+	  pm.project_name in (${project})
 		and i.type = 'INCIDENT'
 		and $__timeFilter(i.created_date)
 ),
@@ -135,30 +136,31 @@ _median_mttr as(
 	SELECT max(lead_time_minutes) as median_time_to_resolve
 	FROM _median_mttr_ranks
 	WHERE ranks <= 0.5
+),
+
+_metric_mttr_2021_report as(
+	SELECT 
+	CASE
+		WHEN ('$dora_report') = '2021' THEN
+			CASE
+				WHEN median_time_to_resolve < 60 THEN CONCAT(round(median_time_to_resolve/60,1), "(elite)")
+				WHEN median_time_to_resolve < 24 * 60 THEN CONCAT(round(median_time_to_resolve/60,1), "(high)")
+				WHEN median_time_to_resolve < 7 * 24 * 60 THEN CONCAT(round(median_time_to_resolve/60,1), "(medium)")
+				WHEN median_time_to_resolve >= 7 * 24 * 60 THEN CONCAT(round(median_time_to_resolve/60,1), "(low)")
+				ELSE "N/A. Please check if you have collected incidents."
+			END
+	END AS median_time_to_resolve
+	FROM 
+		_median_mttr
 )
 
 SELECT 
-  CASE
-    WHEN ('$benchmarks') = '2023 report' THEN
-			CASE
-				WHEN median_time_to_resolve < 60 THEN "Less than one hour(elite)"
-				WHEN median_time_to_resolve < 24 * 60 THEN "Less than one day(high)"
-				WHEN median_time_to_resolve < 7 * 24 * 60 THEN "Between one day and one week(medium)"
-				WHEN median_time_to_resolve >= 7 * 24 * 60 THEN "More than one week(low)"
-				ELSE "N/A. Please check if you have collected incidents."
-				END 
-		WHEN ('$benchmarks') = '2021 report' THEN
-			CASE
-				WHEN median_time_to_resolve < 60 THEN "Less than one hour(elite)"
-				WHEN median_time_to_resolve < 24 * 60 THEN "Less than one day(high)"
-				WHEN median_time_to_resolve < 7 * 24 * 60 THEN "Between one day and one week(medium)"
-				WHEN median_time_to_resolve >= 7 * 24 * 60 THEN "More than one week(low)"
-				ELSE "N/A. Please check if you have collected incidents."
-    		END
-		ELSE 'Invalid Benchmarks'
-	END AS median_time_to_resolve
+  median_time_to_resolve AS median_time_to_resolve
 FROM 
-	_median_mttr
+  _metric_mttr_2021_report
+WHERE 
+  ('$dora_report') = '2021'
+
 ```
 
 ## How to improve?
