@@ -1,6 +1,6 @@
 ---
 slug: DevLake-Playground-How-to-explore-your-data
-title: DevLake Playground: How to explore your data
+title: "DevLake Playground: How to explore your data"
 authors: [Jochum, Lennart]
 tags: [devlake, playground, python, process mining]
 ---
@@ -9,6 +9,8 @@ DevLake is a compelling offering.
 It collects and normalizes data from many of our favorite development tools and visualizes it using Grafana dashboards.
 Like the sleuths we are, we feel the urge to look beyond the dashboard overviews and find the golden nuggets buried deep within the data.
 So, we'd like to introduce the DevLake Playground, a place where you can unleash the power of Python on your data.
+
+<!--truncate-->
 
 In the DevLake Playground, we can explore the data using Jupyter Notebooks.
 There are some predefined notebooks and you can write your own. 
