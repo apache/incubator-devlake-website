@@ -26,9 +26,10 @@ more plugins. Detailed plugin docs can be found [here](/docs/Plugins).
 | Feishu (WIP)        | Calendar                                                                    | Cloud                              | Not Available           | `feishu`                      | Full Refresh                                                        |
 | AE                  | Source Code Management                                                      | On-prem                            | Not Available           | `ae`                          | Full Refresh                                                        |
 | Sonarqube           | CODE QUALITY                                                                | SonarQube v8.x, v9.x               | Available               | `sonarqube`                   | Full Refresh                                                        |
-| Bamboo CI(WIP)      | CI/CD                                                                       | v6.8.1                             | Not Available           | `bamboo`                      | Full Refresh                                                        |
+| Bamboo CI(WIP)      | CI/CD                                                                       | v6.8.1, Server                     | Not Available           | `bamboo`                      | Full Refresh                                                        |
 | Azure Devops (Beta) | CI/CD, Source Code Management, Code Review                                  | Cloud                              | Available               | `azuredevops`, `gitextractor` | Full Refresh                                                        |
 | CircleCI            | CI/CD                                                                       | Cloud                              | Available               | `circleci`                    | Full Refresh                                                        |
+
 
 ## Data Collection Scope By Each Plugin
 
@@ -174,6 +175,18 @@ the [advanced mode](../Configuration/AdvancedMode.md).
 | **\*CollectApiIssueCommentsMeta\*** | ≈10^6                           | ❌                                       | ❌                            |
 | **CollectApiPipelinesMeta**         | <10^4                           | ❌                                       | ❌                            |
 | CollectApiDeploymentsMeta           | <10^2                           | ❌                                       | ❌                            |
+
+### Bitbucket Server/Data Center
+
+| Subtask Name                        | Estimated Max Number of Request | Does It support Incremental Collection? | Does It Support Time Filter? |
+| ----------------------------------- | ------------------------------- | --------------------------------------- | ---------------------------- |
+| ~~CollectApiBranchesMeta~~          | 1                               | ❌                                      | ❌                           |
+| CollectApiPullRequestsMeta          | ≈10^3                           | ❌                                      | ❌                           |
+| **CollectApiPrActivitiesMeta**      | ≈10^4                           | ❌                                      | ❌                           |
+| **CollectApiPrCommentsMeta**        | ≈10^5                           | ❌                                      | ❌                           |
+| **\*CollectApiIssueCommentsMeta\*** | ≈10^6                           | ❌                                      | ❌                           |
+| **CollectApiCommitsMeta**           | <10^4                           | ❌                                      | ❌                           |
+| CollectApiPrCommitsMeta             | <10^2                           | ❌                                      | ❌                           |
 
 ### Gitee
 
