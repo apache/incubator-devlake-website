@@ -1,6 +1,16 @@
 {
     "data": [
         {
+            "title": "DevLake Playground: How to explore your data",
+            "readTime": "3 min",
+            "authorName": "Jochum Börger & Lennart Tange",
+            "authorImgUrl": "https://avatars.githubusercontent.com/u/75693845?s=200&v=4",
+            "publishTime": "2024/03/15",
+            "detailLink": "/blog/DevLake-Playground-How-to-explore-your-data",
+            "coverTitle": "DevLake-Playground-How-to-explore-your-data",
+            "summary": "We'd like to introduce the DevLake Playground, a place where you can look beyond the dashboard overviews and find the golden nuggets buried deep within the data using the power of Python."
+        },
+        {
             "title": "Compatibility of Apache DevLake with PostgreSQL",
             "readTime": "3 min",
             "authorName": "ZhangLiang",
