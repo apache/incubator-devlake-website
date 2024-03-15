@@ -39,68 +39,79 @@ The overall workflow is:
 Note:
 
 1. Please replace `/path/to/*.csv` with the absolute path of the CSV file you'd like to upload.
-2. Please replace `127.0.0.1:4000` with your actual Apache DevLake ConfigUI service IP and port number.
+2. Please replace `http://127.0.0.1:4000` with your actual Config UI service IP and port number. If you have enabled https, please replace it accordingly.
 
 ## Step 1 - Create the `teams` table
 
 You can create the `teams` table by sending a PUT request to `/plugins/org/teams.csv` with a `teams.csv` file. To jumpstart the process, you can download a template `teams.csv` from `/plugins/org/teams.csv?fake_data=true`. Below are the detailed instructions:
 
-a. Download the template `teams.csv` file
+1. Download the template `teams.csv` file. You can do it by 
 
-    i.  GET http://127.0.0.1:4000/api/plugins/org/teams.csv?fake_data=true (pasting the URL into your browser will download the template)
+    a. Pasting the URL into your browser to download the template.
 
-    ii. If you prefer using curl:
-        curl --location --request GET 'http://127.0.0.1:4000/api/plugins/org/teams.csv?fake_data=true'
-    
+    ```
+    http://127.0.0.1:4000/api/plugins/org/teams.csv?fake_data=true
+    ```
 
-b. Fill out `teams.csv` file and upload it to DevLake (If you are using Excel to modify the CSV file, please save it with UTF-8 encoding. See [how](https://answers.microsoft.com/en-us/msoffice/forum/all/how-can-i-save-a-csv-with-utf-8-encoding-using/12801501-c1e4-4a64-80d9-96b680b64cfe))
+    b. Or using CURL:
+    ```
+    curl 'http://127.0.0.1:4000/api/rest/plugins/org/teams.csv?fake_data=true'  -X 'GET' -H 'Authorization: Bearer {API_key}'
+    ```
 
-    i. Fill out `teams.csv` with your org data. Please don't modify the column headers or the file suffix.
+2. Fill out `teams.csv` file and upload it to DevLake (If you are using Excel to modify the CSV file, please save it with UTF-8 encoding. See [how](https://answers.microsoft.com/en-us/msoffice/forum/all/how-can-i-save-a-csv-with-utf-8-encoding-using/12801501-c1e4-4a64-80d9-96b680b64cfe))
 
-    ii. Upload `teams.csv` to DevLake with the following curl command: 
-    curl --location --request PUT 'http://127.0.0.1:4000/api/plugins/org/teams.csv' --form 'file=@"/path/to/teams.csv"'
+    a. Fill out `teams.csv` with your org data. Please don't modify the column headers or the file suffix.
 
-    iii. The PUT request would populate the `teams` table with data from `teams.csv` file.
-    You can connect to the database and verify the data in the `teams` table.
-    See Appendix for how to connect to the database.
+    b. Upload `teams.csv` to DevLake with the following curl command
+    ``` 
+    curl 'http://127.0.0.1:4000/api/rest/plugins/org/teams.csv' -X 'PUT' -H 'Authorization: Bearer {API_key}' --form 'file=@"/path/to/teams.csv"'
+    ```
 
-![image](/img/Team/teamflow3.png)
+    c. The PUT request would populate the `teams` table with data from `teams.csv` file.
+    You can connect to the database and verify the data in the `teams` table. See 'Appendix A' for how to connect to the database.
+
+    ![image](/img/Team/teamflow3.png)
 
 
 ## Step 2 - Create the `users` and `team_users` table
 
 You can create the `users` and `team_users` table by sending a single PUT request to `/plugins/org/users.csv` with a `users.csv` file. To jumpstart the process, you can download a template `users.csv` from `/plugins/org/users.csv?fake_data=true`. Below are the detailed instructions:
 
-a. Download the template `users.csv` file
+1. Download the template `users.csv` file. You can do it by 
 
-    i.  GET http://127.0.0.1:4000/api/plugins/org/users.csv?fake_data=true (pasting the URL into your browser will download the template)
+    a. Pasting the URL into your browser to download the template.
 
-    ii. If you prefer using curl:
-    curl --location --request GET 'http://127.0.0.1:4000/api/plugins/org/users.csv?fake_data=true'
+    ```
+    http://127.0.0.1:4000/api/plugins/org/users.csv?fake_data=true
+    ```
 
+    b. Or using CURL:
+    ```
+    curl 'http://127.0.0.1:4000/api/rest/plugins/org/users.csv?fake_data=true'  -X 'GET' -H 'Authorization: Bearer {API_key}'
+    ```
 
-b. Fill out `users.csv` and upload to DevLake (If you are using Excel to modify the CSV file, please save it with UTF-8 encoding. See [how](https://answers.microsoft.com/en-us/msoffice/forum/all/how-can-i-save-a-csv-with-utf-8-encoding-using/12801501-c1e4-4a64-80d9-96b680b64cfe))
+2. Fill out `users.csv` and upload it to DevLake (If you are using Excel to modify the CSV file, please save it with UTF-8 encoding. See [how](https://answers.microsoft.com/en-us/msoffice/forum/all/how-can-i-save-a-csv-with-utf-8-encoding-using/12801501-c1e4-4a64-80d9-96b680b64cfe))
 
-    i.  Fill out `users.csv` with your org data. Please don't modify the column headers or the file suffix
+    a.  Fill out `users.csv` with your org data. Please do not modify the column headers or the file suffix.
 
-    ii. Upload `users.csv` to DevLake with the following curl command:
-    curl --location --request PUT 'http://127.0.0.1:4000/api/plugins/org/users.csv' --form 'file=@"/path/to/users.csv"'
+    b. Upload `users.csv` to DevLake with the following curl command:
+    ```
+    curl 'http://127.0.0.1:4000/api/rest/plugins/org/users.csv' -X 'PUT' -H 'Authorization: Bearer {API_key}' --form 'file=@"/path/to/users.csv"'
+    ```
 
-    iii. The PUT request would populate the `users` table along with the `team_users` table with data from `users.csv` file.
-    You can connect to the database and verify these two tables.
+    c. The PUT request would populate the `users` table along with the `team_users` table with data from `users.csv` file. You can connect to the database and verify these two tables.
 
-![image](/img/Team/teamflow1.png)
+    ![image](/img/Team/teamflow1.png)
     
-![image](/img/Team/teamflow2.png)
+    ![image](/img/Team/teamflow2.png)
 
-c. If you ever want to update `team_users` or `users` table, simply upload the updated `users.csv` to DevLake again following step b.
+3. If you want to update `team_users` or `users` table, simply upload the updated `users.csv` to DevLake again following the previous step.
 
 ## Step 3 - Populate the `accounts` table via data collection
 
 The `accounts` table is automatically populated when you collect data from data sources like GitHub and Jira through DevLake.
 
-For example, the GitHub plugin would create one entry in the `accounts` table for each GitHub user involved in your repository.
-For demo purposes, we'll insert some mock data into the `accounts` table using SQL:
+For example, the GitHub plugin would create one entry in the `accounts` table for each GitHub user involved in your repository. For demo purposes, we will insert some mock data into the `accounts` table using SQL:
 
 ```
 INSERT INTO `accounts` (`id`, `created_at`, `updated_at`, `_raw_data_params`, `_raw_data_table`, `_raw_data_id`, `_raw_data_remark`, `email`, `full_name`, `user_name`, `avatar_url`, `organization`, `created_date`, `status`)
@@ -116,68 +127,69 @@ VALUES
 
 Now that we have data in both the `users` and `accounts` table, we can tell DevLake to infer the mappings between `users` and `accounts` with a simple heuristic algorithm based on names and emails.
 
-a. Send an API request to DevLake to run the mapping algorithm
+1. Send an API request to DevLake to run the mapping algorithm
 
-```
-curl --location --request POST '127.0.0.1:4000/api/pipelines' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "name": "test",
-    "plan":[
-        [
-            {
-                "plugin": "org",
-                "subtasks":["connectUserAccountsExact"],
-                "options":{
-                    "connectionId":1
+    ```
+    curl --location --request POST '127.0.0.1:4000/api/pipelines' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "name": "test",
+        "plan":[
+            [
+                {
+                    "plugin": "org",
+                    "subtasks":["connectUserAccountsExact"]
                 }
-            }
+            ]
         ]
-    ]
-}'
-```
+    }'
+    ```
 
-b. After successful execution, you can verify the data in `user_accounts` in the database. 
+2. After successful execution, you can verify the data in `user_accounts` in the database. 
 
-![image](/img/Team/teamflow5.png)
+    ![image](/img/Team/teamflow5.png)
 
 ## Step 5 - Manually update `user_accounts` when the algorithm can't catch everything
 
-It is recommended to examine the generated `user_accounts` table after running the algorithm.
-We'll demonstrate how to manually update `user_accounts` when the mapping is inaccurate/incomplete in this section.
-To make manual verification easier, DevLake provides an API for users to download `user_accounts` as a CSV file.
-Alternatively, you can verify and modify `user_accounts` all by SQL, see Appendix for more info.
+It is recommended to examine the generated `user_accounts` table after running the algorithm. We will demonstrate how to manually update `user_accounts` when the mapping is inaccurate or incomplete in this section.
 
-a. GET http://127.0.0.1:4000/api/plugins/org/user_account_mapping.csv(pasting the URL into your browser will download the file). If you prefer using curl:
-```
-curl --location --request GET 'http://127.0.0.1:4000/api/plugins/org/user_account_mapping.csv'
-```
+To make manual verification easier, DevLake provides an API for users to download `user_accounts` as a CSV file. Alternatively, you can verify and modify `user_accounts` all by SQL, see Appendix for more info.
 
-![image](/img/Team/teamflow6.png)
+1. Download the template by pasting the following URL to your browser:
 
-b. If you find the mapping inaccurate or incomplete, you can modify the `user_account_mapping.csv` file and then upload it to DevLake.
-For example, here we change the `UserId` of row 'Id=github:GithubAccount:1:1234' in the `user_account_mapping.csv` file to 2.
+    ```
+    http://127.0.0.1:4000/api/plugins/org/user_account_mapping.csv
+    ```
 
-c. Save and upload the updated `user_account_mapping.csv` file with the following curl command (If you are using Excel to modify the CSV file, please save it with UTF-8 encoding. See [how](https://answers.microsoft.com/en-us/msoffice/forum/all/how-can-i-save-a-csv-with-utf-8-encoding-using/12801501-c1e4-4a64-80d9-96b680b64cfe)):
+    b. Or using CURL:
+    ```
+    curl 'http://127.0.0.1:4000/api/rest/plugins/org/user_account_mapping.csv'  -X 'GET' -H 'Authorization: Bearer {API_key}'
+    ```
 
-```
-curl --location --request PUT 'http://127.0.0.1:4000/api/plugins/org/user_account_mapping.csv' --form 'file=@"/path/to/user_account_mapping.csv"'
-```
+    ![image](/img/Team/teamflow6.png)
 
-d. You can verify the data in the `user_accounts` table has been updated.
+2. If you find the mapping inaccurate or incomplete, you can modify the `user_account_mapping.csv` file and then upload it to DevLake. For example, here we change the `UserId` of row 'Id=github:GithubAccount:1:1234' in the `user_account_mapping.csv` file to 2.
+
+3. Save and upload the updated `user_account_mapping.csv` file with the following curl command (If you are using Excel to modify the CSV file, please save it with UTF-8 encoding. See [how](https://answers.microsoft.com/en-us/msoffice/forum/all/how-can-i-save-a-csv-with-utf-8-encoding-using/12801501-c1e4-4a64-80d9-96b680b64cfe)):
+
+    ```
+    curl 'http://127.0.0.1:4000/api/rest/plugins/org/user_account_mapping.csv' -X 'PUT' -H 'Authorization: Bearer {API_key}' --form 'file=@"/path/to/user_account_mapping.csv"'
+    ```
+
+4. You can verify the data in the `user_accounts` table has been updated.
 
 ![image](/img/Team/teamflow7.png)
 
 ## Appendix A: how to connect to the database
 
-Here we use MySQL as an example. You can install database management tools like Sequel Ace, DataGrip, MySQLWorkbench, etc.
+There are many ways to connect to the database:
 
-
-Or through the command line:
-
-```
-mysql -h <ip> -u <username> -p -P <port>
-```
+1. Through Grafana. Go to Grafana's Explore page. Switch the SQL editor to the code mode. Then, you can write SQL to describe database and query data.
+2. Through database management tools such as Navicat, phyMyAdmin, DataGrip, MySQLWorkbench, etc. Type in your host, port, username and password to connect to the DB. The username and password can be fount in the image or .env file.
+3. Through the command line. Take MySQL as an example:
+    ```
+    mysql -h <ip> -u <username> -p -P <port>
+    ```
 
 ## Appendix B: how to examine `user_accounts` via SQL
 

@@ -100,7 +100,7 @@ Usually, you don't have to modify this part. However, if you don't want to colle
 ![github-add-transformation-rules-list](images/github-set-transformation1.png)
 ![github-add-transformation-rules](images/github-set-transformation2.png)
 
-Without adding transformation rules, you can still view the "[GitHub Metrics](/livedemo/DataSources/GitHub)" dashboard. However, if you want to view "[Weekly Bug Retro](/livedemo/QAEngineers/WeeklyBugRetro)", "[Weekly Community Retro](/livedemo/OSSMaintainers/WeeklyCommunityRetro)" or other pre-built dashboards, the following transformation rules, especially "Type/Bug", should be added.<br/>
+Without adding transformation rules, you can still view the "[GitHub Metrics](/livedemo/DataSources/GitHub)" dashboard. However, if you want to view "[Weekly Bug Retro](/livedemo/EngineeringLeads/WeeklyBugRetro)", "[Weekly Community Retro](/livedemo/OSSMaintainers/WeeklyCommunityRetro)" or other pre-built dashboards, the following transformation rules, especially "Type/Bug", should be added.<br/>
 
 Each GitHub repo has at most ONE set of transformation rules.
 

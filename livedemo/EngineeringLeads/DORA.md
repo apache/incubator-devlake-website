@@ -25,4 +25,8 @@ To set up your own DORA metrics dashboard, you can checkout our detailed [DORA u
   </h5>
 </div>
 
-<iframe src="https://grafana-lake.demo.devlake.io/grafana/d/qNo8_0M4z/dora?orgId=1&from=now-6M&to=now" width="135%" height="1140px"></iframe>
+**View live metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/grafana/d/qNo8_0M4z/dora?orgId=1&from=now-6M&to=now)**
+
+![DORA](./DORA.png)
+
+<!-- <iframe src="https://grafana-lake.demo.devlake.io/grafana/d/qNo8_0M4z/dora?orgId=1&from=now-6M&to=now" width="135%" height="1140px"></iframe> -->

@@ -33,7 +33,7 @@ To set up a new data connection, it is recommended to use the 'Data Connections'
 You can add multiple data scopes to a data connection to determine which data to collect. Data scopes vary for different data sources.
 
 ### Scope Config
-**A scope config refers to the configuration of a data scope.** It defines the specific data entities to be collected and the transformations to be applied to that data. 
+**A scope config refers to the configuration of a data scope.** It defines the specific data entities to be collected and the transformations to be applied to that data.
 
 Each data scope can have at most one scope config associated with it; while a scope config can be shared among multiple data scopes under the same data connection.
 
@@ -49,32 +49,33 @@ When setting up the scope config of a GitHub data connection, you have the flexi
 #### Transformations
 Transformations are configurations for users to customize how DevLake transforms raw API responses to the domain layer data.
 
-Although configuring transformation rules is not mandatory, certain pre-built dashboards, such as [DORA](/livedemo/EngineeringLeads/DORA) and [Weekly Bug Retro](/livedemo/QAEngineers/WeeklyBugRetro) require the them to display the metrics accurately. If you leave the rules blank or have not configured them correctly, only a few [data source dashboards](/livedemo/DataSources/GitHub) will be displayed as expected. 
+Although configuring transformation rules is not mandatory, certain pre-built dashboards, such as [DORA](/livedemo/EngineeringLeads/DORA) and [Weekly Bug Retro](/livedemo/EngineeringLeads/WeeklyBugRetro) require them to display the metrics accurately. If you leave the rules blank or have not configured them correctly, only a few [data source dashboards](/livedemo/DataSources/GitHub) will be displayed as expected.
 
 You can find the required transformations in the 'Dashboard Introduction' panel in each pre-built dashboard.
 
 ### Project
 **On a high level, a DevLake project can be viewed as a real-world project or product line.** It represents a specific initiative or endeavor within the software development domain.
 
-**On a lower level, a DevLake project is a way of organizing and grouping data from different domains.** DevLake uses various [data scopes](#data-scope), such as repos, boards, cicd_scopes, and cq_projects as the 'container' to associate different types of data to a specific project. 
+**On a lower level, a DevLake project is a way of organizing and grouping data from different domains.** DevLake uses various [data scopes](#data-scope), such as repos, boards, cicd_scopes, and cq_projects as the 'container' to associate different types of data to a specific project.
 
-- A project has a [blueprint](#Bluepirnts) for data collection and metric computation. 
+- A project has a [blueprint](#Bluepirnts) for data collection and metric computation.
 - DevLake measures DORA metrics at the project level. Each project has a set of DORA metrics. For example, if a user associates 'Jenkins Job A' and 'Jira board B' with project M, only the 'deployments' from 'Jenkins Job A' and the 'incidents' from 'Jira board B' will be considered when calculating the Change Failure Rate metric for project M.
    ![](../Configuration/images/HowToOrganizeDevlakeProjects/project_pipeline.png)
 
 ### Blueprint
 **A blueprint serves as the plan to synchronize data from data sources into the DevLake platform.** Creating a blueprint consists of four steps:
-1. Adding [data connections](#data-connections): You can add one or more data connections to a blueprint, depending on the data sources you want to sync with DevLake. Each data connection represents a specific data source, such as GitHub or Jira. 
+1. Adding [data connections](#data-connections): You can add one or more data connections to a blueprint, depending on the data sources you want to sync with DevLake. Each data connection represents a specific data source, such as GitHub or Jira.
 2. Setting up the [data scope](#data-scope): When adding a data connection, you can choose to collect all or part of the configured data scopes of the data connection.
 3. Setting up the sync policy: You can specify the sync frequency and the time range for data collection.
 
-The relationship between 'Blueprint', 'Data Connection' and 'Scope COnfig' is explained as follows:
+The relationship between 'Blueprint', 'Project' and 'Data Connection' is explained as follows:
 
 ![Blueprint ERD](../Configuration/images/blueprint-erd.svg)
+- A blueprint will be automatically created by along the creation with a DevLake project.
 - Each blueprint can have multiple data connections.
 - Each data connection can have multiple data scopes.
 - Each set of data scope only consists of one GitHub/GitLab project or Jira board, along with their corresponding data entities.
-- Each set of data scope can only have one set of transformation rules.
+- Each set of data scope can only have one set of scope config.
 
 ## APIs and Config UI Advanced Mode
 
