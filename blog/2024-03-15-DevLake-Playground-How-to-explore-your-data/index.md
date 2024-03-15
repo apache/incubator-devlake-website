@@ -16,7 +16,7 @@ A Jupyter notebook combines Python code and documentation, which you can easily 
 The benefits of these Jupyter notebooks as opposed to Grafana are:
 - Grafana is limited to SQL queries for gathering and transforming data, and visualizations for data tables.
 - Python (code) offers more flexibility in transforming the data and can easily provide feedback on intermediate steps.
-- The playground also supports more visualization types; for example (see the first use case below,) the data is structured as a graph, which we visualized with Graphviz.
+- The playground also supports more visualization types; for example (see the first use case below,) when the data is structured as a graph, we can visualize it with Graphviz.
 
 
 ## Use cases
