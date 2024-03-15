@@ -103,7 +103,7 @@ FROM
 
 If you want to measure in which category your team falls as in the picture shown below, run the following SQL in Grafana. Unlike monthly deployments which are based on the number of deployments, the metric below is based on `deployment days`.
 
-![](/img/Metrics/deployment-frequency-text.jpeg)
+![](/img/Metrics/deployment-frequency-text.png)
 
 ```
 -- Metric 1: Deployment Frequency
@@ -133,7 +133,7 @@ _production_deployment_days as(
 	FROM cicd_deployment_commits cdc
 	JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id and pm.`table` = 'cicd_scopes'
 	WHERE
-		pm.project_name in (${project:sqlstring}+'')
+		pm.project_name in (${project})
 		and cdc.result = 'SUCCESS'
 		and cdc.environment = 'PRODUCTION'
 	GROUP BY 1
@@ -226,21 +226,21 @@ _median_number_of_deployment_days_per_six_months as(
 
 SELECT 
   CASE
-    WHEN ('$benchmarks') = '2023 report' THEN
+    WHEN ('$dora_report') = '2023' THEN
 			CASE  
-				WHEN median_number_of_deployment_days_per_week >= 7 THEN 'On-demand(elite)'
-				WHEN median_number_of_deployment_days_per_week >= 1 THEN 'Between once per day and once per week(high)'
-				WHEN median_number_of_deployment_days_per_month >= 1 THEN 'Between once per week and once per month(medium)'
-				WHEN median_number_of_deployment_days_per_month < 1 and is_collected != NULL THEN 'Fewer than once per month(low)'
+				WHEN median_number_of_deployment_days_per_week >= 7 THEN CONCAT(median_number_of_deployment_days_per_week, ' deployment days per week(elite)')
+				WHEN median_number_of_deployment_days_per_week >= 1 THEN CONCAT(median_number_of_deployment_days_per_week, ' deployment days per week(high)')
+				WHEN median_number_of_deployment_days_per_month >= 1 THEN CONCAT(median_number_of_deployment_days_per_month, ' deployment days per month(medium)')
+				WHEN median_number_of_deployment_days_per_month < 1 and is_collected is not null THEN CONCAT(median_number_of_deployment_days_per_month, ' deployment days per month(low)')
 				ELSE "N/A. Please check if you have collected deployments." END
-	 	WHEN ('$benchmarks') = '2021 report' THEN
+	 	WHEN ('$dora_report') = '2021' THEN
 			CASE  
-				WHEN median_number_of_deployment_days_per_week >= 7 THEN 'On-demand(elite)'
-				WHEN median_number_of_deployment_days_per_month >= 1 THEN 'Between once per day and once per month(high)'
-				WHEN median_number_of_deployment_days_per_six_months >= 1 THEN 'Between once per month and once every 6 months(medium)'
-				WHEN median_number_of_deployment_days_per_six_months < 1 and is_collected != NULL THEN 'Fewer than once per six months(low)'
+				WHEN median_number_of_deployment_days_per_week >= 7 THEN CONCAT(median_number_of_deployment_days_per_week, ' deployment days per week(elite)')
+				WHEN median_number_of_deployment_days_per_month >= 1 THEN CONCAT(median_number_of_deployment_days_per_month, ' deployment days per month(high)')
+				WHEN median_number_of_deployment_days_persix_months >= 1 THEN CONCAT(median_number_of_deployment_days_per_six_months, ' deployment days per six months(medium)')
+				WHEN median_number_of_deployment_days_per_six_months < 1 and is_collected is not null THEN CONCAT(median_number_of_deployment_days_per_six_months, ' deployment days per six months(low)')
 				ELSE "N/A. Please check if you have collected deployments." END
-		ELSE 'Invalid Benchmarks'
+		ELSE 'Invalid dora report'
 	END AS 'Deployment Frequency'
 FROM _median_number_of_deployment_days_per_week, _median_number_of_deployment_days_per_month, _median_number_of_deployment_days_per_six_months
 ```

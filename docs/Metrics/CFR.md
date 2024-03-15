@@ -118,10 +118,10 @@ FROM
 
 If you want to measure in which category your team falls, run the following SQL in Grafana.
 
-![](/img/Metrics/cfr-text.jpeg)
+![](/img/Metrics/cfr-text.png)
 
 ```
--- Metric 4: change failure rate
+-- Metric 3: change failure rate
 with _deployments as (
 -- When deploying multiple commits in one pipeline, GitLab and BitBucket may generate more than one deployment. However, DevLake consider these deployments as ONE production deployment and use the last one's finished_date as the finished date.
 	SELECT
@@ -131,7 +131,7 @@ with _deployments as (
 		cicd_deployment_commits cdc
 		JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id and pm.`table` = 'cicd_scopes'
 	WHERE
-		pm.project_name in (${project:sqlstring}+'')
+		pm.project_name in (${project})
 		and cdc.result = 'SUCCESS'
 		and cdc.environment = 'PRODUCTION'
 	GROUP BY 1
@@ -158,30 +158,52 @@ _change_failure_rate as (
 			else sum(has_incident)/count(deployment_id) end as change_failure_rate
 	FROM
 		_failure_caused_by_deployments
+),
+
+_is_collected_data as(
+	SELECT
+        CASE 
+        WHEN COUNT(i.id) = 0 AND COUNT(cdc.id) = 0 THEN 'No All'
+        WHEN COUNT(i.id) = 0 THEN 'No Incidents' 
+        WHEN COUNT(cdc.id) = 0 THEN 'No Deployments'
+        END AS is_collected
+FROM
+    (SELECT 1) AS dummy
+LEFT JOIN
+    issues i ON i.type = 'INCIDENT'
+LEFT JOIN
+    cicd_deployment_commits cdc ON 1=1
 )
+
 
 SELECT
   CASE
-    WHEN ('$benchmarks') = '2023 report' THEN
+    WHEN ('$dora_report') = '2023' THEN
 			CASE  
-				WHEN change_failure_rate <= 5 THEN "0-5%(elite)"
-				WHEN change_failure_rate <= .10 THEN "5%-10%(high)"
-				WHEN change_failure_rate <= .15 THEN "10%-15%(medium)"
-				WHEN change_failure_rate > .15 THEN "> 15%(low)"
+				WHEN is_collected = "No All"  THEN "N/A. Please check if you have collected deployments/incidents."
+				WHEN is_collected = "No Incidents"  THEN "N/A. Please check if you have collected incidents."
+				WHEN is_collected = "No Deployments"  THEN "N/A. Please check if you have collected deployments."
+				WHEN change_failure_rate <= .05 THEN CONCAT(round(change_failure_rate*100,1), "%(elite)")
+				WHEN change_failure_rate <= .10 THEN CONCAT(round(change_failure_rate*100,1), "%(high)")
+				WHEN change_failure_rate <= .15 THEN CONCAT(round(change_failure_rate*100,1), "%(medium)")
+				WHEN change_failure_rate > .15 THEN CONCAT(round(change_failure_rate*100,1), "%(low)")
 				ELSE "N/A. Please check if you have collected deployments/incidents."
 				END
-		WHEN ('$benchmarks') = '2021 report' THEN
+		WHEN ('$dora_report') = '2021' THEN
 			CASE  
-				WHEN change_failure_rate <= .15 THEN "0-15%(elite)"
-				WHEN change_failure_rate <= .20 THEN "16%-20%(high)"
-				WHEN change_failure_rate <= .30 THEN "21%-30%(medium)"
-				WHEN change_failure_rate > .30 THEN "> 30%(low)" 
+			  WHEN is_collected = "No All"  THEN "N/A. Please check if you have collected deployments/incidents."
+				WHEN is_collected = "No Incidents"  THEN "N/A. Please check if you have collected incidents."
+				WHEN is_collected = "No Deployments"  THEN "N/A. Please check if you have collected deployments."
+				WHEN change_failure_rate <= .15 THEN CONCAT(round(change_failure_rate*100,1), "%(elite)")
+				WHEN change_failure_rate <= .20 THEN CONCAT(round(change_failure_rate*100,1), "%(high)")
+				WHEN change_failure_rate <= .30 THEN CONCAT(round(change_failure_rate*100,1), "%(medium)")
+				WHEN change_failure_rate > .30 THEN CONCAT(round(change_failure_rate*100,1), "%(low)") 
 				ELSE "N/A. Please check if you have collected deployments/incidents."
 				END
-		ELSE 'Invalid Benchmarks'
+		ELSE 'Invalid dora report'
 	END AS change_failure_rate
 FROM 
-	_change_failure_rate
+	_change_failure_rate, _is_collected_data
 ```
 
 ## How to improve?
