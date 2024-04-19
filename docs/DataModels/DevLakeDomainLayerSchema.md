@@ -60,7 +60,7 @@ Tables that end with WIP are still under development.
 Apache DevLake provides 2 plugins:
 
 - [customize](https://devlake.apache.org/docs/Plugins/customize): to create/delete columns in the domain layer schema with the data extracted from [raw layer tables](https://devlake.apache.org/docs/Overview/Architecture/#dataflow)
-- [dbt](https://devlake.apache.org/docs/Plugins/customize): to transform data based on the domain layer schema and generate new tables
+- [dbt](https://devlake.apache.org/docs/Plugins/dbt): to transform data based on the domain layer schema and generate new tables
 
 <br/>
 
