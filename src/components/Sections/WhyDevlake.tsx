@@ -48,52 +48,52 @@ function Supports() {
         sm:gap-x-1"
       >
         <C.Sup title="Jira">
-          <a href="https://devlake.apache.org/docs/Plugins/jira">
+          <a href="https://devlake.apache.org/docs/Plugins/jira" target="_blank">
             <C.SupImg src={Sup1} />
           </a>
         </C.Sup>
         <C.Sup title="TAPD">
-          <a href="https://devlake.apache.org/docs/Plugins/tapd">
+          <a href="https://devlake.apache.org/docs/Plugins/tapd" target="_blank">
             <Sup2 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="GitHub">
-          <a href="https://devlake.apache.org/docs/Plugins/github">
+          <a href="https://devlake.apache.org/docs/Plugins/github" target="_blank">
             <Sup3 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="GitLab">
-          <a href="https://devlake.apache.org/docs/Plugins/gitlab">
+          <a href="https://devlake.apache.org/docs/Plugins/gitlab" target="_blank">
             <Sup4 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="BitBucket">
-          <a href="https://devlake.apache.org/docs/Plugins/bitbucket">
+          <a href="https://devlake.apache.org/docs/Plugins/bitbucket" target="_blank">
             <Sup5 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="Gitee">
-          <a href="https://devlake.apache.org/docs/Plugins/gitee">
+          <a href="https://devlake.apache.org/docs/Plugins/gitee" target="_blank">
             <Sup6 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="Jenkins">
-          <a href="https://devlake.apache.org/docs/Plugins/jenkins">
+          <a href="https://devlake.apache.org/docs/Plugins/jenkins" target="_blank">
             <Sup7 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="GitHub Action">
-          <a href="https://devlake.apache.org/docs/Plugins/github">
+          <a href="https://devlake.apache.org/docs/Plugins/github" target="_blank">
             <Sup8 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="GitLab CI">
-          <a href="https://devlake.apache.org/docs/Plugins/gitlab">
+          <a href="https://devlake.apache.org/docs/Plugins/gitlab" target="_blank">
             <Sup9 className="sm:w-[48px] sm:h-[48px]" />
           </a>
         </C.Sup>
         <C.Sup title="Feishu">
-          <a href="https://devlake.apache.org/docs/Plugins/feishu">
+          <a href="https://devlake.apache.org/docs/Plugins/feishu" target="_blank">
             <C.SupImg src={SupA} />
           </a>
         </C.Sup>

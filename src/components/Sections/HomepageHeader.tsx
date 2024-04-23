@@ -162,28 +162,28 @@ export function HomepageHeader() {
               max-w-[90%]"
       >
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <a href="https://www.redhat.com/en"><RedHatIcon className="mobile:w-[72px]" /></a>
+          <a href="https://www.redhat.com/en" target="_blank"><RedHatIcon className="mobile:w-[72px]" /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <a href="https://stripe.com/gb"><StripeIcon className="mobile:w-[36px]" /></a>
+          <a href="https://stripe.com/gb" target="_blank"><StripeIcon className="mobile:w-[36px]" /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <a href="https://orkes.io/"><img className="w-[88px] mobile:w-[48px]" src={OrkesIcon} /></a>
+          <a href="https://orkes.io/" target="_blank"><img className="w-[88px] mobile:w-[48px]" src={OrkesIcon} /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <a href="https://clickhouse.com/"><img className="w-[140px] mobile:w-[71px]" src={ClickHouseIcon} /></a>
+          <a href="https://clickhouse.com/" target="_blank"><img className="w-[140px] mobile:w-[71px]" src={ClickHouseIcon} /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <a href="https://croz.net/"><img className="w-[80px] mobile:w-[36px]" src={CrozIcon} /></a>
+          <a href="https://croz.net/" target="_blank"><img className="w-[80px] mobile:w-[36px]" src={CrozIcon} /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <a href="https://coder.com/"><img className="w-[120px] mobile:w-[60px]" src={CoderIcon} /></a>
+          <a href="https://coder.com/" target="_blank"><img className="w-[120px] mobile:w-[60px]" src={CoderIcon} /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <a href="https://about.scarf.sh/"><ScarfIcon className="mobile:w-[48px]" /></a>
+          <a href="https://about.scarf.sh/" target="_blank"><ScarfIcon className="mobile:w-[48px]" /></a>
         </div>
         <div className="sm:flex-[0_0_25%] sm:text-center sm:mt-[14px] mobile:mt-[0px] z-20">
-          <a href="https://www.ibm.com/"><IBMIcon className="mobile:w-[30px]" /></a>
+          <a href="https://www.ibm.com/" target="_blank"><IBMIcon className="mobile:w-[30px]" /></a>
         </div>
       </div>
     </div>

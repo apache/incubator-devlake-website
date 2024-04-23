@@ -2,8 +2,8 @@ name: Check links daily
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "18 0 * * *"
+#  schedule:
+#    - cron: "18 0 * * *"
 
 permissions:
   issues: write # to create an issue when link check fails

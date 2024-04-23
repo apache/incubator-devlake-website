@@ -12,6 +12,14 @@ When you create an Incoming Webhook within DevLake, DevLake generates a unique U
 
 In v0.14+, users can push "incidents" and "deployments" required by DORA metrics to DevLake via Incoming Webhooks.
 
+Webhooks are meant to be used at the lowest level that you want to relate incidents with deployments. For example, if you want to relate incidents at the individual service level, you will need a webhook per service. If you wish to relate incidents at the product level, you will need a webhook for the product. This is because incidents on a project will be related to the last deployment on the project with a timestamp that is before the incident's timestamp. This is true regardless of the source of incidents or deployments.
+
+Note: If you post incidents using webhook due to your tool not being supported but your deployments are collected via plugins automatically, you need to re-collect data for deployments for the posted incidents to get mapped to deployments based on timestamps. This is required for Change Failure Rate (DORA) metric to show up correctly for the project.
+
+Diagram of the relationship between incidents and deployments:
+
+![Change Failure Reporting](/img/Metrics/cfr-definition.png)
+
 ## Entities
 
 Check out the [Incoming Webhooks entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.
@@ -48,7 +56,7 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 |     Key     | Required | Notes                                                                                                                                                                           |
 | :---------: | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | pipeline_id |  ✖️ No   | related Domain Layer `cicd_pipelines.id`                                                                                                                                         |
-| environment |  ✖️ No   | the environment this deployment happens. For example, `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br/>The default value is `PRODUCTION`                  |
+| environment |  ✖️ No   | the environment this deployment happens, one of the values: `PRODUCTION`, `STAGING`, `TESTING`, `DEVELOPMENT`. <br/>The default value is `PRODUCTION`.                  |
 |  repo_url   |  ✔️ Yes  | the repo URL of the deployment commit<br />If there is a row in the domain layer table `repos` where `repos.url` equals `repo_url`, the `repoId` will be filled with `repos.id`. |
 |   repo_id   |  ✖️ No   | related Domain Layer `repos.id` <br/> No default value.                                                                                                                          |
 |    name     |  ✖️ No   | deployment name. The default value is "deployment for `request.commit_sha`"                                                                                   |
@@ -58,7 +66,7 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 | create_time |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                       |
 | start_time  |  ✔️ Yes  | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                    |
 |  end_time   |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> The default value is the time when DevLake receives the POST request.                                                                   |
-|   result    |  ✖️ No   | deployment result, one of the values : `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`, <br/> The default value is `SUCCESS`.                                                            |
+|   result    |  ✖️ No   | deployment result, one of the values: `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`. <br/> The default value is `SUCCESS`.                                                            |
 | deploymentCommits[]    |  ✖️ yes  | Allow deployment webhook to push deployments to multiple repos in one request, includes repo_url,commit_sha,commit_msg,name,ref_name    |
 
 

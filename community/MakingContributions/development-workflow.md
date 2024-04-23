@@ -37,8 +37,8 @@ git remote set-url --push upstream no_push
 Execute `git remote -v` and you'll see output like below:
 
 ```sh
-origin  github.com/apache/incubator-devlake.git (fetch)
-origin  github.com/apache/incubator-devlake.git (push)
+origin  github.com/{user}/incubator-devlake.git (fetch)
+origin  github.com/{user}/incubator-devlake.git (push)
 upstream        https://github.com/apache/incubator-devlake.git (fetch)
 upstream        no_push (push)
 ```

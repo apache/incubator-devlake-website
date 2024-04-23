@@ -16,4 +16,8 @@ description: >
   </h5>
 </div>
 
-<iframe src="https://grafana-lake.demo.devlake.io/d/KXWvOFQnz/github?orgId=1&from=now-6M&to=now" width="135%" height="3000px"></iframe>
+**View live metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/d/KXWvOFQnz/github?orgId=1&from=now-6M&to=now)**
+
+![GitHub](./GitHub.png)
+
+<!-- <iframe src="https://grafana-lake.demo.devlake.io/d/KXWvOFQnz/github?orgId=1&from=now-6M&to=now" width="135%" height="3000px"></iframe> -->

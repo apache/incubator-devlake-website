@@ -16,4 +16,8 @@ description: >
   </h5>
 </div>
 
-<iframe src="https://grafana-lake.demo.devlake.io/grafana/d/msSjEq97z/gitlab?orgId=1" width="135%" height="1800px"></iframe>
+**View live metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/grafana/d/msSjEq97z/gitlab?orgId=1)**
+
+![GitLab](./GitLab.png)
+
+<!-- <iframe src="https://grafana-lake.demo.devlake.io/grafana/d/msSjEq97z/gitlab?orgId=1" width="135%" height="1800px"></iframe> -->

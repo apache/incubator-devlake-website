@@ -99,10 +99,10 @@ An `issue` is the abstraction of Github/GitLab/BitBucket/Jira/TAPD/Zentao... iss
 
 This table shows the labels of issues. Multiple entries can exist per issue. This table can be used to filter issues by label name.
 
-| **field**  | **type** | **length** | **description**                                                   | **key**      |
-| :--------- | :------- | :--------- | :---------------------------------------------------------------- | :----------- |
-| `name`     | varchar  | 255        | Label name. Collect from GitHub issue labels or Jira issue labels |              |
-| `issue_id` | varchar  | 255        | Issue ID                                                          | FK_issues.id |
+| **field**    | **type** | **length** | **description**                                                   | **key**      |
+|:-------------| :------- | :--------- | :---------------------------------------------------------------- | :----------- |
+| `label_name` | varchar  | 255        | Label name. Collect from GitHub issue labels or Jira issue labels |              |
+| `issue_id`   | varchar  | 255        | Issue ID                                                          | FK_issues.id |
 
 #### issue_comments
 
@@ -241,7 +241,7 @@ A ref is the abstraction of a branch or tag.
 | `name`       | varchar  | 255        | The name of the ref. E.g. '[refs/tags/v0.9.3](https://github.com/apache/incubator-devlake/tree/v0.9.3)' or 'origin/main'                                                                                                                                                                                                                                    |             |
 | `repo_id`    | varchar  | 255        | The id of repo this ref belongs to                                                                                                                                                                                                                                                                                                                          | FK_repos.id |
 | `commit_sha` | char     | 40         | The commit this ref points to at the time of collection                                                                                                                                                                                                                                                                                                     |             |
-| `is_default` | tinyint  | 1          | <ul><li>0: the ref is the default branch. By the definition of [Github](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch), the default branch is the base branch for pull requests and code commits.</li><li>1: not the default branch</li></ul> |             |
+| `is_default` | tinyint  | 1          | <ul><li>0: not the default branch</li><li>1: the ref is the default branch. By the definition of [Github](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch), the default branch is the base branch for pull requests and code commits.</li></ul> |             |
 | `ref_type`   | varchar  | 64         | There are 2 typical types:<ul><li>BRANCH</li><li>TAG</li></ul>                                                                                                                                                                                                                                                                                              |             |
 
 #### commits_diffs
