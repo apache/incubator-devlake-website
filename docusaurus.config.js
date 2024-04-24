@@ -102,6 +102,15 @@ const versions = require('./versions.json');
         sidebarPath: require.resolve('./sidebarsLivedemo.js'),
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'download',
+        path: 'download',
+        routeBasePath: 'download',
+        sidebarPath: require.resolve('./sidebarsDownload.js'),
+      },
+    ],
     function tailwindcss() {
       return {
         name: 'docusaurus-tailwindcss',
@@ -201,19 +210,9 @@ const versions = require('./versions.json');
             position: 'right',
           }, 
           {
-            type: 'dropdown',
+            to: '/download',
             label: 'Download',
-            position: 'right',
-            items: [
-              {
-                label: 'Latest Release',
-                to: 'https://dist.apache.org/repos/dist/release/incubator/devlake',
-              },
-              {
-                label: 'Older Releases',
-                to: 'https://archive.apache.org/dist/incubator/devlake',
-              }
-            ],
+            position: 'right'
           },
           {
             type: 'dropdown',
@@ -330,7 +329,7 @@ const versions = require('./versions.json');
         require.resolve('@easyops-cn/docusaurus-search-local'),
         /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
         ({
-          docsRouteBasePath: ['docs','livedemo', 'community', 'blog'],
+          docsRouteBasePath: ['docs','livedemo', 'community', 'blog', 'Download'],
           hashed: true,
           explicitSearchResultPath: true,
         }),
