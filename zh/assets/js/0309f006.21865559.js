@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwww=self.webpackChunkwww||[]).push([[81422],{15963:a=>{a.exports=JSON.parse('{"label":"Grafana","permalink":"/zh/blog/tags/grafana","allTagsPath":"/zh/blog/tags","count":1}')}}]);
