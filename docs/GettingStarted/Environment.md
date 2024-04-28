@@ -10,13 +10,13 @@ This document explains how to set environment variables for Apache DevLake and w
 ### ENABLE_SUBTASKS_BY_DEFAULT
 This environment variable is used to enable or disable the execution of subtasks.
 
+#### How to set
 The format is as follows: plugin_name1:subtask_name1:enabled_value,plugin_name2:subtask_name2:enabled_value,plugin_name3:subtask_name3:enabled_value
   
 Guidance on locating the [plugin_name and subtask_name](https://github.com/apache/incubator-devlake/blob/release-v1.0/backend/plugins/jira/tasks/issue_changelog_collector.go#L41):
 
 - plugin_name: Represents the plugin's name, such as 'jira' for the Jira plugin.
 - subtask_name: Denotes the subtask's name, like 'collectIssueChangelogs' for the Jira plugin."  
-
 
 Example 1: Enable some subtasks that are closed by default
 
@@ -28,6 +28,14 @@ Example 2: Close some subtasks that are executed by default
 ```shell
 ENABLE_SUBTASKS_BY_DEFAULT="github_graphql:Collect Job Runs:false,github_graphql:Extract Job Runs:false,github_graphql:Convert Job Runs:false"
 ```
+
+#### How to take effect
+After setting the environment variable, restart the DevLake service to take effect.
+- For Docker Compose, run `docker-compose down` and `docker-compose up -d`.
+- For Helm, run `helm upgrade --install devlake apache/devlake`.
+
+
+
 
 
 
