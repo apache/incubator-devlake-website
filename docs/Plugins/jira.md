@@ -72,3 +72,6 @@ curl 'http://localhost:8080/pipelines' \
 }
 '
 ```
+
+## Enable Subtasks By Environment Variables
+Environment variables: ENABLE_SUBTASKS_BY_DEFAULT can be set to enable or disable the execution of subtasks. Check [this doc](/GettingStarted/Environment.md#enable_subtasks_by_default) for more details.

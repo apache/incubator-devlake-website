@@ -26,3 +26,7 @@ Metrics that can be calculated based on the data collected from Zentao:
 
 - Configuring Zentao via [config-ui](/Configuration/Zentao.md).
 - Configuring Zentao via Config UI's [advanced mode](/Configuration/AdvancedMode.md#8-zentao).
+
+## Enable Subtasks By Environment Variables
+Environment variables: ENABLE_SUBTASKS_BY_DEFAULT can be set to enable or disable the execution of subtasks. Check [this doc](/GettingStarted/Environment.md#enable_subtasks_by_default) for more details.
+
