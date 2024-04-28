@@ -32,7 +32,7 @@ ENABLE_SUBTASKS_BY_DEFAULT="github_graphql:Collect Job Runs:false,github_graphql
 #### How to take effect
 After setting the environment variable, restart the DevLake service to take effect.
 - For Docker Compose, run `docker-compose down` and `docker-compose up -d`.
-- For Helm, run `helm upgrade --install devlake apache/devlake`.
+- For Helm, run `helm upgrade devlake devlake/devlake --recreate-pods`.
 
 
 
