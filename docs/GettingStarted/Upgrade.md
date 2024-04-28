@@ -1,6 +1,6 @@
 ---
 title: "Upgrade"
-sidebar_position: 3
+sidebar_position: 4
 description: How to upgrade your Apache DevLake to a newer version
 ---
 

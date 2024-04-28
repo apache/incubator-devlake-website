@@ -15,6 +15,10 @@ Available for Jira Cloud, Sever/Data Center 7.x, 8.x. Check [this doc](https://d
 
 Check out the [Jira entities](/Overview/SupportedDataSources.md#data-collection-scope-by-each-plugin) collected by this plugin.
 
+### How to get more entities
+Environment Variables `ENABLE_SUBTASKS_BY_DEFAULT` can be set to enable or disable the execution of subtasks, so that more entities can be collected.
+Check [this doc](/GettingStarted/Environment.md#enable_subtasks_by_default) for more details.
+
 ## Data Refresh Policy
 
 Check out the [data refresh policy](/Overview/SupportedDataSources.md#jira) of this plugin.
