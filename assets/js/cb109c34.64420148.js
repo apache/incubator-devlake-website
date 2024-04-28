@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwww=self.webpackChunkwww||[]).push([[86911],{96718:i=>{i.exports=JSON.parse('{"title":"Config UI","slug":"Config UI","permalink":"/docs/Config UI","navigation":{"previous":{"title":"Environment Variables","permalink":"/docs/GettingStarted/Environment"},"next":{"title":"Tutorial","permalink":"/docs/Configuration/Tutorial"}}}')}}]);
