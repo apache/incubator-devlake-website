@@ -589,7 +589,7 @@ A cicd_deployment_commit is a deployment in a specific repo. A deployment may co
 - Tool layer deployments: in v0.18, only the BitBucket and Bamboo plugins collect the independent deployment entity which you can find in table.\_tool_bitbucket_deployments and \_tool_bamboo_deploy_builds, but there will be more in the future.
 - Deployments pushed directly from webhooks
 
-You can query deployments from this table by `SELECT DISTINCT cicd_deployment_id FROM cicd_deployments_commits`.
+You can query deployments from this table by `SELECT DISTINCT cicd_deployment_id FROM cicd_deployment_commits`.
 
 Normally, one deployment only deploy to one repo. But in some cases, one deployment may deploy in multiple repos with different commits. In these cases, there will be multiple pairs of deployment-commit-repo, appeared in multiple entries in this table.
 
