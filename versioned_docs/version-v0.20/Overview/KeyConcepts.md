@@ -49,7 +49,7 @@ When setting up the scope config of a GitHub data connection, you have the flexi
 #### Transformations
 Transformations are configurations for users to customize how DevLake transforms raw API responses to the domain layer data.
 
-Although configuring transformation rules is not mandatory, certain pre-built dashboards, such as [DORA](/livedemo/EngineeringLeads/DORA) and [Weekly Bug Retro](/livedemo/QAEngineers/WeeklyBugRetro) require the them to display the metrics accurately. If you leave the rules blank or have not configured them correctly, only a few [data source dashboards](/livedemo/DataSources/GitHub) will be displayed as expected. 
+Although configuring transformation rules is not mandatory, certain pre-built dashboards, such as [DORA](/livedemo/EngineeringLeads/DORA) and [Weekly Bug Retro](/livedemo/EngineeringLeads/WeeklyBugRetro) require the them to display the metrics accurately. If you leave the rules blank or have not configured them correctly, only a few [data source dashboards](/livedemo/DataSources/GitHub) will be displayed as expected. 
 
 You can find the required transformations in the 'Dashboard Introduction' panel in each pre-built dashboard.
 
@@ -68,13 +68,14 @@ You can find the required transformations in the 'Dashboard Introduction' panel 
 2. Setting up the [data scope](#data-scope): When adding a data connection, you can choose to collect all or part of the configured data scopes of the data connection.
 3. Setting up the sync policy: You can specify the sync frequency and the time range for data collection.
 
-The relationship between 'Blueprint', 'Data Connection' and 'Scope COnfig' is explained as follows:
+The relationship between 'Blueprint', 'Project' and 'Data Connection' is explained as follows:
 
 ![Blueprint ERD](../Configuration/images/blueprint-erd.svg)
+- A blueprint will be automatically created by along the creation with a DevLake project.
 - Each blueprint can have multiple data connections.
 - Each data connection can have multiple data scopes.
 - Each set of data scope only consists of one GitHub/GitLab project or Jira board, along with their corresponding data entities.
-- Each set of data scope can only have one set of transformation rules.
+- Each set of data scope can only have one set of scope config.
 
 ## APIs and Config UI Advanced Mode
 

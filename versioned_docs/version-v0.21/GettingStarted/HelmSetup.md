@@ -72,29 +72,33 @@ grafana by url `http://YOUR-NODE-IP:30091`
 
 ### Upgrade
 
-**Note:**
+:::caution
 
 **Back up your Grafana dashboards** before upgrading if you have modified/customized any dashboards. You can re-import these dashboards to Grafana after the upgrade.
 
-**If you're upgrading from DevLake v0.17.x or earlier versions to v0.18.x or later versions:**
+:::
+
+**If you are upgrading from DevLake v0.18.x or later versions:**
+
+```shell
+helm repo update
+helm upgrade devlake devlake/devlake --version=0.20.0-beta8
+```
+
+<br/>
+
+**If you are upgrading from DevLake v0.17.x or earlier versions to v0.18.x or later versions:**
 
 1. Copy the ENCODE_KEY value from /app/config/.env of the lake pod (e.g. devlake-lake-0), and replace the <ENCRYPTION_SECRET> in the upgrade command below.
 
 2. You may encounter the below error when upgrading because the built-in grafana has been replaced by the official grafana dependency. So you may need to delete the grafana deployment first.
 
-> Error: UPGRADE FAILED: cannot patch "devlake-grafana" with kind Deployment: Deployment.apps "devlake-grafana" is invalid: spec.selector: Invalid value: v1.LabelSelector{MatchLabels:map[string]string{"app.kubernetes.io/instance":"devlake", "app.kubernetes.io/name":"grafana"}, MatchExpressions:[]v1.LabelSelectorRequirement(nil)}: field is immutable
+  > Error: UPGRADE FAILED: cannot patch "devlake-grafana" with kind Deployment: Deployment.apps "devlake-grafana" is invalid: spec.selector: Invalid value: v1.LabelSelector{MatchLabels:map[string]string{"app.kubernetes.io/instance":"devlake", "app.kubernetes.io/name":"grafana"}, MatchExpressions:[]v1.LabelSelectorRequirement(nil)}: field is immutable
 
-```shell
-helm repo update
-helm upgrade devlake devlake/devlake --version=0.21.0-beta1 --set lake.encryptionSecret.secret=<ENCRYPTION_SECRET>
-```
-
-**If you're upgrading from DevLake v0.18.x or later versions:**
-
-```shell
-helm repo update
-helm upgrade devlake devlake/devlake --version=0.21.0-beta1
-```
+  ```shell
+  helm repo update
+  helm upgrade devlake devlake/devlake --version=0.20.0-beta8 --set lake.encryptionSecret.secret=<ENCRYPTION_SECRET>
+  ```
 
 ### Uninstall
 

@@ -1,6 +1,26 @@
 {
     "data": [
         {
+            "title": "Quick Start Guide: Setup Your First Engineering Metrics Dashboard in 5 Minutes",
+            "readTime": "3 min",
+            "authorName": "Joshua Poddoku",
+            "authorImgUrl": "https://avatars.githubusercontent.com/u/31725457?v=4",
+            "publishTime": "2024/04/24",
+            "detailLink": "/blog/Quick-Start-Guide-Setup-Your-First-Engineering-Metrics-Dashboard-in-5-Minutes",
+            "coverTitle": "Setup-Your-First-Engineering-Metrics",
+            "summary": "Kickstart your Proof of Concept (POC) and onboard to DevLake within minutes! Easily integrate your favorite tools such as GitHub, GitLab, BitBucket, and Azure DevOps. Just follow our streamlined 3-step tutorial to quickly set up your first engineering metrics dashboard"
+        },
+        {
+            "title": "DevLake Playground: How to explore your data",
+            "readTime": "3 min",
+            "authorName": "Jochum Börger & Lennart Tange",
+            "authorImgUrl": "https://avatars.githubusercontent.com/u/375746?s=200&v=4",
+            "publishTime": "2024/03/15",
+            "detailLink": "/blog/DevLake-Playground-How-to-explore-your-data",
+            "coverTitle": "DevLake-Playground-How-to-explore-your-data",
+            "summary": "We'd like to introduce the DevLake Playground, a place where you can look beyond the dashboard overviews and find the golden nuggets buried deep within the data using the power of Python."
+        },
+        {
             "title": "Compatibility of Apache DevLake with PostgreSQL",
             "readTime": "3 min",
             "authorName": "ZhangLiang",

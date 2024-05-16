@@ -25,16 +25,30 @@ The number of deployments affected by incidents/total number of deployments. For
 
 When there are multiple deployments triggered by one pipeline, tools like GitLab and BitBucket will generate more than one deployment. In these cases, DevLake will consider these deployments as ONE deployment and use the last deployment's finished date as the deployment finished date.
 
-Below are the benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's change failure rate is `18%` or `40%`. Therefore, DevLake provides its own benchmarks to address this problem:
+Below are the 2023 DORA benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's change failure rate is between 15% and 64%. Therefore, DevLake provides its own benchmarks to address this problem:
 
 | Groups            | Benchmarks | DevLake Benchmarks |
 | ----------------- | ---------- | ------------------ |
-| Elite performers  | 0%-15%     | 0%-15%             |
-| High performers   | 16%-30%    | 16-20%             |
-| Medium performers | 16%-30%    | 21%-30%            |
-| Low performers    | 16%-30%    | > 30%              |
+| Elite performers  | 5%     	 | (0, 5%]            |
+| High performers   | 10%        | (5%, 10%]          |
+| Medium performers | 15%        | (10%, 15%]         |
+| Low performers    | 64%        | (15%, 100%]        |
+
+<details>
+<summary>Click to expand or collapse 2021 DORA benchmarks</summary>
+
+| Groups            | Benchmarks | DevLake Benchmarks |
+| ----------------- | ---------- | ------------------ |
+| Elite performers  | 0%-15%     | (0, 15%]           |
+| High performers   | 16%-30%    | (16%, 20%]         |
+| Medium performers | 16%-30%    | (21%, 30%]         |
+| Low performers    | 16%-30%    | (30%, 100%]        |
 
 <p><i>Source: 2021 Accelerate State of DevOps, Google</i></p>
+</details>
+<br>
+</br>
+
 
 <b>Data Sources Required</b>
 
@@ -58,11 +72,11 @@ with _deployments as (
 	SELECT
 		cdc.cicd_deployment_id as deployment_id,
 		max(cdc.finished_date) as deployment_finished_date
-	FROM
+	FROM 
 		cicd_deployment_commits cdc
 		JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id and pm.`table` = 'cicd_scopes'
 	WHERE
-		pm.project_name in ($project)
+		pm.project_name in (${project:sqlstring}+'')
 		and cdc.result = 'SUCCESS'
 		and cdc.environment = 'PRODUCTION'
 	GROUP BY 1
@@ -83,9 +97,9 @@ _failure_caused_by_deployments as (
 ),
 
 _change_failure_rate_for_each_month as (
-	SELECT
+	SELECT 
 		date_format(deployment_finished_date,'%y/%m') as month,
-		case
+		case 
 			when count(deployment_id) is null then null
 			else sum(has_incident)/count(deployment_id) end as change_failure_rate
 	FROM
@@ -93,10 +107,10 @@ _change_failure_rate_for_each_month as (
 	GROUP BY 1
 )
 
-SELECT
+SELECT 
 	cm.month,
 	cfr.change_failure_rate
-FROM
+FROM 
 	calendar_months cm
 	LEFT JOIN _change_failure_rate_for_each_month cfr on cm.month = cfr.month
 	WHERE $__timeFilter(cm.month_timestamp)
@@ -107,16 +121,17 @@ If you want to measure in which category your team falls, run the following SQL 
 ![](/img/Metrics/cfr-text.jpeg)
 
 ```
+-- Metric 4: change failure rate
 with _deployments as (
 -- When deploying multiple commits in one pipeline, GitLab and BitBucket may generate more than one deployment. However, DevLake consider these deployments as ONE production deployment and use the last one's finished_date as the finished date.
 	SELECT
 		cdc.cicd_deployment_id as deployment_id,
 		max(cdc.finished_date) as deployment_finished_date
-	FROM
+	FROM 
 		cicd_deployment_commits cdc
-		JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id
+		JOIN project_mapping pm on cdc.cicd_scope_id = pm.row_id and pm.`table` = 'cicd_scopes'
 	WHERE
-		pm.project_name in ($project)
+		pm.project_name in (${project:sqlstring}+'')
 		and cdc.result = 'SUCCESS'
 		and cdc.environment = 'PRODUCTION'
 	GROUP BY 1
@@ -137,8 +152,8 @@ _failure_caused_by_deployments as (
 ),
 
 _change_failure_rate as (
-	SELECT
-		case
+	SELECT 
+		case 
 			when count(deployment_id) is null then null
 			else sum(has_incident)/count(deployment_id) end as change_failure_rate
 	FROM
@@ -146,13 +161,26 @@ _change_failure_rate as (
 )
 
 SELECT
-	case
-		when change_failure_rate <= .15 then "0-15%"
-		when change_failure_rate <= .20 then "16%-20%"
-		when change_failure_rate <= .30 then "21%-30%"
-		else "> 30%"
-	end as change_failure_rate
-FROM
+  CASE
+    WHEN ('$benchmarks') = '2023 report' THEN
+			CASE  
+				WHEN change_failure_rate <= 5 THEN "0-5%(elite)"
+				WHEN change_failure_rate <= .10 THEN "5%-10%(high)"
+				WHEN change_failure_rate <= .15 THEN "10%-15%(medium)"
+				WHEN change_failure_rate > .15 THEN "> 15%(low)"
+				ELSE "N/A. Please check if you have collected deployments/incidents."
+				END
+		WHEN ('$benchmarks') = '2021 report' THEN
+			CASE  
+				WHEN change_failure_rate <= .15 THEN "0-15%(elite)"
+				WHEN change_failure_rate <= .20 THEN "16%-20%(high)"
+				WHEN change_failure_rate <= .30 THEN "21%-30%(medium)"
+				WHEN change_failure_rate > .30 THEN "> 30%(low)" 
+				ELSE "N/A. Please check if you have collected deployments/incidents."
+				END
+		ELSE 'Invalid Benchmarks'
+	END AS change_failure_rate
+FROM 
 	_change_failure_rate
 ```
 

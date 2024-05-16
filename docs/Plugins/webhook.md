@@ -14,6 +14,8 @@ In v0.14+, users can push "incidents" and "deployments" required by DORA metrics
 
 Webhooks are meant to be used at the lowest level that you want to relate incidents with deployments. For example, if you want to relate incidents at the individual service level, you will need a webhook per service. If you wish to relate incidents at the product level, you will need a webhook for the product. This is because incidents on a project will be related to the last deployment on the project with a timestamp that is before the incident's timestamp. This is true regardless of the source of incidents or deployments.
 
+Note: If you post incidents using webhook due to your tool not being supported but your deployments are collected via plugins automatically, you need to re-collect data for deployments for the posted incidents to get mapped to deployments based on timestamps. This is required for Change Failure Rate (DORA) metric to show up correctly for the project.
+
 Diagram of the relationship between incidents and deployments:
 
 ![Change Failure Reporting](/img/Metrics/cfr-definition.png)
@@ -65,8 +67,7 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 | start_time  |  ✔️ Yes  | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                       |
 |  end_time   |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> The default value is the time when DevLake receives the POST request.                                                                   |
 |   result    |  ✖️ No   | deployment result, one of the values : `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`, <br/> The default value is `SUCCESS`.                                                            |
-| deploymentCommits[]    |  ✖️ yes  | Allow deployment webhook to push deployments to multiple repos in one request, includes repo_url,commit_sha,commit_msg,name,ref_name                                  |
-
+| deployment_commits[]    |  ✖️ yes  | Allow deployment webhook to push deployments to multiple repos in one request, includes display_title,repo_url,commit_sha,commit_msg,name,ref_name                   |
 
 
 #### Register a Deployment - Sample API Calls
@@ -104,7 +105,7 @@ curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
     "result": "FAILURE",
     "deploymentCommits":[
        {
-           "display_title":"optional-custom-deployment-commit-display-title",
+           "display_title":"optional-custom-deployment-commit-display-title-1",
            "repo_url":"repo-1",
            "name":"optional, if null, it will be deployment for {commit_sha}",
            "ref_name": "optional-release-v0.17",
@@ -112,7 +113,7 @@ curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
            "commit_msg":"optional-msg-1"
        },
        {
-           "display_title":"optional-custom-deployment-commit-display-title",
+           "display_title":"optional-custom-deployment-commit-display-title-2",
            "repo_url":"repo-2",
            "name":"optional, if null, it will be deployment for {commit_sha}",
            "ref_name": "optional-release-v0.17",

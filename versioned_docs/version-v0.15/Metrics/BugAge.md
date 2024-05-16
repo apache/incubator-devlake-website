@@ -15,8 +15,7 @@ The amount of time it takes a bug to fix.
 ## Which dashboard(s) does it exist in
 - [Jira](https://devlake.apache.org/livedemo/DataSources/Jira)
 - [GitHub](https://devlake.apache.org/livedemo/DataSources/GitHub)
-- [Weekly Bug Retro](https://devlake.apache.org/livedemo/QAEngineers/WeeklyBugRetro)
-
+- [Weekly Bug Retro](https://devlake.apache.org/livedemo/EngineeringLeads/WeeklyBugRetro)
 
 ## How is it calculated?
 Similar to [requirement lead time](./RequirementLeadTime.md), this metric equals `resolution_date - created_date` of issues in type "BUG".

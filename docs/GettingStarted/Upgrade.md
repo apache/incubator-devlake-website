@@ -1,8 +1,16 @@
 ---
 title: "Upgrade"
-sidebar_position: 3
+sidebar_position: 4
 description: How to upgrade your Apache DevLake to a newer version
 ---
+
+## How to Upgrade to a new version
+Please follow the guide for detailed information:
+
+- Upgrade via [Docker Compose](DockerComposeSetup.md#upgrade)
+- Upgrade via [Helm](HelmSetup.md#upgrade)
+
+## Key points
 
 1. ENCRYPTION_SECRET: It is important to keep the ENCRYPTION_SECRET safe as it is used to encrypt sensitive information in the database, such as personal access tokens and passwords. Losing the ENCRYPTION_SECRET may result in the inability to decrypt this sensitive information.
 

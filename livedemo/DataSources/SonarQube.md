@@ -16,4 +16,8 @@ description: >
   </h5>
 </div>
 
-<iframe src="https://grafana-lake.demo.devlake.io/grafana/d/WA0qbuJ4k/sonarqube?orgId=1&from=now-6M&to=now" width="135%" height="1240px"></iframe>
+**View live metrics on [🔗 Grafana](https://grafana-lake.demo.devlake.io/grafana/d/WA0qbuJ4k/sonarqube?orgId=1&from=now-6M&to=now)**
+
+![SonarQube](./SonarQube.png)
+
+<!-- <iframe src="https://grafana-lake.demo.devlake.io/grafana/d/WA0qbuJ4k/sonarqube?orgId=1&from=now-6M&to=now" width="135%" height="1240px"></iframe> -->

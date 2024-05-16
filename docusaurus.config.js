@@ -102,6 +102,15 @@ const versions = require('./versions.json');
         sidebarPath: require.resolve('./sidebarsLivedemo.js'),
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'download',
+        path: 'download',
+        routeBasePath: 'download',
+        sidebarPath: require.resolve('./sidebarsDownload.js'),
+      },
+    ],
     function tailwindcss() {
       return {
         name: 'docusaurus-tailwindcss',
@@ -133,7 +142,12 @@ const versions = require('./versions.json');
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     (
       {
-      metadata: [{name: 'keywords', content: 'Engineering Productivity, Open-Source Engineering, Open-Source Integration Tools, Data Integrates Platform, Open-Source Dev Platform, Open-Source Data Integrates, DevOps Tools Integrates, Open-Source DevOps Tools'}],
+      metadata: [
+          {
+            name: 'keywords',
+            content: 'Engineering Productivity, Open-Source Engineering, Open-Source Integration Tools, Data Integrates Platform, Open-Source Dev Platform, Open-Source Data Integrates, DevOps Tools Integrates, Open-Source DevOps Tools'
+          }
+      ],
       navbar: {
         title: 'Apache DevLake',
         logo: {
@@ -196,19 +210,9 @@ const versions = require('./versions.json');
             position: 'right',
           }, 
           {
-            type: 'dropdown',
+            to: '/download',
             label: 'Download',
-            position: 'right',
-            items: [
-              {
-                label: 'Latest Release',
-                to: 'https://dist.apache.org/repos/dist/release/incubator/devlake',
-              },
-              {
-                label: 'Older Releases',
-                to: 'https://archive.apache.org/dist/incubator/devlake',
-              }
-            ],
+            position: 'right'
           },
           {
             type: 'dropdown',
@@ -325,7 +329,7 @@ const versions = require('./versions.json');
         require.resolve('@easyops-cn/docusaurus-search-local'),
         /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
         ({
-          docsRouteBasePath: ['docs','livedemo', 'community', 'blog'],
+          docsRouteBasePath: ['docs','livedemo', 'community', 'blog', 'Download'],
           hashed: true,
           explicitSearchResultPath: true,
         }),
