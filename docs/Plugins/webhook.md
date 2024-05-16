@@ -53,22 +53,21 @@ If you want to collect deployment data from your system, you can use the incomin
 
 You can copy the generated deployment curl commands to your CI/CD script to post deployments to Apache DevLake. Below is the detailed payload schema:
 
-|     Key     | Required | Notes                                                                                                                                                                           |
-| :---------: | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| pipeline_id |  ✖️ No   | related Domain Layer `cicd_pipelines.id`                                                                                                                                         |
-| environment |  ✖️ No   | the environment this deployment happens, one of the values: `PRODUCTION`, `STAGING`, `TESTING`, `DEVELOPMENT`. <br/>The default value is `PRODUCTION`.                  |
+|     Key     | Required | Notes                                                                                                                                                                            |
+| :---------: |:--------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pipeline_id |  ✔️ Yes  | related Domain Layer `cicd_pipelines.id`, it's optional before v1.0.0-beta8.                                                                                                     |
+| environment |  ✖️ No   | the environment this deployment happens. For example, `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br/>The default value is `PRODUCTION`                                     |
 |  repo_url   |  ✔️ Yes  | the repo URL of the deployment commit<br />If there is a row in the domain layer table `repos` where `repos.url` equals `repo_url`, the `repoId` will be filled with `repos.id`. |
 |   repo_id   |  ✖️ No   | related Domain Layer `repos.id` <br/> No default value.                                                                                                                          |
-|    name     |  ✖️ No   | deployment name. The default value is "deployment for `request.commit_sha`"                                                                                   |
-|  ref_name   |  ✖️ No   | related branch/tag<br/> No default value.                                                                                                                     |
-| commit_sha  |  ✔️ Yes  | the sha of the deployment commit                                                                                                                              |
-| commit_msg  |  ✖️ No   | the sha of the deployment commit message                                                                                                                      |
+|    name     |  ✖️ No   | deployment name. The default value is "deployment for `request.commit_sha`"                                                                                                      |
+|  ref_name   |  ✖️ No   | related branch/tag<br/> No default value.                                                                                                                                        |
+| commit_sha  |  ✔️ Yes  | the sha of the deployment commit                                                                                                                                                 |
+| commit_msg  |  ✖️ No   | the sha of the deployment commit message                                                                                                                                         |
 | create_time |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                       |
-| start_time  |  ✔️ Yes  | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                    |
+| start_time  |  ✔️ Yes  | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                       |
 |  end_time   |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> The default value is the time when DevLake receives the POST request.                                                                   |
-|   result    |  ✖️ No   | deployment result, one of the values: `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`. <br/> The default value is `SUCCESS`.                                                            |
-| deploymentCommits[]    |  ✖️ yes  | Allow deployment webhook to push deployments to multiple repos in one request, includes repo_url,commit_sha,commit_msg,name,ref_name    |
-
+|   result    |  ✖️ No   | deployment result, one of the values : `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`, <br/> The default value is `SUCCESS`.                                                            |
+| deployment_commits[]    |  ✖️ yes  | Allow deployment webhook to push deployments to multiple repos in one request, includes display_title,repo_url,commit_sha,commit_msg,name,ref_name                   |
 
 
 #### Register a Deployment - Sample API Calls
@@ -80,6 +79,7 @@ curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
     "environment":"PRODUCTION",
     "repo_url":"https://github.com/apache/incubator-devlake/",
     "repo_id": "optional-repo-id",
+    "display_title":"optional-custom-deploy-display-title",
     "name": "optional-deployment-name. If you do not post a name, DevLake will generate one for you.",
     "ref_name": "optional-release-v0.17",
     "commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d",
@@ -97,6 +97,7 @@ curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
     "pipeline_id": "optional-pipeline-id",
     "environment":"PRODUCTION",
     "repo_id": "optional-repo-id",
+    "display_title":"optional-custom-deploy-display-title",
     "name": "optional-deployment-name. If you do not post a name, DevLake will generate one for you.",
     "create_time":"2020-01-01T11:00:00+00:00",
     "start_time":"2020-01-01T12:00:00+00:00",
@@ -104,6 +105,7 @@ curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
     "result": "FAILURE",
     "deploymentCommits":[
        {
+           "display_title":"optional-custom-deployment-commit-display-title-1",
            "repo_url":"repo-1",
            "name":"optional, if null, it will be deployment for {commit_sha}",
            "ref_name": "optional-release-v0.17",
@@ -111,6 +113,7 @@ curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
            "commit_msg":"optional-msg-1"
        },
        {
+           "display_title":"optional-custom-deployment-commit-display-title-2",
            "repo_url":"repo-2",
            "name":"optional, if null, it will be deployment for {commit_sha}",
            "ref_name": "optional-release-v0.17",
