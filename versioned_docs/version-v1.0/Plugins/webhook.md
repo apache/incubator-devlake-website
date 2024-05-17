@@ -14,6 +14,8 @@ In v0.14+, users can push "incidents" and "deployments" required by DORA metrics
 
 Webhooks are meant to be used at the lowest level that you want to relate incidents with deployments. For example, if you want to relate incidents at the individual service level, you will need a webhook per service. If you wish to relate incidents at the product level, you will need a webhook for the product. This is because incidents on a project will be related to the last deployment on the project with a timestamp that is before the incident's timestamp. This is true regardless of the source of incidents or deployments.
 
+Note: If you post incidents using webhook due to your tool not being supported but your deployments are collected via plugins automatically, you need to re-collect data for deployments for the posted incidents to get mapped to deployments based on timestamps. This is required for Change Failure Rate (DORA) metric to show up correctly for the project.
+
 Diagram of the relationship between incidents and deployments:
 
 ![Change Failure Reporting](/img/Metrics/cfr-definition.png)
@@ -51,22 +53,22 @@ If you want to collect deployment data from your system, you can use the incomin
 
 You can copy the generated deployment curl commands to your CI/CD script to post deployments to Apache DevLake. Below is the detailed payload schema:
 
-|     Key     | Required | Notes                                                                                                                                                                           |
-| :---------: | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| pipeline_id |  ✖️ No   | related Domain Layer `cicd_pipelines.id`                                                                                                                                         |
-| environment |  ✖️ No   | the environment this deployment happens, one of the values: `PRODUCTION`, `STAGING`, `TESTING`, `DEVELOPMENT`. <br/>The default value is `PRODUCTION`.                  |
-|  repo_url   |  ✔️ Yes  | the repo URL of the deployment commit<br />If there is a row in the domain layer table `repos` where `repos.url` equals `repo_url`, the `repoId` will be filled with `repos.id`. |
-|   repo_id   |  ✖️ No   | related Domain Layer `repos.id` <br/> No default value.                                                                                                                          |
-|    name     |  ✖️ No   | deployment name. The default value is "deployment for `request.commit_sha`"                                                                                   |
-|  ref_name   |  ✖️ No   | related branch/tag<br/> No default value.                                                                                                                     |
-| commit_sha  |  ✔️ Yes  | the sha of the deployment commit                                                                                                                              |
-| commit_msg  |  ✖️ No   | the sha of the deployment commit message                                                                                                                      |
-| create_time |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                       |
-| start_time  |  ✔️ Yes  | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                    |
-|  end_time   |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> The default value is the time when DevLake receives the POST request.                                                                   |
-|   result    |  ✖️ No   | deployment result, one of the values: `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`. <br/> The default value is `SUCCESS`.                                                            |
-| deploymentCommits[]    |  ✖️ yes  | Allow deployment webhook to push deployments to multiple repos in one request, includes repo_url,commit_sha,commit_msg,name,ref_name    |
-
+|        Key         | Required | Notes                                                                                                                                                                            |
+|:------------------:|:--------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|    pipeline_id     |  ✔️ Yes  | This will be the unique id of table cicd_deployments. This key was optional before v1.0.0-beta8.                                                                                 |
+|    environment     |  ✖️ No   | the environment this deployment happens. For example, `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br/>The default value is `PRODUCTION`                                     |
+|      repo_url      |  ✔️ Yes  | the repo URL of the deployment commit<br />If there is a row in the domain layer table `repos` where `repos.url` equals `repo_url`, the `repoId` will be filled with `repos.id`. |
+|      repo_id       |  ✖️ No   | related Domain Layer `repos.id` <br/> No default value.                                                                                                                          |
+|        name        |  ✖️ No   | deployment name. The default value is "deployment for `request.commit_sha`"                                                                                                      |
+|   display_title    |  ✖️ No   | deployment display_title. No default value.                                                                                                                                      |
+|      ref_name      |  ✖️ No   | related branch/tag<br/> No default value.                                                                                                                                        |
+|     commit_sha     |  ✔️ Yes  | the sha of the deployment commit                                                                                                                                                 |
+|     commit_msg     |  ✖️ No   | the sha of the deployment commit message                                                                                                                                         |
+|    create_time     |  ✖️ No   | Time. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                      |
+|     start_time     |  ✔️ Yes  | Time. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                       |
+|      end_time      |  ✖️ No   | Time. E.g. 2020-01-01T12:00:00+00:00<br/> The default value is the time when DevLake receives the POST request.                                                                   |
+|       result       |  ✖️ No   | deployment result, one of the values : `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`, <br/> The default value is `SUCCESS`.                                                            |
+| deployment_commits |  ✖ No   | Allow deployment webhook to push deployments to multiple repos in one request, includes display_title,repo_url,commit_sha,commit_msg,name,ref_name.                              |  
 
 
 #### Register a Deployment - Sample API Calls
@@ -74,10 +76,11 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 To deploy on a single repository, use the following command:
 ```
 curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
-    "pipeline_id": "optional-pipeline-id",
+    "pipeline_id": "required-pipeline-id",
     "environment":"PRODUCTION",
     "repo_url":"https://github.com/apache/incubator-devlake/",
     "repo_id": "optional-repo-id",
+    "display_title":"optional-custom-deploy-display-title",
     "name": "optional-deployment-name. If you do not post a name, DevLake will generate one for you.",
     "ref_name": "optional-release-v0.17",
     "commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d",
@@ -92,16 +95,18 @@ curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
 To deploy across multiple repositories (refer to the [discussion](https://github.com/apache/incubator-devlake/discussions/6162)), use the following command:
 ```
 curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
-    "pipeline_id": "optional-pipeline-id",
+    "pipeline_id": "required-pipeline-id",
     "environment":"PRODUCTION",
     "repo_id": "optional-repo-id",
+    "display_title":"optional-custom-deploy-display-title",
     "name": "optional-deployment-name. If you do not post a name, DevLake will generate one for you.",
     "create_time":"2020-01-01T11:00:00+00:00",
     "start_time":"2020-01-01T12:00:00+00:00",
     "end_time":"2020-01-02T13:00:00+00:00",
     "result": "FAILURE",
-    "deploymentCommits":[
+    "deployment_commits":[
        {
+           "display_title":"optional-custom-deployment-commit-display-title-1",
            "repo_url":"repo-1",
            "name":"optional, if null, it will be deployment for {commit_sha}",
            "ref_name": "optional-release-v0.17",
@@ -109,6 +114,7 @@ curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
            "commit_msg":"optional-msg-1"
        },
        {
+           "display_title":"optional-custom-deployment-commit-display-title-2",
            "repo_url":"repo-2",
            "name":"optional, if null, it will be deployment for {commit_sha}",
            "ref_name": "optional-release-v0.17",
@@ -123,7 +129,8 @@ If you have set a [username/password](GettingStarted/Authentication.md) for Conf
 
 ```
 curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
-    "deploymentCommits":[
+    "pipeline_id": "required-pipeline-id",
+    "deployment_commits":[
         {
         "commit_sha":"the sha of deployment commit1",
         "repo_url":"the repo URL of the deployment commit"
@@ -169,6 +176,7 @@ jobs:
             # Send the request to DevLake after deploy
             # The values start with a '$CIRCLE_' are CircleCI's built-in variables
             curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d "{
+              \"pipeline_id\": \"$PIPLINE_ID\",
               \"commit_sha\":\"$CIRCLE_SHA1\",
               \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
               \"start_time\":\"$start_time\"
