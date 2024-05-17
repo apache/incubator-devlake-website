@@ -67,7 +67,7 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 |      start_time       |  ✔️ Yes  | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                       |
 |       end_time        |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> The default value is the time when DevLake receives the POST request.                                                                   |
 |        result         |  ✖️ No   | deployment result, one of the values : `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`, <br/> The default value is `SUCCESS`.                                                            |
-|  deployment_commits   |   ✖ No   | Allow deployment webhook to push deployments to multiple repos in one request, includes display_title,repo_url,commit_sha,commit_msg,name,ref_name.                              |  
+|  deployment_commits   |  ✖ No   | Allow deployment webhook to push deployments to multiple repos in one request, includes display_title,repo_url,commit_sha,commit_msg,name,ref_name.                              |  
 
 
 #### Register a Deployment - Sample API Calls
