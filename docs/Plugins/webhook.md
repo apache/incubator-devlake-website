@@ -53,8 +53,8 @@ If you want to collect deployment data from your system, you can use the incomin
 
 You can copy the generated deployment curl commands to your CI/CD script to post deployments to Apache DevLake. Below is the detailed payload schema:
 
-|        Key         | Required | Notes                                                                                                                                                                            |
-|:------------------:|:--------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|        Key         | Required | Notes                                                                                                                                                                           |
+|:------------------:|:--------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |    pipeline_id     |  ✔️ Yes  | This will be the unique id of table cicd_deployments. This key was optional before v1.0.0-beta8.                                                                                 |
 |    environment     |  ✖️ No   | the environment this deployment happens. For example, `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br/>The default value is `PRODUCTION`                                     |
 |      repo_url      |  ✔️ Yes  | the repo URL of the deployment commit<br />If there is a row in the domain layer table `repos` where `repos.url` equals `repo_url`, the `repoId` will be filled with `repos.id`. |
@@ -65,8 +65,8 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 |     commit_sha     |  ✔️ Yes  | the sha of the deployment commit                                                                                                                                                 |
 |     commit_msg     |  ✖️ No   | the sha of the deployment commit message                                                                                                                                         |
 |    create_time     |  ✖️ No   | Time. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                      |
-|     start_time     |  ✔️ Yes  | Time. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                       |
-|      end_time      |  ✖️ No   | Time. E.g. 2020-01-01T12:00:00+00:00<br/> The default value is the time when DevLake receives the POST request.                                                                   |
+|     start_time     |  ✔️ Yes  | Time. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                      |
+|      end_time      |  ✖️ No   | Time. E.g. 2020-01-01T12:00:00+00:00<br/> The default value is the time when DevLake receives the POST request.                                                                  |
 |       result       |  ✖️ No   | deployment result, one of the values : `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`, <br/> The default value is `SUCCESS`.                                                            |
 | deployment_commits |  ✖ No   | Allow deployment webhook to push deployments to multiple repos in one request, includes display_title,repo_url,commit_sha,commit_msg,name,ref_name.                              |  
 
