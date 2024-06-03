@@ -66,6 +66,8 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 |      deploymentCommits.repoUrl      |  ✔️ Yes  | The repo URL of the deployment commit<br />If there is a row in the domain layer table `repos` where `repos.url` equals `repo_url`, the `repoId` will be filled with `repos.id`. |
 |      deploymentCommits.repoId       |  ✖️ No   | Deprecated.                 |
 |      deploymentCommits.refName      |  ✖️ No   | The branch/tag to deploy <br/> No default value.      |
+|      deploymentCommits.startedDate      |  ✔️ Yes   | The start time of the deploy to this repo. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.      |
+|      deploymentCommits.finishedDate      |  ✔️ Yes   | The end time of the deploy to this repo. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.      |
 |     deploymentCommits.commitSha     |  ✔️ Yes  | Commit sha that triggers the deploy in this repo |
 |     deploymentCommits.commitMsg     |  ✖️ No   | Commit sha of the deployment commit message   |
 |   deploymentCommits.displayTitle    |  ✖️ No   | A readable title for the deployment to this repo.            |
