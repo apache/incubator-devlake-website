@@ -70,6 +70,7 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 |      deploymentCommits.finishedDate      |  ✔️ Yes   | The end time of the deploy to this repo. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.      |
 |     deploymentCommits.commitSha     |  ✔️ Yes  | Commit sha that triggers the deploy in this repo |
 |     deploymentCommits.commitMsg     |  ✖️ No   | Commit sha of the deployment commit message   |
+|   deploymentCommits.result    |  ✖️ No   | The result of the deploy to this repo.            |
 |   deploymentCommits.displayTitle    |  ✖️ No   | A readable title for the deployment to this repo.            |
 |       deploymentCommits.name        |  ✖️ No   | Deprecated.   |
 
