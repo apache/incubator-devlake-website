@@ -56,9 +56,9 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 |        Key         | Required | Notes                                                                                                                                                                           |
 |:------------------:|:--------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |             id     |  ✔️ Yes  | This will be the unique ID of table cicd_deployments. This key replaced pipeline_id for clarity.                           |
-|    createdDate     |  ✖️ No   | Time. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.             |
-|     startedDate     |  ✔️ Yes  | Time. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.             |
-|      finishedDate   |  ✔️ Yes   | Time. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.            |
+|    createdDate     |  ✖️ No   | The time this deploy pipeline starts. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.             |
+|     startedDate     |  ✔️ Yes  | The time when the first deploy to a certain repo starts. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.             |
+|      finishedDate   |  ✔️ Yes   | The time when the last deploy to a certain repo ends. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.            |
 |    environment     |  ✖️ No   | The environment this deployment happens. For example, `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br/>The default value is `PRODUCTION`                                     |
 |       result       |  ✖️ No   | deployment result, one of the values : `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`, <br/> The default value is `SUCCESS`.                  |
 |   displayTitle    |  ✖️ No   | A readable title for the deployment.   |
@@ -96,6 +96,8 @@ curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -H 'Authori
        {
            "repoUrl":"required-repo-url",
            "refName": "optional-release-v0.17",
+           "startedDate":"2020-01-01T11:00:00+00:00",
+           "finishedDate":"2020-01-02T11:00:00+00:00",
            "commitSha":"c1",
            "commitMsg":"optional-msg-1",
            "name":"optional, if null, it will be deployment for {commit_sha}",
@@ -104,6 +106,8 @@ curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -H 'Authori
        {
            "repoUrl":"repo-2",
            "refName": "optional-release-v0.17",
+           "startedDate":"2020-01-01T11:00:00+00:00",
+           "finishedDate":"2020-01-02T11:00:00+00:00",
            "commitSha":"c2",
            "commitMsg":"optional-msg-2",
            "name":"optional, if null, it will be deployment for {commit_sha}",
