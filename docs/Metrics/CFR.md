@@ -11,7 +11,7 @@ The percentage of changes that were made to a code that then resulted in inciden
 
 ## Why is it important?
 
-Unlike Deployment Frequency and Lead Time for Changes that measure the throughput, Change Failure Rate measures the stability and quality of software delivery. A low CFR reflects a bad end-user experience as the production failure is relatively high.
+Unlike Deployment Frequency and Lead Time for Changes that measure the throughput, Change Failure Rate measures the stability and quality of software delivery. A high CFR reflects a bad end-user experience as the production failure is relatively high.
 
 ## Which dashboard(s) does it exist in
 
