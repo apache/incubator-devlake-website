@@ -50,7 +50,7 @@ DevLake measures DORA metrics at the [project level](Configuration/HowToOrganize
 
 DevLake now supports Jenkins, GitHub Action, GitLab CI, BitBucket and Azure Pipelines as the data sources for `deployments`; Jira boards, GitHub issues, TAPD workspaces and Zentao issues as the sources for `incidents` data; Github/BitBucket/Azure/GitLab repos as the sources for `Pull Requests` and `Commits`.
 
-If your CI/CD or incident management tools are not listed on the [Supported Data Sources](./Overview/SupportedDataSources.md) page, have no fear! DevLake provides incoming webhooks to push your `deployments` or `incidents` to DevLake. The webhook configuration doc can be found [here](./Configuration/webhook.md).
+If your CI/CD tool is not listed on the [Supported Data Sources](./Overview/SupportedDataSources.md) page, have no fear! DevLake provides incoming webhooks to push your `deployments` or `incidents` to DevLake. The webhook configuration doc can be found [here](./Configuration/webhook.md).
 
 ## A real-world example
 
