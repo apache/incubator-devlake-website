@@ -146,6 +146,10 @@ const versions = require('./versions.json');
           {
             name: 'keywords',
             content: 'Engineering Productivity, Open-Source Engineering, Open-Source Integration Tools, Data Integrates Platform, Open-Source Dev Platform, Open-Source Data Integrates, DevOps Tools Integrates, Open-Source DevOps Tools'
+          },
+          {
+            name: 'Content-Security-Policy',
+            content: "frame-src 'self' https://www.google.com/recaptcha/;"
           }
       ],
       navbar: {
@@ -335,7 +339,7 @@ const versions = require('./versions.json');
         }),
       ],
     ],
-    
+
     scripts: [
       {
         id: "runllm-widget-script",
