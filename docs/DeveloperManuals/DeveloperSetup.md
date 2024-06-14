@@ -62,6 +62,7 @@ The following guide will walk through how to run DevLake's frontend (`config-ui`
     ```sh
     # specify the plugins that you need for both backend and frontend
     export DEVLAKE_PLUGINS=bamboo,bitbucket,circleci,customize,dora,gitextractor,github,github_graphql,gitlab,jenkins,jira,org,pagerduty,refdiff,slack,sonarqube,trello,webhook
+    # install poetry, just follow the guide in: https://python-poetry.org/docs/#installation 
     # run devlake
     make dev
     # run config-ui
