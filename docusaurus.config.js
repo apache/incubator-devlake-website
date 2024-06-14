@@ -149,7 +149,7 @@ const versions = require('./versions.json');
           },
           {
             name: 'Content-Security-Policy',
-            content: "frame-src 'self' https://www.google.com/recaptcha/;"
+            content: "frame-src 'self' https://www.google.com/recaptcha/ https://www.google.com/;"
           }
       ],
       navbar: {
