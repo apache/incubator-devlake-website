@@ -53,8 +53,27 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 Select the CircleCI projects to collect.
 
 ### Step 1.3 - Adding Scope Config (Optional)
-![image](/img/ConfigUI/circleci-scope-config.png)
-You can add a `transformation` to standardize the data. A `transformation` acts on the CircleCI data in the [tool layer](/docs/DataModels/ToolLayerSchema.md), transforming it to the [domain layer](/docs/DataModels/DevLakeDomainLayerSchema.md).
+Scope config includes two sets of configurations:
+- Data Entities
+- Transformations
+
+##### Data Entities
+![image](images/circleci-scope-config-1.png)
+
+CircleCI only supports `CI/CD` domain entities, which include CircleCI `projects`, `workflows`, `jobs`, and etc.
+
+
+##### Transformations
+
+![image](images/circleci-scope-config-2.png)
+
+This set of configurations is used for calculating [DORA metrics](../DORA.md). 
+
+You can transform a CircleCI workflow run into a DevLake deployment with the following regex:
+
+- Deployment: The given regex should match the name of the Circle workflow run or one of its jobs to be considered as a deployment. For example, if the workflow run used for deployment is named 'build-and-push-image', you can input `(push-image)`. To make the regex case insensitive, you can include `(?i)` before the regex.
+- Environment: The given regex should match the workflow run's name to be considered a deployment within the production environment. For instance, if the workflow run used for deployment is named 'deploy-to-prod', you can input `(prod)`. To make the regex case insensitive, you can include (?i) before the regex.
+
 
 ## Step 2 - Collect Data in a Project
 ### Step 2.1 - Create a Project
