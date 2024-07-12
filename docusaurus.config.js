@@ -146,10 +146,6 @@ const versions = require('./versions.json');
           {
             name: 'keywords',
             content: 'Engineering Productivity, Open-Source Engineering, Open-Source Integration Tools, Data Integrates Platform, Open-Source Dev Platform, Open-Source Data Integrates, DevOps Tools Integrates, Open-Source DevOps Tools'
-          },
-          {
-            name: 'Content-Security-Policy',
-            content: "frame-src 'self' https://www.google.com/recaptcha/ https://www.google.com/;"
           }
       ],
       navbar: {
@@ -338,23 +334,5 @@ const versions = require('./versions.json');
           explicitSearchResultPath: true,
         }),
       ],
-    ],
-
-    scripts: [
-      {
-        id: "runllm-widget-script",
-        type: "module",
-        src: "https://cdn.jsdelivr.net/npm/@runllm/search-widget@stable/dist/run-llm-search-widget.es.js",
-        "runllm-server-address": "https://api.runllm.com",
-        "runllm-assistant-id": "157",
-        "runllm-position": "BOTTOM_RIGHT",
-        "runllm-keyboard-shortcut": "Mod+j",
-        version: "stable",
-        "runllm-preset": "docusaurus",
-        "runllm-slack-community-url": "https://join.slack.com/t/devlake-io/shared_invite/zt-20envwfbk-JUTZ4z9jSeRnrvNhBFLg9w",
-        "runllm-name": "Apache DevLake",
-        "runllm-theme-color": "#005EEC",
-        async: true,
-      },
     ],
 });
