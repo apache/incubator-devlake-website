@@ -166,11 +166,11 @@ const versions = require('./versions.json');
                 to: "/docs/Overview/Introduction"
               },
               {
-                label: versions[0] + ' (Beta)',
+                label: versions[0] + ' (Stable)',
                 to: "/docs/"+versions[0]+"/Overview/Introduction"
               },
               {
-                label: versions[1] + ' (Stable)',
+                label: versions[1] + '',
                 to: "/docs/"+versions[1]+"/Overview/Introduction"
               },
               ...versions.slice(2, versions.length).map((version) => ({
