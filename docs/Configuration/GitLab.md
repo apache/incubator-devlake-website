@@ -36,9 +36,8 @@ Your GitLab personal access token (PAT) is required to add a connection. Learn a
 
 ##### Personal Access Token Permissions
 
-At least one of the following permissions is required to collect data from repositories:
+The following permission is required to collect data from repositories:
 
-- `api`
 - `read_api`
 
 You also have to double-check your GitLab user permission settings.
