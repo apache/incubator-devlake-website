@@ -50,14 +50,33 @@ Azure DevOps supports the following data entities.
 
 Scope config contains two parts: 
 - The entities of which domain you wish to collect: Usually, you don't have to modify this part. However, if you don't want to collect certain Azure DevOps entities, you can unselect some entities to accelerate the collection speed.
+  - Issue Tracking: Azure Work Items, etc.
   - Source Code Management: Azure repos, refs, commits, etc.
   - Code Review: Azure PRs, PR comments and reviews, etc.
   - CI/CD: Azure pipelines, jobs, etc.
   - Cross Domain: Azure accounts, etc.
 - The transformations on the Azure DevOps data you are going to collect. 
 
-![azuredevops-set-transformation](images/azuredevops-set-transformation.png)
+![azuredevops-set-transformation](images/azuredevops-set-transformation-2.png)
+#### Issue Tracking
 
+In Azure DevOps, work items are referenced as issues, belonging to project or organizations. The transformation settings for issues are as follows:
+
+- Severity: Parse the value of `severity` from issue labels.
+
+  - when your issue labels for severity level are like 'severity/p0', 'severity/p1', 'severity/p2', then input 'severity/(.\*)$'
+  - when your issue labels for severity level are like 'p0', 'p1', 'p2', then input '(p0|p1|p2)$'
+
+- Component: Same as "Severity".
+
+- Priority: Same as "Severity".
+
+- Type/Requirement: The `type` of issues with labels that match given regular expression will be set to "REQUIREMENT". Unlike "PR.type", submatch does nothing, because for issue management analysis, users tend to focus on 3 kinds of types (Requirement/Bug/Incident), however, the concrete naming varies from repo to repo, time to time, so we decided to standardize them to help analysts metrics.
+
+- Type/Bug: Same as "Type/Requirement", with `type` setting to "BUG".
+
+- Type/Incident: Same as "Type/Requirement", with `type` setting to "INCIDENT".
+- 
 #### CI/CD
 
 To effectively measure [DORA metrics](../DORA.md) through Azure DevOps, it is necessary to define the concept of a 'deployment'. DevLake considers an Azure Pipeline Run (see the blue rectangle) as a DevLake deployment using specific conditions expressed through regular expressions (regex):

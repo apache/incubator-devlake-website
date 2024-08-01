@@ -207,5 +207,5 @@ Well, at this point, the E2E writing is done. We have added a total of 3 new fil
 
 ## Run E2E tests for all plugins like CI
 
-It's straightforward. Just run `make e2e-plugins` because DevLake has already solidified it into a script~
+It's straightforward. Just cd to backend folder and run `make e2e-test-go-plugins` because DevLake has already solidified it into a script~
 
