@@ -14,6 +14,8 @@ In v0.14+, users can push "incidents" and "deployments" required by DORA metrics
 
 Webhooks are meant to be used at the lowest level that you want to relate incidents with deployments. For example, if you want to relate incidents at the individual service level, you will need a webhook per service. If you wish to relate incidents at the product level, you will need a webhook for the product. This is because incidents on a project will be related to the last deployment on the project with a timestamp that is before the incident's timestamp. This is true regardless of the source of incidents or deployments.
 
+Note: If you post incidents using webhook due to your tool not being supported but your deployments are collected via plugins automatically, you need to re-collect data for deployments for the posted incidents to get mapped to deployments based on timestamps. This is required for Change Failure Rate (DORA) metric to show up correctly for the project.
+
 Diagram of the relationship between incidents and deployments:
 
 ![Change Failure Reporting](/img/Metrics/cfr-definition.png)
@@ -51,86 +53,70 @@ If you want to collect deployment data from your system, you can use the incomin
 
 You can copy the generated deployment curl commands to your CI/CD script to post deployments to Apache DevLake. Below is the detailed payload schema:
 
-|     Key     | Required | Notes                                                                                                                                                                           |
-| :---------: | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| pipeline_id |  ✖️ No   | related Domain Layer `cicd_pipelines.id`                                                                                                                                         |
-| environment |  ✖️ No   | the environment this deployment happens, one of the values: `PRODUCTION`, `STAGING`, `TESTING`, `DEVELOPMENT`. <br/>The default value is `PRODUCTION`.                  |
-|  repo_url   |  ✔️ Yes  | the repo URL of the deployment commit<br />If there is a row in the domain layer table `repos` where `repos.url` equals `repo_url`, the `repoId` will be filled with `repos.id`. |
-|   repo_id   |  ✖️ No   | related Domain Layer `repos.id` <br/> No default value.                                                                                                                          |
-|    name     |  ✖️ No   | deployment name. The default value is "deployment for `request.commit_sha`"                                                                                   |
-|  ref_name   |  ✖️ No   | related branch/tag<br/> No default value.                                                                                                                     |
-| commit_sha  |  ✔️ Yes  | the sha of the deployment commit                                                                                                                              |
-| commit_msg  |  ✖️ No   | the sha of the deployment commit message                                                                                                                      |
-| create_time |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                                       |
-| start_time  |  ✔️ Yes  | Time. Eg. 2020-01-01T12:00:00+00:00<br/> No default value.                                                                                                    |
-|  end_time   |  ✖️ No   | Time. Eg. 2020-01-01T12:00:00+00:00<br/> The default value is the time when DevLake receives the POST request.                                                                   |
-|   result    |  ✖️ No   | deployment result, one of the values: `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`. <br/> The default value is `SUCCESS`.                                                            |
-| deploymentCommits[]    |  ✖️ yes  | Allow deployment webhook to push deployments to multiple repos in one request, includes repo_url,commit_sha,commit_msg,name,ref_name    |
+|        Key         | Required | Notes                                                                                                                                                                           |
+|:------------------:|:--------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|             id     |  ✔️ Yes  | This will be the unique ID of table cicd_deployments. This key replaced pipeline_id for clarity.                           |
+|    createdDate     |  ✖️ No   | The time this deploy pipeline starts. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.             |
+|     startedDate     |  ✔️ Yes  | The time when the first deploy to a certain repo starts. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.             |
+|      finishedDate   |  ✔️ Yes   | The time when the last deploy to a certain repo ends. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.            |
+|    environment     |  ✖️ No   | The environment this deployment happens. For example, `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br/>The default value is `PRODUCTION`                                     |
+|       result       |  ✖️ No   | deployment result, one of the values : `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`, <br/> The default value is `SUCCESS`.                  |
+|   displayTitle    |  ✖️ No   | A readable title for the deployment.   |
+|        name        |  ✖️ No   | Deprecated.        |
+|      deploymentCommits.repoUrl      |  ✔️ Yes  | The repo URL of the deployment commit<br />If there is a row in the domain layer table `repos` where `repos.url` equals `repo_url`, the `repoId` will be filled with `repos.id`. |
+|      deploymentCommits.repoId       |  ✖️ No   | Deprecated.                 |
+|      deploymentCommits.refName      |  ✖️ No   | The branch/tag to deploy <br/> No default value.      |
+|      deploymentCommits.startedDate      |  ✔️ Yes   | The start time of the deploy to this repo. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.      |
+|      deploymentCommits.finishedDate      |  ✔️ Yes   | The end time of the deploy to this repo. E.g. 2020-01-01T12:00:00+00:00<br/> No default value.      |
+|     deploymentCommits.commitSha     |  ✔️ Yes  | Commit sha that triggers the deploy in this repo |
+|     deploymentCommits.commitMsg     |  ✖️ No   | Commit sha of the deployment commit message   |
+|   deploymentCommits.result    |  ✖️ No   | The result of the deploy to this repo. The default value is 'SUCCESS'           |
+|   deploymentCommits.displayTitle    |  ✖️ No   | A readable title for the deployment to this repo.            |
+|       deploymentCommits.name        |  ✖️ No   | Deprecated.   |
 
+More information about these columns at the domain layer tables: [cicd_deployments](/DataModels/DevLakeDomainLayerSchema.md#cicd_deployments) and [cicd_deployment_commits](/DataModels/DevLakeDomainLayerSchema.md#cicd_deployment_commits).
 
 
 #### Register a Deployment - Sample API Calls
 
-To deploy on a single repository, use the following command:
-```
-curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
-    "pipeline_id": "optional-pipeline-id",
-    "environment":"PRODUCTION",
-    "repo_url":"https://github.com/apache/incubator-devlake/",
-    "repo_id": "optional-repo-id",
-    "name": "optional-deployment-name. If you do not post a name, DevLake will generate one for you.",
-    "ref_name": "optional-release-v0.17",
-    "commit_sha":"015e3d3b480e417aede5a1293bd61de9b0fd051d",
-    "commit_msg":"optional-commit-message",
-    "create_time":"2020-01-01T11:00:00+00:00",
-    "start_time":"2020-01-01T12:00:00+00:00",
-    "end_time":"2020-01-02T13:00:00+00:00",
-    "result": "FAILURE"
-  }'
-```
+The payload supports the deployment to one or multiple repositories (referring to the [discussion](https://github.com/apache/incubator-devlake/discussions/6162)).
 
-To deploy across multiple repositories (refer to the [discussion](https://github.com/apache/incubator-devlake/discussions/6162)), use the following command:
+Please replace the `API_KEY` with the real token generated after creating a webhook.
+
 ```
-curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d '{
-    "pipeline_id": "optional-pipeline-id",
+curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -H 'Authorization: Bearer {API_KEY}' -d '{
+    "id": "required-id",
+    "createdDate":"2020-01-01T11:00:00+00:00",
+    "startedDate":"2020-01-01T12:00:00+00:00",
+    "finishedDate":"2020-01-02T13:00:00+00:00",
     "environment":"PRODUCTION",
-    "repo_id": "optional-repo-id",
+    "result": "SUCCESS",
+    "displayTitle":"optional-custom-deploy-display-title",
     "name": "optional-deployment-name. If you do not post a name, DevLake will generate one for you.",
-    "create_time":"2020-01-01T11:00:00+00:00",
-    "start_time":"2020-01-01T12:00:00+00:00",
-    "end_time":"2020-01-02T13:00:00+00:00",
-    "result": "FAILURE",
     "deploymentCommits":[
        {
-           "repo_url":"repo-1",
+           "repoUrl":"required-repo-url",
+           "refName": "optional-release-v0.17",
+           "startedDate":"2020-01-01T11:00:00+00:00",
+           "finishedDate":"2020-01-02T11:00:00+00:00",
+           "commitSha":"c1",
+           "commitMsg":"optional-msg-1",
+           "result":"SUCCESS",
            "name":"optional, if null, it will be deployment for {commit_sha}",
-           "ref_name": "optional-release-v0.17",
-           "commit_sha":"c1",
-           "commit_msg":"optional-msg-1"
+           "displayTitle":"optional-custom-deployment-commit-display-title-1"
        },
        {
-           "repo_url":"repo-2",
+           "repoUrl":"repo-2",
+           "refName": "optional-release-v0.17",
+           "startedDate":"2020-01-01T11:00:00+00:00",
+           "finishedDate":"2020-01-02T11:00:00+00:00",
+           "commitSha":"c2",
+           "commitMsg":"optional-msg-2",
+           "result":"FAILURE",
            "name":"optional, if null, it will be deployment for {commit_sha}",
-           "ref_name": "optional-release-v0.17",
-           "commit_sha":"c2",
-           "commit_msg":"optional-msg-2"
+           "displayTitle":"optional-custom-deployment-commit-display-title-2"
        }
     ]
-  }'
-```
-
-If you have set a [username/password](GettingStarted/Authentication.md) for Config UI, you'll need to add them to the curl command to register a `deployment`:
-
-```
-curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -u 'username:password' -d '{
-    "deploymentCommits":[
-        {
-        "commit_sha":"the sha of deployment commit1",
-        "repo_url":"the repo URL of the deployment commit"
-        }
-    ],
-    "start_time":"2020-01-01T12:00:00+00:00",
-    "end_time":"2020-01-02T12:00:00+00:00"
   }'
 ```
 
@@ -161,7 +147,7 @@ jobs:
           name: "deploy"
           command: |
             # The time a deploy started
-            start_time=`date '+%Y-%m-%dT%H:%M:%S%z'`
+            started_date=`date '+%Y-%m-%dT%H:%M:%S%z'`
 
             # Some deployment tasks here ...
             echo Hello, World!
@@ -169,9 +155,15 @@ jobs:
             # Send the request to DevLake after deploy
             # The values start with a '$CIRCLE_' are CircleCI's built-in variables
             curl <devlake-host>/api/rest/plugins/webhook/1/deployments -X 'POST' -d "{
-              \"commit_sha\":\"$CIRCLE_SHA1\",
-              \"repo_url\":\"$CIRCLE_REPOSITORY_URL\",
-              \"start_time\":\"$start_time\"
+              \"id\": \"$PIPELINE_ID\",
+              \"startedDate\":\"$started_date\",
+              \"finishedDate\":\"$finished_date\",
+              \"deploymentCommits\":\[
+                \{
+                  \"commitSha\":\"$CIRCLE_SHA1\",
+                  \"repoUrl\":\"$CIRCLE_REPOSITORY_URL\",
+                \}
+              \]
             }"
 
 workflows:
@@ -193,32 +185,32 @@ needs to be called when an issue or incident is created. The body should be a JS
 
 |          Keyname          | Required | Notes                                                         |
 | :-----------------------: | :------: | ------------------------------------------------------------- |
-|            url            |  ✖️ No   | issue's URL                                                   |
-|         issue_key         |  ✔️ Yes  | issue's key, needs to be unique in a connection               |
+|            url            |  ✖️ No   | Issue's URL                                                   |
+|         issueKey         |  ✔️ Yes  | Issue's key, needs to be unique in a connection               |
 |           title           |  ✔️ Yes  |                                                               |
 |        description        |  ✖️ No   |                                                               |
-|         epic_key          |  ✖️ No   | in which epic.                                                |
-|           type            |  ✖️ No   | type, such as bug/incident/epic/...                           |
-|          status           |  ✔️ Yes  | issue's status. Must be one of `TODO` `DONE` `IN_PROGRESS`    |
-|      original_status      |  ✔️ Yes  | status in your system, such as created/open/closed/...        |
-|        story_point        |  ✖️ No   |                                                               |
-|      resolution_date      |  ✖️ No   | date, Format should be 2020-01-01T12:00:00+00:00              |
-|       created_date        |  ✔️ Yes  | date, Format should be 2020-01-01T12:00:00+00:00              |
-|       updated_date        |  ✖️ No   | date, Format should be 2020-01-01T12:00:00+00:00              |
-|     lead_time_minutes     |  ✖️ No   | how long from this issue accepted to develop                  |
-|     parent_issue_key      |  ✖️ No   |                                                               |
+|         epicKey          |  ✖️ No   | Issue's epic                                                |
+|           type            |  ✖️ No   | Type, such as `INCIDENT`, `BUG`, `REQUIREMENT`
+|          status           |  ✔️ Yes  | Issue's status. Must be one of `TODO` `DONE` `IN_PROGRESS`    |
+|      originalStatus      |  ✔️ Yes  | Status in your tool, such as created/open/closed/...        |
+|        storyPoint        |  ✖️ No   |                                                               |
+|      resolutionDate      |  ✖️ No   | Resolved date, Format should be 2020-01-01T12:00:00+00:00              |
+|       createdDate        |  ✔️ Yes  | Created date, Format should be 2020-01-01T12:00:00+00:00              |
+|       updatedDate        |  ✖️ No   | Last updated date, Format should be 2020-01-01T12:00:00+00:00              |
+|     leadTimeMinutes     |  ✖️ No   | How long from this issue accepted to develop.                   |
+|     parentIssueKey      |  ✖️ No   |                                                               |
 |         priority          |  ✖️ No   |                                                               |
-| original_estimate_minutes |  ✖️ No   |                                                               |
-|    time_spent_minutes     |  ✖️ No   |                                                               |
-|  time_remaining_minutes   |  ✖️ No   |                                                               |
-|        creator_id         |  ✖️ No   | the user id of the creator                                    |
-|       creator_name        |  ✖️ No   | the user name of the creator, it will just be used to display |
-|        assignee_id        |  ✖️ No   |                                                               |
-|       assignee_name       |  ✖️ No   |                                                               |
+| originalEstimateMinutes |  ✖️ No   |                                                               |
+|    timeSpentMinutes     |  ✖️ No   |                                                               |
+|  timeRemainingMinutes   |  ✖️ No   |                                                               |
+|        creatorId         |  ✖️ No   | The user id of the creator                                    |
+|       creatorName        |  ✖️ No   | The username of the creator, it will just be used to display |
+|        assigneeId        |  ✖️ No   |                                                               |
+|       assigneeName       |  ✖️ No   |                                                               |
 |         severity          |  ✖️ No   |                                                               |
-|         component         |  ✖️ No   | which component is this issue in.                             |
+|         component         |  ✖️ No   |                              |
 
-More information about these columns at [DomainLayerIssueTracking](https://devlake.apache.org/docs/DataModels/DevLakeDomainLayerSchema#domain-1---issue-tracking).
+More information about these columns at the [domain layer issues table](/DataModels/DevLakeDomainLayerSchema.md#issues).
 
 #### Register Issues - Close Issues (Optional)
 
@@ -232,20 +224,20 @@ Sample CURL for creating an incident:
 
 ```
 curl <devlake-host>/api/rest/plugins/webhook/1/issues -X 'POST' -d '{
-  "issue_key":"DLK-1234",
+  "issueKey":"DLK-1234",
   "title":"a feature from DLK",
   "description":"",
   "url":"",
   "type":"INCIDENT",
   "status":"TODO",
-  "created_date":"2020-01-01T12:00:00+00:00",
-  "updated_date":"2020-01-01T12:00:00+00:00",
+  "createdDate":"2020-01-01T12:00:00+00:00",
+  "updatedDate":"2020-01-01T12:00:00+00:00",
   "priority":"",
   "severity":"",
-  "creator_id":"user1131",
-  "creator_name":"Nick name 1",
-  "assignee_id":"user1132",
-  "assignee_name":"Nick name 2"
+  "creatorId":"user1131",
+  "creatorName":"Nick name 1",
+  "assigneeId":"user1132",
+  "assigneeName":"Nick name 2"
 }'
 ```
 

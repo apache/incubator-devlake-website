@@ -19,9 +19,9 @@ DORA dashboard. See [live demo](https://grafana-lake.demo.devlake.io/grafana/d/q
 
 ## How is it calculated?
 
-MTTR = Total [incident age](./IncidentAge.md) (in hours)/number of incidents.
+MTTR = The median [incident age](./IncidentAge.md) of all incidents.
 
-If you have three incidents that happened in the given data range, one lasting 1 hour, one lasting 2 hours and one lasting 3 hours. Your MTTR will be: (1 + 2 + 3) / 3 = 2 hours.
+If you have three incidents that happened in the given data range, one lasting 1 hour, one lasting 3 hours and one lasting 4 hours. Your MTTR will be: median(1, 3, 4) = 3 hours.
 
 Below are the 2023 DORA benchmarks for different development teams from Google's report. However, it's difficult to tell which group a team falls into when the team's median time to restore service is `between one week and six months`. Therefore, DevLake provides its own benchmarks to address this problem:
 
