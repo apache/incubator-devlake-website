@@ -60,4 +60,4 @@ Three modes.
    ![img](/img/ConfigUI/BlueprintEditing/blueprint-edit3.png)
 
 
-For other problems, please check the [troubleshooting](/Troubleshooting/Configuration.md) doc, [create an issue](https://github.com/apache/incubator-devlake/issues), or contact us on [Slack](https://join.slack.com/t/devlake-io/shared_invite/zt-17b6vuvps-x98pqseoUagM7EAmKC82xQ).
+For other problems, please check the [troubleshooting](/Troubleshooting/Configuration.md) doc, [create an issue](https://github.com/apache/incubator-devlake/issues), or contact us on [Slack](https://join.slack.com/t/devlake-io/shared_invite/zt-2ox842kuu-_6x3Lwdj88YpzKhMRpgnMg).

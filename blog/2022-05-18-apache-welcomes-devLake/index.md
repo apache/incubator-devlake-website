@@ -70,5 +70,5 @@ Join us on Slack and at our weekly open source community meetups🥳
 
 - GitHub:  https://github.com/apache/incubator-devlake
 - Official Website: https://devlake.apache.org/
-- Slack:   https://join.slack.com/t/devlake-io/shared_invite/zt-20envwfbk-JUTZ4z9jSeRnrvNhBFLg9w
+- Slack:  https://join.slack.com/t/devlake-io/shared_invite/zt-2ox842kuu-_6x3Lwdj88YpzKhMRpgnMg
 - Podling Website：https://incubator.apache.org/projects/devlake.html

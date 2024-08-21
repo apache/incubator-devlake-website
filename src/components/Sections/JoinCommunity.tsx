@@ -14,7 +14,7 @@ export function JoinCommunity() {
       <div className="text-label18 mb-4 text-neutral-500
         sm:text-label16 sm:mb-3">Join our community to stay up to date with the latest news, ask and answer questions, make contributions, and connect with fellow community members!</div>
       <div className="text-label16 space-y-[8px] flex flex-col">
-        <InlineLink link="https://join.slack.com/t/devlake-io/shared_invite/zt-20envwfbk-JUTZ4z9jSeRnrvNhBFLg9w">Join Slack</InlineLink>
+        <InlineLink link="https://join.slack.com/t/devlake-io/shared_invite/zt-2ox842kuu-_6x3Lwdj88YpzKhMRpgnMg">Join Slack</InlineLink>
         <InlineLink link="https://devlake.apache.org/community/subscribe">Subscribe to Mailing List</InlineLink>
       </div>
     </div>
