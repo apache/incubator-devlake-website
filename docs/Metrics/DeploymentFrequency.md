@@ -30,7 +30,7 @@ Below are the 2023 DORA benchmarks for different development teams from Google's
 
 | Groups            | Benchmarks                                     | DevLake Benchmarks                             | The Criteria of DevLake Benchmarks                |
 | ----------------- | ---------------------------------------------- | ---------------------------------------------- | --------------------------------------------------|
-| Elite performers  | On-demand (multiple deploys per day)           | On-demand                                      | Median Number of `Deployment Days` per Week >= 7  |
+| Elite performers  | On-demand (multiple deploys per day)           | On-demand                                      | Median Number of `Deployment Days` per Week >= 5  |
 | High performers   | Between once per day and once per week         | Between once per day and once per week         | Median Number of `Deployment Days` per Week >= 1  |
 | Medium performers | Between once per week and once per month       | Between once per week and once per month       | Median Number of `Deployment Days` per Month >= 1 |
 | Low performers    | Between once per week and once per month       | Fewer than once per month                      | Median Number of `Deployment Days` per Month < 1  |
@@ -43,7 +43,7 @@ Below are the 2023 DORA benchmarks for different development teams from Google's
 
 | Groups            | Benchmarks                                     | DevLake Benchmarks                             | The Criteria of DevLake Benchmarks                |
 | ----------------- | ---------------------------------------------- | ---------------------------------------------- | --------------------------------------------------|
-| Elite performers  | On-demand (multiple deploys per day)           | On-demand                                      | Median Number of `Deployment Days` per Week >= 7  |
+| Elite performers  | On-demand (multiple deploys per day)           | On-demand                                      | Median Number of `Deployment Days` per Week >= 5  |
 | High performers   | Between once per week and once per month       | Between once per day and once per month       | Median Number of `Deployment Days` per Month >= 1  |
 | Medium performers | Between once per month and once every 6 months | Between once per month and once every 6 months | Median Number of `Deployment Days` per six Months >= 1 |
 | Low performers    | Fewer than once per six months                 | Fewer than once per six months                 | Median Number of `Deployment Days` per six Months < 1  |
@@ -228,14 +228,14 @@ SELECT
   CASE
     WHEN ('$dora_report') = '2023' THEN
 			CASE  
-				WHEN median_number_of_deployment_days_per_week >= 7 THEN CONCAT(median_number_of_deployment_days_per_week, ' deployment days per week(elite)')
+				WHEN median_number_of_deployment_days_per_week >= 5 THEN CONCAT(median_number_of_deployment_days_per_week, ' deployment days per week(elite)')
 				WHEN median_number_of_deployment_days_per_week >= 1 THEN CONCAT(median_number_of_deployment_days_per_week, ' deployment days per week(high)')
 				WHEN median_number_of_deployment_days_per_month >= 1 THEN CONCAT(median_number_of_deployment_days_per_month, ' deployment days per month(medium)')
 				WHEN median_number_of_deployment_days_per_month < 1 and is_collected is not null THEN CONCAT(median_number_of_deployment_days_per_month, ' deployment days per month(low)')
 				ELSE "N/A. Please check if you have collected deployments." END
 	 	WHEN ('$dora_report') = '2021' THEN
 			CASE  
-				WHEN median_number_of_deployment_days_per_week >= 7 THEN CONCAT(median_number_of_deployment_days_per_week, ' deployment days per week(elite)')
+				WHEN median_number_of_deployment_days_per_week >= 5 THEN CONCAT(median_number_of_deployment_days_per_week, ' deployment days per week(elite)')
 				WHEN median_number_of_deployment_days_per_month >= 1 THEN CONCAT(median_number_of_deployment_days_per_month, ' deployment days per month(high)')
 				WHEN median_number_of_deployment_days_persix_months >= 1 THEN CONCAT(median_number_of_deployment_days_per_six_months, ' deployment days per six months(medium)')
 				WHEN median_number_of_deployment_days_per_six_months < 1 and is_collected is not null THEN CONCAT(median_number_of_deployment_days_per_six_months, ' deployment days per six months(low)')
