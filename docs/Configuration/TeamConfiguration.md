@@ -36,10 +36,13 @@ The overall workflow is:
 4. Run a heuristic algorithm to populate `user_accounts` table
 5. Manually update `user_accounts` when the algorithm can't catch everything
 
-Note:
+:::info
 
 1. Please replace `/path/to/*.csv` with the absolute path of the CSV file you'd like to upload.
-2. Please replace `http://127.0.0.1:4000` with your actual Config UI service IP and port number. If you have enabled https, please replace it accordingly.
+2. Please replace `http://127.0.0.1:4000` with your actual Config UI service IP and port number. If you have enabled HTTPS, please replace it accordingly.
+3. Please create your API key on the `API Keys` page instead of using the automatically generated key from the webhook creation.
+
+:::
 
 ## Step 1 - Create the `teams` table
 
