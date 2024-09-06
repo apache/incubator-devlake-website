@@ -141,20 +141,26 @@ Scope config contains two parts:
 - Type/Incident: Same as "Type/Requirement", with `type` setting to "INCIDENT".
 
 #### CI/CD
+![github-transform-data-2](images/github-transform-data-2.png)
 
-This set of configurations is used to define 'deployments'. Deployments are related to measure [DORA metrics](../DORA.md).
+**This is the critical rule for calculating [DORA metrics](../DORA.md) using GitHub CI/CD entities to define `deployments`.**
 
-For GitHub deployments, DevLake recognizes them as deployments by specifying a regular expression (regex) to identify the production environments among all 'GitHub environments'.
+DevLake recognizes deployments from GitHub deployments by using a regular expression (regex) to pinpoint production environments among all listed GitHub environments.
 
-If your deployments are not performed through GitHub deployments but rather specific workflow runs in GitHub, you have the option to convert a workflow run into a DevLake deployment. In this case, you need to configure two regular expressions (regex):
+If your deployments are not performed through GitHub deployments but rather specific workflow runs in GitHub, you have the option to convert a workflow run into a DevLake deployment. In this case, you need to check this option and configure two regular expressions (regex):
 
-- Deployment: The given regex should match the name of the GitHub workflow run or one of its jobs to be considered as a deployment. For example, if the workflow run used for deployment is named 'build-and-push-image', you can input (push-image). To make the regex case insensitive, you can include (?i) before the regex.
-- Production: The given regex should match either the workflow run's name or its branch's name to be considered a deployment within the production environment. For instance:
-  - If the workflow run used for deployment is named 'build-to-prod', you can input (prod). To make the regex case insensitive, you can include (?i) before the regex.
-  - Also, many users in GitHub utilize the same workflow for both staging and prod deployments, executing it on the release branch would indicate a production deployment.
+![github-transform-data-2](images/github-transform-data-3.png)
 
-![github-action-run](/img/ConfigUI/github-action-run.png)
-![github-action-job](/img/ConfigUI/github-action-job.png)
+![github-action-run](images/github_workflow_runs.png)
+
+- In the first input field, enter the following regex to identify deployments (highlighted by the yellow rectangle): 
+  - The given regex should match the name of the GitHub workflow run or one of its jobs to be considered as a deployment. The workflow run's name is usually the same as the name of the workflow run. 
+  - For example, if the workflow run used for deployment is named 'build-and-push-image', you can enter `.*push-image.*`. To make the regex case insensitive, you can include `(?i)` before the regex.
+- In the second input field, enter the following regex to identify production deployments (highlighted by the red rectangle).
+  - If you use different workflows, such as 'push-image-to-prod' and 'push-image-to-test' to deploy to different environments, enter `push-image-to-prod` or `.*prod` to define which deployments are PRODUCTION deployments. To make the regex case insensitive, you can include `(?i)` before the regex.
+  - If you use the same workflow across different branches for test and production deployments, enter `release.*` to recognize only runs on the release branch as PRODUCTION deployments. The regex should match the naming pattern of your release or production branches.
+  - If left empty, all deployments in the yellow rectangle will be regarded as Production Deployments.
+
 
 #### Code Review
 

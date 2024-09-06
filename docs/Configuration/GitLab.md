@@ -72,6 +72,8 @@ Select the GitLab repositories you want to collect from the miller column. **Ple
 
 
 ### Step 1.3 - Add Scope Config (Optional)
+![gitlab-set-transformation1](images/gitlab-scope-config.png)
+
 Scope config contains two parts: 
 - The entities of which domain you wish to collect: Usually, you don't have to modify this part. However, if you don't want to collect certain GitLab entities, you can unselect some entities to accelerate the collection speed.
   - Issue Tracking: GitLab issues, issue comments, issue labels, etc.
@@ -84,21 +86,29 @@ Scope config contains two parts:
   - Without adding transformation rules, you can still view some of the dashboards.
   - Each GitLab repo has at most ONE set of transformations.
 
-![gitlab-set-transformation1](images/gitlab-scope-config.png)
-![gitlab-set-transformation2](images/gitlab-set-transformation2.png)
 
 #### CI/CD
+![gitlab-transform-data-2](images/gitlab-transform-data-2.png)
 
-This set of configurations is used to define 'deployments'. Deployments are related to measure [DORA metrics](../DORA.md).
+**This is the critical rule for calculating [DORA metrics](../DORA.md) using GitLab CI/CD entities to define `deployments`.**
 
-For GitLab deployments, DevLake recognizes them as deployments by specifying a regular expression (regex) to identify the production environments among all 'GitLab environments'.
+DevLake recognizes deployments from GitLab deployments by using a regular expression (regex) to pinpoint production environments among all listed GitLab environments.
 
 If your deployments are not performed through GitLab deployments but rather specific pipelines in GitLab, you have the option to convert a GitLab pipeline run into a DevLake deployment. In this case, you need to configure two regular expressions (regex):
 
-- Deployment: The given regex should match the name of the GitLab pipeline's branch name or one of its job names to be considered as a deployment. For example, if the pipeline is executet on the 'build-and-push-image', you can input (push-image). To make the regex case insensitive, you can include (?i) before the regex.
-- Production: The given regex should match either the pipeline's branch name or one of its job names to be considered a deployment within the production environment. For instance:
-  - If the pipeline used for deployment is named 'build-to-prod', you can input (prod). To make the regex case insensitive, you can include (?i) before the regex.
-  - Also, many users in GitLab utilize the same pipeline for both staging and prod deployments, executing it on the release branch would indicate a production deployment.
+![gitlab-transform-data-3](images/gitlab-transform-data-3.png)
+
+![gitlab-pipeline](images/gitlab-pipeline.png)
+
+- In the first input field, enter the following regex to identify deployments (highlighted by the yellow rectangle). For example: 
+  - If you consider the pipeline runs that have executed certain job as deployments, e.g. 'build-image', enter `.*build-image.*` in the input field.
+  - If you only consider the pipeline runs on certain branches (e.g. release branches or main) as deployments, enter `(release.*|main)` to recognize runs on these branches as deployments.
+- In the second input field, enter the following regex to identify the production deployments (highlighted in the red rectangle). If left empty, all deployments will be regarded as Production Deployments.
+  - If you have two jobs 'build-image-to-test' and 'build-image-to-prod' matching `.*build-image.*`, and only the pipeline runs that have executed 'build-image-to-prod' should be considered PRODUCTION deployment, you can enter `.*-prod.*` or `build-image-to-prod`.
+  - If you only consider runs on release branches as PRODUCTION deployments, enter `release.*` to convert only runs on the release branch as PRODUCTION deployments. The regex should match the naming pattern of your release or production branches.
+
+To make the regex case insensitive, you can include `(?i)` before the regex.
+  
 
 ## Step 2 - Collect Data in a Project
 ### Step 2.1 - Create a Project
