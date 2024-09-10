@@ -62,7 +62,7 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 |    environment     |  ✖️ No   | The environment this deployment happens. For example, `PRODUCTION` `STAGING` `TESTING` `DEVELOPMENT`. <br/>The default value is `PRODUCTION`                                     |
 |       result       |  ✖️ No   | deployment result, one of the values : `SUCCESS`, `FAILURE`, `ABORT`, `MANUAL`, <br/> The default value is `SUCCESS`.                  |
 |   displayTitle    |  ✖️ No   | A readable title for the deployment.   |
-|        name        |  ✖️ No   | Deprecated.        |
+|        name        |  ✖️ No   |         |
 |      deploymentCommits.repoUrl      |  ✔️ Yes  | The repo URL of the deployment commit<br />If there is a row in the domain layer table `repos` where `repos.url` equals `repo_url`, the `repoId` will be filled with `repos.id`. |
 |      deploymentCommits.repoId       |  ✖️ No   | Deprecated.                 |
 |      deploymentCommits.refName      |  ✖️ No   | The branch/tag to deploy <br/> No default value.      |
@@ -72,7 +72,7 @@ You can copy the generated deployment curl commands to your CI/CD script to post
 |     deploymentCommits.commitMsg     |  ✖️ No   | Commit sha of the deployment commit message   |
 |   deploymentCommits.result    |  ✖️ No   | The result of the deploy to this repo. The default value is 'SUCCESS'           |
 |   deploymentCommits.displayTitle    |  ✖️ No   | A readable title for the deployment to this repo.            |
-|       deploymentCommits.name        |  ✖️ No   | Deprecated.   |
+|       deploymentCommits.name        |  ✖️ No   |    |
 
 More information about these columns at the domain layer tables: [cicd_deployments](/DataModels/DevLakeDomainLayerSchema.md#cicd_deployments) and [cicd_deployment_commits](/DataModels/DevLakeDomainLayerSchema.md#cicd_deployment_commits).
 
