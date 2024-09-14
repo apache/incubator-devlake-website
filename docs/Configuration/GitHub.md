@@ -60,7 +60,13 @@ The token should be granted read-only permission for the following entities.
   - `Pull requests`
 
 
-##### GitHub Apps 
+##### GitHub Apps (beta)
+:::caution
+
+The GitHub App token expires every hour and does not auto-renew. To collect data from large repositories, please use the [Personal Access Token](#github-personal-access-tokensrecommended) for authentication.
+
+:::
+
 Learn about [how to create a GitHub Apps](https://docs.github.com/en/apps/maintaining-github-apps/modifying-a-github-app-registration#navigating-to-your-github-app-settings). The following permissions are required to collect data from repositories:
 - Repository
     - Actions
