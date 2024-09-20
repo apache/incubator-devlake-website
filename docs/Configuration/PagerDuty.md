@@ -8,49 +8,50 @@ Visit Config UI at: `http://localhost:4000`.
 
 ## Step 1 - Add Data Connections
 
+### Step 1.1 - Authentication
 ![pagerduty-create-a-connection](images/pagerduty-create-a-connection.png)
 
-### Connection Name
+#### Connection Name
 
 Give your connection a unique name to help you identify it in the future.
 
-### Token
+#### Token
 
 Paste your PagerDuty personal access token (PAT) here. You may make it a Read-Only token for the plugin's purposes.
 
-### Test and Save Connection
+#### Test and Save Connection
 
 Click `Test Connection`, if the connection is successful, click `Save Connection` to add the connection.
 
-## Step 1 - Add Data Connection
+### Step 1.2 - Add Data Scopes
 
-Create a project for PagerDuty by adding the connection created above to it.
+Choose the **PagerDuty services** to collect.
 
-![pagerduty-add-data-connection](images/pagerduty-add-data-connection.png)
+Only PagerDuty incidents will be collected. The data will be stored in table issues and incidents.
 
-## Step 2 - Setting Data Scope
+Note: PagerDuty plugin does not support any scope config.
 
-### Select services
+## Step 2 - Collect PagerDuty Data in a Project
+### Step 2.1 - Create a Project
+Collecting PagerDuty data requires creating a project first. 
 
-Select the services you want to collect data from.
+Navigate to the **Projects** page from the side menu and create a new project.
 
-![pagerduty-set-data-scope](images/pagerduty-set-data-scope.png)
+### Step 2.2 - Add a PagerDuty Connection
+Create a project, add the PagerDuty connection.
 
-### Data Entities
+Please note: if you don't see the repositories you are looking for, please check if you have added them to the connection first.
 
-PagerDuty supports the following data entities.
+### Step 2.3 - Set the Sync Policy (Optional)
+There are three settings for Sync Policy:
+- Data Time Range: You can select the time range of the data you wish to collect. The default is set to the past six months.
+- Sync Frequency: You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your preferred schedule.
+- Skip Failed Tasks: sometime a few tasks may fail in a long pipeline; you can choose to skip them to avoid spending more time in running the pipeline all over again.
 
-- Issue Tracking: These map to PagerDuty incidents.
+### Step 2.4 - Start Data Collection
+Click on **Collect Data** to start collecting data for the whole project, including the SonarQube data. 
 
-## Step 3 - Adding Transformation Rules (Optional)
-
-Currently, this plugin does not support transformation rules, so skip this page by clicking `Next Step`.
-
-## Step 4 - Set Sync Policy
-
-Set the sync policy as you see fit. Note that PagerDuty can only collect data from up to 6 months prior to the present time.
-
-![pagerduty-sync-policy](images/pagerduty-sync-policy.png)
+You can also trigger the data sync at the **General Settings/Status** page (The previous **Blueprint/Status** page).
 
 ## Troubleshooting
 

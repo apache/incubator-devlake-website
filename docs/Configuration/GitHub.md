@@ -8,7 +8,7 @@ Visit Config UI at: `http://localhost:4000`.
 
 ## Step 1 - Add Data Connections
 
-On the Connections page, you can select GitHub and create a new connection on it.
+On the **Connections** page, you can select GitHub and create a new connection on it.
 
 ### Step 1.1 - Authentication
 ![github-add-data-connections](images/github-create-a-connection.png)
@@ -105,9 +105,9 @@ Click `Test Connection`, if the connection is successful, click `Save Connection
 
 ### Step 1.2 - Add Data Scopes
 
-#### Repositories
+Choose the GitHub repositories you wish to collect either by finding them in the miller column, or searching. 
 
-Choose the GitHub repositories you wish to collect either by finding them in the miller column, or searching. You can only add public repositories through the search box.
+You can only add public repositories through the search box.
 
 
 ![github-set-data-scope](images/github-add-data-scopes.png)
@@ -193,17 +193,20 @@ Please click `Save` to save the transformation rules for the repo. In the data s
 
 ## Step 2 - Collect Data in a Project
 ### Step 2.1 - Create a Project
-Collecting GitHub data requires creating a project first. You can visit the Project page from the side menu and create a new project by following the instructions on the user interface.
+Collecting GitHub data requires creating a project first. 
+
+Navigate to the **Projects** page from the side menu and create a new project.
 
 ![create-a-project](images/create-a-project.png)
 
 ### Step 2.2 - Add a GitHub Connection
-You can add a previously configured GitHub connection to the project and select the boards for which you wish to collect the data for.
+Add the GitHub connection to the project and select the repos you wish to sync in this project.
+
 Please note: if you don't see the repositories you are looking for, please check if you have added them to the connection first.
 
 ![add-a-connection](images/add-a-connection-project.png)
 
-### Step 2.3 - Set the Sync Policy
+### Step 2.3 - Set the Sync Policy (Optional)
 There are three settings for Sync Policy:
 - Data Time Range: You can select the time range of the data you wish to collect. The default is set to the past six months.
 - Sync Frequency: You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your preferred schedule.
@@ -212,7 +215,10 @@ There are three settings for Sync Policy:
 ![sync-policy](images/sync-policy.png)
 
 ### Step 2.4 - Start Data Collection
-Click on "Collect Data" to start collecting data for the whole project. You can check the status in the Status tab on the same page.
+Click on **Collect Data** to start collecting data for the whole project, including the SonarQube data. 
+
+You can also trigger the data sync at the **General Settings/Status** page (The previous **Blueprint/Status** page).
+
 ![collect-data](images/collect-data.png)
 
 
