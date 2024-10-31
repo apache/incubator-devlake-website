@@ -214,7 +214,7 @@ More information about these columns at the [domain layer issues table](/DataMod
 
 #### Register Issues - Close Issues (Optional)
 
-`POST <devlake-host>/api/rest/plugins/webhook/1/issue/:issueId/close`
+`POST <devlake-host>/api/rest/plugins/webhook/connections/1/issue/:issueId/close`
 
 needs to be called when an issue or incident is closed. Replace `:issueId` with specific strings and keep the body empty.
 
