@@ -1,7 +1,5 @@
 # links ignore in ci check
 data:image/png;base64*
-https://www.googletagmanager.com
-https://www.google-analytics.com
 .*your-.*
 .*xxx.*
 https://twitter.com/ApacheDevLake
