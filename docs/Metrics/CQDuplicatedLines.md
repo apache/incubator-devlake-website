@@ -7,7 +7,7 @@ sidebar_position: 34
 
 ## What is this metric?
 
-This metric is the number of files involved in duplications. This metric is collected from SonarQube, check [this doc](https://docs.sonarqube.org/latest/user-guide/metric-definitions/#duplications) for detailed definition.
+This metric is the number of lines involved in duplications. This metric is collected from SonarQube, check [this doc](https://docs.sonarqube.org/latest/user-guide/metric-definitions/#duplications) for detailed definition.
 
 ## Why is it important?
 
