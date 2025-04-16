@@ -84,5 +84,23 @@ Not this.
 Or this.
 ```
 
+6. For the blog post to be visible on the web, please also update `info/Blog/AllPosts.json` and add your entry to the list:
+
+```json
+{
+  "data": [
+    {
+      "title": "Quick Start Guide: Setup Your First Engineering Metrics Dashboard in 5 Minutes",
+      "readTime": "3 min",
+      "authorName": "Joshua Poddoku",
+      "authorImgUrl": "https://avatars.githubusercontent.com/u/31725457?v=4",
+      "publishTime": "2024/04/24",
+      "detailLink": "/blog/Quick-Start-Guide-Setup-Your-First-Engineering-Metrics-Dashboard-in-5-Minutes",
+      "coverTitle": "Setup-Your-First-Engineering-Metrics",
+      "summary": "Kickstart your Proof of Concept (POC) and onboard to DevLake within minutes! Easily integrate your favorite tools such as GitHub, GitLab, BitBucket, and Azure DevOps. Just follow our streamlined 3-step tutorial to quickly set up your first engineering metrics dashboard"
+    }
+  ]
+}
+```
 
 After completing the above steps, please submit a PR to [apache/incubator-devlake-website](https://github.com/apache/incubator-devlake-website) for review. Happy blogging!
