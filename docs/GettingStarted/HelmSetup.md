@@ -238,7 +238,7 @@ Some useful parameters for the chart, you could also check them in values.yaml
 Yes, it just set useExternal value to true while you deploy devlake with helm chart. Below we'll use MySQL on AWS RDS as an example.
 
 a. (Optional) Create a MySQL instance on AWS RDS following this [doc](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html), skip this step if you'd like to use an existing instance
-b. Proviede below values while install from helm:
+b. Provide below values while install from helm:
 
     - `mysql.useExternal`: this should be `true`
     - `mysql.externalServer`: use your RDS instance's IP address or domain name.
