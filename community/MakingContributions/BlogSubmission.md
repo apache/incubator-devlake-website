@@ -103,4 +103,6 @@ Or this.
 }
 ```
 
+And add a cover image into the folder `static/img/Blog` with the image name same as the cover title defined above. In this example it would be `static/img/Blog/Setup-Your-First-Engineering-Metrics.png`.
+
 After completing the above steps, please submit a PR to [apache/incubator-devlake-website](https://github.com/apache/incubator-devlake-website) for review. Happy blogging!
