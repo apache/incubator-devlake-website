@@ -4,9 +4,9 @@ The official Apache DevLake releases are provided as source artifacts.
 
 ## Releases
 
-The latest source release is [1.0.1](
-https://www.apache.org/dyn/closer.lua/incubator/devlake/1.0.1-incubating/apache-devlake-1.0.1-incubating-src.tar.gz?action=download) ([asc](https://downloads.apache.org/incubator/devlake/1.0.1-incubating/apache-devlake-1.0.1-incubating-src.tar.gz.asc),
-[sha512](https://downloads.apache.org/incubator/devlake/1.0.1-incubating/apache-devlake-1.0.1-incubating-src.tar.gz.sha512)).
+The latest source release is [1.0.2](
+https://www.apache.org/dyn/closer.lua/incubator/devlake/1.0.2-incubating/apache-devlake-1.0.2-incubating-src.tar.gz?action=download) ([asc](https://downloads.apache.org/incubator/devlake/1.0.2-incubating/apache-devlake-1.0.2-incubating-src.tar.gz.asc),
+[sha512](https://downloads.apache.org/incubator/devlake/1.0.2-incubating/apache-devlake-1.0.2-incubating-src.tar.gz.sha512)).
 
 For older releases, please check the [archive](https://archive.apache.org/dist/incubator/devlake).
 
