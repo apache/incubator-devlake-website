@@ -11,7 +11,7 @@ description: >
 This plugin provides users the ability to:
 - Add/delete columns in domain layer tables
 - Insert values to certain columns with data extracted from some raw layer tables
-- Import data from CSV files(only `issues`, `issue_commits`, `qa_apis`, `qa_test_cases` and `qa_test_case_executions` tables are supported)
+- Import data from CSV files(only `issues`, `issue_commits`, `issue_repo_commits`, `sprints`, `issue_worklogs`, `issue_changelogs`, `qa_apis`, `qa_test_cases` and `qa_test_case_executions` tables are supported)
 
 **NOTE:** The names of columns added via this plugin must start with the prefix `x_`
 
@@ -175,20 +175,25 @@ Drop the column `x_text` of the table `issues`
 
 > POST /plugins/customize/csvfiles/issues.csv
 
-The HTTP `Content-Type` must be `multipart/form-data`, and the form should have three fields:
+The HTTP `Content-Type` must be `multipart/form-data`, and the form should have four fields:
 
-- `file`: The CSV file
+- `file`: The CSV file to upload
 - `boardId`: It will be written to the `id` field of the `boards` table, the `board_id` field of `board_issues`, and the `_raw_data_params` field of `issues`
 - `boardName`: It will be written to the `name` field of the `boards` table
+- `incremental`: Whether to import incrementally (default: false)
 
-Upload a CSV file and import it to the `issues` table via this API. There should be no extra fields in the file except the `labels` field, and if the field value is `NULL`, it should be `NULL` in the CSV instead of the empty string.
+Upload a CSV file and import it to the `issues` table via this API. There should be no extra fields in the file except the `labels` and `sprint_ids` fields, and if the field value is `NULL`, it should be `NULL` in the CSV instead of the empty string.
+
+**Note:**
+- The `sprint_ids` field should contain comma-separated sprint IDs (e.g. "sprint1,sprint2")
+- These values will be automatically written to the `sprint_issues` table during import
 DevLake will parse the CSV file and store it in the `issues` table, where the `labels` are stored in the `issue_labels` table. 
 If the `boardId` does not appear, a new record will be created in the boards table. The `board_issues` table will be updated at the same time as the import.
 The following is an issues.CSV file sample:
 
-|id                           |_raw_data_params     |url                                                                 |icon_url|issue_key|title        |description                      |epic_key|type |status|original_status|story_point|resolution_date|created_date                 |updated_date                 |parent_issue_id|priority|original_estimate_minutes|time_spent_minutes|time_remaining_minutes|creator_id                                           |creator_name|assignee_id                                          |assignee_name|severity|component|lead_time_minutes|original_project|original_type|x_int         |x_time             |x_varchar|x_float|labels              |
-|-----------------------------|---------------------|--------------------------------------------------------------------|--------|---------|-------------|---------------------------------|--------|-----|------|---------------|-----------|---------------|-----------------------------|-----------------------------|---------------|--------|-------------------------|------------------|----------------------|-----------------------------------------------------|------------|-----------------------------------------------------|-------------|--------|---------|-----------------|----------------|-------------|--------------|-------------------|---------|-------|--------------------|
-|bitbucket:BitbucketIssue:1:1 |board789             |https://api.bitbucket.org/2.0/repositories/thenicetgp/lake/issues/1 |        |1        |issue test   |bitbucket issues test for devlake|        |issue|TODO  |new            |0          |NULL           |2022-07-17 07:15:55.959+00:00|2022-07-17 09:11:42.656+00:00|               |major   |0                        |0                 |0                     |bitbucket:BitbucketAccount:1:62abf394192edb006fa0e8cf|tgp         |bitbucket:BitbucketAccount:1:62abf394192edb006fa0e8cf|tgp          |        |         |NULL             |NULL            |NULL         |10            |2022-09-15 15:27:56|world    |8      |NULL                |
+|id                           |_raw_data_params     |url                                                                 |icon_url|issue_key|title        |description                      |epic_key|type |status|original_status|story_point|resolution_date|created_date                 |updated_date                 |parent_issue_id|priority|original_estimate_minutes|time_spent_minutes|time_remaining_minutes|creator_id                                           |creator_name|assignee_id                                          |assignee_name|severity|component|lead_time_minutes|original_project|original_type|x_int         |x_time             |x_varchar|x_float|labels              |sprint_ids       |
+|-----------------------------|---------------------|--------------------------------------------------------------------|--------|---------|-------------|---------------------------------|--------|-----|------|---------------|-----------|---------------|-----------------------------|-----------------------------|---------------|--------|-------------------------|------------------|----------------------|-----------------------------------------------------|------------|-----------------------------------------------------|-------------|--------|---------|-----------------|----------------|-------------|--------------|-------------------|---------|-------|--------------------|-----------------|
+|bitbucket:BitbucketIssue:1:1 |board789             |https://api.bitbucket.org/2.0/repositories/thenicetgp/lake/issues/1 |        |1        |issue test   |bitbucket issues test for devlake|        |issue|TODO  |new            |0          |NULL           |2022-07-17 07:15:55.959+00:00|2022-07-17 09:11:42.656+00:00|               |major   |0                        |0                 |0                     |bitbucket:BitbucketAccount:1:62abf394192edb006fa0e8cf|tgp         |bitbucket:BitbucketAccount:1:62abf394192edb006fa0e8cf|tgp          |        |         |NULL             |NULL            |NULL         |10            |2022-09-15 15:27:56|world    |8      |NULL                |sprint1,sprint2  |
 |bitbucket:BitbucketIssue:1:10|board789             |https://api.bitbucket.org/2.0/repositories/thenicetgp/lake/issues/10|        |10       |issue test007|issue test007                    |        |issue|TODO  |new            |0          |NULL           |2022-08-12 13:43:00.783+00:00|2022-08-12 13:43:00.783+00:00|               |trivial |0                        |0                 |0                     |bitbucket:BitbucketAccount:1:62abf394192edb006fa0e8cf|tgp         |bitbucket:BitbucketAccount:1:62abf394192edb006fa0e8cf|tgp          |        |         |NULL             |NULL            |NULL         |30            |2022-09-15 15:27:56|abc      |2456790|hello worlds        |
 |bitbucket:BitbucketIssue:1:13|board789             |https://api.bitbucket.org/2.0/repositories/thenicetgp/lake/issues/13|        |13       |issue test010|issue test010                    |        |issue|TODO  |new            |0          |NULL           |2022-08-12 13:44:46.508+00:00|2022-08-12 13:44:46.508+00:00|               |critical|0                        |0                 |0                     |bitbucket:BitbucketAccount:1:62abf394192edb006fa0e8cf|tgp         |                                                     |             |        |         |NULL             |NULL            |NULL         |1             |2022-09-15 15:27:56|NULL     |0.00014|NULL                |
 |bitbucket:BitbucketIssue:1:14|board789             |https://api.bitbucket.org/2.0/repositories/thenicetgp/lake/issues/14|        |14       |issue test011|issue test011                    |        |issue|TODO  |new            |0          |NULL           |2022-08-12 13:45:12.810+00:00|2022-08-12 13:45:12.810+00:00|               |blocker |0                        |0                 |0                     |bitbucket:BitbucketAccount:1:62abf394192edb006fa0e8cf|tgp         |bitbucket:BitbucketAccount:1:62abf394192edb006fa0e8cf|tgp          |        |         |NULL             |NULL            |NULL         |41534568464351|2022-09-15 15:27:56|NULL     |NULL   |label1,label2,label3|
@@ -216,6 +221,84 @@ The following is an issue_commits.CSV file sample:
 |jira:JiraIssue:1:10159|d28785ff09229ac9e3c6734f0c97466ab00eb4da|
 |jira:JiraIssue:1:10202|0ab12c4d4064003602edceed900d1456b6209894|
 |jira:JiraIssue:1:10203|980e9fe7bc3e22a0409f7241a024eaf9c53680dd|
+
+### Upload `issue_repo_commits.csv` file
+
+> POST /plugins/customize/csvfiles/issue_repo_commits.csv
+
+#### API Description
+Upload issue_repo_commits.csv file to import issue-repo commit relationships into DevLake.
+
+#### Request
+- **Content-Type**: multipart/form-data
+- **Parameters**:
+ - `boardId` (required): The ID of the board
+ - `incremental` (optional): Whether to import incrementally (default: false)
+ - `file` (required): The CSV file to upload
+
+#### Responses
+- **200**: Success
+- **400**: Bad Request
+- **500**: Internal Server Error
+
+#### CSV Format
+The CSV file should contain the following columns:
+
+|issue_id              |repo_url                                  |commit_sha                              |host        |namespace |repo_name|
+|----------------------|------------------------------------------|----------------------------------------|------------|----------|---------|
+|jira:JiraIssue:1:10063|https://github.com/apache/devlake.git     |8748a066cbaf67b15e86f2c636f9931347e987cf|github.com  |apache    |devlake  |
+|jira:JiraIssue:1:10064|https://github.com/apache/devlake.git     |e6bde456807818c5c78d7b265964d6d48b653af6|github.com  |apache    |devlake  |
+
+### Upload `sprints.csv` file
+
+> POST /plugins/customize/csvfiles/sprints.csv
+
+The `Content-Type` should be `multipart/form-data`, and the form should have three fields:
+
+- `file`: The CSV file to upload
+- `boardId`: The ID of the board
+- `incremental`: Whether to import incrementally (default: false)
+
+The following is a sprints.CSV file sample:
+
+|id    |url                                  |status    |name       |start_date          |ended_date            |completed_date        |
+|------|-------------------------------------|----------|-----------|--------------------|----------------------|----------------------|
+|sprint1|https://jira.example.com/sprint/1   |ACTIVE    |Sprint 1   |2022-01-01 00:00:00 |2022-01-14 00:00:00   |NULL                  |
+|sprint2|https://jira.example.com/sprint/2   |CLOSED    |Sprint 2   |2022-01-15 00:00:00 |2022-01-28 00:00:00   |2022-01-28 12:00:00   |
+
+### Upload `issue_worklogs.csv` file
+
+> POST /plugins/customize/csvfiles/issue_worklogs.csv
+
+The `Content-Type` should be `multipart/form-data`, and the form should have three fields:
+
+- `file`: The CSV file to upload
+- `boardId`: The ID of the board
+- `incremental`: Whether to import incrementally (default: false)
+
+The following is an issue_worklogs.CSV file sample:
+
+|id    |issue_id              |author_name (will create account record)|time_spent_minutes|started_date         |logged_date          |comment               |
+|------|----------------------|------------|------------------|---------------------|---------------------|----------------------|
+|1     |jira:JiraIssue:1:10063|John Doe    |120               |2022-01-01 09:30:00  |2022-01-01 10:00:00 |Initial investigation |
+|2     |jira:JiraIssue:1:10064|Jane Smith  |60                |2022-01-02 14:00:00  |2022-01-02 14:30:00 |Bug fixing            |
+
+### Upload `issue_changelogs.csv` file
+
+> POST /plugins/customize/csvfiles/issue_changelogs.csv
+
+The `Content-Type` should be `multipart/form-data`, and the form should have three fields:
+
+- `file`: The CSV file to upload
+- `boardId`: The ID of the board
+- `incremental`: Whether to import incrementally (default: false)
+
+The following is an issue_changelogs.CSV file sample:
+
+|id    |issue_id              |author_name (will create account record)|field_name |original_from_value|original_to_value|created_date          |
+|------|----------------------|------------|-----------|-------------------|-----------------|----------------------|
+|1     |jira:JiraIssue:1:10063|John Doe    |status     |Open               |In Progress      |2022-01-01 09:00:00  |
+|2     |jira:JiraIssue:1:10063|John Doe    |status     |In Progress        |Done             |2022-01-03 17:00:00  |
 
 ### Upload `qa_apis.csv` file
 
