@@ -11,11 +11,11 @@ description: >
 This plugin provides users the ability to:
 - Add/delete columns in domain layer tables
 - Insert values to certain columns with data extracted from some raw layer tables
-- Import data from CSV files(only `issues` and `issue_commits` two tables are supported) 
+- Import data from CSV files(only `issues`, `issue_commits`, `qa_apis`, `qa_test_cases` and `qa_test_case_executions` tables are supported)
 
 **NOTE:** The names of columns added via this plugin must start with the prefix `x_`
 
-For now, only the following five types were supported:
+For now, only the following six types are supported:
 - varchar(255)
 - text
 - bigint
@@ -216,3 +216,89 @@ The following is an issue_commits.CSV file sample:
 |jira:JiraIssue:1:10159|d28785ff09229ac9e3c6734f0c97466ab00eb4da|
 |jira:JiraIssue:1:10202|0ab12c4d4064003602edceed900d1456b6209894|
 |jira:JiraIssue:1:10203|980e9fe7bc3e22a0409f7241a024eaf9c53680dd|
+
+### Upload `qa_apis.csv` file
+
+> POST /plugins/customize/csvfiles/qa_apis.csv
+
+The HTTP `Content-Type` must be `multipart/form-data`, and the form should have three fields:
+
+- `file`: The CSV file
+- `qaProjectId`: It will be used as qa_project_id for the imported data
+- `incremental`: Boolean value indicating whether this is an incremental update (true/false)
+
+Upload a CSV file and import it to the `qa_apis` table via this API. The following fields are required:
+
+| Field Name       | Data Type     | Description                     |
+|------------------|---------------|---------------------------------|
+| id               | varchar(500)  | Unique identifier for the API   |
+| name             | varchar(255)  | API name                        |
+| path             | varchar(255)  | API path                        |
+| method           | varchar(255)   | HTTP method (GET, POST, etc.)   |
+| create_time      | timestamp     | Creation timestamp              |
+| creator_name     | varchar(255)  | Creator name (will create a record in accounts table and write creator_id to qa_apis table) |
+
+#### qa_apis.csv sample:
+|id                  |name          |path              |method|create_time              |creator_name|qa_project_id|
+|--------------------|--------------|------------------|------|-------------------------|------------|-------------|
+|qa:api:1:101        |Login API     |/api/v1/login     |POST  |2025-07-01 10:00:00      |tester1     |project101   |
+|qa:api:1:102        |User Info API |/api/v1/user/{id} |GET   |2025-07-01 11:30:00      |tester2     |project101   |
+|qa:api:1:103        |Logout API    |/api/v1/logout    |POST  |NULL                     |tester1     |project102   |
+
+### Upload `qa_test_cases.csv` file
+
+> POST /plugins/customize/csvfiles/qa_test_cases.csv
+
+The HTTP `Content-Type` must be `multipart/form-data`, and the form should have four fields:
+
+- `file`: The CSV file
+- `qaProjectId`: (max length 500) Will be used as qa_project_id and will create/update a record in qa_projects table
+- `qaProjectName`: (max length 255) Will be written to the `name` field of qa_projects table. Together with qaProjectId, this will create a new record in qa_projects table if not exists.
+- `incremental`: Boolean value indicating whether this is an incremental update (true/false)
+
+Upload a CSV file and import it to the `qa_test_cases` table via this API. The following fields are required:
+
+| Field Name       | Data Type     | Description                     |
+|------------------|---------------|---------------------------------|
+| id               | varchar(500)  | Unique test case ID             |
+| name             | varchar(255)  | Test case name                  |
+| create_time      | timestamp     | Creation timestamp              |
+| creator_name     | varchar(255)  | Creator name (will create a record in accounts table and write creator_id to qa_test_cases table) |
+| type             | varchar(255)  | Test case type, api or functional |
+| qa_api_id        | varchar(255)  | Related API ID, if type is api  |
+
+#### qa_test_cases.csv sample:
+|id                  |name               |create_time              |creator_name|type   |qa_api_id      |qa_project_id|
+|--------------------|-------------------|-------------------------|------------|-------|---------------|-------------|
+|qa:case:1:201       |Login Test         |2025-07-02 09:00:00      |tester1     |api    |qa:api:1:101   |project101   |
+|qa:case:1:202       |User Profile Test  |2025-07-02 10:30:00      |tester2     |api    |qa:api:1:102   |project101   |
+|qa:case:1:203       |UI Navigation Test |2025-07-02 11:45:00      |tester3     |functional|NULL       |project102   |
+
+### Upload `qa_test_case_executions.csv` file
+
+> POST /plugins/customize/csvfiles/qa_test_case_executions.csv
+
+The HTTP `Content-Type` must be `multipart/form-data`, and the form should have three fields:
+
+- `file`: The CSV file
+- `qaProjectId`: It will be used as qa_project_id for the imported data
+- `incremental`: Boolean value indicating whether this is an incremental update (true/false)
+
+Upload a CSV file and import it to the `qa_test_case_executions` table via this API. The following fields are required:
+
+| Field Name            | Data Type     | Description                     |
+|-----------------------|---------------|---------------------------------|
+| id                    | varchar(500)  | Unique execution ID             |
+| qa_test_case_id       | varchar(255)  | Related test case ID            |
+| create_time           | timestamp     | Creation timestamp              |
+| start_time            | timestamp     | Test execution start time       |
+| finish_time           | timestamp     | Test execution finish time      |
+| creator_name          | varchar(255)  | Creator name (will create a record in accounts table and write creator_id to qa_test_case_executions table) |
+| status                | varchar(255)   | Execution status (PENDING, IN_PROGRESS, SUCCESS, FAILED) |
+
+#### qa_test_case_executions.csv sample:
+|id                  |qa_test_case_id    |create_time              |start_time              |finish_time             |creator_name|status    |qa_project_id|
+|--------------------|-------------------|-------------------------|------------------------|------------------------|------------|----------|-------------|
+|qa:exec:1:301       |qa:case:1:201      |2025-07-03 14:00:00      |2025-07-03 14:05:00     |2025-07-03 14:15:00     |tester1     |SUCCESS   |project101   |
+|qa:exec:1:302       |qa:case:1:202      |2025-07-03 15:30:00      |2025-07-03 15:35:00     |NULL                    |tester2     |IN_PROGRESS|project101   |
+|qa:exec:1:303       |qa:case:1:203      |2025-07-04 09:00:00      |NULL                    |NULL                    |tester3     |PENDING   |project102   |
