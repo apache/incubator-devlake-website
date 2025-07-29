@@ -13,7 +13,7 @@ always available, it leads to a rapid increase in MySQL disk consumption.
 This growth is primarily caused by the large size of the binary logs generated
 after each data collection cycle.
 
-### Why dose DevLake choose to delete the existing data and then insert new data?
+### Why does DevLake choose to delete the existing data and then insert new data?
 
 Because we want to ensure that the latest data is 
 always available. If we don't delete the existing data, some old data which has been deleted 
