@@ -8,7 +8,7 @@ Visit Config UI at `http://localhost:4000` and go to the `Connections` page.
 
 ## Step 1 - Add Data Connections
 
-![image](https://user-images.githubusercontent.com/3294100/220118398-2d08070f-0edb-4de6-8696-9ee58b80719b.png)
+![Bitbucket connection form showing authentication method selection with API Token and App Password options](/img/ConfigUI/bitbucket-add-data-connections.png)
 
 ### Step 1.1 - Authentication
 
@@ -20,11 +20,58 @@ Give your connection a unique name to help you identify it in the future.
 
 For Bitbucket Cloud, you do not need to enter the REST API endpoint URL, which is always `https://api.bitbucket.org/2.0/`.
 
-#### Username and App Password
+#### Authentication Method
 
-Learn about [how to create a Bitbucket app password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/).
+:::warning App Password Deprecation
+Bitbucket is deprecating App passwords in favor of API tokens:
 
-The following permissions are required to collect data from Bitbucket repositories:
+- **September 9, 2025**: Creation of new App passwords will be discontinued
+- **June 9, 2026**: All existing App passwords will be deactivated
+
+**Please use API tokens for all new connections.** Existing connections using App passwords should be migrated to API tokens before June 9, 2026.
+:::
+
+You can choose between two authentication methods:
+
+##### API Token (Recommended)
+
+API tokens are the recommended authentication method for Bitbucket Cloud. Learn about [how to create a Bitbucket API token](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api-token/).
+
+**Steps to create an API token:**
+
+1. Sign in at [https://id.atlassian.com/manage-profile/security/api-tokens](https://id.atlassian.com/manage-profile/security/api-tokens).
+2. Select **Create API token with scopes**.
+3. Give the API token a name and an expiry date (ex: 365 days), then select **Next**.
+4. Select **Bitbucket** as the app and select **Next**.
+5. Select the required scopes (see **Q2**) and select **Next**.
+6. Review your token and select **Create token**.
+7. **Copy the generated API token immediately** - it's only displayed once and can't be retrieved later.
+
+For detailed instructions, refer to [Atlassian's API token documentation](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api-token/).
+
+**Required Scopes:**
+
+The following scopes are **required** to collect data from Bitbucket repositories:
+
+- `read:account` - Required to view users profiles
+- `read:issue:bitbucket` - View your issues
+- `read:pipeline:bitbucket` - View your pipelines
+- `read:project:bitbucket` - View your projects
+- `read:pullrequest:bitbucket` - View your pull requests
+- `read:repository:bitbucket` - View your repositories
+- `read:runner:bitbucket` - View your workspaces/repositories' runners
+- `read:user:bitbucket` - View user info (required for connection test)
+- `read:workspace:bitbucket` - View your workspaces
+
+![Bitbucket API token scopes selection interface](/img/ConfigUI/bitbucket-api-token-scope-selection-interface.png)
+
+##### App Password (Deprecated)
+
+:::caution Deprecated
+App passwords are deprecated and should only be used for existing connections. For new connections, please use API tokens instead.
+:::
+
+If you're using an existing App password, learn about [how to create a Bitbucket app password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/).
 
 - Account:Read
 - Workspace membership:Read
@@ -37,11 +84,9 @@ The following permissions are required to collect data from Bitbucket repositori
 
 ![bitbucket-app-password-permissions](/img/ConfigUI/bitbucket-app-password-permissions.jpeg)
 
-
 #### Proxy URL (Optional)
 
 If you are behind a corporate firewall or VPN you may need to utilize a proxy server. Enter a valid proxy server address on your network, e.g. `http://your-proxy-server.com:1080`
-
 
 #### Fixed Rate Limit (Optional)
 
@@ -51,10 +96,22 @@ The maximum rate limit for different entities in Bitbucket(Cloud) [varies from 1
 
 <!-- ![image](https://user-images.githubusercontent.com/3294100/220094172-9e8e9e8b-75ea-4c3e-8e5b-716320dabb64.png) -->
 
-
 #### Test and Save Connection
 
 Click `Test Connection`, if the connection is successful, click `Save Connection` to add the connection.
+
+#### Migrating from App Password to API Token
+
+If you have an existing connection using an App password and want to migrate to an API token:
+
+1. **Create an API token** in Bitbucket (see instructions above)
+2. **Edit your existing connection** in DevLake
+3. **Change the Authentication Method** from "App Password" to "API Token"
+4. **Enter your API token** in the token field
+5. **Test the connection** to verify it works
+6. **Save the connection**
+
+Your data collection will continue without interruption, and you'll be ready for the App password deprecation in 2026.
 
 ### Step 1.2 - Add Data Scopes
 
@@ -63,21 +120,27 @@ Choose the Bitbucket repositories you wish to collect either by finding them in 
 ![image](https://user-images.githubusercontent.com/14050754/224308925-449a4d3e-ed52-45e9-bb72-0d2892df374f.png)
 
 ### Step 1.3 - Add Scope Config (Optional)
+
 #### Entities
-The entities of which domain you wish to collect: Usually, you don't have to modify this part. However, if you don't want to collect certain Bitbucket entities, you can unselect some entities to accelerate the collection speed.
-    - Issue Tracking: Bitbucket issues, issue comments, etc.
-    - Source Code Management: Bitbucket repos, refs, commits, etc.
-    - Code Review: Bitbucket PRs, PR comments, etc.
-    - CI/CD: Bitbucket Pipelines, Bitbucket Deployments, etc.
-    - Cross Domain: Bitbucket users, etc.
+
+The entities of which domain you wish to collect: Usually, you don't
+have to modify this part. However, if you don't want to collect certain
+Bitbucket entities, you can unselect some entities to accelerate the
+collection speed.
+
+- Issue Tracking: Bitbucket issues, issue comments, etc.
+- Source Code Management: Bitbucket repos, refs, commits, etc.
+- Code Review: Bitbucket PRs, PR comments, etc.
+- CI/CD: Bitbucket Pipelines, Bitbucket Deployments, etc.
+- Cross Domain: Bitbucket users, etc.
 
 #### Transformations
 
 The transformations on the Bitbucket data you are going to collect.
-  - The details of the transformations will be explained below.
-  - Without adding transformation rules, you can still view the 'Bitbucket' dashboard. However, if you want to view more pre-built dashboards, finish the transformations required.
-  - Each Bitbucket repo has at most ONE set of transformations.
 
+- The details of the transformations will be explained below.
+- Without adding transformation rules, you can still view the 'Bitbucket' dashboard. However, if you want to view more pre-built dashboards, finish the transformations required.
+- Each Bitbucket repo has at most ONE set of transformations.
 
 ###### Issue Tracking > Issue Status Mapping
 
@@ -85,7 +148,7 @@ The transformations on the Bitbucket data you are going to collect.
 
 The given settings transformed the Bitbucket issue statuses to the issue statuses used by DevLake, enabling you to measure metrics like the Issue Delivery Rate on the pre-built dashboards, as DevLake understands your definition of when an issue is considered as completed (status = 'DONE').
 
-- TODO: The issues that are planned but have not been worked on yet 
+- TODO: The issues that are planned but have not been worked on yet
 - IN-PROGRESS: The issues that are work-in-progress
 - DONE: The issues that are completed
 - OTHER: Other issues statuses that do not belong to the three statuses above
@@ -97,9 +160,10 @@ The original status will be saved in the column `original_status` of the table '
 DevLake will convert the issue types of 'enhancement', 'proposal', and 'task' from Bitbucket into the new issue type 'REQUIREMENT' for DevLake. In contrast, any issues classified as 'bug' in Bitbucket will be converted into the new issue type 'BUG' for DevLake. The original type will be saved in the column `original_type` of the table 'issues', and the new type will be saved in the column `type` of the same table.
 
 ###### CI/CD
+
 The CI/CD configuration for Bitbucket is used for calculating [DORA metrics](../DORA.md).
 
-By default, DevLake will identify the deployment and environment settings that are defined in the Bitbucket CI .yml file. 
+By default, DevLake will identify the deployment and environment settings that are defined in the Bitbucket CI .yml file.
 
 ![image](https://user-images.githubusercontent.com/14050754/224311429-31304867-8cdd-476b-8675-e4acbc17f552.png)
 
@@ -118,6 +182,7 @@ If you have not defined these settings in the .yml file, please select 'Detect D
 - Production: A pipeline step with a name that matches the given RegEx will be recognized as a DevLake cicd_task in the production environment.
 
 ###### Introduction to Bitbucket CI entities
+
 Bitbucket has several key CI entities: `pipelines`, `pipeline steps`, and `deployments`. A Bitbucket pipeline contains several pipeline steps. Each pipeline step defined with a deployment key can be mapped to a Bitbucket deployment.
 
 Each Bitbucket pipeline is converted to a cicd_pipeline in DevLake's domain layer schema and each Bitbucket pipeline step is converted to a cicd_task in DevLake's domain layer.
@@ -131,8 +196,8 @@ If a pipeline step defines `deployment` with a value (usually indicating the env
 
 - Tags Limit: DevLake compares the last N pairs of tags to get the "commit diff', "issue diff" between tags. N defaults to 10.
 
-    - commit diff: new commits for a tag relative to the previous one
-    - issue diff: issues solved by the new commits for a tag relative to the previous one
+  - commit diff: new commits for a tag relative to the previous one
+  - issue diff: issues solved by the new commits for a tag relative to the previous one
 
 - Tags Pattern: Only tags that meet the given Regular Expression will be counted.
 
@@ -140,22 +205,25 @@ If a pipeline step defines `deployment` with a value (usually indicating the env
 
 Please click `Save` to save the transformation rules for the repo. In the data scope list, click `Next Step` to continue configuring.
 
-
-
 ## Step 2 - Collect Data in a Project
+
 ### Step 2.1 - Create a Project
+
 Collecting Bitbucket data requires creating a project first. You can visit the Project page from the side menu and create a new project by following the instructions on the user interface.
 
 ![create-a-project](images/create-a-project.png)
 
 ### Step 2.2 - Add a Bitbucket Connection
+
 You can add a previously configured Bitbucket connection to the project and select the boards for which you wish to collect the data for.
 Please note: if you don't see the repositories you are looking for, please check if you have added them to the connection first.
 
 ![add-a-connection](images/add-a-connection-project.png)
 
 ### Step 2.3 - Set the Sync Policy
+
 There are three settings for Sync Policy:
+
 - Data Time Range: You can select the time range of the data you wish to collect. The default is set to the past six months.
 - Sync Frequency: You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your preferred schedule.
 - Skip Failed Tasks: sometime a few tasks may fail in a long pipeline; you can choose to skip them to avoid spending more time in running the pipeline all over again.
@@ -163,8 +231,8 @@ There are three settings for Sync Policy:
 ![sync-policy](images/sync-policy.png)
 
 ### Step 2.4 - Start Data Collection
-Click on "Collect Data" to start collecting data for the whole project. You can check the status in the Status tab on the same page.
 
+Click on "Collect Data" to start collecting data for the whole project. You can check the status in the Status tab on the same page.
 
 ## Troubleshooting
 
