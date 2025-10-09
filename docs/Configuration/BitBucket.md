@@ -43,7 +43,7 @@ API tokens are the recommended authentication method for Bitbucket Cloud. Learn 
 2. Select **Create API token with scopes**.
 3. Give the API token a name and an expiry date (ex: 365 days), then select **Next**.
 4. Select **Bitbucket** as the app and select **Next**.
-5. Select the required scopes (see **Q2**) and select **Next**.
+5. Select the required scopes (see below) and select **Next**.
 6. Review your token and select **Create token**.
 7. **Copy the generated API token immediately** - it's only displayed once and can't be retrieved later.
 
@@ -63,7 +63,7 @@ The following scopes are **required** to collect data from Bitbucket repositorie
 - `read:user:bitbucket` - View user info (required for connection test)
 - `read:workspace:bitbucket` - View your workspaces
 
-![Bitbucket API token scopes selection interface](/img/ConfigUI/bitbucket-api-token-scope-selection-interface.png)
+![Bitbucket API Token Scopes Selection Interface](/img/ConfigUI/bitbucket-api-token-scope-selection-interface.png)
 
 ##### App Password (Deprecated)
 
@@ -72,6 +72,8 @@ App passwords are deprecated and should only be used for existing connections. F
 :::
 
 If you're using an existing App password, learn about [how to create a Bitbucket app password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/).
+
+**Required Permissions:**
 
 - Account:Read
 - Workspace membership:Read
@@ -82,7 +84,7 @@ If you're using an existing App password, learn about [how to create a Bitbucket
 - Pipelines:Read
 - Runners:Read
 
-![bitbucket-app-password-permissions](/img/ConfigUI/bitbucket-app-password-permissions.jpeg)
+![Bitbucket App Password Permissions](/img/ConfigUI/bitbucket-app-password-permissions.jpeg)
 
 #### Proxy URL (Optional)
 
@@ -117,7 +119,7 @@ Your data collection will continue without interruption, and you'll be ready for
 
 Choose the Bitbucket repositories you wish to collect either by finding them in the miller column, or searching. You can only add public repositories through the search box.
 
-![image](https://user-images.githubusercontent.com/14050754/224308925-449a4d3e-ed52-45e9-bb72-0d2892df374f.png)
+![Bitbucket - Add Data Scopes](/img/ConfigUI/bitbucket-add-data-scopes.png)
 
 ### Step 1.3 - Add Scope Config (Optional)
 
@@ -144,7 +146,7 @@ The transformations on the Bitbucket data you are going to collect.
 
 ###### Issue Tracking > Issue Status Mapping
 
-![image](https://user-images.githubusercontent.com/14050754/224309704-b096c256-b2cf-4107-b78c-044d06b5f23c.png)
+![Bitbucket Issue Status Mapping](/img/ConfigUI/bitbucket-issue-status-mapping.png)
 
 The given settings transformed the Bitbucket issue statuses to the issue statuses used by DevLake, enabling you to measure metrics like the Issue Delivery Rate on the pre-built dashboards, as DevLake understands your definition of when an issue is considered as completed (status = 'DONE').
 
@@ -165,10 +167,10 @@ The CI/CD configuration for Bitbucket is used for calculating [DORA metrics](../
 
 By default, DevLake will identify the deployment and environment settings that are defined in the Bitbucket CI .yml file.
 
-![image](https://user-images.githubusercontent.com/14050754/224311429-31304867-8cdd-476b-8675-e4acbc17f552.png)
+![Bitbucket Detect Deployments for DORA](/img/ConfigUI/bitbucket-detect-deployments-dora.png)
 
 However, to ensure this works properly, you must specify the deployment settings in the .yml file.
-![img_v2_89602d14-a733-4679-9d4b-d9635c03bc5g](https://user-images.githubusercontent.com/3294100/221528908-4943b1e6-1398-49e9-8ce9-aa264995f9bc.jpg)
+![Bitbucket Pipelines Deployment Settings](/img/ConfigUI/bitbucket-pipelines-deployment-settings.png)
 
 The pipeline steps with the `deployment` key will be recognized as DevLake deployments. The value of the `deployment` key will be recognized as the environment of DevLake deployments.
 
@@ -176,7 +178,7 @@ All Bitbucket pipeline steps will be saved in table 'cicd_tasks', but DevLake de
 
 If you have not defined these settings in the .yml file, please select 'Detect Deployments from Pipeline steps in Bitbucket', and input the RegEx in the following fields:
 
-![image](https://user-images.githubusercontent.com/14050754/224310350-cc9a4901-476d-4583-ad73-4d3b394bc343.png)
+![Bitbucket Detect Deployments Regex](/img/ConfigUI/bitbucket-detect-deployments-regex.png)
 
 - Deployment: A pipeline step with a name that matches the given RegEx will be recognized as a DevLake deployment.
 - Production: A pipeline step with a name that matches the given RegEx will be recognized as a DevLake cicd_task in the production environment.
@@ -186,11 +188,11 @@ If you have not defined these settings in the .yml file, please select 'Detect D
 Bitbucket has several key CI entities: `pipelines`, `pipeline steps`, and `deployments`. A Bitbucket pipeline contains several pipeline steps. Each pipeline step defined with a deployment key can be mapped to a Bitbucket deployment.
 
 Each Bitbucket pipeline is converted to a cicd_pipeline in DevLake's domain layer schema and each Bitbucket pipeline step is converted to a cicd_task in DevLake's domain layer.
-![image](https://user-images.githubusercontent.com/3294100/220288225-71bee07d-c319-45bd-98e5-f4d01359840e.png)
+![Bitbucket Pipeline interface showing CI entities and DevLake schema mapping](/img/ConfigUI/bitbucket-ci-entities-overview.png)
 
 If a pipeline step defines `deployment` with a value (usually indicating the environment), this pipeline step is also a Bitbucket deployment.
 
-![image](https://user-images.githubusercontent.com/3294100/221887426-4cae1c46-31ce-4fcd-b773-a54c28af0264.png)
+![Bitbucket Deployment view showing environment history with various pipeline runs](/img/ConfigUI/bitbucket-deployment-pipeline-history.png)
 
 ###### Additional Settings (Optional)
 
@@ -211,14 +213,14 @@ Please click `Save` to save the transformation rules for the repo. In the data s
 
 Collecting Bitbucket data requires creating a project first. You can visit the Project page from the side menu and create a new project by following the instructions on the user interface.
 
-![create-a-project](images/create-a-project.png)
+![DevLake Project Creation Interface](images/create-a-project.png)
 
 ### Step 2.2 - Add a Bitbucket Connection
 
 You can add a previously configured Bitbucket connection to the project and select the boards for which you wish to collect the data for.
 Please note: if you don't see the repositories you are looking for, please check if you have added them to the connection first.
 
-![add-a-connection](images/add-a-connection-project.png)
+![DevLake Project Add Connection Interface](images/add-a-connection-project.png)
 
 ### Step 2.3 - Set the Sync Policy
 
@@ -228,7 +230,7 @@ There are three settings for Sync Policy:
 - Sync Frequency: You can choose how often you would like to sync your data in this step by selecting a sync frequency option or enter a cron code to specify your preferred schedule.
 - Skip Failed Tasks: sometime a few tasks may fail in a long pipeline; you can choose to skip them to avoid spending more time in running the pipeline all over again.
 
-![sync-policy](images/sync-policy.png)
+![DevLake Sync Policy Settings](images/sync-policy.png)
 
 ### Step 2.4 - Start Data Collection
 
