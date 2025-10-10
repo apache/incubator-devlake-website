@@ -8,7 +8,7 @@ Visit Config UI: `http://localhost:4000`.
 
 ## Step 1 - Add Data Connections
 
-On the Connections page, you can select GitHub and create a new connection or it.
+On the Connections page, you can select GitLab and create a new connection or it.
 
 ### Step 1.1 - Authentication
 
