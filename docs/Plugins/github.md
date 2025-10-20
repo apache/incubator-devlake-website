@@ -62,6 +62,7 @@ Metrics that can be calculated based on the data collected from GitHub:
 
 - Configuring GitHub via [Config UI](/Configuration/GitHub.md)
 - Configuring GitHub via Config UI's [advanced mode](/Configuration/AdvancedMode.md#1-github).
+- Configurable via [Environment Variables](/GettingStarted/Environment.md#github_graphql_job_...).
 
 ## API Sample Request
 
