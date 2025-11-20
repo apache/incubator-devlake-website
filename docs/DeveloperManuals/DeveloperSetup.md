@@ -69,7 +69,7 @@ The following guide will walk through how to run DevLake's frontend (`config-ui`
     make configure-dev
     ```
 
-    For common errors, please see [Troubleshooting](#troubleshotting).
+    For common errors, please see [Troubleshooting](#troubleshooting).
 
 8.  Config UI is running at `localhost:4000`
     - For how to use Config UI, please refer to our [tutorial](Configuration/Tutorial.md)
