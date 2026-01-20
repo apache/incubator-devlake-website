@@ -276,7 +276,7 @@ const versions = require('./versions.json');
             items: [
               {
                 label: 'Slack',
-                to: 'https://join.slack.com/t/devlake-io/shared_invite/zt-2ox842kuu-_6x3Lwdj88YpzKhMRpgnMg',
+                to: 'https://join.slack.com/t/devlake-io/shared_invite/zt-3e9dlaurp-JTLNb7Bu1OxYjU3WbLM5HQ',
               },
               {
                 label: 'GitHub Issue Tracker',
