@@ -5,10 +5,10 @@ import Join from "@site/static/img/Homepage/Join.png";
 import { InlineLink } from "./Components";
 
 export function JoinCommunity() {
-  return (<div className="flex align-self-center justify-between xl:relative right-2
+  return (<div className="flex justify-between xl:relative right-2
     my-[72px] rounded-[20px] bg-primary-200 px-5 py-[36px] font-inter xl:mx-auto xl:w-[72vw] xl:max-w-[1300px]
-    sm:w-[87vw] sm:my-6 sm:p-4 mobile:my-4 mobile:p-3 mobile:mt-[80px] sm:mt-[180px]">
-    <div className="w-[600px] pr-3 sm:pr-[0] sm:w-auto">
+    sm:w-[87vw] sm:my-6 sm:p-4 sm:flex-col mobile:my-4 mobile:p-3 mobile:mt-[80px] sm:mt-[180px]">
+    <div className="w-[600px] pr-3 sm:pr-[0] sm:w-auto sm:order-2">
       <div className="text-heading1 mb-3 text-primary-800 font-semibold
         sm:text-heading2">Join the Community</div>
       <div className="text-label18 mb-4 text-neutral-500
@@ -18,6 +18,6 @@ export function JoinCommunity() {
         <InlineLink link="https://devlake.apache.org/community/subscribe">Subscribe to Mailing List</InlineLink>
       </div>
     </div>
-    <img src={Join} alt='' className="w-[216px] h-[200px] sm:mx-auto sm:mb-4" />
+    <img src={Join} alt='' className="w-[216px] h-[200px] sm:mx-auto sm:mb-4 sm:order-1" />
   </div>)
 }
