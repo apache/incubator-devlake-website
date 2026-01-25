@@ -23,12 +23,12 @@ function UCCard({ lead, title, desc, demoURL, children }: {
       sm:h-[182px]">
       {children}
     </div>
-    <div className="bg-white px-4 py-2 h-[264px] sm:h-[195px] sm:p-2 mobile:h-[240px]">
-      <div className="font-inter text-neutral-300 text-label18 font-medium mb-2 pr-1
+    <div className="bg-white dark:bg-[#242526] px-4 py-2 h-[264px] sm:h-[195px] sm:p-2 mobile:h-[240px]">
+      <div className="font-inter text-neutral-300 dark:text-[#e3e3e3] text-label18 font-medium mb-2 pr-1
         sm:text-label16 sm:font-normal sm:mb-[4px]">{lead}</div>
-      <div className="font-inter text-primary-800 text-heading2 font-semibold mb-2 pr-1
+      <div className="font-inter text-primary-500 text-heading2 font-semibold mb-2 pr-1
         sm:text-[20px] sm:leading-[28px] sm:mb-[4px] sm:pr-[0]">{title}</div>
-      <div className="font-inter text-neutral-500 text-label18 font-normal pr-1
+      <div className="font-inter text-neutral-500 dark:text-[#e3e3e3] text-label18 font-normal pr-1
         sm:text-label16 sm:pr-[0]">{desc}</div>
        <C.TextLink link={demoURL}>{lead === "Data Engineers" ? "Learn More" : "See it Live"}</C.TextLink>
     </div>

@@ -99,7 +99,7 @@ function Supports() {
         </C.Sup>
       </div>
       <div
-        className="text-label18 font-inter text-neutral-500 mt-6
+        className="text-label18 font-inter text-neutral-500 dark:text-[#e3e3e3] mt-6
         sm:text-label16 sm:mt-4"
       >
         Check out all {" "}

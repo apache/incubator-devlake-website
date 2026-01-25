@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 
 let {tailwindConfig} = require('dev-website-tailwind-config');
+
+tailwindConfig.darkMode = ['class', '[data-theme="dark"]'];
+
 tailwindConfig.theme.extend.fontSize = {
     ...tailwindConfig.theme.extend.fontSize,
     label40: ['40px', { lineHeight : '56px' }],
