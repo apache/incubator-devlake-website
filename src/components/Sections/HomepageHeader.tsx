@@ -121,7 +121,7 @@ export function HomepageHeader() {
             mobile:mt-3
             w-[200px] sm:w-[140px] mobile:w-[140px]
             h-[48px] sm:h-[32px] mobile:h-[32px]"
-            to="https://join.slack.com/t/devlake-io/shared_invite/zt-2ox842kuu-_6x3Lwdj88YpzKhMRpgnMg"
+            to="https://join.slack.com/t/devlake-io/shared_invite/zt-3e9dlaurp-JTLNb7Bu1OxYjU3WbLM5HQ"
           >
             Join Slack
           </Link>
