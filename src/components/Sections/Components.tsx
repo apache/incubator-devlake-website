@@ -10,7 +10,7 @@ export const TextTitle = ({
 }) => (
   <span
     className="block font-inter
-    text-heading2 text-primary-800 font-semibold mb-[16px]
+    text-heading2 text-primary-800 dark:text-primary-500 font-semibold mb-[16px]
     sm:text-heading4 sm:mb-2 sm:mt-5"
   >
     {children}
@@ -20,7 +20,7 @@ export const TextTitle = ({
 export const H3Title = ({ children }: { children: React.ReactNode }) => (
   <span
     className="block font-inter
-    text-heading3 text-primary-800 font-semibold mb-[24px]
+    text-heading3 text-primary-800 dark:text-primary-500 font-semibold mb-[24px]
     sm:text-heading4"
   >
     {children}
@@ -34,7 +34,7 @@ export const TextDescription = ({
 }) => (
   <div
     className="font-inter
-    text-label18 text-neutral-500 
+    text-label18 text-neutral-500 dark:text-[#e3e3e3]
     sm:text-label16 sm:text-start"
   >
     {children}
@@ -108,7 +108,7 @@ export const InlineLink = ({
 export const BreakLine = () => (
   <div
     className="
-  h-[2px] bg-neutral-100
+  h-[2px] bg-neutral-100 dark:bg-neutral-600
   "
   />
 );
@@ -127,7 +127,7 @@ export const Sup = ({
     {children}
     <span
       className="font-inter text-label14 text-center
-      flex h-[24px] text-neutral-500 mt-[4px]
+      flex h-[24px] text-neutral-500 dark:text-[#e3e3e3] mt-[4px]
       sm:text-[12px] sm:leading-[12px] sm:mt-1
     "
     >

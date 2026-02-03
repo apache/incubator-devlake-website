@@ -16,9 +16,9 @@ export default function Home() {
     <Layout
       title={`${siteConfig.title}`}
       description="Apache DevLake is an open-source dev data platform that ingests, analyzes, and visualizes the fragmented data from DevOps tools to distill insights for engineering productivity.">
-      <div className='bg-[#f8f8f8]'>
+      <div className='bg-[#f8f8f8] dark:bg-[#1b1b1d]'>
        <HeaderLearnMore />
-        <div className=' mx-auto bg-white'>
+        <div className='mx-auto bg-white dark:bg-[#242526]'>
           <HomepageHeader />
           <main className='max-w-[70%] xl:mx-auto
             sm:max-w-[90%] mx-auto xl:max-w-[1280px]'>

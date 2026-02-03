@@ -30,14 +30,14 @@ export function Contributor() {
         <div className="py-[60px] sm:py-5 mobile:py-4">
           <h2
             className="
-    text-primary-800 font-semibold
+    text-primary-500 font-semibold
       text-heading1 sm:text-heading3
       mb-[16px] sm:mb-[12px] mobile:mb-[12px]
       "
           >
             Contributors
           </h2>
-          <p className="text-label18 font-normal text-neutral-500 mb-[64px] sm:mb-[32px] mobile:mb-[24px] ">
+          <p className="text-label18 font-normal text-neutral-500 dark:text-[#e3e3e3] mb-[64px] sm:mb-[32px] mobile:mb-[24px] ">
             New contributors are always welcomed by our community. You will be
             awarded with a certificate once your first PRs get merged into the
             codebase.

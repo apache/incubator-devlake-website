@@ -19,7 +19,7 @@ const Card = ({ icon, text, children }: {
     <div className="mt-[40px]">{icon}</div>
     <div className="mt-[10px] text-heading4 font-inter font-semibold text-primary-800">{text}</div>
   </div>
-  <div className="mt-5 text-label18 font-inter pl-1 text-neutral-500">{children}</div>
+  <div className="mt-5 text-label18 font-inter pl-1 text-neutral-500 dark:text-[#e3e3e3]">{children}</div>
 </div>)
 
 const Arrow = () => <div className="h-[140px] flex items-center"><BlueArrow className="xl:w-[3.33vw] xl:max-w-[80px] " /></div>

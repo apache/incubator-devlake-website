@@ -59,7 +59,7 @@ export function HomepageHeader() {
           <div
             className="
             mt-5 mobile:mt-3 sm:mt-3
-            text-primary-800
+            text-primary-800  
             text-label24
             sm:text-label16Lake mobile:text-label16Lake
             font-inter
@@ -94,7 +94,7 @@ export function HomepageHeader() {
             flex
             whitespace-nowrap
             rounded-[8px] sm:rounded-[5px] mobile:rounded-[5px]
-            bg-neutral-invert
+            bg-neutral-invert dark:bg-[#242526]
             text-primary-500
             border-2 border-primary-500 border-solid
             hover:text-primary-500 
@@ -112,7 +112,7 @@ export function HomepageHeader() {
             flex
             whitespace-nowrap
             rounded-[8px] sm:rounded-[5px] mobile:rounded-[5px]
-            bg-neutral-invert
+            bg-neutral-invert dark:bg-[#242526]
             text-primary-500
             border-2 border-primary-500 border-solid
             hover:text-primary-500 
@@ -140,10 +140,11 @@ export function HomepageHeader() {
        mb-[40px]
        items-center
       ">
-        <div className="h-[2px] bg-neutral-100 w-[46%] sm:w-[42%] mobile:w-[35%] relative"></div>
+        <div className="h-[2px] bg-neutral-100 w-[46%]  sm:w-[42%] mobile:w-[35%] relative"></div>
         <span className="
          flex-1
          w-[81px]
+         dark:text-[#e3e3e3]
         ">
         Trusted by
         </span>

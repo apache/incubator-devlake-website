@@ -7,7 +7,7 @@ export function PPMC() {
   return (
     <div className="py-[60px] sm:py-5 mobile:py-4">
       <h2 className="
-    text-primary-800 font-semibold
+    text-primary-500 font-semibold
       text-heading1 sm:text-heading3
       mb-[64px] sm:mb-[32px] mobile:mb-[24px]
       ">
