@@ -90,4 +90,4 @@ The Transformations page allows you to manage all your transformation rules.
 
 ## Troubleshooting
 
-If you run into any problem, please check [Troubleshooting](/Troubleshooting/Configuration.md), contact us on [Slack](https://join.slack.com/t/devlake-io/shared_invite/zt-17b6vuvps-x98pqseoUagM7EAmKC82xQ) or [create an issue](https://github.com/apache/incubator-devlake/issues).
+If you run into any problem, please check [Troubleshooting](/Troubleshooting/Configuration.md), contact us on [Slack](https://join.slack.com/t/devlake-io/shared_invite/zt-1lkgbdmys-AU2azidzO1u~mtjlg9my7A) or [create an issue](https://github.com/apache/incubator-devlake/issues).

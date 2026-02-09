@@ -31,6 +31,6 @@ Feel free to give it a read, as this has been specially handpicked for you! This
 ### Question #4: "If you were starting out in your engineering career again, what advice would you share with yourself?"
 > Wow... great question... I would probably tell myself to be far more aware and avoidant of toxic workplaces and work cultures. You will grow much more quickly at a healthy company. How we can measure that would be a great question to answer!
 
-Thanks for taking your time and reading through this. Do share your thoughts and comments in our [slack community](https://join.slack.com/t/devlake-io/shared_invite/zt-20envwfbk-JUTZ4z9jSeRnrvNhBFLg9w). You can also nominate your favorite leader from the community for the upcoming editions of "Diving Into The Lake".
+Thanks for taking your time and reading through this. Do share your thoughts and comments in our [slack community](https://join.slack.com/t/devlake-io/shared_invite/zt-1lkgbdmys-AU2azidzO1u~mtjlg9my7A). You can also nominate your favorite leader from the community for the upcoming editions of "Diving Into The Lake".
 
 Happy DevLaking!
