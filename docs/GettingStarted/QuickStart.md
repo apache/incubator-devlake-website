@@ -8,7 +8,14 @@ sidebar_position: 1
 The key steps to deploy and utilize Apache DevLake.
 
 ## Step 1. Install DevLake
-Install DevLake using either <a href="DockerComposeSetup">Docker Compose</a> or <a href="HelmSetup">Helm</a>. If you want to upgrade DevLake to a newer version, please refer to the <a href="Upgrade">upgrade manuals</a>.
+Install DevLake using either <a href="DockerComposeSetup">Docker Compose</a>, <a href="HelmSetup">Helm</a>, or the <a href="https://github.com/DevExpGBB/gh-devlake">gh-devlake CLI</a>. If you want to upgrade DevLake to a newer version, please refer to the <a href="Upgrade">upgrade manuals</a>.
+
+**Prefer the terminal?** You can use [gh-devlake](https://github.com/DevExpGBB/gh-devlake), a GitHub CLI extension that deploys, configures, and monitors DevLake entirely from the command line:
+
+```bash
+gh extension install DevExpGBB/gh-devlake
+gh devlake init
+```
 
 ## Step 2. Configure DevLake
 Configure DevLake via the Config UI. Follow the <a href="/docs/Configuration/Tutorial">tutorial</a> for configuration instructions. If you specifically want to configure DORA metrics, please refer to the <a href="/docs/DORA">DORA manuals</a> for detailed instructions.
