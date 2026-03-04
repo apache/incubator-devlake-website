@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-let {tailwindConfig} = require('dev-website-tailwind-config');
+let {tailwindConfig} = require('./tailwind.preset');
 
 tailwindConfig.darkMode = ['class', '[data-theme="dark"]'];
 
